@@ -13,11 +13,13 @@ def llm(prompt, max_tokens=8000, temperature=0.8, retries=3):
     model = os.getenv("LLM_MODEL", "gemini-2.5-flash")
     if not key:
         raise SystemExit("LLM_API_KEY 시크릿이 없습니다")
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}"
+    # 키는 x-goog-api-key 헤더로 전달 — 신형 키(AQ.…)는 ?key= 쿼리 방식에서 404가 난다(2026-09-02 실측)
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
     body = {"contents": [{"parts": [{"text": prompt}]}],
             "generationConfig": {"maxOutputTokens": max_tokens, "temperature": temperature}}
     for i in range(retries):
-        r = requests.post(url, json=body, timeout=120)
+        r = requests.post(url, json=body, timeout=120,
+                          headers={"x-goog-api-key": key, "Content-Type": "application/json"})
         if r.status_code == 200:
             try:
                 return r.json()["candidates"][0]["content"]["parts"][0]["text"]
