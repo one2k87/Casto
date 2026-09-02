@@ -10,7 +10,7 @@ def cfg():
 def llm(prompt, max_tokens=8000, temperature=0.8, retries=3):
     """Gemini generateContent 단순 REST 호출. 실패 시 재시도."""
     key = os.getenv("LLM_API_KEY", "")
-    model = os.getenv("LLM_MODEL", "gemini-2.5-flash")
+    model = os.getenv("LLM_MODEL") or "gemini-2.5-flash"   # 시크릿 미등록 시 env가 빈 문자열이라 or 필수(404 실측)
     if not key:
         raise SystemExit("LLM_API_KEY 시크릿이 없습니다")
     # 키는 x-goog-api-key 헤더로 전달 — 신형 키(AQ.…)는 ?key= 쿼리 방식에서 404가 난다(2026-09-02 실측)
