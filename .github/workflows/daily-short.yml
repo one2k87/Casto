@@ -4,27 +4,50 @@ name: 쇼츠 자동 제작
 on:
   schedule:
     - cron: "0 23 * * *"
+    - cron: "50 23 * * *"   # 백업 크론(08:50 KST) — GitHub 크론 스킵 실측(Scripto 9/1) 대응
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   short:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: 중복 실행 가드 (오늘 이미 만들었으면 스킵)
+        id: dup
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ] && [ -f data/last_short.txt ] && [ "$(cat data/last_short.txt)" = "$(TZ=Asia/Seoul date +%F)" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"; echo "오늘 쇼츠 이미 생성됨 — 백업 크론 스킵"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
       - uses: actions/setup-python@v5
+        if: steps.dup.outputs.skip != 'true'
         with: { python-version: "3.12" }
       - name: 의존성 (한글 폰트·이모지·ffmpeg 포함)
+        if: steps.dup.outputs.skip != 'true'
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-cjk fonts-noto-color-emoji
           pip install requests pillow edge-tts
       - name: 쇼츠 제작
+        if: steps.dup.outputs.skip != 'true'
         env:
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
           LLM_MODEL: ${{ secrets.LLM_MODEL }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python make_short.py
+      - name: 성공 마커 커밋 (중복 가드용)
+        if: steps.dup.outputs.skip != 'true'
+        run: |
+          TZ=Asia/Seoul date +%F > data/last_short.txt
+          git config user.name casto-bot && git config user.email casto@solvup.local
+          git add data/last_short.txt && git commit -m "marker: $(TZ=Asia/Seoul date +%F) 쇼츠 생성" || true
+          git pull --rebase --autostash origin main && git push origin main || true
       - name: 결과 보존 (텔레그램 실패 대비 7일)
+        if: steps.dup.outputs.skip != 'true'
         uses: actions/upload-artifact@v4
         with:
           name: short-${{ github.run_number }}
