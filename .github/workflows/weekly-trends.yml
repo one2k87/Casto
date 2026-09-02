@@ -1,0 +1,30 @@
+name: 주간 트렌드 갱신
+# 매주 월요일 07:00 KST — 다른 쇼츠/릴스를 분석해 '이번 주 먹히는 형식'을 갱신한다.
+on:
+  schedule:
+    - cron: "0 22 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  trends:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install requests
+      - name: 트렌드 스캔
+        env:
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          LLM_MODEL: ${{ secrets.LLM_MODEL }}
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+        run: python trend_scan.py
+      - name: 결과 커밋
+        run: |
+          git config user.name casto-bot && git config user.email casto@solvup.local
+          git add data/trends.json
+          git diff --cached --quiet || git commit -m "trends: $(date +%F) 주간 갱신"
+          git pull --rebase --autostash origin main && git push origin main

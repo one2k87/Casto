@@ -1,0 +1,32 @@
+name: 쇼츠 자동 제작
+# 픽담 최신 글 → 트렌드 반영 대본 → TTS+ffmpeg 합성 → 텔레그램 전송.
+# 매일 08:00 KST(글 발행 07:00 이후). 시크릿 등록 전 실패 방지를 위해 크론은 주석으로 시작.
+on:
+  # schedule:
+  #   - cron: "0 23 * * *"
+  workflow_dispatch:
+
+jobs:
+  short:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: 의존성 (한글 폰트·이모지·ffmpeg 포함)
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-cjk fonts-noto-color-emoji
+          pip install requests pillow edge-tts
+      - name: 쇼츠 제작
+        env:
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          LLM_MODEL: ${{ secrets.LLM_MODEL }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python make_short.py
+      - name: 결과 보존 (텔레그램 실패 대비 7일)
+        uses: actions/upload-artifact@v4
+        with:
+          name: short-${{ github.run_number }}
+          path: out/short.mp4
+          retention-days: 7

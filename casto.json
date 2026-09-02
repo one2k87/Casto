@@ -1,0 +1,24 @@
+{
+ "_설명": "캐스토(Casto) 설정 — 픽담(pickdam.com) 글을 쇼츠/릴스 영상으로 완전 자동 변환하는 배포 엔진",
+ "source_site": "https://pickdam.com",
+ "niche": "생활·주방 (쿠팡파트너스 커머스)",
+ "lang": "ko",
+ "style": "character",
+ "_style_설명": "character=일러스트/캐릭터 톤 카드 · realistic=실사 톤(제미니 이미지 사용, IMAGE로 확장) · card=텍스트 카드만(비용 0)",
+ "video": {
+  "width": 1080, "height": 1920,
+  "target_sec": 45,
+  "voice": "ko-KR-SunHiNeural",
+  "_voice_설명": "edge-tts 무료 한국어 보이스. 남성: ko-KR-InJoonNeural"
+ },
+ "trends": {
+  "region": "KR",
+  "queries": ["주방 꿀템 쇼츠", "자취 살림템", "생활꿀팁 shorts"],
+  "refresh": "weekly",
+  "_설명": "주 1회(weekly-trends.yml) 유튜브 인기·검색 결과를 분석해 data/trends.json을 갱신. YT_API_KEY 없으면 LLM 지식 기반 폴백"
+ },
+ "upload": {
+  "mode": "telegram",
+  "_설명": "완성 mp4를 텔레그램으로 전송 → 폰에서 유튜브 쇼츠/인스타 릴스에 바로 업로드. v2: YouTube API 자동 업로드(OAuth)"
+ }
+}
