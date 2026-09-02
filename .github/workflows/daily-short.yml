@@ -2,8 +2,8 @@ name: 쇼츠 자동 제작
 # 픽담 최신 글 → 트렌드 반영 대본 → TTS+ffmpeg 합성 → 텔레그램 전송.
 # 매일 08:00 KST(글 발행 07:00 이후). 시크릿 등록 전 실패 방지를 위해 크론은 주석으로 시작.
 on:
-  # schedule:
-  #   - cron: "0 23 * * *"
+  schedule:
+    - cron: "0 23 * * *"
   workflow_dispatch:
 
 jobs:
