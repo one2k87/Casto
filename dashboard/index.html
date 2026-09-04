@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Casto</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#5b8def">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Casto">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<style>
+  /* Casto v1 — 파스텔 블루 · 스크립토 패밀리 디자인 시스템 (v2 규격) */
+  :root{
+    --bg:#0a0d13; --card:#10141c; --card2:#171d28; --line:#242c3a;
+    --txt:#fafafa; --muted:#9aa3b2; --ok:#34d399; --warn:#fbbf24;
+    --accent:#5b8def; --accent-2:#3d6fd8; --danger:#fb7185;
+    --glow:rgba(91,141,239,.25); --ring:rgba(91,141,239,.45); --radius:12px;
+    --safe-t:env(safe-area-inset-top); --safe-b:env(safe-area-inset-bottom);
+  }
+  html[data-theme="light"]{
+    --bg:#eef4fd; --card:rgba(255,255,255,.6); --card2:rgba(255,255,255,.8);
+    --line:rgba(91,141,239,.16); --txt:#2c3a55; --muted:#7f8ca6;
+    --ok:#4cbf98; --warn:#e8b04b; --accent:#8fb1f5; --accent-2:#5b8def;
+    --danger:#f298ab; --glow:rgba(143,177,245,.3); --ring:rgba(143,177,245,.5);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);
+    font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",sans-serif;
+    font-variant-numeric:tabular-nums;letter-spacing:-.01em;
+    padding-bottom:calc(20px + var(--safe-b))}
+  html[data-theme="light"] body{
+    background:
+      radial-gradient(1100px 520px at 12% -8%, #e3edff 0%, transparent 60%),
+      radial-gradient(900px 480px at 108% 12%, #e6f4ff 0%, transparent 55%),
+      radial-gradient(1000px 700px at 50% 118%, #eae6ff 0%, transparent 60%),
+      #eef4fd fixed}
+  header{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:10px;
+    padding:calc(10px + var(--safe-t)) 14px 10px;
+    background:rgba(255,255,255,.5);backdrop-filter:blur(16px) saturate(1.6);
+    -webkit-backdrop-filter:blur(16px) saturate(1.6);
+    border-bottom:1px solid rgba(255,255,255,.7)}
+  header img{border-radius:9px}
+  h1{font-size:19px;margin:0;font-weight:800;letter-spacing:-.025em}
+  .sub{font-size:11px;color:var(--muted)}
+  .spacer{flex:1}
+  main{max-width:560px;margin:0 auto;padding:14px}
+  .card{background:var(--card);border:1px solid rgba(255,255,255,.75);border-radius:var(--radius);
+    padding:14px 16px;margin:12px 0;
+    backdrop-filter:blur(14px) saturate(1.5);-webkit-backdrop-filter:blur(14px) saturate(1.5);
+    box-shadow:0 10px 28px -16px var(--glow);
+    transition:box-shadow .2s ease,border-color .2s ease}
+  .card h2{font-size:14px;margin:0 0 8px;letter-spacing:-.01em;text-wrap:balance}
+  .row{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line);
+    font-size:13px;text-decoration:none;color:var(--txt)}
+  .row:first-of-type{border-top:0}
+  .row small{color:var(--muted);margin-left:auto;font-size:11px;white-space:nowrap}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--muted);flex:0 0 auto}
+  .dot.ok{background:var(--ok)} .dot.warn{background:var(--warn)} .dot.err{background:var(--danger)}
+  .big{font-size:22px;font-weight:800;letter-spacing:-.02em}
+  .pill{display:inline-block;font-size:10px;padding:2px 8px;border-radius:999px;
+    background:rgba(91,141,239,.14);color:var(--accent-2);font-weight:700}
+  a.ext{color:var(--accent-2);text-decoration:none;font-weight:600}
+  :focus-visible{outline:2px solid var(--ring);outline-offset:2px;border-radius:8px}
+  @media (hover:hover){ .card:hover{border-color:var(--ring)} .row:hover small{color:var(--accent-2)} }
+  .appsw{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:999px;
+    overflow:hidden;flex:0 0 auto;height:30px;background:var(--card2)}
+  .appsw a{display:flex;align-items:center;justify-content:center;width:26px;
+    font-size:11px;font-weight:800;text-decoration:none;color:var(--muted);
+    transition:background .16s,color .16s}
+  .appsw a+a{border-left:1px solid var(--line)}
+  .appsw a[data-hue="s"]:hover{color:#8b5cf6}
+  .appsw a[data-hue="p"]:hover{color:#2e9e6b}
+  .appsw a.on[data-hue="c"]{background:rgba(91,141,239,.16);color:#5b8def}
+  .foot{text-align:center;color:var(--muted);font-size:11px;margin-top:18px}
+</style>
+</head>
+<body>
+<header>
+  <img src="icons/icon-192.png" alt="Casto" width="30" height="30"
+       onerror="this.style.display='none'">
+  <div>
+    <h1>Casto</h1>
+    <div class="sub">픽담 쇼츠 배포 라인 · 콕픽</div>
+  </div>
+  <div class="spacer"></div>
+  <nav class="appsw" aria-label="앱 전환">
+    <a data-hue="s" href="https://one2k87.github.io/Scripto/dashboard/" title="Scripto — 애드센스 라인">S</a><a data-hue="p" href="https://one2k87.github.io/Picto/dashboard/" title="Picto — 쿠팡 픽 라인">P</a><a class="on" data-hue="c" href="#" onclick="return false">C</a>
+  </nav>
+</header>
+<main>
+  <div class="card">
+    <h2>오늘의 쇼츠 <span class="pill" id="todayPill">확인 중…</span></h2>
+    <div class="big" id="todayBig">—</div>
+    <div class="sub" id="todaySub">매일 08:09 KST 자동 제작 → 텔레그램 전송</div>
+  </div>
+
+  <div class="card">
+    <h2>이번 주 트렌드</h2>
+    <div id="trendBox" class="sub">불러오는 중…</div>
+  </div>
+
+  <div class="card">
+    <h2>바로가기</h2>
+    <a class="row" href="https://www.youtube.com/@kokpick_kr" target="_blank" rel="noopener">
+      <span class="dot ok"></span>콕픽 채널 <small>youtube.com/@kokpick_kr</small></a>
+    <a class="row" href="https://github.com/one2k87/Casto/actions/workflows/daily-short.yml" target="_blank" rel="noopener">
+      <span class="dot" id="ciDot"></span>쇼츠 제작 실행 기록 <small>GitHub Actions</small></a>
+    <a class="row" href="https://github.com/one2k87/Casto/actions/workflows/weekly-trends.yml" target="_blank" rel="noopener">
+      <span class="dot"></span>주간 트렌드 스캔 <small>매주 월 07:00</small></a>
+    <a class="row" href="https://pickdam.com" target="_blank" rel="noopener">
+      <span class="dot ok"></span>픽담 (CTA 수렴처) <small>pickdam.com</small></a>
+  </div>
+
+  <div class="card">
+    <h2>콕픽 규격 요약</h2>
+    <div class="sub" style="line-height:1.7">
+      「콕 열리는 상자」 — 상자는 콕 3번을 통과해야만 열린다.<br>
+      0.5초 제품명 공개 → 콕×3(근거) → 오늘의 콕 ✅ / 다음콕 📦<br>
+      부정어 금지 · 콕 사운드=우드블록 · CTA는 픽담으로.
+    </div>
+  </div>
+
+  <div class="foot">Casto v1 · Scripto 패밀리 <span id="buildTag"></span></div>
+</main>
+<script>
+const RAW = "https://raw.githubusercontent.com/one2k87/Casto/main/";
+const todayKST = () => new Intl.DateTimeFormat("sv-SE",{timeZone:"Asia/Seoul"}).format(new Date());
+(async () => {
+  try{
+    const t = (await (await fetch(RAW+"data/last_short.txt",{cache:"no-store"})).text()).trim();
+    const ok = t === todayKST();
+    document.getElementById("todayPill").textContent = ok ? "완료" : "대기";
+    document.getElementById("todayBig").textContent = ok ? "오늘 쇼츠 제작 완료 🎬" : "아직 제작 전";
+    document.getElementById("todaySub").textContent = "마지막 제작일: " + (t || "기록 없음");
+    document.getElementById("ciDot").className = "dot " + (ok ? "ok" : "warn");
+  }catch(e){
+    document.getElementById("todayPill").textContent = "오프라인";
+    document.getElementById("todayBig").textContent = "상태 확인 불가";
+  }
+  try{
+    const j = await (await fetch(RAW+"data/trends.json",{cache:"no-store"})).json();
+    const hooks = (j.hooks||j.trends||[]).slice(0,4);
+    const src = j.source ? ` <span class="pill">${j.source}</span>` : "";
+    document.getElementById("trendBox").innerHTML =
+      (hooks.length ? hooks.map(h=>"· "+(h.hook||h.title||h)).join("<br>") : "트렌드 데이터 없음") +
+      "<div style='margin-top:6px'>갱신: "+(j.updated||j.date||"—")+src+"</div>";
+  }catch(e){
+    document.getElementById("trendBox").textContent = "트렌드 파일을 불러오지 못했습니다";
+  }
+})();
+</script>
+</body>
+</html>
