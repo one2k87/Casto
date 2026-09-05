@@ -1,24 +1,122 @@
 {
- "_설명": "캐스토(Casto) 설정 — 픽담(pickdam.com) 글을 쇼츠/릴스 영상으로 완전 자동 변환하는 배포 엔진",
+ "_설명": "캐스토(Casto) 설정 — 픽담(pickdam.com) 글을 콕픽 「콕 열리는 상자」 규격 쇼츠로 완전 자동 변환하는 배포 엔진",
  "source_site": "https://pickdam.com",
+ "channel": {
+  "name": "콕픽",
+  "handle": "@kokpick_kr",
+  "url": "https://youtube.com/@kokpick_kr"
+ },
+ "concept": "kok_open",
+ "_concept_설명": "kok_open=「콕 열리는 상자」(콕 3번 통과해야 상자가 열림). 규격 원문: docs/콕픽_쇼츠_포맷.md",
+ "verdicts": {
+  "buy": {
+   "key": "오늘의 콕",
+   "emoji": "✅",
+   "caption": "오늘의 콕 ✅",
+   "card": "오늘의 콕",
+   "voice": "오늘의 콕!",
+   "badge": "check",
+   "color": [
+    47,
+    143,
+    104
+   ]
+  },
+  "cond": {
+   "key": "조건콕",
+   "emoji": "👆",
+   "caption": "조건콕 👆",
+   "card": "조건콕",
+   "voice": "조건콕!",
+   "badge": "arrow",
+   "color": [
+    214,
+    158,
+    74
+   ]
+  },
+  "later": {
+   "key": "다음콕",
+   "emoji": "📦",
+   "caption": "다음콕 📦",
+   "card": "다음콕",
+   "voice": "다음콕!",
+   "badge": "box",
+   "color": [
+    168,
+    128,
+    84
+   ]
+  }
+ },
+ "_verdicts_설명": "부정어 금지 원칙 — '사지 마세요'가 아니라 '다음콕'. 판정어는 코드가 강제하고 LLM은 근거만 생성한다. card=영상 자막용(이모지 없음, 러너에 컬러이모지 폰트 없어 두부 렌더 실측), caption/emoji=설명란·해시태그용.",
  "niche": "생활·주방 (쿠팡파트너스 커머스)",
  "lang": "ko",
- "style": "character",
- "_style_설명": "character=일러스트/캐릭터 톤 카드 · realistic=실사 톤(제미니 이미지 사용, IMAGE로 확장) · card=텍스트 카드만(비용 0)",
+ "style": "kok_card",
+ "_style_설명": "kok_card=콕픽 파스텔(민트/크림/세이지) 카드. 클립뱅크(assets/clips/) 구축 후 clip_bank로 전환 예정",
+ "clips": {
+  "dir": "assets/clips",
+  "banks": {
+   "A": "등장",
+   "B": "긴장",
+   "C": "콕 반응",
+   "D": "개봉 팝",
+   "E": "다음콕"
+  },
+  "_설명": "힉스필드 클립뱅크. 폴더에 클립이 있으면 카드 대신 사용(미구축 시 카드 폴백 — 발행 중단 없음)"
+ },
  "video": {
-  "width": 1080, "height": 1920,
-  "target_sec": 45,
+  "width": 1080,
+  "height": 1920,
+  "target_sec": 15,
+  "insta_sec": 20,
   "voice": "ko-KR-SunHiNeural",
-  "_voice_설명": "edge-tts 무료 한국어 보이스. 남성: ko-KR-InJoonNeural"
+  "_voice_설명": "edge-tts 무료 한국어 보이스. 남성: ko-KR-InJoonNeural",
+  "sfx": {
+   "kok": "out/sfx_kok.wav",
+   "_설명": "콕 사운드=우드블록 근사음. ffmpeg lavfi로 매 실행 생성(에셋 의존 없음)"
+  }
+ },
+ "brand": {
+  "cream": [
+   251,
+   246,
+   236
+  ],
+  "mint": [
+   176,
+   224,
+   210
+  ],
+  "sage": [
+   47,
+   93,
+   78
+  ],
+  "kraft": [
+   214,
+   178,
+   130
+  ],
+  "_설명": "콕이(크래프트 택배상자) 파스텔 팔레트. 대시보드/3앱 스위처의 캐스토 색은 #5b8def(파스텔 블루)로 별개"
+ },
+ "disclosure": {
+  "coupang": "※ 이 영상은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+  "ai": "※ 이 영상은 AI로 제작되었습니다. (AI 기본법 제31조 고지)",
+  "_설명": "설명란·고정댓글 의무 문구. AI 고지는 solvup_global_architecture.md 3장 전역 규칙"
  },
  "trends": {
   "region": "KR",
-  "queries": ["주방 꿀템 쇼츠", "자취 살림템", "생활꿀팁 shorts"],
+  "queries": [
+   "주방 꿀템 쇼츠",
+   "자취 살림템",
+   "생활꿀팁 shorts"
+  ],
   "refresh": "weekly",
   "_설명": "주 1회(weekly-trends.yml) 유튜브 인기·검색 결과를 분석해 data/trends.json을 갱신. YT_API_KEY 없으면 LLM 지식 기반 폴백"
  },
  "upload": {
   "mode": "telegram",
-  "_설명": "완성 mp4를 텔레그램으로 전송 → 폰에서 유튜브 쇼츠/인스타 릴스에 바로 업로드. v2: YouTube API 자동 업로드(OAuth)"
+  "_설명": "완성 mp4를 텔레그램으로 전송 → 폰에서 유튜브 쇼츠/인스타 릴스에 바로 업로드. v2: Make MCP로 유튜브·인스타 자동 게시"
  }
 }
