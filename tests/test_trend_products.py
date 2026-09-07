@@ -87,6 +87,21 @@ class TestBoard(unittest.TestCase):
         out = tp.board()
         self.assertNotIn("viral", out["blocked"])
 
+    def test_delta_classification(self):
+        """차트의 NEW/↑/↓ — 단순 나열이 아니라 '변화'를 보여줘야 시리즈성이 생긴다."""
+        hist = tp.snapshots()
+        # viral은 3일치 스냅샷 내내 노출량 동일 → flat
+        self.assertEqual(tp.delta(hist, "viral", 250_000 * 12), "flat")
+        # 노출량이 크게 늘면 up, 줄면 down
+        self.assertEqual(tp.delta(hist, "viral", 250_000 * 12 * 2), "up")
+        self.assertEqual(tp.delta(hist, "viral", 250_000 * 2), "down")
+        # 기준 스냅샷에 없던 제품은 new
+        self.assertEqual(tp.delta(hist, "처음보는제품", 5000), "new")
+
+    def test_board_rows_carry_delta(self):
+        out = tp.board()
+        self.assertTrue(all("delta" in r for r in out["briefing"]))
+
     def test_no_snapshots_returns_empty(self):
         for f in os.listdir(tp.DAILY_DIR):
             os.remove(os.path.join(tp.DAILY_DIR, f))

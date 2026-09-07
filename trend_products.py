@@ -149,6 +149,45 @@ def _prev_values(hist: list[dict], key: str) -> tuple[int | None, float | None, 
     return None, None, None
 
 
+def _exposure_at(hist: list[dict], key: str, days_ago: int) -> float | None:
+    """`days_ago`일 전 스냅샷에서의 노출량(조회수 합). 델타 판정의 기준점."""
+    if not hist:
+        return None
+    target = dt.date.fromisoformat(hist[-1]["date"]) - dt.timedelta(days=days_ago)
+    best, best_gap = None, None
+    for snap in hist[:-1]:
+        try:
+            gap = abs((dt.date.fromisoformat(snap["date"]) - target).days)
+        except Exception:  # noqa: BLE001
+            continue
+        if best_gap is None or gap < best_gap:
+            for p in snap.get("products", []):
+                if p["key"] == key:
+                    best, best_gap = sum(v["views"] for v in p.get("videos", [])), gap
+                    break
+    return best
+
+
+def delta(hist: list[dict], key: str, current_views: float, days: int = 7,
+          threshold: float = 0.15) -> str:
+    """주간 델타 — 브리핑 차트의 **NEW / ↑상승 / ↓하락** 섹션(5-4-2).
+
+    단순 나열(TOP10)은 완결형이라 다시 볼 이유가 없다. **변화**를 보여줘야 시리즈성이 생긴다.
+    기준 스냅샷에 없던 제품은 `new`, 노출량이 임계 이상 변하면 `up`/`down`, 아니면 `flat`.
+    """
+    prev = _exposure_at(hist, key, days)
+    if prev is None:
+        return "new"
+    if prev <= 0:
+        return "up" if current_views > 0 else "flat"
+    change = (current_views - prev) / prev
+    if change >= threshold:
+        return "up"
+    if change <= -threshold:
+        return "down"
+    return "flat"
+
+
 def _is_blocked(covered: dict, key: str, price: float | None, today: dt.date) -> bool:
     """8주 내 다뤘으면 차단 — **단 가격이 15% 이상 내렸으면 예외**(상태가 바뀌면 새 정보)."""
     rec = covered.get(key)
@@ -195,6 +234,10 @@ def board() -> dict:
     rows = rank(signals)
     for r in rows:
         m = meta.get(r["key"], {})
+        r["delta"] = delta(hist, r["key"], sum(v["views"] for v in m.get("videos", [])))
+        r["price"] = m.get("price")
+        r["price_source"] = m.get("price_source")
+        r["sellers"] = m.get("sellers")
         r["price_band"] = m.get("price_band")
         r["keyword"] = m.get("keyword")
         r["coupang_url"] = m.get("coupang_url")

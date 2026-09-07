@@ -1,0 +1,53 @@
+name: 콕 브리핑 (주간 유행템 차트)
+# 매주 월요일 06:40 KST — trend-collect가 일요일에 만든 주간 랭킹으로 브리핑 2벌을 렌더한다.
+# 쇼츠 60초(발견·추천 피드) + 롱폼 3~4분(검색·시청시간). 같은 데이터, 다른 그릇.
+on:
+  schedule:
+    - cron: "40 21 * * 0"
+  workflow_dispatch:
+    inputs:
+      variant:
+        description: "렌더할 버전"
+        type: choice
+        options: [both, short, long]
+        default: both
+
+permissions:
+  contents: write
+
+concurrency:
+  group: briefing
+  cancel-in-progress: false
+
+jobs:
+  briefing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-cjk
+      - run: pip install requests pillow edge-tts
+
+      - name: 회귀 테스트
+        run: python -m unittest discover -s tests
+
+      - name: 브리핑 렌더
+        env:
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          LLM_MODEL: ${{ secrets.LLM_MODEL }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python make_briefing.py ${{ inputs.variant || 'both' }}
+
+      - name: 아티팩트 업로드
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: briefing
+          path: |
+            out/briefing_*.mp4
+            out/briefing_*_caption.txt
+            out/briefing_script.json
+          if-no-files-found: warn
+          retention-days: 14
