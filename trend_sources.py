@@ -112,6 +112,45 @@ def youtube_videos(keyword: str, days: int = 14, max_items: int = 50,
     return out
 
 
+def youtube_search_rich(query: str, days: int = 14, max_items: int = 50,
+                        region: str = "KR") -> list[dict] | None:
+    """발굴용 — 제목뿐 아니라 **설명란(description)까지** 받아온다.
+
+    설명란에 크리에이터의 제휴 링크가 들어 있고, 그 링크가 "정확히 어느 상품인가"를 특정한다
+    (product_links 참조). `videos.list`의 part에 snippet을 추가하는 것뿐이라 **할당량은 그대로**다
+    (videos.list는 1유닛). 비싼 건 search.list(100유닛)이고 그건 어차피 1회 호출한다.
+    """
+    key = os.getenv("YT_API_KEY", "")
+    if not key:
+        return None
+    after = (dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=days)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    found = _get(YT_SEARCH, params={
+        "key": key, "q": query, "part": "snippet", "type": "video",
+        "order": "viewCount", "regionCode": region, "relevanceLanguage": "ko",
+        "publishedAfter": after, "maxResults": min(max_items, 50),
+    })
+    if not found:
+        return None
+    ids = [i["id"]["videoId"] for i in found.get("items", []) if (i.get("id") or {}).get("videoId")]
+    if not ids:
+        return []
+    stats = _get(YT_VIDEOS, params={"key": key, "id": ",".join(ids[:50]),
+                                    "part": "snippet,statistics"})
+    out = []
+    for it in (stats or {}).get("items", []):
+        sn = it.get("snippet", {})
+        out.append({
+            "id": it.get("id"),
+            "title": sn.get("title", ""),
+            "description": sn.get("description", ""),   # ← 제휴 링크가 여기 있다
+            "channel_id": sn.get("channelId", ""),
+            "channel": sn.get("channelTitle", ""),
+            "published": sn.get("publishedAt", "")[:10],
+            "views": int(it.get("statistics", {}).get("viewCount", 0)),
+        })
+    return out
+
+
 # ------------------------------------------------------------------ 네이버 공통
 def _naver_auth() -> tuple[str, dict[str, str], str] | None:
     """(베이스 URL, 인증 헤더). **HUB 키가 있으면 HUB 우선**, 없으면 레거시로 폴백한다.

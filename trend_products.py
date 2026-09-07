@@ -20,6 +20,8 @@ import os
 import sys
 
 from common import cfg, llm_json
+import discover_terms as dterms
+import product_links as plinks
 import trend_sources as src
 from trend_score import ProductSignals, VideoStat, rank
 
@@ -66,45 +68,74 @@ def snapshots(limit: int = 60) -> list[dict]:
 
 
 # ------------------------------------------------------------------ 1. 후보 발굴
-def discover(c: dict, per_query: int = 25) -> list[str]:
-    """유튜브 최근 인기 영상 제목에서 **제품명**을 추출한다.
+def discover(c: dict, per_query: int = 50) -> list[dict]:
+    """후보 발굴 — **링크로 특정된 실제 상품**을 찾는다.
 
-    제목은 사람이 부르는 이름으로 쓰여 있으므로, 여기서 나온 표현이 곧
-    '유행 시점의 통칭'이다(5-4-10의 재인 규칙에 그대로 쓰인다).
+    순서가 핵심이다: **수집 → 통계 → LLM**. LLM에게 먼저 물으면 그럴듯한 제품명을 지어낸다.
+      1) 유행 특화 검색어로 최근 영상을 모으고 **설명란까지** 받는다
+      2) 설명란의 제휴 링크를 상품 ID로 묶어(product_links) **여러 채널이 링크한 상품**만 남긴다
+         → 이게 "정확한 상품" + "진짜 유행"을 동시에 만족하는 유일한 신호다
+      3) 링크가 없는 영상은 제목 n-gram으로 보조 후보를 만든다(discover_terms)
+      4) LLM은 **정규화만** 한다 — 통칭·검색 키워드·카테고리 정리. 없는 제품을 만들지 못하게
+         근거(채널 수·예시 제목)를 함께 넘긴다
+
+    ⚠️ 남의 제휴 링크는 상품 식별에만 쓰고 **게시에는 절대 재사용하지 않는다**(수수료가 그쪽으로 간다).
     """
-    titles: list[str] = []
+    videos: list[dict] = []
+    seen = set()
     for q in c["trends"]["queries"]:
-        vids = src.youtube_videos(q, days=14, max_items=per_query)
-        if vids is None:
+        got = src.youtube_search_rich(q, days=14, max_items=per_query)
+        if got is None:
             continue
-        found = src._get(src.YT_SEARCH, params={  # 제목은 search 응답에 있으므로 재활용
-            "key": os.getenv("YT_API_KEY", ""), "q": q, "part": "snippet", "type": "video",
-            "order": "viewCount", "regionCode": "KR", "relevanceLanguage": "ko",
-            "publishedAfter": (dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=14)).strftime("%Y-%m-%dT%H:%M:%SZ"),
-            "maxResults": min(per_query, 50)}) or {}
-        titles += [i["snippet"]["title"] for i in found.get("items", []) if i.get("snippet")]
-    if not titles:
-        print("[discover] 유튜브 소스 없음 — 후보 발굴 건너뜀(YT_API_KEY 확인)")
+        for v in got:
+            if v["id"] not in seen:
+                seen.add(v["id"])
+                videos.append(v)
+    if not videos:
+        print("[discover] 유튜브 수집 0건 — YT_API_KEY를 확인할 것")
         return []
-    sample = "\n".join(f"- {t}" for t in titles[:60])
-    data = llm_json(f"""아래는 최근 2주 한국 쇼츠 인기 영상 제목입니다. 니치: {c['niche']}.
-{sample}
+    print(f"[discover] 영상 {len(videos)}편 수집(설명란 포함)")
 
-여기서 **반복적으로 등장하는 실제 제품**만 골라 JSON으로 주세요.
+    linked = plinks.cluster(videos, min_channels=2)
+    with_link = sum(1 for v in videos if plinks.links_in(v))
+    print(f"[discover] 제휴 링크가 있는 영상 {with_link}편 → 여러 채널이 링크한 상품 {len(linked)}개")
+    for r in linked[:8]:
+        print(f"[discover]   · {r['name'] or '(미상)'} — 채널 {r['channels']}개 · 조회 {r['views']:,}")
+
+    terms = dterms.candidates(videos, min_videos=3, min_channels=2)
+    data = llm_json(f"""당신은 한국 커머스 트렌드 분석가입니다. 니치: {c['niche']}.
+아래는 **최근 2주 쇼츠에서 통계로 확인된 것들**입니다. 없는 정보를 추가하지 말고 정리만 하세요.
+
+[A. 여러 채널이 제휴 링크를 건 실제 상품] ← 가장 신뢰도 높음. 우선 채택
+{plinks.summary(linked)}
+
+[B. 제목에 반복 등장한 표현] ← A에 없는 것만 보조로
+{dterms.evidence_block(terms)}
+
+아래 JSON만 출력하세요.
 {{"products": [
   {{"key": "영문소문자_스네이크케이스_식별자",
-    "name": "제품 통칭 — **영상에서 사람들이 부르는 이름 그대로**(정식 상품명 아님, 12자 이내)",
-    "search_keyword": "네이버·쿠팡에서 검색할 대표 키워드",
-    "category": "네이버 쇼핑 카테고리 코드 — 50000000 패션의류 / 50000001 패션잡화 / 50000002 화장품미용 / 50000003 디지털가전 / 50000004 가구인테리어 / 50000005 출산육아 / 50000006 식품 / 50000007 스포츠레저 / 50000008 생활건강. **가전제품은 반드시 50000003**",
-    "price_band": "저가|중가|고가"}}
-  ... 최대 12개
+    "name": "**사람들이 부르는 이름 그대로**(12자 이내). 위 근거에 나온 표현을 쓸 것",
+    "search_keyword": "네이버·쿠팡에서 이 상품을 찾을 검색어 — **구체적일수록 좋다**",
+    "brand": "근거에 브랜드명이 보이면 적고, 없으면 빈 문자열. **추측 금지**",
+    "product_id": "A에서 왔으면 그 platform:id, B에서 왔으면 빈 문자열",
+    "category": "네이버 쇼핑 카테고리 — 50000000 패션의류/50000001 패션잡화/50000002 화장품미용/50000003 디지털가전/50000004 가구인테리어/50000005 출산육아/50000006 식품/50000007 스포츠레저/50000008 생활건강. **가전은 반드시 50000003**",
+    "price_band": "저가|중가|고가",
+    "evidence": "왜 유행으로 판단했는지 한 줄 — 근거의 채널 수·조회수를 인용"}}
+  ... 최대 12개, **A 항목을 먼저**
 ]}}
-규칙: 특정 브랜드·모델명이 아니라 **품목**으로. 채널명·유행어·비제품 단어는 제외.""")
+
+규칙
+- **위 근거에 없는 제품을 만들어내지 마세요.** 브랜드도 근거에 없으면 비워두세요
+- `프라이팬`·`청소기`처럼 1년 내내 영상이 나오는 **일반 카테고리 단독은 제외**합니다.
+  유행이 아니라 상수이기 때문입니다. 수식어가 붙어 특정되는 경우만 채택하세요
+- 채널명·유행어·비제품 표현은 제외합니다""")
+
     out = []
     for p in data.get("products", [])[:12]:
         if p.get("key") and p.get("name"):
             out.append(p)
-    print(f"[discover] 후보 {len(out)}개")
+    print(f"[discover] 최종 후보 {len(out)}개: {', '.join(p['name'] for p in out)}")
     return out
 
 
