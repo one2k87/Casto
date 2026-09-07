@@ -4,7 +4,9 @@
  "channel": {
   "name": "콕픽",
   "handle": "@kokpick_kr",
-  "url": "https://youtube.com/@kokpick_kr"
+  "url": "https://youtube.com/@kokpick_kr",
+  "id": "UC-wB3FjDH6zjBEuwYdVrsrQ",
+  "_id_설명": "channel_stats.py가 공개 통계(구독자·조회수)를 조회할 때 쓴다. API 키만 있으면 되고 OAuth 불필요."
  },
  "concept": "kok_open",
  "_concept_설명": "kok_open=「콕 열리는 상자」(콕 3번 통과해야 상자가 열림). 규격 원문: docs/콕픽_쇼츠_포맷.md",

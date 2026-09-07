@@ -1,0 +1,37 @@
+name: 채널 성과 추적
+# 매일 22:20 KST — 구독자·조회수·영상별 성과를 기록한다.
+# API 키만으로 동작(공개 데이터). 8주 손절 기준을 자동 판정해 감으로 판단하지 않게 한다.
+on:
+  schedule:
+    - cron: "20 13 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: channel-stats
+  cancel-in-progress: false
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install requests
+      - name: 성과 수집
+        env:
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+        run: python channel_stats.py
+      - name: 결과 커밋
+        run: |
+          git config user.name casto-bot && git config user.email casto@solvup.local
+          git add -A data
+          if git diff --cached --quiet; then
+            echo "::warning::변경 없음 — 수집이 실패했을 수 있다"
+          else
+            git commit -m "stats: $(date +%F) 채널 성과"
+            git pull --rebase --autostash origin main && git push origin main
+          fi
