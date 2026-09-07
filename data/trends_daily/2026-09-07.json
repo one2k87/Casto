@@ -1,0 +1,2082 @@
+{
+ "date": "2026-09-07",
+ "sources": {
+  "youtube": true,
+  "naver": true,
+  "coupang": false
+ },
+ "products": [
+  {
+   "key": "tumbler_scrubber",
+   "name": "텀블러 수세미",
+   "keyword": "텀블러 수세미",
+   "price_band": "저가",
+   "videos": [
+    {
+     "views": 141854,
+     "age_days": 6.73,
+     "channel_id": "UCV5kpk-hE67MgG7OIptAVqw"
+    },
+    {
+     "views": 2217,
+     "age_days": 5.67,
+     "channel_id": "UCJQPFltcaagGISfXvzyLS4Q"
+    },
+    {
+     "views": 1542,
+     "age_days": 13.81,
+     "channel_id": "UCfHFACJDHh4mYix2R8vakyw"
+    },
+    {
+     "views": 1475,
+     "age_days": 1.2,
+     "channel_id": "UCcFJLdkwxdS-SIZPcsgTrRA"
+    },
+    {
+     "views": 1455,
+     "age_days": 6.87,
+     "channel_id": "UC4eROxyF5QQQ3iivQIa7xdw"
+    },
+    {
+     "views": 1230,
+     "age_days": 10.1,
+     "channel_id": "UCAGBNY6BllFH4kibN20zmGQ"
+    },
+    {
+     "views": 1354,
+     "age_days": 1.56,
+     "channel_id": "UCnNNxIWDjLlppkQ7cFAg4pQ"
+    },
+    {
+     "views": 1344,
+     "age_days": 3.82,
+     "channel_id": "UCHHPdBa5BhbMCThrLaGi95w"
+    },
+    {
+     "views": 1214,
+     "age_days": 13.18,
+     "channel_id": "UCtAjm2_cd8tuHoq2W-LQNRA"
+    },
+    {
+     "views": 1196,
+     "age_days": 13.04,
+     "channel_id": "UClsDZ6pU6BVlcsZWtVXUBaA"
+    },
+    {
+     "views": 1170,
+     "age_days": 1.07,
+     "channel_id": "UCCryJXsWUSeE34kP53iVs9w"
+    },
+    {
+     "views": 1277,
+     "age_days": 7.06,
+     "channel_id": "UC7EnBr6ES3ohhqaEeWl0Wzg"
+    },
+    {
+     "views": 1032,
+     "age_days": 6.88,
+     "channel_id": "UCijeLDQ77FHC51lUiLQKshA"
+    },
+    {
+     "views": 1230,
+     "age_days": 12.14,
+     "channel_id": "UCWGT_roGGqZATlmExbgmcXQ"
+    },
+    {
+     "views": 959,
+     "age_days": 6.1,
+     "channel_id": "UCK7zsp5XFWRl5MKrFUsQgVw"
+    },
+    {
+     "views": 400,
+     "age_days": 13.68,
+     "channel_id": "UCkXnc1Tms8jpEPpsE5rLCZA"
+    },
+    {
+     "views": 107,
+     "age_days": 9.75,
+     "channel_id": "UCBGALRm7wKnhkre3C9pN46g"
+    },
+    {
+     "views": 103,
+     "age_days": 8.0,
+     "channel_id": "UCqknItrEQ8li5PPR3UdKwwQ"
+    },
+    {
+     "views": 29,
+     "age_days": 4.77,
+     "channel_id": "UC1ghivqT7vsM31XuwPSk5hQ"
+    },
+    {
+     "views": 5,
+     "age_days": 3.67,
+     "channel_id": "UC_gwNsE45qk1wuqAkewwYBw"
+    }
+   ],
+   "mentions": null,
+   "demand": null,
+   "demand_last_year": null,
+   "price": null,
+   "review_count": null,
+   "sellers": null,
+   "coupang_url": null,
+   "price_source": null
+  },
+  {
+   "key": "frying_pan",
+   "name": "프라이팬",
+   "keyword": "프라이팬",
+   "price_band": "중가",
+   "videos": [
+    {
+     "views": 229986,
+     "age_days": 10.91,
+     "channel_id": "UCITrEeVvx2BmHElmqSBbnTg"
+    },
+    {
+     "views": 641690,
+     "age_days": 9.44,
+     "channel_id": "UCUd5pJOosqI54uOY4KOaoSg"
+    },
+    {
+     "views": 101968,
+     "age_days": 12.18,
+     "channel_id": "UCkOJ7CpknOjyHgk3sOIQA_g"
+    },
+    {
+     "views": 173993,
+     "age_days": 10.19,
+     "channel_id": "UCtMwtT4JcnWa1efuv9jm8Fg"
+    },
+    {
+     "views": 78265,
+     "age_days": 7.22,
+     "channel_id": "UCk2Bdi5aL5Mog8Oi-GxwscQ"
+    },
+    {
+     "views": 103959,
+     "age_days": 6.01,
+     "channel_id": "UCOvv04WmdjLKn77R-Q34t7Q"
+    },
+    {
+     "views": 69533,
+     "age_days": 5.79,
+     "channel_id": "UCAfL1r-IPHD1EoI3BUR8LLw"
+    },
+    {
+     "views": 35277,
+     "age_days": 4.18,
+     "channel_id": "UC6PjFIwIO77DL9plVPI_SoA"
+    },
+    {
+     "views": 42967,
+     "age_days": 13.12,
+     "channel_id": "UCD5E6MuZMJSgPpSesQf4kuw"
+    },
+    {
+     "views": 40149,
+     "age_days": 6.89,
+     "channel_id": "UCyWJ1DEvSLg6Xprj2ZzQEmQ"
+    },
+    {
+     "views": 55535,
+     "age_days": 1.79,
+     "channel_id": "UC-S0OgXOzS4Rwnp1d-QLfmQ"
+    },
+    {
+     "views": 31693,
+     "age_days": 10.84,
+     "channel_id": "UCq36IQhkZt6va1NuNRISBQw"
+    },
+    {
+     "views": 12960,
+     "age_days": 12.15,
+     "channel_id": "UCE5rfLQJKPkq0DnF6kG8rZA"
+    },
+    {
+     "views": 30482,
+     "age_days": 7.14,
+     "channel_id": "UCwZNs09y8VnpSjAJiFKxYpg"
+    },
+    {
+     "views": 31093,
+     "age_days": 4.01,
+     "channel_id": "UCOhasIfc8m1PwV6crpGVUHg"
+    },
+    {
+     "views": 11029,
+     "age_days": 12.66,
+     "channel_id": "UCE5rfLQJKPkq0DnF6kG8rZA"
+    },
+    {
+     "views": 15803,
+     "age_days": 7.26,
+     "channel_id": "UCBfEbw-pzVuBGqzwGUmQ0EQ"
+    },
+    {
+     "views": 23478,
+     "age_days": 13.69,
+     "channel_id": "UCEPSGxI-u4ekwk9YVMtiDjA"
+    },
+    {
+     "views": 20110,
+     "age_days": 9.01,
+     "channel_id": "UCD5E6MuZMJSgPpSesQf4kuw"
+    },
+    {
+     "views": 26307,
+     "age_days": 8.64,
+     "channel_id": "UCj53BlVc-lTPniQcbOaCpew"
+    },
+    {
+     "views": 21656,
+     "age_days": 2.1,
+     "channel_id": "UC_kKCGK8qLm9JaGSFovcl3w"
+    },
+    {
+     "views": 23845,
+     "age_days": 2.12,
+     "channel_id": "UCdxH02j_6Eo5K0OXb2YDUOw"
+    },
+    {
+     "views": 23417,
+     "age_days": 11.97,
+     "channel_id": "UCB2gLcnm63oQjUy8EIKAOGA"
+    },
+    {
+     "views": 8958,
+     "age_days": 13.58,
+     "channel_id": "UCci3ekONGGf4njfCemeGsLA"
+    },
+    {
+     "views": 25264,
+     "age_days": 9.83,
+     "channel_id": "UCXeLPTEaMn1uscu2fmY_1XQ"
+    },
+    {
+     "views": 19630,
+     "age_days": 9.89,
+     "channel_id": "UCj53BlVc-lTPniQcbOaCpew"
+    },
+    {
+     "views": 22517,
+     "age_days": 1.18,
+     "channel_id": "UCjvQgQrcnj22R_MaC6lZxGg"
+    },
+    {
+     "views": 19686,
+     "age_days": 8.22,
+     "channel_id": "UCb4vtXvxY1NWSHo8EangSfw"
+    },
+    {
+     "views": 14284,
+     "age_days": 8.56,
+     "channel_id": "UCWlh4Waga4Gxz_cfL5x1Miw"
+    },
+    {
+     "views": 20370,
+     "age_days": 12.29,
+     "channel_id": "UCZ3FtwbRC3FKbyteiGomMSQ"
+    },
+    {
+     "views": 13829,
+     "age_days": 7.85,
+     "channel_id": "UCHHJfl8eF20y2y3SmkS3MEg"
+    },
+    {
+     "views": 11545,
+     "age_days": 12.01,
+     "channel_id": "UC4DVW1z8HI3q0xnfd4aAT9A"
+    },
+    {
+     "views": 13638,
+     "age_days": 11.78,
+     "channel_id": "UC1spJ1bsr5C97wbySRIBpkA"
+    },
+    {
+     "views": 11119,
+     "age_days": 1.15,
+     "channel_id": "UCfksEXqRxAM_IVwfF3DMOYg"
+    },
+    {
+     "views": 12830,
+     "age_days": 7.22,
+     "channel_id": "UCWWPbXICYE15dpvdkNw1gtQ"
+    },
+    {
+     "views": 13777,
+     "age_days": 9.14,
+     "channel_id": "UCj53BlVc-lTPniQcbOaCpew"
+    },
+    {
+     "views": 17275,
+     "age_days": 7.89,
+     "channel_id": "UCj53BlVc-lTPniQcbOaCpew"
+    },
+    {
+     "views": 12704,
+     "age_days": 1.06,
+     "channel_id": "UCj53BlVc-lTPniQcbOaCpew"
+    },
+    {
+     "views": 9767,
+     "age_days": 8.22,
+     "channel_id": "UCzXDUolVTJVOXdnwQLzb20A"
+    },
+    {
+     "views": 9443,
+     "age_days": 4.87,
+     "channel_id": "UCXOd_lvEU0jum9Kg1ZeVXTA"
+    },
+    {
+     "views": 12514,
+     "age_days": 8.37,
+     "channel_id": "UCj53BlVc-lTPniQcbOaCpew"
+    },
+    {
+     "views": 8850,
+     "age_days": 11.39,
+     "channel_id": "UCj53BlVc-lTPniQcbOaCpew"
+    },
+    {
+     "views": 8321,
+     "age_days": 7.89,
+     "channel_id": "UC30FFJbch9LZZvQKFWLKmwQ"
+    },
+    {
+     "views": 10453,
+     "age_days": 6.14,
+     "channel_id": "UCjUvJRIVz7PGtPwxAnr3Ehw"
+    },
+    {
+     "views": 13343,
+     "age_days": 0.97,
+     "channel_id": "UCAw8VMVDCzv7HvH4Kddr3Bw"
+    },
+    {
+     "views": 7651,
+     "age_days": 8.01,
+     "channel_id": "UCBijM8FrAG1CWrsvSmR-8KQ"
+    },
+    {
+     "views": 7090,
+     "age_days": 5.01,
+     "channel_id": "UCwZNs09y8VnpSjAJiFKxYpg"
+    },
+    {
+     "views": 7117,
+     "age_days": 8.01,
+     "channel_id": "UCb4vtXvxY1NWSHo8EangSfw"
+    },
+    {
+     "views": 7871,
+     "age_days": 5.01,
+     "channel_id": "UCOhasIfc8m1PwV6crpGVUHg"
+    },
+    {
+     "views": 7460,
+     "age_days": 1.83,
+     "channel_id": "UCB2gLcnm63oQjUy8EIKAOGA"
+    }
+   ],
+   "mentions": null,
+   "demand": null,
+   "demand_last_year": null,
+   "price": null,
+   "review_count": null,
+   "sellers": null,
+   "coupang_url": null,
+   "price_source": null
+  },
+  {
+   "key": "kimchi_container",
+   "name": "김치통",
+   "keyword": "김치통",
+   "price_band": "중가",
+   "videos": [
+    {
+     "views": 475548,
+     "age_days": 12.76,
+     "channel_id": "UC5WiWhX8n1N-r0HS_ocSiOA"
+    },
+    {
+     "views": 326007,
+     "age_days": 7.89,
+     "channel_id": "UCteP-Wh0p64rUWrjOWspARg"
+    },
+    {
+     "views": 121250,
+     "age_days": 10.81,
+     "channel_id": "UCBxx9RHFP0sk-5RVV4Llomw"
+    },
+    {
+     "views": 94564,
+     "age_days": 5.91,
+     "channel_id": "UCJSYxqV8XiqbBvXBP0ohEVg"
+    },
+    {
+     "views": 58558,
+     "age_days": 8.82,
+     "channel_id": "UCNf8cY9OaeROUGwzrbXL9jQ"
+    },
+    {
+     "views": 70902,
+     "age_days": 3.89,
+     "channel_id": "UCN8CPzwkYiDVLZlgD4JQgJQ"
+    },
+    {
+     "views": 64326,
+     "age_days": 11.06,
+     "channel_id": "UCAw8VMVDCzv7HvH4Kddr3Bw"
+    },
+    {
+     "views": 41815,
+     "age_days": 10.06,
+     "channel_id": "UCcQTRi69dsVYHN3exePtZ1A"
+    },
+    {
+     "views": 34381,
+     "age_days": 11.75,
+     "channel_id": "UCA54fe0aSFq6hKCBsKzrLbg"
+    },
+    {
+     "views": 29175,
+     "age_days": 12.28,
+     "channel_id": "UCzvtI36qBni7VutQoUxepXA"
+    },
+    {
+     "views": 17642,
+     "age_days": 13.07,
+     "channel_id": "UCwPqe82iBliuXXumQHmQ6Rw"
+    },
+    {
+     "views": 15616,
+     "age_days": 5.93,
+     "channel_id": "UCLmLpjP-Gq4I8X_Gi3hwBjw"
+    },
+    {
+     "views": 18191,
+     "age_days": 10.82,
+     "channel_id": "UCXb-ULsl6KN09qOEPX3z1nw"
+    },
+    {
+     "views": 10325,
+     "age_days": 10.89,
+     "channel_id": "UCNFYc_9uNNGN1gAeQw6HsAw"
+    },
+    {
+     "views": 10372,
+     "age_days": 2.79,
+     "channel_id": "UC_dt4jSu83RHoAVJ41fSgGg"
+    },
+    {
+     "views": 9659,
+     "age_days": 0.31,
+     "channel_id": "UCFnZqGc7g1NsFIIz8Fo1A5g"
+    },
+    {
+     "views": 6255,
+     "age_days": 10.92,
+     "channel_id": "UCz_1JcdG1FX2v-8LfzhHAIg"
+    },
+    {
+     "views": 7734,
+     "age_days": 6.01,
+     "channel_id": "UCwlJ9Us77O3Fc0aRhjkbI1w"
+    },
+    {
+     "views": 4924,
+     "age_days": 4.81,
+     "channel_id": "UCXDsAwrFo6CKodB9kG-OEiQ"
+    },
+    {
+     "views": 6259,
+     "age_days": 11.31,
+     "channel_id": "UCT5a5IxSTiMI_pwC69A2Ezg"
+    },
+    {
+     "views": 5395,
+     "age_days": 5.28,
+     "channel_id": "UCt5mSgS4ZxBVWIvzy7CzxSg"
+    },
+    {
+     "views": 5244,
+     "age_days": 8.89,
+     "channel_id": "UCWSxntcjHZp1ozVmbK4vyAg"
+    },
+    {
+     "views": 11292,
+     "age_days": 7.31,
+     "channel_id": "UCHR9KSVUq43JkvIHO5WI2bg"
+    },
+    {
+     "views": 4674,
+     "age_days": 7.43,
+     "channel_id": "UCtQStaOU-p7V-2V5uxyT6iQ"
+    },
+    {
+     "views": 315,
+     "age_days": 9.95,
+     "channel_id": "UCkWzm4u2CT8LUDt2bWYeT9A"
+    },
+    {
+     "views": 6,
+     "age_days": 4.24,
+     "channel_id": "UC4SaMzM0vxXUizHnPAupCCA"
+    },
+    {
+     "views": 1,
+     "age_days": 7.67,
+     "channel_id": "UCTEYX588QRihVLtNZv7gX9A"
+    },
+    {
+     "views": 3303,
+     "age_days": 5.26,
+     "channel_id": "UCHqx8359A7U-DLQmOxVZdgg"
+    },
+    {
+     "views": 3066,
+     "age_days": 5.11,
+     "channel_id": "UCxqxQ1WJFeGKdNctABZBAOA"
+    },
+    {
+     "views": 2340,
+     "age_days": 8.16,
+     "channel_id": "UCkDuVwfzYbpjYUKnVKMhOtw"
+    },
+    {
+     "views": 3731,
+     "age_days": 11.26,
+     "channel_id": "UCR4kLCWz354OoSuFs_aKwsA"
+    },
+    {
+     "views": 1492,
+     "age_days": 4.88,
+     "channel_id": "UCOVYBceSTsjjGCISLMZJOuQ"
+    },
+    {
+     "views": 1356,
+     "age_days": 6.39,
+     "channel_id": "UClfzspY9RJuUtdv8PqCeW_g"
+    },
+    {
+     "views": 1551,
+     "age_days": 4.36,
+     "channel_id": "UCWM3ATY5bkh-N3ycFgXF1Iw"
+    },
+    {
+     "views": 1466,
+     "age_days": 4.85,
+     "channel_id": "UC-vXl7Vf38-VPctkGXxRtyQ"
+    },
+    {
+     "views": 1879,
+     "age_days": 8.22,
+     "channel_id": "UCXxpOeyc-OXqW9XW7dtCnNg"
+    },
+    {
+     "views": 3118,
+     "age_days": 3.95,
+     "channel_id": "UC-XkCOyHVxyyzvqeEUDHN3Q"
+    },
+    {
+     "views": 1358,
+     "age_days": 8.69,
+     "channel_id": "UCkWzm4u2CT8LUDt2bWYeT9A"
+    },
+    {
+     "views": 1544,
+     "age_days": 4.91,
+     "channel_id": "UC3S0-XZ00va7IclA9ZWFtqg"
+    },
+    {
+     "views": 2062,
+     "age_days": 10.8,
+     "channel_id": "UCvJ-c-ykW5eZuAQkbwzFeQw"
+    },
+    {
+     "views": 2742,
+     "age_days": 10.21,
+     "channel_id": "UChfcarEPBXAXgjdgzPLOJrg"
+    },
+    {
+     "views": 1589,
+     "age_days": 10.1,
+     "channel_id": "UCKJJ8tWF4wA0a5jC_gBwRtQ"
+    },
+    {
+     "views": 1385,
+     "age_days": 5.36,
+     "channel_id": "UC-gA5oaiZGU42Fqr6NG-neQ"
+    },
+    {
+     "views": 1509,
+     "age_days": 3.57,
+     "channel_id": "UCNR_ivmwTVqZjG6OVNYFWKQ"
+    },
+    {
+     "views": 1527,
+     "age_days": 7.85,
+     "channel_id": "UC1JQEB3oyPVIWic0J6mA14Q"
+    },
+    {
+     "views": 1306,
+     "age_days": 6.92,
+     "channel_id": "UCzhlF5hkrn6VDebB7WXMAJQ"
+    },
+    {
+     "views": 1404,
+     "age_days": 10.35,
+     "channel_id": "UCgQI4gxT3v_ysuY1YH-nkMg"
+    },
+    {
+     "views": 1510,
+     "age_days": 11.21,
+     "channel_id": "UCQFtAkR8J-rMrTPfb5jMl_A"
+    },
+    {
+     "views": 2054,
+     "age_days": 1.85,
+     "channel_id": "UCeUzT_t4w2SqYJ5hHKAa6cg"
+    },
+    {
+     "views": 1453,
+     "age_days": 10.72,
+     "channel_id": "UCcHo_MyZeUxegqssCC6Lscw"
+    }
+   ],
+   "mentions": null,
+   "demand": null,
+   "demand_last_year": null,
+   "price": null,
+   "review_count": null,
+   "sellers": null,
+   "coupang_url": null,
+   "price_source": null
+  },
+  {
+   "key": "functional_ladle",
+   "name": "기능성 국자",
+   "keyword": "기름 제거 국자",
+   "price_band": "중가",
+   "videos": [
+    {
+     "views": 2280,
+     "age_days": 8.25,
+     "channel_id": "UC1km8bvCLOvq0ZR9T8XTpbQ"
+    },
+    {
+     "views": 4,
+     "age_days": 0.23,
+     "channel_id": "UCHHPdBa5BhbMCThrLaGi95w"
+    }
+   ],
+   "mentions": null,
+   "demand": null,
+   "demand_last_year": null,
+   "price": null,
+   "review_count": null,
+   "sellers": null,
+   "coupang_url": null,
+   "price_source": null
+  },
+  {
+   "key": "vegetable_cutter",
+   "name": "야채 커터",
+   "keyword": "다기능 야채 커터",
+   "price_band": "저가",
+   "videos": [
+    {
+     "views": 1736,
+     "age_days": 13.89,
+     "channel_id": "UCGgSrSNsB1_8YKA9nusfVWA"
+    },
+    {
+     "views": 10,
+     "age_days": 11.24,
+     "channel_id": "UCW24SwIJiswInXsObI9VAEg"
+    }
+   ],
+   "mentions": null,
+   "demand": null,
+   "demand_last_year": null,
+   "price": null,
+   "review_count": null,
+   "sellers": null,
+   "coupang_url": null,
+   "price_source": null
+  },
+  {
+   "key": "rice_scoop",
+   "name": "밥주걱",
+   "keyword": "세워지는 밥주걱",
+   "price_band": "저가",
+   "videos": [
+    {
+     "views": 1390,
+     "age_days": 4.01,
+     "channel_id": "UCHPcUUwbO0MyyhLGesExZ_w"
+    }
+   ],
+   "mentions": null,
+   "demand": null,
+   "demand_last_year": null,
+   "price": null,
+   "review_count": null,
+   "sellers": null,
+   "coupang_url": null,
+   "price_source": null
+  },
+  {
+   "key": "mini_washing_machine",
+   "name": "미니 세탁기",
+   "keyword": "소형 세탁기",
+   "price_band": "고가",
+   "videos": [
+    {
+     "views": 169504,
+     "age_days": 8.35,
+     "channel_id": "UChR-QJHWHQYJRhUfdm4FIzw"
+    },
+    {
+     "views": 18190,
+     "age_days": 9.87,
+     "channel_id": "UCFw3DyUVf71OweMTj_axBww"
+    },
+    {
+     "views": 8964,
+     "age_days": 5.89,
+     "channel_id": "UCjBFXhM1tmWXrolnbNo21Yw"
+    },
+    {
+     "views": 5795,
+     "age_days": 6.08,
+     "channel_id": "UCbbSSC34H9779AN_7sGQsMA"
+    },
+    {
+     "views": 6135,
+     "age_days": 4.93,
+     "channel_id": "UCjw6w2JgcbgYXL29_w2k7XA"
+    },
+    {
+     "views": 3147,
+     "age_days": 7.84,
+     "channel_id": "UCEhiRDym_ifhs1b08qPZ1BQ"
+    },
+    {
+     "views": 2886,
+     "age_days": 7.31,
+     "channel_id": "UC6hLlaUavqIj_IomdbocKYQ"
+    },
+    {
+     "views": 2578,
+     "age_days": 5.85,
+     "channel_id": "UCN_YKz-tKWkVpNyYths0ZQQ"
+    },
+    {
+     "views": 1735,
+     "age_days": 9.8,
+     "channel_id": "UCjuWNsEa9sR3rWKJaxCIo2Q"
+    },
+    {
+     "views": 1677,
+     "age_days": 4.14,
+     "channel_id": "UCWcJBoDFekGONvf2zUSyEcg"
+    },
+    {
+     "views": 2270,
+     "age_days": 1.39,
+     "channel_id": "UCw4rtuw7G_iKoTyhxZUZIWg"
+    },
+    {
+     "views": 1573,
+     "age_days": 6.26,
+     "channel_id": "UCnoNcGYxPZslQZ0FV1bEpNg"
+    },
+    {
+     "views": 1668,
+     "age_days": 5.89,
+     "channel_id": "UCJ_jg2HfQDbFxr409WJ7Gug"
+    },
+    {
+     "views": 1326,
+     "age_days": 12.89,
+     "channel_id": "UCsa2kWoiCv3cgv_wL6V8cGg"
+    },
+    {
+     "views": 1858,
+     "age_days": 7.0,
+     "channel_id": "UCsOulXtqG4LFnOko_cMfNoA"
+    },
+    {
+     "views": 1449,
+     "age_days": 2.72,
+     "channel_id": "UCx7Y3rUioRZHqh76MhL6Gjw"
+    },
+    {
+     "views": 1167,
+     "age_days": 8.79,
+     "channel_id": "UCYA-PnQZogLVnApEXExqr2Q"
+    },
+    {
+     "views": 1310,
+     "age_days": 4.35,
+     "channel_id": "UCX3RF9-UfBQly6LsHJQoI9Q"
+    },
+    {
+     "views": 1497,
+     "age_days": 13.34,
+     "channel_id": "UCGPi1LtDMfQkx4_x-5RvWew"
+    },
+    {
+     "views": 1615,
+     "age_days": 7.01,
+     "channel_id": "UCXMjDlnPrTc8hODz_EmGLoQ"
+    },
+    {
+     "views": 1321,
+     "age_days": 12.36,
+     "channel_id": "UCeyvolBH-iqsXX010jhvx6w"
+    },
+    {
+     "views": 1283,
+     "age_days": 1.16,
+     "channel_id": "UCqnV_B7agYr_BQ2pEdBcaKg"
+    },
+    {
+     "views": 1372,
+     "age_days": 2.57,
+     "channel_id": "UC0YT10eGdmNRhPPPtWwvSTw"
+    },
+    {
+     "views": 1361,
+     "age_days": 10.96,
+     "channel_id": "UCfBVKZPAJC6aaHhxaTXdgRg"
+    },
+    {
+     "views": 9,
+     "age_days": 9.23,
+     "channel_id": "UCgcPupAaFb3EuryHwDRc5aA"
+    },
+    {
+     "views": 2,
+     "age_days": 12.78,
+     "channel_id": "UC6_fvIeemaL-Tbc1BMLSs5g"
+    },
+    {
+     "views": 1384,
+     "age_days": 2.86,
+     "channel_id": "UCkzvEdWk2IyZHt6KSmp6Vmg"
+    },
+    {
+     "views": 1347,
+     "age_days": 13.9,
+     "channel_id": "UC-ulqQo3zLZldsuWPf_FKVA"
+    },
+    {
+     "views": 1266,
+     "age_days": 2.89,
+     "channel_id": "UCEN5laxMs1m4tH4J4wHdchA"
+    },
+    {
+     "views": 1292,
+     "age_days": 5.18,
+     "channel_id": "UCT28GqYgmg5XBNBNq2kUF4w"
+    },
+    {
+     "views": 1189,
+     "age_days": 6.95,
+     "channel_id": "UCnC6znXG0JevIdxRYzodb5w"
+    },
+    {
+     "views": 1374,
+     "age_days": 12.22,
+     "channel_id": "UCe3Nk8xAI7fmE7BVJCtqoWA"
+    },
+    {
+     "views": 1390,
+     "age_days": 11.0,
+     "channel_id": "UCjreBRIAC_4A5x_lS_7VXVQ"
+    },
+    {
+     "views": 1430,
+     "age_days": 1.56,
+     "channel_id": "UCjPTKcpjNGCpSyNDa4shNRQ"
+    },
+    {
+     "views": 1115,
+     "age_days": 13.29,
+     "channel_id": "UCBk8EkkPHEd4ljw8dSGsCng"
+    },
+    {
+     "views": 1175,
+     "age_days": 9.17,
+     "channel_id": "UCZDTs3lZZ2Lo28UzcxzXVtg"
+    },
+    {
+     "views": 1242,
+     "age_days": 13.09,
+     "channel_id": "UCQKiJOnSC8WCKsCdbuqyj2A"
+    },
+    {
+     "views": 990,
+     "age_days": 5.29,
+     "channel_id": "UCBwa17XydYjx13ABjiWbJ-A"
+    },
+    {
+     "views": 1272,
+     "age_days": 3.72,
+     "channel_id": "UC9JQRwQ9ALlMqT9q4Z_kDIA"
+    },
+    {
+     "views": 1191,
+     "age_days": 1.22,
+     "channel_id": "UCG9y78184_aheuzp0CHrNWQ"
+    },
+    {
+     "views": 1256,
+     "age_days": 3.25,
+     "channel_id": "UChNX2OiZBTRufcyyXGBRolg"
+    },
+    {
+     "views": 955,
+     "age_days": 3.27,
+     "channel_id": "UCfNWzvxbwzJgBfpTWrNZbZw"
+    },
+    {
+     "views": 1275,
+     "age_days": 0.88,
+     "channel_id": "UCVo5dAlYYzZXIpLQd0V8lpA"
+    },
+    {
+     "views": 803,
+     "age_days": 13.81,
+     "channel_id": "UCoMixgbGQXHzmTXrdAxDd6A"
+    },
+    {
+     "views": 557,
+     "age_days": 10.1,
+     "channel_id": "UCPdLMsf8zVuX_KkJjDISjkg"
+    },
+    {
+     "views": 923,
+     "age_days": 7.26,
+     "channel_id": "UC1Nqa42DT5iDZ3M9JdPPj3w"
+    },
+    {
+     "views": 498,
+     "age_days": 5.71,
+     "channel_id": "UC7PdUF6omRImdacwaul76Xw"
+    },
+    {
+     "views": 490,
+     "age_days": 5.71,
+     "channel_id": "UCHRys9X0ZN_BncS1U-Albfg"
+    },
+    {
+     "views": 45,
+     "age_days": 9.78,
+     "channel_id": "UCRflU1As7_YsEEQ_d_bwyCQ"
+    },
+    {
+     "views": 42,
+     "age_days": 9.03,
+     "channel_id": "UCgUPtccmimnz1v_7o6oaYjg"
+    }
+   ],
+   "mentions": null,
+   "demand": null,
+   "demand_last_year": null,
+   "price": null,
+   "review_count": null,
+   "sellers": null,
+   "coupang_url": null,
+   "price_source": null
+  },
+  {
+   "key": "refrigerator_storage",
+   "name": "냉장고 수납",
+   "keyword": "냉장고 정리",
+   "price_band": "저가",
+   "videos": [
+    {
+     "views": 153333,
+     "age_days": 10.69,
+     "channel_id": "UCyWJ1DEvSLg6Xprj2ZzQEmQ"
+    },
+    {
+     "views": 146330,
+     "age_days": 6.85,
+     "channel_id": "UCcQTRi69dsVYHN3exePtZ1A"
+    },
+    {
+     "views": 60619,
+     "age_days": 9.35,
+     "channel_id": "UCZseDHYlrD1LV8jwShLFsXw"
+    },
+    {
+     "views": 111030,
+     "age_days": 10.83,
+     "channel_id": "UCbVa4V0hcnscgUFIklIwNEw"
+    },
+    {
+     "views": 55348,
+     "age_days": 6.16,
+     "channel_id": "UCbLQHyl04s9xIPrfLn96iHQ"
+    },
+    {
+     "views": 97710,
+     "age_days": 5.83,
+     "channel_id": "UCbVa4V0hcnscgUFIklIwNEw"
+    },
+    {
+     "views": 55802,
+     "age_days": 1.99,
+     "channel_id": "UCdDXuPkKKJTtl9GSxtHLCuw"
+    },
+    {
+     "views": 76571,
+     "age_days": 7.01,
+     "channel_id": "UCb763mDr-ZwjtuC3gVhJ4pA"
+    },
+    {
+     "views": 82198,
+     "age_days": 10.84,
+     "channel_id": "UCL5p5u4IoMd4a25LR9Hn13w"
+    },
+    {
+     "views": 30286,
+     "age_days": 6.01,
+     "channel_id": "UCL12SCB2y7J-KX0_ghAf-xQ"
+    },
+    {
+     "views": 30126,
+     "age_days": 3.88,
+     "channel_id": "UC5gGyUilbL-UEajnzm1meHw"
+    },
+    {
+     "views": 30743,
+     "age_days": 6.77,
+     "channel_id": "UCofiIW3cLP6mHminUAA6zpw"
+    },
+    {
+     "views": 16693,
+     "age_days": 13.83,
+     "channel_id": "UC5gGyUilbL-UEajnzm1meHw"
+    },
+    {
+     "views": 26786,
+     "age_days": 4.88,
+     "channel_id": "UCWzGnnOjzIQOvgFoxxYA51Q"
+    },
+    {
+     "views": 18528,
+     "age_days": 13.01,
+     "channel_id": "UCpfUcK8sUp1H3OSrOLCuHVw"
+    },
+    {
+     "views": 14717,
+     "age_days": 7.14,
+     "channel_id": "UC0-k8VNVlzLGRlQ4o4nqxew"
+    },
+    {
+     "views": 29119,
+     "age_days": 5.26,
+     "channel_id": "UCjm1fZAjGD6UBrIuasxXzgg"
+    },
+    {
+     "views": 13961,
+     "age_days": 10.89,
+     "channel_id": "UC1a0JQT7R4uHIQYKNaJOVcw"
+    },
+    {
+     "views": 26892,
+     "age_days": 8.02,
+     "channel_id": "UCPJSz9tqSIH03dI0GbYxz-w"
+    },
+    {
+     "views": 25513,
+     "age_days": 0.97,
+     "channel_id": "UCMXB8x0NMgYL0DPePRa9q2A"
+    },
+    {
+     "views": 18978,
+     "age_days": 3.89,
+     "channel_id": "UCb763mDr-ZwjtuC3gVhJ4pA"
+    },
+    {
+     "views": 10465,
+     "age_days": 5.89,
+     "channel_id": "UCVSH4CnxA-uoTcUFFPcpeQQ"
+    },
+    {
+     "views": 13053,
+     "age_days": 12.39,
+     "channel_id": "UC_8wlpZ5nX2_po78KIaSJ3A"
+    },
+    {
+     "views": 7227,
+     "age_days": 5.79,
+     "channel_id": "UCenlclB39lDWXZWrhb6GHyw"
+    },
+    {
+     "views": 5882,
+     "age_days": 0.81,
+     "channel_id": "UCly2OfVAwp5nqCf13glP9Zg"
+    },
+    {
+     "views": 507,
+     "age_days": 11.33,
+     "channel_id": "UCM5buXIwGwf5sbYNJq-dHeg"
+    },
+    {
+     "views": 9560,
+     "age_days": 2.97,
+     "channel_id": "UCMxGrrcSv8mLjDSsMmKTQBw"
+    },
+    {
+     "views": 5842,
+     "age_days": 8.93,
+     "channel_id": "UCEp-zshRuVV6R85SaLyPfpg"
+    },
+    {
+     "views": 8763,
+     "age_days": 11.29,
+     "channel_id": "UC168TymjwW76s3USTY2ZaOQ"
+    },
+    {
+     "views": 5664,
+     "age_days": 11.86,
+     "channel_id": "UC1HlFD5xRmqmp2UHakS-iow"
+    },
+    {
+     "views": 5686,
+     "age_days": 11.93,
+     "channel_id": "UCFw2gtdchWd-orp2CtFabQQ"
+    },
+    {
+     "views": 7167,
+     "age_days": 7.33,
+     "channel_id": "UC8wYHiJ0KnPozpJfCagKymA"
+    },
+    {
+     "views": 10979,
+     "age_days": 10.77,
+     "channel_id": "UCCaemE8xjzqJ1UYUHT-0vTg"
+    },
+    {
+     "views": 4641,
+     "age_days": 6.75,
+     "channel_id": "UCx85MHw6twsAJy4eM3k2iYA"
+    },
+    {
+     "views": 5097,
+     "age_days": 1.31,
+     "channel_id": "UC-eB3YN8aUe3Sj-I8tzEvZA"
+    },
+    {
+     "views": 4143,
+     "age_days": 8.82,
+     "channel_id": "UCRs3-k4pFfKLU4rKvR25uFQ"
+    },
+    {
+     "views": 8768,
+     "age_days": 7.83,
+     "channel_id": "UCSUn0ZP7hTPXfQbq6UO27bA"
+    },
+    {
+     "views": 4421,
+     "age_days": 7.17,
+     "channel_id": "UC_Evq7nFd_Lpof7miZKHV6Q"
+    },
+    {
+     "views": 5036,
+     "age_days": 11.22,
+     "channel_id": "UC56mbbrsfY533LnI8F24fZQ"
+    },
+    {
+     "views": 5262,
+     "age_days": 7.07,
+     "channel_id": "UC50ypW518Vf7mU34aX4Ut8Q"
+    },
+    {
+     "views": 4188,
+     "age_days": 9.85,
+     "channel_id": "UCU7bwe52owlokonqm7YwPHQ"
+    },
+    {
+     "views": 3726,
+     "age_days": 5.83,
+     "channel_id": "UCtV0TAGKMBakq-MlYfQhPxQ"
+    },
+    {
+     "views": 3035,
+     "age_days": 11.71,
+     "channel_id": "UCxsGKmjRzsPXE_ip7tffCPQ"
+    },
+    {
+     "views": 4525,
+     "age_days": 1.86,
+     "channel_id": "UCqhjIPLChLrLxr1Cv1MvIzA"
+    },
+    {
+     "views": 5592,
+     "age_days": 8.93,
+     "channel_id": "UCPFN54ksdCnl0JKw5a4pnJA"
+    },
+    {
+     "views": 2900,
+     "age_days": 4.85,
+     "channel_id": "UCYUGrVBKBQ-CFSPTUQmd7wQ"
+    },
+    {
+     "views": 5757,
+     "age_days": 3.9,
+     "channel_id": "UCM4B4i1zhU6gBPklg24jbRw"
+    },
+    {
+     "views": 5414,
+     "age_days": 13.06,
+     "channel_id": "UCi_O7k8haLiwS2fD-CXzI4g"
+    },
+    {
+     "views": 2997,
+     "age_days": 4.81,
+     "channel_id": "UCVNb25zzZWoBhM8UhZ-N98Q"
+    },
+    {
+     "views": 5187,
+     "age_days": 7.89,
+     "channel_id": "UC3F9ZdApOdK-GkHCuFD9ISg"
+    }
+   ],
+   "mentions": null,
+   "demand": null,
+   "demand_last_year": null,
+   "price": null,
+   "review_count": null,
+   "sellers": null,
+   "coupang_url": null,
+   "price_source": null
+  },
+  {
+   "key": "dish_drainer",
+   "name": "식기세척기",
+   "keyword": "미니 식기세척기",
+   "price_band": "고가",
+   "videos": [
+    {
+     "views": 4737,
+     "age_days": 13.32,
+     "channel_id": "UCFx9ZIe6IfOtsjs8ld1LYWg"
+    },
+    {
+     "views": 2072,
+     "age_days": 6.81,
+     "channel_id": "UC56mbbrsfY533LnI8F24fZQ"
+    },
+    {
+     "views": 1667,
+     "age_days": 7.86,
+     "channel_id": "UCEQyuhFB2xaTRCfgyLfIBLQ"
+    },
+    {
+     "views": 1481,
+     "age_days": 11.89,
+     "channel_id": "UC0I7EaXiWJchEYzaZ5c-h1g"
+    },
+    {
+     "views": 1264,
+     "age_days": 12.85,
+     "channel_id": "UCHie-9dqD48028jUfY0GXcw"
+    },
+    {
+     "views": 1251,
+     "age_days": 6.63,
+     "channel_id": "UCw-Vssbyj4PQQCVfZyqxP5Q"
+    },
+    {
+     "views": 1446,
+     "age_days": 12.92,
+     "channel_id": "UCj11tTL4Q7UPbJbFD6aLLHw"
+    },
+    {
+     "views": 1293,
+     "age_days": 13.9,
+     "channel_id": "UCqRPtNEnIYNyWUyiCAFMtrw"
+    },
+    {
+     "views": 1147,
+     "age_days": 11.01,
+     "channel_id": "UCXZbSDCzXb71tT7TWUbOsTw"
+    },
+    {
+     "views": 1464,
+     "age_days": 9.73,
+     "channel_id": "UCdLSVCA4MbHKgJGrY7_KPjg"
+    },
+    {
+     "views": 1331,
+     "age_days": 13.27,
+     "channel_id": "UCzXcR9W0VxqsxyRZCwOgCTQ"
+    },
+    {
+     "views": 1173,
+     "age_days": 3.91,
+     "channel_id": "UC_n3vXfhYDQ-gr5NA8ViPZA"
+    },
+    {
+     "views": 1363,
+     "age_days": 13.33,
+     "channel_id": "UCj4RAFvItpD7O3v92vuoE4A"
+    },
+    {
+     "views": 1175,
+     "age_days": 10.64,
+     "channel_id": "UC9KrNtOlxK8wVKRXQbtpvbg"
+    },
+    {
+     "views": 1179,
+     "age_days": 6.55,
+     "channel_id": "UCNPlI-zZRVGjisbHlMKronA"
+    },
+    {
+     "views": 1129,
+     "age_days": 12.65,
+     "channel_id": "UCM8g7OsQ8Cb03iDjmrk7TBQ"
+    },
+    {
+     "views": 1256,
+     "age_days": 8.79,
+     "channel_id": "UC6g8OrWNkLBpSg3krfl175g"
+    },
+    {
+     "views": 1148,
+     "age_days": 11.57,
+     "channel_id": "UCRhFmcemwEMpWB3qimaFdnw"
+    },
+    {
+     "views": 1072,
+     "age_days": 13.66,
+     "channel_id": "UC0CmWNV_4nMgLsgveweIjYg"
+    },
+    {
+     "views": 447,
+     "age_days": 4.66,
+     "channel_id": "UC3MQYEEh74V62YhZl_Ccd5w"
+    },
+    {
+     "views": 462,
+     "age_days": 3.89,
+     "channel_id": "UCKlVAr5IFzGuQHssBAglonw"
+    },
+    {
+     "views": 409,
+     "age_days": 6.84,
+     "channel_id": "UCcqzhu09RNzh7YmyrU4AGnw"
+    },
+    {
+     "views": 441,
+     "age_days": 6.72,
+     "channel_id": "UCizU-49MAn_C5wJ9jK_AfZw"
+    },
+    {
+     "views": 284,
+     "age_days": 7.2,
+     "channel_id": "UCh3ygaLKuBPx_YgRi3xUt1Q"
+    },
+    {
+     "views": 10,
+     "age_days": 11.02,
+     "channel_id": "UCLCGJ4oqDJ3S0WenFE3Dcaw"
+    },
+    {
+     "views": 9,
+     "age_days": 4.1,
+     "channel_id": "UCz4q-pDuy69yiqCKCKVhAQA"
+    },
+    {
+     "views": 4,
+     "age_days": 13.58,
+     "channel_id": "UCHrXyg3TguAVgtaCxzbi21Q"
+    },
+    {
+     "views": 106,
+     "age_days": 6.86,
+     "channel_id": "UCR2e-p6-Ft4aP14WCp81JGQ"
+    },
+    {
+     "views": 68,
+     "age_days": 8.8,
+     "channel_id": "UC4QvhDAcpQz2iKUQmpB0IPw"
+    },
+    {
+     "views": 98,
+     "age_days": 1.97,
+     "channel_id": "UCE8MO4xTKVIX5Yg9qGBGYeQ"
+    },
+    {
+     "views": 17,
+     "age_days": 4.86,
+     "channel_id": "UChieJQZ6BRiOU7KGyXiUqRQ"
+    },
+    {
+     "views": 11,
+     "age_days": 12.92,
+     "channel_id": "UCgiMkYU-n4BPjWpvG_Yq9Sw"
+    },
+    {
+     "views": 10,
+     "age_days": 4.09,
+     "channel_id": "UCz4q-pDuy69yiqCKCKVhAQA"
+    },
+    {
+     "views": 13,
+     "age_days": 8.76,
+     "channel_id": "UC972FF6NZbq4M4C2brHwPsQ"
+    },
+    {
+     "views": 7,
+     "age_days": 2.3,
+     "channel_id": "UCPDCX3hLmVHODhiQRKtLtmw"
+    },
+    {
+     "views": 18,
+     "age_days": 10.93,
+     "channel_id": "UCXy7N8uwPluCRQNGEyHIM8w"
+    },
+    {
+     "views": 8,
+     "age_days": 1.89,
+     "channel_id": "UCvHV8YmnHxMi_No9c_xijzQ"
+    },
+    {
+     "views": 6,
+     "age_days": 11.01,
+     "channel_id": "UCLCGJ4oqDJ3S0WenFE3Dcaw"
+    },
+    {
+     "views": 5,
+     "age_days": 0.36,
+     "channel_id": "UC8XzbtLfGnbmDPzawuKMbzg"
+    },
+    {
+     "views": 4,
+     "age_days": 3.91,
+     "channel_id": "UCxk1dgWhtydprhsVi2KUmUA"
+    },
+    {
+     "views": 5,
+     "age_days": 4.75,
+     "channel_id": "UCSxjfOqgkpz_KNmVCLe1QvQ"
+    },
+    {
+     "views": 3,
+     "age_days": 9.94,
+     "channel_id": "UCXzp5hYNRYjyTFuhXv6aw7A"
+    },
+    {
+     "views": 1388,
+     "age_days": 0.8,
+     "channel_id": "UC0-MSoPb8Q8F24ujQyHWcRw"
+    },
+    {
+     "views": 1184,
+     "age_days": 1.26,
+     "channel_id": "UCU6TRmkMSRVMGlYrOoE9V8A"
+    },
+    {
+     "views": 1,
+     "age_days": 7.84,
+     "channel_id": "UCi5lVXvkboMtsFzzuH2K2MA"
+    },
+    {
+     "views": 0,
+     "age_days": 0.0,
+     "channel_id": "UC6MAcHre94-_Bs2fObDcPZA"
+    },
+    {
+     "views": 0,
+     "age_days": 4.03,
+     "channel_id": "UCYsXQn39f9yjN17BNYcte3Q"
+    },
+    {
+     "views": 975,
+     "age_days": 1.04,
+     "channel_id": "UCIP4w-bv7oYPOjFmV9S166g"
+    }
+   ],
+   "mentions": null,
+   "demand": null,
+   "demand_last_year": null,
+   "price": null,
+   "review_count": null,
+   "sellers": null,
+   "coupang_url": null,
+   "price_source": null
+  },
+  {
+   "key": "storage_box",
+   "name": "수납함",
+   "keyword": "이케아 수납함",
+   "price_band": "중가",
+   "videos": [
+    {
+     "views": 86789,
+     "age_days": 10.81,
+     "channel_id": "UCwfipXEUgyhWaTNVYzp-gJA"
+    },
+    {
+     "views": 2191,
+     "age_days": 7.39,
+     "channel_id": "UClZjicRCtPXO1zV4q_InSCw"
+    },
+    {
+     "views": 1843,
+     "age_days": 6.89,
+     "channel_id": "UCTiTDnbVHe3k4EuFjUry8Qg"
+    },
+    {
+     "views": 1326,
+     "age_days": 11.89,
+     "channel_id": "UCTiTDnbVHe3k4EuFjUry8Qg"
+    },
+    {
+     "views": 1370,
+     "age_days": 12.75,
+     "channel_id": "UCFUrxZAhg1FIK0l4hjLHAOQ"
+    },
+    {
+     "views": 1285,
+     "age_days": 13.31,
+     "channel_id": "UCyLd0pu6mmuxBIfEHKYvQBg"
+    },
+    {
+     "views": 1251,
+     "age_days": 12.83,
+     "channel_id": "UChfohA3UxFH__JmLmcJC6vg"
+    },
+    {
+     "views": 1024,
+     "age_days": 5.89,
+     "channel_id": "UCuBpEqak9dgcJ93BilzCs-Q"
+    },
+    {
+     "views": 1295,
+     "age_days": 8.97,
+     "channel_id": "UC84G7kkNcDlAR8BRNaJrLaA"
+    },
+    {
+     "views": 312,
+     "age_days": 6.55,
+     "channel_id": "UCT27EMY4e6WYqV--Cl4_KKg"
+    },
+    {
+     "views": 19,
+     "age_days": 10.52,
+     "channel_id": "UCpDWf-u8P6NCusiO8qkGgCQ"
+    },
+    {
+     "views": 22,
+     "age_days": 2.35,
+     "channel_id": "UCEdoNYYU9GbeK6DasjonhAQ"
+    },
+    {
+     "views": 11,
+     "age_days": 13.86,
+     "channel_id": "UClyXzB2lsNs9G3V2sbwZRMA"
+    },
+    {
+     "views": 5,
+     "age_days": 12.43,
+     "channel_id": "UCPpBtq02eW_ECIPyW3dRWtw"
+    },
+    {
+     "views": 3,
+     "age_days": 4.42,
+     "channel_id": "UCeg9U5K3Hg70O7uYg6oIhEg"
+    },
+    {
+     "views": 1,
+     "age_days": 5.92,
+     "channel_id": "UCpDWf-u8P6NCusiO8qkGgCQ"
+    },
+    {
+     "views": 2,
+     "age_days": 11.2,
+     "channel_id": "UCpw90LjerzRERrXFaYmDtiw"
+    },
+    {
+     "views": 1,
+     "age_days": 4.68,
+     "channel_id": "UCYp-etihxrKNY65O2_-5FdQ"
+    },
+    {
+     "views": 0,
+     "age_days": 6.81,
+     "channel_id": "UCtU5slkgJVbtGZ-Y9SrrC0g"
+    },
+    {
+     "views": 353,
+     "age_days": 0.71,
+     "channel_id": "UC9c3TwJzlDUCybaFPLu-PiA"
+    },
+    {
+     "views": 3,
+     "age_days": 9.23,
+     "channel_id": "UCxtOrziUCX6sTbdPA7IN56w"
+    },
+    {
+     "views": 0,
+     "age_days": 7.23,
+     "channel_id": "UCeg9U5K3Hg70O7uYg6oIhEg"
+    }
+   ],
+   "mentions": null,
+   "demand": null,
+   "demand_last_year": null,
+   "price": null,
+   "review_count": null,
+   "sellers": null,
+   "coupang_url": null,
+   "price_source": null
+  },
+  {
+   "key": "spice_container",
+   "name": "양념통",
+   "keyword": "양념통 추천",
+   "price_band": "저가",
+   "videos": [
+    {
+     "views": 44824,
+     "age_days": 3.0,
+     "channel_id": "UCsAUcxKoHlPwhjNmKMh9I1Q"
+    },
+    {
+     "views": 38644,
+     "age_days": 5.89,
+     "channel_id": "UCi7QrFQ8VzF5wuhj6pEgEQA"
+    },
+    {
+     "views": 32665,
+     "age_days": 11.85,
+     "channel_id": "UC9Y8AFpglQzggVeZt-TKgBQ"
+    },
+    {
+     "views": 28440,
+     "age_days": 13.67,
+     "channel_id": "UCtMChWo4yEHL0ExsQP_aPog"
+    },
+    {
+     "views": 4728,
+     "age_days": 9.31,
+     "channel_id": "UC6tR8pVi1jiQ3Ly3Lgc_8MQ"
+    },
+    {
+     "views": 5619,
+     "age_days": 10.13,
+     "channel_id": "UCQ9BskuEAsawuHLPtSnqraA"
+    },
+    {
+     "views": 2967,
+     "age_days": 5.08,
+     "channel_id": "UCV_6jEFSxxVojmYAQv4BdNg"
+    },
+    {
+     "views": 1764,
+     "age_days": 7.97,
+     "channel_id": "UCfJvlmpNzAVGUJH0SuRV6Eg"
+    },
+    {
+     "views": 2001,
+     "age_days": 6.31,
+     "channel_id": "UCJjd4Nm51OApNtVj4XmedbA"
+    },
+    {
+     "views": 1988,
+     "age_days": 6.31,
+     "channel_id": "UCxXxq5Qn4IIePjHdyNdNyNg"
+    },
+    {
+     "views": 1554,
+     "age_days": 6.09,
+     "channel_id": "UCaV0Yu8_VhLyDqtwcghM2pw"
+    },
+    {
+     "views": 1482,
+     "age_days": 7.31,
+     "channel_id": "UCDKvRC8OY8KBEaYFJDStYKg"
+    },
+    {
+     "views": 1478,
+     "age_days": 7.89,
+     "channel_id": "UCUEchmaNzcRCeVJA2urNzHQ"
+    },
+    {
+     "views": 1158,
+     "age_days": 6.7,
+     "channel_id": "UCh9eNfPKoMwr8mYWLwzrG-g"
+    },
+    {
+     "views": 1423,
+     "age_days": 3.66,
+     "channel_id": "UCdLSVCA4MbHKgJGrY7_KPjg"
+    },
+    {
+     "views": 1316,
+     "age_days": 5.86,
+     "channel_id": "UCmzIO-hsH19jMb_YJiGRk-Q"
+    },
+    {
+     "views": 1287,
+     "age_days": 13.74,
+     "channel_id": "UCBlUH3wiargvfXNhjm9Qd7w"
+    },
+    {
+     "views": 1092,
+     "age_days": 6.73,
+     "channel_id": "UCz-18dlTnRopyIXPyo0_kMQ"
+    },
+    {
+     "views": 1218,
+     "age_days": 3.89,
+     "channel_id": "UCChXYHsT7Yz-hXBoHuaxG7A"
+    },
+    {
+     "views": 1201,
+     "age_days": 5.95,
+     "channel_id": "UCHBHGMHTedhywZonA5FAYfQ"
+    },
+    {
+     "views": 1296,
+     "age_days": 11.56,
+     "channel_id": "UCrJbHK0pcfKV2CPDOFVEC2A"
+    },
+    {
+     "views": 1249,
+     "age_days": 7.79,
+     "channel_id": "UCNgf6mJJiOM96wi1p6DvfZw"
+    },
+    {
+     "views": 1202,
+     "age_days": 7.79,
+     "channel_id": "UCVq-ETfnEzxjHGmUviGmvzg"
+    },
+    {
+     "views": 1219,
+     "age_days": 9.74,
+     "channel_id": "UCUdssLfLFqFohjgoAPcmtuA"
+    },
+    {
+     "views": 1175,
+     "age_days": 10.63,
+     "channel_id": "UC_BAo_Hem4cg0xvpwp3nbWQ"
+    },
+    {
+     "views": 243,
+     "age_days": 12.92,
+     "channel_id": "UCAkSG6ii_a6Njvg8MjdQ_8A"
+    },
+    {
+     "views": 376,
+     "age_days": 8.05,
+     "channel_id": "UCXhi4arBc4sEVPHkyfFIFFw"
+    },
+    {
+     "views": 424,
+     "age_days": 10.63,
+     "channel_id": "UC4didDG0biQPpkl5IjX_wYg"
+    },
+    {
+     "views": 329,
+     "age_days": 7.27,
+     "channel_id": "UC2L7e7zN--HrYUYbE52vttw"
+    },
+    {
+     "views": 452,
+     "age_days": 1.01,
+     "channel_id": "UCRkBNjG8Vg61Yg84SXgQOLg"
+    },
+    {
+     "views": 6,
+     "age_days": 13.74,
+     "channel_id": "UCki_TEmmy55nkHd5K51-ZNg"
+    },
+    {
+     "views": 1,
+     "age_days": 10.96,
+     "channel_id": "UCElHuN42pXJeo-FWEmLAbig"
+    },
+    {
+     "views": 1165,
+     "age_days": 0.33,
+     "channel_id": "UCTIs2yX5wXd4sAbSnC9-gMQ"
+    },
+    {
+     "views": 3,
+     "age_days": 0.04,
+     "channel_id": "UC1qy3ODOkWehfjAADaqdQ8g"
+    }
+   ],
+   "mentions": null,
+   "demand": null,
+   "demand_last_year": null,
+   "price": null,
+   "review_count": null,
+   "sellers": null,
+   "coupang_url": null,
+   "price_source": null
+  },
+  {
+   "key": "steel_scrubber",
+   "name": "철수세미",
+   "keyword": "철수세미",
+   "price_band": "저가",
+   "videos": [
+    {
+     "views": 165185,
+     "age_days": 5.72,
+     "channel_id": "UC8-MniDkkvtGD1YQZMVottw"
+    },
+    {
+     "views": 79412,
+     "age_days": 13.79,
+     "channel_id": "UCjvQgQrcnj22R_MaC6lZxGg"
+    },
+    {
+     "views": 58729,
+     "age_days": 7.99,
+     "channel_id": "UC9DNVNi8fNdEIUC5aeMxcYg"
+    },
+    {
+     "views": 26238,
+     "age_days": 12.99,
+     "channel_id": "UC8m4s6Bu9SszVTlqRtYRQFg"
+    },
+    {
+     "views": 34823,
+     "age_days": 11.18,
+     "channel_id": "UCwZNs09y8VnpSjAJiFKxYpg"
+    },
+    {
+     "views": 40226,
+     "age_days": 7.27,
+     "channel_id": "UCb4vtXvxY1NWSHo8EangSfw"
+    },
+    {
+     "views": 29238,
+     "age_days": 6.31,
+     "channel_id": "UCjvQgQrcnj22R_MaC6lZxGg"
+    },
+    {
+     "views": 29401,
+     "age_days": 8.98,
+     "channel_id": "UCjvQgQrcnj22R_MaC6lZxGg"
+    },
+    {
+     "views": 18946,
+     "age_days": 8.85,
+     "channel_id": "UCL2p9m6qzM-L_VApkKNjx8A"
+    },
+    {
+     "views": 19654,
+     "age_days": 11.79,
+     "channel_id": "UCjvQgQrcnj22R_MaC6lZxGg"
+    },
+    {
+     "views": 16251,
+     "age_days": 8.81,
+     "channel_id": "UCjvQgQrcnj22R_MaC6lZxGg"
+    },
+    {
+     "views": 16119,
+     "age_days": 2.8,
+     "channel_id": "UCQfe3JJANKh6Y_myo-LAWYA"
+    },
+    {
+     "views": 18285,
+     "age_days": 4.18,
+     "channel_id": "UCwZNs09y8VnpSjAJiFKxYpg"
+    },
+    {
+     "views": 12763,
+     "age_days": 7.98,
+     "channel_id": "UCjvQgQrcnj22R_MaC6lZxGg"
+    },
+    {
+     "views": 10569,
+     "age_days": 11.27,
+     "channel_id": "UCb4vtXvxY1NWSHo8EangSfw"
+    },
+    {
+     "views": 10686,
+     "age_days": 8.1,
+     "channel_id": "UCb4vtXvxY1NWSHo8EangSfw"
+    },
+    {
+     "views": 11165,
+     "age_days": 4.14,
+     "channel_id": "UCOhasIfc8m1PwV6crpGVUHg"
+    },
+    {
+     "views": 4364,
+     "age_days": 4.14,
+     "channel_id": "UCILkGTVr2aVC8TmU4L24wBQ"
+    },
+    {
+     "views": 5724,
+     "age_days": 11.12,
+     "channel_id": "UCOhasIfc8m1PwV6crpGVUHg"
+    },
+    {
+     "views": 4882,
+     "age_days": 3.09,
+     "channel_id": "UCt7J8UigafP_5xbTOieNSFg"
+    },
+    {
+     "views": 1664,
+     "age_days": 12.71,
+     "channel_id": "UCIArN5eQs2FvaPcpXkND9Cw"
+    },
+    {
+     "views": 4006,
+     "age_days": 2.99,
+     "channel_id": "UC6RwzwJqCGIfiJqbTF2RZag"
+    },
+    {
+     "views": 3077,
+     "age_days": 1.19,
+     "channel_id": "UCZfVcTlBB8wiMeSISCI-DCg"
+    },
+    {
+     "views": 2349,
+     "age_days": 8.17,
+     "channel_id": "UCt7J8UigafP_5xbTOieNSFg"
+    },
+    {
+     "views": 1891,
+     "age_days": 10.89,
+     "channel_id": "UC4B57UnV_PsaNve1EFvQkew"
+    },
+    {
+     "views": 1688,
+     "age_days": 11.72,
+     "channel_id": "UCDaeaNaM-xlJwD1qbfa5dnA"
+    },
+    {
+     "views": 1493,
+     "age_days": 10.83,
+     "channel_id": "UCDlt1ioyYqmMBcdeYhH9Hag"
+    },
+    {
+     "views": 1415,
+     "age_days": 13.93,
+     "channel_id": "UCYaZDU2T6jgSOqlZLANjztQ"
+    },
+    {
+     "views": 1301,
+     "age_days": 6.88,
+     "channel_id": "UC5d001fiLoD7llC0IuvHRRw"
+    },
+    {
+     "views": 1511,
+     "age_days": 2.83,
+     "channel_id": "UCcFJLdkwxdS-SIZPcsgTrRA"
+    },
+    {
+     "views": 1331,
+     "age_days": 3.15,
+     "channel_id": "UCikGYJDfOi1cMt1rn2GLlIw"
+    },
+    {
+     "views": 1714,
+     "age_days": 1.91,
+     "channel_id": "UC0pm7PM6G1WpxTUS0DNsYeg"
+    },
+    {
+     "views": 1546,
+     "age_days": 6.3,
+     "channel_id": "UCONLqreks-OQBFJuvpqmI1A"
+    },
+    {
+     "views": 1257,
+     "age_days": 6.1,
+     "channel_id": "UCFepgepc_f7IselKhn8Bpzg"
+    },
+    {
+     "views": 1165,
+     "age_days": 5.22,
+     "channel_id": "UCd_YuDiL9owa-s5ebJJelQQ"
+    },
+    {
+     "views": 1233,
+     "age_days": 8.14,
+     "channel_id": "UCwZNs09y8VnpSjAJiFKxYpg"
+    },
+    {
+     "views": 1191,
+     "age_days": 13.0,
+     "channel_id": "UCS5slBvKqg_BguaeUMYyKTg"
+    },
+    {
+     "views": 188,
+     "age_days": 11.79,
+     "channel_id": "UCX4DamBl9EDCCKfcO9Z9fhQ"
+    },
+    {
+     "views": 182,
+     "age_days": 13.85,
+     "channel_id": "UCFepgepc_f7IselKhn8Bpzg"
+    },
+    {
+     "views": 1012,
+     "age_days": 0.93,
+     "channel_id": "UCd_YuDiL9owa-s5ebJJelQQ"
+    },
+    {
+     "views": 189,
+     "age_days": 10.85,
+     "channel_id": "UC9Fs6_0XDkNOI2cxP7xD59g"
+    },
+    {
+     "views": 110,
+     "age_days": 6.93,
+     "channel_id": "UCOhasIfc8m1PwV6crpGVUHg"
+    },
+    {
+     "views": 96,
+     "age_days": 7.89,
+     "channel_id": "UCOhasIfc8m1PwV6crpGVUHg"
+    },
+    {
+     "views": 44,
+     "age_days": 7.1,
+     "channel_id": "UCdgxTfNOHKJJqqbLVQ_xzdg"
+    },
+    {
+     "views": 86,
+     "age_days": 7.35,
+     "channel_id": "UCwZNs09y8VnpSjAJiFKxYpg"
+    },
+    {
+     "views": 4,
+     "age_days": 0.63,
+     "channel_id": "UCXsU2hjipkFNprga5c9AWcg"
+    },
+    {
+     "views": 26,
+     "age_days": 0.08,
+     "channel_id": "UCZfVcTlBB8wiMeSISCI-DCg"
+    }
+   ],
+   "mentions": null,
+   "demand": null,
+   "demand_last_year": null,
+   "price": null,
+   "review_count": null,
+   "sellers": null,
+   "coupang_url": null,
+   "price_source": null
+  }
+ ]
+}
