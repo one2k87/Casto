@@ -24,6 +24,9 @@ import trend_sources as src
 from trend_score import ProductSignals, VideoStat, rank
 
 DAILY_DIR = "data/trends_daily"
+WATCHLIST = "data/watchlist.json"
+WATCH_DAYS = 21          # 한 번 발굴한 제품을 며칠간 계속 추적할지(델타 계산의 전제)
+WATCH_MAX = 20           # 추적 목록 상한 — 유튜브 할당량(search 100유닛/제품)을 지킨다
 BOARD = "data/trend_board.json"
 COVERED = "data/covered.json"
 COVER_BLOCK_WEEKS = 8
@@ -92,6 +95,7 @@ def discover(c: dict, per_query: int = 25) -> list[str]:
   {{"key": "영문소문자_스네이크케이스_식별자",
     "name": "제품 통칭 — **영상에서 사람들이 부르는 이름 그대로**(정식 상품명 아님, 12자 이내)",
     "search_keyword": "네이버·쿠팡에서 검색할 대표 키워드",
+    "category": "네이버 쇼핑 카테고리 코드 — 50000000 패션의류 / 50000001 패션잡화 / 50000002 화장품미용 / 50000003 디지털가전 / 50000004 가구인테리어 / 50000005 출산육아 / 50000006 식품 / 50000007 스포츠레저 / 50000008 생활건강. **가전제품은 반드시 50000003**",
     "price_band": "저가|중가|고가"}}
   ... 최대 12개
 ]}}
@@ -105,16 +109,52 @@ def discover(c: dict, per_query: int = 25) -> list[str]:
 
 
 # ------------------------------------------------------------------ 2~3. 일별 수집
+def merge_watchlist(found: list[dict], today: dt.date) -> list[dict]:
+    """신규 발굴 결과를 **추적 목록과 합친다.**
+
+    ⚠️ 이게 없으면 파이프라인이 성립하지 않는다: `discover`는 매 실행 LLM 샘플링으로 서로 다른
+    제품을 뽑기 때문에(run #4 프라이팬·철수세미 → run #5 코팅팬·종이호일), 같은 제품이 이틀 연속
+    잡히지 않아 **델타(NEW/↑/↓)와 리뷰 증가가 영원히 계산되지 않는다.**
+    한 번 발굴한 제품은 WATCH_DAYS 동안 계속 추적해 시계열을 만든다.
+    """
+    wl = _load(WATCHLIST, {})
+    for p in found:                       # 신규 발굴은 갱신 또는 추가
+        rec = wl.get(p["key"], {})
+        rec.update({k: p[k] for k in ("name", "search_keyword", "category", "price_band") if k in p})
+        rec["last_found"] = today.isoformat()
+        rec.setdefault("first_seen", today.isoformat())
+        wl[p["key"]] = rec
+    alive, dropped = {}, []
+    for key, rec in wl.items():
+        try:
+            age = (today - dt.date.fromisoformat(rec.get("last_found", "1970-01-01"))).days
+        except ValueError:
+            age = 999
+        (alive.__setitem__(key, rec) if age <= WATCH_DAYS else dropped.append(key))
+    # 최근 발굴된 것부터 상한까지 — 할당량을 넘기지 않으면서 신선도를 유지
+    ordered = sorted(alive.items(), key=lambda kv: kv[1].get("last_found", ""), reverse=True)[:WATCH_MAX]
+    alive = dict(ordered)
+    _save(WATCHLIST, alive)
+    if dropped:
+        print(f"[watch] {WATCH_DAYS}일 넘게 재발굴 안 됨 — 추적 종료: {dropped}")
+    new_keys = {p["key"] for p in found} - set(wl.keys() - alive.keys())
+    print(f"[watch] 추적 {len(alive)}개 (이번 신규 {len([p for p in found if p['key'] in alive])}개)")
+    return [{"key": k, **v} for k, v in alive.items()]
+
+
 def collect() -> dict:
     c = cfg()
     avail = src.available()
     for axis, state in src.axis_report().items():
         print(f"[collect] {axis}: {state}")
-    cands = discover(c)
-    today = dt.date.today().isoformat()
+    today_d = dt.date.today()
+    cands = merge_watchlist(discover(c), today_d)
+    today = today_d.isoformat()
     rows = []
     for p in cands:
         kw = p.get("search_keyword") or p["name"]
+        # 카테고리를 고정하면 가전(미니 세탁기·식기세척기)이 생활/건강에 안 잡혀 수요가 0이 된다(실측)
+        cat = str(p.get("category") or "50000008")
         vids = src.youtube_videos(kw, days=14) or []
         coupang = src.coupang_product(kw)
         # 네이버 쇼핑 검색은 2026-07-31 종료 → 가격 대체 소스가 없다.
@@ -125,9 +165,10 @@ def collect() -> dict:
             "price_band": p.get("price_band"),
             "videos": [{"views": v.views, "age_days": round(v.age_days, 2), "channel_id": v.channel_id}
                        for v in vids],
+            "category": cat,
             "mentions": src.naver_mentions(kw),
-            "demand": src.naver_demand(kw),
-            "demand_last_year": src.naver_demand(kw, last_year=True),
+            "demand": src.naver_demand(kw, category=cat),
+            "demand_last_year": src.naver_demand(kw, category=cat, last_year=True),
             "price": (coupang or {}).get("price") or (shop or {}).get("price"),
             "review_count": (coupang or {}).get("review_count"),   # 쿠팡 없으면 결측 → 거래 축 제외
             "sellers": (shop or {}).get("sellers"),

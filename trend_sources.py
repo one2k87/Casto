@@ -145,7 +145,7 @@ def naver_mode() -> str:
     return "none"
 
 
-def naver_demand(keyword: str, category: str = "50000008",
+def naver_demand(keyword: str, category: str | None = None,
                  days: int = 120, last_year: bool = False) -> list[float] | None:
     """네이버 데이터랩 쇼핑인사이트 — 키워드의 **일별 클릭량 지수**(수요 축).
 
@@ -158,6 +158,7 @@ def naver_demand(keyword: str, category: str = "50000008",
     if not auth:
         return None
     base, h, mode = auth
+    category = category or "50000008"   # 미지정 시 생활/건강
     end = dt.date.today() - (dt.timedelta(days=365) if last_year else dt.timedelta(0))
     start = end - dt.timedelta(days=days)
     body = {
