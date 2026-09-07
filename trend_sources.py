@@ -31,8 +31,18 @@ from trend_score import VideoStat
 
 YT_SEARCH = "https://www.googleapis.com/youtube/v3/search"
 YT_VIDEOS = "https://www.googleapis.com/youtube/v3/videos"
-NAVER_DATALAB = "https://openapi.naver.com/v1/datalab/shopping/keywords"
-NAVER_SEARCH = "https://openapi.naver.com/v1/search/{kind}.json"
+# ── 네이버 오픈API 이관(2026) ────────────────────────────────────────────────
+# 네이버가 개발자센터 오픈API를 **NAVER API HUB(네이버 클라우드)**로 이관 중이다.
+#   · 레거시 키(X-Naver-Client-Id/Secret)는 **2027-06-30까지** 사용 가능
+#   · 도메인 openapi.naver.com → naverapihub.apigw.ntruss.com
+#   · 인증 헤더 X-Naver-Client-Id/Secret → X-NCP-APIGW-API-KEY-ID/KEY
+#   · ⛔ **쇼핑 검색·책·전문자료 검색은 2026-07-31 종료(대체 없음)** — HUB에도 없다
+# 그래서 두 방식을 모두 지원하고 **HUB 키가 있으면 HUB를 우선**한다.
+# HUB 경로는 첫 호출 때 실측으로 확정할 것(문서에 경로 표기가 없어 레거시와 동일 경로로 가정).
+NAVER_LEGACY_BASE = "https://openapi.naver.com"
+NAVER_HUB_BASE = os.getenv("NAVER_HUB_BASE", "https://naverapihub.apigw.ntruss.com")
+DATALAB_PATH = "/v1/datalab/shopping/keywords"
+SEARCH_PATH = "/v1/search/{kind}.json"
 COUPANG_HOST = "https://api-gateway.coupang.com"
 
 
@@ -97,12 +107,30 @@ def youtube_videos(keyword: str, days: int = 14, max_items: int = 50,
 
 
 # ------------------------------------------------------------------ 네이버 공통
-def _naver_headers() -> dict[str, str] | None:
+def _naver_auth() -> tuple[str, dict[str, str]] | None:
+    """(베이스 URL, 인증 헤더). **HUB 키가 있으면 HUB 우선**, 없으면 레거시로 폴백한다.
+
+    이관 기간 동안 둘 다 살아 있으므로 코드가 양쪽을 알고 있어야 키 교체가 무중단으로 된다.
+    레거시 키는 2027-06-30에 끊기므로 그 전에 HUB 키만 넣으면 자동 전환된다.
+    """
+    kid, key = os.getenv("NAVER_HUB_KEY_ID", ""), os.getenv("NAVER_HUB_KEY", "")
+    if kid and key:
+        return NAVER_HUB_BASE, {"X-NCP-APIGW-API-KEY-ID": kid, "X-NCP-APIGW-API-KEY": key,
+                                "Content-Type": "application/json"}
     cid, sec = os.getenv("NAVER_CLIENT_ID", ""), os.getenv("NAVER_CLIENT_SECRET", "")
-    if not (cid and sec):
-        return None
-    return {"X-Naver-Client-Id": cid, "X-Naver-Client-Secret": sec,
-            "Content-Type": "application/json"}
+    if cid and sec:
+        return NAVER_LEGACY_BASE, {"X-Naver-Client-Id": cid, "X-Naver-Client-Secret": sec,
+                                   "Content-Type": "application/json"}
+    return None
+
+
+def naver_mode() -> str:
+    """현재 어느 방식으로 호출 중인지 — 로그에 남겨 이관 상태를 눈으로 확인한다."""
+    if os.getenv("NAVER_HUB_KEY_ID") and os.getenv("NAVER_HUB_KEY"):
+        return "hub"
+    if os.getenv("NAVER_CLIENT_ID") and os.getenv("NAVER_CLIENT_SECRET"):
+        return "legacy(2027-06-30 만료)"
+    return "none"
 
 
 def naver_demand(keyword: str, category: str = "50000008",
@@ -114,9 +142,10 @@ def naver_demand(keyword: str, category: str = "50000008",
     `last_year=True`면 1년 전 같은 기간을 받아 계절성 제거(5-4-9⑥)에 쓴다 —
     **과거 기간 조회가 되므로 1년을 기다릴 필요가 없다.**
     """
-    h = _naver_headers()
-    if not h:
+    auth = _naver_auth()
+    if not auth:
         return None
+    base, h = auth
     end = dt.date.today() - (dt.timedelta(days=365) if last_year else dt.timedelta(0))
     start = end - dt.timedelta(days=days)
     body = {
@@ -125,7 +154,7 @@ def naver_demand(keyword: str, category: str = "50000008",
         "keyword": [{"name": keyword, "param": [keyword]}],
     }
     try:
-        r = requests.post(NAVER_DATALAB, json=body, headers=h, timeout=30)
+        r = requests.post(base + DATALAB_PATH, json=body, headers=h, timeout=30)
         if r.status_code != 200:
             print(f"[src] datalab HTTP {r.status_code}: {r.text[:160]}")
             return None
@@ -139,40 +168,16 @@ def naver_demand(keyword: str, category: str = "50000008",
 
 
 def naver_shopping(keyword: str) -> dict[str, Any] | None:
-    """네이버 쇼핑 검색 API — **최저가와 등록 상품 수**(거래 축의 부분 대체).
+    """⛔ **폐기됨** — 네이버 쇼핑 검색 API는 **2026-07-31 종료**(대체 없음, API HUB에도 미포함).
 
-    쿠팡 오픈API는 파트너스 수익 요건이 있어 초기 운영자는 발급받을 수 없다. 그 공백을 메운다.
-    - `lprice`(최저가): **가격 추적이 되므로 재심콕 트리거(15% 하락)가 살아난다.** 이게 가장 큰 이득.
-    - `total`(등록 상품 수): 셀러가 몰린다 = 시장이 커진다는 신호. 다만 소비자 거래가 아니라
-      **공급 측 신호**이므로 리뷰 증가만큼 신뢰할 수는 없다 — 보조 지표로만 쓴다.
-    데이터랩·검색 API와 **동일한 Client ID**로 호출된다(추가 발급·비용 0).
+    한때 쿠팡 오픈API가 없는 초기 운영자의 '거래 축' 대체재로 최저가·셀러 수를 받으려 했으나
+    이관 공지 확인 결과 이미 종료된 API였다. 호출하지 않고 항상 None을 반환한다.
+
+    **가격 정보의 새 경로**: 픽담 글의 구조화 블록(`<!--KOKPICK ... -->`)에 쿠팡 가격이 들어오므로
+    거기서 읽는다(운영 브리프 6-C). 재심콕 트리거는 가격 하락 외에 **노출 재상승**도 인정하도록
+    `trend_products._is_blocked`에서 보완했다.
     """
-    h = _naver_headers()
-    if not h:
-        return None
-    data = _get(NAVER_SEARCH.format(kind="shop"), headers=h,
-                params={"query": keyword, "display": 10, "sort": "sim"})
-    if data is None:
-        return None
-    items = data.get("items") or []
-    prices = []
-    for it in items:
-        try:
-            v = int(it.get("lprice") or 0)
-            if v > 0:
-                prices.append(v)
-        except (TypeError, ValueError):
-            continue
-    if not prices:
-        return {"price": None, "sellers": data.get("total"), "title": None}
-    prices.sort()
-    return {
-        # 최저가 1건은 미끼상품·오배송일 수 있어 중앙값을 대표가로 쓴다
-        "price": prices[len(prices) // 2],
-        "price_min": prices[0],
-        "sellers": data.get("total"),
-        "title": (items[0].get("title") or "").replace("<b>", "").replace("</b>", ""),
-    }
+    return None
 
 
 def naver_mentions(keyword: str, kind: str = "blog") -> int | None:
@@ -181,10 +186,11 @@ def naver_mentions(keyword: str, kind: str = "blog") -> int | None:
     인스타 Hashtag Search는 승인 장벽이 높아 쓰지 않는다. 대신 블로그·카페 언급량을
     한국 소셜 노출의 대리 지표로 쓴다. **데이터랩과 같은 Client ID로 호출되어 추가 비용이 없다.**
     """
-    h = _naver_headers()
-    if not h:
+    auth = _naver_auth()
+    if not auth:
         return None
-    data = _get(NAVER_SEARCH.format(kind=kind), headers=h,
+    base, h = auth
+    data = _get(base + SEARCH_PATH.format(kind=kind), headers=h,
                 params={"query": keyword, "display": 1, "sort": "date"})
     if data is None:
         return None
@@ -239,7 +245,8 @@ def available() -> dict[str, bool]:
     """어떤 소스가 살아 있는지 — 로그와 대시보드에 그대로 노출해 '왜 이 축이 비었는지' 보이게 한다."""
     return {
         "youtube": bool(os.getenv("YT_API_KEY")),
-        "naver": bool(os.getenv("NAVER_CLIENT_ID") and os.getenv("NAVER_CLIENT_SECRET")),
+        "naver": bool((os.getenv("NAVER_CLIENT_ID") and os.getenv("NAVER_CLIENT_SECRET"))
+                      or (os.getenv("NAVER_HUB_KEY_ID") and os.getenv("NAVER_HUB_KEY"))),
         "coupang": bool(os.getenv("COUPANG_ACCESS_KEY") and os.getenv("COUPANG_SECRET_KEY")),
     }
 
@@ -253,6 +260,7 @@ def axis_report() -> dict[str, str]:
         "수요": "네이버 데이터랩 ✅" if a["naver"] else "❌ NAVER_CLIENT_ID/SECRET 없음",
         "언급량": "네이버 검색 ✅" if a["naver"] else "❌ 동일 키 필요",
         "거래": ("쿠팡 리뷰 ✅" if a["coupang"]
-                 else ("⚠️ 쿠팡 미발급 — 네이버 쇼핑(가격·셀러수)으로 부분 대체"
-                       if a["naver"] else "❌ 대체 소스도 없음")),
+                 else "⚠️ 쿠팡 미발급 + 네이버 쇼핑 종료(2026-07-31) — 가격은 픽담 구조화 필드에서, "
+                      "재심콕은 노출 재상승으로 대체"),
+        "네이버 인증": naver_mode(),
     }

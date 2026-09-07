@@ -28,6 +28,7 @@ BOARD = "data/trend_board.json"
 COVERED = "data/covered.json"
 COVER_BLOCK_WEEKS = 8
 PRICE_DROP_EXEMPT = 0.15   # 15% 이상 하락하면 8주 차단을 무시하고 다시 다룬다(재심콕)
+REVISIT_MIN_WEEKS = 4      # 노출 재상승으로 재등장할 때의 최소 쿨다운(가격 소스가 없을 때의 대체 트리거)
 
 
 # ------------------------------------------------------------------ 저장소
@@ -116,9 +117,9 @@ def collect() -> dict:
         kw = p.get("search_keyword") or p["name"]
         vids = src.youtube_videos(kw, days=14) or []
         coupang = src.coupang_product(kw)
-        # 쿠팡 키가 없으면(초기 운영자는 대개 없다) 네이버 쇼핑으로 가격·셀러 수를 대체 수집한다.
-        # 리뷰(거래)는 대체되지 않지만 **가격 추적이 살아나 재심콕 트리거가 동작**한다.
-        shop = None if coupang else src.naver_shopping(kw)
+        # 네이버 쇼핑 검색은 2026-07-31 종료 → 가격 대체 소스가 없다.
+        # 가격은 픽담 글의 구조화 블록에서 들어오고(운영 브리프 6-C), 재심콕은 노출 재상승으로 대체한다.
+        shop = None
         rows.append({
             "key": p["key"], "name": p["name"], "keyword": kw,
             "price_band": p.get("price_band"),
@@ -188,8 +189,14 @@ def delta(hist: list[dict], key: str, current_views: float, days: int = 7,
     return "flat"
 
 
-def _is_blocked(covered: dict, key: str, price: float | None, today: dt.date) -> bool:
-    """8주 내 다뤘으면 차단 — **단 가격이 15% 이상 내렸으면 예외**(상태가 바뀌면 새 정보)."""
+def _is_blocked(covered: dict, key: str, price: float | None, today: dt.date,
+                delta_state: str | None = None) -> bool:
+    """8주 내 다뤘으면 차단. **상태가 바뀌면 새 정보**이므로 두 가지 예외를 둔다.
+
+    1) **가격 15% 이상 하락** — 원래의 재심콕 트리거.
+    2) **노출 재상승(delta='up')** + 최소 4주 경과 — 네이버 쇼핑 검색 종료(2026-07-31)로
+       가격 소스가 사라진 상황의 대체 트리거. 한 번 식었다 다시 뜨는 것 자체가 새 정보다.
+    """
     rec = covered.get(key)
     if not rec:
         return False
@@ -202,6 +209,9 @@ def _is_blocked(covered: dict, key: str, price: float | None, today: dt.date) ->
     old = rec.get("price")
     if price and old and old > 0 and (old - price) / old >= PRICE_DROP_EXEMPT:
         print(f"[board] {key}: 가격 {old}→{price} 급락 — 8주 차단 예외(재심콕 후보)")
+        return False
+    if delta_state == "up" and (today - last).days >= REVISIT_MIN_WEEKS * 7:
+        print(f"[board] {key}: 식었다 다시 상승 — 8주 차단 예외(재조명)")
         return False
     return True
 
@@ -241,7 +251,7 @@ def board() -> dict:
         r["price_band"] = m.get("price_band")
         r["keyword"] = m.get("keyword")
         r["coupang_url"] = m.get("coupang_url")
-        r["blocked"] = _is_blocked(covered, r["key"], m.get("price"), today)
+        r["blocked"] = _is_blocked(covered, r["key"], m.get("price"), today, r.get("delta"))
 
     fresh = [r for r in rows if not r["blocked"]]
     out = {

@@ -36,8 +36,12 @@ jobs:
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
           LLM_MODEL: ${{ secrets.LLM_MODEL }}
           YT_API_KEY: ${{ secrets.YT_API_KEY }}
+          # 레거시(개발자센터, 2027-06-30 만료)
           NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
           NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+          # NAVER API HUB(네이버 클라우드) — 값이 있으면 이쪽을 우선 사용한다
+          NAVER_HUB_KEY_ID: ${{ secrets.NAVER_HUB_KEY_ID }}
+          NAVER_HUB_KEY: ${{ secrets.NAVER_HUB_KEY }}
           COUPANG_ACCESS_KEY: ${{ secrets.COUPANG_ACCESS_KEY }}
           COUPANG_SECRET_KEY: ${{ secrets.COUPANG_SECRET_KEY }}
         run: python trend_products.py collect

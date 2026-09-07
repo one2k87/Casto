@@ -102,6 +102,22 @@ class TestBoard(unittest.TestCase):
         out = tp.board()
         self.assertTrue(all("delta" in r for r in out["briefing"]))
 
+    def test_exposure_rebound_exempts_block(self):
+        """네이버 쇼핑 종료로 가격 소스가 없어도, 식었다 다시 뜨면 재등장할 수 있어야 한다."""
+        today = dt.date.today()
+        # 5주 전에 다룬 것으로 기록
+        tp._save(tp.COVERED, {"viral": {"date": (today - dt.timedelta(days=35)).isoformat(), "price": 30000}})
+        covered = tp._load(tp.COVERED, {})
+        self.assertTrue(tp._is_blocked(covered, "viral", 30000, today, "flat"))   # 변화 없으면 차단 유지
+        self.assertFalse(tp._is_blocked(covered, "viral", 30000, today, "up"))    # 재상승이면 예외
+
+    def test_exposure_rebound_respects_cooldown(self):
+        """재상승 예외에도 최소 4주 쿨다운이 있어 바로 다음 주에 또 나오지 않는다."""
+        today = dt.date.today()
+        tp._save(tp.COVERED, {"viral": {"date": (today - dt.timedelta(days=7)).isoformat(), "price": 30000}})
+        covered = tp._load(tp.COVERED, {})
+        self.assertTrue(tp._is_blocked(covered, "viral", 30000, today, "up"))
+
     def test_no_snapshots_returns_empty(self):
         for f in os.listdir(tp.DAILY_DIR):
             os.remove(os.path.join(tp.DAILY_DIR, f))
