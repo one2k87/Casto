@@ -25,7 +25,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
-      - run: pip install requests
+      # pillow는 수집 자체엔 불필요하지만, 회귀 테스트가 브리핑 모듈(make_briefing→PIL)을
+      # import하므로 필요하다. 빼면 테스트 수집 단계에서 ImportError로 잡한다(2026-09-07 실측).
+      - run: pip install requests pillow
 
       - name: 점수 모델 회귀 테스트
         run: python -m unittest discover -s tests
