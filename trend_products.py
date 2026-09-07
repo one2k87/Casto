@@ -72,7 +72,39 @@ def snapshots(limit: int = 60) -> list[dict]:
 DISCOVERY_STATS: dict = {}
 
 
-def discover(c: dict, per_query: int = 50) -> list[dict]:
+def match_videos(pool: list[dict], product: dict) -> list[VideoStat]:
+    """**영상 풀에서** 이 제품에 해당하는 영상을 고른다(제품별 재검색을 하지 않는다).
+
+    ⚠️ 할당량 설계(2026-09-07 실측): `search.list`는 호출당 100유닛이고 하루 한도가 10,000이다.
+    제품마다 검색하면 12제품 × 100 = 1,200유닛이 매 실행 추가되어 몇 번 돌리면 바로 소진된다.
+    실제로 소진되자 수집 영상이 2편으로 떨어지고 링크 클러스터가 0개가 됐다.
+    discover가 이미 모은 풀에서 제목 매칭으로 뽑으면 **추가 유닛이 0**이고, 모든 제품이
+    같은 기간·같은 풀을 보므로 노출량 비교의 공정성도 올라간다.
+    """
+    terms = [t for t in re.split(r"[\s·,/]+", f"{product.get('name','')} {product.get('search_keyword','')}")
+             if len(t) >= 2]
+    if not terms:
+        return []
+    now_titles = []
+    for v in pool:
+        title = (v.get("title") or "")
+        hits = sum(1 for t in terms if t in title)
+        if hits:
+            now_titles.append((hits, v))
+    now_titles.sort(key=lambda x: (-x[0], -x[1].get("views", 0)))
+    out = []
+    for _, v in now_titles[:50]:
+        try:
+            age = (dt.datetime.now(dt.timezone.utc)
+                   - dt.datetime.fromisoformat((v.get("published") or "") + "T00:00:00+00:00")).days
+        except Exception:  # noqa: BLE001
+            age = 7
+        out.append(VideoStat(views=v.get("views", 0), age_days=max(age, 0),
+                             channel_id=v.get("channel_id", "")))
+    return out
+
+
+def discover(c: dict, per_query: int = 50) -> tuple[list[dict], list[dict]]:
     """후보 발굴 — **링크로 특정된 실제 상품**을 찾는다.
 
     순서가 핵심이다: **수집 → 통계 → LLM**. LLM에게 먼저 물으면 그럴듯한 제품명을 지어낸다.
@@ -145,7 +177,7 @@ def discover(c: dict, per_query: int = 50) -> list[dict]:
         if p.get("key") and p.get("name"):
             out.append(p)
     print(f"[discover] 최종 후보 {len(out)}개: {', '.join(p['name'] for p in out)}")
-    return out
+    return out, videos
 
 
 # ------------------------------------------------------------------ 2~3. 일별 수집
@@ -204,14 +236,15 @@ def collect() -> dict:
     for axis, state in src.axis_report().items():
         print(f"[collect] {axis}: {state}")
     today_d = dt.date.today()
-    cands = merge_watchlist(discover(c), today_d)
+    found, pool = discover(c)
+    cands = merge_watchlist(found, today_d)
     today = today_d.isoformat()
     rows = []
     for p in cands:
         kw = p.get("search_keyword") or p["name"]
         # 카테고리를 고정하면 가전(미니 세탁기·식기세척기)이 생활/건강에 안 잡혀 수요가 0이 된다(실측)
         cat = normalize_category(p.get("category")) or "50000008"
-        vids = src.youtube_videos(kw, days=14) or []
+        vids = match_videos(pool, p)      # 풀 재사용 — 제품별 search.list를 쓰지 않는다(할당량)
         coupang = src.coupang_product(kw)
         # 네이버 쇼핑 검색은 2026-07-31 종료 → 가격 대체 소스가 없다.
         # 가격은 픽담 글의 구조화 블록에서 들어오고(운영 브리프 6-C), 재심콕은 노출 재상승으로 대체한다.

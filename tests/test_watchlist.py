@@ -104,3 +104,33 @@ class TestCategoryNormalization(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class TestMatchVideos(unittest.TestCase):
+    """제품별 재검색 대신 **풀 재사용** — search.list 100유닛/회를 아끼는 핵심 장치."""
+
+    POOL = [
+        {"title": "무선 미니 가습기 3개월 후기", "views": 50000, "channel_id": "a", "published": "2026-09-01"},
+        {"title": "접이식 블루투스 키보드 써봤다", "views": 30000, "channel_id": "b", "published": "2026-09-02"},
+        {"title": "미니 가습기 단점", "views": 10000, "channel_id": "c", "published": "2026-09-03"},
+        {"title": "전혀 상관없는 영상", "views": 90000, "channel_id": "d", "published": "2026-09-04"},
+    ]
+
+    def test_matches_by_title_tokens(self):
+        out = tp.match_videos(self.POOL, {"name": "미니 가습기", "search_keyword": "무선 미니 가습기"})
+        self.assertEqual(len(out), 2)
+        self.assertEqual({v.channel_id for v in out}, {"a", "c"})
+
+    def test_more_token_hits_ranked_first(self):
+        out = tp.match_videos(self.POOL, {"name": "미니 가습기", "search_keyword": "무선"})
+        self.assertEqual(out[0].channel_id, "a")     # '무선'까지 맞은 쪽이 앞
+
+    def test_unrelated_excluded(self):
+        out = tp.match_videos(self.POOL, {"name": "미니 가습기", "search_keyword": ""})
+        self.assertNotIn("d", {v.channel_id for v in out})
+
+    def test_empty_product(self):
+        self.assertEqual(tp.match_videos(self.POOL, {"name": "", "search_keyword": ""}), [])
+
+    def test_empty_pool(self):
+        self.assertEqual(tp.match_videos([], {"name": "가습기", "search_keyword": "가습기"}), [])
