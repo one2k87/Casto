@@ -107,7 +107,8 @@ def discover(c: dict, per_query: int = 25) -> list[str]:
 def collect() -> dict:
     c = cfg()
     avail = src.available()
-    print("[collect] 소스 가용성:", avail)
+    for axis, state in src.axis_report().items():
+        print(f"[collect] {axis}: {state}")
     cands = discover(c)
     today = dt.date.today().isoformat()
     rows = []
@@ -115,6 +116,9 @@ def collect() -> dict:
         kw = p.get("search_keyword") or p["name"]
         vids = src.youtube_videos(kw, days=14) or []
         coupang = src.coupang_product(kw)
+        # 쿠팡 키가 없으면(초기 운영자는 대개 없다) 네이버 쇼핑으로 가격·셀러 수를 대체 수집한다.
+        # 리뷰(거래)는 대체되지 않지만 **가격 추적이 살아나 재심콕 트리거가 동작**한다.
+        shop = None if coupang else src.naver_shopping(kw)
         rows.append({
             "key": p["key"], "name": p["name"], "keyword": kw,
             "price_band": p.get("price_band"),
@@ -123,9 +127,11 @@ def collect() -> dict:
             "mentions": src.naver_mentions(kw),
             "demand": src.naver_demand(kw),
             "demand_last_year": src.naver_demand(kw, last_year=True),
-            "price": (coupang or {}).get("price"),
-            "review_count": (coupang or {}).get("review_count"),
+            "price": (coupang or {}).get("price") or (shop or {}).get("price"),
+            "review_count": (coupang or {}).get("review_count"),   # 쿠팡 없으면 결측 → 거래 축 제외
+            "sellers": (shop or {}).get("sellers"),
             "coupang_url": (coupang or {}).get("url"),
+            "price_source": "coupang" if coupang else ("naver_shop" if shop else None),
         })
     snap = {"date": today, "sources": avail, "products": rows}
     _save(os.path.join(DAILY_DIR, f"{today}.json"), snap)

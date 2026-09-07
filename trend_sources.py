@@ -12,7 +12,13 @@
 | YouTube Data API | 공급·효율·**노출(재인)** | 개수보다 조회수 합·중앙값이 중요(5-4-9①) |
 | 네이버 데이터랩 쇼핑인사이트 | 수요 | 지정 키워드의 일별 지수. **TOP500 인기검색어는 API로 안 준다** |
 | 네이버 검색 API(블로그/카페) | **언급량(재인 보조)** | `total`이 곧 언급량. **데이터랩과 동일 키**라 추가 비용 0 |
-| 쿠팡 파트너스 오픈API | **거래** | 리뷰 증가 = 위조 불가 신호. 접근 권한 없으면 skip |
+| 네이버 쇼핑 검색 API | **가격·셀러 수(거래 대리)** | 쿠팡 API가 없을 때의 대체. 같은 키 |
+| 쿠팡 파트너스 오픈API | **거래** | 리뷰 증가 = 위조 불가 신호. **일정 수익 이상이어야 발급**되므로 초기엔 없다 |
+
+⚠️ **쿠팡 오픈API는 초기 운영자에게 사실상 없다**(파트너스 수익 요건). 그래서 거래 축을
+네이버 쇼핑 검색 API로 부분 대체한다 — 완전한 대체는 아니지만 **가격 추적이 살아나므로
+재심콕(가격 15%↓ 재등장) 트리거가 동작하고**, 셀러 수 증가는 시장이 커지는 신호로 쓸 수 있다.
+쿠팡 키가 생기면 자동으로 거래 축이 켜지고 정확도가 올라간다(코드 변경 불필요).
 """
 from __future__ import annotations
 
@@ -132,6 +138,43 @@ def naver_demand(keyword: str, category: str = "50000008",
         return None
 
 
+def naver_shopping(keyword: str) -> dict[str, Any] | None:
+    """네이버 쇼핑 검색 API — **최저가와 등록 상품 수**(거래 축의 부분 대체).
+
+    쿠팡 오픈API는 파트너스 수익 요건이 있어 초기 운영자는 발급받을 수 없다. 그 공백을 메운다.
+    - `lprice`(최저가): **가격 추적이 되므로 재심콕 트리거(15% 하락)가 살아난다.** 이게 가장 큰 이득.
+    - `total`(등록 상품 수): 셀러가 몰린다 = 시장이 커진다는 신호. 다만 소비자 거래가 아니라
+      **공급 측 신호**이므로 리뷰 증가만큼 신뢰할 수는 없다 — 보조 지표로만 쓴다.
+    데이터랩·검색 API와 **동일한 Client ID**로 호출된다(추가 발급·비용 0).
+    """
+    h = _naver_headers()
+    if not h:
+        return None
+    data = _get(NAVER_SEARCH.format(kind="shop"), headers=h,
+                params={"query": keyword, "display": 10, "sort": "sim"})
+    if data is None:
+        return None
+    items = data.get("items") or []
+    prices = []
+    for it in items:
+        try:
+            v = int(it.get("lprice") or 0)
+            if v > 0:
+                prices.append(v)
+        except (TypeError, ValueError):
+            continue
+    if not prices:
+        return {"price": None, "sellers": data.get("total"), "title": None}
+    prices.sort()
+    return {
+        # 최저가 1건은 미끼상품·오배송일 수 있어 중앙값을 대표가로 쓴다
+        "price": prices[len(prices) // 2],
+        "price_min": prices[0],
+        "sellers": data.get("total"),
+        "title": (items[0].get("title") or "").replace("<b>", "").replace("</b>", ""),
+    }
+
+
 def naver_mentions(keyword: str, kind: str = "blog") -> int | None:
     """네이버 검색 API의 `total` — **언급량**(재인 보조 축, 5-4-10).
 
@@ -198,4 +241,18 @@ def available() -> dict[str, bool]:
         "youtube": bool(os.getenv("YT_API_KEY")),
         "naver": bool(os.getenv("NAVER_CLIENT_ID") and os.getenv("NAVER_CLIENT_SECRET")),
         "coupang": bool(os.getenv("COUPANG_ACCESS_KEY") and os.getenv("COUPANG_SECRET_KEY")),
+    }
+
+
+def axis_report() -> dict[str, str]:
+    """어떤 축이 살아 있고 무엇으로 대체 중인지 — 로그·대시보드에 그대로 노출한다.
+    '왜 이 축이 비었는지'가 보이지 않으면 나중에 원인을 못 찾는다."""
+    a = available()
+    return {
+        "노출(재인)": "유튜브 ✅" if a["youtube"] else "❌ YT_API_KEY 없음 — 재인 랭킹 불가",
+        "수요": "네이버 데이터랩 ✅" if a["naver"] else "❌ NAVER_CLIENT_ID/SECRET 없음",
+        "언급량": "네이버 검색 ✅" if a["naver"] else "❌ 동일 키 필요",
+        "거래": ("쿠팡 리뷰 ✅" if a["coupang"]
+                 else ("⚠️ 쿠팡 미발급 — 네이버 쇼핑(가격·셀러수)으로 부분 대체"
+                       if a["naver"] else "❌ 대체 소스도 없음")),
     }
