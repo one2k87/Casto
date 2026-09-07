@@ -136,8 +136,35 @@ def collect() -> dict:
         })
     snap = {"date": today, "sources": avail, "products": rows}
     _save(os.path.join(DAILY_DIR, f"{today}.json"), snap)
-    print(f"[collect] {today} 스냅샷 저장 — 제품 {len(rows)}개")
+    _print_summary(rows, today)
     return snap
+
+
+def _print_summary(rows: list[dict], today: str) -> None:
+    """축별 수집 성공률을 로그에 남긴다.
+
+    "성공"으로 끝난 실행에서도 특정 축이 통째로 결측일 수 있는데(키는 있지만 API 경로가 틀린 경우 등)
+    그게 로그에 안 보이면 몇 주 뒤에야 알아챈다. 매 실행 눈에 띄게 찍는다.
+    """
+    n = len(rows)
+    print(f"\n[collect] {today} 스냅샷 저장 — 제품 {n}개")
+    if not n:
+        print("[collect] ⚠️ 제품이 0개다 — 발굴(discover) 단계를 확인할 것")
+        return
+    checks = (
+        ("노출(유튜브)", lambda p: bool(p.get("videos"))),
+        ("언급량(검색)", lambda p: p.get("mentions") is not None),
+        ("수요(데이터랩)", lambda p: bool(p.get("demand"))),
+        ("작년(계절성)", lambda p: bool(p.get("demand_last_year"))),
+        ("가격", lambda p: p.get("price") is not None),
+        ("리뷰(거래)", lambda p: p.get("review_count") is not None),
+    )
+    print("[collect] 축별 수집 성공률")
+    for label, fn in checks:
+        ok = sum(1 for p in rows if fn(p))
+        mark = "✅" if ok == n else ("⚠️ 부분" if ok else "❌ 전멸")
+        print(f"[collect]   {label:<14} {ok}/{n}  {mark}")
+    print("[collect] 수집 제품: " + ", ".join(p["name"] for p in rows))
 
 
 # ------------------------------------------------------------------ 4~5. 주간 집계
