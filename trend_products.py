@@ -17,6 +17,7 @@ from __future__ import annotations
 import datetime as dt
 import json
 import os
+import re
 import sys
 
 from common import cfg, llm_json
@@ -68,6 +69,9 @@ def snapshots(limit: int = 60) -> list[dict]:
 
 
 # ------------------------------------------------------------------ 1. 후보 발굴
+DISCOVERY_STATS: dict = {}
+
+
 def discover(c: dict, per_query: int = 50) -> list[dict]:
     """후보 발굴 — **링크로 특정된 실제 상품**을 찾는다.
 
@@ -98,6 +102,11 @@ def discover(c: dict, per_query: int = 50) -> list[dict]:
 
     linked = plinks.cluster(videos, min_channels=2)
     with_link = sum(1 for v in videos if plinks.links_in(v))
+    DISCOVERY_STATS.update({
+        "videos": len(videos), "videos_with_link": with_link, "link_clusters": len(linked),
+        "top_clusters": [{"name": r["name"], "product_id": f"{r['platform']}:{r['product_id']}",
+                          "channels": r["channels"], "views": r["views"]} for r in linked[:10]],
+    })
     print(f"[discover] 제휴 링크가 있는 영상 {with_link}편 → 여러 채널이 링크한 상품 {len(linked)}개")
     for r in linked[:8]:
         print(f"[discover]   · {r['name'] or '(미상)'} — 채널 {r['channels']}개 · 조회 {r['views']:,}")
@@ -119,7 +128,7 @@ def discover(c: dict, per_query: int = 50) -> list[dict]:
     "search_keyword": "네이버·쿠팡에서 이 상품을 찾을 검색어 — **구체적일수록 좋다**",
     "brand": "근거에 브랜드명이 보이면 적고, 없으면 빈 문자열. **추측 금지**",
     "product_id": "A에서 왔으면 그 platform:id, B에서 왔으면 빈 문자열",
-    "category": "네이버 쇼핑 카테고리 — 50000000 패션의류/50000001 패션잡화/50000002 화장품미용/50000003 디지털가전/50000004 가구인테리어/50000005 출산육아/50000006 식품/50000007 스포츠레저/50000008 생활건강. **가전은 반드시 50000003**",
+    "category": "**숫자 8자리만** 적으세요(설명 문구를 붙이지 마세요). 패션의류=50000000, 패션잡화=50000001, 화장품미용=50000002, **디지털·가전=50000003**, 가구인테리어=50000004, 출산육아=50000005, 식품=50000006, 스포츠레저=50000007, 생활건강=50000008",
     "price_band": "저가|중가|고가",
     "evidence": "왜 유행으로 판단했는지 한 줄 — 근거의 채널 수·조회수를 인용"}}
   ... 최대 12개, **A 항목을 먼저**
@@ -140,6 +149,19 @@ def discover(c: dict, per_query: int = 50) -> list[dict]:
 
 
 # ------------------------------------------------------------------ 2~3. 일별 수집
+CATEGORY_RE = re.compile(r"\b(5000000\d)\b")
+
+
+def normalize_category(value) -> str | None:
+    """LLM이 준 카테고리에서 **숫자 코드만** 뽑는다.
+
+    실측(run #6): 프롬프트의 설명 문구를 그대로 복사해 `"50000003 디지털가전"`으로 저장됐다.
+    이 값을 데이터랩에 그대로 넘기면 400이 난다. 코드만 남기고, 못 찾으면 None(호출부가 폴백).
+    """
+    m = CATEGORY_RE.search(str(value or ""))
+    return m.group(1) if m else None
+
+
 def merge_watchlist(found: list[dict], today: dt.date) -> list[dict]:
     """신규 발굴 결과를 **추적 목록과 합친다.**
 
@@ -151,7 +173,10 @@ def merge_watchlist(found: list[dict], today: dt.date) -> list[dict]:
     wl = _load(WATCHLIST, {})
     for p in found:                       # 신규 발굴은 갱신 또는 추가
         rec = wl.get(p["key"], {})
-        rec.update({k: p[k] for k in ("name", "search_keyword", "category", "price_band") if k in p})
+        rec.update({k: p[k] for k in ("name", "search_keyword", "price_band",
+                                      "brand", "product_id", "evidence") if k in p})
+        if p.get("category"):
+            rec["category"] = normalize_category(p["category"]) or rec.get("category")
         rec["last_found"] = today.isoformat()
         rec.setdefault("first_seen", today.isoformat())
         wl[p["key"]] = rec
@@ -185,7 +210,7 @@ def collect() -> dict:
     for p in cands:
         kw = p.get("search_keyword") or p["name"]
         # 카테고리를 고정하면 가전(미니 세탁기·식기세척기)이 생활/건강에 안 잡혀 수요가 0이 된다(실측)
-        cat = str(p.get("category") or "50000008")
+        cat = normalize_category(p.get("category")) or "50000008"
         vids = src.youtube_videos(kw, days=14) or []
         coupang = src.coupang_product(kw)
         # 네이버 쇼핑 검색은 2026-07-31 종료 → 가격 대체 소스가 없다.
@@ -193,6 +218,10 @@ def collect() -> dict:
         shop = None
         rows.append({
             "key": p["key"], "name": p["name"], "keyword": kw,
+            # 상품 특정 근거 — 이게 없으면 "정확히 어느 제품인가"를 잃는다(사용자 요구의 핵심)
+            "brand": p.get("brand") or "",
+            "product_id": p.get("product_id") or "",
+            "evidence": p.get("evidence") or "",
             "price_band": p.get("price_band"),
             "videos": [{"views": v.views, "age_days": round(v.age_days, 2), "channel_id": v.channel_id}
                        for v in vids],
@@ -206,7 +235,7 @@ def collect() -> dict:
             "coupang_url": (coupang or {}).get("url"),
             "price_source": "coupang" if coupang else ("naver_shop" if shop else None),
         })
-    snap = {"date": today, "sources": avail, "products": rows}
+    snap = {"date": today, "sources": avail, "discovery": DISCOVERY_STATS.copy(), "products": rows}
     _save(os.path.join(DAILY_DIR, f"{today}.json"), snap)
     _print_summary(rows, today)
     return snap

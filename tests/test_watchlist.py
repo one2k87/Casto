@@ -66,5 +66,41 @@ class TestWatchlist(unittest.TestCase):
         self.assertEqual(rec["first_seen"], self.today.isoformat())  # 최초 발견일은 유지
 
 
+class TestCategoryNormalization(unittest.TestCase):
+    """실측(run #6): LLM이 프롬프트 설명을 그대로 복사해 '50000003 디지털가전'으로 저장됐다.
+    그 값을 데이터랩에 넘기면 400이 난다."""
+
+    def test_strips_description_text(self):
+        self.assertEqual(tp.normalize_category("50000003 디지털가전"), "50000003")
+
+    def test_plain_code(self):
+        self.assertEqual(tp.normalize_category("50000008"), "50000008")
+
+    def test_no_code_returns_none(self):
+        for v in ("디지털가전", "", None, "코드없음", "123"):
+            self.assertIsNone(tp.normalize_category(v), repr(v))
+
+    def setUp(self):
+        self.tmp = tempfile.mkdtemp()
+        self._orig = tp.WATCHLIST
+        tp.WATCHLIST = os.path.join(self.tmp, "watchlist.json")
+        self.today = dt.date(2026, 9, 7)
+
+    def tearDown(self):
+        tp.WATCHLIST = self._orig
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def test_watchlist_stores_normalized_code(self):
+        out = tp.merge_watchlist([{"key": "k", "name": "n", "search_keyword": "kw",
+                                   "category": "50000003 디지털가전", "price_band": "중가",
+                                   "brand": "브랜드", "product_id": "coupang:123",
+                                   "evidence": "채널 5개"}], self.today)
+        rec = out[0]
+        self.assertEqual(rec["category"], "50000003")
+        self.assertEqual(rec["brand"], "브랜드")
+        self.assertEqual(rec["product_id"], "coupang:123")   # 상품 특정 근거가 보존돼야 한다
+        self.assertEqual(rec["evidence"], "채널 5개")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
