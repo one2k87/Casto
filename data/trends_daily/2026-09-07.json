@@ -5,11 +5,20 @@
   "naver": true,
   "coupang": false
  },
+ "discovery": {
+  "videos": 2,
+  "videos_with_link": 0,
+  "link_clusters": 0,
+  "top_clusters": []
+ },
  "products": [
   {
    "key": "접이식_블루투스_키보드",
    "name": "접이식 블루투스 키보드",
    "keyword": "접이식 블루투스 키보드 무선 휴대용",
+   "brand": "",
+   "product_id": "",
+   "evidence": "",
    "price_band": "중가",
    "videos": [
     {
@@ -23,8 +32,8 @@
      "channel_id": "UCq6uDuH8pdtugvbI6hZdLQw"
     },
     {
-     "views": 1249,
-     "age_days": 3.47,
+     "views": 1250,
+     "age_days": 3.48,
      "channel_id": "UCdkBxOAKzh0H2YyBr0AUENw"
     },
     {
@@ -34,7 +43,7 @@
     },
     {
      "views": 634,
-     "age_days": 11.45,
+     "age_days": 11.46,
      "channel_id": "UCXqgNzTdOS7AgqeGh6M_i2w"
     },
     {
@@ -44,7 +53,7 @@
     },
     {
      "views": 21,
-     "age_days": 11.83,
+     "age_days": 11.84,
      "channel_id": "UCvYnXXaathGA0b1jjhvAGhA"
     },
     {
@@ -54,7 +63,7 @@
     },
     {
      "views": 22,
-     "age_days": 4.89,
+     "age_days": 4.9,
      "channel_id": "UCTjyjcglxgFHO3-nthLbD_Q"
     },
     {
@@ -69,12 +78,12 @@
     },
     {
      "views": 10,
-     "age_days": 11.76,
+     "age_days": 11.77,
      "channel_id": "UCSxjfOqgkpz_KNmVCLe1QvQ"
     },
     {
      "views": 1,
-     "age_days": 0.36,
+     "age_days": 0.37,
      "channel_id": "UCgcPupAaFb3EuryHwDRc5aA"
     },
     {
@@ -88,7 +97,7 @@
      "channel_id": "UCrt4s9rxcW1oUvHsORm-vYA"
     }
    ],
-   "category": "50000003 디지털가전",
+   "category": "50000003",
    "mentions": 1247,
    "demand": [],
    "demand_last_year": [],
@@ -102,6 +111,9 @@
    "key": "미니_가습기_무선",
    "name": "미니 가습기 무선",
    "keyword": "무선 미니 가습기 휴대용",
+   "brand": "",
+   "product_id": "",
+   "evidence": "",
    "price_band": "저가",
    "videos": [
     {
@@ -111,7 +123,7 @@
     },
     {
      "views": 235,
-     "age_days": 1.97,
+     "age_days": 1.98,
      "channel_id": "UCU3EuB983wEBbOIFvU1witg"
     },
     {
@@ -141,17 +153,17 @@
     },
     {
      "views": 2,
-     "age_days": 13.44,
+     "age_days": 13.45,
      "channel_id": "UCA4yBH3a6iIUbefc9XsJ2HQ"
     },
     {
      "views": 2,
-     "age_days": 9.75,
+     "age_days": 9.76,
      "channel_id": "UCfL2lD6AG-cstGxB2LKA5Uw"
     },
     {
      "views": 2,
-     "age_days": 1.97,
+     "age_days": 1.98,
      "channel_id": "UCU3EuB983wEBbOIFvU1witg"
     },
     {
@@ -166,11 +178,11 @@
     },
     {
      "views": 0,
-     "age_days": 6.18,
+     "age_days": 6.19,
      "channel_id": "UCI5qzV7ghRnterLAb6s-qoQ"
     }
    ],
-   "category": "50000008 생활건강",
+   "category": "50000008",
    "mentions": 6190,
    "demand": [],
    "demand_last_year": [],
@@ -184,6 +196,9 @@
    "key": "음식물_쓰레기_처리기",
    "name": "음식물 쓰레기처리기",
    "keyword": "음식물 쓰레기 처리기 가정용",
+   "brand": "",
+   "product_id": "",
+   "evidence": "",
    "price_band": "고가",
    "videos": [
     {
@@ -208,7 +223,7 @@
     },
     {
      "views": 504,
-     "age_days": 2.66,
+     "age_days": 2.67,
      "channel_id": "UCyl1yWfnQ3MqPhf0vIX1VyA"
     },
     {
@@ -248,7 +263,7 @@
     },
     {
      "views": 10,
-     "age_days": 9.83,
+     "age_days": 9.84,
      "channel_id": "UC1mZcK0mDMi3g1LF5kuLn0g"
     },
     {
@@ -268,7 +283,7 @@
     },
     {
      "views": 14,
-     "age_days": 11.13,
+     "age_days": 11.14,
      "channel_id": "UCqnkugF0pBIln0B-CIi29DQ"
     },
     {
@@ -278,7 +293,7 @@
     },
     {
      "views": 17,
-     "age_days": 7.75,
+     "age_days": 7.76,
      "channel_id": "UCdQv77TRWXzoZ58ju7qcX2g"
     },
     {
@@ -308,7 +323,7 @@
     },
     {
      "views": 7,
-     "age_days": 1.68,
+     "age_days": 1.69,
      "channel_id": "UCqosotEeBmUGWm4itFqi72g"
     },
     {
@@ -318,17 +333,17 @@
     },
     {
      "views": 3,
-     "age_days": 6.96,
+     "age_days": 6.97,
      "channel_id": "UChnVAnRoOX9QCvwt2-vV8wQ"
     },
     {
-     "views": 358,
+     "views": 359,
      "age_days": 0.06,
      "channel_id": "UC55HVhKPl2CaF0odXU_cdsw"
     },
     {
      "views": 3,
-     "age_days": 1.55,
+     "age_days": 1.56,
      "channel_id": "UConB5Mos2R_OoXqX7VqkZDA"
     },
     {
@@ -343,7 +358,7 @@
     },
     {
      "views": 4,
-     "age_days": 4.28,
+     "age_days": 4.29,
      "channel_id": "UCAq9OhUNI4vAOXdTjlEaM_w"
     },
     {
@@ -353,7 +368,7 @@
     },
     {
      "views": 4,
-     "age_days": 9.69,
+     "age_days": 9.7,
      "channel_id": "UCjcmDoujYLTvFTbMjlECVXg"
     },
     {
@@ -378,7 +393,7 @@
     },
     {
      "views": 3,
-     "age_days": 7.38,
+     "age_days": 7.39,
      "channel_id": "UCJg_nqYdbNQg1QhE3AfATpw"
     },
     {
@@ -388,7 +403,7 @@
     },
     {
      "views": 2,
-     "age_days": 4.87,
+     "age_days": 4.88,
      "channel_id": "UCHGKiXWEmRUOQjfqffT_p_w"
     },
     {
@@ -403,7 +418,7 @@
     },
     {
      "views": 1,
-     "age_days": 2.79,
+     "age_days": 2.8,
      "channel_id": "UC7D2uBalPlTFec1zkvQ8U2A"
     },
     {
@@ -423,7 +438,7 @@
     },
     {
      "views": 2,
-     "age_days": 2.69,
+     "age_days": 2.7,
      "channel_id": "UCb6oVf2x1fOttoI2c6DB2jw"
     },
     {
@@ -437,10 +452,13 @@
      "channel_id": "UCgcPupAaFb3EuryHwDRc5aA"
     }
    ],
-   "category": "50000003 디지털가전",
+   "category": "50000003",
    "mentions": 1820,
    "demand": [],
-   "demand_last_year": [],
+   "demand_last_year": [
+    100.0,
+    100.0
+   ],
    "price": null,
    "review_count": null,
    "sellers": null,
@@ -451,16 +469,19 @@
    "key": "캡슐_커피_머신_소형",
    "name": "캡슐 커피 머신 소형",
    "keyword": "소형 캡슐 커피 머신 미니",
+   "brand": "",
+   "product_id": "",
+   "evidence": "",
    "price_band": "중가",
    "videos": [
     {
      "views": 9,
-     "age_days": 13.71,
+     "age_days": 13.72,
      "channel_id": "UCecRENMn8uYqMNK0Q371RXQ"
     },
     {
      "views": 11,
-     "age_days": 12.95,
+     "age_days": 12.96,
      "channel_id": "UCB3qCT8MKeUWxypISH5Jn-w"
     },
     {
@@ -475,11 +496,11 @@
     },
     {
      "views": 3,
-     "age_days": 2.67,
+     "age_days": 2.68,
      "channel_id": "UC0_8223LmlWJMaL5mw5mB3Q"
     }
    ],
-   "category": "50000003 디지털가전",
+   "category": "50000003",
    "mentions": 113,
    "demand": [],
    "demand_last_year": [],
@@ -493,6 +514,9 @@
    "key": "차량용_공기청정기_컵홀더",
    "name": "차량용 공기청정기",
    "keyword": "차량용 공기청정기 컵홀더",
+   "brand": "",
+   "product_id": "",
+   "evidence": "",
    "price_band": "중가",
    "videos": [
     {
@@ -501,7 +525,7 @@
      "channel_id": "UC6HN_bf9MfcA2pL3Xt_t7_w"
     }
    ],
-   "category": "50000003 디지털가전",
+   "category": "50000003",
    "mentions": 325,
    "demand": [],
    "demand_last_year": [],
@@ -515,21 +539,24 @@
    "key": "무선_물걸레_청소기",
    "name": "무선 물걸레 청소기",
    "keyword": "무선 물걸레 청소기 스팀",
+   "brand": "",
+   "product_id": "",
+   "evidence": "",
    "price_band": "고가",
    "videos": [
     {
-     "views": 1642114,
-     "age_days": 10.62,
+     "views": 1642263,
+     "age_days": 10.63,
      "channel_id": "UCyRoynZRY026vew0Ix41bhw"
     },
     {
-     "views": 72436,
+     "views": 72431,
      "age_days": 13.55,
      "channel_id": "UCazHEBmumgKYsCWQ31Ja7TQ"
     },
     {
-     "views": 103047,
-     "age_days": 11.58,
+     "views": 103045,
+     "age_days": 11.59,
      "channel_id": "UChXOKeqCxhM3AjyNb7rAAOw"
     },
     {
@@ -574,7 +601,7 @@
     },
     {
      "views": 16,
-     "age_days": 11.57,
+     "age_days": 11.58,
      "channel_id": "UCPpBtq02eW_ECIPyW3dRWtw"
     },
     {
@@ -588,10 +615,23 @@
      "channel_id": "UCvzYqkTBH70dIl32WxhxB0w"
     }
    ],
-   "category": "50000003 디지털가전",
+   "category": "50000003",
    "mentions": 1437,
-   "demand": [],
-   "demand_last_year": [],
+   "demand": [
+    100.0,
+    100.0,
+    66.66666,
+    33.33333,
+    100.0,
+    66.66666,
+    33.33333,
+    66.66666,
+    33.33333
+   ],
+   "demand_last_year": [
+    100.0,
+    100.0
+   ],
    "price": null,
    "review_count": null,
    "sellers": null,
@@ -602,6 +642,9 @@
    "key": "휴대용_선풍기_넥밴드",
    "name": "휴대용 선풍기 넥밴드",
    "keyword": "넥밴드 선풍기 휴대용",
+   "brand": "",
+   "product_id": "",
+   "evidence": "",
    "price_band": "저가",
    "videos": [
     {
@@ -611,17 +654,17 @@
     },
     {
      "views": 1160,
-     "age_days": 4.85,
+     "age_days": 4.86,
      "channel_id": "UCURxJk7JWWa2V9AxjuIsYKg"
     },
     {
      "views": 179,
-     "age_days": 1.94,
+     "age_days": 1.95,
      "channel_id": "UCmdAVspyQp3UgTi0GkMrs-Q"
     },
     {
      "views": 49,
-     "age_days": 7.63,
+     "age_days": 7.64,
      "channel_id": "UCTVs_3XeEh8cL9tWGpCbp8Q"
     },
     {
@@ -636,17 +679,17 @@
     },
     {
      "views": 4,
-     "age_days": 13.42,
+     "age_days": 13.43,
      "channel_id": "UCr2Umage_i-aXGBXvh1dovw"
     },
     {
      "views": 5,
-     "age_days": 8.71,
+     "age_days": 8.72,
      "channel_id": "UCDIuE6Q2ztIfQzN06CU3_8g"
     },
     {
      "views": 12,
-     "age_days": 3.93,
+     "age_days": 3.94,
      "channel_id": "UCG5m78YkMG-jUs6CRUhaa7g"
     },
     {
@@ -676,7 +719,7 @@
     },
     {
      "views": 17,
-     "age_days": 1.04,
+     "age_days": 1.05,
      "channel_id": "UC-9s8vy2U4m9odnXFU1yMBA"
     },
     {
@@ -691,7 +734,7 @@
     },
     {
      "views": 2,
-     "age_days": 8.11,
+     "age_days": 8.12,
      "channel_id": "UC93wWoKPdmwEHuq1NObKg-w"
     },
     {
@@ -736,7 +779,7 @@
     },
     {
      "views": 1,
-     "age_days": 4.46,
+     "age_days": 4.47,
      "channel_id": "UConB5Mos2R_OoXqX7VqkZDA"
     },
     {
@@ -761,12 +804,12 @@
     },
     {
      "views": 1,
-     "age_days": 0.41,
+     "age_days": 0.42,
      "channel_id": "UCc5daqAUWBRN1bKC5EvSing"
     },
     {
      "views": 1,
-     "age_days": 10.01,
+     "age_days": 10.02,
      "channel_id": "UCBfhuPk2m-nZ4qdQIOkKAlw"
     },
     {
@@ -791,7 +834,7 @@
     },
     {
      "views": 1,
-     "age_days": 7.78,
+     "age_days": 7.79,
      "channel_id": "UCDvj56BRm1rmztnmDf17jag"
     },
     {
@@ -805,10 +848,89 @@
      "channel_id": "UC4U9CkX-qUMuFN8ISblUCbg"
     }
    ],
-   "category": "50000003 디지털가전",
+   "category": "50000003",
    "mentions": 8281,
-   "demand": [],
-   "demand_last_year": [],
+   "demand": [
+    11.11111,
+    22.22222,
+    11.11111,
+    11.11111,
+    22.22222,
+    88.88888,
+    100.0,
+    77.77777,
+    55.55555,
+    33.33333,
+    22.22222,
+    11.11111,
+    22.22222
+   ],
+   "demand_last_year": [
+    13.04347,
+    4.34782,
+    17.3913,
+    39.13043,
+    21.73913,
+    30.43478,
+    26.08695,
+    34.7826,
+    39.13043,
+    26.08695,
+    4.34782,
+    43.47826,
+    26.08695,
+    73.91304,
+    13.04347,
+    69.56521,
+    82.60869,
+    73.91304,
+    91.30434,
+    82.60869,
+    86.95652,
+    47.82608,
+    65.21739,
+    60.86956,
+    60.86956,
+    100.0,
+    65.21739,
+    73.91304,
+    39.13043,
+    34.7826,
+    43.47826,
+    43.47826,
+    34.7826,
+    34.7826,
+    69.56521,
+    52.17391,
+    39.13043,
+    30.43478,
+    39.13043,
+    39.13043,
+    30.43478,
+    26.08695,
+    65.21739,
+    17.3913,
+    34.7826,
+    26.08695,
+    21.73913,
+    13.04347,
+    39.13043,
+    26.08695,
+    4.34782,
+    4.34782,
+    4.34782,
+    8.69565,
+    4.34782,
+    4.34782,
+    8.69565,
+    13.04347,
+    4.34782,
+    4.34782,
+    4.34782,
+    4.34782,
+    4.34782,
+    8.69565
+   ],
    "price": null,
    "review_count": null,
    "sellers": null,
