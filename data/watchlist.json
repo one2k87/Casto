@@ -1,0 +1,58 @@
+{
+ "접이식_블루투스_키보드": {
+  "name": "접이식 블루투스 키보드",
+  "search_keyword": "접이식 블루투스 키보드 무선 휴대용",
+  "category": "50000003 디지털가전",
+  "price_band": "중가",
+  "last_found": "2026-09-07",
+  "first_seen": "2026-09-07"
+ },
+ "미니_가습기_무선": {
+  "name": "미니 가습기 무선",
+  "search_keyword": "무선 미니 가습기 휴대용",
+  "category": "50000008 생활건강",
+  "price_band": "저가",
+  "last_found": "2026-09-07",
+  "first_seen": "2026-09-07"
+ },
+ "음식물_쓰레기_처리기": {
+  "name": "음식물 쓰레기처리기",
+  "search_keyword": "음식물 쓰레기 처리기 가정용",
+  "category": "50000003 디지털가전",
+  "price_band": "고가",
+  "last_found": "2026-09-07",
+  "first_seen": "2026-09-07"
+ },
+ "캡슐_커피_머신_소형": {
+  "name": "캡슐 커피 머신 소형",
+  "search_keyword": "소형 캡슐 커피 머신 미니",
+  "category": "50000003 디지털가전",
+  "price_band": "중가",
+  "last_found": "2026-09-07",
+  "first_seen": "2026-09-07"
+ },
+ "차량용_공기청정기_컵홀더": {
+  "name": "차량용 공기청정기",
+  "search_keyword": "차량용 공기청정기 컵홀더",
+  "category": "50000003 디지털가전",
+  "price_band": "중가",
+  "last_found": "2026-09-07",
+  "first_seen": "2026-09-07"
+ },
+ "무선_물걸레_청소기": {
+  "name": "무선 물걸레 청소기",
+  "search_keyword": "무선 물걸레 청소기 스팀",
+  "category": "50000003 디지털가전",
+  "price_band": "고가",
+  "last_found": "2026-09-07",
+  "first_seen": "2026-09-07"
+ },
+ "휴대용_선풍기_넥밴드": {
+  "name": "휴대용 선풍기 넥밴드",
+  "search_keyword": "넥밴드 선풍기 휴대용",
+  "category": "50000003 디지털가전",
+  "price_band": "저가",
+  "last_found": "2026-09-07",
+  "first_seen": "2026-09-07"
+ }
+}

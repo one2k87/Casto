@@ -7,2591 +7,89 @@
  },
  "products": [
   {
-   "key": "tumbler_scrubber",
-   "name": "텀블러 수세미",
-   "keyword": "텀블러 세척솔",
-   "price_band": "저가",
-   "videos": [
-    {
-     "views": 4478,
-     "age_days": 13.95,
-     "channel_id": "UC9TF8vMwLHxvvta7BPtuCHg"
-    },
-    {
-     "views": 2346,
-     "age_days": 13.9,
-     "channel_id": "UCbb4TbUBcbyCz2pLa9VG-YQ"
-    },
-    {
-     "views": 1987,
-     "age_days": 11.21,
-     "channel_id": "UClorkocbLcSCGk3nL7G85Qg"
-    },
-    {
-     "views": 1667,
-     "age_days": 13.89,
-     "channel_id": "UC-Ck12UmyxCktAduWKrDDKA"
-    },
-    {
-     "views": 1481,
-     "age_days": 11.41,
-     "channel_id": "UC5QXtNCFbBL_8Jgl063ctHQ"
-    },
-    {
-     "views": 1313,
-     "age_days": 7.91,
-     "channel_id": "UC2zI3qGUyfzNi2xb-DLNK0w"
-    },
-    {
-     "views": 1230,
-     "age_days": 10.17,
-     "channel_id": "UCAGBNY6BllFH4kibN20zmGQ"
-    },
-    {
-     "views": 1263,
-     "age_days": 13.79,
-     "channel_id": "UC55YgaEZTwin9NpCsVD4DqQ"
-    },
-    {
-     "views": 1135,
-     "age_days": 6.98,
-     "channel_id": "UCO1Bpq4qBnbwD-DKF0rBjkA"
-    },
-    {
-     "views": 1338,
-     "age_days": 5.96,
-     "channel_id": "UCk2a3eaFsS4q-pyP5dysCew"
-    },
-    {
-     "views": 1467,
-     "age_days": 2.37,
-     "channel_id": "UCX5sGmHgLwFSP2rMqsK_Qcg"
-    },
-    {
-     "views": 1196,
-     "age_days": 13.1,
-     "channel_id": "UClsDZ6pU6BVlcsZWtVXUBaA"
-    },
-    {
-     "views": 1138,
-     "age_days": 4.25,
-     "channel_id": "UCEpE2KczrQukhLVVu_EJ9iQ"
-    },
-    {
-     "views": 1133,
-     "age_days": 13.79,
-     "channel_id": "UCMLNF__ietQxZ1rGbbmyldw"
-    },
-    {
-     "views": 1004,
-     "age_days": 0.95,
-     "channel_id": "UCDuR35gZzQdIo4xmkxDL_pA"
-    },
-    {
-     "views": 1093,
-     "age_days": 4.13,
-     "channel_id": "UCjm-mk76BDxXNiD9LNbl9dA"
-    },
-    {
-     "views": 1256,
-     "age_days": 13.83,
-     "channel_id": "UCRrDV1Eu1QZfJcTGDmcgDXw"
-    },
-    {
-     "views": 1209,
-     "age_days": 11.85,
-     "channel_id": "UCavpYiO89LfNjHTF7q7lJ9A"
-    },
-    {
-     "views": 978,
-     "age_days": 0.85,
-     "channel_id": "UCr4bnLg11emztVj99CrnF_Q"
-    },
-    {
-     "views": 1054,
-     "age_days": 13.0,
-     "channel_id": "UCyqiiBjySNZctn4J4ErEd9A"
-    },
-    {
-     "views": 686,
-     "age_days": 10.21,
-     "channel_id": "UCw4rtuw7G_iKoTyhxZUZIWg"
-    },
-    {
-     "views": 404,
-     "age_days": 2.4,
-     "channel_id": "UCEuo5uwS0XbRcE8IS0_-Nwg"
-    },
-    {
-     "views": 243,
-     "age_days": 2.74,
-     "channel_id": "UCGB8EmVK-a2CvbDREsTekKg"
-    },
-    {
-     "views": 174,
-     "age_days": 13.94,
-     "channel_id": "UCEeNBlWtrFODFFEZ1Z7pfjQ"
-    },
-    {
-     "views": 3,
-     "age_days": 4.61,
-     "channel_id": "UC6y2YEH3moj9ogh4z33DuIg"
-    },
-    {
-     "views": 1,
-     "age_days": 11.75,
-     "channel_id": "UCPuIaCbKgtYqChyfKRpNtcQ"
-    },
-    {
-     "views": 1,
-     "age_days": 8.2,
-     "channel_id": "UCFukHwL0Vq3nDj2HYbdZGxQ"
-    },
-    {
-     "views": 24,
-     "age_days": 2.49,
-     "channel_id": "UCVkzMtGWdGGO4wq91mrNJrg"
-    },
-    {
-     "views": 31,
-     "age_days": 1.1,
-     "channel_id": "UCIXQeQrm-AhylGwS4uuZuWg"
-    },
-    {
-     "views": 2,
-     "age_days": 0.88,
-     "channel_id": "UCdHG7BwL4EHeD9-MX37aS2Q"
-    },
-    {
-     "views": 3,
-     "age_days": 10.66,
-     "channel_id": "UCPuIaCbKgtYqChyfKRpNtcQ"
-    },
-    {
-     "views": 3,
-     "age_days": 9.11,
-     "channel_id": "UCgurB68lEUep6eUepN8Ng1A"
-    },
-    {
-     "views": 2,
-     "age_days": 6.01,
-     "channel_id": "UCEBDNKSqFogj4J1tZvTdz_w"
-    },
-    {
-     "views": 12,
-     "age_days": 0.72,
-     "channel_id": "UCKDp76kQWgKCgFO2Cl0Q8fw"
-    },
-    {
-     "views": 2,
-     "age_days": 4.1,
-     "channel_id": "UCHT9bokCjhpAYUhgao3aqtw"
-    },
-    {
-     "views": 1,
-     "age_days": 9.0,
-     "channel_id": "UCUBUBDLXr69OCLXUsth2GBA"
-    },
-    {
-     "views": 0,
-     "age_days": 2.14,
-     "channel_id": "UCr4vIkLSwEtJuiG9GmhBAfA"
-    }
-   ],
-   "mentions": 2547,
-   "demand": [
-    16.66666,
-    16.66666,
-    16.66666,
-    16.66666,
-    16.66666,
-    33.33333,
-    16.66666,
-    16.66666,
-    16.66666,
-    33.33333,
-    66.66666,
-    16.66666,
-    16.66666,
-    16.66666,
-    33.33333,
-    33.33333,
-    50.0,
-    33.33333,
-    16.66666,
-    100.0,
-    16.66666,
-    16.66666
-   ],
-   "demand_last_year": [
-    11.11111,
-    33.33333,
-    11.11111,
-    11.11111,
-    11.11111,
-    11.11111,
-    22.22222,
-    11.11111,
-    11.11111,
-    11.11111,
-    11.11111,
-    22.22222,
-    11.11111,
-    22.22222,
-    11.11111,
-    55.55555,
-    11.11111,
-    11.11111,
-    11.11111,
-    22.22222,
-    22.22222,
-    11.11111,
-    11.11111,
-    33.33333,
-    11.11111,
-    11.11111,
-    44.44444,
-    33.33333,
-    11.11111,
-    11.11111,
-    11.11111,
-    11.11111,
-    22.22222,
-    11.11111,
-    11.11111,
-    11.11111,
-    33.33333,
-    22.22222,
-    11.11111,
-    11.11111,
-    11.11111,
-    11.11111,
-    22.22222,
-    11.11111,
-    11.11111,
-    22.22222,
-    11.11111,
-    44.44444,
-    100.0,
-    11.11111,
-    22.22222,
-    11.11111,
-    11.11111,
-    22.22222,
-    33.33333,
-    33.33333,
-    33.33333
-   ],
-   "price": null,
-   "review_count": null,
-   "sellers": null,
-   "coupang_url": null,
-   "price_source": null
-  },
-  {
-   "key": "coating_pan",
-   "name": "코팅팬",
-   "keyword": "프라이팬",
+   "key": "접이식_블루투스_키보드",
+   "name": "접이식 블루투스 키보드",
+   "keyword": "접이식 블루투스 키보드 무선 휴대용",
    "price_band": "중가",
    "videos": [
     {
-     "views": 240690,
-     "age_days": 6.83,
-     "channel_id": "UCZgnDg-w6VqHLJB8Qwpwabg"
+     "views": 1648,
+     "age_days": 3.5,
+     "channel_id": "UCtmju6uKiWc5kM6vhN0sPHQ"
     },
     {
-     "views": 230540,
-     "age_days": 10.98,
-     "channel_id": "UCITrEeVvx2BmHElmqSBbnTg"
+     "views": 1299,
+     "age_days": 6.45,
+     "channel_id": "UCq6uDuH8pdtugvbI6hZdLQw"
     },
     {
-     "views": 648228,
-     "age_days": 9.51,
-     "channel_id": "UCUd5pJOosqI54uOY4KOaoSg"
+     "views": 1249,
+     "age_days": 3.47,
+     "channel_id": "UCdkBxOAKzh0H2YyBr0AUENw"
     },
     {
-     "views": 101968,
-     "age_days": 12.25,
-     "channel_id": "UCkOJ7CpknOjyHgk3sOIQA_g"
+     "views": 1192,
+     "age_days": 7.67,
+     "channel_id": "UCVq-ETfnEzxjHGmUviGmvzg"
     },
     {
-     "views": 174297,
-     "age_days": 10.25,
-     "channel_id": "UCtMwtT4JcnWa1efuv9jm8Fg"
-    },
-    {
-     "views": 78292,
-     "age_days": 7.29,
-     "channel_id": "UCk2Bdi5aL5Mog8Oi-GxwscQ"
-    },
-    {
-     "views": 104637,
-     "age_days": 6.08,
-     "channel_id": "UCOvv04WmdjLKn77R-Q34t7Q"
-    },
-    {
-     "views": 102477,
-     "age_days": 7.29,
-     "channel_id": "UC2-vrHvo4TGMiruqA47fMnw"
-    },
-    {
-     "views": 69687,
-     "age_days": 5.85,
-     "channel_id": "UCAfL1r-IPHD1EoI3BUR8LLw"
-    },
-    {
-     "views": 69804,
-     "age_days": 2.31,
-     "channel_id": "UCUKN0dy8Z4V-uEGzARsvGQw"
-    },
-    {
-     "views": 53758,
-     "age_days": 2.01,
-     "channel_id": "UCEpgRWDUGVu7UaYc7fB1Idw"
-    },
-    {
-     "views": 35799,
-     "age_days": 4.25,
-     "channel_id": "UC6PjFIwIO77DL9plVPI_SoA"
-    },
-    {
-     "views": 42982,
-     "age_days": 13.19,
-     "channel_id": "UCD5E6MuZMJSgPpSesQf4kuw"
-    },
-    {
-     "views": 40189,
-     "age_days": 6.96,
-     "channel_id": "UCyWJ1DEvSLg6Xprj2ZzQEmQ"
-    },
-    {
-     "views": 61548,
-     "age_days": 1.86,
-     "channel_id": "UC-S0OgXOzS4Rwnp1d-QLfmQ"
-    },
-    {
-     "views": 41537,
-     "age_days": 12.94,
-     "channel_id": "UCTqWsS9jZcqqdgrFmj_rqCA"
-    },
-    {
-     "views": 40951,
-     "age_days": 5.22,
-     "channel_id": "UCAfL1r-IPHD1EoI3BUR8LLw"
-    },
-    {
-     "views": 31693,
-     "age_days": 10.91,
-     "channel_id": "UCq36IQhkZt6va1NuNRISBQw"
-    },
-    {
-     "views": 12960,
-     "age_days": 12.22,
-     "channel_id": "UCE5rfLQJKPkq0DnF6kG8rZA"
-    },
-    {
-     "views": 24110,
-     "age_days": 2.19,
-     "channel_id": "UCdxH02j_6Eo5K0OXb2YDUOw"
-    },
-    {
-     "views": 30482,
-     "age_days": 7.21,
-     "channel_id": "UCwZNs09y8VnpSjAJiFKxYpg"
-    },
-    {
-     "views": 19996,
-     "age_days": 2.83,
-     "channel_id": "UCZgnDg-w6VqHLJB8Qwpwabg"
-    },
-    {
-     "views": 31093,
-     "age_days": 4.08,
-     "channel_id": "UCOhasIfc8m1PwV6crpGVUHg"
-    },
-    {
-     "views": 11029,
-     "age_days": 12.73,
-     "channel_id": "UCE5rfLQJKPkq0DnF6kG8rZA"
-    },
-    {
-     "views": 15803,
-     "age_days": 7.33,
-     "channel_id": "UCBfEbw-pzVuBGqzwGUmQ0EQ"
-    },
-    {
-     "views": 20664,
-     "age_days": 12.86,
-     "channel_id": "UCLpTnUTKJb9RT6HMeUCEFCw"
-    },
-    {
-     "views": 23478,
-     "age_days": 13.76,
-     "channel_id": "UCEPSGxI-u4ekwk9YVMtiDjA"
-    },
-    {
-     "views": 18322,
-     "age_days": 7.97,
-     "channel_id": "UChToi3IOmQ006x4RPxth9gA"
-    },
-    {
-     "views": 20110,
-     "age_days": 9.08,
-     "channel_id": "UCD5E6MuZMJSgPpSesQf4kuw"
-    },
-    {
-     "views": 26307,
-     "age_days": 8.71,
-     "channel_id": "UCj53BlVc-lTPniQcbOaCpew"
-    },
-    {
-     "views": 22124,
-     "age_days": 2.17,
-     "channel_id": "UC_kKCGK8qLm9JaGSFovcl3w"
-    },
-    {
-     "views": 25139,
-     "age_days": 1.25,
-     "channel_id": "UCjvQgQrcnj22R_MaC6lZxGg"
-    },
-    {
-     "views": 21588,
-     "age_days": 9.15,
-     "channel_id": "UCXeLPTEaMn1uscu2fmY_1XQ"
-    },
-    {
-     "views": 23420,
-     "age_days": 12.04,
-     "channel_id": "UCB2gLcnm63oQjUy8EIKAOGA"
-    },
-    {
-     "views": 8958,
-     "age_days": 13.65,
-     "channel_id": "UCci3ekONGGf4njfCemeGsLA"
-    },
-    {
-     "views": 18546,
-     "age_days": 2.71,
-     "channel_id": "UCWCWzjneOygPIMFz-ZpFxAQ"
-    },
-    {
-     "views": 25264,
-     "age_days": 9.9,
-     "channel_id": "UCXeLPTEaMn1uscu2fmY_1XQ"
-    },
-    {
-     "views": 19636,
-     "age_days": 9.96,
-     "channel_id": "UCj53BlVc-lTPniQcbOaCpew"
-    },
-    {
-     "views": 19686,
-     "age_days": 8.29,
-     "channel_id": "UCb4vtXvxY1NWSHo8EangSfw"
-    },
-    {
-     "views": 14284,
-     "age_days": 8.63,
-     "channel_id": "UCWlh4Waga4Gxz_cfL5x1Miw"
-    },
-    {
-     "views": 20371,
-     "age_days": 12.36,
-     "channel_id": "UCZ3FtwbRC3FKbyteiGomMSQ"
-    },
-    {
-     "views": 13830,
-     "age_days": 7.92,
-     "channel_id": "UCHHJfl8eF20y2y3SmkS3MEg"
-    },
-    {
-     "views": 11545,
-     "age_days": 12.08,
-     "channel_id": "UC4DVW1z8HI3q0xnfd4aAT9A"
-    },
-    {
-     "views": 11682,
-     "age_days": 1.22,
-     "channel_id": "UCfksEXqRxAM_IVwfF3DMOYg"
-    },
-    {
-     "views": 13638,
-     "age_days": 11.85,
-     "channel_id": "UC1spJ1bsr5C97wbySRIBpkA"
-    },
-    {
-     "views": 13817,
-     "age_days": 1.12,
-     "channel_id": "UCj53BlVc-lTPniQcbOaCpew"
-    },
-    {
-     "views": 12830,
-     "age_days": 7.29,
-     "channel_id": "UCWWPbXICYE15dpvdkNw1gtQ"
-    },
-    {
-     "views": 13777,
-     "age_days": 9.21,
-     "channel_id": "UCj53BlVc-lTPniQcbOaCpew"
-    },
-    {
-     "views": 17277,
-     "age_days": 7.96,
-     "channel_id": "UCj53BlVc-lTPniQcbOaCpew"
-    },
-    {
-     "views": 9443,
-     "age_days": 4.94,
-     "channel_id": "UCXOd_lvEU0jum9Kg1ZeVXTA"
-    }
-   ],
-   "mentions": 173903,
-   "demand": [
-    73.84615,
-    73.84615,
-    71.02564,
-    66.15384,
-    54.87179,
-    45.1282,
-    48.71794,
-    68.46153,
-    73.33333,
-    67.17948,
-    66.66666,
-    69.48717,
-    52.30769,
-    43.58974,
-    62.05128,
-    80.76923,
-    84.87179,
-    63.33333,
-    77.94871,
-    52.5641,
-    55.64102,
-    72.82051,
-    55.64102,
-    60.25641,
-    59.74358,
-    67.43589,
-    53.58974,
-    62.05128,
-    74.35897,
-    55.1282,
-    70.51282,
-    68.20512,
-    52.5641,
-    61.02564,
-    60.25641,
-    87.17948,
-    85.89743,
-    67.6923,
-    80.51282,
-    65.89743,
-    56.15384,
-    63.84615,
-    71.79487,
-    56.92307,
-    59.74358,
-    63.84615,
-    65.89743,
-    36.41025,
-    61.02564,
-    71.53846,
-    69.48717,
-    76.15384,
-    75.89743,
-    84.35897,
-    57.6923,
-    65.64102,
-    100.0,
-    95.64102,
-    81.28205,
-    75.64102,
-    58.71794,
-    65.64102,
-    58.97435,
-    71.53846,
-    56.15384,
-    63.84615,
-    60.25641,
-    60.0,
-    59.23076,
-    55.64102,
-    81.28205,
-    76.92307,
-    59.48717,
-    60.0,
-    64.61538,
-    53.33333,
-    57.43589,
-    47.6923,
-    65.89743,
-    70.25641,
-    57.6923,
-    63.84615,
-    53.58974,
-    53.58974,
-    82.30769,
-    64.87179,
-    55.38461,
-    63.07692,
-    56.66666,
-    69.48717,
-    53.84615,
-    83.58974,
-    71.79487,
-    70.76923,
-    55.64102,
-    52.05128,
-    47.94871,
-    61.02564,
-    67.6923,
-    71.79487,
-    82.5641,
-    66.41025,
-    67.43589,
-    63.07692,
-    52.30769,
-    97.6923,
-    77.17948,
-    63.07692,
-    68.20512,
-    56.66666,
-    53.33333,
-    55.89743,
-    69.48717,
-    75.89743,
-    74.35897,
-    78.20512,
-    77.94871,
-    52.05128,
-    72.30769,
-    92.82051
-   ],
-   "demand_last_year": [
-    40.20467,
-    60.96491,
-    63.74269,
-    63.88888,
-    46.92982,
-    39.47368,
-    41.66666,
-    42.69005,
-    45.32163,
-    42.10526,
-    30.26315,
-    28.50877,
-    23.53801,
-    24.5614,
-    23.24561,
-    33.18713,
-    29.82456,
-    25.0,
-    29.82456,
-    22.22222,
-    25.87719,
-    23.09941,
-    39.32748,
-    36.5497,
-    39.91228,
-    23.39181,
-    59.64912,
-    100.0,
-    46.78362,
-    38.01169,
-    33.77192,
-    25.58479,
-    23.8304,
-    24.4152,
-    24.7076,
-    30.55555,
-    36.2573,
-    31.72514,
-    30.70175,
-    22.66081,
-    28.94736,
-    21.92982,
-    30.11695,
-    29.09356,
-    26.60818,
-    33.77192,
-    28.80116,
-    35.81871,
-    27.48538,
-    26.02339,
-    32.16374,
-    36.11111,
-    32.30994,
-    31.57894,
-    32.01754,
-    23.24561,
-    26.16959,
-    33.77192,
-    30.40935,
-    30.70175,
-    24.7076,
-    20.76023,
-    25.43859,
-    24.1228,
-    36.11111,
-    33.47953,
-    36.11111,
-    40.49707,
-    32.16374,
-    27.48538,
-    31.43274,
-    36.11111,
-    28.21637,
-    32.45614,
-    23.24561,
-    21.78362,
-    24.269,
-    25.0,
-    30.26315,
-    23.24561,
-    22.07602,
-    19.44444,
-    21.19883,
-    22.07602,
-    25.58479,
-    29.82456,
-    36.2573,
-    33.62573,
-    38.59649,
-    29.53216,
-    38.01169,
-    31.43274,
-    29.53216,
-    31.57894,
-    28.21637,
-    23.9766,
-    16.81286,
-    20.46783,
-    22.07602,
-    29.09356,
-    31.28654,
-    34.50292,
-    19.73684,
-    27.77777,
-    19.15204,
-    25.43859,
-    36.5497,
-    29.23976,
-    28.94736,
-    27.92397,
-    19.73684,
-    24.5614,
-    26.75438,
-    36.11111,
-    30.11695,
-    29.82456,
-    27.19298,
-    30.70175,
-    26.16959,
-    30.26315,
-    30.84795
-   ],
-   "price": null,
-   "review_count": null,
-   "sellers": null,
-   "coupang_url": null,
-   "price_source": null
-  },
-  {
-   "key": "kimchi_container",
-   "name": "김치통",
-   "keyword": "김치 보관통",
-   "price_band": "중가",
-   "videos": [
-    {
-     "views": 64326,
-     "age_days": 11.13,
-     "channel_id": "UCAw8VMVDCzv7HvH4Kddr3Bw"
-    },
-    {
-     "views": 29222,
-     "age_days": 12.35,
-     "channel_id": "UCzvtI36qBni7VutQoUxepXA"
-    },
-    {
-     "views": 16970,
-     "age_days": 10.16,
-     "channel_id": "UCdgUlNruZABfk06xFW8DJlQ"
-    },
-    {
-     "views": 18191,
-     "age_days": 10.88,
-     "channel_id": "UCXb-ULsl6KN09qOEPX3z1nw"
-    },
-    {
-     "views": 6255,
-     "age_days": 10.99,
-     "channel_id": "UCz_1JcdG1FX2v-8LfzhHAIg"
-    },
-    {
-     "views": 6259,
-     "age_days": 11.37,
-     "channel_id": "UCT5a5IxSTiMI_pwC69A2Ezg"
-    },
-    {
-     "views": 1253,
-     "age_days": 9.41,
-     "channel_id": "UC5dA84VLPXQZk5pIHjz1UwQ"
-    },
-    {
-     "views": 1417,
-     "age_days": 0.86,
-     "channel_id": "UCg8BDbB3HNPnrZQF4Y_Ufpw"
-    },
-    {
-     "views": 193,
-     "age_days": 12.74,
-     "channel_id": "UCCadBjYJlCIBf7gbaP2t0pA"
-    },
-    {
-     "views": 47,
-     "age_days": 8.61,
-     "channel_id": "UCv2F63om_zhRJnidX5n7IWQ"
-    },
-    {
-     "views": 19,
-     "age_days": 2.01,
-     "channel_id": "UCftV7EqpF5jIXlqCWD5b8cw"
-    },
-    {
-     "views": 17,
-     "age_days": 10.98,
-     "channel_id": "UCRCh8FNCLuTOrqZR-dC5PEQ"
-    },
-    {
-     "views": 290,
-     "age_days": 0.37,
-     "channel_id": "UCOpF_mlL6d0_z8HPafKRDfA"
-    }
-   ],
-   "mentions": 137,
-   "demand": [
-    5.1282,
-    5.1282,
-    2.5641,
-    2.5641,
-    2.5641,
-    2.5641,
-    2.5641,
-    15.38461,
-    12.82051,
-    5.1282,
-    2.5641,
-    5.1282,
-    7.6923,
-    2.5641,
-    2.5641,
-    10.25641,
-    2.5641,
-    2.5641,
-    17.94871,
-    2.5641,
-    2.5641,
-    12.82051,
-    17.94871,
-    7.6923,
-    5.1282,
-    10.25641,
-    10.25641,
-    7.6923,
-    10.25641,
-    5.1282,
-    20.51282,
-    15.38461,
-    5.1282,
-    20.51282,
-    7.6923,
-    10.25641,
-    5.1282,
-    20.51282,
-    7.6923,
-    10.25641,
-    2.5641,
-    12.82051,
-    2.5641,
-    10.25641,
-    10.25641,
-    25.64102,
-    5.1282,
-    17.94871,
-    5.1282,
-    12.82051,
-    12.82051,
-    10.25641,
-    2.5641,
-    5.1282,
-    17.94871,
-    10.25641,
-    2.5641,
-    5.1282,
-    12.82051,
-    2.5641,
-    2.5641,
-    5.1282,
-    5.1282,
-    12.82051,
-    25.64102,
-    2.5641,
-    5.1282,
-    10.25641,
-    2.5641,
-    10.25641,
-    5.1282,
-    10.25641,
-    12.82051,
-    2.5641,
-    2.5641,
-    2.5641,
-    2.5641,
-    5.1282,
-    2.5641,
-    7.6923,
-    15.38461,
-    12.82051,
-    2.5641,
-    7.6923,
-    2.5641,
-    12.82051,
-    5.1282,
-    100.0,
-    7.6923,
-    17.94871
-   ],
-   "demand_last_year": [
-    14.28571,
-    14.28571,
-    71.42857,
-    14.28571,
-    14.28571,
-    42.85714,
-    28.57142,
-    42.85714,
-    28.57142,
-    42.85714,
-    28.57142,
-    28.57142,
-    42.85714,
-    100.0,
-    14.28571,
-    28.57142,
-    14.28571,
-    14.28571,
-    14.28571,
-    28.57142,
-    14.28571,
-    14.28571,
-    14.28571,
-    42.85714,
-    28.57142,
-    42.85714,
-    14.28571,
-    14.28571,
-    28.57142,
-    14.28571,
-    14.28571,
-    14.28571,
-    14.28571,
-    28.57142,
-    28.57142,
-    14.28571,
-    14.28571,
-    28.57142,
-    14.28571,
-    14.28571,
-    14.28571,
-    14.28571,
-    14.28571,
-    14.28571,
-    71.42857,
-    14.28571,
-    57.14285,
-    28.57142,
-    42.85714,
-    14.28571,
-    14.28571,
-    57.14285,
-    14.28571,
-    28.57142,
-    14.28571,
-    14.28571,
-    14.28571,
-    28.57142,
-    14.28571,
-    14.28571,
-    42.85714,
-    14.28571,
-    14.28571,
-    42.85714,
-    28.57142,
-    42.85714,
-    14.28571,
-    14.28571,
-    14.28571,
-    28.57142,
-    14.28571,
-    14.28571,
-    14.28571,
-    28.57142,
-    42.85714,
-    14.28571,
-    28.57142,
-    14.28571,
-    42.85714,
-    85.71428,
-    71.42857,
-    28.57142
-   ],
-   "price": null,
-   "review_count": null,
-   "sellers": null,
-   "coupang_url": null,
-   "price_source": null
-  },
-  {
-   "key": "parchment_paper",
-   "name": "종이호일",
-   "keyword": "종이호일",
-   "price_band": "저가",
-   "videos": [
-    {
-     "views": 3620023,
-     "age_days": 11.98,
-     "channel_id": "UC9SnR_zj0wRj59NSBrWdI2g"
-    },
-    {
-     "views": 2243297,
-     "age_days": 11.74,
-     "channel_id": "UCZUMfoxa6PELaWTjHyGV5sQ"
-    },
-    {
-     "views": 8240,
-     "age_days": 13.83,
-     "channel_id": "UC3BcdBm6X05dEU1P-E7-ZZQ"
-    },
-    {
-     "views": 8674,
-     "age_days": 3.92,
-     "channel_id": "UCQRLTJOU9WTtstLwIeM2lmA"
-    },
-    {
-     "views": 4012,
-     "age_days": 5.11,
-     "channel_id": "UCkwE5yCeaUiLTJZPV0uCVRQ"
-    },
-    {
-     "views": 3278,
-     "age_days": 12.35,
-     "channel_id": "UCee8Ue8X00TH6eSoZ0w08eQ"
-    },
-    {
-     "views": 1575,
-     "age_days": 11.39,
-     "channel_id": "UCgoPL4ymX1hDmTmna8yK0ZQ"
-    },
-    {
-     "views": 2599,
-     "age_days": 10.46,
-     "channel_id": "UC1yJJvlQcw-38XFP4lvPSQA"
-    },
-    {
-     "views": 1754,
-     "age_days": 6.05,
-     "channel_id": "UCJQvovtt3332rIw9fBsTzfw"
-    },
-    {
-     "views": 1363,
-     "age_days": 8.29,
-     "channel_id": "UC7-BjScgiZzRUbA64gxuoSQ"
-    },
-    {
-     "views": 1182,
-     "age_days": 5.37,
-     "channel_id": "UCw05xgPoTZdVTIrStJmigbQ"
-    },
-    {
-     "views": 1719,
-     "age_days": 6.33,
-     "channel_id": "UCIau3xSpHd8v7bbZLSbWLTA"
-    },
-    {
-     "views": 1259,
-     "age_days": 7.96,
-     "channel_id": "UC-T8bIsjMMPtT6l84WX8PlQ"
-    },
-    {
-     "views": 1412,
-     "age_days": 11.9,
-     "channel_id": "UCE_90Wl_21up-sHPG8a9rmw"
-    },
-    {
-     "views": 1022,
-     "age_days": 7.7,
-     "channel_id": "UC5KrbeHHRff2Yy7pgW5vbeA"
-    },
-    {
-     "views": 1173,
-     "age_days": 4.25,
-     "channel_id": "UC2JvWQ2vjAENdT1S25tqzxw"
-    },
-    {
-     "views": 1079,
-     "age_days": 6.24,
-     "channel_id": "UC4dtksQswk_upIzbVm-ks7g"
-    },
-    {
-     "views": 1632,
-     "age_days": 0.21,
-     "channel_id": "UCOch-UD6tVp6U5YGpCF6HQw"
-    },
-    {
-     "views": 994,
-     "age_days": 2.38,
-     "channel_id": "UCLLKT1Ju68d-YChaN7mn13g"
-    },
-    {
-     "views": 453,
-     "age_days": 8.05,
-     "channel_id": "UC_tw2XeudHcd0FeF3x3d7rQ"
-    },
-    {
-     "views": 4,
-     "age_days": 6.42,
-     "channel_id": "UCEOZ8RqUtX13P-bd7TxSwhg"
-    },
-    {
-     "views": 5,
-     "age_days": 7.94,
-     "channel_id": "UCecRENMn8uYqMNK0Q371RXQ"
-    },
-    {
-     "views": 555,
-     "age_days": 0.04,
-     "channel_id": "UCo2OfvS8B-CBRQ3eSevaLxQ"
-    },
-    {
-     "views": 1,
-     "age_days": 12.41,
-     "channel_id": "UCcVTiS9Wp8DqysySJiNksDw"
-    },
-    {
-     "views": 1,
-     "age_days": 3.95,
-     "channel_id": "UCsHwbzlAVIYxbVM-lvMi1Ag"
-    },
-    {
-     "views": 3,
-     "age_days": 7.7,
-     "channel_id": "UC5KrbeHHRff2Yy7pgW5vbeA"
-    }
-   ],
-   "mentions": 27328,
-   "demand": [
-    41.77215,
-    36.70886,
-    64.55696,
-    27.8481,
-    31.64556,
-    16.45569,
-    32.91139,
-    30.37974,
-    21.51898,
-    27.8481,
-    60.75949,
-    37.97468,
-    29.11392,
-    36.70886,
-    30.37974,
-    21.51898,
-    20.25316,
-    69.62025,
-    63.29113,
-    22.78481,
-    20.25316,
-    25.31645,
-    46.83544,
-    36.70886,
-    15.18987,
-    50.63291,
-    51.89873,
-    26.58227,
-    17.72151,
-    43.03797,
-    55.6962,
-    46.83544,
-    62.02531,
-    39.2405,
-    37.97468,
-    40.50632,
-    83.5443,
-    40.50632,
-    32.91139,
-    32.91139,
-    11.3924,
-    29.11392,
-    16.45569,
-    21.51898,
-    40.50632,
-    27.8481,
-    40.50632,
-    45.56962,
-    37.97468,
-    49.36708,
-    40.50632,
-    62.02531,
-    40.50632,
-    55.6962,
-    70.88607,
-    27.8481,
-    64.55696,
-    62.02531,
-    36.70886,
-    41.77215,
-    35.44303,
-    37.97468,
-    22.78481,
-    30.37974,
-    37.97468,
-    24.05063,
-    31.64556,
-    35.44303,
-    25.31645,
-    34.17721,
-    45.56962,
-    65.82278,
-    46.83544,
-    27.8481,
-    31.64556,
-    32.91139,
-    20.25316,
-    45.56962,
-    31.64556,
-    41.77215,
-    29.11392,
-    36.70886,
-    37.97468,
-    16.45569,
-    46.83544,
-    24.05063,
-    48.10126,
-    36.70886,
-    35.44303,
-    25.31645,
-    25.31645,
-    18.98734,
-    35.44303,
-    29.11392,
-    31.64556,
-    15.18987,
-    17.72151,
-    25.31645,
-    22.78481,
-    37.97468,
-    26.58227,
-    100.0,
-    27.8481,
-    22.78481,
-    21.51898,
-    25.31645,
-    36.70886,
-    8.86075,
-    36.70886,
-    25.31645,
-    32.91139,
-    32.91139,
-    43.03797,
-    45.56962,
-    43.03797,
-    45.56962,
-    20.25316,
-    22.78481,
-    37.97468,
-    51.89873
-   ],
-   "demand_last_year": [
-    36.61971,
-    63.38028,
-    67.60563,
-    67.60563,
-    59.15492,
-    39.43661,
-    66.19718,
-    91.54929,
-    54.92957,
-    61.97183,
-    81.69014,
-    50.70422,
-    67.60563,
-    52.11267,
-    38.02816,
-    67.60563,
-    54.92957,
-    66.19718,
-    71.83098,
-    45.07042,
-    64.78873,
-    33.80281,
-    64.78873,
-    77.46478,
-    45.07042,
-    80.28169,
-    29.57746,
-    45.07042,
-    74.64788,
-    64.78873,
-    84.50704,
-    52.11267,
-    36.61971,
-    49.29577,
-    35.21126,
-    52.11267,
-    47.88732,
-    63.38028,
-    90.14084,
-    73.23943,
-    63.38028,
-    47.88732,
-    64.78873,
-    70.42253,
-    54.92957,
-    63.38028,
-    43.66197,
-    69.01408,
-    47.88732,
-    39.43661,
-    52.11267,
-    60.56338,
-    83.09859,
-    71.83098,
-    54.92957,
-    43.66197,
-    49.29577,
-    50.70422,
-    69.01408,
-    61.97183,
-    53.52112,
-    69.01408,
-    54.92957,
-    57.74647,
-    76.05633,
-    61.97183,
-    42.25352,
-    66.19718,
-    61.97183,
-    43.66197,
-    64.78873,
-    43.66197,
-    69.01408,
-    56.33802,
-    63.38028,
-    49.29577,
-    35.21126,
-    22.53521,
-    33.80281,
-    46.47887,
-    35.21126,
-    35.21126,
-    33.80281,
-    57.74647,
-    38.02816,
-    57.74647,
-    66.19718,
-    45.07042,
-    52.11267,
-    100.0,
-    47.88732,
-    39.43661,
-    30.98591,
-    64.78873,
-    64.78873,
-    36.61971,
-    33.80281,
-    50.70422,
-    12.67605,
-    77.46478,
-    63.38028,
-    61.97183,
-    70.42253,
-    59.15492,
-    61.97183,
-    40.84507,
-    66.19718,
-    80.28169,
-    71.83098,
-    43.66197,
-    33.80281,
-    69.01408,
-    38.02816,
-    64.78873,
-    33.80281,
-    46.47887,
-    90.14084,
-    69.01408,
-    39.43661,
-    28.16901,
-    74.64788
-   ],
-   "price": null,
-   "review_count": null,
-   "sellers": null,
-   "coupang_url": null,
-   "price_source": null
-  },
-  {
-   "key": "oil_skimmer_ladle",
-   "name": "기름제거 국자",
-   "keyword": "기름 제거 국자",
-   "price_band": "중가",
-   "videos": [
-    {
-     "views": 2280,
-     "age_days": 8.32,
-     "channel_id": "UC1km8bvCLOvq0ZR9T8XTpbQ"
-    },
-    {
-     "views": 5,
-     "age_days": 0.3,
-     "channel_id": "UCHHPdBa5BhbMCThrLaGi95w"
-    }
-   ],
-   "mentions": 64,
-   "demand": [
-    16.66666,
-    8.33333,
-    25.0,
-    16.66666,
-    8.33333,
-    16.66666,
-    58.33333,
-    16.66666,
-    16.66666,
-    8.33333,
-    25.0,
-    8.33333,
-    100.0,
-    8.33333,
-    8.33333,
-    8.33333,
-    16.66666,
-    8.33333,
-    16.66666,
-    8.33333,
-    8.33333,
-    8.33333,
-    8.33333,
-    8.33333,
-    8.33333,
-    25.0,
-    8.33333,
-    33.33333,
-    8.33333,
-    8.33333,
-    16.66666,
-    8.33333
-   ],
-   "demand_last_year": [
-    9.0909,
-    27.27272,
-    9.0909,
-    18.18181,
-    9.0909,
-    27.27272,
-    9.0909,
-    27.27272,
-    9.0909,
-    18.18181,
-    36.36363,
-    27.27272,
-    9.0909,
-    9.0909,
-    36.36363,
-    18.18181,
-    18.18181,
-    9.0909,
-    45.45454,
-    9.0909,
-    9.0909,
-    27.27272,
-    54.54545,
-    27.27272,
-    9.0909,
-    36.36363,
-    9.0909,
-    18.18181,
-    27.27272,
-    9.0909,
-    36.36363,
-    9.0909,
-    72.72727,
-    27.27272,
-    100.0,
-    9.0909,
-    36.36363,
-    45.45454,
-    27.27272,
-    18.18181,
-    9.0909,
-    27.27272,
-    36.36363,
-    27.27272,
-    18.18181,
-    9.0909,
-    18.18181,
-    18.18181,
-    27.27272,
-    45.45454,
-    9.0909,
-    18.18181,
-    9.0909,
-    27.27272,
-    18.18181,
-    18.18181,
-    18.18181,
-    18.18181,
-    9.0909,
-    45.45454,
-    9.0909,
-    100.0,
-    36.36363,
-    27.27272,
-    9.0909,
-    54.54545,
-    54.54545,
-    54.54545,
-    18.18181,
-    9.0909,
-    9.0909,
-    9.0909,
-    27.27272,
-    27.27272,
-    27.27272
-   ],
-   "price": null,
-   "review_count": null,
-   "sellers": null,
-   "coupang_url": null,
-   "price_source": null
-  },
-  {
-   "key": "vegetable_cutter",
-   "name": "야채 커터",
-   "keyword": "다기능 야채 커터",
-   "price_band": "저가",
-   "videos": [
-    {
-     "views": 1736,
-     "age_days": 13.96,
-     "channel_id": "UCGgSrSNsB1_8YKA9nusfVWA"
-    },
-    {
-     "views": 10,
-     "age_days": 11.31,
-     "channel_id": "UCW24SwIJiswInXsObI9VAEg"
-    }
-   ],
-   "mentions": 111,
-   "demand": [
-    22.22222,
-    22.22222,
-    22.22222,
-    11.11111,
-    11.11111,
-    44.44444,
-    11.11111,
-    11.11111,
-    22.22222,
-    22.22222,
-    100.0,
-    11.11111,
-    22.22222,
-    55.55555
-   ],
-   "demand_last_year": [
-    25.0,
-    50.0,
-    50.0,
-    50.0,
-    75.0,
-    50.0,
-    50.0,
-    50.0,
-    50.0,
-    100.0,
-    50.0,
-    50.0,
-    25.0,
-    25.0,
-    25.0,
-    50.0,
-    25.0,
-    50.0,
-    50.0,
-    75.0,
-    50.0,
-    50.0,
-    25.0
-   ],
-   "price": null,
-   "review_count": null,
-   "sellers": null,
-   "coupang_url": null,
-   "price_source": null
-  },
-  {
-   "key": "rice_scoop",
-   "name": "밥주걱",
-   "keyword": "세워지는 밥주걱",
-   "price_band": "저가",
-   "videos": [
-    {
-     "views": 1390,
-     "age_days": 4.08,
-     "channel_id": "UCHPcUUwbO0MyyhLGesExZ_w"
-    }
-   ],
-   "mentions": 31,
-   "demand": [
-    11.11111,
-    22.22222,
-    11.11111,
-    11.11111,
-    22.22222,
-    11.11111,
-    11.11111,
-    55.55555,
-    66.66666,
-    33.33333,
-    66.66666,
-    33.33333,
-    33.33333,
-    33.33333,
-    66.66666,
-    55.55555,
-    55.55555,
-    22.22222,
-    44.44444,
-    55.55555,
-    33.33333,
-    55.55555,
-    44.44444,
-    55.55555,
-    66.66666,
-    66.66666,
-    55.55555,
-    22.22222,
-    44.44444,
-    33.33333,
-    66.66666,
-    100.0,
-    44.44444,
-    55.55555,
-    55.55555,
-    11.11111,
-    22.22222,
-    22.22222,
-    22.22222,
-    11.11111,
-    33.33333,
-    33.33333,
-    66.66666,
-    66.66666,
-    44.44444,
-    44.44444
-   ],
-   "demand_last_year": [
-    25.0,
-    25.0,
-    100.0,
-    25.0,
-    50.0,
-    25.0,
-    50.0,
-    50.0,
-    25.0
-   ],
-   "price": null,
-   "review_count": null,
-   "sellers": null,
-   "coupang_url": null,
-   "price_source": null
-  },
-  {
-   "key": "mini_washing_machine",
-   "name": "미니 세탁기",
-   "keyword": "소형 세탁기",
-   "price_band": "중가",
-   "videos": [
-    {
-     "views": 171359,
-     "age_days": 8.42,
-     "channel_id": "UChR-QJHWHQYJRhUfdm4FIzw"
-    },
-    {
-     "views": 8964,
-     "age_days": 5.96,
-     "channel_id": "UCjBFXhM1tmWXrolnbNo21Yw"
-    },
-    {
-     "views": 5795,
-     "age_days": 6.15,
-     "channel_id": "UCbbSSC34H9779AN_7sGQsMA"
-    },
-    {
-     "views": 6142,
-     "age_days": 5.0,
-     "channel_id": "UCjw6w2JgcbgYXL29_w2k7XA"
-    },
-    {
-     "views": 3147,
-     "age_days": 7.91,
-     "channel_id": "UCEhiRDym_ifhs1b08qPZ1BQ"
-    },
-    {
-     "views": 2578,
-     "age_days": 5.92,
-     "channel_id": "UCN_YKz-tKWkVpNyYths0ZQQ"
-    },
-    {
-     "views": 1735,
-     "age_days": 9.87,
-     "channel_id": "UCjuWNsEa9sR3rWKJaxCIo2Q"
-    },
-    {
-     "views": 1677,
-     "age_days": 4.2,
-     "channel_id": "UCWcJBoDFekGONvf2zUSyEcg"
-    },
-    {
-     "views": 2284,
-     "age_days": 1.46,
-     "channel_id": "UCw4rtuw7G_iKoTyhxZUZIWg"
-    },
-    {
-     "views": 1573,
-     "age_days": 6.33,
-     "channel_id": "UCnoNcGYxPZslQZ0FV1bEpNg"
-    },
-    {
-     "views": 1668,
-     "age_days": 5.96,
-     "channel_id": "UCJ_jg2HfQDbFxr409WJ7Gug"
-    },
-    {
-     "views": 1326,
-     "age_days": 12.96,
-     "channel_id": "UCsa2kWoiCv3cgv_wL6V8cGg"
-    },
-    {
-     "views": 1858,
-     "age_days": 7.07,
-     "channel_id": "UCsOulXtqG4LFnOko_cMfNoA"
-    },
-    {
-     "views": 1449,
-     "age_days": 2.79,
-     "channel_id": "UCx7Y3rUioRZHqh76MhL6Gjw"
-    },
-    {
-     "views": 1167,
-     "age_days": 8.86,
-     "channel_id": "UCYA-PnQZogLVnApEXExqr2Q"
-    },
-    {
-     "views": 1310,
-     "age_days": 4.42,
-     "channel_id": "UCX3RF9-UfBQly6LsHJQoI9Q"
-    },
-    {
-     "views": 1497,
-     "age_days": 13.41,
-     "channel_id": "UCGPi1LtDMfQkx4_x-5RvWew"
-    },
-    {
-     "views": 1615,
-     "age_days": 7.08,
-     "channel_id": "UCXMjDlnPrTc8hODz_EmGLoQ"
-    },
-    {
-     "views": 1321,
-     "age_days": 12.43,
-     "channel_id": "UCeyvolBH-iqsXX010jhvx6w"
-    },
-    {
-     "views": 1278,
-     "age_days": 1.23,
-     "channel_id": "UCqnV_B7agYr_BQ2pEdBcaKg"
-    },
-    {
-     "views": 1372,
-     "age_days": 2.64,
-     "channel_id": "UC0YT10eGdmNRhPPPtWwvSTw"
-    },
-    {
-     "views": 1361,
-     "age_days": 11.03,
-     "channel_id": "UCfBVKZPAJC6aaHhxaTXdgRg"
-    },
-    {
-     "views": 1382,
-     "age_days": 2.93,
-     "channel_id": "UCkzvEdWk2IyZHt6KSmp6Vmg"
-    },
-    {
-     "views": 1347,
-     "age_days": 13.97,
-     "channel_id": "UC-ulqQo3zLZldsuWPf_FKVA"
-    },
-    {
-     "views": 42,
-     "age_days": 9.1,
-     "channel_id": "UCgUPtccmimnz1v_7o6oaYjg"
-    },
-    {
-     "views": 9,
-     "age_days": 9.3,
-     "channel_id": "UCgcPupAaFb3EuryHwDRc5aA"
-    },
-    {
-     "views": 2,
-     "age_days": 12.84,
-     "channel_id": "UC6_fvIeemaL-Tbc1BMLSs5g"
-    },
-    {
-     "views": 1265,
-     "age_days": 2.96,
-     "channel_id": "UCEN5laxMs1m4tH4J4wHdchA"
-    },
-    {
-     "views": 1292,
-     "age_days": 5.25,
-     "channel_id": "UCT28GqYgmg5XBNBNq2kUF4w"
-    },
-    {
-     "views": 1189,
-     "age_days": 7.01,
-     "channel_id": "UCnC6znXG0JevIdxRYzodb5w"
-    },
-    {
-     "views": 1374,
-     "age_days": 12.29,
-     "channel_id": "UCe3Nk8xAI7fmE7BVJCtqoWA"
-    },
-    {
-     "views": 1390,
-     "age_days": 11.07,
-     "channel_id": "UCjreBRIAC_4A5x_lS_7VXVQ"
-    },
-    {
-     "views": 1430,
-     "age_days": 1.63,
-     "channel_id": "UCjPTKcpjNGCpSyNDa4shNRQ"
-    },
-    {
-     "views": 1115,
-     "age_days": 13.35,
-     "channel_id": "UCBk8EkkPHEd4ljw8dSGsCng"
-    },
-    {
-     "views": 1175,
-     "age_days": 9.24,
-     "channel_id": "UCZDTs3lZZ2Lo28UzcxzXVtg"
-    },
-    {
-     "views": 1242,
-     "age_days": 13.16,
-     "channel_id": "UCQKiJOnSC8WCKsCdbuqyj2A"
-    },
-    {
-     "views": 990,
-     "age_days": 5.36,
-     "channel_id": "UCBwa17XydYjx13ABjiWbJ-A"
-    },
-    {
-     "views": 1272,
-     "age_days": 3.78,
-     "channel_id": "UC9JQRwQ9ALlMqT9q4Z_kDIA"
-    },
-    {
-     "views": 1191,
-     "age_days": 1.29,
-     "channel_id": "UCG9y78184_aheuzp0CHrNWQ"
-    },
-    {
-     "views": 1256,
-     "age_days": 3.31,
-     "channel_id": "UChNX2OiZBTRufcyyXGBRolg"
-    },
-    {
-     "views": 955,
-     "age_days": 3.34,
-     "channel_id": "UCfNWzvxbwzJgBfpTWrNZbZw"
-    },
-    {
-     "views": 1275,
-     "age_days": 0.95,
-     "channel_id": "UCVo5dAlYYzZXIpLQd0V8lpA"
-    },
-    {
-     "views": 803,
-     "age_days": 13.88,
-     "channel_id": "UCoMixgbGQXHzmTXrdAxDd6A"
-    },
-    {
-     "views": 557,
-     "age_days": 10.17,
-     "channel_id": "UCPdLMsf8zVuX_KkJjDISjkg"
-    },
-    {
-     "views": 923,
-     "age_days": 7.33,
-     "channel_id": "UC1Nqa42DT5iDZ3M9JdPPj3w"
-    },
-    {
-     "views": 498,
-     "age_days": 5.78,
-     "channel_id": "UC7PdUF6omRImdacwaul76Xw"
-    },
-    {
-     "views": 490,
-     "age_days": 5.78,
-     "channel_id": "UCHRys9X0ZN_BncS1U-Albfg"
-    },
-    {
-     "views": 45,
-     "age_days": 9.85,
-     "channel_id": "UCRflU1As7_YsEEQ_d_bwyCQ"
-    },
-    {
-     "views": 23,
-     "age_days": 13.4,
-     "channel_id": "UCrpW8_qfn51U3qc9tUWI8bA"
-    },
-    {
-     "views": 102,
-     "age_days": 6.9,
-     "channel_id": "UCBwa17XydYjx13ABjiWbJ-A"
-    }
-   ],
-   "mentions": 25811,
-   "demand": [],
-   "demand_last_year": [
-    100.0,
-    100.0
-   ],
-   "price": null,
-   "review_count": null,
-   "sellers": null,
-   "coupang_url": null,
-   "price_source": null
-  },
-  {
-   "key": "refrigerator_storage",
-   "name": "냉장고 수납",
-   "keyword": "냉장고 정리 용품",
-   "price_band": "저가",
-   "videos": [
-    {
-     "views": 30601,
-     "age_days": 3.95,
-     "channel_id": "UC5gGyUilbL-UEajnzm1meHw"
-    },
-    {
-     "views": 18542,
-     "age_days": 13.08,
-     "channel_id": "UCpfUcK8sUp1H3OSrOLCuHVw"
-    },
-    {
-     "views": 5686,
-     "age_days": 12.0,
-     "channel_id": "UCFw2gtdchWd-orp2CtFabQQ"
-    },
-    {
-     "views": 3182,
-     "age_days": 8.28,
-     "channel_id": "UCmNuCUVKYU29ltpPxu5gWaA"
-    },
-    {
-     "views": 2785,
-     "age_days": 6.38,
-     "channel_id": "UCLM9TcEUx0zn10-PXDVvSOg"
-    },
-    {
-     "views": 1748,
-     "age_days": 11.38,
-     "channel_id": "UCJd1wjU3uh0pYEMH6v0JVzA"
-    },
-    {
-     "views": 1613,
-     "age_days": 12.9,
-     "channel_id": "UCtZji551afXtSuWR-mFZPsA"
-    },
-    {
-     "views": 2139,
-     "age_days": 8.36,
-     "channel_id": "UCVOXrNOicN_sGGLUygBekdA"
-    },
-    {
-     "views": 1962,
-     "age_days": 12.9,
-     "channel_id": "UCwvC9IzknC4jArXuBGxv2Kw"
-    },
-    {
-     "views": 1819,
-     "age_days": 13.94,
-     "channel_id": "UCr6xckfVcjs5-J1lykb4Zeg"
-    },
-    {
-     "views": 1368,
-     "age_days": 11.91,
-     "channel_id": "UC0YT10eGdmNRhPPPtWwvSTw"
-    },
-    {
-     "views": 1972,
-     "age_days": 5.93,
-     "channel_id": "UC-PJ__USxuB0P95wN13lAow"
-    },
-    {
-     "views": 1905,
-     "age_days": 2.12,
-     "channel_id": "UC1HlFD5xRmqmp2UHakS-iow"
-    },
-    {
-     "views": 2295,
-     "age_days": 5.83,
-     "channel_id": "UCjreBRIAC_4A5x_lS_7VXVQ"
-    },
-    {
-     "views": 1493,
-     "age_days": 9.23,
-     "channel_id": "UCgtPujMpFF897BohgBtSK-w"
-    },
-    {
-     "views": 1340,
-     "age_days": 8.38,
-     "channel_id": "UCwgFcqMoGCjekE3suT2e4kQ"
-    },
-    {
-     "views": 1737,
-     "age_days": 11.97,
-     "channel_id": "UCICENAWQCaiMEkabXLr5Uhw"
-    },
-    {
-     "views": 1543,
-     "age_days": 12.88,
-     "channel_id": "UCDzCmgYxXAWffn-wAX_30zw"
-    },
-    {
-     "views": 1719,
-     "age_days": 4.38,
-     "channel_id": "UCUUw-kNg-QS8Wuidn0fcW4Q"
-    },
-    {
-     "views": 1358,
-     "age_days": 8.25,
+     "views": 634,
+     "age_days": 11.45,
      "channel_id": "UCXqgNzTdOS7AgqeGh6M_i2w"
     },
     {
-     "views": 1508,
-     "age_days": 3.92,
-     "channel_id": "UCrOUBREGdYjl_lDoik6gcqQ"
+     "views": 322,
+     "age_days": 5.43,
+     "channel_id": "UCOP6nV_4j9MWTDs9xuVrNYQ"
     },
     {
-     "views": 1253,
-     "age_days": 11.96,
-     "channel_id": "UCSuUjOBSU-8UhBfGcUTuyhQ"
+     "views": 21,
+     "age_days": 11.83,
+     "channel_id": "UCvYnXXaathGA0b1jjhvAGhA"
     },
     {
-     "views": 1140,
-     "age_days": 13.79,
-     "channel_id": "UC_gwNsE45qk1wuqAkewwYBw"
-    },
-    {
-     "views": 1316,
-     "age_days": 12.2,
-     "channel_id": "UCgH3DtUc5jGBLVUBzQei4lg"
-    },
-    {
-     "views": 1227,
-     "age_days": 6.33,
-     "channel_id": "UClsDZ6pU6BVlcsZWtVXUBaA"
-    },
-    {
-     "views": 1329,
-     "age_days": 6.97,
-     "channel_id": "UCzKxBRRsBemwLek0ri6rSsQ"
-    },
-    {
-     "views": 1293,
-     "age_days": 5.24,
-     "channel_id": "UCHPcUUwbO0MyyhLGesExZ_w"
-    },
-    {
-     "views": 1289,
-     "age_days": 11.1,
-     "channel_id": "UC5_8HoNQWhEpXn-ywp5qM5w"
-    },
-    {
-     "views": 1248,
-     "age_days": 2.84,
-     "channel_id": "UCrOUBREGdYjl_lDoik6gcqQ"
-    },
-    {
-     "views": 1223,
-     "age_days": 13.33,
-     "channel_id": "UCgBaNWEi3J-8zPLql4nYGPg"
-    },
-    {
-     "views": 1383,
-     "age_days": 12.14,
-     "channel_id": "UCpDR7f7pF180pQzWt-SgX2A"
-    },
-    {
-     "views": 1282,
-     "age_days": 6.41,
-     "channel_id": "UCAktHvquIWyx83JO5LPoyvA"
-    },
-    {
-     "views": 1301,
-     "age_days": 3.38,
-     "channel_id": "UCUUw-kNg-QS8Wuidn0fcW4Q"
-    },
-    {
-     "views": 1368,
-     "age_days": 11.68,
-     "channel_id": "UCGsZGucwVCN2NNxWKLdY-Zg"
-    },
-    {
-     "views": 1245,
-     "age_days": 2.33,
-     "channel_id": "UCMXH9pqWSVesH5GJq2tarVA"
-    },
-    {
-     "views": 1180,
-     "age_days": 11.2,
-     "channel_id": "UCqCIvkdZAM9W9Y3LO_kAbDw"
-    },
-    {
-     "views": 1187,
-     "age_days": 6.03,
-     "channel_id": "UC4Zeqa_BhXPDW4snXe_WWbg"
-    },
-    {
-     "views": 1297,
-     "age_days": 1.79,
-     "channel_id": "UCInV7aMUv53mVJxIilEkQdA"
-    },
-    {
-     "views": 1265,
-     "age_days": 13.08,
-     "channel_id": "UC1BnnGvUMM8dIf8NFvY8eQA"
-    },
-    {
-     "views": 871,
-     "age_days": 8.07,
-     "channel_id": "UCL7z-hcO2J51JQgy6jq_FhA"
-    },
-    {
-     "views": 1217,
-     "age_days": 6.11,
-     "channel_id": "UCsJLviesSZwiDRrn8fWYRjw"
-    },
-    {
-     "views": 1177,
-     "age_days": 12.29,
-     "channel_id": "UCKROQ6K1RtBDtMF-28I5-9g"
-    },
-    {
-     "views": 507,
-     "age_days": 11.4,
-     "channel_id": "UCM5buXIwGwf5sbYNJq-dHeg"
-    },
-    {
-     "views": 1071,
-     "age_days": 12.29,
-     "channel_id": "UC9yGUOt0vd-OLRjFDeCdFgQ"
-    },
-    {
-     "views": 1033,
-     "age_days": 5.08,
-     "channel_id": "UCWvnO57_IxvDNqSAgJPDYeg"
-    },
-    {
-     "views": 1206,
-     "age_days": 6.08,
-     "channel_id": "UC3CIqWBgf-c5-9_4CP2rVOg"
-    },
-    {
-     "views": 1069,
-     "age_days": 13.98,
-     "channel_id": "UCn1eqpx2M6gjYuo0LLyiRpw"
-    },
-    {
-     "views": 1303,
-     "age_days": 13.83,
-     "channel_id": "UCJwnS99yqk3AutPnnm12SWA"
-    },
-    {
-     "views": 1114,
-     "age_days": 11.04,
-     "channel_id": "UCRqJ9D5zOI7pFmYr9leY_5g"
-    },
-    {
-     "views": 1406,
-     "age_days": 12.3,
-     "channel_id": "UCMYlu_m68gSSPwQCdSGvd1g"
-    }
-   ],
-   "mentions": 5431,
-   "demand": [
-    9.0909,
-    9.0909,
-    18.18181,
-    9.0909,
-    100.0,
-    18.18181,
-    9.0909,
-    18.18181,
-    18.18181,
-    9.0909,
-    9.0909,
-    27.27272,
-    27.27272,
-    9.0909,
-    9.0909,
-    18.18181,
-    27.27272,
-    18.18181,
-    72.72727,
-    27.27272,
-    18.18181,
-    45.45454,
-    27.27272,
-    9.0909,
-    9.0909,
-    36.36363,
-    9.0909,
-    27.27272,
-    27.27272,
-    9.0909,
-    18.18181,
-    36.36363,
-    36.36363,
-    9.0909,
-    18.18181,
-    27.27272,
-    9.0909
-   ],
-   "demand_last_year": [
-    27.27272,
-    9.0909,
-    18.18181,
-    9.0909,
-    9.0909,
-    9.0909,
-    9.0909,
-    18.18181,
-    9.0909,
-    36.36363,
-    18.18181,
-    45.45454,
-    9.0909,
-    18.18181,
-    36.36363,
-    63.63636,
-    9.0909,
-    81.81818,
-    18.18181,
-    9.0909,
-    45.45454,
-    18.18181,
-    18.18181,
-    9.0909,
-    9.0909,
-    27.27272,
-    9.0909,
-    9.0909,
-    18.18181,
-    9.0909,
-    54.54545,
-    45.45454,
-    100.0,
-    9.0909,
-    9.0909,
-    27.27272,
-    18.18181,
-    9.0909,
-    36.36363,
-    9.0909,
-    45.45454,
-    9.0909,
-    18.18181,
-    63.63636,
-    18.18181,
-    90.90909,
-    9.0909,
-    9.0909,
-    100.0,
-    27.27272,
-    18.18181
-   ],
-   "price": null,
-   "review_count": null,
-   "sellers": null,
-   "coupang_url": null,
-   "price_source": null
-  },
-  {
-   "key": "dish_washer",
-   "name": "식기세척기",
-   "keyword": "미니 식기세척기",
-   "price_band": "고가",
-   "videos": [
-    {
-     "views": 4738,
+     "views": 41,
      "age_days": 13.39,
-     "channel_id": "UCFx9ZIe6IfOtsjs8ld1LYWg"
+     "channel_id": "UCc5daqAUWBRN1bKC5EvSing"
     },
     {
-     "views": 2072,
-     "age_days": 6.88,
-     "channel_id": "UC56mbbrsfY533LnI8F24fZQ"
-    },
-    {
-     "views": 1667,
-     "age_days": 7.93,
-     "channel_id": "UCEQyuhFB2xaTRCfgyLfIBLQ"
-    },
-    {
-     "views": 1481,
-     "age_days": 11.96,
-     "channel_id": "UC0I7EaXiWJchEYzaZ5c-h1g"
-    },
-    {
-     "views": 1264,
-     "age_days": 12.92,
-     "channel_id": "UCHie-9dqD48028jUfY0GXcw"
-    },
-    {
-     "views": 1251,
-     "age_days": 6.7,
-     "channel_id": "UCw-Vssbyj4PQQCVfZyqxP5Q"
-    },
-    {
-     "views": 1446,
-     "age_days": 12.99,
-     "channel_id": "UCj11tTL4Q7UPbJbFD6aLLHw"
-    },
-    {
-     "views": 1293,
-     "age_days": 13.97,
-     "channel_id": "UCqRPtNEnIYNyWUyiCAFMtrw"
-    },
-    {
-     "views": 1147,
-     "age_days": 11.08,
-     "channel_id": "UCXZbSDCzXb71tT7TWUbOsTw"
-    },
-    {
-     "views": 1464,
-     "age_days": 9.8,
-     "channel_id": "UCdLSVCA4MbHKgJGrY7_KPjg"
-    },
-    {
-     "views": 1331,
-     "age_days": 13.34,
-     "channel_id": "UCzXcR9W0VxqsxyRZCwOgCTQ"
-    },
-    {
-     "views": 1173,
-     "age_days": 3.98,
-     "channel_id": "UC_n3vXfhYDQ-gr5NA8ViPZA"
-    },
-    {
-     "views": 1363,
-     "age_days": 13.4,
-     "channel_id": "UCj4RAFvItpD7O3v92vuoE4A"
-    },
-    {
-     "views": 1175,
-     "age_days": 10.71,
-     "channel_id": "UC9KrNtOlxK8wVKRXQbtpvbg"
-    },
-    {
-     "views": 1179,
-     "age_days": 6.62,
-     "channel_id": "UCNPlI-zZRVGjisbHlMKronA"
-    },
-    {
-     "views": 1129,
-     "age_days": 12.72,
-     "channel_id": "UCM8g7OsQ8Cb03iDjmrk7TBQ"
-    },
-    {
-     "views": 1256,
-     "age_days": 8.86,
-     "channel_id": "UC6g8OrWNkLBpSg3krfl175g"
-    },
-    {
-     "views": 1148,
-     "age_days": 11.64,
-     "channel_id": "UCRhFmcemwEMpWB3qimaFdnw"
-    },
-    {
-     "views": 1072,
-     "age_days": 13.73,
-     "channel_id": "UC0CmWNV_4nMgLsgveweIjYg"
-    },
-    {
-     "views": 447,
-     "age_days": 4.73,
-     "channel_id": "UC3MQYEEh74V62YhZl_Ccd5w"
-    },
-    {
-     "views": 485,
-     "age_days": 3.96,
-     "channel_id": "UCKlVAr5IFzGuQHssBAglonw"
-    },
-    {
-     "views": 409,
-     "age_days": 6.91,
-     "channel_id": "UCcqzhu09RNzh7YmyrU4AGnw"
-    },
-    {
-     "views": 441,
-     "age_days": 6.79,
-     "channel_id": "UCizU-49MAn_C5wJ9jK_AfZw"
-    },
-    {
-     "views": 284,
-     "age_days": 7.27,
-     "channel_id": "UCh3ygaLKuBPx_YgRi3xUt1Q"
-    },
-    {
-     "views": 10,
-     "age_days": 11.09,
-     "channel_id": "UCLCGJ4oqDJ3S0WenFE3Dcaw"
-    },
-    {
-     "views": 9,
-     "age_days": 4.16,
-     "channel_id": "UCz4q-pDuy69yiqCKCKVhAQA"
-    },
-    {
-     "views": 4,
-     "age_days": 13.65,
-     "channel_id": "UCHrXyg3TguAVgtaCxzbi21Q"
-    },
-    {
-     "views": 106,
-     "age_days": 6.93,
-     "channel_id": "UCR2e-p6-Ft4aP14WCp81JGQ"
-    },
-    {
-     "views": 68,
-     "age_days": 8.87,
-     "channel_id": "UC4QvhDAcpQz2iKUQmpB0IPw"
-    },
-    {
-     "views": 98,
-     "age_days": 2.04,
-     "channel_id": "UCE8MO4xTKVIX5Yg9qGBGYeQ"
-    },
-    {
-     "views": 17,
-     "age_days": 4.93,
-     "channel_id": "UChieJQZ6BRiOU7KGyXiUqRQ"
-    },
-    {
-     "views": 11,
-     "age_days": 12.98,
-     "channel_id": "UCgiMkYU-n4BPjWpvG_Yq9Sw"
-    },
-    {
-     "views": 11,
-     "age_days": 4.16,
-     "channel_id": "UCz4q-pDuy69yiqCKCKVhAQA"
+     "views": 22,
+     "age_days": 4.89,
+     "channel_id": "UCTjyjcglxgFHO3-nthLbD_Q"
     },
     {
      "views": 13,
-     "age_days": 8.83,
-     "channel_id": "UC972FF6NZbq4M4C2brHwPsQ"
+     "age_days": 2.63,
+     "channel_id": "UCZtNTtDT1UhNLJaLjKWOPgQ"
     },
     {
      "views": 10,
-     "age_days": 2.37,
-     "channel_id": "UCPDCX3hLmVHODhiQRKtLtmw"
+     "age_days": 3.0,
+     "channel_id": "UCylYhzDdf8UBtQMqbUAQ7QA"
     },
     {
-     "views": 8,
-     "age_days": 1.96,
-     "channel_id": "UCvHV8YmnHxMi_No9c_xijzQ"
-    },
-    {
-     "views": 18,
-     "age_days": 11.0,
-     "channel_id": "UCXy7N8uwPluCRQNGEyHIM8w"
-    },
-    {
-     "views": 6,
-     "age_days": 11.08,
-     "channel_id": "UCLCGJ4oqDJ3S0WenFE3Dcaw"
-    },
-    {
-     "views": 5,
-     "age_days": 0.42,
-     "channel_id": "UC8XzbtLfGnbmDPzawuKMbzg"
-    },
-    {
-     "views": 4,
-     "age_days": 3.98,
-     "channel_id": "UCxk1dgWhtydprhsVi2KUmUA"
-    },
-    {
-     "views": 5,
-     "age_days": 4.82,
+     "views": 10,
+     "age_days": 11.76,
      "channel_id": "UCSxjfOqgkpz_KNmVCLe1QvQ"
     },
     {
-     "views": 3,
-     "age_days": 10.01,
-     "channel_id": "UCXzp5hYNRYjyTFuhXv6aw7A"
-    },
-    {
-     "views": 1394,
-     "age_days": 0.87,
-     "channel_id": "UC0-MSoPb8Q8F24ujQyHWcRw"
-    },
-    {
-     "views": 1184,
-     "age_days": 1.33,
-     "channel_id": "UCU6TRmkMSRVMGlYrOoE9V8A"
-    },
-    {
      "views": 1,
-     "age_days": 7.91,
-     "channel_id": "UCi5lVXvkboMtsFzzuH2K2MA"
+     "age_days": 0.36,
+     "channel_id": "UCgcPupAaFb3EuryHwDRc5aA"
     },
     {
-     "views": 4,
-     "age_days": 0.07,
-     "channel_id": "UC6MAcHre94-_Bs2fObDcPZA"
+     "views": 3,
+     "age_days": 13.82,
+     "channel_id": "UCNrBYNnS2438i88-uZahrDA"
     },
     {
-     "views": 0,
-     "age_days": 4.1,
-     "channel_id": "UCYsXQn39f9yjN17BNYcte3Q"
-    },
-    {
-     "views": 976,
-     "age_days": 1.11,
-     "channel_id": "UCIP4w-bv7oYPOjFmV9S166g"
+     "views": 5,
+     "age_days": 0.37,
+     "channel_id": "UCrt4s9rxcW1oUvHsORm-vYA"
     }
    ],
-   "mentions": 3756,
+   "category": "50000003 디지털가전",
+   "mentions": 1247,
    "demand": [],
    "demand_last_year": [],
    "price": null,
@@ -2601,81 +99,81 @@
    "price_source": null
   },
   {
-   "key": "shoe_cabinet",
-   "name": "신발장",
-   "keyword": "이케아 신발장",
-   "price_band": "중가",
+   "key": "미니_가습기_무선",
+   "name": "미니 가습기 무선",
+   "keyword": "무선 미니 가습기 휴대용",
+   "price_band": "저가",
    "videos": [
     {
-     "views": 70099,
-     "age_days": 11.88,
-     "channel_id": "UCb8_lBk1rLgVqiC-ft2MeVw"
+     "views": 215,
+     "age_days": 6.44,
+     "channel_id": "UCIPlfJfwVyVczNUo_kIIBqQ"
     },
     {
-     "views": 20164,
-     "age_days": 13.79,
-     "channel_id": "UCm_dU1KOfQ8nxFvmtm0Xx2w"
+     "views": 235,
+     "age_days": 1.97,
+     "channel_id": "UCU3EuB983wEBbOIFvU1witg"
     },
     {
-     "views": 2191,
-     "age_days": 7.46,
-     "channel_id": "UClZjicRCtPXO1zV4q_InSCw"
+     "views": 82,
+     "age_days": 4.61,
+     "channel_id": "UCPd8kSt16oBbAH1410Mbc5w"
     },
     {
-     "views": 1914,
-     "age_days": 13.96,
-     "channel_id": "UCWgZMgGoF2c4n1_W6-YDj9g"
+     "views": 19,
+     "age_days": 5.97,
+     "channel_id": "UClsq2qInb53B7AHkDfzyypA"
     },
     {
-     "views": 1232,
-     "age_days": 8.9,
-     "channel_id": "UCaIZUTap5PlNswxHVEYK6LA"
+     "views": 8,
+     "age_days": 4.74,
+     "channel_id": "UC7NovffauypnHyXskcjY6MA"
     },
     {
-     "views": 1339,
-     "age_days": 13.24,
-     "channel_id": "UC6IUu1p_WoXS4921s0gmqjg"
+     "views": 2,
+     "age_days": 11.87,
+     "channel_id": "UCDMKOSVKHC6PBDYP9RqtIxQ"
     },
     {
-     "views": 1178,
-     "age_days": 8.96,
-     "channel_id": "UCapxHGqG0V_mMNOljpDuSZA"
+     "views": 1,
+     "age_days": 13.34,
+     "channel_id": "UCqlfw8IbZyIKzq8D1ILuKeA"
     },
     {
-     "views": 971,
-     "age_days": 3.19,
-     "channel_id": "UCfBVKZPAJC6aaHhxaTXdgRg"
+     "views": 2,
+     "age_days": 13.44,
+     "channel_id": "UCA4yBH3a6iIUbefc9XsJ2HQ"
     },
     {
-     "views": 18,
-     "age_days": 5.72,
-     "channel_id": "UC2_g2fDHph09Uw3hMx9XnhQ"
+     "views": 2,
+     "age_days": 9.75,
+     "channel_id": "UCfL2lD6AG-cstGxB2LKA5Uw"
     },
     {
-     "views": 3,
-     "age_days": 13.39,
-     "channel_id": "UCYa9btmEBBlOLQU91Br7Egw"
+     "views": 2,
+     "age_days": 1.97,
+     "channel_id": "UCU3EuB983wEBbOIFvU1witg"
     },
     {
-     "views": 88,
-     "age_days": 1.12,
-     "channel_id": "UCIyh_K87PVrvJyKxCx0U82w"
+     "views": 1,
+     "age_days": 10.36,
+     "channel_id": "UCNKK9WgVdoZ4JAlcKpmYX6A"
+    },
+    {
+     "views": 2,
+     "age_days": 13.77,
+     "channel_id": "UCbu1YFEc1CSAwIL8eD29NRQ"
+    },
+    {
+     "views": 0,
+     "age_days": 6.18,
+     "channel_id": "UCI5qzV7ghRnterLAb6s-qoQ"
     }
    ],
-   "mentions": 2253,
-   "demand": [
-    100.0,
-    100.0,
-    100.0
-   ],
-   "demand_last_year": [
-    100.0,
-    100.0,
-    100.0,
-    100.0,
-    100.0,
-    100.0
-   ],
+   "category": "50000008 생활건강",
+   "mentions": 6190,
+   "demand": [],
+   "demand_last_year": [],
    "price": null,
    "review_count": null,
    "sellers": null,
@@ -2683,338 +181,634 @@
    "price_source": null
   },
   {
-   "key": "seasoning_container",
-   "name": "양념통",
-   "keyword": "양념통 세트",
-   "price_band": "저가",
+   "key": "음식물_쓰레기_처리기",
+   "name": "음식물 쓰레기처리기",
+   "keyword": "음식물 쓰레기 처리기 가정용",
+   "price_band": "고가",
    "videos": [
     {
-     "views": 32693,
-     "age_days": 11.92,
-     "channel_id": "UC9Y8AFpglQzggVeZt-TKgBQ"
+     "views": 211080,
+     "age_days": 13.94,
+     "channel_id": "UC6fKqYWsBvP6yxmTrhjOB_Q"
     },
     {
-     "views": 1287,
-     "age_days": 13.81,
-     "channel_id": "UCBlUH3wiargvfXNhjm9Qd7w"
+     "views": 1327,
+     "age_days": 13.48,
+     "channel_id": "UCdIrAq0sG1QVgfwv7HXeMsw"
     },
     {
-     "views": 1357,
-     "age_days": 6.96,
-     "channel_id": "UCk2a3eaFsS4q-pyP5dysCew"
-    },
-    {
-     "views": 1201,
+     "views": 1227,
      "age_days": 10.06,
-     "channel_id": "UCGk7IOGx8iuJ1AFULypYtvw"
+     "channel_id": "UCcGSg6Fa4tfGwTZeDChqAvw"
     },
     {
-     "views": 1223,
-     "age_days": 3.33,
-     "channel_id": "UCAktHvquIWyx83JO5LPoyvA"
+     "views": 931,
+     "age_days": 12.81,
+     "channel_id": "UC2v43BZmYJ7kyxKApZbWPJQ"
     },
     {
-     "views": 1070,
-     "age_days": 7.85,
-     "channel_id": "UCggOqW6WQM5b76-CoyVojaw"
+     "views": 504,
+     "age_days": 2.66,
+     "channel_id": "UCyl1yWfnQ3MqPhf0vIX1VyA"
     },
     {
-     "views": 1175,
-     "age_days": 10.7,
-     "channel_id": "UC_BAo_Hem4cg0xvpwp3nbWQ"
+     "views": 399,
+     "age_days": 12.06,
+     "channel_id": "UCcGSg6Fa4tfGwTZeDChqAvw"
     },
     {
-     "views": 1160,
-     "age_days": 2.3,
-     "channel_id": "UCKPxcHCyKy7hphKEDHMk3XA"
+     "views": 369,
+     "age_days": 13.06,
+     "channel_id": "UCcGSg6Fa4tfGwTZeDChqAvw"
     },
     {
-     "views": 715,
-     "age_days": 8.7,
-     "channel_id": "UCMXf5DwdJDzSpfclKtV3rdg"
+     "views": 419,
+     "age_days": 13.48,
+     "channel_id": "UCF2l6LNfu3dJLZ2qQGUx5zA"
     },
     {
-     "views": 156,
-     "age_days": 6.97,
-     "channel_id": "UCFTfh3uRGlHXRuIGbHqFkvA"
-    },
-    {
-     "views": 500,
-     "age_days": 5.8,
-     "channel_id": "UCno-OEfjkQAL5ng7CEJ6k7g"
-    },
-    {
-     "views": 424,
-     "age_days": 10.7,
-     "channel_id": "UC4didDG0biQPpkl5IjX_wYg"
-    },
-    {
-     "views": 42,
+     "views": 204,
      "age_days": 11.06,
-     "channel_id": "UCXuVntwqj4q9XAAy7Zz1djA"
+     "channel_id": "UCcGSg6Fa4tfGwTZeDChqAvw"
+    },
+    {
+     "views": 260,
+     "age_days": 4.42,
+     "channel_id": "UCXOgG4ncr2Rc4DQ-yKZZflg"
+    },
+    {
+     "views": 158,
+     "age_days": 12.48,
+     "channel_id": "UCzKxBRRsBemwLek0ri6rSsQ"
+    },
+    {
+     "views": 17,
+     "age_days": 13.01,
+     "channel_id": "UCpDWf-u8P6NCusiO8qkGgCQ"
+    },
+    {
+     "views": 10,
+     "age_days": 9.83,
+     "channel_id": "UC1mZcK0mDMi3g1LF5kuLn0g"
+    },
+    {
+     "views": 12,
+     "age_days": 11.61,
+     "channel_id": "UCmnqiGIggem3JAFmwg2EF-Q"
+    },
+    {
+     "views": 7,
+     "age_days": 9.45,
+     "channel_id": "UCY8k4m8KwyFlsyvNYrsTF4w"
+    },
+    {
+     "views": 26,
+     "age_days": 9.1,
+     "channel_id": "UCqnkugF0pBIln0B-CIi29DQ"
+    },
+    {
+     "views": 14,
+     "age_days": 11.13,
+     "channel_id": "UCqnkugF0pBIln0B-CIi29DQ"
+    },
+    {
+     "views": 7,
+     "age_days": 9.56,
+     "channel_id": "UCwrmP7XFEpoIPfuPM8sFe6A"
+    },
+    {
+     "views": 17,
+     "age_days": 7.75,
+     "channel_id": "UCdQv77TRWXzoZ58ju7qcX2g"
     },
     {
      "views": 6,
-     "age_days": 13.81,
-     "channel_id": "UCki_TEmmy55nkHd5K51-ZNg"
+     "age_days": 10.7,
+     "channel_id": "UCv06WkYqm9SA6wQwp2xsRWw"
     },
     {
-     "views": 1044,
-     "age_days": 0.38,
-     "channel_id": "UCw4rtuw7G_iKoTyhxZUZIWg"
+     "views": 11,
+     "age_days": 5.57,
+     "channel_id": "UCX_7053gtVC7RrUsDFsODvw"
+    },
+    {
+     "views": 19,
+     "age_days": 12.28,
+     "channel_id": "UCqnkugF0pBIln0B-CIi29DQ"
+    },
+    {
+     "views": 11,
+     "age_days": 12.65,
+     "channel_id": "UCgcPupAaFb3EuryHwDRc5aA"
+    },
+    {
+     "views": 5,
+     "age_days": 4.29,
+     "channel_id": "UCRSspVgX1v6Y-2di8KaR13A"
+    },
+    {
+     "views": 7,
+     "age_days": 1.68,
+     "channel_id": "UCqosotEeBmUGWm4itFqi72g"
+    },
+    {
+     "views": 6,
+     "age_days": 10.79,
+     "channel_id": "UCdHG7BwL4EHeD9-MX37aS2Q"
+    },
+    {
+     "views": 3,
+     "age_days": 6.96,
+     "channel_id": "UChnVAnRoOX9QCvwt2-vV8wQ"
+    },
+    {
+     "views": 358,
+     "age_days": 0.06,
+     "channel_id": "UC55HVhKPl2CaF0odXU_cdsw"
+    },
+    {
+     "views": 3,
+     "age_days": 1.55,
+     "channel_id": "UConB5Mos2R_OoXqX7VqkZDA"
+    },
+    {
+     "views": 3,
+     "age_days": 4.89,
+     "channel_id": "UCLMzmBxBNHY8rZjmIz6Y1eQ"
+    },
+    {
+     "views": 3,
+     "age_days": 8.8,
+     "channel_id": "UChnVAnRoOX9QCvwt2-vV8wQ"
+    },
+    {
+     "views": 4,
+     "age_days": 4.28,
+     "channel_id": "UCAq9OhUNI4vAOXdTjlEaM_w"
+    },
+    {
+     "views": 3,
+     "age_days": 13.26,
+     "channel_id": "UCqnWgO2oW-3SZjBo0DS3dBA"
+    },
+    {
+     "views": 4,
+     "age_days": 9.69,
+     "channel_id": "UCjcmDoujYLTvFTbMjlECVXg"
+    },
+    {
+     "views": 6,
+     "age_days": 11.37,
+     "channel_id": "UCegEqUGKbo26UkjOcBysDiA"
+    },
+    {
+     "views": 2,
+     "age_days": 9.17,
+     "channel_id": "UCABjdzuvCRqnV2KIIREwwtQ"
+    },
+    {
+     "views": 12,
+     "age_days": 11.76,
+     "channel_id": "UCaG3UAerJ3DqO_agZHPxNrA"
+    },
+    {
+     "views": 2,
+     "age_days": 0.34,
+     "channel_id": "UCj3-jN4-P8jxYA0nmRqdVRA"
+    },
+    {
+     "views": 3,
+     "age_days": 7.38,
+     "channel_id": "UCJg_nqYdbNQg1QhE3AfATpw"
+    },
+    {
+     "views": 5,
+     "age_days": 11.35,
+     "channel_id": "UCxf8lQ5qOoP8EAbbrjo9FTw"
+    },
+    {
+     "views": 2,
+     "age_days": 4.87,
+     "channel_id": "UCHGKiXWEmRUOQjfqffT_p_w"
+    },
+    {
+     "views": 4,
+     "age_days": 10.47,
+     "channel_id": "UCQ3IKL42hY0FEZo9rebGuuA"
+    },
+    {
+     "views": 4,
+     "age_days": 8.65,
+     "channel_id": "UCDP9a3qGCMiFNXrUlRPTKWQ"
     },
     {
      "views": 1,
-     "age_days": 11.03,
-     "channel_id": "UCElHuN42pXJeo-FWEmLAbig"
+     "age_days": 2.79,
+     "channel_id": "UC7D2uBalPlTFec1zkvQ8U2A"
+    },
+    {
+     "views": 5,
+     "age_days": 6.19,
+     "channel_id": "UCy4VKLjsJq_nveTqX9mNE1g"
+    },
+    {
+     "views": 2,
+     "age_days": 7.53,
+     "channel_id": "UCqnWgO2oW-3SZjBo0DS3dBA"
+    },
+    {
+     "views": 4,
+     "age_days": 12.35,
+     "channel_id": "UCZtNTtDT1UhNLJaLjKWOPgQ"
+    },
+    {
+     "views": 2,
+     "age_days": 2.69,
+     "channel_id": "UCb6oVf2x1fOttoI2c6DB2jw"
+    },
+    {
+     "views": 2,
+     "age_days": 4.7,
+     "channel_id": "UCegEqUGKbo26UkjOcBysDiA"
+    },
+    {
+     "views": 7,
+     "age_days": 12.52,
+     "channel_id": "UCgcPupAaFb3EuryHwDRc5aA"
     }
    ],
-   "mentions": 5432,
-   "demand": [
-    37.5,
-    17.1875,
-    32.8125,
-    29.6875,
-    12.5,
-    28.125,
-    25.0,
-    35.9375,
-    37.5,
-    32.8125,
-    43.75,
-    43.75,
-    18.75,
-    7.8125,
-    40.625,
-    35.9375,
-    37.5,
-    43.75,
-    35.9375,
-    32.8125,
-    21.875,
-    26.5625,
-    25.0,
-    39.0625,
-    45.3125,
-    42.1875,
-    45.3125,
-    31.25,
-    50.0,
-    60.9375,
-    39.0625,
-    65.625,
-    39.0625,
-    21.875,
-    56.25,
-    31.25,
-    31.25,
-    62.5,
-    35.9375,
-    34.375,
-    54.6875,
-    53.125,
-    37.5,
-    34.375,
-    17.1875,
-    42.1875,
-    20.3125,
-    39.0625,
-    53.125,
-    39.0625,
-    29.6875,
-    39.0625,
-    26.5625,
-    34.375,
-    60.9375,
-    34.375,
-    51.5625,
-    37.5,
-    21.875,
-    43.75,
-    10.9375,
-    37.5,
-    42.1875,
-    54.6875,
-    60.9375,
-    40.625,
-    48.4375,
-    51.5625,
-    42.1875,
-    43.75,
-    73.4375,
-    40.625,
-    26.5625,
-    29.6875,
-    35.9375,
-    43.75,
-    14.0625,
-    39.0625,
-    32.8125,
-    20.3125,
-    26.5625,
-    37.5,
-    35.9375,
-    28.125,
-    39.0625,
-    50.0,
-    64.0625,
-    26.5625,
-    31.25,
-    62.5,
-    20.3125,
-    29.6875,
-    43.75,
-    56.25,
-    48.4375,
-    43.75,
-    43.75,
-    65.625,
-    89.0625,
-    59.375,
-    21.875,
-    56.25,
-    32.8125,
-    40.625,
-    23.4375,
-    62.5,
-    42.1875,
-    53.125,
-    79.6875,
-    32.8125,
-    18.75,
-    70.3125,
-    37.5,
-    29.6875,
-    57.8125,
-    28.125,
-    50.0,
-    89.0625,
-    34.375,
-    100.0
+   "category": "50000003 디지털가전",
+   "mentions": 1820,
+   "demand": [],
+   "demand_last_year": [],
+   "price": null,
+   "review_count": null,
+   "sellers": null,
+   "coupang_url": null,
+   "price_source": null
+  },
+  {
+   "key": "캡슐_커피_머신_소형",
+   "name": "캡슐 커피 머신 소형",
+   "keyword": "소형 캡슐 커피 머신 미니",
+   "price_band": "중가",
+   "videos": [
+    {
+     "views": 9,
+     "age_days": 13.71,
+     "channel_id": "UCecRENMn8uYqMNK0Q371RXQ"
+    },
+    {
+     "views": 11,
+     "age_days": 12.95,
+     "channel_id": "UCB3qCT8MKeUWxypISH5Jn-w"
+    },
+    {
+     "views": 13,
+     "age_days": 10.12,
+     "channel_id": "UClyXzB2lsNs9G3V2sbwZRMA"
+    },
+    {
+     "views": 8,
+     "age_days": 9.39,
+     "channel_id": "UCB3qCT8MKeUWxypISH5Jn-w"
+    },
+    {
+     "views": 3,
+     "age_days": 2.67,
+     "channel_id": "UC0_8223LmlWJMaL5mw5mB3Q"
+    }
    ],
-   "demand_last_year": [
-    56.91056,
-    53.65853,
-    47.15447,
-    59.34959,
-    32.52032,
-    56.09756,
-    46.34146,
-    34.14634,
-    43.90243,
-    30.8943,
-    51.21951,
-    29.26829,
-    34.14634,
-    19.51219,
-    47.15447,
-    34.14634,
-    52.03252,
-    51.21951,
-    63.41463,
-    51.21951,
-    37.39837,
-    42.27642,
-    31.70731,
-    49.59349,
-    67.47967,
-    47.15447,
-    39.02439,
-    34.14634,
-    39.02439,
-    51.21951,
-    56.09756,
-    52.03252,
-    37.39837,
-    49.59349,
-    46.34146,
-    49.59349,
-    38.21138,
-    43.90243,
-    39.83739,
-    48.78048,
-    47.15447,
-    49.59349,
-    32.52032,
-    64.22764,
-    52.84552,
-    58.53658,
-    46.34146,
-    30.8943,
-    39.02439,
-    27.64227,
-    51.21951,
-    37.39837,
-    39.83739,
-    34.14634,
-    59.34959,
-    19.51219,
-    44.71544,
-    55.28455,
-    49.59349,
-    41.46341,
-    39.83739,
-    44.71544,
-    43.08943,
-    25.20325,
-    41.46341,
-    59.34959,
-    51.21951,
-    43.08943,
-    40.6504,
-    34.95934,
-    44.71544,
-    80.4878,
-    62.60162,
-    30.0813,
-    49.59349,
-    29.26829,
-    28.45528,
-    37.39837,
-    59.34959,
-    56.09756,
-    34.14634,
-    48.78048,
-    46.34146,
-    26.82926,
-    37.39837,
-    36.58536,
-    28.45528,
-    26.82926,
-    36.58536,
-    52.03252,
-    43.08943,
-    44.71544,
-    20.3252,
-    51.21951,
-    49.59349,
-    32.52032,
-    33.33333,
-    46.34146,
-    41.46341,
-    39.02439,
-    51.21951,
-    61.78861,
-    41.46341,
-    34.95934,
-    41.46341,
-    30.8943,
-    63.41463,
-    40.6504,
-    30.0813,
-    45.52845,
-    17.88617,
-    34.95934,
-    33.33333,
-    100.0,
-    41.46341,
-    40.6504,
-    42.27642,
-    26.82926,
-    26.82926,
-    12.19512,
-    34.14634
+   "category": "50000003 디지털가전",
+   "mentions": 113,
+   "demand": [],
+   "demand_last_year": [],
+   "price": null,
+   "review_count": null,
+   "sellers": null,
+   "coupang_url": null,
+   "price_source": null
+  },
+  {
+   "key": "차량용_공기청정기_컵홀더",
+   "name": "차량용 공기청정기",
+   "keyword": "차량용 공기청정기 컵홀더",
+   "price_band": "중가",
+   "videos": [
+    {
+     "views": 388,
+     "age_days": 8.75,
+     "channel_id": "UC6HN_bf9MfcA2pL3Xt_t7_w"
+    }
    ],
+   "category": "50000003 디지털가전",
+   "mentions": 325,
+   "demand": [],
+   "demand_last_year": [],
+   "price": null,
+   "review_count": null,
+   "sellers": null,
+   "coupang_url": null,
+   "price_source": null
+  },
+  {
+   "key": "무선_물걸레_청소기",
+   "name": "무선 물걸레 청소기",
+   "keyword": "무선 물걸레 청소기 스팀",
+   "price_band": "고가",
+   "videos": [
+    {
+     "views": 1642114,
+     "age_days": 10.62,
+     "channel_id": "UCyRoynZRY026vew0Ix41bhw"
+    },
+    {
+     "views": 72436,
+     "age_days": 13.55,
+     "channel_id": "UCazHEBmumgKYsCWQ31Ja7TQ"
+    },
+    {
+     "views": 103047,
+     "age_days": 11.58,
+     "channel_id": "UChXOKeqCxhM3AjyNb7rAAOw"
+    },
+    {
+     "views": 231,
+     "age_days": 7.9,
+     "channel_id": "UCExwcYfJGrSACwFdzk2lvJQ"
+    },
+    {
+     "views": 52,
+     "age_days": 12.29,
+     "channel_id": "UC7p8tD0lXxWhg70xTWP_5lA"
+    },
+    {
+     "views": 53,
+     "age_days": 13.87,
+     "channel_id": "UC0B9H2Wywog3jXfbKCFa9lw"
+    },
+    {
+     "views": 17,
+     "age_days": 3.92,
+     "channel_id": "UC8QDYwwffXfUxHdLux9FUTQ"
+    },
+    {
+     "views": 9,
+     "age_days": 13.01,
+     "channel_id": "UCPpBtq02eW_ECIPyW3dRWtw"
+    },
+    {
+     "views": 18,
+     "age_days": 11.48,
+     "channel_id": "UCocNF44C1yeLS8UOG6GyGyw"
+    },
+    {
+     "views": 28,
+     "age_days": 6.77,
+     "channel_id": "UCtlcxp048htlSvochRx0dAg"
+    },
+    {
+     "views": 10,
+     "age_days": 9.4,
+     "channel_id": "UCJg_nqYdbNQg1QhE3AfATpw"
+    },
+    {
+     "views": 16,
+     "age_days": 11.57,
+     "channel_id": "UCPpBtq02eW_ECIPyW3dRWtw"
+    },
+    {
+     "views": 7,
+     "age_days": 13.94,
+     "channel_id": "UC8QDYwwffXfUxHdLux9FUTQ"
+    },
+    {
+     "views": 8,
+     "age_days": 9.17,
+     "channel_id": "UCvzYqkTBH70dIl32WxhxB0w"
+    }
+   ],
+   "category": "50000003 디지털가전",
+   "mentions": 1437,
+   "demand": [],
+   "demand_last_year": [],
+   "price": null,
+   "review_count": null,
+   "sellers": null,
+   "coupang_url": null,
+   "price_source": null
+  },
+  {
+   "key": "휴대용_선풍기_넥밴드",
+   "name": "휴대용 선풍기 넥밴드",
+   "keyword": "넥밴드 선풍기 휴대용",
+   "price_band": "저가",
+   "videos": [
+    {
+     "views": 975,
+     "age_days": 2.62,
+     "channel_id": "UCkpaYv7u67q6Izj_7r5uglw"
+    },
+    {
+     "views": 1160,
+     "age_days": 4.85,
+     "channel_id": "UCURxJk7JWWa2V9AxjuIsYKg"
+    },
+    {
+     "views": 179,
+     "age_days": 1.94,
+     "channel_id": "UCmdAVspyQp3UgTi0GkMrs-Q"
+    },
+    {
+     "views": 49,
+     "age_days": 7.63,
+     "channel_id": "UCTVs_3XeEh8cL9tWGpCbp8Q"
+    },
+    {
+     "views": 15,
+     "age_days": 12.97,
+     "channel_id": "UCsr2KHCynvLjjIuRFgSaONg"
+    },
+    {
+     "views": 9,
+     "age_days": 2.63,
+     "channel_id": "UCqQgHmqGHgTx2MUljTOQ-Aw"
+    },
+    {
+     "views": 4,
+     "age_days": 13.42,
+     "channel_id": "UCr2Umage_i-aXGBXvh1dovw"
+    },
+    {
+     "views": 5,
+     "age_days": 8.71,
+     "channel_id": "UCDIuE6Q2ztIfQzN06CU3_8g"
+    },
+    {
+     "views": 12,
+     "age_days": 3.93,
+     "channel_id": "UCG5m78YkMG-jUs6CRUhaa7g"
+    },
+    {
+     "views": 4,
+     "age_days": 7.23,
+     "channel_id": "UCSSoaqIV_PW98b_jB8HN_5Q"
+    },
+    {
+     "views": 4,
+     "age_days": 2.41,
+     "channel_id": "UCjHAujJ0XLOwHJbEXly5SGA"
+    },
+    {
+     "views": 2,
+     "age_days": 6.01,
+     "channel_id": "UCV3xG8BDi96GCsq-z5vhkiw"
+    },
+    {
+     "views": 2,
+     "age_days": 10.8,
+     "channel_id": "UCDvj56BRm1rmztnmDf17jag"
+    },
+    {
+     "views": 4,
+     "age_days": 10.54,
+     "channel_id": "UCs7BNS0OxZazi8zhkcObc8w"
+    },
+    {
+     "views": 17,
+     "age_days": 1.04,
+     "channel_id": "UC-9s8vy2U4m9odnXFU1yMBA"
+    },
+    {
+     "views": 2,
+     "age_days": 0.04,
+     "channel_id": "UCQ3IKL42hY0FEZo9rebGuuA"
+    },
+    {
+     "views": 2,
+     "age_days": 4.92,
+     "channel_id": "UCpuCs5EhGyLNb4Ka9kdJklA"
+    },
+    {
+     "views": 2,
+     "age_days": 8.11,
+     "channel_id": "UC93wWoKPdmwEHuq1NObKg-w"
+    },
+    {
+     "views": 2,
+     "age_days": 9.66,
+     "channel_id": "UCDP9a3qGCMiFNXrUlRPTKWQ"
+    },
+    {
+     "views": 1,
+     "age_days": 7.74,
+     "channel_id": "UCHPeKoEp5Xs9LZCYJsSXUow"
+    },
+    {
+     "views": 1,
+     "age_days": 10.78,
+     "channel_id": "UCDvj56BRm1rmztnmDf17jag"
+    },
+    {
+     "views": 1,
+     "age_days": 8.01,
+     "channel_id": "UCZtNTtDT1UhNLJaLjKWOPgQ"
+    },
+    {
+     "views": 1,
+     "age_days": 2.84,
+     "channel_id": "UC5dLCzmSJbxL8Ds6pRVpqvg"
+    },
+    {
+     "views": 2,
+     "age_days": 3.38,
+     "channel_id": "UCCg8H7ZGQD32ZdLHP6Io9YA"
+    },
+    {
+     "views": 1,
+     "age_days": 13.34,
+     "channel_id": "UCc5daqAUWBRN1bKC5EvSing"
+    },
+    {
+     "views": 3,
+     "age_days": 9.88,
+     "channel_id": "UCr4vIkLSwEtJuiG9GmhBAfA"
+    },
+    {
+     "views": 1,
+     "age_days": 4.46,
+     "channel_id": "UConB5Mos2R_OoXqX7VqkZDA"
+    },
+    {
+     "views": 1,
+     "age_days": 11.88,
+     "channel_id": "UCqnWgO2oW-3SZjBo0DS3dBA"
+    },
+    {
+     "views": 1,
+     "age_days": 0.84,
+     "channel_id": "UCC4ofixfQnUbyWg-zeWY0bA"
+    },
+    {
+     "views": 1,
+     "age_days": 7.88,
+     "channel_id": "UC1Cf04LlDMgdDzgzwhSjLxA"
+    },
+    {
+     "views": 0,
+     "age_days": 6.48,
+     "channel_id": "UC4U9CkX-qUMuFN8ISblUCbg"
+    },
+    {
+     "views": 1,
+     "age_days": 0.41,
+     "channel_id": "UCc5daqAUWBRN1bKC5EvSing"
+    },
+    {
+     "views": 1,
+     "age_days": 10.01,
+     "channel_id": "UCBfhuPk2m-nZ4qdQIOkKAlw"
+    },
+    {
+     "views": 0,
+     "age_days": 7.52,
+     "channel_id": "UCMz-0Y1RCbuOFtde29IwZ5g"
+    },
+    {
+     "views": 0,
+     "age_days": 13.43,
+     "channel_id": "UC30J967OjR-1W5stHB9zLjQ"
+    },
+    {
+     "views": 0,
+     "age_days": 12.93,
+     "channel_id": "UCLqXAhyjuBTVf_KgsBqkg7g"
+    },
+    {
+     "views": 0,
+     "age_days": 7.8,
+     "channel_id": "UCDvj56BRm1rmztnmDf17jag"
+    },
+    {
+     "views": 1,
+     "age_days": 7.78,
+     "channel_id": "UCDvj56BRm1rmztnmDf17jag"
+    },
+    {
+     "views": 0,
+     "age_days": 6.56,
+     "channel_id": "UCG047rC4nZxnrQaY108VG-g"
+    },
+    {
+     "views": 1,
+     "age_days": 2.8,
+     "channel_id": "UC4U9CkX-qUMuFN8ISblUCbg"
+    }
+   ],
+   "category": "50000003 디지털가전",
+   "mentions": 8281,
+   "demand": [],
+   "demand_last_year": [],
    "price": null,
    "review_count": null,
    "sellers": null,
