@@ -23,16 +23,29 @@ jobs:
           else
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
+      # 편성 가드: 주 4편(월·화·목·토)만 발행한다. 요일 상한이 곧 양산형 콘텐츠 정책 대응이다.
+      # 수동 실행(workflow_dispatch)은 편성과 무관하게 통과시켜 테스트를 막지 않는다.
       - uses: actions/setup-python@v5
         if: steps.dup.outputs.skip != 'true'
         with: { python-version: "3.12" }
-      - name: 의존성 (한글 폰트·이모지·ffmpeg 포함)
+      - name: 편성 확인 (오늘 발행일인가)
+        id: plan
         if: steps.dup.outputs.skip != 'true'
+        run: |
+          PLAN=$(TZ=Asia/Seoul python schedule.py "$(TZ=Asia/Seoul date +%F)")
+          echo "$PLAN"
+          if echo "$PLAN" | grep -q "발행 없음" && [ "${{ github.event_name }}" = "schedule" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: 의존성 (한글 폰트·이모지·ffmpeg 포함)
+        if: steps.dup.outputs.skip != 'true' && steps.plan.outputs.skip != 'true'
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-cjk fonts-noto-color-emoji
           pip install requests pillow edge-tts
       - name: 쇼츠 제작
-        if: steps.dup.outputs.skip != 'true'
+        if: steps.dup.outputs.skip != 'true' && steps.plan.outputs.skip != 'true'
         env:
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
           LLM_MODEL: ${{ secrets.LLM_MODEL }}
@@ -40,14 +53,14 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python make_short.py
       - name: 성공 마커 커밋 (중복 가드용)
-        if: steps.dup.outputs.skip != 'true'
+        if: steps.dup.outputs.skip != 'true' && steps.plan.outputs.skip != 'true'
         run: |
           TZ=Asia/Seoul date +%F > data/last_short.txt
           git config user.name casto-bot && git config user.email casto@solvup.local
           git add data/last_short.txt && git commit -m "marker: $(TZ=Asia/Seoul date +%F) 쇼츠 생성" || true
           git pull --rebase --autostash origin main && git push origin main || true
       - name: 결과 보존 (텔레그램 실패 대비 7일)
-        if: steps.dup.outputs.skip != 'true'
+        if: steps.dup.outputs.skip != 'true' && steps.plan.outputs.skip != 'true'
         uses: actions/upload-artifact@v4
         with:
           name: short-${{ github.run_number }}
