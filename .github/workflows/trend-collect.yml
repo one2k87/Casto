@@ -1,0 +1,61 @@
+name: 제품 트렌드 수집
+# 매일 06:10 KST 스냅샷 수집 → 일요일엔 주간 랭킹(재인/구매가치)까지 집계.
+# 리뷰 증가·가격 변동은 어제 스냅샷과 비교해야 나오므로 **매일 쌓는 것이 전제**다.
+on:
+  schedule:
+    - cron: "10 21 * * *"
+  workflow_dispatch:
+    inputs:
+      board_only:
+        description: "수집 없이 집계만 다시 돌리기"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: trend-collect
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install requests
+
+      - name: 점수 모델 회귀 테스트
+        run: python -m unittest discover -s tests
+
+      - name: 일별 스냅샷 수집
+        if: ${{ inputs.board_only != true }}
+        env:
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          LLM_MODEL: ${{ secrets.LLM_MODEL }}
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+          COUPANG_ACCESS_KEY: ${{ secrets.COUPANG_ACCESS_KEY }}
+          COUPANG_SECRET_KEY: ${{ secrets.COUPANG_SECRET_KEY }}
+        run: python trend_products.py collect
+
+      # 일요일(UTC 일 21:10 = KST 월 06:10)에 주간 랭킹 집계 → 월요일 브리핑 소재가 된다
+      - name: 주간 랭킹 집계
+        if: ${{ github.event_name == 'workflow_dispatch' || format('{0}', github.event.schedule) != '' }}
+        run: |
+          DOW=$(date -u +%u)   # 7=일요일(UTC)
+          if [ "$DOW" = "7" ] || [ "${{ inputs.board_only }}" = "true" ]; then
+            python trend_products.py board
+          else
+            echo "오늘은 집계일이 아님(UTC 일요일에만) — 스냅샷만 저장"
+          fi
+
+      - name: 결과 커밋
+        run: |
+          git config user.name casto-bot && git config user.email casto@solvup.local
+          git add data/trends_daily data/trend_board.json data/covered.json 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "trends: $(date +%F) 제품 스냅샷"
+          git pull --rebase --autostash origin main && git push origin main
