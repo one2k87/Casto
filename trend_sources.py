@@ -41,8 +41,14 @@ YT_VIDEOS = "https://www.googleapis.com/youtube/v3/videos"
 # HUB 경로는 첫 호출 때 실측으로 확정할 것(문서에 경로 표기가 없어 레거시와 동일 경로로 가정).
 NAVER_LEGACY_BASE = "https://openapi.naver.com"
 NAVER_HUB_BASE = os.getenv("NAVER_HUB_BASE", "https://naverapihub.apigw.ntruss.com")
-DATALAB_PATH = "/v1/datalab/shopping/keywords"
-SEARCH_PATH = "/v1/search/{kind}.json"
+# ⚠️ HUB는 도메인·헤더만 바뀐 게 아니라 **경로 구조가 뒤집혔다**(2026-09-07 공식 문서 실측).
+#   블로그 검색  레거시 /v1/search/blog.json   → HUB /search/v1/blog        (확장자 없음, format=json 파라미터)
+#   쇼핑인사이트 레거시 /v1/datalab/shopping/keywords → HUB /shopping/v1/category/keywords
+# 처음엔 "레거시와 같은 경로"로 가정했다가 네이버 두 축이 전멸했다(run #4에서 12/12 결측).
+NAVER_PATHS = {
+    "hub": {"search": "/search/v1/{kind}", "datalab": "/shopping/v1/category/keywords"},
+    "legacy": {"search": "/v1/search/{kind}.json", "datalab": "/v1/datalab/shopping/keywords"},
+}
 COUPANG_HOST = "https://api-gateway.coupang.com"
 
 
@@ -107,7 +113,7 @@ def youtube_videos(keyword: str, days: int = 14, max_items: int = 50,
 
 
 # ------------------------------------------------------------------ 네이버 공통
-def _naver_auth() -> tuple[str, dict[str, str]] | None:
+def _naver_auth() -> tuple[str, dict[str, str], str] | None:
     """(베이스 URL, 인증 헤더). **HUB 키가 있으면 HUB 우선**, 없으면 레거시로 폴백한다.
 
     이관 기간 동안 둘 다 살아 있으므로 코드가 양쪽을 알고 있어야 키 교체가 무중단으로 된다.
@@ -116,12 +122,18 @@ def _naver_auth() -> tuple[str, dict[str, str]] | None:
     kid, key = os.getenv("NAVER_HUB_KEY_ID", ""), os.getenv("NAVER_HUB_KEY", "")
     if kid and key:
         return NAVER_HUB_BASE, {"X-NCP-APIGW-API-KEY-ID": kid, "X-NCP-APIGW-API-KEY": key,
-                                "Content-Type": "application/json"}
+                                "Content-Type": "application/json"}, "hub"
     cid, sec = os.getenv("NAVER_CLIENT_ID", ""), os.getenv("NAVER_CLIENT_SECRET", "")
     if cid and sec:
         return NAVER_LEGACY_BASE, {"X-Naver-Client-Id": cid, "X-Naver-Client-Secret": sec,
-                                   "Content-Type": "application/json"}
+                                   "Content-Type": "application/json"}, "legacy"
     return None
+
+
+def naver_url(mode: str, api: str, kind: str = "") -> str:
+    """모드별 엔드포인트 URL. HUB와 레거시는 **경로 구조가 다르므로** 한곳에서 관리한다."""
+    base = NAVER_HUB_BASE if mode == "hub" else NAVER_LEGACY_BASE
+    return base + NAVER_PATHS[mode][api].format(kind=kind)
 
 
 def naver_mode() -> str:
@@ -145,7 +157,7 @@ def naver_demand(keyword: str, category: str = "50000008",
     auth = _naver_auth()
     if not auth:
         return None
-    base, h = auth
+    base, h, mode = auth
     end = dt.date.today() - (dt.timedelta(days=365) if last_year else dt.timedelta(0))
     start = end - dt.timedelta(days=days)
     body = {
@@ -154,7 +166,7 @@ def naver_demand(keyword: str, category: str = "50000008",
         "keyword": [{"name": keyword, "param": [keyword]}],
     }
     try:
-        r = requests.post(base + DATALAB_PATH, json=body, headers=h, timeout=30)
+        r = requests.post(naver_url(mode, "datalab"), json=body, headers=h, timeout=30)
         if r.status_code != 200:
             print(f"[src] datalab HTTP {r.status_code}: {r.text[:160]}")
             return None
@@ -189,9 +201,12 @@ def naver_mentions(keyword: str, kind: str = "blog") -> int | None:
     auth = _naver_auth()
     if not auth:
         return None
-    base, h = auth
-    data = _get(base + SEARCH_PATH.format(kind=kind), headers=h,
-                params={"query": keyword, "display": 1, "sort": "date"})
+    base, h, mode = auth
+    # HUB 검색은 경로에 .json이 없고 format 파라미터로 응답 형식을 지정한다
+    params = {"query": keyword, "display": 1, "sort": "date"}
+    if mode == "hub":
+        params["format"] = "json"
+    data = _get(naver_url(mode, "search", kind), headers=h, params=params)
     if data is None:
         return None
     try:
