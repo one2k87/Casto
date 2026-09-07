@@ -93,11 +93,11 @@ def discover(c: dict, per_query: int = 25) -> list[str]:
     "name": "제품 통칭 — **영상에서 사람들이 부르는 이름 그대로**(정식 상품명 아님, 12자 이내)",
     "search_keyword": "네이버·쿠팡에서 검색할 대표 키워드",
     "price_band": "저가|중가|고가"}}
-  ... 최대 15개
+  ... 최대 12개
 ]}}
 규칙: 특정 브랜드·모델명이 아니라 **품목**으로. 채널명·유행어·비제품 단어는 제외.""")
     out = []
-    for p in data.get("products", [])[:15]:
+    for p in data.get("products", [])[:12]:
         if p.get("key") and p.get("name"):
             out.append(p)
     print(f"[discover] 후보 {len(out)}개")
