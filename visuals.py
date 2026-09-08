@@ -17,7 +17,7 @@ from __future__ import annotations
 import os
 import subprocess
 
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFilter
 
 ASSET_DIR = "assets/koki"
 W, H = 1080, 1920
@@ -76,6 +76,110 @@ def compose(character: str = "idle", bg_name: str = "bg") -> Image.Image | None:
         ch = _fit(Image.open(cp).convert("RGBA"), CHAR_BOX)
         bg.paste(ch, (CHAR_CENTER[0] - ch.width // 2, CHAR_CENTER[1] - ch.height // 2), ch)
     return bg
+
+
+# ------------------------------------------------------------------ 실제 상품 사진
+"""상품 사진 슬롯 — **"어떤 물건인지 모양이 제대로 보여야 한다"**(2026-09-08 요구).
+
+클레이 콕이는 채널의 얼굴이지, 상품 설명이 아니다. 시청자가 "어 이거 내가 봤던 거잖아"로
+재인하려면(전략 5-4-10) 피드에서 본 것과 **같은 모양**이 화면에 있어야 한다. 그래서 상품이
+확정된 순간부터는 실사진이 주인공이고 콕이는 옆으로 비켜선다.
+
+사진 출처는 catalog.py가 통제한다. 여기서는 "있으면 예쁘게 얹는다"만 한다.
+"""
+PRODUCT_BOX = (int(W * 0.62), int(H * 0.24))   # 사진 카드 안쪽 최대 크기
+PRODUCT_CENTER = (W // 2, int(H * 0.33))
+
+
+def knockout_white(img: Image.Image, thresh: int = 240) -> Image.Image:
+    """쇼핑몰 상품컷의 흰 배경을 투명으로 바꾼다(파스텔 배경 위에 흰 사각형이 뜨지 않게).
+
+    가장자리에서 흘러들어오는 flood fill이라 **제품 안쪽의 흰색(가전 본체 등)은 보존**된다.
+    단순 임계값 방식은 흰 냉장고를 지워버린다.
+    """
+    im = img.convert("RGBA")
+    px = im.load()
+    w, h = im.size
+    seen = bytearray(w * h)
+    stack = [(x, y) for x in range(w) for y in (0, h - 1)] + \
+            [(x, y) for y in range(h) for x in (0, w - 1)]
+    while stack:
+        x, y = stack.pop()
+        if not (0 <= x < w and 0 <= y < h) or seen[y * w + x]:
+            continue
+        r, g, b, a = px[x, y]
+        if a == 0 or min(r, g, b) < thresh:
+            continue
+        seen[y * w + x] = 1
+        px[x, y] = (r, g, b, 0)
+        stack += [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]
+    return im
+
+
+def trim(im: Image.Image, margin: int = 8) -> Image.Image:
+    """투명 여백을 잘라낸다 — **쇼핑몰 상품컷은 여백이 절반**이라 그대로 넣으면 제품이 작게 보인다.
+
+    "모양이 제대로 보여야 한다"는 요구의 실제 해결점이 여기다. 잘라내야 카드를 제품이 꽉 채운다.
+    """
+    bb = im.getbbox() if im.mode == "RGBA" else None
+    if not bb:
+        return im
+    x0, y0, x1, y1 = bb
+    x0, y0 = max(x0 - margin, 0), max(y0 - margin, 0)
+    x1, y1 = min(x1 + margin, im.width), min(y1 + margin, im.height)
+    # 잘린 결과가 원본의 4% 미만이면 누끼가 잘못된 것 → 원본을 쓴다(제품을 지워버리는 사고 방지)
+    if (x1 - x0) * (y1 - y0) < im.width * im.height * 0.04:
+        return im
+    return im.crop((x0, y0, x1, y1))
+
+
+def product_shot(path: str, box: tuple[int, int] = PRODUCT_BOX,
+                 cut_white: bool = True) -> Image.Image | None:
+    """상품 사진을 카드에 넣을 크기로 준비한다(누끼 → 여백 제거 → 리사이즈). 실패하면 None."""
+    try:
+        im = Image.open(path)
+    except Exception as e:                                    # noqa: BLE001
+        print("[visuals] 상품 사진 열기 실패(무시):", e)
+        return None
+    im = im.convert("RGBA")
+    if im.width * im.height > 4_000_000:      # 큰 원본은 줄여서 flood fill 비용을 낮춘다
+        im.thumbnail((1600, 1600), Image.LANCZOS)
+    if cut_white:
+        im = trim(knockout_white(im))
+    im.thumbnail(box, Image.LANCZOS)
+    return im
+
+
+def paste_product(img: Image.Image, path: str, label: str = "",
+                  center: tuple[int, int] = PRODUCT_CENTER,
+                  box: tuple[int, int] = PRODUCT_BOX,
+                  accent: tuple[int, int, int] = (47, 93, 78),
+                  font=None) -> tuple[int, int, int, int] | None:
+    """파스텔 카드 위에 상품 사진을 얹는다. 반환값은 카드 bbox(호출부가 레이아웃 계산에 쓴다).
+
+    흰 라운드 카드 + 부드러운 그림자 = 제품컷을 배경과 분리해 '진짜 물건'으로 보이게 한다.
+    label(브랜드+모델)은 카드 아래에 작게 — 사진과 이름이 붙어 있어야 정보가 전달된다.
+    """
+    shot = product_shot(path, box)
+    if shot is None:
+        return None
+    pad = 46
+    cw, ch = shot.width + pad * 2, shot.height + pad * 2
+    x0, y0 = center[0] - cw // 2, center[1] - ch // 2
+    bbox = (x0, y0, x0 + cw, y0 + ch)
+
+    shadow = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    ImageDraw.Draw(shadow).rounded_rectangle(
+        (x0 + 6, y0 + 14, x0 + cw + 6, y0 + ch + 18), radius=44, fill=(60, 70, 64, 70))
+    shadow = shadow.filter(ImageFilter.GaussianBlur(18))
+    img.paste(Image.alpha_composite(img.convert("RGBA"), shadow).convert("RGB"), (0, 0))
+
+    d = ImageDraw.Draw(img)
+    d.rounded_rectangle(bbox, radius=44, fill=(255, 255, 255), outline=accent, width=5)
+    img.paste(shot, (center[0] - shot.width // 2, center[1] - shot.height // 2), shot)
+    if label and font is not None:
+        d.text((center[0], y0 + ch + 44), label[:24], font=font, fill=accent, anchor="mm")
+    return bbox
 
 
 # ------------------------------------------------------------------ 모션

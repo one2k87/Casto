@@ -22,6 +22,8 @@ import json, os, re, subprocess, asyncio, html
 import requests
 from PIL import Image, ImageDraw, ImageFont
 from common import cfg, llm_json, telegram_video, telegram_msg
+import catalog
+import visuals
 
 W, H = 1080, 1920
 FONTS = ["/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
@@ -39,16 +41,58 @@ def font(size, bold=True):
 def latest_post(site):
     r = requests.get(f"{site}/wp-json/wp/v2/posts?per_page=1&_fields=title,link,content,excerpt", timeout=30)
     p = r.json()[0]
-    text = re.sub(r"<[^>]+>", " ", p["content"]["rendered"])
+    raw = p["content"]["rendered"]
+    block = catalog.parse_kokpick_block(raw)   # 태그 제거 전에 뽑아야 한다(주석도 태그로 지워진다)
+    text = re.sub(r"<[^>]+>", " ", raw)
     text = html.unescape(re.sub(r"\s+", " ", text))[:4000]
-    return {"title": html.unescape(p["title"]["rendered"]), "link": p["link"], "text": text}
+    return {"title": html.unescape(p["title"]["rendered"]), "link": p["link"], "text": text,
+            "block": block}
+
+
+# ---------------------------------------------------------------- 상품 확정
+def resolve_product(post, name_hint=""):
+    """이 영상이 다루는 **정확한 상품**을 확정한다 — 실사진·브랜드 노출의 전제 조건.
+
+    ① 픽담 글의 KOKPICK 블록(브리프 6-C)이 있으면 그것이 정답이다. 픽담이 자체 파트너스
+       계정으로 확정한 브랜드·모델·공식 이미지·자체 링크가 그대로 들어온다(완전 자동).
+    ② 없으면 로컬 카탈로그에서 이름으로 찾는다(수동 등록분).
+    ③ 둘 다 없으면 None → 카테고리명 + 클레이 아트로 나간다. **추정한 브랜드명은 쓰지 않는다.**
+    """
+    cat = catalog.load()
+    block, slug = post.get("block"), None
+    if block:
+        slug = catalog.adopt_block(cat, block, updated=str(__import__("datetime").date.today()))
+        url = catalog.block_image_url(block)
+        if slug and url and not catalog.image_path(cat["products"][slug]):
+            local = catalog.cache_image(url, slug)
+            if local:
+                cat["products"][slug]["image"] = local
+                cat["products"][slug]["image_source"] = "pickdam"
+        if slug:
+            catalog.save(cat)
+    entry = (dict(cat["products"][slug], slug=slug) if slug
+             else catalog.find(cat, name=name_hint))
+    mode = catalog.render_mode(entry)
+    print(f"[casto] 상품 확정 — {catalog.display_name(entry, name_hint) or '(미확정)'} [{mode}]")
+    if mode != "exact":
+        print("[casto]   실사진 없음 → 클레이 폴백. 채울 목록: python catalog.py")
+    return entry, mode
 
 
 # ---------------------------------------------------------------- 대본(내용만)
-def build_script(post, trends, c):
-    """LLM은 제품명·콕 근거 3줄·판정만 만든다. 판정어 문구와 씬 구조는 코드가 붙인다."""
+def build_script(post, trends, c, entry=None):
+    """LLM은 제품명·콕 근거 3줄·판정만 만든다. 판정어 문구와 씬 구조는 코드가 붙인다.
+
+    상품이 이미 확정된 경우(entry) **제품명은 LLM이 만들지 않는다** — 브랜드·모델을 지어내는
+    순간 오정보가 되기 때문이다. 그때 LLM의 역할은 근거 3줄과 판정뿐이다.
+    """
     tr = json.dumps({k: trends.get(k) for k in ("hooks", "formats", "caption_style", "avoid")}, ensure_ascii=False)
-    return llm_json(f"""당신은 유튜브 쇼츠 채널 「콕픽」의 작가입니다. 니치: {c['niche']}.
+    fixed = ""
+    if entry:
+        fixed = (f'\n[확정된 상품] {catalog.display_name(entry)} (카테고리: {entry.get("category","")})\n'
+                 '→ "product" 값은 이 상품을 가리키는 8자 이내 짧은 이름으로만 쓰고, '
+                 '브랜드명·모델명을 새로 지어내지 마세요.\n')
+    return llm_json(f"""{fixed}당신은 유튜브 쇼츠 채널 「콕픽」의 작가입니다. 니치: {c['niche']}.
 채널 포맷은 「콕 열리는 상자」 — 마스코트 '콕이'(택배상자)가 **구매 근거 '콕' 3개를 통과해야만 열린다**.
 [이번 주 트렌드 지침(매주 자동 갱신됨)] {tr}
 [원본 글] 제목: {post['title']}
@@ -155,8 +199,13 @@ def kok_box(d, cx, cy, w, squish=0.0, open_lid=False):
         d.ellipse([bx - 24, cy - 10, bx + 24, cy + 38], fill=(255, 248, 236), outline=edge, width=4)
 
 
-def scene_card(sc, i, total, c):
-    """콕픽 파스텔 카드 — 크림→민트 그라데이션 + 콕이 + 큰 자막 + 콕 게이지."""
+def scene_card(sc, i, total, c, shot=None, label=""):
+    """콕픽 파스텔 카드 — 크림→민트 그라데이션 + 콕이 + 큰 자막 + 콕 게이지.
+
+    `shot`(실제 상품 사진 경로)이 있으면 **상품이 주인공**이 된다 — 사진 카드가 화면 중앙을
+    차지하고 콕이는 왼쪽 아래로 작게 비켜선다. 시청자가 피드에서 본 그 모양을 그대로 봐야
+    "어 이거 봤던 거잖아"가 일어나기 때문이다(전략 5-4-10). 사진이 없으면 기존 레이아웃 그대로.
+    """
     b = c["brand"]
     cream, mint, sage = tuple(b["cream"]), tuple(b["mint"]), tuple(b["sage"])
     img = Image.new("RGB", (W, H))
@@ -169,11 +218,26 @@ def scene_card(sc, i, total, c):
     kind = sc["kind"]
     squish = 0.85 if kind == "kok" else (0.25 if kind == "rule" else 0.0)
     opened = kind == "verdict" and sc["verdict"]["key"] in ("오늘의 콕", "조건콕")
-    kok_box(d, W // 2, 640, 420, squish=squish, open_lid=opened)
-    if kind == "kok":  # 콕 타격
-        kok_stamp(d, W // 2 + 268, 452)
-    if kind == "verdict":
-        verdict_badge(d, W // 2, 316, sc["verdict"])
+
+    placed = None
+    if shot:
+        # 표지 씬은 자막이 이미 제품명을 크게 말하므로 카드 라벨을 생략(중복 방지),
+        # 나머지 씬은 브랜드·모델을 화면에 계속 남겨 정보가 새지 않게 한다.
+        placed = visuals.paste_product(img, shot, label="" if kind == "stamp" else label,
+                                       accent=sage, font=font(44, bold=False))
+        d = ImageDraw.Draw(img)
+    if placed:
+        kok_box(d, 186, 1452, 212, squish=squish, open_lid=opened)   # 콕이는 조연으로
+        if kind == "kok":
+            kok_stamp(d, W - 176, 300)
+        if kind == "verdict":
+            verdict_badge(d, W - 176, 300, sc["verdict"])
+    else:
+        kok_box(d, W // 2, 640, 420, squish=squish, open_lid=opened)
+        if kind == "kok":  # 콕 타격
+            kok_stamp(d, W // 2 + 268, 452)
+        if kind == "verdict":
+            verdict_badge(d, W // 2, 316, sc["verdict"])
 
     f = font(96 if kind in ("stamp", "verdict") else 84)
     lines = wrap(d, sc["caption"], f, W - 170)[:4]
@@ -252,15 +316,26 @@ def dur(path):
 
 
 # ---------------------------------------------------------------- 캡션(설명란)
-def build_caption(s, v, post, c, total):
+def build_caption(s, v, post, c, total, entry=None):
+    """설명란 — **정확한 상품명이 검색을 만든다**(전략: 제목=검색 / 본문=구독).
+
+    쿠팡 링크는 픽담이 만든 **우리 파트너스 링크**만 넣는다. 발굴 과정에서 본 남의 링크는
+    절대 여기 오지 않는다(catalog.put이 걸러낸다).
+    """
     dis = c["disclosure"]
     tags = list(dict.fromkeys(["#오늘의콕", "#콕픽"] + list(s.get("hashtags", []))))[:8]
-    head = f"{v['caption']} {s['product']}"
-    return "\n".join([
+    name = catalog.display_name(entry, s["product"])
+    head = f"{v['caption']} {name}"
+    buy = (entry or {}).get("coupang_url", "")
+    lines = [
         f"📦 {head} — {s['title']}",
         "",
         f"콕 3번 통과하면 열립니다. 오늘은 {v['key']}!",
         f"👉 자세한 비교는 픽담: {post['link']}",
+    ]
+    if buy:
+        lines.append(f"🛒 {name}: {buy}")
+    return "\n".join(lines + [
         "",
         " ".join(tags),
         "",
@@ -277,7 +352,17 @@ def main():
     c["_trends_updated"] = trends.get("updated", "-")
     post = latest_post(c["source_site"])
     print("[casto] 원본:", post["title"])
-    s = build_script(post, trends, c)
+    entry, mode = resolve_product(post, name_hint=post["title"])
+    s = build_script(post, trends, c, entry)
+    if entry and mode == "generic":
+        entry = None                      # 확정 못 한 상품은 브랜드명을 쓰지 않는다
+    if entry is None:                     # 대본이 고른 제품명으로 한 번 더 카탈로그를 본다
+        entry = catalog.find(catalog.load(), name=s.get("product", ""))
+        mode = catalog.render_mode(entry)
+    shot = catalog.image_path(entry) if mode == "exact" else None
+    label = catalog.display_name(entry) if mode in ("exact", "named") else ""
+    if label:
+        s["product"] = label if len(label) <= 14 else s.get("product", label)
     scenes, v = build_scenes(s, c)
     print(f"[casto] 콕픽 규격 — 제품 {s['product']} · 판정 {v['caption']}")
     sfx = make_kok_sfx(c["video"]["sfx"]["kok"])
@@ -298,7 +383,7 @@ def main():
                             "-c:v", "libx264", "-c:a", "aac", "-shortest", seg],
                            check=True, capture_output=True)
         else:
-            img = scene_card(sc, i, len(scenes), c)
+            img = scene_card(sc, i, len(scenes), c, shot=shot, label=label)
             subprocess.run(["ffmpeg", "-y", "-loop", "1", "-i", img, "-i", mp3,
                             "-t", f"{d:.2f}", "-r", "30", "-pix_fmt", "yuv420p",
                             "-c:v", "libx264", "-c:a", "aac", "-shortest", seg],
@@ -311,7 +396,7 @@ def main():
     subprocess.run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", "out/list.txt",
                     "-c", "copy", "out/short.mp4"], check=True, capture_output=True)
     total = dur("out/short.mp4")
-    cap = build_caption(s, v, post, c, total)
+    cap = build_caption(s, v, post, c, total, entry)
     with open("out/caption.txt", "w", encoding="utf-8") as f:
         f.write(cap)
     telegram_video("out/short.mp4", cap) or telegram_msg("쇼츠 생성 완료(전송 실패) — Actions 아티팩트 확인")
