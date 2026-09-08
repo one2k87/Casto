@@ -36,9 +36,10 @@ def read_stem(stem: str, q: dict) -> tuple[str, int | None]:
     n, rest = int(m.group(1)), m.group(2).strip()
     if rest:
         return rest, n
-    it = catalog.by_number(q, n)
-    # 번호표에 없는 번호를 이름으로 삼으면 "99"라는 이름의 제품이 생긴다 → 빈 이름으로 반려한다
-    return ((it or {}).get("name") or ""), n
+    it = catalog.by_number(q, n) or {}
+    # 번호표에 브랜드·모델이 확정돼 있으면 **그 이름**으로 등록한다(영상 자막에 그대로 나간다).
+    # 번호표에 없는 번호를 이름으로 삼으면 "99"라는 이름의 제품이 생기므로 빈 이름으로 반려한다.
+    return (it.get("display") or it.get("name") or ""), n
 
 
 def split_name(stem: str) -> tuple[str, str]:

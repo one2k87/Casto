@@ -58,3 +58,24 @@ def test_번호_뒤에_이름을_적으면_이름이_우선한다():
     assert capture_import.read_stem("1 락앤락 밀폐용기 800ml", q) == ("락앤락 밀폐용기 800ml", 1)
     assert capture_import.read_stem("1", q) == ("가습기", 1)
     assert capture_import.read_stem("3번", q)[1] == 3
+
+
+def test_번호표에_브랜드가_확정돼_있으면_그_이름으로_등록된다():
+    """영상 자막에 '쌀통'이 아니라 '씨밀렉스 라이스키퍼 쌀통 10kg'이 나가야 한다."""
+    q = {"next": 1, "items": {}}
+    n = catalog.number_for(q, "쌀통 쌀보관")
+    catalog.set_details(q, n, brand="씨밀렉스", model="라이스키퍼 쌀통 10kg",
+                        search="씨밀렉스 라이스키퍼 쌀통", confidence="높음")
+    assert capture_import.read_stem(str(n), q) == ("씨밀렉스 라이스키퍼 쌀통 10kg", n)
+
+
+def test_보류_항목은_번호표_본문에_섞이지_않는다(tmp_path):
+    q = {"next": 1, "items": {}}
+    catalog.number_for(q, "지금 유행")
+    n2 = catalog.number_for(q, "옛날 아이템")
+    catalog.set_details(q, n2, hold=True)
+    path = tmp_path / "list.md"
+    catalog.write_list(q, str(path))
+    body, hold = path.read_text(encoding="utf-8").split("## 보류")
+    assert "지금 유행" in body and "옛날 아이템" not in body
+    assert "옛날 아이템" in hold

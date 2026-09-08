@@ -273,6 +273,23 @@ def number_for(q: dict, name: str, slug: str = "") -> int:
     return n
 
 
+def set_details(q: dict, n: int | str, **kw) -> dict | None:
+    """번호에 브랜드·모델·검색어·신뢰도를 붙인다.
+
+    캡처하는 사람이 **무엇을 검색해야 하는지**까지 알아야 손이 멈추지 않는다.
+    브랜드를 특정하지 못한 항목은 브랜드를 비워두고 검색어만 준다 — 지어내지 않는다.
+    """
+    it = q["items"].get(str(int(n)))
+    if it is None:
+        return None
+    for k in ("brand", "model", "search", "confidence", "note", "hold"):
+        if k in kw:
+            it[k] = kw[k]
+    if it.get("brand") and it.get("model"):
+        it["display"] = f"{it['brand']} {it['model']}"
+    return it
+
+
 def by_number(q: dict, n: int | str) -> dict | None:
     return q["items"].get(str(int(n)))
 
@@ -295,21 +312,41 @@ def refresh_queue(cat: dict, watchlist: dict, q: dict | None = None) -> dict:
 
 
 def write_list(q: dict, path: str = LIST_FILE) -> str:
-    """캡처하는 폴더 **안에** 번호표를 둔다 — 저장하면서 바로 보이도록."""
-    todo = [(int(n), it) for n, it in q["items"].items() if not it.get("done")]
-    todo.sort()
+    """캡처하는 폴더 **안에** 번호표를 둔다 — 저장하면서 바로 보이도록.
+
+    검색어까지 적는다. 사람이 "이게 정확히 뭐지"를 다시 찾게 만들면 거기서 작업이 멈춘다.
+    """
+    conf_mark = {"높음": "◎", "중간": "○", "낮음": "△"}
+
+    def row(n, it):
+        who = it.get("display") or (f"{it.get('brand','')} {it.get('model','')}".strip() or "—")
+        mark = conf_mark.get(it.get("confidence", ""), "")
+        note = it.get("note", "")
+        return (f'| **{n}** | {it["name"]} | {who} {mark} | `{it.get("search") or it["name"]}` '
+                f'| {note} |')
+
+    todo = sorted((int(n), it) for n, it in q["items"].items()
+                  if not it.get("done") and not it.get("hold"))
+    hold = sorted((int(n), it) for n, it in q["items"].items()
+                  if not it.get("done") and it.get("hold"))
     lines = ["# 캡처 번호표", "",
-             "쿠팡에서 아래 제품을 찾아 대표 이미지를 캡처하고, **번호로 저장**하세요.",
-             "예) 3번 → `3.png` (또는 `3.jpg`). 이 폴더에 그냥 넣으면 끝입니다.", ""]
-    if not todo:
-        lines.append("지금 필요한 캡처가 없습니다. 👍")
+             "쿠팡에서 **검색어**를 그대로 치고, 나온 상품의 대표 이미지를 캡처해서 **번호로 저장**하세요.",
+             "예) 4번 → `4.png`. 이 폴더에 넣고 커밋하면 끝입니다.", "",
+             "브랜드 옆 표시 — ◎ 확실 · ○ 유력 · △ 브랜드 특정 실패(검색 결과 상위 아무거나 캡처)", ""]
+    if todo:
+        lines += ["| 번호 | 카테고리 | 브랜드·모델 | 쿠팡 검색어 | 메모 |", "|---|---|---|---|---|"]
+        lines += [row(n, it) for n, it in todo]
     else:
-        lines += ["| 번호 | 제품 |", "|---|---|"]
-        lines += [f"| **{n}** | {it['name']} |" for n, it in todo]
-    done = [(int(n), it) for n, it in q["items"].items() if it.get("done")]
+        lines.append("지금 필요한 캡처가 없습니다. 👍")
+    if hold:
+        lines += ["", "## 보류 — 지금 유행 근거가 없는 항목", "",
+                  "최근 수집에서 언급이 잡히지 않았습니다. **캡처하지 마세요**(다시 뜨면 위로 올라옵니다).", "",
+                  "| 번호 | 카테고리 |", "|---|---|"]
+        lines += [f'| {n} | {it["name"]} |' for n, it in hold]
+    done = sorted((int(n), it) for n, it in q["items"].items() if it.get("done"))
     if done:
-        lines += ["", "---", "", f"완료 {len(done)}건: " +
-                  ", ".join(f"{n}번 {it['name']}" for n, it in sorted(done)[-12:])]
+        lines += ["", "---", "",
+                  f"완료 {len(done)}건: " + ", ".join(f"{n}번 {it['name']}" for n, it in done[-12:])]
     lines += ["", "번호는 한 번 붙으면 바뀌지 않습니다. 완료된 번호는 다시 쓰이지 않습니다."]
     os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
