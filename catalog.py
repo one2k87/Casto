@@ -110,18 +110,24 @@ def display_name(entry: dict | None, fallback: str = "") -> str:
     return fallback
 
 
+REAL_IMAGE_SOURCES = ("pickdam", "coupang_partners", "maker")
+
+
 def render_mode(entry: dict | None) -> str:
     """이 상품을 어떻게 그릴지 한 단어로 답한다.
 
-    exact  : 브랜드·모델 확정 + 실사진 보유 → 실제 상품 사진을 띄운다
-    named  : 브랜드·모델은 확정, 사진 없음 → 이름만 정확히 쓰고 클레이 아트
-    generic: 아무것도 확정 안 됨 → 카테고리명 + 클레이 아트 (현재 기본값)
+    exact  : **실사진** 보유(픽담/파트너스/제조사) → 그대로 띄운다
+    art    : AI가 제품명을 근거로 재현한 이미지 → 띄우되 화면에 "AI 재현 이미지"를 표기한다
+    named  : 이름만 확정, 이미지 없음 → 클레이 아트 + 정확한 이름
+    generic: 아무것도 없음 → 카테고리명 + 클레이 아트
+
+    실사진과 AI 재현을 굳이 나누는 이유는 하나다 — **시청자를 속이지 않기 위해서**다.
     """
     if not entry:
         return "generic"
+    if image_path(entry):
+        return "exact" if entry.get("image_source") in REAL_IMAGE_SOURCES else "art"
     named = bool(entry.get("display") or (entry.get("brand") and entry.get("model")))
-    if named and image_path(entry):
-        return "exact"
     return "named" if named else "generic"
 
 

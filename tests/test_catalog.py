@@ -42,7 +42,10 @@ def test_render_mode는_사진이_있어야_exact(tmp_path):
     img = tmp_path / "p.png"
     img.write_bytes(b"x")
     e["image"] = str(img)
-    assert catalog.render_mode(e) == "exact"          # 사진까지 → 실사진
+    e["image_source"] = "ai_render"
+    assert catalog.render_mode(e) == "art"            # AI 재현 → 표기 대상
+    e["image_source"] = "coupang_partners"
+    assert catalog.render_mode(e) == "exact"          # 실사진
     assert catalog.render_mode(None) == "generic"
 
 
@@ -86,7 +89,8 @@ def test_요청서는_확정된_상품을_다시_묻지_않는다(tmp_path):
     img = tmp_path / "p.png"
     img.write_bytes(b"x")
     cat = {"products": {}}
-    catalog.put(cat, name="코팅팬", brand="테팔", model="A 28cm", image=str(img))
+    catalog.put(cat, name="코팅팬", brand="테팔", model="A 28cm", image=str(img),
+                image_source="coupang_partners")
     wl = {"코팅팬": {"name": "테팔 A 28cm"}, "가습기": {"name": "가습기"}}
     rows = catalog.needs(cat, wl)
     assert [r["name"] for r in rows] == ["가습기"]

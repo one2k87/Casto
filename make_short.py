@@ -74,8 +74,10 @@ def resolve_product(post, name_hint=""):
              else catalog.find(cat, name=name_hint))
     mode = catalog.render_mode(entry)
     print(f"[casto] 상품 확정 — {catalog.display_name(entry, name_hint) or '(미확정)'} [{mode}]")
-    if mode != "exact":
-        print("[casto]   실사진 없음 → 클레이 폴백. 채울 목록: python catalog.py")
+    if mode == "art":
+        print("[casto]   AI 재현 이미지 사용(실사진 아님) — 화면에 표기됨")
+    elif mode != "exact":
+        print("[casto]   이미지 없음 → 클레이 폴백. 자동 생성: python product_art.py")
     return entry, mode
 
 
@@ -199,7 +201,7 @@ def kok_box(d, cx, cy, w, squish=0.0, open_lid=False):
         d.ellipse([bx - 24, cy - 10, bx + 24, cy + 38], fill=(255, 248, 236), outline=edge, width=4)
 
 
-def scene_card(sc, i, total, c, shot=None, label=""):
+def scene_card(sc, i, total, c, shot=None, label="", note=""):
     """콕픽 파스텔 카드 — 크림→민트 그라데이션 + 콕이 + 큰 자막 + 콕 게이지.
 
     `shot`(실제 상품 사진 경로)이 있으면 **상품이 주인공**이 된다 — 사진 카드가 화면 중앙을
@@ -224,7 +226,8 @@ def scene_card(sc, i, total, c, shot=None, label=""):
         # 표지 씬은 자막이 이미 제품명을 크게 말하므로 카드 라벨을 생략(중복 방지),
         # 나머지 씬은 브랜드·모델을 화면에 계속 남겨 정보가 새지 않게 한다.
         placed = visuals.paste_product(img, shot, label="" if kind == "stamp" else label,
-                                       accent=sage, font=font(44, bold=False))
+                                       accent=sage, font=font(44, bold=False),
+                                       note=note, note_font=font(30, bold=False))
         d = ImageDraw.Draw(img)
     if placed:
         kok_box(d, 186, 1452, 212, squish=squish, open_lid=opened)   # 콕이는 조연으로
@@ -359,8 +362,9 @@ def main():
     if entry is None:                     # 대본이 고른 제품명으로 한 번 더 카탈로그를 본다
         entry = catalog.find(catalog.load(), name=s.get("product", ""))
         mode = catalog.render_mode(entry)
-    shot = catalog.image_path(entry) if mode == "exact" else None
-    label = catalog.display_name(entry) if mode in ("exact", "named") else ""
+    shot = catalog.image_path(entry) if mode in ("exact", "art") else None
+    note = "AI 재현 이미지" if mode == "art" else ""
+    label = catalog.display_name(entry) if mode in ("exact", "art", "named") else ""
     if label:
         s["product"] = label if len(label) <= 14 else s.get("product", label)
     scenes, v = build_scenes(s, c)
@@ -383,7 +387,7 @@ def main():
                             "-c:v", "libx264", "-c:a", "aac", "-shortest", seg],
                            check=True, capture_output=True)
         else:
-            img = scene_card(sc, i, len(scenes), c, shot=shot, label=label)
+            img = scene_card(sc, i, len(scenes), c, shot=shot, label=label, note=note)
             subprocess.run(["ffmpeg", "-y", "-loop", "1", "-i", img, "-i", mp3,
                             "-t", f"{d:.2f}", "-r", "30", "-pix_fmt", "yuv420p",
                             "-c:v", "libx264", "-c:a", "aac", "-shortest", seg],

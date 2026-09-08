@@ -59,17 +59,27 @@ jobs:
             echo "오늘은 집계일이 아님(UTC 일요일에만) — 스냅샷만 저장"
           fi
 
+      # 발굴이 알려준 상품을 카탈로그에 자동 등록하고, 이미지가 없는 건 AI로 재현한다.
+      # 실사진(픽담 KOKPICK 블록 / 파트너스 수동 등록)이 있으면 절대 덮지 않는다.
+      - name: 상품 카탈로그·이미지 자동 채움
+        if: ${{ inputs.board_only != true }}
+        env:
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          IMAGE_MODEL: ${{ secrets.IMAGE_MODEL }}
+          ART_MAX_PER_RUN: "4"
+        run: python product_art.py
+
       - name: 결과 커밋
         run: |
           git config user.name casto-bot && git config user.email casto@solvup.local
           # ⚠️ 개별 경로를 나열하면 아직 없는 파일(trend_board/covered) 때문에 pathspec 에러로
           # git add 전체가 실패하고, 그걸 `|| true`가 삼켜 커밋이 조용히 건너뛰어진다.
           # 실제로 run #3에서 수집은 됐는데 결과가 유실됐다(2026-09-07 실측). -A로 통째로 스테이징.
-          git add -A data
-          git status --short data
+          git add -A data assets/products
+          git status --short data assets/products
           if git diff --cached --quiet; then
             echo "::warning::스테이징된 변경이 없다 — 수집 결과가 저장되지 않았을 수 있다"
           else
-            git commit -m "trends: $(date +%F) 제품 스냅샷"
+            git commit -m "trends: $(date +%F) 제품 스냅샷 + 상품 이미지"
             git pull --rebase --autostash origin main && git push origin main
           fi

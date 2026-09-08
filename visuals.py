@@ -154,7 +154,7 @@ def paste_product(img: Image.Image, path: str, label: str = "",
                   center: tuple[int, int] = PRODUCT_CENTER,
                   box: tuple[int, int] = PRODUCT_BOX,
                   accent: tuple[int, int, int] = (47, 93, 78),
-                  font=None) -> tuple[int, int, int, int] | None:
+                  font=None, note: str = "", note_font=None) -> tuple[int, int, int, int] | None:
     """파스텔 카드 위에 상품 사진을 얹는다. 반환값은 카드 bbox(호출부가 레이아웃 계산에 쓴다).
 
     흰 라운드 카드 + 부드러운 그림자 = 제품컷을 배경과 분리해 '진짜 물건'으로 보이게 한다.
@@ -179,6 +179,12 @@ def paste_product(img: Image.Image, path: str, label: str = "",
     img.paste(shot, (center[0] - shot.width // 2, center[1] - shot.height // 2), shot)
     if label and font is not None:
         d.text((center[0], y0 + ch + 44), label[:24], font=font, fill=accent, anchor="mm")
+    if note and note_font is not None:
+        # AI 재현 이미지 표기 — 실사진인 척하지 않는다
+        tw = d.textlength(note, font=note_font)
+        d.rounded_rectangle((x0 + 14, y0 + ch - 52, x0 + 14 + tw + 34, y0 + ch - 10),
+                            radius=20, fill=(255, 255, 255), outline=accent, width=3)
+        d.text((x0 + 14 + tw / 2 + 17, y0 + ch - 31), note, font=note_font, fill=accent, anchor="mm")
     return bbox
 
 
