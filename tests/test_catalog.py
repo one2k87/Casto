@@ -42,8 +42,7 @@ def test_render_mode는_사진이_있어야_exact(tmp_path):
     img = tmp_path / "p.png"
     img.write_bytes(b"x")
     e["image"] = str(img)
-    e["image_source"] = "ai_render"
-    assert catalog.render_mode(e) == "art"            # AI 재현 → 표기 대상
+    assert catalog.render_mode(e) == "named"          # 출처 불명 이미지는 쓰지 않는다
     e["image_source"] = "coupang_partners"
     assert catalog.render_mode(e) == "exact"          # 실사진
     assert catalog.render_mode(None) == "generic"
@@ -95,3 +94,18 @@ def test_요청서는_확정된_상품을_다시_묻지_않는다(tmp_path):
     rows = catalog.needs(cat, wl)
     assert [r["name"] for r in rows] == ["가습기"]
     assert "가습기" in catalog.request_sheet(rows)
+
+
+def test_AI_재현_이미지는_절대_노출하지_않는다(tmp_path):
+    """가상 재현은 시청자가 즉시 알아챈다 — 사진이 없으면 아무것도 넣지 않는다."""
+    img = tmp_path / "p.png"
+    img.write_bytes(b"x")
+    e = {"display": "테팔 A 28cm", "image": str(img), "image_source": "ai_render"}
+    assert catalog.render_mode(e) == "named"       # exact 아님 → 제품 이미지 미사용
+
+
+def test_캡처는_실사진으로_인정된다(tmp_path):
+    img = tmp_path / "p.png"
+    img.write_bytes(b"x")
+    e = {"display": "테팔 A 28cm", "image": str(img), "image_source": "capture"}
+    assert catalog.render_mode(e) == "exact"

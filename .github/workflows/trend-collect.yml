@@ -59,15 +59,10 @@ jobs:
             echo "오늘은 집계일이 아님(UTC 일요일에만) — 스냅샷만 저장"
           fi
 
-      # 발굴이 알려준 상품을 카탈로그에 자동 등록하고, 이미지가 없는 건 AI로 재현한다.
-      # 실사진(픽담 KOKPICK 블록 / 파트너스 수동 등록)이 있으면 절대 덮지 않는다.
-      - name: 상품 카탈로그·이미지 자동 채움
-        if: ${{ inputs.board_only != true }}
-        env:
-          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
-          IMAGE_MODEL: ${{ secrets.IMAGE_MODEL }}
-          ART_MAX_PER_RUN: "4"
-        run: python product_art.py
+      # 사람이 assets/products/캡처_넣는곳/ 에 넣어둔 **실제 상품 캡처**를 카탈로그에 반입한다.
+      # ⚠️ 제품을 AI로 재현하는 단계는 없다 — 실물과 다른 그림은 시청자가 즉시 알아채고 돌아선다.
+      - name: 상품 캡처 반입
+        run: python capture_import.py
 
       - name: 결과 커밋
         run: |

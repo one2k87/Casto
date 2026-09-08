@@ -74,10 +74,9 @@ def resolve_product(post, name_hint=""):
              else catalog.find(cat, name=name_hint))
     mode = catalog.render_mode(entry)
     print(f"[casto] 상품 확정 — {catalog.display_name(entry, name_hint) or '(미확정)'} [{mode}]")
-    if mode == "art":
-        print("[casto]   AI 재현 이미지 사용(실사진 아님) — 화면에 표기됨")
-    elif mode != "exact":
-        print("[casto]   이미지 없음 → 클레이 폴백. 자동 생성: python product_art.py")
+    if mode != "exact":
+        print("[casto]   실제 사진 없음 → 제품 이미지 없이 클레이로 나간다(가짜를 쓰지 않는다).")
+        print("[casto]   캡처를 assets/products/캡처_넣는곳/ 에 넣으면 다음 영상부터 반영된다.")
     return entry, mode
 
 
@@ -362,9 +361,9 @@ def main():
     if entry is None:                     # 대본이 고른 제품명으로 한 번 더 카탈로그를 본다
         entry = catalog.find(catalog.load(), name=s.get("product", ""))
         mode = catalog.render_mode(entry)
-    shot = catalog.image_path(entry) if mode in ("exact", "art") else None
-    note = "AI 재현 이미지" if mode == "art" else ""
-    label = catalog.display_name(entry) if mode in ("exact", "art", "named") else ""
+    shot = catalog.image_path(entry) if mode == "exact" else None
+    note = ""          # 실제 사진만 쓰므로 "재현" 같은 표기가 필요 없다
+    label = catalog.display_name(entry) if mode in ("exact", "named") else ""
     if label:
         s["product"] = label if len(label) <= 14 else s.get("product", label)
     scenes, v = build_scenes(s, c)
