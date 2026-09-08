@@ -97,6 +97,7 @@ def main():
     q = catalog.refresh_queue(cat, wl, q)      # 새로 발굴된 상품에도 번호를 붙인다
     catalog.queue_save(q)
     catalog.write_list(q)
+    catalog.write_html(q)
     for s in done:
         print(f"[capture] 등록 — {cat['products'][s]['display']} → {cat['products'][s]['image']}")
     total = len(cat.get("products", {}))

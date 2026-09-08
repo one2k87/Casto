@@ -242,6 +242,7 @@ def cache_image(url: str, slug: str, session=None, dir_: str = IMAGE_DIR) -> str
 QUEUE_PATH = "data/shot_queue.json"
 INBOX_DIR = os.path.join(IMAGE_DIR, "캡처_넣는곳")
 LIST_FILE = os.path.join(INBOX_DIR, "_목록.md")
+LIST_HTML = os.path.join(INBOX_DIR, "_목록.html")
 
 
 def queue_load(path: str = QUEUE_PATH) -> dict:
@@ -366,6 +367,114 @@ def write_list(q: dict, path: str = LIST_FILE) -> str:
     return path
 
 
+def write_html(q: dict, path: str = LIST_HTML) -> str:
+    """더블클릭하면 브라우저로 열리는 번호표 — **링크를 바로 누를 수 있게** 하는 것이 목적.
+
+    마크다운 표는 링크가 원문 그대로 보여서 읽기도 누르기도 어렵다(2026-09-08 피드백).
+    이 파일은 캡처 폴더 안에 같이 두므로, 폴더를 열면 목록과 저장 위치가 한 화면에 있다.
+    """
+    conf = {"높음": ("확실", "#2f8f68"), "중간": ("유력", "#c9932f"), "낮음": ("브랜드 미확정", "#8a8a8a")}
+
+    def card(n, it):
+        who = it.get("display") or f"{it.get('brand','')} {it.get('model','')}".strip()
+        label, color = conf.get(it.get("confidence", ""), ("", "#8a8a8a"))
+        chip = f'<span class="chip" style="--c:{color}">{label}</span>' if label else ""
+        who_html = (f'<div class="who">{who} {chip}</div>' if who
+                    else f'<div class="who none">브랜드 없음 {chip}</div>')
+        note = f'<div class="note">{it["note"]}</div>' if it.get("note") else ""
+        url = it.get("url", "")
+        btn = (f'<a class="go" href="{url}" target="_blank" rel="noopener">쿠팡에서 열기 →</a>'
+               if url else "")
+        return f'''<li class="card">
+      <div class="n">{n}</div>
+      <div class="body">
+        <div class="cat">{it["name"]}</div>
+        {who_html}
+        <div class="q">검색어 <code>{it.get("search") or it["name"]}</code></div>
+        {note}
+      </div>
+      <div class="act">{btn}<div class="save">저장 → <b>{n}.png</b></div></div>
+    </li>'''
+
+    todo = sorted((int(n), it) for n, it in q["items"].items()
+                  if not it.get("done") and not it.get("hold"))
+    hold = sorted((int(n), it) for n, it in q["items"].items()
+                  if not it.get("done") and it.get("hold"))
+    done = sorted((int(n), it) for n, it in q["items"].items() if it.get("done"))
+    body = "\n".join(card(n, it) for n, it in todo) or \
+        '<li class="empty">지금 필요한 캡처가 없습니다 👍</li>'
+    hold_html = ""
+    if hold:
+        rows = "".join(f"<li>{n}. {it['name']}</li>" for n, it in hold)
+        hold_html = (f'<section class="hold"><h2>보류 — 지금 유행 근거 없음</h2>'
+                     f'<p>최근 수집에서 언급이 잡히지 않았습니다. <b>캡처하지 마세요.</b> '
+                     f'다시 뜨면 위로 올라옵니다.</p><ul>{rows}</ul></section>')
+    done_html = ""
+    if done:
+        rows = ", ".join(f"{n}번 {it['name']}" for n, it in done[-12:])
+        done_html = f'<section class="done"><h2>완료 {len(done)}건</h2><p>{rows}</p></section>'
+
+    html = f'''<!doctype html><html lang="ko"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>콕픽 캡처 번호표</title>
+<style>
+:root{{--bg:#fbf6ec;--card:#fff;--ink:#2f5d4e;--sub:#6b7f76;--line:#dfe8e3;--mint:#b0e0d2}}
+*{{box-sizing:border-box}}
+body{{margin:0;padding:28px 18px 60px;background:var(--bg);color:var(--ink);
+ font:16px/1.6 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}}
+.wrap{{max-width:860px;margin:0 auto}}
+h1{{font-size:26px;margin:0 0 6px}}
+.lead{{color:var(--sub);margin:0 0 26px;font-size:15px}}
+.lead b{{color:var(--ink)}}
+ul{{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px}}
+.card{{display:flex;gap:16px;align-items:center;background:var(--card);border:1px solid var(--line);
+ border-radius:16px;padding:16px 18px;flex-wrap:wrap}}
+.n{{flex:0 0 46px;height:46px;border-radius:14px;background:var(--mint);color:#1f4a3c;
+ font-weight:800;font-size:20px;display:grid;place-items:center}}
+.body{{flex:1 1 320px;min-width:0}}
+.cat{{font-size:13px;color:var(--sub)}}
+.who{{font-size:18px;font-weight:700;margin:1px 0 4px}}
+.who.none{{color:var(--sub);font-weight:600}}
+.chip{{font-size:11px;font-weight:700;color:#fff;background:var(--c);border-radius:999px;
+ padding:2px 9px;vertical-align:2px;margin-left:4px}}
+.q{{font-size:14px;color:var(--sub)}}
+code{{background:#eef5f1;border-radius:6px;padding:2px 7px;font-size:14px;color:var(--ink)}}
+.note{{font-size:13px;color:#9a7b3f;margin-top:5px}}
+.act{{flex:0 0 auto;text-align:right}}
+.go{{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;font-weight:700;
+ border-radius:12px;padding:11px 18px;font-size:15px}}
+.go:hover{{background:#24493d}}
+.save{{font-size:13px;color:var(--sub);margin-top:7px}}
+.save b{{color:var(--ink)}}
+.empty{{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;text-align:center}}
+section{{margin-top:34px}}
+h2{{font-size:16px;margin:0 0 8px}}
+.hold p,.done p{{color:var(--sub);font-size:14px;margin:0 0 8px}}
+.hold ul{{flex-direction:row;flex-wrap:wrap;gap:8px}}
+.hold li{{background:#eef1ef;color:var(--sub);border-radius:999px;padding:5px 12px;font-size:13px}}
+footer{{margin-top:40px;color:var(--sub);font-size:13px;border-top:1px solid var(--line);padding-top:16px}}
+@media(max-width:620px){{.act{{width:100%;text-align:left}}.go{{width:100%;text-align:center}}}}
+</style>
+<div class="wrap">
+<h1>콕픽 캡처 번호표</h1>
+<p class="lead">버튼을 눌러 상품 페이지를 열고, 제품 대표 이미지를 캡처해서
+<b>번호로 저장</b>해 이 폴더에 넣으세요. 예) 4번 → <b>4.png</b><br>
+쿠팡은 브라우저 정책상 차단이라 캐스토가 대신 찍을 수 없습니다.</p>
+<ul>
+{body}
+</ul>
+{hold_html}
+{done_html}
+<footer>번호는 한 번 붙으면 바뀌지 않고, 완료된 번호는 다시 쓰이지 않습니다.<br>
+파일명에 <code>4 씨밀렉스 라이스키퍼 쌀통.png</code>처럼 이름을 덧붙이면 그 이름이 영상 자막에 나갑니다.</footer>
+</div>
+</html>'''
+    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(html)
+    return path
+
+
 # ------------------------------------------------------------------ 요청서
 def needs(cat: dict, watchlist: dict) -> list[dict]:
     """지금 추적 중인 상품 중 **아직 사진·브랜드가 확정 안 된 것**을 뽑는다."""
@@ -412,13 +521,14 @@ def main():
     q = refresh_queue(cat, wl)
     queue_save(q)
     write_list(q)
+    write_html(q)
     sheet = request_sheet(rows)
     os.makedirs("out", exist_ok=True)
     with open("out/이미지_요청서.md", "w", encoding="utf-8") as f:
         f.write(sheet)
     todo = [n for n, it in q["items"].items() if not it.get("done")]
     print(f"[catalog] 등록 {len(cat.get('products', {}))}건 · 캡처 필요 {len(todo)}건")
-    print(f"[catalog] 번호표 → {LIST_FILE}  (번호로 저장하면 끝: 3.png)")
+    print(f"[catalog] 번호표 → {LIST_HTML} (더블클릭해서 열기) · {LIST_FILE}")
 
 
 if __name__ == "__main__":

@@ -371,6 +371,7 @@ def main():
                                      (entry or {}).get("slug", ""))
         catalog.queue_save(q)
         catalog.write_list(q)
+        catalog.write_html(q)
         print(f"[casto]   캡처 필요 — {shot_no}번 「{label or s.get('product','')}」 "
               f"→ {catalog.INBOX_DIR}/{shot_no}.png 로 저장")
     if label:
