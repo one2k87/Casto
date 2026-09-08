@@ -1,5 +1,5 @@
 {
- "next": 20,
+ "next": 27,
  "items": {
   "1": {
    "name": "늘어나는 밀폐용기",
@@ -222,6 +222,48 @@
    "note": "최근 언급 없음",
    "hold": true,
    "url": "https://www.coupang.com/np/search?q=%ED%9C%B4%EB%8C%80%EC%9A%A9+%EC%84%A0%ED%92%8D%EA%B8%B0+%EB%84%A5%EB%B0%B4%EB%93%9C"
+  },
+  "20": {
+   "name": "얼음틀/보관통",
+   "slug": "",
+   "key": "얼음틀보관통",
+   "done": false
+  },
+  "21": {
+   "name": "계란 흰자 분리기",
+   "slug": "",
+   "key": "계란흰자분리기",
+   "done": false
+  },
+  "22": {
+   "name": "레트로 수화기",
+   "slug": "",
+   "key": "레트로수화기",
+   "done": false
+  },
+  "23": {
+   "name": "손끼임 방지가드",
+   "slug": "",
+   "key": "손끼임방지가드",
+   "done": false
+  },
+  "24": {
+   "name": "오일 스프레이",
+   "slug": "",
+   "key": "오일스프레이",
+   "done": false
+  },
+  "25": {
+   "name": "계란보관 트레이",
+   "slug": "",
+   "key": "계란보관트레이",
+   "done": false
+  },
+  "26": {
+   "name": "센서등",
+   "slug": "",
+   "key": "센서등",
+   "done": false
   }
  }
 }

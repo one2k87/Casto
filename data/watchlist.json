@@ -1,33 +1,33 @@
 {
  "늘어나는_밀폐용기": {
   "name": "늘어나는 밀폐용기",
-  "search_keyword": "늘어나는 밀폐용기",
+  "search_keyword": "늘어나는 밀폐용기, 주방용품 밀폐용기",
   "price_band": "중가",
   "brand": "",
   "product_id": "",
-  "evidence": "제목에 '미국에서 유행하는 늘어나는 밀폐용기'로 언급됨.",
+  "evidence": "제목에 '늘어나는 밀폐용기'가 직접 언급되며, '주방용품', '살림템'과 함께 등장",
   "category": "50000008",
   "last_found": "2026-09-08",
   "first_seen": "2026-09-08"
  },
  "레이저가이드가위": {
-  "name": "레이저가이드가위",
-  "search_keyword": "레이저 가이드 가위",
+  "name": "레이저 가이드 가위",
+  "search_keyword": "레이저가이드가위, 레이저 가위, 가위추천",
   "price_band": "중가",
   "brand": "",
   "product_id": "",
-  "evidence": "제목에 '레이저가이드가위'로 여러번 언급됨.",
+  "evidence": "제목에 '레이저가이드가위 #레이저가위 #레이저가이드가위 #가위추천'으로 제품이 명확히 언급됨",
   "category": "50000008",
   "last_found": "2026-09-08",
   "first_seen": "2026-09-08"
  },
  "얼음틀_얼음보관통": {
-  "name": "얼음틀 얼음보관통",
-  "search_keyword": "얼음틀 얼음보관통",
+  "name": "얼음틀/보관통",
+  "search_keyword": "얼음틀, 얼음보관통, 얼음꿀템",
   "price_band": "저가",
   "brand": "",
   "product_id": "",
-  "evidence": "제목에 '얼음틀, 얼음보관통'으로 언급됨.",
+  "evidence": "제목에 '얼음 빼려고 두드리세요? #얼음틀, #얼음보관통, #얼음꿀템'으로 제품이 명확히 언급됨",
   "category": "50000008",
   "last_found": "2026-09-08",
   "first_seen": "2026-09-08"
@@ -44,23 +44,23 @@
   "first_seen": "2026-09-08"
  },
  "에그크래커": {
-  "name": "에그크래커",
-  "search_keyword": "계란 에그크래커",
+  "name": "에그 크래커",
+  "search_keyword": "에그크래커, 계란크래커, 계란 신박템",
   "price_band": "저가",
   "brand": "",
   "product_id": "",
-  "evidence": "제목에 '에그크래커 #계란크래커'로 언급됨.",
+  "evidence": "제목에 '에그크래커 #계란크래커'로 제품이 명확히 언급됨",
   "category": "50000008",
   "last_found": "2026-09-08",
   "first_seen": "2026-09-08"
  },
  "미니세탁기": {
-  "name": "미니세탁기",
-  "search_keyword": "미니세탁기",
-  "price_band": "중가",
+  "name": "미니 세탁기",
+  "search_keyword": "미니세탁기, 강희재 미니세탁기, 자취 미니세탁기",
+  "price_band": "고가",
   "brand": "",
   "product_id": "",
-  "evidence": "제목에 '강희재미니세탁기'로 언급됨.",
+  "evidence": "제목에 '강희재의 속옷 빠는 기막힌 살림템 #강희재미니세탁기'로 제품이 명확히 언급됨",
   "category": "50000003",
   "last_found": "2026-09-08",
   "first_seen": "2026-09-08"
@@ -131,59 +131,88 @@
   "last_found": "2026-09-08",
   "first_seen": "2026-09-08"
  },
+ "코에서_계란흰자_나오는_주방용품": {
+  "name": "계란 흰자 분리기",
+  "search_keyword": "코에서 계란 흰자 분리기, 계란 분리기 신박한 주방용품",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '코에서 계란 흰자가 나오는 신박한 주방용품'이 직접 언급됨",
+  "category": "50000008",
+  "last_found": "2026-09-08",
+  "first_seen": "2026-09-08"
+ },
+ "레트로_수화기": {
+  "name": "레트로 수화기",
+  "search_keyword": "레트로 수화기, 유선전화 레트로",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '요즘 유행하는 레트로 수화기'가 직접 언급되며, '추천템'과 함께 등장",
+  "category": "50000003",
+  "last_found": "2026-09-08",
+  "first_seen": "2026-09-08"
+ },
+ "손끼임_방지가드": {
+  "name": "손끼임 방지가드",
+  "search_keyword": "손끼임 방지가드, 아동 안전 가드",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '손끼임 방지가드'가 직접 언급됨",
+  "category": "50000008",
+  "last_found": "2026-09-08",
+  "first_seen": "2026-09-08"
+ },
+ "오일스프레이": {
+  "name": "오일 스프레이",
+  "search_keyword": "오일스프레이, 수직 오일 스프레이",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '#오일스프레이'가 직접 언급됨",
+  "category": "50000008",
+  "last_found": "2026-09-08",
+  "first_seen": "2026-09-08"
+ },
+ "접이식_플러스_도마": {
+  "name": "접이식 플러스 도마",
+  "search_keyword": "접이식 도마, 플러스 도마",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '접이식 플러스 도마🔪🍽️#접이식도마 #플러스도마'로 제품이 명확히 언급됨",
+  "category": "50000008",
+  "last_found": "2026-09-08",
+  "first_seen": "2026-09-08"
+ },
+ "계란보관_트레이": {
+  "name": "계란보관 트레이",
+  "search_keyword": "계란보관 트레이, 냉장고 계란 트레이",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '37. 계란보관 트레이'가 직접 언급됨",
+  "category": "50000008",
+  "last_found": "2026-09-08",
+  "first_seen": "2026-09-08"
+ },
+ "센서등": {
+  "name": "센서등",
+  "search_keyword": "센서등, 자취방 무드등 센서등",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '실패 없는 자취방 무드등 추천 #자취필수템 #자취방꾸미기 #센서등'으로 제품이 명확히 언급됨",
+  "category": "50000004",
+  "last_found": "2026-09-08",
+  "first_seen": "2026-09-08"
+ },
  "접이식_블루투스_키보드": {
   "name": "접이식 블루투스 키보드",
   "search_keyword": "접이식 블루투스 키보드 무선 휴대용",
   "category": "50000003 디지털가전",
   "price_band": "중가",
-  "last_found": "2026-09-07",
-  "first_seen": "2026-09-07"
- },
- "미니_가습기_무선": {
-  "name": "미니 가습기 무선",
-  "search_keyword": "무선 미니 가습기 휴대용",
-  "category": "50000008 생활건강",
-  "price_band": "저가",
-  "last_found": "2026-09-07",
-  "first_seen": "2026-09-07"
- },
- "음식물_쓰레기_처리기": {
-  "name": "음식물 쓰레기처리기",
-  "search_keyword": "음식물 쓰레기 처리기 가정용",
-  "category": "50000003 디지털가전",
-  "price_band": "고가",
-  "last_found": "2026-09-07",
-  "first_seen": "2026-09-07"
- },
- "캡슐_커피_머신_소형": {
-  "name": "캡슐 커피 머신 소형",
-  "search_keyword": "소형 캡슐 커피 머신 미니",
-  "category": "50000003 디지털가전",
-  "price_band": "중가",
-  "last_found": "2026-09-07",
-  "first_seen": "2026-09-07"
- },
- "차량용_공기청정기_컵홀더": {
-  "name": "차량용 공기청정기",
-  "search_keyword": "차량용 공기청정기 컵홀더",
-  "category": "50000003 디지털가전",
-  "price_band": "중가",
-  "last_found": "2026-09-07",
-  "first_seen": "2026-09-07"
- },
- "무선_물걸레_청소기": {
-  "name": "무선 물걸레 청소기",
-  "search_keyword": "무선 물걸레 청소기 스팀",
-  "category": "50000003 디지털가전",
-  "price_band": "고가",
-  "last_found": "2026-09-07",
-  "first_seen": "2026-09-07"
- },
- "휴대용_선풍기_넥밴드": {
-  "name": "휴대용 선풍기 넥밴드",
-  "search_keyword": "넥밴드 선풍기 휴대용",
-  "category": "50000003 디지털가전",
-  "price_band": "저가",
   "last_found": "2026-09-07",
   "first_seen": "2026-09-07"
  }
