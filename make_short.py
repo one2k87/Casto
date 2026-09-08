@@ -76,7 +76,6 @@ def resolve_product(post, name_hint=""):
     print(f"[casto] 상품 확정 — {catalog.display_name(entry, name_hint) or '(미확정)'} [{mode}]")
     if mode != "exact":
         print("[casto]   실제 사진 없음 → 제품 이미지 없이 클레이로 나간다(가짜를 쓰지 않는다).")
-        print("[casto]   캡처를 assets/products/캡처_넣는곳/ 에 넣으면 다음 영상부터 반영된다.")
     return entry, mode
 
 
@@ -364,6 +363,16 @@ def main():
     shot = catalog.image_path(entry) if mode == "exact" else None
     note = ""          # 실제 사진만 쓰므로 "재현" 같은 표기가 필요 없다
     label = catalog.display_name(entry) if mode in ("exact", "named") else ""
+    shot_no = None
+    if not shot:
+        # 이 제품의 **캡처 번호**를 확정해 알려준다 — 번호만 보고 `3.png`로 저장하면 끝이다.
+        q = catalog.queue_load()
+        shot_no = catalog.number_for(q, label or s.get("product", ""),
+                                     (entry or {}).get("slug", ""))
+        catalog.queue_save(q)
+        catalog.write_list(q)
+        print(f"[casto]   캡처 필요 — {shot_no}번 「{label or s.get('product','')}」 "
+              f"→ {catalog.INBOX_DIR}/{shot_no}.png 로 저장")
     if label:
         s["product"] = label if len(label) <= 14 else s.get("product", label)
     scenes, v = build_scenes(s, c)
@@ -403,6 +412,11 @@ def main():
     with open("out/caption.txt", "w", encoding="utf-8") as f:
         f.write(cap)
     telegram_video("out/short.mp4", cap) or telegram_msg("쇼츠 생성 완료(전송 실패) — Actions 아티팩트 확인")
+    if shot_no:
+        # 폰에서 바로 보고 캡처할 수 있게 별도 메시지로 보낸다(설명란을 오염시키지 않는다)
+        telegram_msg(f"📸 이 영상엔 제품 사진이 없습니다.\n"
+                     f"쿠팡에서 「{label or s['product']}」 대표 이미지를 캡처해서\n"
+                     f"→ **{shot_no}.png** 로 저장 후 {catalog.INBOX_DIR}/ 에 넣어주세요.")
     print(f"[casto] 완료 — {total:.0f}초, out/short.mp4 (목표 {c['video']['target_sec']}초)")
     if total > c["video"]["target_sec"] + 6:
         print(f"[casto] ⚠ 규격 초과({total:.0f}초) — 내레이션이 길다. 다음 실행 시 voice 길이 제한 확인")

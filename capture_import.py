@@ -18,9 +18,27 @@ import sys
 
 import catalog
 
-INBOX = os.path.join(catalog.IMAGE_DIR, "캡처_넣는곳")
+INBOX = catalog.INBOX_DIR
+NUMBERED = re.compile(r"^(\d{1,4})\s*번?\s*[-_.]?\s*(.*)$")
 EXTS = (".png", ".jpg", ".jpeg", ".webp")
 SOURCE = "capture"          # 사람이 직접 캡처한 실제 상품 사진
+
+
+def read_stem(stem: str, q: dict) -> tuple[str, int | None]:
+    """파일명 → (제품명, 번호). **번호만 적어도 동작한다.**
+
+    `3.png` → 번호표 3번의 제품. `3 락앤락 밀폐용기.png` → 번호 3 + 직접 적은 이름(이름 우선).
+    번호가 없으면 파일명 전체를 제품명으로 본다.
+    """
+    m = NUMBERED.match(stem.strip())
+    if not m:
+        return stem.strip(), None
+    n, rest = int(m.group(1)), m.group(2).strip()
+    if rest:
+        return rest, n
+    it = catalog.by_number(q, n)
+    # 번호표에 없는 번호를 이름으로 삼으면 "99"라는 이름의 제품이 생긴다 → 빈 이름으로 반려한다
+    return ((it or {}).get("name") or ""), n
 
 
 def split_name(stem: str) -> tuple[str, str]:
@@ -42,9 +60,13 @@ def scan(inbox: str = INBOX) -> list[str]:
                   if f.lower().endswith(EXTS) and not f.startswith("."))
 
 
-def import_one(cat: dict, path: str, today: str = "") -> str:
+def import_one(cat: dict, path: str, today: str = "", q: dict | None = None) -> str:
     """캡처 1장을 카탈로그에 등록하고 파일을 assets/products/로 옮긴다."""
-    stem = os.path.splitext(os.path.basename(path))[0]
+    q = q if q is not None else catalog.queue_load()
+    stem, num = read_stem(os.path.splitext(os.path.basename(path))[0], q)
+    if not stem:
+        print(f"[capture] ⚠ 번호표에 없는 번호({num}) — 건너뜀: {os.path.basename(path)}")
+        return ""
     brand, model = split_name(stem)
     slug = catalog.put(cat, name=stem, brand=brand, model=model, category=model or stem,
                        image_source=SOURCE, updated=today)
@@ -52,25 +74,39 @@ def import_one(cat: dict, path: str, today: str = "") -> str:
     os.makedirs(catalog.IMAGE_DIR, exist_ok=True)
     shutil.move(path, dest)
     cat["products"][slug]["image"] = dest
+    if num is not None:
+        catalog.mark_done(q, num)
     return slug
 
 
 def main():
     today = __import__("datetime").date.today().isoformat()
     cat = catalog.load()
+    q = catalog.queue_load()
     files = scan()
-    done = [import_one(cat, f, today) for f in files]
+    done = [s for s in (import_one(cat, f, today, q) for f in files) if s]
     if done:
         cat["updated"] = today
         catalog.save(cat)
+    wl = {}
+    if os.path.exists("data/watchlist.json"):
+        import json
+        with open("data/watchlist.json", encoding="utf-8") as f:
+            wl = json.load(f)
+    q = catalog.refresh_queue(cat, wl, q)      # 새로 발굴된 상품에도 번호를 붙인다
+    catalog.queue_save(q)
+    catalog.write_list(q)
     for s in done:
         print(f"[capture] 등록 — {cat['products'][s]['display']} → {cat['products'][s]['image']}")
     total = len(cat.get("products", {}))
     have = sum(1 for e in cat["products"].values() if catalog.image_path(e))
     print(f"[capture] 반입 {len(done)}건 · 카탈로그 {total}건 중 사진 보유 {have}건")
-    if have < total:
-        print(f"[capture] 사진이 없는 {total - have}건은 제품 이미지 없이 나간다(가짜를 쓰지 않는다).")
-        print(f"[capture] 필요 목록: python catalog.py  →  out/이미지_요청서.md")
+    todo = [(int(n), it) for n, it in q["items"].items() if not it.get("done")]
+    if todo:
+        print(f"[capture] 캡처 대기 {len(todo)}건 — 번호로 저장하면 끝(예: 3.png)")
+        for n, it in sorted(todo)[:8]:
+            print(f"[capture]   {n}. {it['name']}")
+        print(f"[capture] 전체 번호표: {catalog.LIST_FILE}")
     return 0
 
 

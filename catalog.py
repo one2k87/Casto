@@ -230,6 +230,93 @@ def cache_image(url: str, slug: str, session=None, dir_: str = IMAGE_DIR) -> str
         return None
 
 
+# ------------------------------------------------------------------ 캡처 번호표
+"""캡처를 **번호로** 주고받는다 — 사람이 하는 일을 최소로 줄이기 위해서다.
+
+파일명을 제품명으로 정확히 타이핑하는 건 생각보다 번거롭고, 한 글자만 달라도 매칭이 깨진다.
+그래서 시스템이 상품마다 **고정 번호**를 붙이고, 사람은 `3.png` 로만 저장하면 되게 한다.
+
+번호는 **한 번 붙으면 재사용하지 않는다.** 어제 3번을 보고 캡처해 둔 게 오늘 다른 상품의
+3번이 되면 엉뚱한 사진이 붙기 때문이다(이 채널에서 제일 피해야 할 사고).
+"""
+QUEUE_PATH = "data/shot_queue.json"
+INBOX_DIR = os.path.join(IMAGE_DIR, "캡처_넣는곳")
+LIST_FILE = os.path.join(INBOX_DIR, "_목록.md")
+
+
+def queue_load(path: str = QUEUE_PATH) -> dict:
+    if not os.path.exists(path):
+        return {"next": 1, "items": {}}
+    with open(path, encoding="utf-8") as f:
+        q = json.load(f)
+    q.setdefault("next", 1)
+    q.setdefault("items", {})
+    return q
+
+
+def queue_save(q: dict, path: str = QUEUE_PATH) -> str:
+    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(q, f, ensure_ascii=False, indent=1)
+    return path
+
+
+def number_for(q: dict, name: str, slug: str = "") -> int:
+    """이 상품의 캡처 번호. 없으면 새로 발급한다(기존 번호는 절대 바뀌지 않는다)."""
+    k = _key(name)
+    for n, it in q["items"].items():
+        if it.get("key") == k or (slug and it.get("slug") == slug):
+            return int(n)
+    n = int(q.get("next", 1))
+    q["items"][str(n)] = {"name": name, "slug": slug, "key": k, "done": False}
+    q["next"] = n + 1
+    return n
+
+
+def by_number(q: dict, n: int | str) -> dict | None:
+    return q["items"].get(str(int(n)))
+
+
+def mark_done(q: dict, n: int | str) -> None:
+    it = q["items"].get(str(int(n)))
+    if it:
+        it["done"] = True
+
+
+def refresh_queue(cat: dict, watchlist: dict, q: dict | None = None) -> dict:
+    """사진이 필요한 상품 전부에 번호를 붙인다(이미 있으면 유지)."""
+    q = q or queue_load()
+    for r in needs(cat, watchlist):
+        number_for(q, r["name"])
+    for slug, e in cat.get("products", {}).items():
+        if render_mode(e) != "exact":
+            number_for(q, e.get("display") or e.get("category") or slug, slug)
+    return q
+
+
+def write_list(q: dict, path: str = LIST_FILE) -> str:
+    """캡처하는 폴더 **안에** 번호표를 둔다 — 저장하면서 바로 보이도록."""
+    todo = [(int(n), it) for n, it in q["items"].items() if not it.get("done")]
+    todo.sort()
+    lines = ["# 캡처 번호표", "",
+             "쿠팡에서 아래 제품을 찾아 대표 이미지를 캡처하고, **번호로 저장**하세요.",
+             "예) 3번 → `3.png` (또는 `3.jpg`). 이 폴더에 그냥 넣으면 끝입니다.", ""]
+    if not todo:
+        lines.append("지금 필요한 캡처가 없습니다. 👍")
+    else:
+        lines += ["| 번호 | 제품 |", "|---|---|"]
+        lines += [f"| **{n}** | {it['name']} |" for n, it in todo]
+    done = [(int(n), it) for n, it in q["items"].items() if it.get("done")]
+    if done:
+        lines += ["", "---", "", f"완료 {len(done)}건: " +
+                  ", ".join(f"{n}번 {it['name']}" for n, it in sorted(done)[-12:])]
+    lines += ["", "번호는 한 번 붙으면 바뀌지 않습니다. 완료된 번호는 다시 쓰이지 않습니다."]
+    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines) + "\n")
+    return path
+
+
 # ------------------------------------------------------------------ 요청서
 def needs(cat: dict, watchlist: dict) -> list[dict]:
     """지금 추적 중인 상품 중 **아직 사진·브랜드가 확정 안 된 것**을 뽑는다."""
@@ -250,24 +337,19 @@ def request_sheet(rows: list[dict]) -> str:
     """사람이 쿠팡 파트너스에서 채워 올 목록. 한 줄씩 그대로 처리하면 된다."""
     if not rows:
         return "# 콕픽 상품 이미지 요청서\n\n필요한 항목 없음 — 추적 중인 상품 전부 사진·브랜드 확정됨.\n"
+    q = queue_load()
     out = ["# 콕픽 상품 이미지 요청서", "",
-           "쿠팡 파트너스 → 상품 검색 → **내 링크 생성** 화면에서 (1) 상품 이미지 저장 (2) 내 링크 복사.",
-           f"이미지는 `{IMAGE_DIR}/` 에 넣고, 아래 표를 `{CATALOG_PATH}`에 등록한다.",
-           "남의 링크·남의 썸네일은 절대 쓰지 않는다(수수료 탈취·저작권).", "",
-           "| 상품 | 상태 | 상품 ID | 확인할 것 |", "|---|---|---|---|"]
+           f"캡처를 **번호로 저장**해 `{INBOX_DIR}/` 에 넣으면 끝입니다(예: 3번 → `3.png`).",
+           "쿠팡 상품 페이지의 대표 이미지를 제품만 나오게 잘라 저장하세요.",
+           "남의 썸네일·릴스 캡처는 쓰지 않습니다(저작권).", "",
+           "| 번호 | 상품 | 상태 | 상품 ID |", "|---|---|---|---|"]
     label = {"named": "이름만 확정(사진 없음)", "generic": "미확정"}
     for r in rows:
-        out.append(f'| {r["name"]} | {label.get(r["mode"], r["mode"])} | {r["product_id"] or "-"} '
-                   f'| 브랜드·모델명 / 공식 상품 이미지 / 내 파트너스 링크 |')
-    out += ["", "등록 예시 (`data/catalog.json` products 항목):", "```json",
-            '"테팔-티타늄-언리미티드-28cm": {',
-            '  "display": "테팔 티타늄 언리미티드 28cm",',
-            '  "brand": "테팔", "model": "티타늄 언리미티드 28cm", "category": "코팅팬",',
-            '  "product_id": "coupang:1234567",',
-            '  "image": "assets/products/테팔-티타늄-언리미티드-28cm.jpg",',
-            '  "image_source": "coupang_partners",',
-            '  "coupang_url": "https://(내 파트너스 링크)"',
-            "}", "```"]
+        n = number_for(q, r["name"])
+        out.append(f'| **{n}** | {r["name"]} | {label.get(r["mode"], r["mode"])} '
+                   f'| {r["product_id"] or "-"} |')
+    out += ["", "브랜드·모델을 정확히 아시면 파일명을 `3 락앤락 밀폐용기 800ml.png` 처럼 "
+            "**번호 + 제품명**으로 저장하세요. 번호만 있어도 동작합니다."]
     return "\n".join(out)
 
 
@@ -278,13 +360,16 @@ def main():
         with open("data/watchlist.json", encoding="utf-8") as f:
             wl = json.load(f)
     rows = needs(cat, wl)
+    q = refresh_queue(cat, wl)
+    queue_save(q)
+    write_list(q)
     sheet = request_sheet(rows)
     os.makedirs("out", exist_ok=True)
     with open("out/이미지_요청서.md", "w", encoding="utf-8") as f:
         f.write(sheet)
-    print(sheet)
-    print(f"\n[catalog] 등록 {len(cat.get('products', {}))}건 · 사진 필요 {len(rows)}건 "
-          f"→ out/이미지_요청서.md")
+    todo = [n for n, it in q["items"].items() if not it.get("done")]
+    print(f"[catalog] 등록 {len(cat.get('products', {}))}건 · 캡처 필요 {len(todo)}건")
+    print(f"[catalog] 번호표 → {LIST_FILE}  (번호로 저장하면 끝: 3.png)")
 
 
 if __name__ == "__main__":

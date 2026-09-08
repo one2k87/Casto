@@ -25,3 +25,36 @@ def test_반입하면_실사진으로_등록되고_파일이_옮겨진다(tmp_pa
     assert e["image_source"] == "capture"
     assert catalog.render_mode(e) == "exact"
     assert not src.exists() and os.path.exists(e["image"])
+
+
+def test_번호만_적어도_번호표의_제품으로_들어간다(tmp_path, monkeypatch):
+    monkeypatch.setattr(catalog, "IMAGE_DIR", str(tmp_path / "products"))
+    q = {"next": 1, "items": {}}
+    n = catalog.number_for(q, "락앤락 접이식 밀폐용기 800ml")
+    assert n == 1
+    inbox = tmp_path / "products" / "캡처_넣는곳"
+    inbox.mkdir(parents=True)
+    src = inbox / f"{n}.png"
+    src.write_bytes(b"x")
+    cat = {"products": {}}
+    slug = capture_import.import_one(cat, str(src), q=q)
+    assert cat["products"][slug]["display"] == "락앤락 접이식 밀폐용기 800ml"
+    assert q["items"]["1"]["done"] is True
+
+
+def test_번호는_재사용되지_않는다():
+    """어제 3번을 보고 캡처한 게 오늘 다른 제품의 3번이 되면 엉뚱한 사진이 붙는다."""
+    q = {"next": 1, "items": {}}
+    a = catalog.number_for(q, "A 제품")
+    catalog.mark_done(q, a)
+    b = catalog.number_for(q, "B 제품")
+    assert b != a and b == a + 1
+    assert catalog.number_for(q, "A 제품") == a      # 기존 번호는 유지된다
+
+
+def test_번호_뒤에_이름을_적으면_이름이_우선한다():
+    q = {"next": 1, "items": {}}
+    catalog.number_for(q, "가습기")
+    assert capture_import.read_stem("1 락앤락 밀폐용기 800ml", q) == ("락앤락 밀폐용기 800ml", 1)
+    assert capture_import.read_stem("1", q) == ("가습기", 1)
+    assert capture_import.read_stem("3번", q)[1] == 3
