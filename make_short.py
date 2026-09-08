@@ -135,10 +135,10 @@ def build_scenes(s, c):
         reason += "."
     if v["key"] == "조건콕":
         cap = f"{cond} {v['card']}".strip()
-        voice = f"{cond} {v['voice']} {reason} 자세한 비교는 픽담에서."
+        voice = f"{cond} {v['voice']} {reason} 링크는 설명란에."
     else:
         cap = v["card"]
-        voice = f"{v['voice']} {reason} 자세한 비교는 픽담에서."
+        voice = f"{v['voice']} {reason} 링크는 설명란에."
     scenes.append({"kind": "verdict", "verdict": v, "caption": cap, "voice": re.sub(r"\s+", " ", voice).strip()})
     return scenes, v
 
@@ -256,7 +256,7 @@ def scene_card(sc, i, total, c, shot=None, label="", note=""):
                   outline=sage, width=6)
         d.text((x, 1562), "콕", font=font(44), anchor="mm", fill=(255, 255, 255) if on else sage)
 
-    d.text((W // 2, 1790), "자세한 비교는 픽담 · 설명란", font=font(40), fill=sage, anchor="mm")
+    d.text((W // 2, 1790), "링크는 설명란 · 비교는 픽담", font=font(40), fill=sage, anchor="mm")
     d.polygon([(W // 2 - 18, 1822), (W // 2 + 18, 1822), (W // 2, 1846)], fill=sage)
     for k in range(total):  # 진행 점
         x = W // 2 + (k - total / 2 + .5) * 40
@@ -328,14 +328,16 @@ def build_caption(s, v, post, c, total, entry=None):
     name = catalog.display_name(entry, s["product"])
     head = f"{v['caption']} {name}"
     buy = (entry or {}).get("coupang_url", "")
-    lines = [
-        f"📦 {head} — {s['title']}",
-        "",
-        f"콕 3번 통과하면 열립니다. 오늘은 {v['key']}!",
-        f"👉 자세한 비교는 픽담: {post['link']}",
-    ]
+    # CTA 순서(2026-09-08 결정): **쿠팡 링크가 있으면 그게 1순위**다.
+    # 픽담에 그 제품 글도 쿠팡 링크도 없는 지금, 픽담을 1순위로 두면 낮은 클릭률을 이탈로 날린다.
+    # 링크가 없을 때만 픽담이 1순위가 된다(그때는 픽담이 유일한 착지점이다).
+    lines = [f"📦 {head} — {s['title']}", ""]
     if buy:
-        lines.append(f"🛒 {name}: {buy}")
+        lines += [f"🛒 {name} 바로가기: {buy}",
+                  f"📄 더 자세한 비교는 픽담: {post['link']}"]
+    else:
+        lines += [f"👉 자세한 비교는 픽담: {post['link']}"]
+    lines.append(f"콕 3번 통과하면 열립니다. 오늘은 {v['key']}!")
     return "\n".join(lines + [
         "",
         " ".join(tags),

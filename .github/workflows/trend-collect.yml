@@ -64,6 +64,11 @@ jobs:
       - name: 상품 캡처 반입
         run: python capture_import.py
 
+      # 콕픽이 관측한 유행템을 픽담(픽토)에 글감으로 넘긴다.
+      # 영상과 글이 같은 제품을 가리켜야 유입 구조가 실제로 작동한다(2026-09-08 결정).
+      - name: 픽담 글감 요청서 갱신
+        run: python topic_requests.py
+
       - name: 결과 커밋
         run: |
           git config user.name casto-bot && git config user.email casto@solvup.local
