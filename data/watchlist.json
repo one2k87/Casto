@@ -1,4 +1,136 @@
 {
+ "늘어나는_밀폐용기": {
+  "name": "늘어나는 밀폐용기",
+  "search_keyword": "늘어나는 밀폐용기",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '미국에서 유행하는 늘어나는 밀폐용기'로 언급됨.",
+  "category": "50000008",
+  "last_found": "2026-09-08",
+  "first_seen": "2026-09-08"
+ },
+ "레이저가이드가위": {
+  "name": "레이저가이드가위",
+  "search_keyword": "레이저 가이드 가위",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '레이저가이드가위'로 여러번 언급됨.",
+  "category": "50000008",
+  "last_found": "2026-09-08",
+  "first_seen": "2026-09-08"
+ },
+ "얼음틀_얼음보관통": {
+  "name": "얼음틀 얼음보관통",
+  "search_keyword": "얼음틀 얼음보관통",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '얼음틀, 얼음보관통'으로 언급됨.",
+  "category": "50000008",
+  "last_found": "2026-09-08",
+  "first_seen": "2026-09-08"
+ },
+ "쌀통_쌀보관": {
+  "name": "쌀통 쌀보관",
+  "search_keyword": "쌀통 쌀 보관",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '쌀통 #쌀보관'으로 언급됨.",
+  "category": "50000008",
+  "last_found": "2026-09-08",
+  "first_seen": "2026-09-08"
+ },
+ "에그크래커": {
+  "name": "에그크래커",
+  "search_keyword": "계란 에그크래커",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '에그크래커 #계란크래커'로 언급됨.",
+  "category": "50000008",
+  "last_found": "2026-09-08",
+  "first_seen": "2026-09-08"
+ },
+ "미니세탁기": {
+  "name": "미니세탁기",
+  "search_keyword": "미니세탁기",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '강희재미니세탁기'로 언급됨.",
+  "category": "50000003",
+  "last_found": "2026-09-08",
+  "first_seen": "2026-09-08"
+ },
+ "무드등": {
+  "name": "무드등",
+  "search_keyword": "무드등 센서등",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '무드등 #센서등'으로 언급됨.",
+  "category": "50000004",
+  "last_found": "2026-09-08",
+  "first_seen": "2026-09-08"
+ },
+ "그릇정리대": {
+  "name": "그릇정리대",
+  "search_keyword": "그릇 정리대",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '그릇정리대'로 언급됨.",
+  "category": "50000004",
+  "last_found": "2026-09-08",
+  "first_seen": "2026-09-08"
+ },
+ "싱크대_식기세척기": {
+  "name": "싱크대 식기세척기",
+  "search_keyword": "싱크대 식기세척기",
+  "price_band": "고가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '싱크대 열었더니 이런 게 나오네요? 요즘 식세기는 다르네요#식기세척기'로 언급됨.",
+  "category": "50000003",
+  "last_found": "2026-09-08",
+  "first_seen": "2026-09-08"
+ },
+ "자동회전냄비": {
+  "name": "자동회전냄비",
+  "search_keyword": "자동회전냄비",
+  "price_band": "고가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '자동회전 냄비 #자동회전냄비'로 언급됨.",
+  "category": "50000008",
+  "last_found": "2026-09-08",
+  "first_seen": "2026-09-08"
+ },
+ "접이식_플러스도마": {
+  "name": "접이식 플러스도마",
+  "search_keyword": "접이식 플러스 도마",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '접이식 플러스 도마🔪🍽️#접이식도마 #플러스도마'로 언급됨.",
+  "category": "50000008",
+  "last_found": "2026-09-08",
+  "first_seen": "2026-09-08"
+ },
+ "이케아_트로네스_신발장": {
+  "name": "이케아 트로네스 신발장",
+  "search_keyword": "이케아 트로네스 신발장",
+  "price_band": "중가",
+  "brand": "이케아",
+  "product_id": "",
+  "evidence": "제목에 '이케아 트로네스 신발장'으로 언급됨.",
+  "category": "50000004",
+  "last_found": "2026-09-08",
+  "first_seen": "2026-09-08"
+ },
  "접이식_블루투스_키보드": {
   "name": "접이식 블루투스 키보드",
   "search_keyword": "접이식 블루투스 키보드 무선 휴대용",
