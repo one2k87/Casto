@@ -294,9 +294,14 @@ def set_details(q: dict, n: int | str, **kw) -> dict | None:
             it[k] = kw[k]
     if it.get("brand") and it.get("model"):
         it["display"] = f"{it['brand']} {it['model']}"
-    if not it.get("url"):
-        from urllib.parse import quote
-        it["url"] = COUPANG_SEARCH.format(quote(it.get("search") or it.get("name", "")))
+    # 링크는 **항상 검색 URL**로 만든다. 상품 ID 직링크는 우리가 열어서 확인할 수 없고
+    # (쿠팡은 브라우저·서버 양쪽에서 차단), 죽은 링크는 검색보다 나쁘다 — "상품을 찾을 수 없다"가
+    # 뜨는 순간 사람 손이 멈춘다(2026-09-08 실측). 확인된 URL을 명시적으로 넘길 때만 그것을 쓴다.
+    if kw.get("url"):
+        it["url"] = kw["url"]
+    else:
+        from urllib.parse import quote_plus
+        it["url"] = COUPANG_SEARCH.format(quote_plus(it.get("search") or it.get("name", "")))
     return it
 
 
