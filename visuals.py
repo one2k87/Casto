@@ -91,15 +91,20 @@ PRODUCT_BOX = (int(W * 0.62), int(H * 0.24))   # 사진 카드 안쪽 최대 크
 PRODUCT_CENTER = (W // 2, int(H * 0.33))
 
 
-def knockout_white(img: Image.Image, thresh: int = 240) -> Image.Image:
-    """쇼핑몰 상품컷의 흰 배경을 투명으로 바꾼다(파스텔 배경 위에 흰 사각형이 뜨지 않게).
+def knockout_white(img: Image.Image, tol: int = 30, floor: int = 200) -> Image.Image:
+    """상품컷의 밝은 배경을 투명으로 바꾼다(파스텔 카드 위에 회색 사각형이 뜨지 않게).
 
+    AI·쇼핑몰 상품컷의 배경은 순백(255)이 아니라 **미묘한 회백색**인 경우가 많다(실측: 240~248).
+    그래서 고정 임계값 대신 **모서리 색을 기준으로 한 허용오차**로 판정한다.
     가장자리에서 흘러들어오는 flood fill이라 **제품 안쪽의 흰색(가전 본체 등)은 보존**된다.
-    단순 임계값 방식은 흰 냉장고를 지워버린다.
     """
     im = img.convert("RGBA")
     px = im.load()
     w, h = im.size
+    corners = [px[0, 0], px[w - 1, 0], px[0, h - 1], px[w - 1, h - 1]]
+    ref = tuple(sorted(c[i] for c in corners)[len(corners) // 2] for i in range(3))
+    if min(ref) < floor:          # 배경이 밝지 않다 → 누끼 대상이 아니다(연출컷 등)
+        return im
     seen = bytearray(w * h)
     stack = [(x, y) for x in range(w) for y in (0, h - 1)] + \
             [(x, y) for y in range(h) for x in (0, w - 1)]
@@ -108,7 +113,7 @@ def knockout_white(img: Image.Image, thresh: int = 240) -> Image.Image:
         if not (0 <= x < w and 0 <= y < h) or seen[y * w + x]:
             continue
         r, g, b, a = px[x, y]
-        if a == 0 or min(r, g, b) < thresh:
+        if a == 0 or max(abs(r - ref[0]), abs(g - ref[1]), abs(b - ref[2])) > tol:
             continue
         seen[y * w + x] = 1
         px[x, y] = (r, g, b, 0)
