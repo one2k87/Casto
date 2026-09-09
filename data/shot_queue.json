@@ -266,7 +266,7 @@
    "name": "오일 스프레이",
    "slug": "",
    "key": "오일스프레이",
-   "done": false,
+   "done": true,
    "search": "오일 스프레이",
    "confidence": "낮음",
    "note": "분무형 기름병",

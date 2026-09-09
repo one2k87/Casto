@@ -361,6 +361,18 @@
    "coupang_url": "",
    "price_band": "",
    "updated": "2026-09-09"
+  },
+  "오일-스프레이": {
+   "display": "오일 스프레이",
+   "brand": "오일",
+   "model": "스프레이",
+   "category": "스프레이",
+   "product_id": "",
+   "image": "assets/products/오일-스프레이.jpg",
+   "image_source": "capture",
+   "coupang_url": "",
+   "price_band": "",
+   "updated": "2026-09-09"
   }
  }
 }
