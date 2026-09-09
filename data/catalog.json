@@ -53,14 +53,14 @@
   "에그크래커": {
    "display": "에그크래커",
    "brand": "",
-   "model": "",
+   "model": "에그크래커",
    "category": "에그크래커",
    "product_id": "",
-   "image": "",
-   "image_source": "",
+   "image": "assets/products/에그크래커.jpg",
+   "image_source": "capture",
    "coupang_url": "",
    "price_band": "저가",
-   "updated": "2026-09-08"
+   "updated": "2026-09-09"
   },
   "미니세탁기": {
    "display": "미니세탁기",
