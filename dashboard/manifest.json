@@ -1,7 +1,9 @@
 {
-  "name": "Casto",
+  "id": "/Casto/dashboard/",
+  "name": "Casto — 콕픽",
   "short_name": "Casto",
-  "start_url": "./",
+  "start_url": "./index.html",
+  "scope": "https://one2k87.github.io/Casto/dashboard/",
   "display": "standalone",
   "background_color": "#eef4fd",
   "theme_color": "#5b8def",
@@ -16,6 +18,5 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "scope": "https://one2k87.github.io/"
+  ]
 }

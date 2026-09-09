@@ -171,6 +171,10 @@ def main() -> None:
     os.makedirs(STATS_DIR, exist_ok=True)
     with open(os.path.join(STATS_DIR, f"{snap['date']}.json"), "w", encoding="utf-8") as f:
         json.dump(snap, f, ensure_ascii=False, indent=1)
+    # 대시보드는 raw.githubusercontent로 파일 하나만 읽을 수 있다(디렉터리 목록 조회 불가).
+    # 그래서 **항상 같은 경로의 최신본**을 따로 둔다. 없으면 앱이 성과를 못 보여준다.
+    with open("data/channel_latest.json", "w", encoding="utf-8") as f:
+        json.dump(snap, f, ensure_ascii=False, indent=1)
     print(report(_snapshots()))
 
 
