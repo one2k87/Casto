@@ -20,6 +20,9 @@ concurrency:
 
 jobs:
   collect:
+    env:
+      # 러너는 UTC — KST 새벽 실행이 전날 날짜로 저장돼 스냅샷을 덮어쓰는 것을 막는다(2026-09-09 실측)
+      TZ: Asia/Seoul
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
