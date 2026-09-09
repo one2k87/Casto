@@ -109,3 +109,34 @@ def test_캡처는_실사진으로_인정된다(tmp_path):
     img.write_bytes(b"x")
     e = {"display": "테팔 A 28cm", "image": str(img), "image_source": "capture"}
     assert catalog.render_mode(e) == "exact"
+
+
+def test_새_번호에는_검색어와_쿠팡_링크가_바로_붙는다():
+    """set_details를 따로 부르지 않으면 링크가 없어 앱에서 '링크 없음'이 떴다(2026-09-09 실측)."""
+    q = {"next": 1, "items": {}}
+    n = catalog.number_for(q, "자동 과일깎이")
+    it = q["items"][str(n)]
+    assert it["search"] == "자동 과일깎이"
+    assert it["url"].startswith("https://www.coupang.com/np/search?q=")
+
+
+def test_같은_물건의_다른_표현을_중복으로_잡는다():
+    """수집기가 같은 제품을 매일 조금씩 다른 이름으로 준다 — 두 번 캡처하게 두면 안 된다."""
+    q = {"next": 1, "items": {}}
+    catalog.number_for(q, "얼음틀 얼음보관통")
+    catalog.number_for(q, "계란 흰자 분리기")
+    assert catalog.dup_of(q, "얼음 보관통") == 1          # 문자열 포함
+    assert catalog.dup_of(q, "코에서 계란 흰자 주방용품") == 2   # 토큰 겹침
+    assert catalog.dup_of(q, "자동 과일깎이") is None      # 관계없는 건 새 번호
+
+
+def test_refresh가_새_중복_번호를_자동_보류한다():
+    cat = {"products": {}}
+    catalog.put(cat, name="얼음틀 얼음보관통")
+    q = catalog.refresh_queue(cat, {}, {"next": 1, "items": {}})
+    n1 = catalog.number_for(q, "얼음틀 얼음보관통")
+    catalog.put(cat, name="얼음 보관통")
+    q = catalog.refresh_queue(cat, {}, q)
+    n2 = catalog.number_for(q, "얼음 보관통")
+    assert n2 != n1 and q["items"][str(n2)]["hold"] is True
+    assert f"{n1}번" in q["items"][str(n2)]["note"]

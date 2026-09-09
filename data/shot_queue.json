@@ -295,25 +295,38 @@
    "name": "코에서 계란 흰자 주방용품",
    "slug": "",
    "key": "코에서계란흰자주방용품",
-   "done": false
+   "done": false,
+   "note": "21번(계란 흰자 분리기)과 같은 물건 — 21번으로 캡처 완료",
+   "hold": true,
+   "url": "https://www.coupang.com/np/search?q=%EC%BD%94%EC%97%90%EC%84%9C+%EA%B3%84%EB%9E%80+%ED%9D%B0%EC%9E%90+%EC%A3%BC%EB%B0%A9%EC%9A%A9%ED%92%88"
   },
   "28": {
    "name": "얼음 보관통",
    "slug": "",
    "key": "얼음보관통",
-   "done": false
+   "done": false,
+   "note": "3번(얼음틀 얼음보관통)과 같은 물건 — 3번으로 캡처 완료",
+   "hold": true,
+   "url": "https://www.coupang.com/np/search?q=%EC%96%BC%EC%9D%8C+%EB%B3%B4%EA%B4%80%ED%86%B5"
   },
   "29": {
    "name": "자동 과일깎이",
    "slug": "",
    "key": "자동과일깎이",
-   "done": false
+   "done": false,
+   "search": "과일 깎는 기계 자동",
+   "confidence": "낮음",
+   "note": "자동 사과깎이 계열",
+   "url": "https://www.coupang.com/np/search?q=%EA%B3%BC%EC%9D%BC+%EA%B9%8E%EB%8A%94+%EA%B8%B0%EA%B3%84+%EC%9E%90%EB%8F%99"
   },
   "30": {
    "name": "기름 분사 용기",
    "slug": "",
    "key": "기름분사용기",
-   "done": false
+   "done": false,
+   "note": "24번(오일 스프레이)과 같은 물건 — 24번으로 캡처 완료",
+   "hold": true,
+   "url": "https://www.coupang.com/np/search?q=%EA%B8%B0%EB%A6%84+%EB%B6%84%EC%82%AC+%EC%9A%A9%EA%B8%B0"
   }
  }
 }

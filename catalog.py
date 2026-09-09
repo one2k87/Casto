@@ -262,14 +262,48 @@ def queue_save(q: dict, path: str = QUEUE_PATH) -> str:
     return path
 
 
+def _tokens(name: str) -> set:
+    return {t for t in re.split(r"\s+", unicodedata.normalize("NFKC", name or "").strip()) if t}
+
+
+def dup_of(q: dict, name: str) -> int | None:
+    """이미 있는 번호 중 **같은 물건으로 보이는 것**을 찾는다.
+
+    수집기는 같은 제품을 매일 조금씩 다른 이름으로 준다("얼음 보관통" vs "얼음틀 얼음보관통").
+    완전일치만 보면 같은 제품에 번호가 계속 새로 발급돼 캡처를 두 번 하게 된다(2026-09-09 실측:
+    27·28·30이 21·3·24의 중복이었다). 그래서 두 가지를 더 본다.
+      ① 정규화 문자열의 포함관계 — "얼음보관통" ⊂ "얼음틀얼음보관통"
+      ② 토큰 겹침 50% 이상 — "계란 흰자 분리기" vs "코에서 계란 흰자 주방용품"
+    의미가 다른데 표현만 다른 경우(오일 스프레이 vs 기름 분사 용기)는 못 잡는다 — 그건 사람이 본다.
+    """
+    k, tk = _key(name), _tokens(name)
+    for n, it in q["items"].items():
+        ok = it.get("key") or _key(it.get("name", ""))
+        if not ok or not k:
+            continue
+        if k in ok or ok in k:
+            return int(n)
+        ot = _tokens(it.get("name", ""))
+        if tk and ot and len(tk & ot) / min(len(tk), len(ot)) >= 0.5:
+            return int(n)
+    return None
+
+
 def number_for(q: dict, name: str, slug: str = "") -> int:
-    """이 상품의 캡처 번호. 없으면 새로 발급한다(기존 번호는 절대 바뀌지 않는다)."""
+    """이 상품의 캡처 번호. 없으면 새로 발급한다(기존 번호는 절대 바뀌지 않는다).
+
+    새 항목에는 **검색어와 쿠팡 링크를 바로 넣는다.** 예전에는 set_details를 따로 불러야만
+    링크가 붙어서, 매일 새로 발굴되는 항목이 전부 "링크 없음"으로 떴다(2026-09-09 실측).
+    """
     k = _key(name)
     for n, it in q["items"].items():
         if it.get("key") == k or (slug and it.get("slug") == slug):
             return int(n)
+    from urllib.parse import quote_plus
     n = int(q.get("next", 1))
-    q["items"][str(n)] = {"name": name, "slug": slug, "key": k, "done": False}
+    q["items"][str(n)] = {"name": name, "slug": slug, "key": k, "done": False,
+                          "search": name,
+                          "url": COUPANG_SEARCH.format(quote_plus(name))}
     q["next"] = n + 1
     return n
 
@@ -316,13 +350,25 @@ def mark_done(q: dict, n: int | str) -> None:
 
 
 def refresh_queue(cat: dict, watchlist: dict, q: dict | None = None) -> dict:
-    """사진이 필요한 상품 전부에 번호를 붙인다(이미 있으면 유지)."""
+    """사진이 필요한 상품 전부에 번호를 붙인다(이미 있으면 유지).
+
+    새 번호가 **이미 있는 물건의 다른 표현**이면 자동으로 보류로 내린다. 번호는 재사용하지 않는
+    규칙이라 지우지는 않고, 목록에서만 빼서 같은 물건을 두 번 캡처하는 낭비를 막는다.
+    """
     q = q or queue_load()
+    before = set(q.get("items", {}))
     for r in needs(cat, watchlist):
         number_for(q, r["name"])
     for slug, e in cat.get("products", {}).items():
         if render_mode(e) != "exact":
             number_for(q, e.get("display") or e.get("category") or slug, slug)
+    for n in set(q["items"]) - before:                       # 이번에 새로 생긴 번호만 검사
+        it = q["items"][n]
+        rest = {k: v for k, v in q["items"].items() if k != n}
+        d = dup_of({"items": rest}, it.get("name", ""))
+        if d is not None:
+            it["hold"] = True
+            it["note"] = f"{d}번과 같은 물건으로 보임 — {d}번으로 캡처"
     return q
 
 
