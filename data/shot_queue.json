@@ -246,7 +246,7 @@
    "name": "레트로 수화기",
    "slug": "",
    "key": "레트로수화기",
-   "done": false,
+   "done": true,
    "search": "레트로 수화기",
    "confidence": "낮음",
    "note": "스마트폰용 유선 수화기",

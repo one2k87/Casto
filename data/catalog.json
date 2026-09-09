@@ -337,6 +337,18 @@
    "coupang_url": "",
    "price_band": "",
    "updated": "2026-09-09"
+  },
+  "레트로-수화기": {
+   "display": "레트로 수화기",
+   "brand": "레트로",
+   "model": "수화기",
+   "category": "수화기",
+   "product_id": "",
+   "image": "assets/products/레트로-수화기.jpg",
+   "image_source": "capture",
+   "coupang_url": "",
+   "price_band": "",
+   "updated": "2026-09-09"
   }
  }
 }
