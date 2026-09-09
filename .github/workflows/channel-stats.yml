@@ -3,7 +3,7 @@ name: 채널 성과 추적
 # API 키만으로 동작(공개 데이터). 8주 손절 기준을 자동 판정해 감으로 판단하지 않게 한다.
 on:
   schedule:
-    - cron: "20 13 * * *"
+    - cron: "50 10 * * *"    # 19:50 KST — 앱을 열면 성과가 최신이다
   workflow_dispatch:
 
 permissions:

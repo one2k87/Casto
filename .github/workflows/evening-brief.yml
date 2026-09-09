@@ -1,0 +1,23 @@
+name: 저녁 작업 브리핑
+# 20:00 KST — 작업 시작 시각에 "오늘 뭘 하면 되는지"를 폰으로 먼저 보낸다.
+# 앱을 열기 전에 할 일을 알면 앉자마자 시작할 수 있다.
+on:
+  schedule:
+    - cron: "0 11 * * *"    # 20:00 KST
+  workflow_dispatch:
+
+jobs:
+  brief:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Seoul
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install requests
+      - name: 브리핑 전송
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python evening_brief.py

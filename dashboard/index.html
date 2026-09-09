@@ -106,6 +106,37 @@
   :focus-visible{outline:2px solid var(--ring);outline-offset:2px;border-radius:10px}
   .foot{text-align:center;color:var(--muted);font-size:11px;margin-top:16px}
   .skeleton{color:var(--muted);font-size:13px}
+
+  /* ── 모바일 캡처 — 촬영/선택 → 크롭 → 등록까지 폰 안에서 끝낸다 ───────────── */
+  .iconbtn{min-width:38px;min-height:38px;display:grid;place-items:center;border-radius:11px;
+    background:var(--card2);border:1px solid var(--line);font-size:16px;cursor:pointer;
+    color:var(--txt);font-family:inherit}
+  .shot .act{display:flex;gap:6px;flex:0 0 auto}
+  .shot .act a,.shot .act button{min-width:var(--tap);min-height:var(--tap);border-radius:11px;
+    display:grid;place-items:center;background:var(--card2);border:1px solid var(--line);
+    text-decoration:none;font-size:17px;cursor:pointer;color:var(--txt);font-family:inherit}
+  .shot .act .cam{background:var(--accent);border-color:var(--accent)}
+  #ovl{position:fixed;inset:0;z-index:60;background:#0a0d13;display:none;
+    flex-direction:column;padding:calc(10px + var(--safe-t)) 12px calc(12px + var(--safe-b))}
+  #ovl.on{display:flex}
+  #ovl .top{display:flex;align-items:center;gap:10px;color:#fff;font-weight:800;font-size:15px}
+  #ovl .top button{margin-left:auto;background:transparent;border:0;color:#fff;font-size:22px;
+    min-width:var(--tap);min-height:var(--tap);cursor:pointer}
+  #ovl .stage{flex:1;display:grid;place-items:center;overflow:hidden;margin:8px 0}
+  #cvs{max-width:100%;max-height:100%;touch-action:none;border-radius:10px}
+  #ovl .hint{color:#c8d0de;font-size:12px;text-align:center;margin-bottom:8px}
+  #ovl .bar{display:flex;gap:8px}
+  #ovl .bar button{flex:1;min-height:var(--tap);border-radius:12px;border:1px solid #2a3444;
+    background:#161d29;color:#e8edf5;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer}
+  #ovl .bar button.go{background:var(--accent);border-color:var(--accent);color:#fff;flex:1.6}
+  #ovl .bar button:disabled{opacity:.5}
+  #toast{position:fixed;left:50%;bottom:calc(24px + var(--safe-b));transform:translateX(-50%);
+    background:#111826;color:#fff;padding:12px 18px;border-radius:12px;font-size:14px;z-index:70;
+    display:none;max-width:88vw;text-align:center}
+  #toast.on{display:block}
+  .panel{margin-top:10px;display:none}.panel.on{display:block}
+  .panel input{width:100%;min-height:var(--tap);border-radius:11px;border:1px solid var(--line);
+    background:var(--card2);color:var(--txt);padding:0 12px;font-size:15px;font-family:inherit}
 </style>
 </head>
 <body>
@@ -113,6 +144,7 @@
   <img src="icons/icon-192.png" alt="" width="30" height="30" onerror="this.style.display='none'">
   <div><h1>Casto</h1><div class="sub">콕픽 · 유행템 쇼츠</div></div>
   <div class="spacer"></div>
+  <button class="iconbtn" id="cfgBtn" aria-label="설정" title="설정">⚙</button>
   <nav class="appsw" aria-label="앱 전환">
     <a href="https://one2k87.github.io/Scripto/dashboard/" aria-label="Scripto">S</a
     ><a href="https://one2k87.github.io/Picto/dashboard/" aria-label="Picto">P</a
@@ -162,8 +194,34 @@
        rel="noopener" hidden><span class="ri">⚠️</span>실행 기록 확인 <small>Actions</small></a>
   </div>
 
+  <div class="card panel" id="cfgPanel">
+    <h2>⚙ 등록 설정</h2>
+    <div class="sub" style="margin-bottom:8px">
+      폰에서 캡처를 바로 등록하려면 <b>깃허브 토큰</b>이 한 번 필요합니다.
+      <a class="ext" href="https://github.com/settings/personal-access-tokens/new" target="_blank"
+         rel="noopener" style="color:var(--accent)">토큰 만들기 ↗</a><br>
+      Repository access = <b>one2k87/Casto</b> 하나만, Permissions = <b>Contents: Read and write</b>.
+    </div>
+    <input id="tok" type="password" inputmode="text" autocomplete="off"
+           placeholder="github_pat_… (이 기기에만 저장)">
+    <button class="btn" id="tokSave">저장</button>
+    <button class="btn ghost" id="tokClear">이 기기에서 지우기</button>
+  </div>
+
   <div class="foot">Casto v2 · <a href="#" id="reload" style="color:inherit">새로고침 ↻</a></div>
 </main>
+<div id="ovl">
+  <div class="top"><span id="ovlTitle">캡처 등록</span><button id="ovlX" aria-label="닫기">✕</button></div>
+  <div class="stage"><canvas id="cvs"></canvas></div>
+  <div class="hint">모서리를 끌어 크기 조절 · 안쪽을 끌어 이동 — 제품만 남기세요</div>
+  <div class="bar">
+    <button id="cropAll">전체</button>
+    <button id="reshoot">다시</button>
+    <button class="go" id="send">등록</button>
+  </div>
+</div>
+<div id="toast"></div>
+<input type="file" id="pick" accept="image/*" capture="environment" hidden>
 <script>
 const RAW = "https://raw.githubusercontent.com/one2k87/Casto/main/";
 const $ = id => document.getElementById(id);
@@ -179,6 +237,10 @@ const store = {                                  // 실패해도 화면이 죽�
   set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} },
 };
 
+// 등록은 했지만 아직 서버 반입 전인 번호 — 목록에서 미리 빼야 헷갈리지 않는다
+const sent = new Set(JSON.parse(store.get("casto.sent") || "[]"));
+const saveSent = () => store.set("casto.sent", JSON.stringify([...sent]));
+
 function setNext(ico, t1, t2, btn){
   $("nextIco").textContent = ico; $("nextT1").textContent = t1; $("nextT2").textContent = t2;
   const b = $("nextBtn");
@@ -191,7 +253,7 @@ function setNext(ico, t1, t2, btn){
 function renderShots(q){
   const items = Object.entries(q.items || {})
     .map(([n,it]) => ({n:+n, ...it}))
-    .filter(it => !it.done && !it.hold)
+    .filter(it => !it.done && !it.hold && !sent.has(it.n))
     .sort((a,b) => a.n - b.n);
   $("shotCount").textContent = items.length + "건";
   $("sShot").textContent = items.length;
@@ -202,7 +264,11 @@ function renderShots(q){
     const mark = {"높음":"◎","중간":"○","낮음":"△"}[it.confidence] || "";
     return `<div class="shot"><div class="no">${it.n}</div>
       <div class="nm"><b>${who} ${mark}</b><span>${it.search || it.name} → ${it.n}.png</span></div>
-      <a href="${it.url||"#"}" target="_blank" rel="noopener" aria-label="쿠팡에서 열기">🛒</a></div>`;
+      <div class="act">
+        <a href="${it.url||"#"}" target="_blank" rel="noopener" aria-label="쿠팡에서 열기">🛒</a>
+        <button class="cam" data-n="${it.n}" data-name="${(who||"").replace(/"/g,"&quot;")}"
+                aria-label="${it.n}번 캡처 등록">📷</button>
+      </div></div>`;
   };
   $("shotList").innerHTML = items.length
     ? items.slice(0, CAP).map(card).join("")
@@ -267,6 +333,153 @@ function renderShots(q){
   };
   if(videos === 0) $("ciRow").hidden = false;   // 아직 발행 0편이면 실행기록을 노출
 })();
+
+
+/* ── 모바일 캡처 등록 ─────────────────────────────────────────────────────────
+   폰에서 촬영/선택 → 크롭 → 리사이즈 → 깃허브에 커밋한다.
+   커밋이 곧 트리거다: capture-import 워크플로가 push를 받아 카탈로그에 반입하고
+   텔레그램으로 결과를 보낸다. 사람이 하는 동작은 [📷 → 자르기 → 등록] 세 번뿐이다.
+
+   토큰은 **사용자가 자기 기기에 직접 넣고** localStorage에만 둔다(서버로 보내지 않는다).
+   레포 하나·Contents 권한만 가진 fine-grained 토큰을 쓰도록 안내한다. */
+const REPO = "one2k87/Casto";
+const DIR = "assets/products/캡처_넣는곳";
+
+const toast = (m, ms=2600) => { const t=$("toast"); t.textContent=m; t.classList.add("on");
+  clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.remove("on"), ms); };
+
+/* 설정 패널 */
+$("cfgBtn").onclick = () => { const p=$("cfgPanel"); p.classList.toggle("on");
+  if(p.classList.contains("on")){ $("tok").value = store.get("casto.gh") || "";
+    p.scrollIntoView({behavior:"smooth", block:"center"}); } };
+$("tokSave").onclick = () => { const v=$("tok").value.trim();
+  if(!v) return toast("토큰을 붙여넣어 주세요");
+  store.set("casto.gh", v); $("cfgPanel").classList.remove("on"); toast("저장했습니다 — 이제 📷로 등록됩니다"); };
+$("tokClear").onclick = () => { store.set("casto.gh", ""); $("tok").value=""; toast("토큰을 지웠습니다"); };
+
+/* 크롭 상태 */
+const cvs = $("cvs"), ctx = cvs.getContext("2d");
+let img = null, crop = null, cur = null, drag = null;
+
+function draw(){
+  if(!img) return;
+  ctx.clearRect(0,0,cvs.width,cvs.height);
+  ctx.drawImage(img, 0, 0, cvs.width, cvs.height);
+  ctx.fillStyle = "rgba(8,11,17,.62)";
+  ctx.fillRect(0,0,cvs.width,crop.y);
+  ctx.fillRect(0,crop.y+crop.h,cvs.width,cvs.height-crop.y-crop.h);
+  ctx.fillRect(0,crop.y,crop.x,crop.h);
+  ctx.fillRect(crop.x+crop.w,crop.y,cvs.width-crop.x-crop.w,crop.h);
+  ctx.strokeStyle="#fff"; ctx.lineWidth=2; ctx.strokeRect(crop.x,crop.y,crop.w,crop.h);
+  ctx.fillStyle="#fff";
+  for(const [cx,cy] of corners()) ctx.fillRect(cx-9,cy-9,18,18);
+}
+const corners = () => [[crop.x,crop.y],[crop.x+crop.w,crop.y],
+                       [crop.x,crop.y+crop.h],[crop.x+crop.w,crop.y+crop.h]];
+
+function openCrop(file, n, name){
+  const fr = new FileReader();
+  fr.onload = () => { const im = new Image();
+    im.onload = () => {
+      const maxW = Math.min(window.innerWidth-24, 640);
+      const maxH = window.innerHeight - 230;
+      const r = Math.min(maxW/im.naturalWidth, maxH/im.naturalHeight, 1);
+      cvs.width = Math.round(im.naturalWidth*r); cvs.height = Math.round(im.naturalHeight*r);
+      img = im;
+      crop = {x:cvs.width*.06, y:cvs.height*.06, w:cvs.width*.88, h:cvs.height*.88};
+      cur = {n, name}; $("ovlTitle").textContent = `${n}번 · ${name}`;
+      $("ovl").classList.add("on"); draw();
+    };
+    im.src = fr.result; };
+  fr.readAsDataURL(file);
+}
+
+cvs.addEventListener("pointerdown", e => {
+  const r = cvs.getBoundingClientRect();
+  const x = (e.clientX-r.left)*cvs.width/r.width, y = (e.clientY-r.top)*cvs.height/r.height;
+  const near = corners().findIndex(([cx,cy]) => Math.hypot(cx-x,cy-y) < 30);
+  drag = near >= 0 ? {mode:"resize", i:near} :
+    (x>crop.x && x<crop.x+crop.w && y>crop.y && y<crop.y+crop.h)
+      ? {mode:"move", dx:x-crop.x, dy:y-crop.y} : null;
+  if(drag) cvs.setPointerCapture(e.pointerId);
+});
+cvs.addEventListener("pointermove", e => {
+  if(!drag) return;
+  const r = cvs.getBoundingClientRect();
+  const x = (e.clientX-r.left)*cvs.width/r.width, y = (e.clientY-r.top)*cvs.height/r.height;
+  const MIN = 40;
+  if(drag.mode === "move"){
+    crop.x = Math.max(0, Math.min(x-drag.dx, cvs.width-crop.w));
+    crop.y = Math.max(0, Math.min(y-drag.dy, cvs.height-crop.h));
+  } else {
+    const x2 = crop.x+crop.w, y2 = crop.y+crop.h;
+    const cx = Math.max(0, Math.min(x, cvs.width)), cy = Math.max(0, Math.min(y, cvs.height));
+    if(drag.i===0){ crop.x=Math.min(cx,x2-MIN); crop.y=Math.min(cy,y2-MIN); }
+    if(drag.i===1){ crop.y=Math.min(cy,y2-MIN); crop.w=Math.max(MIN,cx-crop.x); }
+    if(drag.i===2){ crop.x=Math.min(cx,x2-MIN); crop.h=Math.max(MIN,cy-crop.y); }
+    if(drag.i===3){ crop.w=Math.max(MIN,cx-crop.x); crop.h=Math.max(MIN,cy-crop.y); }
+    if(drag.i===0||drag.i===2) crop.w = x2-crop.x;
+    if(drag.i===0||drag.i===1) crop.h = y2-crop.y;
+  }
+  draw();
+});
+addEventListener("pointerup", () => { drag = null; });
+
+$("cropAll").onclick = () => { crop = {x:0,y:0,w:cvs.width,h:cvs.height}; draw(); };
+$("ovlX").onclick = () => { $("ovl").classList.remove("on"); img=null; };
+$("reshoot").onclick = () => { $("pick").value=""; $("pick").click(); };
+
+function exportJpeg(){
+  const sx = img.naturalWidth/cvs.width, sy = img.naturalHeight/cvs.height;
+  const sw = crop.w*sx, sh = crop.h*sy;
+  const scale = Math.min(1400/Math.max(sw,sh), 1);         // 긴 변 1400px로 제한
+  const out = document.createElement("canvas");
+  out.width = Math.round(sw*scale); out.height = Math.round(sh*scale);
+  out.getContext("2d").drawImage(img, crop.x*sx, crop.y*sy, sw, sh, 0, 0, out.width, out.height);
+  return out.toDataURL("image/jpeg", .85).split(",")[1];
+}
+
+const apiPath = n => `https://api.github.com/repos/${REPO}/contents/` +
+  `${DIR}/${n}.jpg`.split("/").map(encodeURIComponent).join("/");
+
+async function upload(n, b64, tok){
+  const h = {Authorization:`Bearer ${tok}`, Accept:"application/vnd.github+json"};
+  let sha;
+  const head = await fetch(apiPath(n), {headers:h});         // 같은 번호를 다시 올릴 수도 있다
+  if(head.ok) sha = (await head.json()).sha;
+  const r = await fetch(apiPath(n), {method:"PUT", headers:{...h,"Content-Type":"application/json"},
+    body: JSON.stringify({message:`capture: ${n}번 캡처(모바일)`, content:b64, branch:"main",
+                          ...(sha ? {sha} : {})})});
+  if(!r.ok) throw new Error((await r.json()).message || r.status);
+}
+
+$("send").onclick = async () => {
+  const tok = store.get("casto.gh");
+  if(!tok){ $("ovl").classList.remove("on"); $("cfgPanel").classList.add("on");
+            $("cfgPanel").scrollIntoView({behavior:"smooth",block:"center"});
+            return toast("먼저 깃허브 토큰을 저장해 주세요"); }
+  const b = $("send"); b.disabled = true; b.textContent = "등록 중…";
+  try{
+    await upload(cur.n, exportJpeg(), tok);
+    sent.add(cur.n); saveSent();
+    $("ovl").classList.remove("on");
+    toast(`${cur.n}번 등록 완료 — 잠시 후 자동 반입됩니다`);
+    document.querySelectorAll(`.shot .cam[data-n="${cur.n}"]`)
+      .forEach(el => el.closest(".shot").remove());
+    const left = document.querySelectorAll(".shot").length;
+    $("shotCount").textContent = left + "건"; $("sShot").textContent = left;
+  }catch(e){ toast("등록 실패: " + e.message, 4200); }
+  finally{ b.disabled = false; b.textContent = "등록"; }
+};
+
+document.addEventListener("click", e => {
+  const cam = e.target.closest(".shot .cam");
+  if(!cam) return;
+  $("pick").dataset.n = cam.dataset.n; $("pick").dataset.name = cam.dataset.name;
+  $("pick").value = ""; $("pick").click();
+});
+$("pick").onchange = e => { const f = e.target.files[0];
+  if(f) openCrop(f, +$("pick").dataset.n, $("pick").dataset.name); };
 
 $("reload").onclick = e => { e.preventDefault(); location.reload(); };
 // iOS bfcache 복귀 후 고정 헤더가 밀려 못 누르는 현상 보정

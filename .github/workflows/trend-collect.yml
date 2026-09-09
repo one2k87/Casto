@@ -3,7 +3,7 @@ name: 제품 트렌드 수집
 # 리뷰 증가·가격 변동은 어제 스냅샷과 비교해야 나오므로 **매일 쌓는 것이 전제**다.
 on:
   schedule:
-    - cron: "10 21 * * *"
+    - cron: "30 9 * * *"    # 18:30 KST — 퇴근 무렵 수집이 끝나 저녁 작업 때 번호표가 최신이다
   workflow_dispatch:
     inputs:
       board_only:

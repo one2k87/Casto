@@ -3,7 +3,7 @@ name: 콕 브리핑 (주간 유행템 차트)
 # 쇼츠 60초(발견·추천 피드) + 롱폼 3~4분(검색·시청시간). 같은 데이터, 다른 그릇.
 on:
   schedule:
-    - cron: "40 21 * * 0"
+    - cron: "0 10 * * 1"    # 월 19:00 KST — 월요일 저녁 작업 시작 전에 브리핑 준비
   workflow_dispatch:
     inputs:
       variant:
