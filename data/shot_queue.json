@@ -1,5 +1,5 @@
 {
- "next": 27,
+ "next": 31,
  "items": {
   "1": {
    "name": "늘어나는 밀폐용기",
@@ -290,6 +290,30 @@
    "note": "7번(무드등)과 동일 — 7번으로 캡처",
    "hold": true,
    "url": "https://www.coupang.com/np/search?q=%EC%84%BC%EC%84%9C%EB%93%B1"
+  },
+  "27": {
+   "name": "코에서 계란 흰자 주방용품",
+   "slug": "",
+   "key": "코에서계란흰자주방용품",
+   "done": false
+  },
+  "28": {
+   "name": "얼음 보관통",
+   "slug": "",
+   "key": "얼음보관통",
+   "done": false
+  },
+  "29": {
+   "name": "자동 과일깎이",
+   "slug": "",
+   "key": "자동과일깎이",
+   "done": false
+  },
+  "30": {
+   "name": "기름 분사 용기",
+   "slug": "",
+   "key": "기름분사용기",
+   "done": false
   }
  }
 }
