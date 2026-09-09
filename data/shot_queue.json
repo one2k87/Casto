@@ -256,7 +256,7 @@
    "name": "손끼임 방지가드",
    "slug": "",
    "key": "손끼임방지가드",
-   "done": false,
+   "done": true,
    "search": "손끼임 방지가드",
    "confidence": "낮음",
    "note": "문틈 안전가드",

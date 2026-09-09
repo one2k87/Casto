@@ -349,6 +349,18 @@
    "coupang_url": "",
    "price_band": "",
    "updated": "2026-09-09"
+  },
+  "손끼임-방지가드": {
+   "display": "손끼임 방지가드",
+   "brand": "손끼임",
+   "model": "방지가드",
+   "category": "방지가드",
+   "product_id": "",
+   "image": "assets/products/손끼임-방지가드.jpg",
+   "image_source": "capture",
+   "coupang_url": "",
+   "price_band": "",
+   "updated": "2026-09-09"
   }
  }
 }
