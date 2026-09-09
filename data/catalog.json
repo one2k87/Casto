@@ -301,6 +301,18 @@
    "coupang_url": "",
    "price_band": "",
    "updated": "2026-09-09"
+  },
+  "조셉조셉-찹투팟-플러스-접이식도마": {
+   "display": "조셉조셉 찹투팟 플러스 접이식도마",
+   "brand": "조셉조셉",
+   "model": "찹투팟 플러스 접이식도마",
+   "category": "찹투팟 플러스 접이식도마",
+   "product_id": "",
+   "image": "assets/products/조셉조셉-찹투팟-플러스-접이식도마.jpg",
+   "image_source": "capture",
+   "coupang_url": "",
+   "price_band": "",
+   "updated": "2026-09-09"
   }
  }
 }
