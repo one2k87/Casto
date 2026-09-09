@@ -227,43 +227,69 @@
    "name": "얼음틀/보관통",
    "slug": "",
    "key": "얼음틀보관통",
-   "done": false
+   "done": false,
+   "note": "3번(얼음틀 얼음보관통)과 동일 — 3번으로 캡처",
+   "hold": true,
+   "url": "https://www.coupang.com/np/search?q=%EC%96%BC%EC%9D%8C%ED%8B%80%2F%EB%B3%B4%EA%B4%80%ED%86%B5"
   },
   "21": {
    "name": "계란 흰자 분리기",
    "slug": "",
    "key": "계란흰자분리기",
-   "done": false
+   "done": false,
+   "search": "계란 흰자 분리기",
+   "confidence": "낮음",
+   "note": "'코에서 흰자 나오는' 그 제품",
+   "url": "https://www.coupang.com/np/search?q=%EA%B3%84%EB%9E%80+%ED%9D%B0%EC%9E%90+%EB%B6%84%EB%A6%AC%EA%B8%B0"
   },
   "22": {
    "name": "레트로 수화기",
    "slug": "",
    "key": "레트로수화기",
-   "done": false
+   "done": false,
+   "search": "레트로 수화기",
+   "confidence": "낮음",
+   "note": "스마트폰용 유선 수화기",
+   "url": "https://www.coupang.com/np/search?q=%EB%A0%88%ED%8A%B8%EB%A1%9C+%EC%88%98%ED%99%94%EA%B8%B0"
   },
   "23": {
    "name": "손끼임 방지가드",
    "slug": "",
    "key": "손끼임방지가드",
-   "done": false
+   "done": false,
+   "search": "손끼임 방지가드",
+   "confidence": "낮음",
+   "note": "문틈 안전가드",
+   "url": "https://www.coupang.com/np/search?q=%EC%86%90%EB%81%BC%EC%9E%84+%EB%B0%A9%EC%A7%80%EA%B0%80%EB%93%9C"
   },
   "24": {
    "name": "오일 스프레이",
    "slug": "",
    "key": "오일스프레이",
-   "done": false
+   "done": false,
+   "search": "오일 스프레이",
+   "confidence": "낮음",
+   "note": "분무형 기름병",
+   "url": "https://www.coupang.com/np/search?q=%EC%98%A4%EC%9D%BC+%EC%8A%A4%ED%94%84%EB%A0%88%EC%9D%B4"
   },
   "25": {
    "name": "계란보관 트레이",
    "slug": "",
    "key": "계란보관트레이",
-   "done": false
+   "done": false,
+   "search": "계란보관 트레이",
+   "confidence": "낮음",
+   "note": "냉장고 계란정리",
+   "url": "https://www.coupang.com/np/search?q=%EA%B3%84%EB%9E%80%EB%B3%B4%EA%B4%80+%ED%8A%B8%EB%A0%88%EC%9D%B4"
   },
   "26": {
    "name": "센서등",
    "slug": "",
    "key": "센서등",
-   "done": false
+   "done": false,
+   "note": "7번(무드등)과 동일 — 7번으로 캡처",
+   "hold": true,
+   "url": "https://www.coupang.com/np/search?q=%EC%84%BC%EC%84%9C%EB%93%B1"
   }
  }
 }
