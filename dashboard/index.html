@@ -29,6 +29,7 @@
     }
   }
   *{box-sizing:border-box}
+  [hidden]{display:none!important}   /* .btn의 display가 [hidden]을 덮어써서 안 숨겨졌다 */
   body{margin:0;background:var(--bg);color:var(--txt);
     font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",sans-serif;
     font-variant-numeric:tabular-nums;letter-spacing:-.01em;
@@ -195,13 +196,25 @@ function renderShots(q){
   $("shotCount").textContent = items.length + "건";
   $("sShot").textContent = items.length;
   $("shotList").className = "";
-  $("shotList").innerHTML = items.length ? items.map(it => {
+  const CAP = 8;
+  const card = it => {
     const who = it.display || [it.brand, it.model].filter(Boolean).join(" ") || it.name;
     const mark = {"높음":"◎","중간":"○","낮음":"△"}[it.confidence] || "";
     return `<div class="shot"><div class="no">${it.n}</div>
       <div class="nm"><b>${who} ${mark}</b><span>${it.search || it.name} → ${it.n}.png</span></div>
       <a href="${it.url||"#"}" target="_blank" rel="noopener" aria-label="쿠팡에서 열기">🛒</a></div>`;
-  }).join("") : "<div class='skeleton'>필요한 캡처가 없습니다 👍</div>";
+  };
+  $("shotList").innerHTML = items.length
+    ? items.slice(0, CAP).map(card).join("")
+      + (items.length > CAP
+         ? `<div id="shotMore">${items.slice(CAP).map(card).join("")}</div>
+            <button class="btn ghost" id="moreBtn">+${items.length - CAP}건 더 보기</button>`
+         : "")
+    : "<div class='skeleton'>필요한 캡처가 없습니다 👍</div>";
+  if(items.length > CAP){
+    $("shotMore").hidden = true;
+    $("moreBtn").onclick = () => { $("shotMore").hidden = false; $("moreBtn").hidden = true; };
+  }
   if(items.length) $("shotWrap").open = true;
   return items.length;
 }
