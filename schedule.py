@@ -23,9 +23,23 @@ import os
 import sys
 
 PUBLISH_LOG = "data/publish_log.json"   # 발행 이력(판정 쿼터·중복 방지의 근거)
+SNAPSHOT_DIR = "data/trends_daily"      # 일별 스냅샷 — 델타(증감)의 유일한 출처
 NEXT_KOK_RATIO = 0.25                   # '다음콕' 최소 비율(5-3 ③) — 매번 열리면 완주 장치가 죽는다
 QUOTA_WINDOW = 12                       # 최근 몇 편을 기준으로 판정 비율을 볼지
 MAX_PER_WEEK = 4                        # 양산형 콘텐츠 정책 대응 상한(5-2 발행량 상한)
+
+# ── 램프업(2026-09-09 결정) ─────────────────────────────────────────────────
+# 사용자 판단: "며칠은 지켜봐야 정확도가 늘지 않을까? 빨리 많이보다 제대로 올리는 게 낫지 않나."
+# 맞다. 다만 이유는 '천천히 하자'가 아니라 **데이터 구조상 지금은 판정이 불가능**하다는 것이다.
+#   · 트렌드 점수의 핵심 입력은 **델타(어제 대비 증감)**인데 깨끗한 스냅샷이 오늘부터 쌓인다.
+#   · 재인(再認) 모델은 "며칠째 피드에 보이는가"가 전제다 — 하루짜리 스파이크는 재인이 아니다.
+#   · 브리핑(주간 유행 모음)은 최소 7일이 있어야 상승·하락을 말할 수 있다.
+# 반대로 **발행을 0으로 두는 것도 틀렸다**: 채널이 0편이면 알고리즘이 분류조차 못 하고,
+# 8주 컷오프 시계가 시작되지 않으며, 무엇이 먹히는지는 발행해야만 알 수 있다.
+# → 그래서 "관측은 매일, 발행은 확정된 것만 주 2편"으로 간다.
+RAMP_SLOT = {1: "deep1", 5: "season"}   # 화·토 2편
+BRIEFING_MIN_DAYS = 7                   # 브리핑에 필요한 최소 스냅샷 일수
+RAMP_MAX_PER_WEEK = 2
 
 # 요일 → 슬롯. 월=0 … 일=6
 WEEKDAY_SLOT = {0: "trend", 1: "deep1", 3: "deep2", 5: "season"}
@@ -82,11 +96,19 @@ def _save(path, data):
         json.dump(data, f, ensure_ascii=False, indent=1)
 
 
-def record_publish(date: str, slot: str, key: str, verdict: str, path: str = PUBLISH_LOG) -> None:
-    """발행 이력을 남긴다 — 판정 쿼터와 중복 편성의 유일한 근거."""
+def record_publish(date: str, slot: str, key: str, verdict: str, path: str = PUBLISH_LOG,
+                   **meta) -> None:
+    """발행 이력을 남긴다 — 판정 쿼터·중복 편성 + **성과 학습의 유일한 입력**.
+
+    2026-09-09까지 이 함수는 아무도 호출하지 않았다. 즉 무엇을 왜 만들었는지 기록이 없었고,
+    그래서 "어떤 영상이 잘 됐나"를 나중에 물어볼 수가 없었다. 학습 루프(learn.py)는
+    여기 남는 메타(제목·제품·판정·가격대·포맷·사진유무)를 성과와 조인해서 돌아간다.
+    """
     log = _load(path, [])
-    log.append({"date": date, "slot": slot, "key": key, "verdict": verdict})
-    _save(path, log[-200:])
+    row = {"date": date, "slot": slot, "key": key, "verdict": verdict}
+    row.update({k: v for k, v in meta.items() if v not in (None, "")})
+    log.append(row)
+    _save(path, log[-400:])
 
 
 def next_kok_due(log: list[dict], window: int = QUOTA_WINDOW, ratio: float = NEXT_KOK_RATIO) -> bool:
@@ -103,9 +125,26 @@ def next_kok_due(log: list[dict], window: int = QUOTA_WINDOW, ratio: float = NEX
 
 
 # ------------------------------------------------------------------ 편성
-def slot_for(date: dt.date) -> str | None:
-    """오늘의 슬롯. 발행일이 아니면 None — 주 4편 상한을 요일로 강제한다."""
-    return WEEKDAY_SLOT.get(date.weekday())
+def snapshot_days(dir_: str = SNAPSHOT_DIR) -> int:
+    """깨끗한 일별 스냅샷이 며칠치인가 — 램프업 해제와 브리핑 가능 여부의 기준."""
+    if not os.path.isdir(dir_):
+        return 0
+    return len([f for f in os.listdir(dir_) if f.endswith(".json")])
+
+
+def ramping(days: int | None = None) -> bool:
+    """아직 램프업 구간인가. 스냅샷이 7일 미만이면 델타를 신뢰할 수 없다."""
+    return (snapshot_days() if days is None else days) < BRIEFING_MIN_DAYS
+
+
+def slot_for(date: dt.date, ramp: bool | None = None) -> str | None:
+    """오늘의 슬롯. 발행일이 아니면 None.
+
+    램프업 중에는 **화·토 2편**만 편성한다. 월요일 브리핑은 7일치 데이터가 모이기 전엔
+    '이번 주 유행'을 말할 근거가 없어 만들지 않는다(빈약한 브리핑은 채널 정체성을 흐린다).
+    """
+    ramp = ramping() if ramp is None else ramp
+    return (RAMP_SLOT if ramp else WEEKDAY_SLOT).get(date.weekday())
 
 
 def pick_product(slot: str, board: dict, log: list[dict], month: int) -> dict | None:
@@ -140,17 +179,30 @@ def revisit_candidate(board: dict) -> dict | None:
     return None
 
 
-def plan(date: dt.date, board: dict, log: list[dict] | None = None) -> dict:
-    """오늘의 편성안. 발행일이 아니면 `publish: False`."""
+def plan(date: dt.date, board: dict, log: list[dict] | None = None,
+         ready: list[str] | None = None) -> dict:
+    """오늘의 편성안. 발행일이 아니면 `publish: False`.
+
+    `ready`는 **실사진까지 확보된 상품 이름 목록**이다(catalog에서 온다). 램프업 구간에는
+    이게 비면 발행하지 않는다 — 제품 사진 없는 영상은 재인을 못 만들고, 재인이 구독의 동력이다.
+    """
     log = log or []
-    slot = slot_for(date)
+    ramp = ramping()
+    days = snapshot_days()
+    slot = slot_for(date, ramp)
     if slot is None:
-        return {"date": date.isoformat(), "publish": False,
-                "reason": f"{'월화수목금토일'[date.weekday()]}요일은 발행일이 아니다(주 4편: 월·화·목·토)"}
+        pace = "주 2편: 화·토(램프업)" if ramp else "주 4편: 월·화·목·토"
+        return {"date": date.isoformat(), "publish": False, "ramp": ramp, "snapshot_days": days,
+                "reason": f"{'월화수목금토일'[date.weekday()]}요일은 발행일이 아니다({pace})"}
+    if ramp and ready is not None and not ready:
+        return {"date": date.isoformat(), "publish": False, "ramp": ramp, "snapshot_days": days,
+                "reason": ("램프업 중 발행 게이트 — 실사진이 확보된 상품이 없다. "
+                           "캡처를 먼저 등록할 것(앱 📷)")}
     spec = SLOT_SPEC[slot]
     product = pick_product(slot, board, log, date.month)
     out = {
         "date": date.isoformat(), "publish": True, "slot": slot,
+        "ramp": ramp, "snapshot_days": days, "ready": ready or [],
         "format": spec["format"], "price_band": spec["price_band"],
         "category": MONTH_CATEGORY.get(date.month), "why": spec["why"],
         "product": product,
@@ -172,7 +224,8 @@ def describe(p: dict) -> str:
         return f"[편성] {p['date']} 발행 없음 — {p.get('reason')}"
     prod = p.get("product") or {}
     lines = [
-        f"[편성] {p['date']} · {p['slot']} · {p['format']}",
+        f"[편성] {p['date']} · {p['slot']} · {p['format']}"
+        + (f"  (램프업 · 스냅샷 {p.get('snapshot_days')}일)" if p.get("ramp") else ""),
         f"[편성]   이유: {p['why']}",
         f"[편성]   이달 카테고리: {p.get('category')} · 가격대: {p['price_band']}",
         f"[편성]   제품: {prod.get('name')}",
@@ -184,7 +237,18 @@ def describe(p: dict) -> str:
     return "\n".join(lines)
 
 
+def ready_products() -> list[str]:
+    """실사진까지 확보돼 **정확한 상품으로 만들 수 있는** 소재 목록."""
+    try:
+        import catalog
+        cat = catalog.load()
+        return [e.get("display") or slug for slug, e in cat.get("products", {}).items()
+                if catalog.render_mode(dict(e, slug=slug)) == "exact"]
+    except Exception:                                      # noqa: BLE001
+        return []
+
+
 if __name__ == "__main__":
     day = dt.date.fromisoformat(sys.argv[1]) if len(sys.argv) > 1 else dt.date.today()
     board = _load("data/trend_board.json", {})
-    print(describe(plan(day, board, _load(PUBLISH_LOG, []))))
+    print(describe(plan(day, board, _load(PUBLISH_LOG, []), ready_products())))

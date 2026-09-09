@@ -36,9 +36,28 @@ jobs:
           echo "$PLAN"
           if echo "$PLAN" | grep -q "발행 없음" && [ "${{ github.event_name }}" = "schedule" ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
+            { echo "reason<<EOF"; echo "$PLAN"; echo "EOF"; } >> "$GITHUB_OUTPUT"
           else
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
+
+      # 조용히 건너뛰면 "왜 오늘 영상이 없지?"를 사람이 조사하게 된다 → 이유를 폰으로 보낸다
+      - name: 발행 건너뜀 알림
+        if: steps.plan.outputs.skip == 'true'
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          REASON: ${{ steps.plan.outputs.reason }}
+        run: |
+          python - <<'PY'
+          import os, urllib.parse, urllib.request
+          tok, chat = os.getenv("TELEGRAM_TOKEN"), os.getenv("TELEGRAM_CHAT_ID")
+          if not (tok and chat):
+              raise SystemExit(0)
+          msg = "🎬 오늘은 발행하지 않습니다\n\n" + (os.getenv("REASON") or "").strip()
+          urllib.request.urlopen("https://api.telegram.org/bot%s/sendMessage" % tok,
+              urllib.parse.urlencode({"chat_id": chat, "text": msg}).encode())
+          PY
       - name: 의존성 (한글 폰트·이모지·ffmpeg 포함)
         if: steps.dup.outputs.skip != 'true' && steps.plan.outputs.skip != 'true'
         run: |

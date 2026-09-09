@@ -23,6 +23,8 @@ import requests
 from PIL import Image, ImageDraw, ImageFont
 from common import cfg, llm_json, telegram_video, telegram_msg
 import catalog
+import learn
+import schedule as sched
 import visuals
 
 W, H = 1080, 1920
@@ -87,12 +89,17 @@ def build_script(post, trends, c, entry=None):
     순간 오정보가 되기 때문이다. 그때 LLM의 역할은 근거 3줄과 판정뿐이다.
     """
     tr = json.dumps({k: trends.get(k) for k in ("hooks", "formats", "caption_style", "avoid")}, ensure_ascii=False)
+    # 이 채널에서 실제로 먹힌 패턴을 작가에게 준다 — 영상이 쌓일수록 이 줄이 길어진다.
+    # 근거(최소 표본)를 통과한 축만 들어오므로, 초반엔 비어 있는 게 정상이다.
+    learned = learn.load_hints()
+    lesson = ("\n[이 채널에서 검증된 패턴 — 성과 데이터 기반]\n"
+              + "\n".join("- " + h for h in learned) + "\n") if learned else ""
     fixed = ""
     if entry:
         fixed = (f'\n[확정된 상품] {catalog.display_name(entry)} (카테고리: {entry.get("category","")})\n'
                  '→ "product" 값은 이 상품을 가리키는 8자 이내 짧은 이름으로만 쓰고, '
                  '브랜드명·모델명을 새로 지어내지 마세요.\n')
-    return llm_json(f"""{fixed}당신은 유튜브 쇼츠 채널 「콕픽」의 작가입니다. 니치: {c['niche']}.
+    return llm_json(f"""{fixed}{lesson}당신은 유튜브 쇼츠 채널 「콕픽」의 작가입니다. 니치: {c['niche']}.
 채널 포맷은 「콕 열리는 상자」 — 마스코트 '콕이'(택배상자)가 **구매 근거 '콕' 3개를 통과해야만 열린다**.
 [이번 주 트렌드 지침(매주 자동 갱신됨)] {tr}
 [원본 글] 제목: {post['title']}
@@ -114,6 +121,8 @@ def build_script(post, trends, c, entry=None):
 - 콕 3개는 **구매 결정 근거**여야 한다(감상·수식어 금지). 숫자가 있으면 넣되 가격은 '~원대' 범위로.
 - verdict: 대부분 사도 되면 buy, 특정 조건에서만 이득이면 cond, 아직이면 later.
 - **부정어 금지** — '별로다/사지 마라' 대신 '아직'의 뉘앙스로 쓴다.
+- **첫 콕은 가장 의외이거나 가장 돈이 걸린 근거**를 둔다. 1초 안에 "이건 봐야겠다"가 되어야 완주한다.
+- 세 콕은 **점점 세지는 순서**로. 마지막 콕이 가장 약하면 시청자는 중간에 나간다.
 - 겪지 않은 경험담·과장 금지. 판정어("오늘의 콕" 등)는 코드가 넣으니 문장에 쓰지 말 것.""")
 
 
@@ -414,6 +423,23 @@ def main():
     cap = build_caption(s, v, post, c, total, entry)
     with open("out/caption.txt", "w", encoding="utf-8") as f:
         f.write(cap)
+    # 발행 이력 — 학습 루프(learn.py)의 유일한 입력이다. 여기 안 남기면 나중에
+    # "어떤 영상이 잘 됐나"를 물어볼 수가 없다(2026-09-09까지 기록이 비어 있었다).
+    try:
+        sched.record_publish(
+            date=__import__("datetime").date.today().isoformat(),
+            slot=os.getenv("CASTO_SLOT", ""), key=catalog.slugify(name_key := (label or s["product"])),
+            verdict=s.get("verdict", "buy"),
+            title=s["title"], product=name_key, format=c.get("concept", ""),
+            price_band=(entry or {}).get("price_band", ""),
+            category=(entry or {}).get("category", ""),
+            has_photo=bool(shot), brand=(entry or {}).get("brand", ""),
+            hook=(s.get("koks") or [{}])[0].get("caption", ""),
+            seconds=round(total, 1))
+        print(f"[casto] 발행 이력 기록 — {name_key} / {v['key']}")
+    except Exception as e:                                   # noqa: BLE001
+        print("[casto] 발행 이력 기록 실패(무시):", e)
+
     telegram_video("out/short.mp4", cap) or telegram_msg("쇼츠 생성 완료(전송 실패) — Actions 아티팩트 확인")
     if shot_no:
         # 폰에서 바로 보고 캡처할 수 있게 별도 메시지로 보낸다(설명란을 오염시키지 않는다)

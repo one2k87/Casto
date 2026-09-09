@@ -4,6 +4,10 @@ import datetime as dt, os, sys, unittest
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import schedule as sch  # noqa: E402
 
+# 이 파일의 기존 테스트는 **램프업 해제 후**(스냅샷 7일 이상)의 주 4편 계약을 검증한다.
+# 램프업 구간(2026-09-09 도입)의 계약은 파일 하단에 따로 있다.
+sch.snapshot_days = lambda *a, **k: 30
+
 
 def row(key, name, band, rec=0.0, val=0.0, delta="flat", quad="peak", blocked=False):
     return {"key": key, "name": name, "price_band": band, "recognition": rec,
@@ -106,3 +110,34 @@ class TestDescribe(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+# ── 램프업(2026-09-09) ────────────────────────────────────────────────────────
+def test_램프업이면_화토_2편만_편성된다():
+    """스냅샷이 7일 미만이면 델타를 신뢰할 수 없다 → 확정 소재로 주 2편만."""
+    import datetime as dt
+    mon, tue, thu, sat = (dt.date(2026, 9, 14), dt.date(2026, 9, 15),
+                          dt.date(2026, 9, 17), dt.date(2026, 9, 19))
+    assert sch.slot_for(mon, ramp=True) is None      # 브리핑은 데이터가 모인 뒤에
+    assert sch.slot_for(thu, ramp=True) is None
+    assert sch.slot_for(tue, ramp=True) == "deep1"
+    assert sch.slot_for(sat, ramp=True) == "season"
+    # 램프업 해제 후에는 기존 주 4편 편성으로 돌아온다
+    assert sch.slot_for(mon, ramp=False) == "trend"
+    assert sch.slot_for(thu, ramp=False) == "deep2"
+
+
+def test_ramping_기준은_7일():
+    assert sch.ramping(0) and sch.ramping(6)
+    assert not sch.ramping(7)
+
+
+def test_실사진_소재가_없으면_램프업중에는_발행하지_않는다(monkeypatch):
+    """제품 사진 없는 영상은 재인을 못 만든다 — 재인이 구독의 동력이다."""
+    import datetime as dt
+    monkeypatch.setattr(sch, "snapshot_days", lambda *a, **k: 2)
+    board = {"deep_dive": [{"key": "k1", "name": "테스트", "price_band": "중가"}]}
+    p = sch.plan(dt.date(2026, 9, 15), board, [], ready=[])
+    assert p["publish"] is False and "실사진" in p["reason"]
+    p2 = sch.plan(dt.date(2026, 9, 15), board, [], ready=["씨밀렉스 쌀통"])
+    assert p2["publish"] is True and p2["ramp"] is True

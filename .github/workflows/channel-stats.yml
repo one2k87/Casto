@@ -28,6 +28,10 @@ jobs:
         env:
           YT_API_KEY: ${{ secrets.YT_API_KEY }}
         run: python channel_stats.py
+      # 성과가 갱신된 직후 학습을 돌린다 — 다음 영상 대본이 이 결과를 프롬프트로 받는다
+      - name: 학습 루프
+        run: python learn.py
+
       - name: 결과 커밋
         run: |
           git config user.name casto-bot && git config user.email casto@solvup.local
