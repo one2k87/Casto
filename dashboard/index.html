@@ -72,6 +72,7 @@
   .appsw a[data-hue="s"]:hover{color:#8b5cf6}
   .appsw a[data-hue="p"]:hover{color:#2e9e6b}
   .appsw a.on[data-hue="c"]{background:rgba(91,141,239,.16);color:#5b8def}
+  .appsw a.on[data-hue="m"]{background:rgba(237,143,71,.18);color:#ed8f47}
   .foot{text-align:center;color:var(--muted);font-size:11px;margin-top:18px}
 </style>
 </head>
@@ -85,7 +86,7 @@
   </div>
   <div class="spacer"></div>
   <nav class="appsw" aria-label="앱 전환">
-    <a data-hue="s" href="https://one2k87.github.io/Scripto/dashboard/" title="Scripto — 애드센스 라인">S</a><a data-hue="p" href="https://one2k87.github.io/Picto/dashboard/" title="Picto — 쿠팡 픽 라인">P</a><a class="on" data-hue="c" href="#" onclick="return false">C</a>
+    <a data-hue="s" href="https://one2k87.github.io/Scripto/dashboard/" title="Scripto — 애드센스 라인">S</a><a data-hue="p" href="https://one2k87.github.io/Picto/dashboard/" title="Picto — 쿠팡 픽 라인">P</a><a class="on" data-hue="c" href="#" onclick="return false">C</a><a data-hue="m" href="https://one2k87.github.io/Markto/dashboard/" title="Markto — 핀터레스트 배포 라인">M</a>
   </nav>
 </header>
 <main>
@@ -149,6 +150,13 @@ const todayKST = () => new Intl.DateTimeFormat("sv-SE",{timeZone:"Asia/Seoul"}).
     document.getElementById("trendBox").textContent = "트렌드 파일을 불러오지 못했습니다";
   }
 })();
+</script>
+<script>
+// iOS 인앱 시트/bfcache 복귀 후 상단 고정 요소가 밀려 못 누르게 되는 현상 보정(1px 스크롤 흔들기)
+window.addEventListener("pageshow",e=>{
+  if(!e.persisted) return;
+  requestAnimationFrame(()=>{ const y=window.scrollY; window.scrollTo(0,y+1); window.scrollTo(0,y); });
+});
 </script>
 </body>
 </html>
