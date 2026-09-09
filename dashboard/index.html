@@ -115,7 +115,7 @@
     background:var(--card2);border:1px solid var(--line);font-size:16px;cursor:pointer;
     color:var(--txt);font-family:inherit}
   .shot .act{display:flex;gap:6px;flex:0 0 auto}
-  .shot .act a,.shot .act button{min-width:var(--tap);min-height:var(--tap);border-radius:11px;
+  .shot .act button{min-width:var(--tap);min-height:var(--tap);border-radius:11px;
     display:grid;place-items:center;background:var(--card2);border:1px solid var(--line);
     text-decoration:none;font-size:17px;cursor:pointer;color:var(--txt);font-family:inherit}
   .shot .act .cam{background:var(--accent);border-color:var(--accent)}
@@ -123,8 +123,10 @@
     flex-direction:column;padding:calc(10px + var(--safe-t)) 12px calc(12px + var(--safe-b))}
   #ovl.on{display:flex}
   #ovl .top{display:flex;align-items:center;gap:10px;color:#fff;font-weight:800;font-size:15px}
-  #ovl .top button{margin-left:auto;background:transparent;border:0;color:#fff;font-size:22px;
+  #ovl .top button{margin-right:4px;background:transparent;border:0;color:#fff;font-size:22px;
     min-width:var(--tap);min-height:var(--tap);cursor:pointer}
+  /* 오버레이가 떠 있는 동안 헤더는 못 누르게 — 닫는 탭이 앱 전환으로 새지 않도록 */
+  body.ovl-open header{pointer-events:none}
   #ovl .stage{flex:1;display:grid;place-items:center;overflow:hidden;margin:8px 0}
   #cvs{max-width:100%;max-height:100%;touch-action:none;border-radius:10px}
   #ovl .hint{color:#c8d0de;font-size:12px;text-align:center;margin-bottom:8px}
@@ -142,6 +144,7 @@
     background:#111826;color:#fff;padding:12px 18px;border-radius:12px;font-size:14px;z-index:70;
     display:none;max-width:88vw;text-align:center}
   #toast.on{display:block}
+  body.ovl-open #toast{bottom:calc(104px + var(--safe-b))}
   .panel{margin-top:10px;display:none}.panel.on{display:block}
   .panel input{width:100%;min-height:var(--tap);border-radius:11px;border:1px solid var(--line);
     background:var(--card2);color:var(--txt);padding:0 12px;font-size:15px;font-family:inherit}
@@ -216,12 +219,12 @@
     <button class="btn ghost" id="tokClear">이 기기에서 지우기</button>
   </div>
 
-  <div class="foot">Casto <b id="ver">v2.2</b> ·
+  <div class="foot">Casto <b id="ver">v2.3</b> ·
     <a href="#" id="reload" style="color:inherit">새로고침 ↻</a> ·
     <a href="#" id="hardReset" style="color:inherit">캐시 비우기</a></div>
 </main>
 <div id="ovl">
-  <div class="top"><span id="ovlTitle">캡처 등록</span><button id="ovlX" aria-label="닫기">✕</button></div>
+  <div class="top"><button id="ovlX" aria-label="닫기">✕</button><span id="ovlTitle">캡처 등록</span></div>
   <div class="stage">
     <div id="pickSrc">
       <button class="src go" id="fromClip">📋 클립보드에서 붙여넣기</button>
@@ -283,7 +286,7 @@ function renderShots(q){
     return `<div class="shot"><div class="no">${it.n}</div>
       <div class="nm"><b>${who} ${mark}</b><span>${it.search || it.name} → ${it.n}.png</span></div>
       <div class="act">
-        <a href="${it.url||"#"}" target="_blank" rel="noopener" aria-label="쿠팡에서 열기">🛒</a>
+        <button class="shop" data-url="${it.url||""}" aria-label="쿠팡에서 열기">🛒</button>
         <button class="cam" data-n="${it.n}" data-name="${(who||"").replace(/"/g,"&quot;")}"
                 aria-label="${it.n}번 캡처 등록">📷</button>
       </div></div>`;
@@ -406,7 +409,18 @@ function startCapture(n, name){
   cur = {n, name}; img = null;
   $("ovlTitle").textContent = `${n}번 · ${name}`;
   showStage(false);
-  $("ovl").classList.add("on");
+  openOvl(true);
+}
+
+function openOvl(on){
+  $("ovl").classList.toggle("on", on);
+  document.body.classList.toggle("ovl-open", on);
+}
+
+function closeOvl(){
+  // 같은 탭의 click이 아래 요소로 다시 떨어지는 것을 막으려 한 프레임 뒤에 헤더를 되살린다
+  $("ovl").classList.remove("on"); img = null;
+  setTimeout(() => document.body.classList.remove("ovl-open"), 350);
 }
 
 function openCrop(file, n, name){
@@ -420,8 +434,9 @@ function openCrop(file, n, name){
       img = im;
       crop = {x:cvs.width*.06, y:cvs.height*.06, w:cvs.width*.88, h:cvs.height*.88};
       if(n != null) cur = {n, name};
+      if(!cur){ toast("어느 번호인지 알 수 없습니다 — 번호표에서 📷를 눌러주세요", 3600); return; }
       $("ovlTitle").textContent = `${cur.n}번 · ${cur.name}`;
-      $("ovl").classList.add("on"); showStage(true); draw();
+      openOvl(true); showStage(true); draw();
     };
     im.src = fr.result; };
   fr.readAsDataURL(file);
@@ -478,7 +493,7 @@ cvs.addEventListener("pointermove", e => {
 addEventListener("pointerup", () => { drag = null; });
 
 $("cropAll").onclick = () => { crop = {x:0,y:0,w:cvs.width,h:cvs.height}; draw(); };
-$("ovlX").onclick = () => { $("ovl").classList.remove("on"); img=null; };
+$("ovlX").onclick = closeOvl;
 $("reshoot").onclick = () => { img = null; showStage(false); };   // 소스 선택으로 되돌아간다
 $("fromClip").onclick = fromClipboard;
 $("fromLib").onclick = () => { $("pick").value=""; $("pick").click(); };
@@ -516,14 +531,14 @@ async function upload(n, b64, tok){
 
 $("send").onclick = async () => {
   const tok = store.get("casto.gh");
-  if(!tok){ $("ovl").classList.remove("on"); $("cfgPanel").classList.add("on");
+  if(!tok){ closeOvl(); $("cfgPanel").classList.add("on");
             $("cfgPanel").scrollIntoView({behavior:"smooth",block:"center"});
             return toast("먼저 깃허브 토큰을 저장해 주세요"); }
   const b = $("send"); b.disabled = true; b.textContent = "등록 중…";
   try{
     await upload(cur.n, exportJpeg(), tok);
     sent.add(cur.n); saveSent();
-    $("ovl").classList.remove("on");
+    closeOvl();
     toast(`${cur.n}번 등록 완료 — 잠시 후 자동 반입됩니다`);
     document.querySelectorAll(`.shot .cam[data-n="${cur.n}"]`)
       .forEach(el => el.closest(".shot").remove());
@@ -534,6 +549,15 @@ $("send").onclick = async () => {
 };
 
 document.addEventListener("click", e => {
+  const shop = e.target.closest(".shot .shop");
+  if(shop){
+    const u = shop.dataset.url;
+    if(!u) return toast("링크가 없습니다");
+    // 별도 창으로 연다 — 홈 화면 앱에서 같은 창을 이동시키면 앱이 사라진다
+    window.open(u, "_blank", "noopener");
+    toast("쿠팡에서 캡처한 뒤 앱으로 돌아오세요", 3200);
+    return;
+  }
   const cam = e.target.closest(".shot .cam");
   if(!cam) return;
   startCapture(+cam.dataset.n, cam.dataset.name);
