@@ -373,6 +373,18 @@
    "coupang_url": "",
    "price_band": "",
    "updated": "2026-09-09"
+  },
+  "계란보관-트레이": {
+   "display": "계란보관 트레이",
+   "brand": "계란보관",
+   "model": "트레이",
+   "category": "트레이",
+   "product_id": "",
+   "image": "assets/products/계란보관-트레이.jpg",
+   "image_source": "capture",
+   "coupang_url": "",
+   "price_band": "",
+   "updated": "2026-09-09"
   }
  }
 }
