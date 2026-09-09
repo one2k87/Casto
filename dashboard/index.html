@@ -103,6 +103,9 @@
     font-weight:800;text-decoration:none;color:var(--muted)}
   .appsw a+a{border-left:1px solid var(--line)}
   .appsw a.on{background:var(--accent-soft);color:var(--accent)}
+  .appsw a[data-hue="s"]{color:#8b5cf6}          /* 스크립토 퍼플 */
+  .appsw a[data-hue="p"]{color:#2e9e6b}          /* 픽토 그린 */
+  .appsw a[data-hue="m"]{color:#C2662E;background:#F5A46A22}  /* 마크토 파스텔 오렌지(사양 통지) */
   :focus-visible{outline:2px solid var(--ring);outline-offset:2px;border-radius:10px}
   .foot{text-align:center;color:var(--muted);font-size:11px;margin-top:16px}
   .skeleton{color:var(--muted);font-size:13px}
@@ -146,10 +149,10 @@
   <div class="spacer"></div>
   <button class="iconbtn" id="cfgBtn" aria-label="설정" title="설정">⚙</button>
   <nav class="appsw" aria-label="앱 전환">
-    <a href="https://one2k87.github.io/Scripto/dashboard/" aria-label="Scripto">S</a
-    ><a href="https://one2k87.github.io/Picto/dashboard/" aria-label="Picto">P</a
+    <a data-hue="s" href="https://one2k87.github.io/Scripto/dashboard/" aria-label="Scripto">S</a
+    ><a data-hue="p" href="https://one2k87.github.io/Picto/dashboard/" aria-label="Picto">P</a
     ><a class="on" href="#" aria-current="page" aria-label="Casto (현재)" onclick="return false">C</a
-    ><a href="https://one2k87.github.io/Markto/dashboard/" aria-label="Markto">M</a>
+    ><a data-hue="m" href="https://one2k87.github.io/Markto/dashboard/" aria-label="Markto">M</a>
   </nav>
 </header>
 <main>
