@@ -17,14 +17,14 @@
   "레이저가이드가위": {
    "display": "레이저가이드가위",
    "brand": "",
-   "model": "",
+   "model": "레이저가이드가위",
    "category": "레이저가이드가위",
    "product_id": "",
-   "image": "",
-   "image_source": "",
+   "image": "assets/products/레이저가이드가위.jpg",
+   "image_source": "capture",
    "coupang_url": "",
    "price_band": "중가",
-   "updated": "2026-09-08"
+   "updated": "2026-09-09"
   },
   "얼음틀-얼음보관통": {
    "display": "얼음틀 얼음보관통",
