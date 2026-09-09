@@ -1,12 +1,15 @@
 /* Casto 대시보드 서비스워커 — 껍데기는 캐시 우선, 데이터는 네트워크 우선.
    목적은 오프라인에서도 **캡처 번호표를 볼 수 있게** 하는 것이다(지하철에서 캡처 목록 확인). */
-const SHELL = "casto-shell-v4";
-const DATA = "casto-data-v4";
+const SHELL = "casto-shell-v5";
+const DATA = "casto-data-v5";
 const FILES = ["./", "./index.html", "./manifest.json", "./icons/icon-192.png"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(SHELL).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));
 });
+// 페이지가 "skip"을 보내면 대기 중인 새 워커가 즉시 활성화된다(앱을 껐다 켤 필요 없음)
+self.addEventListener("message", e => { if (e.data === "skip") self.skipWaiting(); });
+
 self.addEventListener("activate", e => {
   e.waitUntil(caches.keys().then(ks => Promise.all(
     ks.filter(k => k !== SHELL && k !== DATA).map(k => caches.delete(k))

@@ -216,7 +216,9 @@
     <button class="btn ghost" id="tokClear">이 기기에서 지우기</button>
   </div>
 
-  <div class="foot">Casto v2 · <a href="#" id="reload" style="color:inherit">새로고침 ↻</a></div>
+  <div class="foot">Casto <b id="ver">v2.2</b> ·
+    <a href="#" id="reload" style="color:inherit">새로고침 ↻</a> ·
+    <a href="#" id="hardReset" style="color:inherit">캐시 비우기</a></div>
 </main>
 <div id="ovl">
   <div class="top"><span id="ovlTitle">캡처 등록</span><button id="ovlX" aria-label="닫기">✕</button></div>
@@ -542,8 +544,39 @@ $("reload").onclick = e => { e.preventDefault(); location.reload(); };
 // iOS bfcache 복귀 후 고정 헤더가 밀려 못 누르는 현상 보정
 addEventListener("pageshow", e => { if(e.persisted){
   requestAnimationFrame(() => { const y=scrollY; scrollTo(0,y+1); scrollTo(0,y); }); }});
-if("serviceWorker" in navigator) addEventListener("load",
-  () => navigator.serviceWorker.register("sw.js").catch(()=>{}));
+/* 서비스워커 갱신 — v2까지는 껍데기를 캐시 우선으로 줘서 앱을 고쳐도 폰에 안 내려갔다.
+   새 워커가 제어권을 잡는 순간 **자동으로 한 번만** 새로고침해서 최신 화면으로 바꾼다.
+   (한 번만: reloaded 플래그가 없으면 controllerchange 때마다 무한 새로고침이 난다) */
+if("serviceWorker" in navigator){
+  let reloaded = false;
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if(reloaded) return; reloaded = true; location.reload();
+  });
+  addEventListener("load", async () => {
+    try{
+      const reg = await navigator.serviceWorker.register("sw.js");
+      reg.update();                                   // 열 때마다 새 버전이 있는지 확인
+      reg.addEventListener("updatefound", () => {
+        const w = reg.installing;
+        w && w.addEventListener("statechange", () => {
+          if(w.state === "installed" && navigator.serviceWorker.controller) w.postMessage("skip");
+        });
+      });
+    }catch(e){}
+  });
+}
+
+// 최후의 수단 — 캐시를 통째로 비우고 워커를 해제한다(화면이 옛날 것에서 안 바뀔 때)
+$("hardReset").onclick = async e => {
+  e.preventDefault();
+  try{
+    if("caches" in window) for(const k of await caches.keys()) await caches.delete(k);
+    if("serviceWorker" in navigator)
+      for(const r of await navigator.serviceWorker.getRegistrations()) await r.unregister();
+    toast("캐시를 비웠습니다 — 다시 엽니다");
+    setTimeout(() => location.reload(true), 900);
+  }catch(err){ toast("캐시 비우기 실패: " + err.message, 3600); }
+};
 </script>
 </body>
 </html>
