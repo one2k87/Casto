@@ -133,6 +133,11 @@
     background:#161d29;color:#e8edf5;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer}
   #ovl .bar button.go{background:var(--accent);border-color:var(--accent);color:#fff;flex:1.6}
   #ovl .bar button:disabled{opacity:.5}
+  #pickSrc{display:flex;flex-direction:column;gap:12px;width:100%;max-width:420px;padding:0 4px}
+  #pickSrc .src{min-height:56px;border-radius:14px;border:1px solid #2a3444;background:#161d29;
+    color:#e8edf5;font-size:16px;font-weight:700;font-family:inherit;cursor:pointer}
+  #pickSrc .src.go{background:var(--accent);border-color:var(--accent);color:#fff}
+  #pickSrc .srchint{color:#9aa8bd;font-size:13px;line-height:1.6;text-align:center;margin-top:4px}
   #toast{position:fixed;left:50%;bottom:calc(24px + var(--safe-b));transform:translateX(-50%);
     background:#111826;color:#fff;padding:12px 18px;border-radius:12px;font-size:14px;z-index:70;
     display:none;max-width:88vw;text-align:center}
@@ -215,9 +220,17 @@
 </main>
 <div id="ovl">
   <div class="top"><span id="ovlTitle">캡처 등록</span><button id="ovlX" aria-label="닫기">✕</button></div>
-  <div class="stage"><canvas id="cvs"></canvas></div>
-  <div class="hint">모서리를 끌어 크기 조절 · 안쪽을 끌어 이동 — 제품만 남기세요</div>
-  <div class="bar">
+  <div class="stage">
+    <div id="pickSrc">
+      <button class="src go" id="fromClip">📋 클립보드에서 붙여넣기</button>
+      <button class="src" id="fromLib">🖼 사진에서 선택</button>
+      <div class="srchint">쿠팡 화면 캡처 → <b>복사 후 삭제</b> → 여기서 붙여넣기<br>
+        사진첩에 저장할 필요가 없습니다</div>
+    </div>
+    <canvas id="cvs" hidden></canvas>
+  </div>
+  <div class="hint" id="cropHint" hidden>모서리를 끌어 크기 조절 · 안쪽을 끌어 이동 — 제품만 남기세요</div>
+  <div class="bar" id="cropBar" hidden>
     <button id="cropAll">전체</button>
     <button id="reshoot">다시</button>
     <button class="go" id="send">등록</button>
@@ -380,6 +393,20 @@ function draw(){
 const corners = () => [[crop.x,crop.y],[crop.x+crop.w,crop.y],
                        [crop.x,crop.y+crop.h],[crop.x+crop.w,crop.y+crop.h]];
 
+function showStage(cropping){
+  $("pickSrc").hidden = cropping;
+  $("cvs").hidden = !cropping;
+  $("cropHint").hidden = !cropping;
+  $("cropBar").hidden = !cropping;
+}
+
+function startCapture(n, name){
+  cur = {n, name}; img = null;
+  $("ovlTitle").textContent = `${n}번 · ${name}`;
+  showStage(false);
+  $("ovl").classList.add("on");
+}
+
 function openCrop(file, n, name){
   const fr = new FileReader();
   fr.onload = () => { const im = new Image();
@@ -390,11 +417,31 @@ function openCrop(file, n, name){
       cvs.width = Math.round(im.naturalWidth*r); cvs.height = Math.round(im.naturalHeight*r);
       img = im;
       crop = {x:cvs.width*.06, y:cvs.height*.06, w:cvs.width*.88, h:cvs.height*.88};
-      cur = {n, name}; $("ovlTitle").textContent = `${n}번 · ${name}`;
-      $("ovl").classList.add("on"); draw();
+      if(n != null) cur = {n, name};
+      $("ovlTitle").textContent = `${cur.n}번 · ${cur.name}`;
+      $("ovl").classList.add("on"); showStage(true); draw();
     };
     im.src = fr.result; };
   fr.readAsDataURL(file);
+}
+
+/* 클립보드에서 바로 받기 — 사진첩을 거치지 않는 경로.
+   iOS는 스크린샷 편집에서 '복사 후 삭제'가 되므로, 캡처가 사진첩에 쌓이지 않는다.
+   navigator.clipboard.read()는 사용자 제스처 + 권한 확인이 필요해서 버튼 안에서만 부른다. */
+async function fromClipboard(){
+  try{
+    if(!navigator.clipboard || !navigator.clipboard.read)
+      throw new Error("이 브라우저는 붙여넣기를 지원하지 않습니다");
+    const items = await navigator.clipboard.read();
+    for(const it of items){
+      const type = it.types.find(t => t.startsWith("image/"));
+      if(type){ openCrop(await it.getType(type)); return; }
+    }
+    throw new Error("클립보드에 이미지가 없습니다");
+  }catch(e){
+    toast(e.message.includes("이미지가 없") ? "클립보드에 이미지가 없습니다 — 캡처 후 '복사'를 먼저"
+          : "붙여넣기를 못 했습니다 — '사진에서 선택'을 써주세요", 3800);
+  }
 }
 
 cvs.addEventListener("pointerdown", e => {
@@ -430,7 +477,16 @@ addEventListener("pointerup", () => { drag = null; });
 
 $("cropAll").onclick = () => { crop = {x:0,y:0,w:cvs.width,h:cvs.height}; draw(); };
 $("ovlX").onclick = () => { $("ovl").classList.remove("on"); img=null; };
-$("reshoot").onclick = () => { $("pick").value=""; $("pick").click(); };
+$("reshoot").onclick = () => { img = null; showStage(false); };   // 소스 선택으로 되돌아간다
+$("fromClip").onclick = fromClipboard;
+$("fromLib").onclick = () => { $("pick").value=""; $("pick").click(); };
+
+// 데스크톱·외장 키보드에서 ⌘V / Ctrl+V로도 받는다
+addEventListener("paste", e => {
+  if(!$("ovl").classList.contains("on") || img) return;
+  const f = [...(e.clipboardData?.files || [])].find(f => f.type.startsWith("image/"));
+  if(f){ e.preventDefault(); openCrop(f); }
+});
 
 function exportJpeg(){
   const sx = img.naturalWidth/cvs.width, sy = img.naturalHeight/cvs.height;
@@ -478,11 +534,9 @@ $("send").onclick = async () => {
 document.addEventListener("click", e => {
   const cam = e.target.closest(".shot .cam");
   if(!cam) return;
-  $("pick").dataset.n = cam.dataset.n; $("pick").dataset.name = cam.dataset.name;
-  $("pick").value = ""; $("pick").click();
+  startCapture(+cam.dataset.n, cam.dataset.name);
 });
-$("pick").onchange = e => { const f = e.target.files[0];
-  if(f) openCrop(f, +$("pick").dataset.n, $("pick").dataset.name); };
+$("pick").onchange = e => { const f = e.target.files[0]; if(f) openCrop(f); };
 
 $("reload").onclick = e => { e.preventDefault(); location.reload(); };
 // iOS bfcache 복귀 후 고정 헤더가 밀려 못 누르는 현상 보정
