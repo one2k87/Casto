@@ -354,7 +354,7 @@ def card_hook(sc, c, shots, i, total):
                  3: [(300, 660), (W // 2, 800), (780, 660)]}.get(len(got), [(W // 2, 720)])
         for p, ctr in zip(got, spots):
             visuals.paste_product(img, p, center=ctr, box=(430, 430), accent=sage)
-        visuals.paste_koki(img, "idle", (170, 1480), (240, 240))
+        visuals.paste_koki(img, "idle", (168, 1620), (230, 230))
         d = ImageDraw.Draw(img)
     big_text(d, sc["caption"], 1290, size=88, stroke=sage)
     return img
@@ -363,7 +363,7 @@ def card_hook(sc, c, shots, i, total):
 def card_ask(sc, c, i, total):
     """3~5초 — 콕이가 질문을 세운다. 여기서부터가 이 채널의 차별점이다."""
     img, d, sage = base_card(c, i, total)
-    if visuals.paste_koki(img, "magnify", (W // 2, 700), (620, 620)):
+    if visuals.paste_koki(img, "magnify", (W // 2, 720), (720, 720)):
         d = ImageDraw.Draw(img)                     # 클레이 콕이(돋보기 포함)
     else:
         kok_box(d, W // 2, 700, 420, squish=0.2)    # 폴백: 도형 + 돋보기
@@ -400,8 +400,9 @@ def card_comic(sc, c, panel, i, total):
             d = ImageDraw.Draw(img)
         except Exception as e:
             print(f"[casto] 만화 컷 로드 실패({panel}): {e}")
+    # 콕이는 자막 아래·CTA 위의 빈 띠에 둔다. 1470에 두니 큰 자막과 겹쳤다(2026-09-10 실측)
     visuals.paste_koki(img, "think" if sc.get("phase") == "cause" else "idea",
-                       (180, 1470), (260, 260))
+                       (172, 1615), (250, 250))
     d = ImageDraw.Draw(img)
     badge = sc.get("badge", "")
     if badge:
@@ -424,7 +425,7 @@ def card_verdict(sc, c, shots, win, i, total):
         d = ImageDraw.Draw(img)
     verdict_badge(d, W - 190, 330, v)
     won = v["key"] in ("오늘의 콕", "조건콕")
-    if visuals.paste_koki(img, "stamp" if won else "nope", (200, 1470), (300, 300)):
+    if visuals.paste_koki(img, "stamp" if won else "nope", (190, 1600), (270, 270)):
         d = ImageDraw.Draw(img)
     else:
         kok_box(d, 190, 1500, 190, squish=0.0, open_lid=won)
