@@ -121,5 +121,13 @@
  "upload": {
   "mode": "telegram",
   "_설명": "완성 mp4를 텔레그램으로 전송 → 폰에서 유튜브 쇼츠/인스타 릴스에 바로 업로드. v2: Make MCP로 유튜브·인스타 자동 게시"
+ },
+ "coupang_partners": {
+  "channel_id": "kokpicktube",
+  "_설명": "콕픽 유튜브 전용 채널 아이디(2026-09-10 생성). 파트너스 링크를 만들 때 반드시 이 채널을 지정한다 — 그래야 성과가 채널별로 갈리고 채널 승인·활동증빙 관리가 꼬이지 않는다. 계정당 채널 10개, 아이디는 8~20자 영문·숫자.",
+  "other_channels": {
+   "pickdam": "pickdamblog",
+   "markto": "(핀터레스트 진행 시 marktopins 예정)"
+  }
  }
 }
