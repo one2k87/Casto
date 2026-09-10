@@ -1,7 +1,7 @@
 /* Casto 대시보드 서비스워커 — 껍데기는 캐시 우선, 데이터는 네트워크 우선.
    목적은 오프라인에서도 **캡처 번호표를 볼 수 있게** 하는 것이다(지하철에서 캡처 목록 확인). */
-const SHELL = "casto-shell-v10";
-const DATA = "casto-data-v10";
+const SHELL = "casto-shell-v11";
+const DATA = "casto-data-v11";
 const FILES = ["./", "./index.html", "./manifest.json", "./icons/icon-192.png"];
 
 self.addEventListener("install", e => {

@@ -90,6 +90,8 @@
   .shot .paste{background:var(--accent);border-color:var(--accent)}
   .cap{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:16px;font-weight:800;line-height:1.4;letter-spacing:-.02em}
   .cap + .sub{margin-top:4px}
+  .shot .find{background:var(--card2)}
+  .shot .act{display:flex;gap:6px}
   .shot.due{background:var(--due,#fff7ed);border-radius:12px}
   .shot.due .nm span{color:#c2410c;font-weight:700}
   .cp{display:flex;gap:8px;margin-top:10px}
@@ -245,9 +247,20 @@
            placeholder="github_pat_… (이 기기에만 저장)">
     <button class="btn" id="tokSave">저장</button>
     <button class="btn ghost" id="tokClear">이 기기에서 지우기</button>
+
+    <h2 style="margin-top:18px">🔎 파트너스 검색 주소</h2>
+    <div class="sub" style="margin-bottom:8px">
+      한 번만 알려주면, 그다음부터 🔎를 누를 때 <b>상품명이 검색된 상태</b>로 열립니다.<br>
+      ① 파트너스에서 <b>테스트</b> 라고 검색 → ② 주소창 주소 복사 → ③ 아래에 붙여넣기
+    </div>
+    <input id="pt" type="url" inputmode="url" autocomplete="off"
+           placeholder="https://partners.coupang.com/…테스트…">
+    <div class="sub" id="ptNow" style="margin:6px 0"></div>
+    <button class="btn" id="ptSave">저장</button>
+    <button class="btn ghost" id="ptClear">지우기</button>
   </div>
 
-  <div class="foot">Casto <b id="ver">v2.7</b> ·
+  <div class="foot">Casto <b id="ver">v2.8</b> ·
     <a href="#" id="reload" style="color:inherit">새로고침 ↻</a> ·
     <a href="#" id="hardReset" style="color:inherit">캐시 비우기</a></div>
 </main>
@@ -404,11 +417,59 @@ const toast = (m, ms=2600) => { const t=$("toast"); t.textContent=m; t.classList
 /* 설정 패널 */
 $("cfgBtn").onclick = () => { const p=$("cfgPanel"); p.classList.toggle("on");
   if(p.classList.contains("on")){ $("tok").value = store.get("casto.gh") || "";
+    ptShow();
     p.scrollIntoView({behavior:"smooth", block:"center"}); } };
 $("tokSave").onclick = () => { const v=$("tok").value.trim();
   if(!v) return toast("토큰을 붙여넣어 주세요");
   store.set("casto.gh", v); $("cfgPanel").classList.remove("on"); toast("저장했습니다 — 이제 📷로 등록됩니다"); };
 $("tokClear").onclick = () => { store.set("casto.gh", ""); $("tok").value=""; toast("토큰을 지웠습니다"); };
+
+/* ── 파트너스 검색 주소 ───────────────────────────────────────────────────────
+   쿠팡은 자동화 브라우저를 막아 두어서 검색 주소 형식을 **밖에서 확인할 수 없다**.
+   추측해서 박아 넣으면 "상품을 찾을 수 없습니다"가 나온다(2026-09-08에 이미 겪었다).
+   그래서 앱이 사용자에게 한 번 배운다: '테스트'로 검색한 주소를 받아
+   그 자리를 치환 자리로 바꿔 템플릿으로 저장한다. 파트너스가 주소를 바꿔도
+   다시 한 번 붙여넣으면 그만이다. */
+const PT_KEY = "casto.partners";
+const SENTINEL = "테스트";
+
+function ptTemplate(raw){
+  const u = (raw || "").trim();
+  if(!/^https?:\/\//i.test(u)) return null;
+  for(const needle of [SENTINEL, encodeURIComponent(SENTINEL), encodeURIComponent(SENTINEL).toLowerCase()]){
+    if(u.includes(needle)) return u.split(needle).join("{q}");
+  }
+  return u;                       // 키워드가 주소에 안 담기는 형태 — 그냥 열기만 한다
+}
+function ptShow(){
+  const t = store.get(PT_KEY);
+  $("ptNow").textContent = !t ? "아직 등록 전 — 🔎는 파트너스 첫 화면만 엽니다."
+    : t.includes("{q}") ? "✅ 등록됨 — 🔎가 상품명으로 검색해서 엽니다."
+    : "⚠ 등록됨 — 이 주소엔 검색어가 안 담겨서 화면만 열립니다.";
+}
+$("ptSave").onclick = () => {
+  const t = ptTemplate($("pt").value);
+  if(!t) return toast("http로 시작하는 주소를 붙여넣어 주세요");
+  store.set(PT_KEY, t); ptShow();
+  toast(t.includes("{q}") ? "저장했습니다 — 이제 🔎가 검색까지 합니다"
+                          : "저장했습니다 — 검색어가 안 담긴 주소라 화면만 열립니다", 4200);
+};
+$("ptClear").onclick = () => { store.set(PT_KEY, ""); $("pt").value = ""; ptShow(); toast("지웠습니다"); };
+
+function partnersUrl(name){
+  const t = store.get(PT_KEY);
+  if(!t) return "https://partners.coupang.com/";
+  return t.includes("{q}") ? t.split("{q}").join(encodeURIComponent(name)) : t;
+}
+
+/* 🔎 — 파트너스를 새 탭으로 연다. 같은 창에서 열면 PWA가 통째로 파트너스가 된다
+   (🛒에서 이미 한 번 겪었다). 돌아와서 📋를 누르면 클립보드에서 링크를 받는다. */
+document.addEventListener("click", e => {
+  const b = e.target.closest("#linkList .find");
+  if(!b) return;
+  if(!store.get(PT_KEY)) toast("⚙ 설정에서 파트너스 검색 주소를 한 번 등록하면 검색까지 됩니다", 4600);
+  window.open(partnersUrl(b.dataset.name), "_blank", "noopener");
+});
 
 /* 크롭 상태 */
 const cvs = $("cvs"), ctx = cvs.getContext("2d");
@@ -629,7 +690,9 @@ async function loadLinkNeeds(){
     $("linkList").innerHTML = rows.map(r => `<div class="shot${r.due ? " due" : ""}" data-slug="${r.slug}">
       <div class="no">${r.due ? "⏰" : "🔗"}</div>
       <div class="nm"><b>${r.name}</b><span>${r.due ? r.due + " 영상에 쓸 상품 — 먼저" : "파트너스 링크 미등록"}</span></div>
-      <div class="act"><button class="paste" data-slug="${r.slug}" data-name="${r.name.replace(/"/g,"&quot;")}"
+      <div class="act">
+        <button class="find" data-name="${r.name.replace(/"/g,"&quot;")}" aria-label="파트너스에서 검색">🔎</button>
+        <button class="paste" data-slug="${r.slug}" data-name="${r.name.replace(/"/g,"&quot;")}"
         aria-label="링크 붙여넣기">📋</button></div></div>`).join("");
     if(due) $("linkWrap").open = true;      // 급한 게 있으면 접어두지 않는다
   }catch(e){ $("linkCard").hidden = true; }
