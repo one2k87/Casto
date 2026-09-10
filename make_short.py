@@ -154,14 +154,36 @@ def build_scenes(s, c):
 
 # ---------------------------------------------------------------- 콕픽 카드 렌더
 def wrap(d, text, f, maxw):
+    """어절 단위 줄바꿈.
+
+    글자 단위로 자르면 "냄새가 밴다"가 "냄새가 밴 / 다"로 갈린다 — 한 글자짜리
+    고아 줄은 15초 안에 한 번 읽고 지나가는 화면에서 특히 눈에 걸린다(실측).
+    어절로 먼저 자르고, 한 어절이 통째로 안 들어갈 때만 글자로 쪼갠다.
+    """
+    def chars(word):
+        out, cur = [], ""
+        for ch in word:
+            if d.textlength(cur + ch, font=f) > maxw and cur:
+                out.append(cur); cur = ch
+            else:
+                cur += ch
+        if cur:
+            out.append(cur)
+        return out
+
     lines = []
     for raw in text.split("\n"):
         cur = ""
-        for ch in raw:
-            if d.textlength(cur + ch, font=f) > maxw and cur:
-                lines.append(cur); cur = ch
+        for word in raw.split(" "):
+            cand = f"{cur} {word}".strip()
+            if d.textlength(cand, font=f) <= maxw or not cur:
+                if d.textlength(cand, font=f) > maxw:   # 어절 하나가 줄보다 길다
+                    parts = chars(cand)
+                    lines.extend(parts[:-1]); cur = parts[-1]
+                else:
+                    cur = cand
             else:
-                cur += ch
+                lines.append(cur); cur = word
         lines.append(cur)
     return lines
 
@@ -208,7 +230,7 @@ def kok_box(d, cx, cy, w, squish=0.0, open_lid=False):
         d.ellipse([bx - 24, cy - 10, bx + 24, cy + 38], fill=(255, 248, 236), outline=edge, width=4)
 
 
-def scene_card(sc, i, total, c, shot=None, label="", note=""):
+def scene_card(sc, i, total, c, shot=None, label="", note="", hit=False):
     """콕픽 파스텔 카드 — 크림→민트 그라데이션 + 콕이 + 큰 자막 + 콕 게이지.
 
     `shot`(실제 상품 사진 경로)이 있으면 **상품이 주인공**이 된다 — 사진 카드가 화면 중앙을
@@ -225,7 +247,11 @@ def scene_card(sc, i, total, c, shot=None, label="", note=""):
     d.text((W // 2, 140), "콕픽 KOKPICK", font=font(48), fill=sage, anchor="mm")
 
     kind = sc["kind"]
-    squish = 0.85 if kind == "kok" else (0.25 if kind == "rule" else 0.0)
+    # punch 모션은 이 둘을 교차한다 — **평소 프레임과 눌림 프레임의 차이가 곧 타격감**이다.
+    # 예전엔 콕 씬 기본값이 이미 0.85(거의 눌린 상태)라 교차해도 움직임이 안 보였다.
+    squish = 0.15 if kind == "kok" else (0.25 if kind == "rule" else 0.0)
+    if hit:
+        squish = 0.95
     opened = kind == "verdict" and sc["verdict"]["key"] in ("오늘의 콕", "조건콕")
 
     placed = None
@@ -270,7 +296,7 @@ def scene_card(sc, i, total, c, shot=None, label="", note=""):
     for k in range(total):  # 진행 점
         x = W // 2 + (k - total / 2 + .5) * 40
         d.ellipse([x - 8, 1866, x + 8, 1882], fill=sage if k <= i else (255, 255, 255))
-    p = f"out/scene{i}.png"
+    p = f"out/scene{i}{'_hit' if hit else ''}.png"
     img.save(p)
     return p
 
@@ -407,8 +433,19 @@ def main():
                             "-c:v", "libx264", "-c:a", "aac", "-shortest", seg],
                            check=True, capture_output=True)
         else:
+            # 카드는 정지 이미지지만 **그대로 띄우면 15초 내내 움직임이 0이다**.
+            # visuals.motion_clip이 이미 있는데 호출되지 않고 있었다(2026-09-10 발견).
+            # 콕 씬은 눌림 프레임을 끼워 타격을, 나머지는 느린 줌인을 준다.
             img = scene_card(sc, i, len(scenes), c, shot=shot, label=label, note=note)
-            subprocess.run(["ffmpeg", "-y", "-loop", "1", "-i", img, "-i", mp3,
+            frames, style = [img], "zoom"
+            if sc["kind"] == "kok":
+                frames.append(scene_card(sc, i, len(scenes), c, shot=shot, label=label,
+                                         note=note, hit=True))
+                style = "punch"
+            elif sc["kind"] == "verdict":
+                style = "pop"
+            vid = visuals.motion_clip(frames, d, f"out/mo{i}.mp4", style=style)
+            subprocess.run(["ffmpeg", "-y", "-i", vid, "-i", mp3,
                             "-t", f"{d:.2f}", "-r", "30", "-pix_fmt", "yuv420p",
                             "-c:v", "libx264", "-c:a", "aac", "-shortest", seg],
                            check=True, capture_output=True)

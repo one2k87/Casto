@@ -220,9 +220,15 @@ def motion_clip(frames: list[str], seconds: float, out: str, style: str = "zoom"
         lst = f"{out}.list.txt"
         with open(lst, "w") as f:
             f.writelines(f"file '{os.path.basename(p)}'\n" for p in parts)
-        subprocess.run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", lst,
-                        "-c", "copy", out], check=True, capture_output=True,
+        # cwd를 out 폴더로 주면서 목록/출력까지 전체 경로로 넘기면 파일을 못 찾는다
+        # (concat 목록 안의 file 경로가 cwd 기준이라 cwd는 필요하다). 둘 다 basename으로.
+        subprocess.run(["ffmpeg", "-y", "-f", "concat", "-safe", "0",
+                        "-i", os.path.basename(lst), "-c", "copy", os.path.basename(out)],
+                       check=True, capture_output=True,
                        cwd=os.path.dirname(out) or ".")
+        for junk in parts + [lst]:
+            try: os.remove(junk)
+            except OSError: pass
         return out
 
     zexpr = {"zoom": "min(zoom+0.0012,1.12)", "pop": "if(lte(on,6),1.06,max(1.0,zoom-0.004))"}
