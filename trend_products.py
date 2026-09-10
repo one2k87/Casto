@@ -158,6 +158,7 @@ def discover(c: dict, per_query: int = 50) -> tuple[list[dict], list[dict]]:
   {{"key": "영문소문자_스네이크케이스_식별자",
     "name": "**사람들이 부르는 이름 그대로**(12자 이내). 위 근거에 나온 표현을 쓸 것",
     "search_keyword": "네이버·쿠팡에서 이 상품을 찾을 검색어 — **구체적일수록 좋다**",
+    "en_keyword": "영어권에서 이 물건을 부르는 말(유튜브 영어 검색어). 모르면 빈 문자열 — 지어내지 말 것",
     "brand": "근거에 브랜드명이 보이면 적고, 없으면 빈 문자열. **추측 금지**",
     "product_id": "A에서 왔으면 그 platform:id, B에서 왔으면 빈 문자열",
     "category": "**숫자 8자리만** 적으세요(설명 문구를 붙이지 마세요). 패션의류=50000000, 패션잡화=50000001, 화장품미용=50000002, **디지털·가전=50000003**, 가구인테리어=50000004, 출산육아=50000005, 식품=50000006, 스포츠레저=50000007, 생활건강=50000008",
@@ -205,7 +206,7 @@ def merge_watchlist(found: list[dict], today: dt.date) -> list[dict]:
     wl = _load(WATCHLIST, {})
     for p in found:                       # 신규 발굴은 갱신 또는 추가
         rec = wl.get(p["key"], {})
-        rec.update({k: p[k] for k in ("name", "search_keyword", "price_band",
+        rec.update({k: p[k] for k in ("name", "search_keyword", "en_keyword", "price_band",
                                       "brand", "product_id", "evidence") if k in p})
         if p.get("category"):
             rec["category"] = normalize_category(p["category"]) or rec.get("category")
@@ -260,6 +261,9 @@ def collect() -> dict:
                        for v in vids],
             "category": cat,
             "mentions": src.naver_mentions(kw),
+            # 해외가 먼저 떴는지 — 인스타·틱톡이 막힌 자리를 메우는 값싼 대체 신호
+            "overseas": (src.overseas_lead(kw, p.get("en_keyword") or "")
+                         if p.get("en_keyword") else None),
             # 발굴 키워드는 문장에 가까워 그대로는 수요가 안 잡힌다 → 사다리로 좁혀 재시도
             "demand": src.demand_ladder(kw, name, category=cat),
             "demand_last_year": src.demand_ladder(kw, name, category=cat, last_year=True),

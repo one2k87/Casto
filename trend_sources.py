@@ -151,6 +151,78 @@ def youtube_search_rich(query: str, days: int = 14, max_items: int = 50,
     return out
 
 
+def youtube_first_seen(query: str, days: int = 180, region: str = "US",
+                       lang: str = "en", max_items: int = 25) -> dict | None:
+    """이 검색어가 **언제 처음 나타났고 얼마나 퍼졌는지**. 지역·언어를 바꿔 부를 수 있다.
+
+    order를 date로 두면 최신순이라 '처음'을 못 본다. viewCount로 받아 그중 가장
+    오래된 것을 본다 — 조회수 있는 영상 중 최초라는 뜻이고, 유행의 시작점 근사로 충분하다.
+    """
+    key = os.getenv("YT_API_KEY", "")
+    if not key or not query:
+        return None
+    after = (dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=days)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    params = {"key": key, "q": query, "part": "snippet", "type": "video",
+              "order": "viewCount", "publishedAfter": after,
+              "maxResults": min(max_items, 50)}
+    if region:
+        params["regionCode"] = region
+    if lang:
+        params["relevanceLanguage"] = lang
+    found = _get(YT_SEARCH, params=params)
+    ids = [i["id"]["videoId"] for i in (found or {}).get("items", [])
+           if (i.get("id") or {}).get("videoId")]
+    if not ids:
+        return {"query": query, "region": region, "count": 0, "views": 0,
+                "earliest": None, "titles": []}
+    stats = _get(YT_VIDEOS, params={"key": key, "id": ",".join(ids[:50]),
+                                    "part": "snippet,statistics"})
+    rows = []
+    for it in (stats or {}).get("items", []):
+        sn = it.get("snippet", {})
+        rows.append({"published": sn.get("publishedAt", "")[:10],
+                     "title": sn.get("title", ""),
+                     "views": int(it.get("statistics", {}).get("viewCount", 0))})
+    if not rows:
+        return {"query": query, "region": region, "count": 0, "views": 0,
+                "earliest": None, "titles": []}
+    rows.sort(key=lambda r: r["published"])
+    return {"query": query, "region": region, "count": len(rows),
+            "views": sum(r["views"] for r in rows),
+            "earliest": rows[0]["published"],
+            "titles": [r["title"] for r in sorted(rows, key=lambda r: -r["views"])[:3]]}
+
+
+def overseas_lead(ko_query: str, en_query: str, days: int = 180) -> dict | None:
+    """**해외가 얼마나 먼저 떴는가.** 인과를 좁히는 가장 값싼 신호다.
+
+    인스타·틱톡 해시태그 증가량이 이상적이지만 2026 기준 둘 다 막혀 있다
+    (틱톡은 무료 경로 없음, 인스타는 앱 심사+7일 30개 제한). 그런데 우리가 알고 싶은 건
+    결국 "이게 밖에서 먼저 떴나, 언제부터인가"이고, 그건 **이미 가진 유튜브 키**로
+    한국 검색과 영어권 검색의 최초 등장일을 비교하면 나온다.
+
+    덤으로 "해외에서 난리난 ○○ 3가지"는 이 니치에서 실제로 197만을 찍은 제목 틀이다.
+    """
+    ko = youtube_first_seen(ko_query, days=days, region="KR", lang="ko")
+    en = youtube_first_seen(en_query, days=days, region="US", lang="en")
+    if not ko or not en:
+        return None
+    out = {"ko": ko, "en": en, "lead_days": None, "verdict": "unknown"}
+    if ko.get("earliest") and en.get("earliest"):
+        d_ko = dt.date.fromisoformat(ko["earliest"])
+        d_en = dt.date.fromisoformat(en["earliest"])
+        out["lead_days"] = (d_ko - d_en).days
+        if out["lead_days"] >= 21 and en["count"] >= 3:
+            out["verdict"] = "overseas_first"      # 해외가 먼저 — "해외에서 난리난"
+        elif out["lead_days"] <= -21:
+            out["verdict"] = "korea_first"
+        else:
+            out["verdict"] = "simultaneous"
+    elif en.get("count") == 0:
+        out["verdict"] = "korea_only"              # 국내 한정 유행
+    return out
+
+
 # ------------------------------------------------------------------ 네이버 공통
 def _naver_auth() -> tuple[str, dict[str, str], str] | None:
     """(베이스 URL, 인증 헤더). **HUB 키가 있으면 HUB 우선**, 없으면 레거시로 폴백한다.

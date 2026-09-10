@@ -66,3 +66,25 @@ def test_같이_뜬_품목에서_자기_자신은_빠진다():
         {"name": "나", "videos": [{"views": 99}]}]}]
     got = E.co_risers(["가"], snaps=snap)
     assert [x["name"] for x in got] == ["나"]
+
+
+def test_해외가_먼저면_그렇게_말한다():
+    snap = [{"products": [{"name": "테스트템", "overseas": {
+        "verdict": "overseas_first", "lead_days": 150,
+        "en": {"earliest": "2026-04-01", "count": 7, "titles": ["viral kitchen gadget"]},
+        "ko": {"earliest": "2026-08-29", "count": 3}}}]}]
+    lines = " ".join(E.brief("테스트템", snaps=snap)["lines"])
+    assert "5.0개월" in lines and "2026-04-01" in lines
+
+
+def test_한국이_먼저면_해외에서_난리났다고_쓰지_말라고_한다():
+    """'해외에서 난리난'은 197만짜리 제목 틀이라 유혹이 크다 — 사실이 아닐 때 막아야 한다."""
+    snap = [{"products": [{"name": "테스트템",
+                           "overseas": {"verdict": "korea_first", "lead_days": -60}}]}]
+    lines = " ".join(E.brief("테스트템", snaps=snap)["lines"])
+    assert "한국이 먼저" in lines and "쓰면 안 된다" in lines
+
+
+def test_영어권에_없으면_국내_유행이라고_적는다():
+    snap = [{"products": [{"name": "테스트템", "overseas": {"verdict": "korea_only"}}]}]
+    assert "국내에서 생긴 유행" in " ".join(E.brief("테스트템", snaps=snap)["lines"])

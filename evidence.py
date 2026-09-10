@@ -147,6 +147,20 @@ def brief(name, snaps=None) -> dict:
             if ly["trend"] == "up" else
             "작년 같은 기간엔 이런 상승이 없었다 → **올해 새로 생긴 이유**가 있다")
 
+    ov = p.get("overseas") or {}
+    if ov.get("verdict") == "overseas_first":
+        out["overseas"] = ov
+        m = round(ov["lead_days"] / 30, 1)
+        out["lines"].append(
+            f"해외 선행: 영어권에서 {ov['en']['earliest']}부터 보이기 시작 · 한국은 {ov['ko']['earliest']}"
+            f" → **약 {m}개월 늦게 들어왔다**(영어권 영상 {ov['en']['count']}개)")
+        if ov["en"].get("titles"):
+            out["lines"].append("   영어권 영상 제목: " + " / ".join(ov["en"]["titles"][:2]))
+    elif ov.get("verdict") == "korea_only":
+        out["lines"].append("해외 선행: 영어권에는 관련 영상이 없다 → **국내에서 생긴 유행**")
+    elif ov.get("verdict") == "korea_first":
+        out["lines"].append("해외 선행: 오히려 한국이 먼저다 → ‘해외에서 난리난’이라고 쓰면 안 된다")
+
     if p.get("mentions"):
         out["mentions"] = p["mentions"]
         out["lines"].append(f"네이버 블로그·카페 언급 {p['mentions']:,}건")
