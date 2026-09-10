@@ -18,5 +18,24 @@
   "brand": "늘어나는",
   "hook": "미국 유행 주방용품 소개, 1일 전",
   "seconds": 86.5
+ },
+ {
+  "date": "2026-09-10",
+  "slot": "",
+  "key": "에그크래커",
+  "verdict": "buy",
+  "title": "요즘 난리난 주방 살림 난이도 최상템 TOP3",
+  "product": "에그크래커",
+  "products": [
+   "에그크래커",
+   "씨밀렉스 라이스키퍼 쌀통 10kg",
+   "신일전자 삶는 미니세탁기 3kg SWM-1500WSJ"
+  ],
+  "format": "roundup3",
+  "price_band": "저가",
+  "category": "에그크래커",
+  "has_photo": true,
+  "hook": "최근 2일 사이 유튜브 10개 영상 확산",
+  "seconds": 88.1
  }
 ]
