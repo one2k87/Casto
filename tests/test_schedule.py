@@ -141,3 +141,27 @@ def test_실사진_소재가_없으면_램프업중에는_발행하지_않는다
     assert p["publish"] is False and "실사진" in p["reason"]
     p2 = sch.plan(dt.date(2026, 9, 15), board, [], ready=["씨밀렉스 쌀통"])
     assert p2["publish"] is True and p2["ramp"] is True
+
+
+def test_램프업편은_반드시_실사진_있는_상품을_고른다(monkeypatch):
+    """게이트가 '실사진 하나라도 있으면 발행'까지만 봐서, 정작 **고른 상품**은
+    사진 없는 시즌 키워드로 나갈 수 있었다. 첫 편이 그럴 뻔했다."""
+    import datetime as dt
+    monkeypatch.setattr(sch, "snapshot_days", lambda *a, **k: 2)
+    # 실사진이 있는 건 '밀폐용기'뿐이라고 가정한다
+    monkeypatch.setattr(sch, "_has_photo",
+                        lambda name, ready: ready is None or name == "밀폐용기")
+    board = {"deep_dive": [{"key": "코팅팬", "name": "코팅팬", "price_band": "중가"}]}
+    p = sch.plan(dt.date(2026, 9, 15), board, [], ready=["밀폐용기"])
+    assert p["publish"] is True
+    assert p["product"]["name"] == "밀폐용기"   # 사진 없는 코팅팬으로 가면 안 된다
+
+    # 시즌 슬롯도 마찬가지 — 시즌 키워드에 사진이 없으면 손에 든 걸 쓴다
+    ps = sch.plan(dt.date(2026, 9, 12), board, [], ready=["밀폐용기"])
+    assert ps["slot"] == "season" and ps["product"]["name"] == "밀폐용기"
+
+
+def test_램프업_폴백은_같은_상품을_반복하지_않는다():
+    """폴백이 늘 ready[0]이면 첫 네 편이 전부 같은 상품이 된다."""
+    assert sch._unused(["a", "b", "c"], [{"product": "a"}]) == "b"
+    assert sch._unused(["a", "b"], [{"key": "a"}, {"key": "b"}]) == "a"   # 다 썼으면 처음으로

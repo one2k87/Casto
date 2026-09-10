@@ -147,7 +147,25 @@ def slot_for(date: dt.date, ramp: bool | None = None) -> str | None:
     return (RAMP_SLOT if ramp else WEEKDAY_SLOT).get(date.weekday())
 
 
-def pick_product(slot: str, board: dict, log: list[dict], month: int) -> dict | None:
+def _has_photo(name: str, ready: list[str] | None) -> bool:
+    """이 이름이 **실사진까지 확보된 상품**인가. catalog.find와 같은 느슨한 매칭을 쓴다."""
+    if ready is None:
+        return True
+    import catalog
+    return catalog.render_mode(catalog.find(catalog.load(), name=name)) == "exact"
+
+
+def _unused(ready: list[str], log: list[dict]) -> str:
+    """실사진 상품 중 **최근에 안 쓴 것**을 고른다 — 램프업 폴백이 같은 상품만 반복하지 않게."""
+    used = [e.get("product") or e.get("key") for e in log]
+    for n in ready:
+        if n not in used:
+            return n
+    return ready[0]
+
+
+def pick_product(slot: str, board: dict, log: list[dict], month: int,
+                 ready: list[str] | None = None) -> dict | None:
     """슬롯에 맞는 제품을 고른다.
 
     **슬롯마다 다른 랭킹을 쓴다**(5-4-10): 브리핑은 재인 랭킹(이미 봤을 확률),
@@ -155,10 +173,25 @@ def pick_product(slot: str, board: dict, log: list[dict], month: int) -> dict | 
     """
     spec = SLOT_SPEC[slot]
     if spec["ranking"] == "season":
-        names = SEASON_CALENDAR.get(month, [])
-        return {"name": names[0], "season": True, "keyword": names[0]} if names else None
+        names = [n for n in SEASON_CALENDAR.get(month, []) if _has_photo(n, ready)] \
+                if ready is not None else SEASON_CALENDAR.get(month, [])
+        if names:
+            return {"name": names[0], "season": True, "keyword": names[0]}
+        if ready is None:
+            return None
+        # 시즌 키워드 중 실사진 있는 게 없다 — 램프업에는 시즌을 포기하고
+        # 손에 든 실사진 상품으로 간다. 사진 없는 편을 내보내는 것보다 낫다.
+        pick = _unused(ready, log)
+        return {"name": pick, "season": True, "keyword": pick, "photo_fallback": True}
     rows = [r for r in board.get(spec["ranking"], []) if not r.get("blocked")]
+    if ready is not None:
+        # 램프업 구간에는 **실사진이 있는 것만** 후보다. 하나도 없으면 랭킹을 포기하고
+        # 손에 든 실사진 상품으로 간다 — 사진 없는 편을 내보내는 것보다 낫다.
+        rows = [r for r in rows if _has_photo(r.get("name") or r.get("key", ""), ready)]
     if not rows:
+        if ready:
+            pick = _unused(ready, log)
+            return {"name": pick, "key": pick, "photo_fallback": True}
         return None
     used = {e["key"] for e in log[-QUOTA_WINDOW:]}
     fresh = [r for r in rows if r["key"] not in used] or rows   # 최근 다룬 건 뒤로
@@ -199,7 +232,7 @@ def plan(date: dt.date, board: dict, log: list[dict] | None = None,
                 "reason": ("램프업 중 발행 게이트 — 실사진이 확보된 상품이 없다. "
                            "캡처를 먼저 등록할 것(앱 📷)")}
     spec = SLOT_SPEC[slot]
-    product = pick_product(slot, board, log, date.month)
+    product = pick_product(slot, board, log, date.month, ready if ramp else None)
     out = {
         "date": date.isoformat(), "publish": True, "slot": slot,
         "ramp": ramp, "snapshot_days": days, "ready": ready or [],
