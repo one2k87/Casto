@@ -88,6 +88,8 @@
     display:grid;place-items:center;background:var(--card2);border:1px solid var(--line);
     text-decoration:none;font-size:17px}
   .shot .paste{background:var(--accent);border-color:var(--accent)}
+  .cap{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:16px;font-weight:800;line-height:1.4;letter-spacing:-.02em}
+  .cap + .sub{margin-top:4px}
   .cp{display:flex;gap:8px;margin-top:10px}
   .cp .cpy{flex:1;min-height:var(--tap);font-size:14px;font-weight:700}
   .chip{font-size:10px;font-weight:800;padding:1px 6px;border-radius:999px;
@@ -175,6 +177,15 @@
       <div class="txt"><div class="t1" id="nextT1">확인 중…</div>
         <div class="t2" id="nextT2">데이터를 불러오고 있습니다</div></div>
     </div>
+    <!-- 오늘 올릴 영상 — 제목·설명 복사가 매일 가장 오래 걸리던 손작업이다 -->
+    <div id="capBox" hidden>
+      <div class="cap" id="upTitle"></div>
+      <div class="sub" id="upMeta"></div>
+      <div class="cp">
+        <button class="iconbtn cpy" id="cpTitle">📋 제목</button>
+        <button class="iconbtn cpy" id="cpDesc">📋 설명</button>
+      </div>
+    </div>
     <a class="btn" id="nextBtn" hidden></a>
     <button class="btn ghost" id="doneBtn" hidden>오늘 업로드 완료로 표시</button>
   </div>
@@ -187,20 +198,6 @@
       <div class="stat"><div class="n" id="sShot">—</div><div class="l">📸 캡처 대기</div></div>
       <div class="stat"><div class="n" id="sSubs">—</div><div class="l">👥 구독</div></div>
     </div>
-  </div>
-
-  <!-- ②-2 오늘 업로드 — 제목·설명을 한 번에 복사한다(매일 가장 오래 걸리던 손작업) -->
-  <div class="card" id="upCard" hidden>
-    <h2>🎬 오늘 업로드</h2>
-    <div class="t1" id="upTitle" style="font-size:16px;font-weight:800;line-height:1.4"></div>
-    <div class="sub" id="upMeta" style="margin-top:4px"></div>
-    <div class="cp">
-      <button class="iconbtn cpy" id="cpTitle">📋 제목</button>
-      <button class="iconbtn cpy" id="cpDesc">📋 설명</button>
-    </div>
-    <a class="btn" href="https://studio.youtube.com" target="_blank" rel="noopener"
-       id="upStudio">유튜브 스튜디오 열기</a>
-    <button class="btn ghost" id="upDone">업로드 완료로 표시</button>
   </div>
 
   <!-- ③ 캡처 번호표 — 매일 반복하는 유일한 손작업이라 앱 안에 둔다 -->
@@ -248,7 +245,7 @@
     <button class="btn ghost" id="tokClear">이 기기에서 지우기</button>
   </div>
 
-  <div class="foot">Casto <b id="ver">v2.5</b> ·
+  <div class="foot">Casto <b id="ver">v2.6</b> ·
     <a href="#" id="reload" style="color:inherit">새로고침 ↻</a> ·
     <a href="#" id="hardReset" style="color:inherit">캐시 비우기</a></div>
 </main>
@@ -376,6 +373,8 @@ function renderShots(q){
   $("doneBtn").onclick = () => {
     store.set("casto.uploaded", todayKST());
     $("doneBtn").hidden = true;
+    $("capBox").hidden = true;
+    toast("업로드 완료로 표시했습니다");
     if(waiting > 0) setNext("📸", `상품 캡처 ${waiting}건`, "쿠팡에서 대표 이미지를 캡처해 번호로 저장",
       {label:"번호표 보기", run:() => { $("shotWrap").open = true;
         $("shotWrap").scrollIntoView({behavior:"smooth", block:"center"}); }});
@@ -685,20 +684,13 @@ async function loadCaption(){
     $("upTitle").textContent = c.title;
     $("upMeta").textContent = `${c.product} · ${c.verdict} · ${c.seconds}초`
       + (c.coupang_url ? " · 쿠팡 링크 있음" : " · ⚠ 쿠팡 링크 없음");
-    $("upCard").hidden = false;
+    $("capBox").hidden = false;
     return true;
   }catch(e){ return false; }
 }
 
 $("cpTitle").onclick = () => caption && copyText(caption.title, "제목을");
 $("cpDesc").onclick = () => caption && copyText(caption.description, "설명을");
-$("upDone").onclick = () => {
-  store.set("casto.uploaded", todayKST());
-  $("upCard").hidden = true;
-  toast("업로드 완료로 표시했습니다");
-  location.reload();
-};
-
 $("reload").onclick = e => { e.preventDefault(); location.reload(); };
 // iOS bfcache 복귀 후 고정 헤더가 밀려 못 누르는 현상 보정
 addEventListener("pageshow", e => { if(e.persisted){
