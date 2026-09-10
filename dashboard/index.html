@@ -87,6 +87,7 @@
   .shot a{flex:0 0 auto;min-width:var(--tap);min-height:var(--tap);border-radius:11px;
     display:grid;place-items:center;background:var(--card2);border:1px solid var(--line);
     text-decoration:none;font-size:17px}
+  .shot .paste{background:var(--accent);border-color:var(--accent)}
   .chip{font-size:10px;font-weight:800;padding:1px 6px;border-radius:999px;
     background:var(--accent-soft);color:var(--accent)}
 
@@ -194,6 +195,18 @@
     </details>
   </div>
 
+  <!-- ③-2 파트너스 링크 — 사진은 있는데 링크가 없는 상품 -->
+  <div class="card" id="linkCard" hidden>
+    <details id="linkWrap">
+      <summary>🔗 쿠팡 링크 필요 <span class="chip" id="linkCount">—</span></summary>
+      <div class="sub" style="margin:6px 0 2px">
+        파트너스에서 <b>내 링크 생성</b> → 복사 → 여기서 📋 붙여넣기.
+        링크가 있어야 영상 설명란에 들어가고, 그게 파트너스 증빙 스크린샷이 됩니다.
+      </div>
+      <div id="linkList" class="skeleton">불러오는 중…</div>
+    </details>
+  </div>
+
   <!-- ④ 바로가기 -->
   <div class="card">
     <h2>바로가기</h2>
@@ -219,7 +232,7 @@
     <button class="btn ghost" id="tokClear">이 기기에서 지우기</button>
   </div>
 
-  <div class="foot">Casto <b id="ver">v2.3</b> ·
+  <div class="foot">Casto <b id="ver">v2.4</b> ·
     <a href="#" id="reload" style="color:inherit">새로고침 ↻</a> ·
     <a href="#" id="hardReset" style="color:inherit">캐시 비우기</a></div>
 </main>
@@ -352,6 +365,7 @@ function renderShots(q){
         $("shotWrap").scrollIntoView({behavior:"smooth", block:"center"}); }});
     else setNext("✅", "오늘 할 일 없음", "모두 처리했습니다", null);
   };
+  loadLinkNeeds();
   if(videos === 0) $("ciRow").hidden = false;   // 아직 발행 0편이면 실행기록을 노출
 })();
 
@@ -563,6 +577,72 @@ document.addEventListener("click", e => {
   startCapture(+cam.dataset.n, cam.dataset.name);
 });
 $("pick").onchange = e => { const f = e.target.files[0]; if(f) openCrop(f); };
+
+
+/* ── 파트너스 링크 입력 ───────────────────────────────────────────────────────
+   사진이 있는데 링크가 없는 상품을 모아, 클립보드에서 바로 붙여넣게 한다.
+   저장은 data/catalog.json을 읽어 해당 항목만 고쳐 다시 올리는 방식(read-modify-write).
+   ⚠️ 반드시 **본인 파트너스 계정에서 만든 링크**여야 한다. 남의 링크를 넣으면 수수료가
+   그쪽으로 가고 정책 위반이다 — 그래서 붙여넣기 전에 형태를 검사하고, 확인 문구를 띄운다. */
+const CAT_PATH = "data/catalog.json";
+const COUPANG_LINK = /^https?:\/\/(link\.coupang\.com\/a\/|coupa\.ng\/|(www\.)?coupang\.com\/vp\/products\/)/i;
+
+async function loadLinkNeeds(){
+  try{
+    const cat = await get(CAT_PATH, true);
+    const rows = Object.entries(cat.products || {})
+      .filter(([, e]) => e.image && !e.coupang_url)
+      .map(([slug, e]) => ({slug, name: e.display || e.category || slug}));
+    $("linkCount").textContent = rows.length + "건";
+    $("linkCard").hidden = rows.length === 0;
+    $("linkList").className = "";
+    $("linkList").innerHTML = rows.map(r => `<div class="shot" data-slug="${r.slug}">
+      <div class="no">🔗</div><div class="nm"><b>${r.name}</b><span>파트너스 링크 미등록</span></div>
+      <div class="act"><button class="paste" data-slug="${r.slug}" data-name="${r.name.replace(/"/g,"&quot;")}"
+        aria-label="링크 붙여넣기">📋</button></div></div>`).join("");
+  }catch(e){ $("linkCard").hidden = true; }
+}
+
+async function saveLink(slug, url, name){
+  const tok = store.get("casto.gh");
+  if(!tok){ $("cfgPanel").classList.add("on");
+            $("cfgPanel").scrollIntoView({behavior:"smooth", block:"center"});
+            throw new Error("먼저 깃허브 토큰을 저장해 주세요"); }
+  const api = `https://api.github.com/repos/${REPO}/contents/${CAT_PATH}`;
+  const h = {Authorization:`Bearer ${tok}`, Accept:"application/vnd.github+json"};
+  const cur = await fetch(api + "?t=" + Date.now(), {headers:h});
+  if(!cur.ok) throw new Error("카탈로그를 읽지 못했습니다");
+  const meta = await cur.json();
+  const cat = JSON.parse(decodeURIComponent(escape(atob(meta.content.replace(/\n/g,"")))));
+  if(!cat.products[slug]) throw new Error("카탈로그에 없는 상품입니다");
+  cat.products[slug].coupang_url = url;
+  const body = btoa(unescape(encodeURIComponent(JSON.stringify(cat, null, 1))));
+  const r = await fetch(api, {method:"PUT", headers:{...h,"Content-Type":"application/json"},
+    body: JSON.stringify({message:`link: ${name} 파트너스 링크 등록(모바일)`,
+                          content: body, sha: meta.sha, branch:"main"})});
+  if(!r.ok) throw new Error((await r.json()).message || r.status);
+}
+
+document.addEventListener("click", async e => {
+  const b = e.target.closest("#linkList .paste");
+  if(!b) return;
+  let url = "";
+  try{
+    if(!navigator.clipboard || !navigator.clipboard.readText) throw new Error("붙여넣기 미지원");
+    url = (await navigator.clipboard.readText()).trim();
+  }catch(err){ return toast("클립보드를 읽지 못했습니다 — 링크를 복사한 뒤 다시", 3600); }
+  if(!COUPANG_LINK.test(url))
+    return toast("쿠팡 링크가 아닙니다 — 파트너스에서 만든 내 링크를 복사해 주세요", 4000);
+  b.disabled = true; b.textContent = "…";
+  try{
+    await saveLink(b.dataset.slug, url, b.dataset.name);
+    b.closest(".shot").remove();
+    const left = document.querySelectorAll("#linkList .shot").length;
+    $("linkCount").textContent = left + "건";
+    if(!left) $("linkCard").hidden = true;
+    toast(`${b.dataset.name} 링크 등록 완료`);
+  }catch(err){ toast("등록 실패: " + err.message, 4200); b.disabled = false; b.textContent = "📋"; }
+});
 
 $("reload").onclick = e => { e.preventDefault(); location.reload(); };
 // iOS bfcache 복귀 후 고정 헤더가 밀려 못 누르는 현상 보정
