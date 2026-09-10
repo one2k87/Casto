@@ -19,6 +19,7 @@ import evidence
 import learn
 from common import llm_json
 
+VOICE_MAX = 42        # 한 씬 내레이션 상한(자) — 8자/초 × 약 5초
 N_ITEMS = 3          # 4개는 조회수가 떨어진다(9.2천 vs 3개 46만~473만, 2026-09-10 실측)
 NUM = ["①", "②", "③"]
 
@@ -64,10 +65,10 @@ def build_script(items, trends, c, post=None, retries=2):
 
 {{"items": [
   {{"cause": "유행의 계기 한 줄(화면 자막, 24자 이내). 바깥에서 온 구체적 사건이어야 함",
-    "cause_detail": "그 계기를 한 문장 더(내레이션용, 45자 이내)",
+    "cause_detail": "그 계기를 한 문장 더(내레이션용, **20자 이내**)",
     "cause_scene": "계기 장면을 영어로 묘사(그림 지시문). 상품 자체는 절대 묘사 금지 — 상황·사람·다른 유행·계절·매대만",
     "effect": "그래서 생긴 결과 한 줄(화면 자막, 24자 이내)",
-    "effect_detail": "결과를 한 문장 더(내레이션용, 45자 이내). 관측한 숫자가 있으면 여기 넣을 것",
+    "effect_detail": "결과를 한 문장 더(내레이션용, **20자 이내**). 관측한 숫자가 있으면 여기 넣을 것",
     "effect_scene": "결과 장면을 영어로 묘사(그림 지시문). 역시 상품 자체 묘사 금지",
     "use": "어떻게 쓰는 물건인지 한 줄(14자 이내)",
     "confidence": "high" | "low"}},
@@ -152,8 +153,13 @@ def build_scenes(s, items, c):
                 continue
             # 화면 자막은 짧게(한눈에), 내레이션은 한 문장 더 — 자세함은 귀로 들어간다.
             # 자막까지 길게 하면 3초 안에 못 읽고 이탈한다.
+            # 자세함에는 값이 있다 — **길이**다. detail을 그대로 읽혔더니 88초가 나왔다
+            # (목표 30초, 2026-09-10 실측). 한국어 TTS는 대략 8자/초라
+            # 한 씬 내레이션이 40자를 넘으면 5초를 먹는다. 그래서 상한을 둔다.
             detail = (r.get(f"{kind}_detail") or "").strip()
             voice = f"{line}. {detail}" if detail else line
+            if len(voice) > VOICE_MAX:
+                voice = line                      # 넘치면 자막 줄만 읽는다
             scenes.append({"kind": "comic", "idx": i, "phase": kind,
                            "badge": "왜?" if kind == "cause" else "그래서",
                            "caption": line, "voice": voice,
