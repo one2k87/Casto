@@ -22,7 +22,7 @@
 """
 from __future__ import annotations
 
-import base64, datetime as dt, hashlib, hmac, os, time
+import base64, datetime as dt, hashlib, hmac, os, re, time
 from typing import Any
 
 import requests
@@ -369,6 +369,68 @@ def naver_mentions(keyword: str, kind: str = "blog") -> int | None:
         return int(data.get("total", 0))
     except (TypeError, ValueError):
         return None
+
+
+def naver_texts(keyword: str, kind: str = "blog", n: int = 10,
+                sort: str = "sim") -> list[dict] | None:
+    """네이버 검색 **본문까지** 받아온다.
+
+    naver_mentions는 `display=1`로 불러 `total`만 읽고 본문을 버렸다. 그런데 유행의
+    이유는 사람들이 직접 써 놓는다 — "두바이 초콜릿 만들려고 샀다"처럼. 개수는
+    규모를 말할 뿐 이유를 말하지 않는다. 같은 키·같은 호출에서 본문을 안 읽을 이유가 없다.
+
+    kind: blog | news | cafearticle
+      - news는 **인과를 직접 설명**하는 경우가 많다(품귀·가격·방송)
+      - blog/cafe는 **구매 동기**가 사람 말로 적혀 있다
+    """
+    auth = _naver_auth()
+    if not auth:
+        return None
+    base, h, mode = auth
+    params = {"query": keyword, "display": min(n, 30), "sort": sort}
+    if mode == "hub":
+        params["format"] = "json"
+    data = _get(naver_url(mode, "search", kind), headers=h, params=params)
+    if data is None:
+        return None
+    out = []
+    for it in data.get("items", []) or []:
+        out.append({
+            "kind": kind,
+            "title": _strip_tags(it.get("title", "")),
+            "text": _strip_tags(it.get("description", "")),
+            "date": (it.get("postdate") or it.get("pubDate") or "")[:11],
+            "link": it.get("link", ""),
+        })
+    return out
+
+
+def _strip_tags(t: str) -> str:
+    """네이버는 검색어를 <b>로 감싸 돌려준다."""
+    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", t or "")).strip()
+
+
+def youtube_comments(video_id: str, n: int = 20) -> list[str] | None:
+    """영상 댓글 — **유입 경로가 사람 말로 적혀 있는 유일한 곳**이다.
+
+    "OO 보고 왔어요", "이거 그 방송에서 본 거네" 같은 문장이 인과의 직접 증거가 된다.
+    commentThreads.list는 1유닛이라 search.list(100유닛)에 비하면 사실상 공짜다.
+    """
+    key = os.getenv("YT_API_KEY", "")
+    if not (key and video_id):
+        return None
+    data = _get("https://www.googleapis.com/youtube/v3/commentThreads", params={
+        "key": key, "videoId": video_id, "part": "snippet",
+        "order": "relevance", "maxResults": min(n, 100), "textFormat": "plainText"})
+    if data is None:
+        return None
+    out = []
+    for it in data.get("items", []) or []:
+        sn = (((it.get("snippet") or {}).get("topLevelComment") or {}).get("snippet") or {})
+        t = (sn.get("textDisplay") or "").strip()
+        if t:
+            out.append(re.sub(r"\s+", " ", t)[:300])
+    return out
 
 
 # ------------------------------------------------------------------ 쿠팡(거래)

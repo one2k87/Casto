@@ -102,8 +102,12 @@ def _fmt_when(days_ago):
     return f"{d.month}월 {['첫','둘','셋','넷','다섯'][min(wk,5)-1]}째 주"
 
 
-def brief(name, snaps=None) -> dict:
-    """한 상품의 근거 묶음. `lines`는 프롬프트에 그대로 넣는 사실 목록이다."""
+def brief(name, snaps=None, live=False) -> dict:
+    """한 상품의 근거 묶음. `lines`는 프롬프트에 그대로 넣는 사실 목록이다.
+
+    `live=True`면 네이버 글·유튜브 댓글을 **그 자리에서** 모아 붙인다(reasons).
+    숫자는 "얼마나·언제"를 말하지만 "왜"는 사람이 쓴 글에만 있다.
+    """
     snaps = snaps if snaps is not None else snapshots()
     p, date = find(name, snaps)
     out = {"name": name, "date": date, "lines": [], "has_data": bool(p)}
@@ -169,6 +173,19 @@ def brief(name, snaps=None) -> dict:
         out["lines"].append(f"발굴 맥락: {p['evidence']}")
     if p.get("keyword"):
         out["lines"].append(f"검색된 표현: 「{p['keyword']}」")
+
+    if live:
+        try:
+            import reasons
+            g = reasons.gather(name, keyword=p.get("keyword") or "",
+                               en_keyword=p.get("en_keyword") or "",
+                               video_ids=[v.get("id") for v in (p.get("videos") or [])
+                                          if v.get("id")])
+            out["reasons"] = g
+            out["lines"].append("── 사람들이 실제로 쓴 말 ──")
+            out["lines"].extend(reasons.lines(g))
+        except Exception as e:                               # noqa: BLE001
+            print(f"[evidence] 사람 글 수집 실패({name}):", e)
 
     return out
 

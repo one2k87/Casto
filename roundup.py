@@ -42,7 +42,7 @@ def build_script(items, trends, c, post=None, retries=2):
               + "\n".join("- " + h for h in learned) + "\n") if learned else ""
 
     snaps = evidence.snapshots()
-    briefs = [evidence.brief(n, snaps) for n in items]
+    briefs = [evidence.brief(n, snaps, live=True) for n in items]
     facts = "\n\n".join(
         f"{NUM[i]} {n}\n" + "\n".join("   · " + l for l in b["lines"])
         for i, (n, b) in enumerate(zip(items, briefs)))
@@ -87,6 +87,10 @@ def build_script(items, trends, c, post=None, retries=2):
   좋은 예: 두쫀쿠가 8월부터 유행 → 피스타치오 수요가 몰림 → 그래서 이게 보인다.
 - **시점·숫자·고유명사 중 최소 하나**를 cause에 넣으세요. 없으면 되돌려 보냅니다.
 - **숫자는 위 관측 목록에 있는 것만** 씁니다. 없으면 숫자를 쓰지 마세요(지어내면 오정보입니다).
+- 「사람들이 실제로 쓴 말」에 **반복해서 나온 말**이 있으면 거기서 계기를 찾으세요.
+  여러 사람이 각자 같은 것을 말하고 있다면 그게 원인입니다. 특히 이 물건 **바깥의 것**
+  (다른 음식·방송·행사·계절)이 반복되면 그것이 계기일 가능성이 높습니다.
+  댓글의 "OO 보고 왔어요" 같은 문장은 **유입 경로를 그대로 알려주는** 단서입니다.
 - 관측에 "식는 중"이라고 적혀 있으면 '지금 뜬다'고 쓰지 말고, 그 상품을 winner로 고르지 마세요.
 - 근거를 못 찾았으면 confidence를 "low"로 두세요. 그럴듯하게 지어내는 것보다 낫습니다.
 - **cause_scene / effect_scene에 상품 이름을 쓰지 마세요.** 상품은 실제 사진으로 나갑니다.
