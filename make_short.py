@@ -423,6 +423,14 @@ def main():
     cap = build_caption(s, v, post, c, total, entry)
     with open("out/caption.txt", "w", encoding="utf-8") as f:
         f.write(cap)
+    os.makedirs("data", exist_ok=True)
+    with open("data/last_caption.json", "w", encoding="utf-8") as f:
+        json.dump({"date": __import__("datetime").date.today().isoformat(),
+                   "title": s["title"], "description": cap,
+                   "product": catalog.display_name(entry, s["product"]),
+                   "verdict": v["key"], "seconds": round(total, 1),
+                   "coupang_url": (entry or {}).get("coupang_url", "")},
+                  f, ensure_ascii=False, indent=1)
     # 발행 이력 — 학습 루프(learn.py)의 유일한 입력이다. 여기 안 남기면 나중에
     # "어떤 영상이 잘 됐나"를 물어볼 수가 없다(2026-09-09까지 기록이 비어 있었다).
     try:

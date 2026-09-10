@@ -76,7 +76,7 @@ jobs:
         run: |
           TZ=Asia/Seoul date +%F > data/last_short.txt
           git config user.name casto-bot && git config user.email casto@solvup.local
-          git add data/last_short.txt && git commit -m "marker: $(TZ=Asia/Seoul date +%F) 쇼츠 생성" || true
+          git add -A data && git commit -m "marker: $(TZ=Asia/Seoul date +%F) 쇼츠 생성" || true
           git pull --rebase --autostash origin main && git push origin main || true
       - name: 결과 보존 (텔레그램 실패 대비 7일)
         if: steps.dup.outputs.skip != 'true' && steps.plan.outputs.skip != 'true'

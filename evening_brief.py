@@ -33,19 +33,32 @@ def build() -> str:
     todo = [i for i in q.get("items", {}).values() if not i.get("done") and not i.get("hold")]
     short_done = (last == today)
 
+    cap = _load("data/last_caption.json", {})
     lines = [f"🌙 {today} 저녁 작업 브리핑", ""]
     if short_done:
-        lines.append("1️⃣ 오늘 영상 업로드 — 텔레그램에 도착한 mp4를 유튜브에 올리기")
+        lines.append("1️⃣ 오늘 영상 업로드 (약 3분)")
+        if cap.get("date") == today:
+            lines.append(f"   「{cap.get('title')}」")
+            lines.append("   앱에서 제목·설명 복사 버튼 한 번이면 됩니다")
+            if not cap.get("coupang_url"):
+                lines.append("   ⚠ 이 제품은 쿠팡 링크가 없습니다 — 앱 🔗 카드에서 먼저 넣어주세요")
     else:
         lines.append("1️⃣ 오늘 쇼츠가 아직 없습니다 — 19:40 자동 제작 확인 필요")
     if todo:
+        lines.append("")
         head = ", ".join(f"{n}번 {it.get('display') or it.get('name')}"
                          for n, it in sorted(
                              ((int(n), i) for n, i in q["items"].items()
                               if not i.get("done") and not i.get("hold")))[:3])
-        lines.append(f"2️⃣ 상품 캡처 {len(todo)}건 — {head} …")
+        lines.append(f"2️⃣ 상품 캡처 {len(todo)}건 (건당 1분) — {head} …")
     else:
+        lines.append("")
         lines.append("2️⃣ 캡처 대기 없음 👍")
+    cat = _load("data/catalog.json", {})
+    nolink = [e for e in (cat.get("products") or {}).values()
+              if e.get("image") and not e.get("coupang_url")]
+    if nolink:
+        lines.append(f"3️⃣ 쿠팡 링크 {len(nolink)}건 미등록 — 오늘 쓸 것 1개만 넣어도 충분합니다")
     lines += ["",
               f"📊 구독 {st.get('subscribers', '—')} · 영상 {st.get('video_count', '—')}편",
               "", f"👉 앱에서 바로: {APP}"]
