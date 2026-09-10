@@ -8,8 +8,8 @@
   "id": "UC-wB3FjDH6zjBEuwYdVrsrQ",
   "_id_설명": "channel_stats.py가 공개 통계(구독자·조회수)를 조회할 때 쓴다. API 키만 있으면 되고 OAuth 불필요."
  },
- "concept": "kok_open",
- "_concept_설명": "kok_open=「콕 열리는 상자」(콕 3번 통과해야 상자가 열림). 규격 원문: docs/콕픽_쇼츠_포맷.md",
+ "concept": "roundup3",
+ "_concept_설명": "roundup3=「왜 갑자기 보이지?」 유행템 3개 묶음 + 상품마다 인과 만화 2컷, 도장은 셋 중 하나만. 규격 원문: docs/콕픽_쇼츠_포맷_2판.md (1판 kok_open=상품 1개·콕 3번은 2026-09-10 폐기 — 이 니치에서 100만 넘는 건 전부 묶음이었다)",
  "verdicts": {
   "buy": {
    "key": "오늘의 콕",
@@ -54,8 +54,8 @@
  "_verdicts_설명": "부정어 금지 원칙 — '사지 마세요'가 아니라 '다음콕'. 판정어는 코드가 강제하고 LLM은 근거만 생성한다. card=영상 자막용(이모지 없음, 러너에 컬러이모지 폰트 없어 두부 렌더 실측), caption/emoji=설명란·해시태그용.",
  "niche": "생활·주방 (쿠팡파트너스 커머스)",
  "lang": "ko",
- "style": "kok_card",
- "_style_설명": "kok_card=콕픽 파스텔(민트/크림/세이지) 카드. 클립뱅크(assets/clips/) 구축 후 clip_bank로 전환 예정",
+ "style": "kok_card_v2",
+ "_style_설명": "kok_card_v2=콕픽 파스텔 카드 + 인과 만화 컷. 콕이는 심사관이 아니라 유행 추적가(돋보기)",
  "clips": {
   "dir": "assets/clips",
   "banks": {
@@ -70,14 +70,15 @@
  "video": {
   "width": 1080,
   "height": 1920,
-  "target_sec": 15,
-  "insta_sec": 20,
+  "target_sec": 30,
+  "insta_sec": 35,
   "voice": "ko-KR-SunHiNeural",
   "_voice_설명": "edge-tts 무료 한국어 보이스. 남성: ko-KR-InJoonNeural",
   "sfx": {
    "kok": "out/sfx_kok.wav",
    "_설명": "콕 사운드=우드블록 근사음. ffmpeg lavfi로 매 실행 생성(에셋 의존 없음)"
-  }
+  },
+  "_길이_설명": "30초. 알고리즘 고품질선이 평균 시청 15초라 15초짜리는 100% 완주해야 겨우 통과한다 — 여유가 0이었다(2026-09-10 개정)"
  },
  "brand": {
   "cream": [
