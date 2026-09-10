@@ -21,6 +21,7 @@ import sys
 
 import catalog
 
+RAW = "https://raw.githubusercontent.com/one2k87/Casto/main/"
 OUT_JSON = "data/topic_requests.json"
 OUT_MD = "data/topic_requests.md"
 CONF_RANK = {"높음": 0, "중간": 1, "낮음": 2, "": 3}
@@ -32,6 +33,7 @@ def build(cat: dict, q: dict, limit: int = 12) -> list[dict]:
         if it.get("hold"):
             continue                       # 유행 근거가 없는 항목은 글감으로도 넘기지 않는다
         e = catalog.find(cat, name=it.get("display") or it.get("name", ""))
+        img = catalog.image_path(e) if e else None
         rows.append({
             "no": int(n),
             "category": it.get("name", ""),
@@ -43,6 +45,9 @@ def build(cat: dict, q: dict, limit: int = 12) -> list[dict]:
             "confidence": it.get("confidence", ""),
             "note": it.get("note", ""),
             "has_photo": catalog.render_mode(e) == "exact",
+            # 픽토가 그대로 가져다 쓰라고 절대 URL로 준다 — 같은 상품을 두 번 캡처하는 낭비를 막는다
+            "image_url": (RAW + img.replace("\\", "/")) if img else "",
+            "coupang_url": (e or {}).get("coupang_url", ""),
         })
     rows.sort(key=lambda r: (CONF_RANK.get(r["confidence"], 3), r["no"]))
     return rows[:limit]
@@ -52,7 +57,7 @@ def to_md(rows: list[dict], today: str) -> str:
     out = [f"# 픽담 글감 요청 — 콕픽 발굴 유행템 ({today})", "",
            "콕픽이 유튜브에서 관측한 **지금 유행 중인** 제품들입니다. 위에서부터 우선순위입니다.",
            "",
-           "**부탁**: 글에 이 제품을 지목해 주시고, 본문에 **픽담 자체 쿠팡 파트너스 링크**와",
+           "**부탁**: 글에 이 제품을 지목해 주시고, 본문에 **픽담 채널로 만든 쿠팡 파트너스 링크**와",
            "`<!--KOKPICK ... -->` 블록(브랜드·모델·image_url·coupang_url)을 넣어주세요.",
            "그러면 콕픽 영상이 실제 상품 사진과 정확한 이름으로 나가고, 영상↔글이 같은 제품을 가리킵니다.",
            "", "| 우선 | 제품 | 카테고리 | 확신도 | 쿠팡 | 메모 |", "|---|---|---|---|---|---|"]
@@ -63,7 +68,14 @@ def to_md(rows: list[dict], today: str) -> str:
                    f'| {mark.get(r["confidence"], "-")} | {link} | {r["note"]} |')
     out += ["", "---", "",
             "브랜드가 '미확정'인 항목은 카테고리 글로 쓰시고, 특정 제품을 고르셨다면",
-            "그 브랜드·모델을 KOKPICK 블록에 적어주시면 캐스토가 그대로 따라갑니다."]
+            "그 브랜드·모델을 KOKPICK 블록에 적어주시면 캐스토가 그대로 따라갑니다.", "",
+            "### 상품 사진은 다시 캡처하지 마세요",
+            "사용자가 이미 캡처해 둔 실제 상품 사진이 있습니다. `image_url`을 그대로 쓰시면 됩니다",
+            "(JSON 쪽에 절대 URL로 들어 있습니다). 같은 상품을 두 번 캡처하게 하지 않는 것이 목적입니다.", "",
+            "### 파트너스 링크는 채널을 나눠 만드세요",
+            "쿠팡 파트너스는 계정당 채널 ID를 10개까지 만들 수 있고, 링크 생성 시 채널을 지정하면",
+            "성과가 채널별로 갈립니다. **픽담 채널 ID로 만든 링크**를 픽담 글에 쓰시고,",
+            "콕픽 영상용 링크는 캐스토가 따로 받습니다. 같은 링크를 공유하면 어느 쪽이 벌었는지 알 수 없습니다."]
     return "\n".join(out) + "\n"
 
 
