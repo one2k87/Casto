@@ -90,6 +90,8 @@
   .shot .paste{background:var(--accent);border-color:var(--accent)}
   .cap{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:16px;font-weight:800;line-height:1.4;letter-spacing:-.02em}
   .cap + .sub{margin-top:4px}
+  .shot.due{background:var(--due,#fff7ed);border-radius:12px}
+  .shot.due .nm span{color:#c2410c;font-weight:700}
   .cp{display:flex;gap:8px;margin-top:10px}
   .cp .cpy{flex:1;min-height:var(--tap);font-size:14px;font-weight:700}
   .chip{font-size:10px;font-weight:800;padding:1px 6px;border-radius:999px;
@@ -245,7 +247,7 @@
     <button class="btn ghost" id="tokClear">이 기기에서 지우기</button>
   </div>
 
-  <div class="foot">Casto <b id="ver">v2.6</b> ·
+  <div class="foot">Casto <b id="ver">v2.7</b> ·
     <a href="#" id="reload" style="color:inherit">새로고침 ↻</a> ·
     <a href="#" id="hardReset" style="color:inherit">캐시 비우기</a></div>
 </main>
@@ -606,16 +608,30 @@ const COUPANG_LINK = /^https?:\/\/(link\.coupang\.com\/a\/|coupa\.ng\/|(www\.)?c
 async function loadLinkNeeds(){
   try{
     const cat = await get(CAT_PATH, true);
-    const rows = Object.entries(cat.products || {})
+    let rows = Object.entries(cat.products || {})
       .filter(([, e]) => e.image && !e.coupang_url)
       .map(([slug, e]) => ({slug, name: e.display || e.category || slug}));
-    $("linkCount").textContent = rows.length + "건";
+
+    // 17줄 중 어느 걸 먼저? — 다가오는 편성일 순으로 올린다.
+    // 링크는 영상이 나가기 **전에** 있어야 설명란에 들어간다.
+    let due = 0;
+    try{
+      const plan = await get("data/next_plan.json", true);
+      const when = new Map((plan.items || []).map((it, i) => [it.slug, {i, label: it.label}]));
+      rows.forEach(r => { const m = when.get(r.slug); if(m){ r.rank = m.i; r.due = m.label; } });
+      rows.sort((a,b) => (a.rank ?? 99) - (b.rank ?? 99));
+      due = rows.filter(r => r.due).length;
+    }catch(e){}
+
+    $("linkCount").textContent = due ? `${due}건 급함 · 전체 ${rows.length}건` : rows.length + "건";
     $("linkCard").hidden = rows.length === 0;
     $("linkList").className = "";
-    $("linkList").innerHTML = rows.map(r => `<div class="shot" data-slug="${r.slug}">
-      <div class="no">🔗</div><div class="nm"><b>${r.name}</b><span>파트너스 링크 미등록</span></div>
+    $("linkList").innerHTML = rows.map(r => `<div class="shot${r.due ? " due" : ""}" data-slug="${r.slug}">
+      <div class="no">${r.due ? "⏰" : "🔗"}</div>
+      <div class="nm"><b>${r.name}</b><span>${r.due ? r.due + " 영상에 쓸 상품 — 먼저" : "파트너스 링크 미등록"}</span></div>
       <div class="act"><button class="paste" data-slug="${r.slug}" data-name="${r.name.replace(/"/g,"&quot;")}"
         aria-label="링크 붙여넣기">📋</button></div></div>`).join("");
+    if(due) $("linkWrap").open = true;      // 급한 게 있으면 접어두지 않는다
   }catch(e){ $("linkCard").hidden = true; }
 }
 

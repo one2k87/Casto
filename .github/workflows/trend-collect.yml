@@ -72,6 +72,11 @@ jobs:
       - name: 픽담 글감 요청서 갱신
         run: python topic_requests.py
 
+      # 다가오는 발행일과 그날 쓸 상품 — 앱이 "어느 링크부터 만들지"를 이걸로 정한다.
+      # 캡처 반입 뒤에 돌려야 오늘 올린 사진이 편성에 반영된다.
+      - name: 편성 예고 갱신
+        run: python next_plan.py
+
       - name: 결과 커밋
         run: |
           git config user.name casto-bot && git config user.email casto@solvup.local

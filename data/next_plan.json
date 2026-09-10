@@ -1,0 +1,35 @@
+{
+ "updated": "2026-09-10",
+ "items": [
+  {
+   "date": "2026-09-12",
+   "weekday": "토",
+   "label": "9/12(토)",
+   "slot": "season",
+   "product": "늘어나는 밀폐용기",
+   "slug": "늘어나는-밀폐용기",
+   "photo": true,
+   "link": false
+  },
+  {
+   "date": "2026-09-15",
+   "weekday": "화",
+   "label": "9/15(화)",
+   "slot": "deep1",
+   "product": "레이저가이드가위",
+   "slug": "레이저가이드가위",
+   "photo": true,
+   "link": false
+  },
+  {
+   "date": "2026-09-19",
+   "weekday": "토",
+   "label": "9/19(토)",
+   "slot": "season",
+   "product": "얼음틀 얼음보관통",
+   "slug": "얼음틀-얼음보관통",
+   "photo": true,
+   "link": false
+  }
+ ]
+}
