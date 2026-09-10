@@ -7,7 +7,7 @@ def cfg():
     c = json.load(open("casto.json", encoding="utf-8"))
     return c
 
-def llm(prompt, max_tokens=8000, temperature=0.8, retries=3, json_mode=False):
+def llm(prompt, max_tokens=8000, temperature=0.8, retries=3, json_mode=False, search=False):
     """Gemini generateContent 단순 REST 호출. 실패 시 재시도.
 
     **thinking 함정(2026-09-07 실측)**: Gemini 2.5 Flash는 사고 토큰이 maxOutputTokens에
@@ -27,10 +27,23 @@ def llm(prompt, max_tokens=8000, temperature=0.8, retries=3, json_mode=False):
     if json_mode:
         gen["responseMimeType"] = "application/json"
     body = {"contents": [{"parts": [{"text": prompt}]}], "generationConfig": gen}
+    if search:
+        # 구글 검색 그라운딩 — 모델이 **실제 근거를 읽고** 답하게 한다.
+        # 유행의 원인은 학습 데이터에 없는 최근 사건인 경우가 대부분이라
+        # 이게 없으면 그럴듯한 문장을 지어낸다(2026-09-10).
+        body["tools"] = [{"google_search": {}}]
+        gen.pop("responseMimeType", None)   # 도구 사용 시 JSON 강제와 같이 못 쓴다
     last = ""
     for i in range(retries):
         r = requests.post(url, json=body, timeout=180,
                           headers={"x-goog-api-key": key, "Content-Type": "application/json"})
+        if r.status_code == 400 and search and ("tool" in r.text.lower() or "search" in r.text.lower()):
+            print("[llm] 검색 그라운딩 미지원 — 끄고 재시도(근거 없이 씀)")
+            body.pop("tools", None)
+            search = False
+            if json_mode:
+                gen["responseMimeType"] = "application/json"
+            continue
         if r.status_code == 400 and "thinking" in r.text.lower():
             # 사고 비활성화를 지원하지 않는 모델 → 옵션을 빼고 즉시 재시도
             print("[llm] thinkingConfig 미지원 모델 — 옵션 제거 후 재시도")
@@ -91,7 +104,11 @@ def _has_content(obj):
 
 
 def llm_json(prompt, **kw):
-    """JSON 응답 강제 + 코드펜스 제거 후 파싱. 잘렸으면 복구를 시도한다."""
+    """JSON 응답 강제 + 코드펜스 제거 후 파싱. 잘렸으면 복구를 시도한다.
+
+    `search=True`면 구글 검색 그라운딩을 켠다. 그때는 responseMimeType을 못 쓰므로
+    JSON이 코드펜스로 올 수 있는데, 아래에서 벗겨 낸다.
+    """
     kw.setdefault("json_mode", True)
     t = llm(prompt + "\n\n[출력] 순수 JSON만. 코드블록·설명 금지.", **kw)
     t = t.strip()

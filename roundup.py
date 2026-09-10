@@ -15,6 +15,7 @@
 import json
 
 import catalog
+import evidence
 import learn
 from common import llm_json
 
@@ -22,33 +23,54 @@ N_ITEMS = 3          # 4개는 조회수가 떨어진다(9.2천 vs 3개 46만~47
 NUM = ["①", "②", "③"]
 
 
-def build_script(items, trends, c, post=None):
+def build_script(items, trends, c, post=None, retries=2):
     """LLM은 **유행의 원인·결과·용도**만 쓴다. 상품명·구조·판정어는 코드가 정한다.
 
-    `items`는 이미 확정된 상품 목록이다(catalog에서 온 실사진 보유 상품).
-    LLM에게 상품을 고르게 하지 않는다 — 브랜드·모델을 지어내는 순간 오정보가 된다.
+    처음엔 상품 이름만 주고 인과를 쓰게 했다. 그러니 "자취 가구 급증" 같은
+    아무 데나 붙는 문장이 나왔다 — **이유가 뜬구름인 건 입력 탓이었다.**
+    이제 세 가지를 준다.
+
+      ① 우리가 모은 근거 (수요 급등 시점·배수, 확산 속도, 언급량, 발굴 맥락)
+      ② 같은 주에 함께 뜬 다른 품목 — 공통 원인의 실마리
+      ③ 구글 검색 그라운딩 — 최근 사건은 학습 데이터에 없다
+
+    그리고 나온 인과가 동어반복이면 되돌려 보낸다(evidence.too_vague).
     """
     tr = json.dumps({k: trends.get(k) for k in ("hooks", "avoid")}, ensure_ascii=False)
     learned = learn.load_hints()
     lesson = ("\n[이 채널에서 검증된 패턴 — 성과 데이터 기반]\n"
               + "\n".join("- " + h for h in learned) + "\n") if learned else ""
-    names = "\n".join(f"{NUM[i]} {n}" for i, n in enumerate(items))
-    src = f"\n[참고 글]\n{post['text'][:1500]}\n" if post else ""
 
-    return llm_json(f"""{lesson}당신은 유튜브 쇼츠 채널 「콕픽」의 작가입니다. 니치: {c['niche']}.
+    snaps = evidence.snapshots()
+    briefs = [evidence.brief(n, snaps) for n in items]
+    facts = "\n\n".join(
+        f"{NUM[i]} {n}\n" + "\n".join("   · " + l for l in b["lines"])
+        for i, (n, b) in enumerate(zip(items, briefs)))
+    co = evidence.co_risers(items, snaps)
+    co_line = ("\n[같은 주에 함께 뜬 다른 품목 — 공통 원인의 실마리가 될 수 있다]\n"
+               + "\n".join(f"   · {x['name']} (영상 {x['videos']}개)" for x in co) + "\n") if co else ""
+    src = f"\n[참고 글]\n{post['text'][:1200]}\n" if post else ""
+
+    base = f"""{lesson}당신은 유튜브 쇼츠 채널 「콕픽」의 작가입니다. 니치: {c['niche']}.
 채널의 존재 이유는 **"요즘 갑자기 많이 보이는 물건 3개를 몰아서 보여주고, 그게 왜 유행인지 알게 하는 것"**입니다.
 [이번 주 트렌드 지침] {tr}{src}
 [이번 편에 다룰 상품 — 이 셋을 그대로 씁니다. 다른 상품을 고르지 마세요]
-{names}
+{chr(10).join(f"{NUM[i]} {n}" for i, n in enumerate(items))}
 
-각 상품마다 **왜 지금 유행인지**를 원인→결과로 설명하세요. 아래 JSON만 출력합니다.
+[우리가 실제로 관측한 것 — 숫자는 여기 있는 것만 씁니다]
+{facts}
+{co_line}
+각 상품이 **왜 지금 유행인지**를 원인→결과로 설명하세요. 아래 JSON만 출력합니다.
 
 {{"items": [
-  {{"cause": "유행의 원인 한 줄(화면 자막, 16자 이내)",
-    "cause_scene": "원인 장면을 영어로 묘사(그림 지시문). 상품 자체는 절대 묘사하지 말 것 — 상황·사람·다른 유행·계절·매대만",
-    "effect": "그래서 생긴 결과 한 줄(화면 자막, 16자 이내)",
+  {{"cause": "유행의 계기 한 줄(화면 자막, 24자 이내). 바깥에서 온 구체적 사건이어야 함",
+    "cause_detail": "그 계기를 한 문장 더(내레이션용, 45자 이내)",
+    "cause_scene": "계기 장면을 영어로 묘사(그림 지시문). 상품 자체는 절대 묘사 금지 — 상황·사람·다른 유행·계절·매대만",
+    "effect": "그래서 생긴 결과 한 줄(화면 자막, 24자 이내)",
+    "effect_detail": "결과를 한 문장 더(내레이션용, 45자 이내). 관측한 숫자가 있으면 여기 넣을 것",
     "effect_scene": "결과 장면을 영어로 묘사(그림 지시문). 역시 상품 자체 묘사 금지",
-    "use": "어떻게 쓰는 물건인지 한 줄(14자 이내)"}},
+    "use": "어떻게 쓰는 물건인지 한 줄(14자 이내)",
+    "confidence": "high" | "low"}},
   ... 정확히 {len(items)}개, 위 번호 순서대로
  ],
  "winner": 0,
@@ -59,9 +81,14 @@ def build_script(items, trends, c, post=None):
  "hashtags": ["#태그", ... 6개]}}
 
 규칙
-- **cause는 진짜 원인이어야 한다.** "인기가 많아서"처럼 동어반복이면 실패다.
-  좋은 예: 두쫀쿠가 유행 → 피스타치오 수요 폭증 → 그래서 이게 보인다.
-  다른 유행·계절·물가·방송·해외 유행 등 **바깥에서 온 이유**를 찾으세요.
+- **cause는 바깥에서 온 계기여야 한다.** "인기가 많아서/편리해서/가성비가 좋아서"는 아무것도
+  설명하지 못하는 동어반복이라 되돌려 보냅니다. 다른 유행·방송·계절·물가·해외 유행·제도 변화처럼
+  **이 물건 밖에서 벌어진 일**을 짚으세요.
+  좋은 예: 두쫀쿠가 8월부터 유행 → 피스타치오 수요가 몰림 → 그래서 이게 보인다.
+- **시점·숫자·고유명사 중 최소 하나**를 cause에 넣으세요. 없으면 되돌려 보냅니다.
+- **숫자는 위 관측 목록에 있는 것만** 씁니다. 없으면 숫자를 쓰지 마세요(지어내면 오정보입니다).
+- 관측에 "식는 중"이라고 적혀 있으면 '지금 뜬다'고 쓰지 말고, 그 상품을 winner로 고르지 마세요.
+- 근거를 못 찾았으면 confidence를 "low"로 두세요. 그럴듯하게 지어내는 것보다 낫습니다.
 - **cause_scene / effect_scene에 상품 이름을 쓰지 마세요.** 상품은 실제 사진으로 나갑니다.
   그림은 '왜'를 설명하는 상황만 그립니다. (상품명이 섞이면 코드가 그 컷을 버립니다)
 - winner는 0-based 인덱스. **셋 중 하나만** 도장을 받습니다.
@@ -69,7 +96,29 @@ def build_script(items, trends, c, post=None):
   ✅ "어쩐지 자꾸 보이더라, 요즘 난리난 주방템 3가지"
   ❌ 브랜드명 나열 — 조회수가 자릿수로 떨어진다.
 - **부정어 금지** — '별로다/사지 마라' 대신 '아직'의 뉘앙스.
-- 겪지 않은 경험담·과장 금지. 판정어("오늘의 콕" 등)는 코드가 넣으니 쓰지 말 것.""")
+- 겪지 않은 경험담·과장 금지. 판정어("오늘의 콕" 등)는 코드가 넣으니 쓰지 말 것."""
+
+    prompt, s = base, None
+    for attempt in range(retries + 1):
+        s = llm_json(prompt, search=True)
+        bad = []
+        for i, row in enumerate((s.get("items") or [])[:len(items)]):
+            why = evidence.too_vague(row.get("cause", ""))
+            if why:
+                bad.append(f"{NUM[i]} {items[i]}: 「{row.get('cause','')}」 — {why}")
+        if not bad or attempt == retries:
+            if bad:
+                print("[roundup] ⚠ 인과가 여전히 뜬구름이다(그대로 진행):")
+                for b in bad:
+                    print("   -", b)
+            return s
+        print(f"[roundup] 인과 반려 {attempt+1}/{retries} — 다시 요청한다:")
+        for b in bad:
+            print("   -", b)
+        prompt = base + ("\n\n[이전 답변 반려] 아래 cause는 유행의 이유를 설명하지 못합니다. "
+                         "이 물건 **바깥에서** 벌어진 구체적 사건으로 다시 쓰세요.\n"
+                         + "\n".join("- " + b for b in bad))
+    return s
 
 
 def build_scenes(s, items, c):
@@ -97,9 +146,14 @@ def build_scenes(s, items, c):
             line = (r.get(kind) or "").strip()
             if not line:
                 continue
+            # 화면 자막은 짧게(한눈에), 내레이션은 한 문장 더 — 자세함은 귀로 들어간다.
+            # 자막까지 길게 하면 3초 안에 못 읽고 이탈한다.
+            detail = (r.get(f"{kind}_detail") or "").strip()
+            voice = f"{line}. {detail}" if detail else line
             scenes.append({"kind": "comic", "idx": i, "phase": kind,
                            "badge": "왜?" if kind == "cause" else "그래서",
-                           "caption": line, "voice": line})
+                           "caption": line, "voice": voice,
+                           "low": (r.get("confidence") == "low")})
 
     win = s.get("winner", 0)
     win = win if isinstance(win, int) and 0 <= win < n else 0

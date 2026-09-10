@@ -219,6 +219,50 @@ def naver_demand(keyword: str, category: str | None = None,
         return None
 
 
+def demand_ladder(keyword: str, name: str = "", category: str | None = None,
+                  last_year: bool = False) -> list[float] | None:
+    """수요 조회를 **키워드를 좁혀 가며** 다시 시도한다.
+
+    데이터랩 쇼핑인사이트는 '쇼핑 키워드'를 받는다. 그런데 발굴 키워드는
+    「미국 유행 늘어나는 밀폐용기」, 「코에서 계란 흰자 나오는 주방용품」처럼
+    문장에 가깝다 — 그런 건 결과가 빈다. 실제로 20개 중 6개만 수요가 잡혔고,
+    그중 4개는 점 1~2개라 추세를 못 쟀다(2026-09-10 실측).
+
+    그래서 긴 것부터 짧은 것까지 사다리로 내려간다. 수요 시계열은 "언제부터
+    몇 배"를 만들어 내는 **인과를 가장 크게 좁히는 신호**라, 비워 두면 손해가 크다.
+    """
+    tried, best = [], None
+    for kw in _ladder(keyword, name):
+        if kw in tried:
+            continue
+        tried.append(kw)
+        got = naver_demand(kw, category=category, last_year=last_year)
+        if got and len(got) > len(best or []):
+            best = got
+            if len(best) >= 30:                              # 추세를 재기 충분하다
+                print(f"[src] 수요 키워드 확정: 「{kw}」 ({len(best)}일)")
+                return best
+    if best:
+        print(f"[src] 수요 키워드 부분 확보: {tried} ({len(best)}일)")
+    return best
+
+
+def _ladder(keyword: str, name: str = "") -> list[str]:
+    """긴 표현 → 상품명 → 뒤쪽 두 어절 → 핵심 명사 순."""
+    out = []
+    for base in (keyword, name):
+        b = (base or "").strip()
+        if not b:
+            continue
+        out.append(b)
+        w = b.split()
+        if len(w) >= 3:
+            out.append(" ".join(w[-2:]))
+        if len(w) >= 2:
+            out.append(w[-1])
+    return [x for x in dict.fromkeys(out) if len(x) >= 2]
+
+
 def naver_shopping(keyword: str) -> dict[str, Any] | None:
     """⛔ **폐기됨** — 네이버 쇼핑 검색 API는 **2026-07-31 종료**(대체 없음, API HUB에도 미포함).
 

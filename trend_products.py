@@ -260,8 +260,9 @@ def collect() -> dict:
                        for v in vids],
             "category": cat,
             "mentions": src.naver_mentions(kw),
-            "demand": src.naver_demand(kw, category=cat),
-            "demand_last_year": src.naver_demand(kw, category=cat, last_year=True),
+            # 발굴 키워드는 문장에 가까워 그대로는 수요가 안 잡힌다 → 사다리로 좁혀 재시도
+            "demand": src.demand_ladder(kw, name, category=cat),
+            "demand_last_year": src.demand_ladder(kw, name, category=cat, last_year=True),
             "price": (coupang or {}).get("price") or (shop or {}).get("price"),
             "review_count": (coupang or {}).get("review_count"),   # 쿠팡 없으면 결측 → 거래 축 제외
             "sellers": (shop or {}).get("sellers"),
