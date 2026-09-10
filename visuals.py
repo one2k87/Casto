@@ -23,13 +23,20 @@ ASSET_DIR = "assets/koki"
 W, H = 1080, 1920
 
 # 파일명 → 용도. 사용자가 나노바나나(구글 AI Pro 포함)로 뽑아 이 이름으로 넣는다.
+# 프롬프트: docs/콕이_에셋_프롬프트.md
+#
+# 2판에서 콕이의 배역이 바뀌었다: **심사관 → 유행 추적가**.
+# 1판은 도장 찍는 상자였고 표정이 기대/눌림/개봉이면 됐다. 2판은 "왜 갑자기 보이지?"를
+# 캐내는 역할이라 **질문하고 · 갸웃하고 · 깨닫는** 연기가 필요하다. 그게 인과 파트를
+# 끌고 가는 얼굴이다. (excited/squish는 콕 3번 규격과 함께 폐기)
 ASSETS = {
-    "bg":       "bg.png",           # 배경 1080×1920, 중앙은 비워둘 것(캐릭터·자막 자리)
-    "idle":     "koki_idle.png",     # 기본 미소 — 표지·룰 씬
-    "excited":  "koki_excited.png",  # 기대(눈 반짝) — 룰 씬
-    "squish":   "koki_squish.png",   # 콕 눌림 — 타격 프레임
-    "open":     "koki_open.png",     # 개봉(뚜껑 팟 + 꽃가루) — 오늘의 콕/조건콕
-    "nope":     "koki_nope.png",     # 도리도리 — 다음콕
+    "bg":      "bg.png",            # 배경 1080×1920, 중앙·상단은 비워둘 것(자막 자리)
+    "idle":    "koki_idle.png",     # 기본 미소 — 훅·상품 소개
+    "magnify": "koki_magnify.png",  # 돋보기 들고 질문 — "왜 갑자기?"
+    "think":   "koki_think.png",    # 갸웃 — 인과 컷1(원인)
+    "idea":    "koki_idea.png",     # 깨달음 — 인과 컷2(결과)
+    "stamp":   "koki_stamp.png",    # 도장 쾅 + 개봉 — 오늘의 콕 / 조건콕
+    "nope":    "koki_nope.png",     # 도리도리(부정어 금지, 다음 기회 예고) — 다음콕
 }
 CHAR_BOX = (int(W * 0.62), int(H * 0.30))   # 캐릭터 최대 크기
 CHAR_CENTER = (W // 2, int(H * 0.34))
@@ -53,6 +60,31 @@ def missing() -> list[str]:
     return [f"{k} ({v})" for k, v in ASSETS.items() if not path(k)]
 
 
+def koki(name: str, box: tuple[int, int] | None = None) -> Image.Image | None:
+    """클레이 콕이 한 장. 없으면 None → 호출부가 도형으로 폴백한다.
+
+    에셋이 하나도 없어도 발행은 멈추지 않아야 한다(품질만 떨어진다).
+    """
+    p = path(name)
+    if not p:
+        return None
+    try:
+        im = Image.open(p).convert("RGBA")
+    except Exception:                                        # noqa: BLE001
+        return None
+    return _fit(im, box) if box else im
+
+
+def paste_koki(img: Image.Image, name: str, center: tuple[int, int],
+               box: tuple[int, int]) -> bool:
+    """콕이를 얹는다. 얹었으면 True(호출부가 도형을 그리지 않도록)."""
+    ch = koki(name, box)
+    if ch is None:
+        return False
+    img.paste(ch, (center[0] - ch.width // 2, center[1] - ch.height // 2), ch)
+    return True
+
+
 def _fit(img: Image.Image, box: tuple[int, int]) -> Image.Image:
     img = img.copy()
     img.thumbnail(box, Image.LANCZOS)
@@ -71,7 +103,8 @@ def compose(character: str = "idle", bg_name: str = "bg") -> Image.Image | None:
         bg = bg.resize((int(bg.width * r), int(bg.height * r)), Image.LANCZOS)
         left, top = (bg.width - W) // 2, (bg.height - H) // 2
         bg = bg.crop((left, top, left + W, top + H))
-    cp = path(character) or path("idle")
+    # character=None이면 배경만 — 2판 카드는 씬마다 다른 표정을 직접 얹는다
+    cp = (path(character) or path("idle")) if character else None
     if cp:
         ch = _fit(Image.open(cp).convert("RGBA"), CHAR_BOX)
         bg.paste(ch, (CHAR_CENTER[0] - ch.width // 2, CHAR_CENTER[1] - ch.height // 2), ch)
