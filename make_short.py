@@ -304,6 +304,67 @@ def scene_card(sc, i, total, c, shot=None, label="", note="", hit=False):
 
 
 # ---------------------------------------------------------------- 2판 카드 렌더
+def fill_frame(img, path, dim=0.0):
+    """사진을 **화면 전체로** 채운다(cover). 이 장르의 기본 문법이다.
+
+    2026-09-10에 조회수 100만~473만짜리 주방템 쇼츠 썸네일을 실제로 뜯어봤다.
+    공통점이 분명했다 — **오려낸 제품컷을 흰 카드에 넣은 화면은 하나도 없었다.**
+    전부 실제 장면이 화면을 꽉 채우고, 자막은 그 위에 얹혀 있었다.
+    우리는 흰 카드에 사진을 담아 화면의 1/3만 쓰고 나머지를 빈 파스텔로 두고 있었다.
+    화면이 둘로 쪼개지니 밀도가 죽고 "제품사진 덜렁"으로 읽혔다.
+
+    사진 1장뿐이라 실사용 영상은 못 만들지만, **꽉 채우는 것**은 지금 할 수 있다.
+    """
+    try:
+        im = Image.open(path).convert("RGB")
+    except Exception:                                        # noqa: BLE001
+        return False
+    r = max(W / im.width, H / im.height)
+    im = im.resize((max(int(im.width * r), W), max(int(im.height * r), H)), Image.LANCZOS)
+    im = im.crop(((im.width - W) // 2, (im.height - H) // 2,
+                  (im.width - W) // 2 + W, (im.height - H) // 2 + H))
+    if dim:
+        im = Image.blend(im, Image.new("RGB", (W, H), (0, 0, 0)), dim)
+    img.paste(im, (0, 0))
+    return True
+
+
+def scrim(img, top_h=520, bot_h=760, strength=170):
+    """위아래 그림자 — 사진 위에 얹은 흰 자막이 밝은 배경에서도 읽히게.
+
+    외곽선만으로는 흰 접시·흰 벽 위에서 글자가 사라진다(실측 사례가 바로 그런 사진이었다).
+    """
+    ov = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(ov)
+    for y in range(top_h):
+        d.line([(0, y), (W, y)], fill=(0, 0, 0, int(strength * (1 - y / top_h) ** 1.4)))
+    for k in range(bot_h):
+        y = H - 1 - k
+        d.line([(0, y), (W, y)], fill=(0, 0, 0, int(strength * 1.25 * (1 - k / bot_h) ** 1.2)))
+    img.paste(Image.alpha_composite(img.convert("RGBA"), ov).convert("RGB"), (0, 0))
+
+
+def punch_text(d, text, y, size=104, maxw=W - 120, fill=(255, 255, 255),
+               stroke=(20, 30, 26), sw=12, accent=None):
+    """굵은 흰 글씨 + 두꺼운 어두운 외곽선. 실측한 화면들이 전부 이 조합이었다.
+
+    `accent`가 있으면 첫 줄 뒤에 컬러 밑줄을 깐다(노란 형광펜 효과 — 실측 사례).
+    """
+    f = font(size)
+    lines = wrap(d, text, f, maxw)[:3]
+    y0 = y - (len(lines) - 1) * size * 0.62
+    for j, ln in enumerate(lines):
+        yy = y0 + j * size * 1.2
+        if accent and j == 0:
+            tw = d.textlength(ln, font=f)
+            d.rounded_rectangle((W // 2 - tw / 2 - 18, yy + size * 0.16,
+                                 W // 2 + tw / 2 + 18, yy + size * 0.52),
+                                radius=10, fill=accent)
+        d.text((W // 2, yy), ln, font=f, fill=fill, anchor="mm",
+               stroke_width=sw, stroke_fill=stroke)
+    return y0
+
+
 def base_card(c, i=0, total=1):
     """모든 2판 씬의 바탕 — 그라데이션 + 로고 + 하단 CTA + 진행 점.
 
@@ -341,22 +402,32 @@ def big_text(d, text, y, size=92, fill=(255, 255, 255), stroke=None, maxw=W - 15
 
 
 def card_hook(sc, c, shots, i, total):
-    """0~3초 — 물건 3개를 먼저 쏟아 놓는다.
+    """0~3초 — 물건 3개가 **화면을 꽉 채워** 쏟아진다.
 
-    추상적인 '왜 유행일까'로 시작하는 쇼츠는 1천 조회수에서 죽는다(2026-09-10 실측).
-    시청자를 붙잡는 건 **물건**이고, 인과는 붙잡은 다음의 깊이다.
+    이전엔 작은 흰 카드 3장을 부채꼴로 놓고 아래를 비워 뒀다. 실측한 화면들은
+    전부 사진이 프레임을 채운다 — 빈 파스텔은 이 장르에 없다.
     """
-    img, d, sage = base_card(c, i, total)
     got = [p for p in shots if p]
+    img, d, sage = base_card(c, i, total)
     if got:
-        # 부채꼴로 겹쳐 놓아 '여러 개'가 한눈에 읽히게 한다
-        spots = {1: [(W // 2, 720)], 2: [(330, 700), (750, 780)],
-                 3: [(300, 660), (W // 2, 800), (780, 660)]}.get(len(got), [(W // 2, 720)])
-        for p, ctr in zip(got, spots):
-            visuals.paste_product(img, p, center=ctr, box=(430, 430), accent=sage)
-        visuals.paste_koki(img, "idle", (168, 1620), (230, 230))
+        band = H // max(len(got), 1)
+        for k, p in enumerate(got):
+            try:
+                im = Image.open(p).convert("RGB")
+            except Exception:                                # noqa: BLE001
+                continue
+            r = max(W / im.width, band / im.height)
+            im = im.resize((int(im.width * r), int(im.height * r)), Image.LANCZOS)
+            im = im.crop(((im.width - W) // 2, max((im.height - band) // 2, 0),
+                          (im.width - W) // 2 + W, max((im.height - band) // 2, 0) + band))
+            img.paste(im, (0, k * band))
         d = ImageDraw.Draw(img)
-    big_text(d, sc["caption"], 1290, size=88, stroke=sage)
+        for k in range(1, len(got)):                          # 칸 사이 흰 구분선
+            d.rectangle((0, k * band - 3, W, k * band + 3), fill=(255, 255, 255))
+    scrim(img, top_h=560, bot_h=620)
+    d = ImageDraw.Draw(img)
+    punch_text(d, sc["caption"], 300, size=98, accent=(214, 90, 78))
+    visuals.paste_koki(img, "idle", (155, 1560), (215, 215))
     return img
 
 
@@ -373,63 +444,61 @@ def card_ask(sc, c, i, total):
 
 
 def card_item(sc, c, shot, i, total):
-    """상품 한 개 — 실사진이 주인공. 절대 그림으로 대체하지 않는다."""
+    """상품 한 개 — 사진이 **화면 전체**. 흰 카드 프레임은 없앴다.
+
+    "그냥 제품사진 덜렁"으로 읽히던 원인이 이 프레임이었다. 사진을 꽉 채우고
+    자막을 그 위에 얹으면, 같은 사진 1장으로도 화면 밀도가 완전히 달라진다.
+    """
     img, d, sage = base_card(c, i, total)
-    if shot:
-        visuals.paste_product(img, shot, center=(W // 2, 760), box=(760, 760), accent=sage)
-        d = ImageDraw.Draw(img)
-    big_text(d, sc["caption"], 1360, size=84, stroke=sage)
+    filled = fill_frame(img, shot) if shot else False
+    if filled:
+        scrim(img, top_h=480, bot_h=780)
+    d = ImageDraw.Draw(img)
+    use = (sc.get("use") or "").strip()
+    punch_text(d, sc["caption"], 1330 if filled else 1360, size=96)
+    if use:
+        f = font(56, bold=False)
+        d.text((W // 2, 1470), use, font=f, fill=(255, 255, 255), anchor="mm",
+               stroke_width=7, stroke_fill=(20, 30, 26))
+    visuals.paste_koki(img, "idle", (150, 1620), (200, 200))
     return img
 
 
 def card_comic(sc, c, panel, i, total):
-    """인과 컷 — 왜?(원인) / 그래서(결과). 상품은 여기 안 나온다."""
+    """인과 컷 — 만화도 **화면 전체**로. 상품은 여기 안 나온다."""
     img, d, sage = base_card(c, i, total)
-    if panel and os.path.exists(panel):
-        try:
-            im = Image.open(panel).convert("RGB")
-            bw, bh = 900, 700
-            im = im.resize((bw, int(im.height * bw / im.width)))
-            if im.height > bh:
-                top = (im.height - bh) // 2
-                im = im.crop((0, top, bw, top + bh))
-            x0, y0 = (W - bw) // 2, 400
-            d.rounded_rectangle((x0 - 12, y0 - 12, x0 + bw + 12, y0 + im.height + 12),
-                                radius=40, fill=(255, 255, 255), outline=sage, width=5)
-            img.paste(im, (x0, y0))
-            d = ImageDraw.Draw(img)
-        except Exception as e:
-            print(f"[casto] 만화 컷 로드 실패({panel}): {e}")
-    # 콕이는 자막 아래·CTA 위의 빈 띠에 둔다. 1470에 두니 큰 자막과 겹쳤다(2026-09-10 실측)
-    visuals.paste_koki(img, "think" if sc.get("phase") == "cause" else "idea",
-                       (172, 1615), (250, 250))
+    filled = fill_frame(img, panel) if (panel and os.path.exists(panel)) else False
+    if filled:
+        scrim(img, top_h=520, bot_h=760)
     d = ImageDraw.Draw(img)
     badge = sc.get("badge", "")
     if badge:
-        f = font(52)
-        bw2 = d.textlength(badge, font=f) + 72
-        d.rounded_rectangle((W // 2 - bw2 / 2, 268, W // 2 + bw2 / 2, 360),
-                            radius=34, fill=sage)
-        d.text((W // 2, 314), badge, font=f, fill=(255, 255, 255), anchor="mm")
-    big_text(d, sc["caption"], 1330, size=80, stroke=sage)
+        f = font(58)
+        bw = d.textlength(badge, font=f) + 84
+        col = (214, 90, 78) if badge == "왜?" else (47, 143, 104)
+        d.rounded_rectangle((W // 2 - bw / 2, 250, W // 2 + bw / 2, 358), radius=40, fill=col)
+        d.text((W // 2, 304), badge, font=f, fill=(255, 255, 255), anchor="mm")
+    punch_text(d, sc["caption"], 1340, size=92)
+    visuals.paste_koki(img, "think" if sc.get("phase") == "cause" else "idea",
+                       (150, 1620), (210, 210))
     return img
 
 
 def card_verdict(sc, c, shots, win, i, total):
-    """마지막 — 셋 중 하나에만 도장. 끝까지 봐야 어느 건지 안다."""
+    """마지막 — 셋 중 하나에만 도장. 승자 사진이 화면을 채운다."""
     img, d, sage = base_card(c, i, total)
     v = sc["verdict"]
     shot = shots[win] if win < len(shots) else None
-    if shot:
-        visuals.paste_product(img, shot, center=(W // 2, 720), box=(660, 660), accent=sage)
-        d = ImageDraw.Draw(img)
-    verdict_badge(d, W - 190, 330, v)
-    won = v["key"] in ("오늘의 콕", "조건콕")
-    if visuals.paste_koki(img, "stamp" if won else "nope", (190, 1600), (270, 270)):
-        d = ImageDraw.Draw(img)
-    else:
-        kok_box(d, 190, 1500, 190, squish=0.0, open_lid=won)
-    big_text(d, sc["caption"], 1300, size=88, stroke=sage)
+    filled = fill_frame(img, shot) if shot else False
+    if filled:
+        scrim(img, top_h=520, bot_h=820)
+    d = ImageDraw.Draw(img)
+    verdict_badge(d, W - 185, 330, v)
+    punch_text(d, sc["caption"], 1320, size=98)
+    if not visuals.paste_koki(img, "stamp" if v["key"] in ("오늘의 콕", "조건콕") else "nope",
+                              (185, 1590), (280, 280)):
+        kok_box(ImageDraw.Draw(img), 185, 1590, 190,
+                open_lid=v["key"] in ("오늘의 콕", "조건콕"))
     return img
 
 

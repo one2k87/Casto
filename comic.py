@@ -33,7 +33,7 @@ import requests
 from PIL import Image, ImageDraw
 
 W, H = 1080, 1920
-PANEL = (920, 720)                       # 만화 컷 한 장의 크기(카드 안에 들어간다)
+PANEL = (W, H)                           # 만화 컷은 화면 전체를 채운다(2026-09-10 개편)
 # 이미지 생성 API는 형식이 두 가지다. 어느 쪽이 살아 있는지 **여기서 확인할 방법이 없어서**
 # (키가 GitHub 시크릿에만 있다) 둘 다 시도하고, 통한 쪽을 로그로 남긴다.
 #   ① /v1beta/interactions            + gemini-3.1-flash-image  (신형, 문서 기준)
@@ -167,29 +167,19 @@ def generate(scene: str, product: str, out_path: str, timeout: int = 120) -> str
 
 # ---------------------------------------------------------------- 폴백(도형 인과카드)
 def fallback(scene: str, brand: dict, out_path: str, font=None, badge: str = "") -> str:
-    """이미지 생성이 안 될 때의 대체 컷 — 그림 대신 **글 한 줄**로 인과를 만든다.
+    """생성이 안 될 때의 대체 컷 — **그림 자리만 비워 둔다.**
 
-    보기 좋진 않지만 거짓말은 안 한다. 상품을 그리지 않는다는 규칙에도 어긋나지 않는다.
-    (`badge`는 화면 카드 쪽에서 이미 그리므로 여기선 받지만 쓰지 않는다 — 중복 방지)
+    예전엔 이 카드가 문구를 크게 적었는데, 화면 쪽에서도 같은 문구를 자막으로 얹어
+    **같은 말이 두 번** 나왔다(2026-09-10 렌더 실측). 자막은 화면이 책임지므로
+    여기서는 글자를 그리지 않는다 — 부드러운 바탕만 둔다.
     """
-    cream, mint, sage = tuple(brand["cream"]), tuple(brand["mint"]), tuple(brand["sage"])
-    img = Image.new("RGB", PANEL, cream)
+    cream, mint = tuple(brand["cream"]), tuple(brand["mint"])
+    img = Image.new("RGB", (W, H))
     d = ImageDraw.Draw(img)
-    d.rounded_rectangle((16, 16, PANEL[0] - 16, PANEL[1] - 16), radius=36,
-                        fill=mint, outline=sage, width=6)
-    if font is not None:
-        line, lines = "", []
-        for w in scene.split(" "):
-            cand = (line + " " + w).strip()
-            if d.textlength(cand, font=font) > PANEL[0] - 140 and line:
-                lines.append(line); line = w
-            else:
-                line = cand
-        lines.append(line)
-        lines = lines[:4]
-        y = PANEL[1] // 2 - (len(lines) - 1) * 46
-        for i, ln in enumerate(lines):
-            d.text((PANEL[0] // 2, y + i * 92), ln, font=font, fill=sage, anchor="mm")
+    for y in range(H):                                       # 세로 그라데이션(화면 전체용)
+        t = y / H
+        d.line([(0, y), (W, y)],
+               fill=tuple(int(mint[j] + (cream[j] - mint[j]) * t) for j in range(3)))
     os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
     img.save(out_path)
     return out_path

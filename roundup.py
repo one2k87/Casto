@@ -143,7 +143,7 @@ def build_scenes(s, items, c):
     for i, name in enumerate(items):
         r = rows[i] if i < len(rows) else {}
         use = (r.get("use") or "").strip()
-        scenes.append({"kind": "item", "idx": i, "name": name,
+        scenes.append({"kind": "item", "idx": i, "name": name, "use": use,
                        "caption": f"{NUM[i]} {name}",
                        "voice": f"{name}." + (f" {use}." if use else "")})
         for kind in ("cause", "effect"):
