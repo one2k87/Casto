@@ -30,10 +30,12 @@ jobs:
         with: { python-version: "3.12" }
       # pillow는 수집 자체엔 불필요하지만, 회귀 테스트가 브리핑 모듈(make_briefing→PIL)을
       # import하므로 필요하다. 빼면 테스트 수집 단계에서 ImportError로 잡한다(2026-09-07 실측).
-      - run: pip install requests pillow
+      - run: pip install requests pillow pytest
 
-      - name: 점수 모델 회귀 테스트
-        run: python -m unittest discover -s tests
+      # pytest로 돌린다: unittest discover는 함수형 테스트를 **못 보고 지나간다**
+      # (171개 중 111개만 실행됐다). 게다가 러너에 pytest가 없어 import부터 깨졌다.
+      - name: 회귀 테스트
+        run: python -m pytest -q tests
 
       - name: 일별 스냅샷 수집
         if: ${{ inputs.board_only != true }}
