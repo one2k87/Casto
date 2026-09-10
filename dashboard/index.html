@@ -233,6 +233,9 @@
       <span class="ri">📺</span>콕픽 채널 <small>@kokpick_kr</small></a>
     <a class="row" id="ciRow" href="https://github.com/one2k87/Casto/actions" target="_blank"
        rel="noopener" hidden><span class="ri">⚠️</span>실행 기록 확인 <small>Actions</small></a>
+    <button class="row" id="runBtn" style="width:100%;background:none;border:0;
+      border-top:1px solid var(--line);text-align:left;cursor:pointer;font:inherit;color:inherit">
+      <span class="ri">⚡</span>지금 쇼츠 만들기 <small id="runNote">깃허브에서 실행</small></button>
   </div>
 
   <div class="card panel" id="cfgPanel">
@@ -241,7 +244,9 @@
       폰에서 캡처를 바로 등록하려면 <b>깃허브 토큰</b>이 한 번 필요합니다.
       <a class="ext" href="https://github.com/settings/personal-access-tokens/new" target="_blank"
          rel="noopener" style="color:var(--accent)">토큰 만들기 ↗</a><br>
-      Repository access = <b>one2k87/Casto</b> 하나만, Permissions = <b>Contents: Read and write</b>.
+      Repository access = <b>one2k87/Casto</b> 하나만,<br>
+      Permissions = <b>Contents: Read and write</b> + <b>Actions: Read and write</b>.<br>
+      <span style="color:var(--muted)">Actions 권한은 「⚡ 지금 쇼츠 만들기」에만 쓰입니다.</span>
     </div>
     <input id="tok" type="password" inputmode="text" autocomplete="off"
            placeholder="github_pat_… (이 기기에만 저장)">
@@ -260,7 +265,7 @@
     <button class="btn ghost" id="ptClear">지우기</button>
   </div>
 
-  <div class="foot">Casto <b id="ver">v2.8</b> ·
+  <div class="foot">Casto <b id="ver">v2.9</b> ·
     <a href="#" id="reload" style="color:inherit">새로고침 ↻</a> ·
     <a href="#" id="hardReset" style="color:inherit">캐시 비우기</a></div>
 </main>
@@ -770,6 +775,51 @@ async function loadCaption(){
 
 $("cpTitle").onclick = () => caption && copyText(caption.title, "제목을");
 $("cpDesc").onclick = () => caption && copyText(caption.description, "설명을");
+/* ── 지금 만들기 ──────────────────────────────────────────────────────────────
+   그동안 수동 실행은 깃허브 Actions 페이지에 들어가 드롭다운을 두 번 눌러야 했다.
+   폰에서 그걸 하는 건 사실상 불가능하다. 캡처 등록에 이미 쓰는 토큰으로
+   workflow_dispatch를 그대로 호출한다(추가 권한 없이 되는 건 아니다 — 아래 참고).
+
+   ⚠️ 토큰 권한: 캡처 등록은 Contents만 있으면 되지만 워크플로 실행에는
+   **Actions: Read and write**가 추가로 필요하다. 없으면 403이 오는데,
+   그때는 "토큰 권한이 부족하다"고 정확히 알려준다(조용히 실패하지 않는다). */
+const WORKFLOWS = {
+  short:  {file: "daily-short.yml",   label: "쇼츠 제작"},
+  trend:  {file: "trend-collect.yml", label: "트렌드 수집"},
+};
+
+async function runWorkflow(key){
+  const tok = store.get("casto.gh");
+  if(!tok){ $("cfgPanel").classList.add("on");
+            $("cfgPanel").scrollIntoView({behavior:"smooth", block:"center"});
+            throw new Error("먼저 깃허브 토큰을 저장해 주세요"); }
+  const wf = WORKFLOWS[key];
+  const r = await fetch(`https://api.github.com/repos/${REPO}/actions/workflows/${wf.file}/dispatches`,
+    {method:"POST",
+     headers:{Authorization:`Bearer ${tok}`, Accept:"application/vnd.github+json",
+              "Content-Type":"application/json"},
+     body: JSON.stringify({ref:"main"})});
+  if(r.status === 204) return wf.label;
+  if(r.status === 403) throw new Error("토큰에 Actions 권한이 없습니다 — 토큰 설정에서 Actions: Read and write 추가");
+  if(r.status === 404) throw new Error("워크플로를 찾을 수 없습니다 — 토큰 권한 또는 파일명 확인");
+  throw new Error(((await r.json().catch(()=>({}))).message) || ("실행 실패 " + r.status));
+}
+
+$("runBtn").onclick = async () => {
+  const b = $("runBtn"), note = $("runNote");
+  b.disabled = true; note.textContent = "실행 중…";
+  try{
+    await runWorkflow("short");
+    note.textContent = "실행됨 · 5~10분 뒤 텔레그램";
+    toast("쇼츠 제작을 시작했습니다 — 완성되면 텔레그램으로 옵니다", 5000);
+    store.set("casto.lastRun", new Date().toISOString());
+  }catch(e){
+    note.textContent = "실행 실패";
+    toast(e.message, 6000);
+    b.disabled = false;
+  }
+};
+
 $("reload").onclick = e => { e.preventDefault(); location.reload(); };
 // iOS bfcache 복귀 후 고정 헤더가 밀려 못 누르는 현상 보정
 addEventListener("pageshow", e => { if(e.persisted){
