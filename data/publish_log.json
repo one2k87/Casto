@@ -37,5 +37,24 @@
   "has_photo": true,
   "hook": "최근 2일 사이 유튜브 10개 영상 확산",
   "seconds": 88.1
+ },
+ {
+  "date": "2026-09-11",
+  "slot": "",
+  "key": "미닉스-3인용-미니-식기세척기-pro-mndw-110",
+  "verdict": "buy",
+  "title": "어쩐지 자꾸 보이더라, 요즘 난리난 주방템 TOP3",
+  "product": "미닉스 3인용 미니 식기세척기 PRO MNDW-110",
+  "products": [
+   "무아스 마그넷 무선 LED 무드등 MLL37",
+   "코멧 길이조절 접시정리대",
+   "미닉스 3인용 미니 식기세척기 PRO MNDW-110"
+  ],
+  "format": "roundup3",
+  "category": "3인용 미니 식기세척기 PRO MNDW-110",
+  "has_photo": true,
+  "brand": "미닉스",
+  "hook": "가을 맞이 인테리어로 센서등 인기",
+  "seconds": 60.3
  }
 ]
