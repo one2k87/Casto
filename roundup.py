@@ -22,6 +22,29 @@ from common import llm_json
 VOICE_MAX = 42        # 한 씬 내레이션 상한(자) — 8자/초 × 약 5초
 N_ITEMS = 3          # 4개는 조회수가 떨어진다(9.2천 vs 3개 46만~473만, 2026-09-10 실측)
 NUM = ["①", "②", "③"]
+CPS = 8              # 한국어 TTS 체감 속도(자/초) — 길이 검산의 기준
+SCENE_PAD = 0.4      # 씬 경계 여백(초)
+SHORTS_MAX_SEC = 60  # 이 선을 넘으면 쇼츠가 아니다(유튜브 규격) — 검산의 하드 상한
+
+
+def fit_voice(base, extra):
+    """상한에 들어갈 때만 덧붙인다 — 자세함이 길이가 되는 것을 막는 단일 관문.
+
+    2026-09-10에 detail을 그대로 읽혀 88초가 나갔다. 그때 고친 건 comic 씬 하나였고
+    item·verdict 씬은 여전히 무제한이었다(2026-09-11 러너 실측). 상한은 한 곳에서 건다.
+    """
+    base = (base or "").strip()
+    extra = (extra or "").strip()
+    if not extra:
+        return base
+    joined = f"{base} {extra}".strip()
+    return joined if len(joined) <= VOICE_MAX else base
+
+
+def est_seconds(scenes):
+    """렌더 전에 길이를 추정한다 — 88초짜리가 또 나가기 전에 테스트가 잡도록."""
+    chars = sum(len(s.get("voice") or "") for s in scenes)
+    return chars / CPS + len(scenes) * SCENE_PAD
 
 
 def build_script(items, trends, c, post=None, retries=2):
@@ -146,7 +169,7 @@ def build_scenes(s, items, c):
         use = (r.get("use") or "").strip()
         scenes.append({"kind": "item", "idx": i, "name": name, "use": use,
                        "caption": f"{NUM[i]} {name}",
-                       "voice": f"{name}." + (f" {use}." if use else "")})
+                       "voice": fit_voice(f"{name}.", f"{use}." if use else "")})
         for kind in ("cause", "effect"):
             line = (r.get(kind) or "").strip()
             if not line:
@@ -157,9 +180,7 @@ def build_scenes(s, items, c):
             # (목표 30초, 2026-09-10 실측). 한국어 TTS는 대략 8자/초라
             # 한 씬 내레이션이 40자를 넘으면 5초를 먹는다. 그래서 상한을 둔다.
             detail = (r.get(f"{kind}_detail") or "").strip()
-            voice = f"{line}. {detail}" if detail else line
-            if len(voice) > VOICE_MAX:
-                voice = line                      # 넘치면 자막 줄만 읽는다
+            voice = fit_voice(f"{line}.", detail) if detail else line  # 넘치면 자막 줄만 읽는다
             scenes.append({"kind": "comic", "idx": i, "phase": kind,
                            "badge": "왜?" if kind == "cause" else "그래서",
                            "caption": line, "voice": voice,
@@ -173,11 +194,15 @@ def build_scenes(s, items, c):
         reason += "."
     cap = (f"{cond} {v['card']}".strip() if v["key"] == "조건콕" else v["card"])
     voice = (f"{cond} {v['voice']}" if v["key"] == "조건콕" else v["voice"])
+    # 판정 씬도 상한을 넘길 수 있다 — 이유가 길면 이유를 버리고 **CTA는 남긴다**.
+    # 설명란 유도가 쿠팡 전환의 유일한 입구라 이 문장은 길이와 맞바꾸지 않는다.
+    head = (f"오늘의 콕은 {items[win]}." if v["key"] == "오늘의 콕"
+            else f"{voice} {items[win]}.")
+    cta = "링크는 설명란에."
+    body = fit_voice(head, reason)
     scenes.append({"kind": "verdict", "verdict": v, "idx": win, "name": items[win],
                    "caption": f"{cap}\n{items[win]}",
-                   "voice": f"오늘의 콕은 {items[win]}. {reason} 링크는 설명란에."
-                            if v["key"] == "오늘의 콕" else
-                            f"{voice} {items[win]}. {reason} 링크는 설명란에."})
+                   "voice": f"{body} {cta}"})
     return scenes, v, win
 
 
