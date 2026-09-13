@@ -23,6 +23,7 @@ import requests
 from PIL import Image, ImageDraw, ImageFont
 from common import cfg, llm_json, telegram_video, telegram_msg
 import catalog
+import evidence
 import learn
 import schedule as sched
 import visuals
@@ -464,23 +465,33 @@ def card_item(sc, c, shot, i, total):
     return img
 
 
-def card_comic(sc, c, panel, i, total):
-    """인과 컷 — 만화도 **화면 전체**로. 상품은 여기 안 나온다."""
+def card_comic(sc, c, panel, i, total, proof=False):
+    """인과 컷 — 만화도 **화면 전체**로. 상품은 여기 안 나온다.
+
+    `proof=True`면 배경이 증거 그래프다. 그때는 스크림을 얕게 준다 —
+    밝은 자료 화면을 어둡게 덮으면 숫자가 안 읽히고, 숫자가 안 읽히면 증거가 아니다.
+    """
     img, d, sage = base_card(c, i, total)
     filled = fill_frame(img, panel) if (panel and os.path.exists(panel)) else False
     if filled:
-        scrim(img, top_h=520, bot_h=760)
+        scrim(img, top_h=0 if proof else 520, bot_h=420 if proof else 760,
+              strength=110 if proof else 170)
     d = ImageDraw.Draw(img)
     badge = sc.get("badge", "")
     if badge:
         f = font(58)
         bw = d.textlength(badge, font=f) + 84
         col = (214, 90, 78) if badge == "왜?" else (47, 143, 104)
-        d.rounded_rectangle((W // 2 - bw / 2, 250, W // 2 + bw / 2, 358), radius=40, fill=col)
-        d.text((W // 2, 304), badge, font=f, fill=(255, 255, 255), anchor="mm")
-    punch_text(d, sc["caption"], 1340, size=92)
-    visuals.paste_koki(img, "think" if sc.get("phase") == "cause" else "idea",
-                       (150, 1620), (210, 210))
+        # 증거 배경에는 상단에 자료 제목("네이버 쇼핑 검색량")이 있다 —
+        # 배지를 y250에 두면 그 제목을 덮어 무슨 자료인지 알 수 없게 된다(렌더 실측).
+        by = 1400 if proof else 250
+        d.rounded_rectangle((W // 2 - bw / 2, by, W // 2 + bw / 2, by + 108), radius=40, fill=col)
+        d.text((W // 2, by + 54), badge, font=f, fill=(255, 255, 255), anchor="mm")
+    # 증거 배경에는 출처 줄(y1700)이 있다 — 자막이 그 위를 덮으면 근거가 근거가 아니게 된다
+    punch_text(d, sc["caption"], 1570 if proof else 1340, size=84 if proof else 92)
+    if not proof:
+        visuals.paste_koki(img, "think" if sc.get("phase") == "cause" else "idea",
+                           (150, 1620), (210, 210))
     return img
 
 
@@ -510,6 +521,44 @@ def magnifier(d, cx, cy, r=76):
            fill=col, width=22)
 
 
+def card_proof(sc, c, path, i, total):
+    """증거 화면 — 그래프·타임라인이 화면을 채운다.
+
+    상품 사진과 달리 이건 **밝은 자료 화면**이라 스크림을 얕게 준다.
+    자막은 아래에만 얹는다(그래프 숫자를 가리면 증거가 아니게 된다).
+    """
+    img, d, sage = base_card(c, i, total)
+    if path and os.path.exists(path):
+        fill_frame(img, path)
+        scrim(img, top_h=0, bot_h=560, strength=120)
+    d = ImageDraw.Draw(img)
+    f = font(50)
+    badge = "근거"
+    bw = d.textlength(badge, font=f) + 76
+    d.rounded_rectangle((W // 2 - bw / 2, 150, W // 2 + bw / 2, 250), radius=36, fill=sage)
+    d.text((W // 2, 200), badge, font=f, fill=(255, 255, 255), anchor="mm")
+    if sc.get("caption"):
+        punch_text(d, sc["caption"], 1620, size=78)
+    return img
+
+
+def card_teaser(sc, c, i, total):
+    """마지막 1.5초 — 다음 편 예고. 답은 주지 않고 **질문만** 남긴다."""
+    img, d, sage = base_card(c, i, total)
+    f = font(52)
+    lab = sc.get("label", "")
+    if lab:
+        bw = d.textlength(lab, font=f) + 80
+        d.rounded_rectangle((W // 2 - bw / 2, 470, W // 2 + bw / 2, 574), radius=38, fill=sage)
+        d.text((W // 2, 522), lab, font=f, fill=(255, 255, 255), anchor="mm")
+    punch_text(d, "다음 콕", 700, size=76, fill=sage, stroke=(255, 255, 255), sw=8)
+    punch_text(d, sc.get("product", ""), 900, size=96, fill=(255, 255, 255), stroke=sage)
+    d.text((W // 2, 1090), "콕일까?", font=font(80), fill=sage, anchor="mm",
+           stroke_width=8, stroke_fill=(255, 255, 255))
+    visuals.paste_koki(img, "magnify", (W // 2, 1430), (420, 420))
+    return img
+
+
 def scene_card_v2(sc, i, total, c, shots, panels, out="out"):
     """씬 하나를 그려 파일로 저장하고 경로를 반환한다."""
     kind = sc["kind"]
@@ -520,9 +569,14 @@ def scene_card_v2(sc, i, total, c, shots, panels, out="out"):
     elif kind == "item":
         img = card_item(sc, c, shots[sc["idx"]] if sc["idx"] < len(shots) else None, i, total)
     elif kind == "comic":
-        img = card_comic(sc, c, (panels.get((sc["idx"], sc["phase"])) or {}).get("path"), i, total)
+        # 증거가 있으면 만화 대신 그래프를 배경으로 — 같은 질문에 더 센 답이다
+        src = panels.get(("proof", sc["idx"])) if sc.get("proof") else None
+        img = card_comic(sc, c, (src or panels.get((sc["idx"], sc["phase"])) or {}).get("path"),
+                         i, total, proof=bool(src))
     elif kind == "verdict":
         img = card_verdict(sc, c, shots, sc["idx"], i, total)
+    elif kind == "teaser":
+        img = card_teaser(sc, c, i, total)
     else:
         img = base_card(c, i, total)[0]
     p = f"{out}/v2_{i:02d}_{kind}.png"
@@ -668,7 +722,22 @@ def main():
         print(f"[casto]   {roundup.NUM[i]} {name} — 인과 컷 {gen}/2 생성"
               + ("" if gen == 2 else " (나머지는 폴백 카드)"))
 
-    scenes, v, win = roundup.build_scenes(s, items, c)
+    # 증거 화면 — 있으면 만들고, 없으면 조용히 건너뛴다
+    import proof
+    briefs = [evidence.brief(n, live=False) for n in items]
+    proofs = {}
+    for i, (name, br) in enumerate(zip(items, briefs)):
+        got = proof.best_card(br, c["brand"], font, out_dir="out",
+                              slug=catalog.slugify(name)[:30])
+        if got:
+            got["caption"] = proof.CAPTION.get(got["kind"], "")
+            proofs[i] = got
+            panels[("proof", i)] = {"path": got["path"]}
+            print(f"[casto]   {roundup.NUM[i]} {name} — 증거 화면: {got['kind']}")
+    if not proofs:
+        print("[casto]   증거 화면 없음 — 수집 데이터가 아직 얕다(그래프를 지어내지 않는다)")
+
+    scenes, v, win = roundup.build_scenes(s, items, c, proofs=proofs)
     print(f"[casto] 2판 규격 — {len(scenes)}씬 · 오늘의 콕: {items[win]} [{v['caption']}]")
     sfx = make_kok_sfx(c["video"]["sfx"]["kok"])
 
@@ -678,10 +747,15 @@ def main():
         asyncio.run(tts(sc["voice"], mp3, c["video"]["voice"]))
         if sc["kind"] == "verdict" and sfx:
             mp3 = mix_kok(mp3, sfx, f"out/voice{i}_kok.mp3")
-        d = dur(mp3) + 0.25
+        # 씬 여백을 **씬 종류마다 다르게** 준다.
+        # 모든 씬이 정확히 같은 간격으로 바뀌면 그 규칙성 자체가 "기계가 만들었다"로 읽힌다
+        # (전략 3판 3절). 훅은 치고 빠지고, 판정은 한 박자 쉰다.
+        PAD = {"hook": 0.10, "ask": 0.15, "item": 0.30, "comic": 0.22,
+               "verdict": 0.55, "teaser": 0.35}
+        d = dur(mp3) + PAD.get(sc["kind"], 0.25)
         seg = f"out/seg{i}.mp4"
         img = scene_card_v2(sc, i, len(scenes), c, shots, panels)
-        style = {"hook": "pop", "verdict": "pop"}.get(sc["kind"], "zoom")
+        style = {"hook": "pop", "verdict": "pop", "teaser": "pop"}.get(sc["kind"], "zoom")
         vid = visuals.motion_clip([img], d, f"out/mo{i}.mp4", style=style)
         subprocess.run(["ffmpeg", "-y", "-i", vid, "-i", mp3,
                         "-t", f"{d:.2f}", "-r", "30", "-pix_fmt", "yuv420p",

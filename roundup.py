@@ -12,6 +12,7 @@
 그리고 도장은 **하나만** 찍힌다 — 끝까지 봐야 어느 게 콕인지 알 수 있어야
 순위 영상의 완결형 함정(다 보면 다시 올 이유가 없음)에 빠지지 않는다.
 """
+import io
 import json
 
 import catalog
@@ -124,6 +125,9 @@ def build_script(items, trends, c, post=None, retries=2):
   ✅ "어쩐지 자꾸 보이더라, 요즘 난리난 주방템 3가지"
   ❌ 브랜드명 나열 — 조회수가 자릿수로 떨어진다.
 - **부정어 금지** — '별로다/사지 마라' 대신 '아직'의 뉘앙스.
+- **구어체로 쓰세요.** `~습니다/~됩니다/~입니다` 금지. 말하듯이 짧게 끊습니다.
+  문어체는 TTS가 읽을 때 가장 크게 티가 나는 지점입니다.
+  ❌ "수요가 급증하였습니다"  ✅ "갑자기 다들 찾아요"
 - 겪지 않은 경험담·과장 금지. 판정어("오늘의 콕" 등)는 코드가 넣으니 쓰지 말 것."""
 
     prompt, s = base, None
@@ -149,7 +153,7 @@ def build_script(items, trends, c, post=None, retries=2):
     return s
 
 
-def build_scenes(s, items, c):
+def build_scenes(s, items, c, proofs=None):
     """대본 + 2판 고정 규격 → 씬 리스트.
 
     씬 순서가 곧 포맷이다. 훅에서 물건을 먼저 보여주고(추상적 '왜 유행'은 1천대에서 죽는다),
@@ -164,12 +168,22 @@ def build_scenes(s, items, c):
          "voice": f"이번 주 갑자기 많이 보이는 것 {n}개."},
         {"kind": "ask", "caption": "왜 갑자기?", "voice": "왜 갑자기 보일까요?"},
     ]
-    for i, name in enumerate(items):
+    # **역순으로 공개한다: ③ → ② → ①.**
+    # `Best3` 관례가 역순인 데는 이유가 있다 — 1번이 마지막이면 **1번을 보려고 남는다.**
+    # ①②③ 순이면 뒤로 갈수록 볼 이유가 줄어든다(2026-09-11 전략 3판 4절).
+    # 번호는 상품에 고정이고 **등장 순서만** 뒤집는다.
+    for i in reversed(range(n)):
+        name = items[i]
         r = rows[i] if i < len(rows) else {}
         use = (r.get("use") or "").strip()
         scenes.append({"kind": "item", "idx": i, "name": name, "use": use,
                        "caption": f"{NUM[i]} {name}",
                        "voice": fit_voice(f"{name}.", f"{use}." if use else "")})
+        # 증거 화면은 **별도 씬으로 넣지 않는다.**
+        # 처음엔 상품마다 증거 씬을 하나씩 끼웠더니 16씬 41.6초가 됐다(목표 35초).
+        # 그런데 증거가 답하는 질문은 「왜?」 컷과 **같다** — 그래서 씬을 늘리는 대신
+        # 「왜?」 컷의 **배경**을 만화에서 그래프로 바꾼다. 길이는 그대로, 질감만 바뀐다.
+        pf = (proofs or {}).get(i)
         for kind in ("cause", "effect"):
             line = (r.get(kind) or "").strip()
             if not line:
@@ -184,6 +198,8 @@ def build_scenes(s, items, c):
             scenes.append({"kind": "comic", "idx": i, "phase": kind,
                            "badge": "왜?" if kind == "cause" else "그래서",
                            "caption": line, "voice": voice,
+                           # 원인 컷에 증거가 있으면 그래프를 배경으로 쓴다
+                           "proof": (pf or {}).get("kind") if kind == "cause" else None,
                            "low": (r.get("confidence") == "low")})
 
     win = s.get("winner", 0)
@@ -203,7 +219,54 @@ def build_scenes(s, items, c):
     scenes.append({"kind": "verdict", "verdict": v, "idx": win, "name": items[win],
                    "caption": f"{cap}\n{items[win]}",
                    "voice": f"{body} {cta}"})
+    t = next_teaser()
+    if t:
+        # 판정 뒤 1.5초 — 답은 주지 않고 **질문만** 남긴다
+        scenes.append({"kind": "teaser", "label": t["label"], "product": t["product"],
+                       "caption": f"다음 콕\n{t['product']}",
+                       "voice": f"다음 편, {t['product']}{josa(t['product'])} 콕일까요?"})
     return scenes, v, win
+
+
+def josa(word: str, pair: str = "은/는") -> str:
+    """받침에 맞는 조사. "얼음보관통는"처럼 읽히면 그 순간 기계가 읽는 티가 난다.
+
+    TTS는 틀린 조사를 그대로 읽는다 — AI티가 나는 가장 싼 실수다.
+    """
+    with_batchim, without = pair.split("/")
+    w = (word or "").strip()
+    if not w:
+        return without
+    ch = w[-1]
+    if not ("가" <= ch <= "힣"):
+        return without                                       # 숫자·영문은 보수적으로
+    has = (ord(ch) - 0xAC00) % 28 != 0
+    if pair == "으로/로" and (ord(ch) - 0xAC00) % 28 == 8:   # ㄹ 받침은 '로'
+        return without
+    return with_batchim if has else without
+
+
+def next_teaser(path: str = "data/next_plan.json") -> dict | None:
+    """다음 편 예고 — **오늘 편이 끝나는 순간에 다음 편을 심는다.**
+
+    구독은 "다음 편이 이번 편의 결과에 달려 있을 때" 생긴다(전략 5-1).
+    다음에 무엇을 다룰지는 이미 next_plan.json에 정해져 있으므로,
+    사람이 쓸 것도 없이 마지막 1.5초에 붙일 수 있다.
+
+    ⚠️ 다음 편 상품을 **여기서 판정하지 않는다.** "OO는 콕일까?"까지만 말한다 —
+    미리 답을 주면 다음 편을 볼 이유가 사라진다.
+    """
+    try:
+        with io.open(path, encoding="utf-8") as f:
+            items = json.load(f).get("items") or []
+    except Exception:                                        # noqa: BLE001
+        return None
+    import datetime as dt
+    today = dt.date.today().isoformat()
+    for it in items:
+        if it.get("date", "") > today and it.get("product"):
+            return {"label": it.get("label", ""), "product": it["product"]}
+    return None
 
 
 def build_caption(s, v, items, entries, c, total, post=None):

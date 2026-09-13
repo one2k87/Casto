@@ -128,6 +128,8 @@ def brief(name, snaps=None, live=False) -> dict:
             out["lines"].append("→ 최근 며칠 사이에 여러 채널이 동시에 다뤘다(확산 중)")
 
     sp = spike(p.get("demand"))
+    if sp:
+        out["demand_series"] = p.get("demand") or []         # 증거 그래프(proof.py)가 그린다
     if sp and sp["trend"] == "up":
         out["spike"] = sp
         out["lines"].append(
