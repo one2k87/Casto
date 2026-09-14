@@ -30,10 +30,17 @@ jobs:
         with: { python-version: "3.12" }
       # pillow는 수집 자체엔 불필요하지만, 회귀 테스트가 브리핑 모듈(make_briefing→PIL)을
       # import하므로 필요하다. 빼면 테스트 수집 단계에서 ImportError로 잡한다(2026-09-07 실측).
-      - run: pip install requests pillow pytest
+      - run: pip install requests pillow pytest ruff
 
       # pytest로 돌린다: unittest discover는 함수형 테스트를 **못 보고 지나간다**
       # (171개 중 111개만 실행됐다). 게다가 러너에 pytest가 없어 import부터 깨졌다.
+      # ⚠️ 이 단계가 있었다면 2026-09-11~14 나흘치 스냅샷 유실은 없었다.
+      #    trend_products.collect()의 `name` 오타는 테스트가 타지 않는 경로라 pytest로는
+      #    안 잡히고, 매일 NameError로 죽었다. F821(정의되지 않은 이름)·F811(중복 정의)은
+      #    거짓 양성이 없는 "확실한 크래시"만 골라내므로 게이트로 쓰기에 안전하다.
+      - name: 크래시 린트 (정의되지 않은 이름)
+        run: python -m ruff check --select F821,F811 .
+
       - name: 회귀 테스트
         run: python -m pytest -q tests
 
@@ -78,6 +85,25 @@ jobs:
       # 캡처 반입 뒤에 돌려야 오늘 올린 사진이 편성에 반영된다.
       - name: 편성 예고 갱신
         run: python next_plan.py
+
+      # 조용한 실패가 가장 비싸다 — 나흘 동안 아무도 몰랐다. 실패하면 폰으로 알린다.
+      - name: 실패 알림
+        if: failure()
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          python - <<'PYEOF'
+          import os, urllib.parse, urllib.request
+          tok, chat = os.getenv("TELEGRAM_TOKEN"), os.getenv("TELEGRAM_CHAT_ID")
+          if not (tok and chat):
+              raise SystemExit(0)
+          msg = ("⚠️ 트렌드 수집 실패 — 오늘 스냅샷이 쌓이지 않았습니다.\n"
+                 "유행 추이·증거 그래프가 이 데이터로 만들어집니다.\n" + (os.getenv("RUN_URL") or ""))
+          urllib.request.urlopen("https://api.telegram.org/bot%s/sendMessage" % tok,
+              urllib.parse.urlencode({"chat_id": chat, "text": msg}).encode())
+          PYEOF
 
       - name: 결과 커밋
         run: |

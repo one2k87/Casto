@@ -226,7 +226,6 @@ def merge_watchlist(found: list[dict], today: dt.date) -> list[dict]:
     _save(WATCHLIST, alive)
     if dropped:
         print(f"[watch] {WATCH_DAYS}일 넘게 재발굴 안 됨 — 추적 종료: {dropped}")
-    new_keys = {p["key"] for p in found} - set(wl.keys() - alive.keys())
     print(f"[watch] 추적 {len(alive)}개 (이번 신규 {len([p for p in found if p['key'] in alive])}개)")
     return [{"key": k, **v} for k, v in alive.items()]
 
@@ -265,8 +264,11 @@ def collect() -> dict:
             "overseas": (src.overseas_lead(kw, p.get("en_keyword") or "")
                          if p.get("en_keyword") else None),
             # 발굴 키워드는 문장에 가까워 그대로는 수요가 안 잡힌다 → 사다리로 좁혀 재시도
-            "demand": src.demand_ladder(kw, name, category=cat),
-            "demand_last_year": src.demand_ladder(kw, name, category=cat, last_year=True),
+            # ⚠️ `name`이 아니라 `p["name"]`이다 — 전역에 name이 없어 2026-09-11부터 매일
+            #    NameError로 수집이 통째로 죽었고(4일치 스냅샷 유실), 성공/실패가 텔레그램으로
+            #    가지 않아 아무도 몰랐다. 수요 시계열은 유행 추이표의 유일한 입력이다.
+            "demand": src.demand_ladder(kw, p["name"], category=cat),
+            "demand_last_year": src.demand_ladder(kw, p["name"], category=cat, last_year=True),
             "price": (coupang or {}).get("price") or (shop or {}).get("price"),
             "review_count": (coupang or {}).get("review_count"),   # 쿠팡 없으면 결측 → 거래 축 제외
             "sellers": (shop or {}).get("sellers"),
