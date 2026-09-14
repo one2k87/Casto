@@ -265,7 +265,7 @@
     <button class="btn ghost" id="ptClear">지우기</button>
   </div>
 
-  <div class="foot">Casto <b id="ver">v2.9</b> ·
+  <div class="foot">Casto <b id="ver">v3.0</b> ·
     <a href="#" id="reload" style="color:inherit">새로고침 ↻</a> ·
     <a href="#" id="hardReset" style="color:inherit">캐시 비우기</a></div>
 </main>
@@ -371,7 +371,11 @@ function renderShots(q){
   }catch(e){ $("sSubs").textContent = "—"; }
 
   // 다음 할 일 — 조건 분기로 **항상 하나만** 정한다
-  const uploadedToday = store.get("casto.uploaded") === todayKST();
+  // 자동 게시(publish.py)가 오늘 video_url을 남겼으면 업로드 할 일은 이미 끝난 것이다.
+  let published = null;
+  try{ const c = await get("data/last_caption.json", true);
+       if(c.date === todayKST() && c.video_url) published = c; }catch(e){}
+  const uploadedToday = !!published || store.get("casto.uploaded") === todayKST();
   if(failed && !shortDone && !waiting){
     setNext("📡", "상태를 확인할 수 없음", "네트워크를 확인하고 다시 시도하세요",
             {label:"다시 시도", run:() => location.reload()});
@@ -384,6 +388,9 @@ function renderShots(q){
     setNext("📸", `상품 캡처 ${waiting}건`, "쿠팡에서 대표 이미지를 캡처해 번호로 저장",
             {label:"번호표 보기", run:() => { $("shotWrap").open = true;
               $("shotWrap").scrollIntoView({behavior:"smooth", block:"center"}); }});
+  } else if(published){
+    setNext("✅", "오늘 영상 게시됨", published.title || "유튜브에 올라갔습니다",
+            {label:"영상 보기", href: published.video_url});
   } else if(!shortDone){
     setNext("⏳", "오늘 쇼츠 제작 대기", "매일 아침 자동 생성됩니다", null);
   } else {
