@@ -1,23 +1,13 @@
 {
- "updated": "2026-09-10",
+ "updated": "2026-09-15",
  "items": [
-  {
-   "date": "2026-09-12",
-   "weekday": "토",
-   "label": "9/12(토)",
-   "slot": "season",
-   "product": "레이저가이드가위",
-   "slug": "레이저가이드가위",
-   "photo": true,
-   "link": false
-  },
   {
    "date": "2026-09-15",
    "weekday": "화",
    "label": "9/15(화)",
    "slot": "deep1",
-   "product": "얼음틀 얼음보관통",
-   "slug": "얼음틀-얼음보관통",
+   "product": "레이저가이드가위",
+   "slug": "레이저가이드가위",
    "photo": true,
    "link": false
   },
@@ -26,8 +16,18 @@
    "weekday": "토",
    "label": "9/19(토)",
    "slot": "season",
-   "product": "에그크래커",
-   "slug": "에그크래커",
+   "product": "얼음틀 얼음보관통",
+   "slug": "얼음틀-얼음보관통",
+   "photo": true,
+   "link": false
+  },
+  {
+   "date": "2026-09-22",
+   "weekday": "화",
+   "label": "9/22(화)",
+   "slot": "deep1",
+   "product": "씨밀렉스 라이스키퍼 쌀통 10kg",
+   "slug": "씨밀렉스-라이스키퍼-쌀통-10kg",
    "photo": true,
    "link": false
   }
