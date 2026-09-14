@@ -1,5 +1,5 @@
 name: 쇼츠 자동 제작
-# 픽담 최신 글 → 트렌드 반영 대본 → TTS+ffmpeg 합성 → 텔레그램 전송.
+# 픽담 최신 글 → 트렌드 반영 대본 → TTS+ffmpeg 합성 → Make 웹훅으로 유튜브 공개 게시 → 텔레그램 링크.
 # 매일 08:00 KST(글 발행 07:00 이후). 시크릿 등록 전 실패 방지를 위해 크론은 주석으로 시작.
 on:
   schedule:
@@ -70,7 +70,19 @@ jobs:
           LLM_MODEL: ${{ secrets.LLM_MODEL }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          MAKE_UPLOAD_HOOK: ${{ secrets.MAKE_UPLOAD_HOOK }}
         run: python make_short.py
+      # 여기가 수익의 시작점이다 — 올라가지 않은 영상의 수익은 0이다 (docs/콕픽_수익화_보고서.md §0).
+      # MAKE_UPLOAD_HOOK 시크릿이 없으면 조용히 건너뛰고 텔레그램 mp4 수동 폴백으로 남는다.
+      - name: 유튜브 자동 게시 (Make 웹훅)
+        if: steps.dup.outputs.skip != 'true' && steps.plan.outputs.skip != 'true'
+        env:
+          MAKE_UPLOAD_HOOK: ${{ secrets.MAKE_UPLOAD_HOOK }}
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python publish.py
       - name: 성공 마커 커밋 (중복 가드용)
         if: steps.dup.outputs.skip != 'true' && steps.plan.outputs.skip != 'true'
         run: |

@@ -16,7 +16,7 @@
 4) 씬 비주얼: 클립뱅크(assets/clips/)가 있으면 사용, 없으면 콕픽 파스텔 카드 폴백(비용 0)
 5) edge-tts(무료)로 씬별 한국어 내레이션 mp3 + 콕 사운드 믹스
 6) ffmpeg으로 1080x1920 mp4 합성
-7) 텔레그램 sendVideo → 폰에서 업로드(v2: Make로 자동 게시)
+7) publish.py → Make 웹훅 → 유튜브 공개 게시 (웹훅 없으면 텔레그램 mp4 수동 폴백)
 """
 import json, os, re, subprocess, asyncio, html
 import requests
@@ -797,7 +797,12 @@ def main():
     except Exception as e:                                   # noqa: BLE001
         print("[casto] 발행 이력 기록 실패(무시):", e)
 
-    telegram_video("out/short.mp4", cap) or telegram_msg("쇼츠 생성 완료(전송 실패) — Actions 아티팩트 확인")
+    # 자동 게시(publish.py)가 켜져 있으면 mp4를 폰으로 보내지 않는다 — 링크만 간다.
+    # 웹훅이 없을 때만 예전처럼 mp4를 보내 수동 업로드 폴백을 유지한다.
+    if os.getenv("MAKE_UPLOAD_HOOK"):
+        telegram_msg(f"🎬 쇼츠 생성 완료 — 유튜브 자동 게시 중\n{s.get('title', '')}")
+    else:
+        telegram_video("out/short.mp4", cap) or telegram_msg("쇼츠 생성 완료(전송 실패) — Actions 아티팩트 확인")
     print(f"[casto] 완료 — {total:.0f}초, out/short.mp4 (목표 {c['video']['target_sec']}초)")
     if total > c["video"]["target_sec"] + 8:
         print(f"[casto] ⚠ 규격 초과({total:.0f}초) — 내레이션이 길다.")
