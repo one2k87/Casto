@@ -74,5 +74,25 @@
   "seconds": 76.0,
   "video_id": "P4W-SK5i44w",
   "note": "첫 자동 게시 (run #27, Make 재실행)"
+ },
+ {
+  "date": "2026-09-14",
+  "slot": "",
+  "key": "계란-흰자-분리기",
+  "verdict": "cond",
+  "title": "요즘 이거 다시 유행한다는 주방템 3가지",
+  "product": "계란 흰자 분리기",
+  "products": [
+   "계란 흰자 분리기",
+   "레트로 수화기",
+   "손끼임 방지가드"
+  ],
+  "format": "roundup3",
+  "category": "흰자 분리기",
+  "has_photo": true,
+  "brand": "계란",
+  "hook": "유튜브에 '코 계란 흰자' 뜬 지 3일",
+  "seconds": 66.8,
+  "video_id": "C0UlizOG2zc"
  }
 ]
