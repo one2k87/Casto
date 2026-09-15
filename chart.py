@@ -30,6 +30,9 @@ import evidence as E
 DAILY_DIR = "data/trends_daily"
 CHART_DIR = "data/chart"
 TOP_N = 5
+# 차트가 성립하는 최소 칸 수. 2칸짜리 순위표는 순위가 아니라 비교다.
+# 이 아래로 떨어지면 그 주는 차트를 내지 않는다 — 빈칸을 그림으로 메우지 않는다.
+MIN_N = 3
 
 # 상태 태그 — 라벨은 화면에, note는 대본이 쓰는 한 줄.
 # 젊은 세대/기성세대 양쪽 문장을 같이 들고 다닌다(보고서 §3-5): 한 편 안에

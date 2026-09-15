@@ -37,16 +37,23 @@ MAX_PER_WEEK = 4                        # 양산형 콘텐츠 정책 대응 상�
 # 반대로 **발행을 0으로 두는 것도 틀렸다**: 채널이 0편이면 알고리즘이 분류조차 못 하고,
 # 8주 컷오프 시계가 시작되지 않으며, 무엇이 먹히는지는 발행해야만 알 수 있다.
 # → 그래서 "관측은 매일, 발행은 확정된 것만 주 2편"으로 간다.
-RAMP_SLOT = {1: "deep1", 5: "season"}   # 화·토 2편
+# 2026-09-15 변경: 화·토 → **화·일**. 일요일이 「콕픽 차트」 자리다.
+# 주간 차트는 '그 주에 뜬 것'을 말하는 편이라 주가 끝난 뒤에 나와야 한다.
+# 토요일에 내면 아직 안 끝난 주를 결산하는 셈이 된다.
+RAMP_SLOT = {1: "deep1", 6: "chart"}   # 화·일 2편
 BRIEFING_MIN_DAYS = 7                   # 브리핑에 필요한 최소 스냅샷 일수
 RAMP_MAX_PER_WEEK = 2
 
 # 요일 → 슬롯. 월=0 … 일=6
-WEEKDAY_SLOT = {0: "trend", 1: "deep1", 3: "deep2", 5: "season"}
+# 월요일 브리핑(trend)은 일요일 차트로 옮겼다 — 같은 질문("이번 주에 뭐가 떴나")에
+# 두 번 답할 필요가 없고, 주 결산은 주가 끝난 뒤가 맞다.
+WEEKDAY_SLOT = {1: "deep1", 3: "deep2", 5: "season", 6: "chart"}
 
 SLOT_SPEC = {
+    "chart":  {"format": "chart",     "ranking": "chart",     "price_band": "혼합",
+               "why": "일요일 「콕픽 차트」 — 그 주에 뜬 것 5개. 순위·상태 태그·한 줄 이유"},
     "trend":  {"format": "briefing",  "ranking": "briefing",  "price_band": "저가",
-               "why": "월요일 브리핑 — 그 주의 소재 창고이자 신규 유입 창구"},
+               "why": "(보류) 월요일 브리핑 — 일요일 차트로 대체했다"},
     "deep1":  {"format": "kok_open",  "ranking": "deep_dive", "price_band": "중가",
                "why": "월요일 브리핑에서 발굴한 1건을 콕 3번으로 심층 심사"},
     "deep2":  {"format": "kok_open",  "ranking": "deep_dive", "price_band": "고가",
@@ -172,6 +179,16 @@ def pick_product(slot: str, board: dict, log: list[dict], month: int,
     심층은 구매가치 랭킹(사도 되는가). 같은 데이터로 다른 질문에 답하는 것이 설계의 핵심이다.
     """
     spec = SLOT_SPEC[slot]
+    if spec["ranking"] == "chart":
+        # 차트는 한 상품이 아니라 **5개짜리 순위표**다. 실사진 게이트는 chart.build이
+        # 이미 건다 — 사진 없는 칸을 그림으로 메우지 않는다(절대 규칙).
+        import chart
+        c = chart.build()
+        entries = c.get("entries") or []
+        if len(entries) < chart.MIN_N:
+            return None
+        return {"name": f"콕픽 차트 {c['week']}", "chart": c,
+                "keyword": entries[0]["display"], "top": entries[0]["display"]}
     if spec["ranking"] == "season":
         names = [n for n in SEASON_CALENDAR.get(month, []) if _has_photo(n, ready)] \
                 if ready is not None else SEASON_CALENDAR.get(month, [])
@@ -224,7 +241,7 @@ def plan(date: dt.date, board: dict, log: list[dict] | None = None,
     days = snapshot_days()
     slot = slot_for(date, ramp)
     if slot is None:
-        pace = "주 2편: 화·토(램프업)" if ramp else "주 4편: 월·화·목·토"
+        pace = "주 2편: 화·일(램프업)" if ramp else "주 4편: 화·목·토·일"
         return {"date": date.isoformat(), "publish": False, "ramp": ramp, "snapshot_days": days,
                 "reason": f"{'월화수목금토일'[date.weekday()]}요일은 발행일이 아니다({pace})"}
     if ramp and ready is not None and not ready:
@@ -241,13 +258,17 @@ def plan(date: dt.date, board: dict, log: list[dict] | None = None,
         "product": product,
         "prefer_next_kok": next_kok_due(log),
     }
-    if slot != "trend":
+    if slot not in ("trend", "chart"):
         rev = revisit_candidate(board)
         if rev:
             out["revisit_available"] = rev["name"]
     if product is None:
+        import chart as _c
+        ch_min = _c.MIN_N
         out["publish"] = False
-        out["reason"] = f"{slot} 슬롯에 쓸 제품이 없다 — 수집(trend_products)을 먼저 확인할 것"
+        out["reason"] = (f"차트에 올릴 실사진 상품이 {ch_min}개 미만이다 — 촬영이 먼저다"
+                         if slot == "chart" else
+                         f"{slot} 슬롯에 쓸 제품이 없다 — 수집(trend_products)을 먼저 확인할 것")
     return out
 
 

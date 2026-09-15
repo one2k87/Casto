@@ -23,14 +23,16 @@ MON, TUE, WED, THU, SAT, SUN = (dt.date(2026, 9, d) for d in (7, 8, 9, 10, 12, 1
 
 
 class TestCadence(unittest.TestCase):
-    def test_publish_days_are_mon_tue_thu_sat(self):
-        self.assertEqual(sch.slot_for(MON), "trend")
+    def test_publish_days_are_tue_thu_sat_sun(self):
+        """2026-09-15부터 월요일 브리핑 → **일요일 차트**. 주 결산은 주가 끝난 뒤다."""
+        self.assertIsNone(sch.slot_for(MON))
         self.assertEqual(sch.slot_for(TUE), "deep1")
         self.assertEqual(sch.slot_for(THU), "deep2")
         self.assertEqual(sch.slot_for(SAT), "season")
+        self.assertEqual(sch.slot_for(SUN), "chart")
 
     def test_non_publish_days(self):
-        for d in (WED, SUN, dt.date(2026, 9, 11)):   # 수·금·일
+        for d in (MON, WED, dt.date(2026, 9, 11)):   # 월·수·금
             self.assertIsNone(sch.slot_for(d))
             self.assertFalse(sch.plan(d, BOARD)["publish"])
 
@@ -41,11 +43,10 @@ class TestCadence(unittest.TestCase):
 
 
 class TestSlotRouting(unittest.TestCase):
-    def test_monday_uses_recognition_ranking(self):
-        """브리핑은 재인 랭킹에서 고른다(이미 봤을 확률)."""
-        p = sch.plan(MON, BOARD)
-        self.assertEqual(p["format"], "briefing")
-        self.assertEqual(p["product"]["key"], "foil")   # 저가 밴드 우선
+    def test_sunday_is_the_weekly_chart(self):
+        """일요일은 한 상품이 아니라 5개짜리 순위표다."""
+        self.assertEqual(sch.SLOT_SPEC["chart"]["format"], "chart")
+        self.assertEqual(sch.SLOT_SPEC["chart"]["ranking"], "chart")
 
     def test_deep_slots_use_value_ranking(self):
         """심층은 구매가치 랭킹에서 고른다(사도 되는가) — 브리핑과 다른 질문."""
@@ -66,8 +67,8 @@ class TestSlotRouting(unittest.TestCase):
         self.assertEqual(sch.plan(TUE, BOARD, log)["product"]["key"], "dish")
 
     def test_month_category_rotates(self):
-        self.assertEqual(sch.plan(MON, BOARD)["category"], "주방")
-        self.assertEqual(sch.plan(dt.date(2026, 10, 5), BOARD)["category"], "청소")
+        self.assertEqual(sch.plan(TUE, BOARD)["category"], "주방")
+        self.assertEqual(sch.plan(dt.date(2026, 10, 6), BOARD)["category"], "청소")
 
 
 class TestVerdictQuota(unittest.TestCase):
@@ -113,18 +114,20 @@ if __name__ == "__main__":
 
 
 # ── 램프업(2026-09-09) ────────────────────────────────────────────────────────
-def test_램프업이면_화토_2편만_편성된다():
-    """스냅샷이 7일 미만이면 델타를 신뢰할 수 없다 → 확정 소재로 주 2편만."""
+def test_램프업이면_화일_2편만_편성된다():
+    """스냅샷이 7일 미만이면 델타를 신뢰할 수 없다 → 확정 소재로 주 2편만(화·일)."""
     import datetime as dt
-    mon, tue, thu, sat = (dt.date(2026, 9, 14), dt.date(2026, 9, 15),
-                          dt.date(2026, 9, 17), dt.date(2026, 9, 19))
-    assert sch.slot_for(mon, ramp=True) is None      # 브리핑은 데이터가 모인 뒤에
+    mon, tue, thu, sat, sun = (dt.date(2026, 9, 14), dt.date(2026, 9, 15),
+                               dt.date(2026, 9, 17), dt.date(2026, 9, 19),
+                               dt.date(2026, 9, 20))
+    assert sch.slot_for(mon, ramp=True) is None
     assert sch.slot_for(thu, ramp=True) is None
+    assert sch.slot_for(sat, ramp=True) is None      # 토 → 일로 옮겼다
     assert sch.slot_for(tue, ramp=True) == "deep1"
-    assert sch.slot_for(sat, ramp=True) == "season"
-    # 램프업 해제 후에는 기존 주 4편 편성으로 돌아온다
-    assert sch.slot_for(mon, ramp=False) == "trend"
+    assert sch.slot_for(sun, ramp=True) == "chart"   # 첫 「콕픽 차트」 2026-09-20
+    # 램프업 해제 후에는 주 4편으로 돌아오지만 일요일 차트는 그대로다
     assert sch.slot_for(thu, ramp=False) == "deep2"
+    assert sch.slot_for(sun, ramp=False) == "chart"
 
 
 def test_ramping_기준은_7일():
@@ -156,9 +159,10 @@ def test_램프업편은_반드시_실사진_있는_상품을_고른다(monkeypa
     assert p["publish"] is True
     assert p["product"]["name"] == "밀폐용기"   # 사진 없는 코팅팬으로 가면 안 된다
 
-    # 시즌 슬롯도 마찬가지 — 시즌 키워드에 사진이 없으면 손에 든 걸 쓴다
-    ps = sch.plan(dt.date(2026, 9, 12), board, [], ready=["밀폐용기"])
-    assert ps["slot"] == "season" and ps["product"]["name"] == "밀폐용기"
+    # 시즌 슬롯도 마찬가지 — 시즌 키워드에 사진이 없으면 손에 든 걸 쓴다.
+    # (토요일은 이제 램프업 편성에 없어서 슬롯 선택을 거치지 않고 직접 본다)
+    ps = sch.pick_product("season", board, [], 9, ready=["밀폐용기"])
+    assert ps["name"] == "밀폐용기" and ps["photo_fallback"]
 
 
 def test_램프업_폴백은_같은_상품을_반복하지_않는다():
