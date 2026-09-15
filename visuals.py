@@ -43,15 +43,13 @@ ASSETS = {
 # 클레이 애니메이션의 생명은 보간이 아니라 '다른 그림 한 장'이다. 코드 변형(스쿼시·보일)은
 # 같은 인형을 흔들 뿐이라 표정이 안 바뀐다. 그래서 핵심 동작마다 짝 그림을 한 장씩 둔다.
 # 이 표는 clay.animate(poses=...)에 그대로 넘어간다.
+# ⚠️ 이 그림들은 **생성하지 않는다.** `make_faces.py`가 원본 에셋에서 굽는다.
+#    나노바나나로 이어 뽑아보니 2번째 장부터 캐릭터가 표류했다(도장이 머리에
+#    눌어붙고, 교정하면 뚜껑 비율이 달라졌다). 1/10초마다 갈아 끼우는 짝 그림에서는
+#    그 정도 차이도 깜빡임으로 보인다. 같은 몸에서 눈만 바꾸면 그 문제가 없다.
 EXTRA = {
-    "blink":    "koki_blink.png",     # idle 짝 — 눈 감은 한 장(홀드가 죽어 보이지 않게)
-    "up":       "koki_stamp_up.png",  # stamp 짝 — 도장을 머리 위로 든 순간
-    "surprise": "koki_surprise.png",  # 놀람 — 양손 들고 눈 크게
-    "point":    "koki_point.png",     # 가리킴 — 순위·상품 지목
-    "cheer":    "koki_cheer.png",     # 환호 — 1위 발표
-    "shrug":    "koki_shrug.png",     # 갸웃 — "왜 갑자기?"
-    "lean":     "koki_lean.png",      # 들여다봄 — 확대·관찰
-    "hide":     "koki_hide.png",      # 눈 가림 — 가격 공개 직전
+    "blink": "koki_blink.png",   # idle 짝 — 눈 감은 한 장(홀드가 죽어 보이지 않게)
+    "wide":  "koki_wide.png",    # idle 짝 — 눈 크게 뜬 한 장(놀람의 0.1초)
 }
 CHAR_BOX = (int(W * 0.62), int(H * 0.30))   # 캐릭터 최대 크기
 CHAR_CENTER = (W // 2, int(H * 0.34))
