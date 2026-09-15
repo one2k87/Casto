@@ -91,6 +91,13 @@
   .cap{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:16px;font-weight:800;line-height:1.4;letter-spacing:-.02em}
   .cap + .sub{margin-top:4px}
   .shot .find{background:var(--card2)}
+  /* 이미 찍어 둔 상품의 가격만 채우는 칸 — 다시 촬영시키지 않기 위한 것 */
+  .shot input.won{flex:0 0 108px;min-height:var(--tap);border-radius:11px;border:1px solid var(--line);
+    background:var(--card2);color:var(--txt);padding:0 10px;font-size:15px;font-family:inherit;
+    text-align:right;-moz-appearance:textfield}
+  .shot input.won::-webkit-outer-spin-button,.shot input.won::-webkit-inner-spin-button{
+    -webkit-appearance:none;margin:0}
+  .shot input.won.ok{border-color:var(--accent);color:var(--accent)}
   .shot .act{display:flex;gap:6px}
   .shot.due{background:var(--due,#fff7ed);border-radius:12px}
   .shot.due .nm span{color:#c2410c;font-weight:700}
@@ -231,6 +238,20 @@
     </details>
   </div>
 
+  <!-- ③-3 가격 — 사진은 있는데 가격이 없는 상품.
+       쿠팡 오픈 API 미발급 + 네이버 쇼핑 검색 API 종료(2026-07-31)로 자동 수집 경로가
+       전부 닫혔다. 카드의 「정확한 상품명 + 가격」과 대체재의 「더 싸다」가 여기 걸려 있다. -->
+  <div class="card" id="priceCard" hidden>
+    <details id="priceWrap">
+      <summary>💰 가격 필요 <span class="chip" id="priceCount">—</span></summary>
+      <div class="sub" style="margin:6px 0 2px">
+        숫자만 넣고 <b>완료</b>를 누르면 저장됩니다. 가격이 있어야 카드에 값이 차고
+        <b>대체재(더 싼 것)</b> 비교가 가능해집니다.
+      </div>
+      <div id="priceList" class="skeleton">불러오는 중…</div>
+    </details>
+  </div>
+
   <!-- ④ 바로가기 -->
   <div class="card">
     <h2>바로가기</h2>
@@ -272,7 +293,7 @@
     <button class="btn ghost" id="ptClear">지우기</button>
   </div>
 
-  <div class="foot">Casto <b id="ver">v3.1</b> ·
+  <div class="foot">Casto <b id="ver">v3.2</b> ·
     <a href="#" id="reload" style="color:inherit">새로고침 ↻</a> ·
     <a href="#" id="hardReset" style="color:inherit">캐시 비우기</a></div>
 </main>
@@ -419,6 +440,7 @@ function renderShots(q){
     else setNext("✅", "오늘 할 일 없음", "모두 처리했습니다", null);
   };
   loadLinkNeeds();
+  loadPriceNeeds();
   if(shortDone && !uploadedToday) await loadCaption();
   if(videos === 0) $("ciRow").hidden = false;   // 아직 발행 0편이면 실행기록을 노출
 })();
@@ -735,7 +757,8 @@ async function loadLinkNeeds(){
   }catch(e){ $("linkCard").hidden = true; }
 }
 
-async function saveLink(slug, url, name){
+/* 카탈로그의 필드 하나를 고쳐 커밋한다. 링크·가격이 같은 경로를 쓴다. */
+async function saveField(slug, field, value, msg){
   const tok = store.get("casto.gh");
   if(!tok){ $("cfgPanel").classList.add("on");
             $("cfgPanel").scrollIntoView({behavior:"smooth", block:"center"});
@@ -747,13 +770,56 @@ async function saveLink(slug, url, name){
   const meta = await cur.json();
   const cat = JSON.parse(decodeURIComponent(escape(atob(meta.content.replace(/\n/g,"")))));
   if(!cat.products[slug]) throw new Error("카탈로그에 없는 상품입니다");
-  cat.products[slug].coupang_url = url;
+  cat.products[slug][field] = value;
   const body = btoa(unescape(encodeURIComponent(JSON.stringify(cat, null, 1))));
   const r = await fetch(api, {method:"PUT", headers:{...h,"Content-Type":"application/json"},
-    body: JSON.stringify({message:`link: ${name} 파트너스 링크 등록(모바일)`,
-                          content: body, sha: meta.sha, branch:"main"})});
+    body: JSON.stringify({message: msg, content: body, sha: meta.sha, branch:"main"})});
   if(!r.ok) throw new Error((await r.json()).message || r.status);
 }
+
+async function loadPriceNeeds(){
+  try{
+    const cat = await get(CAT_PATH, true);
+    const rows = Object.entries(cat.products || {})
+      .filter(([, e]) => e.image && !e.price)
+      .map(([slug, e]) => ({slug, name: e.display || e.category || slug}));
+    $("priceCount").textContent = rows.length + "건";
+    $("priceCard").hidden = rows.length === 0;
+    $("priceList").className = "";
+    $("priceList").innerHTML = rows.map(r => `<div class="shot" data-slug="${r.slug}">
+      <div class="no">💰</div>
+      <div class="nm"><b>${r.name}</b><span>쿠팡 판매가를 숫자만</span></div>
+      <input class="won" type="number" inputmode="numeric" enterkeyhint="done"
+             placeholder="원" data-slug="${r.slug}" data-name="${r.name.replace(/"/g,"&quot;")}">
+      </div>`).join("");
+  }catch(e){ $("priceCard").hidden = true; }
+}
+
+/* 숫자를 넣고 포커스를 떠나거나 완료를 누르면 그 자리에서 저장한다 */
+async function commitPrice(el){
+  const won = parseInt(String(el.value).replace(/[^\d]/g, ""), 10);
+  if(!won) return;
+  if(won < 100 || won > 50000000)
+    return toast("자릿수를 확인해 주세요 — 100원~5천만원", 3200);
+  if(el.dataset.saved === String(won)) return;          // 같은 값 재저장 방지
+  el.disabled = true;
+  try{
+    await saveField(el.dataset.slug, "price", won, `price: ${el.dataset.name} ${won}원(모바일)`);
+    el.dataset.saved = String(won);
+    el.classList.add("ok");
+    toast(`${el.dataset.name} ${won.toLocaleString()}원 저장`);
+  }catch(err){ toast(err.message || "저장 실패", 3600); }
+  finally{ el.disabled = false; }
+}
+document.addEventListener("change", e => {
+  if(e.target.classList?.contains("won")) commitPrice(e.target);
+});
+document.addEventListener("keydown", e => {
+  if(e.key === "Enter" && e.target.classList?.contains("won")){ e.target.blur(); }
+});
+
+const saveLink = (slug, url, name) =>
+  saveField(slug, "coupang_url", url, `link: ${name} 파트너스 링크 등록(모바일)`);
 
 document.addEventListener("click", async e => {
   const b = e.target.closest("#linkList .paste");
