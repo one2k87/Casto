@@ -222,6 +222,11 @@ def publish(video_path: str = "out/short.mp4", caption_path: str = "out/caption.
 
 
 if __name__ == "__main__":
-    ok = publish(privacy=(sys.argv[1] if len(sys.argv) > 1 else "public"))
+    # 사용: python publish.py [public|private] [영상경로] [설명경로]
+    # 일요일 차트 편은 out/chart.mp4를 올리므로 경로를 받을 수 있어야 한다.
+    _a = sys.argv[1:]
+    ok = publish(video_path=_a[1] if len(_a) > 1 else "out/short.mp4",
+                 caption_path=_a[2] if len(_a) > 2 else "out/caption.txt",
+                 privacy=_a[0] if _a else "public")
     # 웹훅이 아직 등록 안 된 상태는 실패가 아니다(수동 폴백). 등록됐는데 못 올렸을 때만 빨간불.
     sys.exit(0 if ok or not os.getenv("MAKE_UPLOAD_HOOK") else 1)
