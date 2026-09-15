@@ -79,3 +79,38 @@ def test_보류_항목은_번호표_본문에_섞이지_않는다(tmp_path):
     body, hold = path.read_text(encoding="utf-8").split("## 보류")
     assert "지금 유행" in body and "옛날 아이템" not in body
     assert "옛날 아이템" in hold
+
+
+# ── 가격 반입 (2026-09-15) ──────────────────────────────────────────────────
+# 쿠팡 오픈 API 미발급 + 네이버 쇼핑 검색 API 종료(2026-07-31)로 가격을 자동으로
+# 가져올 경로가 전부 닫혔다. 카드의 「정확한 상품명 + 가격」과 대체재의 「더 싸다」가
+# 둘 다 이 값에 걸려 있어, 사람이 캡처할 때 파일명으로 같이 올린다.
+def test_가격은_골뱅이로_명시해야_읽는다():
+    import capture_import as C
+    assert C.read_price("3 락앤락 밀폐용기 @32900") == ("3 락앤락 밀폐용기", 32900)
+    assert C.read_price("7 @12,900") == ("7", 12900)
+
+
+def test_모델명_숫자를_가격으로_읽지_않는다():
+    """끝자리 숫자를 가격으로 보면 800ml·10kg·MNDW-110이 전부 가격이 된다."""
+    import capture_import as C
+    for stem in ("3 락앤락 밀폐용기 800ml", "5 미닉스 식기세척기 MNDW-110",
+                 "9 씨밀렉스 라이스키퍼 쌀통 10kg", "12"):
+        assert C.read_price(stem) == (stem, None), stem
+
+
+def test_자릿수가_터무니없으면_가격을_버린다():
+    """0원·9억원짜리 주방템은 오타다. 틀린 가격은 없느니만 못하다."""
+    import capture_import as C
+    assert C.read_price("3 도마 @9")[1] is None
+    assert C.read_price("3 도마 @999999999")[1] is None
+
+
+def test_가격이_카탈로그에_남는다(tmp_path):
+    import catalog
+    cat = {}
+    slug = catalog.put(cat, name="락앤락 밀폐용기", brand="락앤락", model="밀폐용기", price=32900)
+    assert cat["products"][slug]["price"] == 32900
+    # 가격 없이 다시 등록해도 이미 넣은 값이 지워지지 않는다
+    catalog.put(cat, name="락앤락 밀폐용기", brand="락앤락", model="밀폐용기")
+    assert cat["products"][slug]["price"] == 32900

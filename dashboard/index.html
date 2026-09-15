@@ -157,6 +157,13 @@
   .panel{margin-top:10px;display:none}.panel.on{display:block}
   .panel input{width:100%;min-height:var(--tap);border-radius:11px;border:1px solid var(--line);
     background:var(--card2);color:var(--txt);padding:0 12px;font-size:15px;font-family:inherit}
+  /* 캡처와 함께 받는 상품명·가격 — 카드의 「정확한 상품명 + 가격」과 대체재가 여기 걸려 있다 */
+  #ovl .meta{display:flex;gap:8px;margin-bottom:8px}
+  #ovl .meta input{min-height:44px;border-radius:11px;border:1px solid #2a3444;background:#161d29;
+    color:#e8edf5;padding:0 12px;font-size:15px;font-family:inherit;min-width:0}
+  #ovl .meta #mName{flex:2.2}
+  #ovl .meta #mPrice{flex:1}
+  #ovl .meta input::placeholder{color:#6b7787}
 </style>
 </head>
 <body>
@@ -265,7 +272,7 @@
     <button class="btn ghost" id="ptClear">지우기</button>
   </div>
 
-  <div class="foot">Casto <b id="ver">v3.0</b> ·
+  <div class="foot">Casto <b id="ver">v3.1</b> ·
     <a href="#" id="reload" style="color:inherit">새로고침 ↻</a> ·
     <a href="#" id="hardReset" style="color:inherit">캐시 비우기</a></div>
 </main>
@@ -281,6 +288,10 @@
     <canvas id="cvs" hidden></canvas>
   </div>
   <div class="hint" id="cropHint" hidden>모서리를 끌어 크기 조절 · 안쪽을 끌어 이동 — 제품만 남기세요</div>
+  <div class="meta" id="cropMeta" hidden>
+    <input id="mName" placeholder="브랜드 모델명 (예: 락앤락 밀폐용기 800ml)" autocomplete="off" enterkeyhint="done">
+    <input id="mPrice" type="number" inputmode="numeric" placeholder="가격(원)" enterkeyhint="done">
+  </div>
   <div class="bar" id="cropBar" hidden>
     <button id="cropAll">전체</button>
     <button id="reshoot">다시</button>
@@ -507,6 +518,7 @@ function showStage(cropping){
   $("pickSrc").hidden = cropping;
   $("cvs").hidden = !cropping;
   $("cropHint").hidden = !cropping;
+  $("cropMeta").hidden = !cropping;
   $("cropBar").hidden = !cropping;
 }
 
@@ -541,6 +553,9 @@ function openCrop(file, n, name){
       if(n != null) cur = {n, name};
       if(!cur){ toast("어느 번호인지 알 수 없습니다 — 번호표에서 📷를 눌러주세요", 3600); return; }
       $("ovlTitle").textContent = `${cur.n}번 · ${cur.name}`;
+      // 번호표 이름을 미리 채워 둔다 — 쿠팡 화면의 정식 상품명으로 고쳐 주면 그게 자막에 나간다
+      $("mName").value = cur.name || "";
+      $("mPrice").value = "";
       openOvl(true); showStage(true); draw();
     };
     im.src = fr.result; };
@@ -623,6 +638,15 @@ function exportJpeg(){
 const apiPath = n => `https://api.github.com/repos/${REPO}/contents/` +
   `${DIR}/${n}.jpg`.split("/").map(encodeURIComponent).join("/");
 
+/* 파일명이 곧 데이터다 — capture_import가 「번호 상품명 @가격」으로 읽는다.
+   가격을 `@`로 명시하는 이유: 모델명에 숫자가 흔해서(800ml·10kg·MNDW-110)
+   끝자리 숫자를 가격으로 보면 반드시 틀린다. 슬래시만 못 쓴다(경로가 쪼개진다). */
+function shotName(n, name, price){
+  const clean = (name || "").replace(/[\/@]/g, " ").replace(/\s+/g, " ").trim().slice(0, 60);
+  const won = String(price || "").replace(/[^\d]/g, "");
+  return `${n}${clean ? " " + clean : ""}${won ? " @" + won : ""}`;
+}
+
 async function upload(n, b64, tok){
   const h = {Authorization:`Bearer ${tok}`, Accept:"application/vnd.github+json"};
   let sha;
@@ -641,10 +665,11 @@ $("send").onclick = async () => {
             return toast("먼저 깃허브 토큰을 저장해 주세요"); }
   const b = $("send"); b.disabled = true; b.textContent = "등록 중…";
   try{
-    await upload(cur.n, exportJpeg(), tok);
+    await upload(shotName(cur.n, $("mName").value, $("mPrice").value), exportJpeg(), tok);
     sent.add(cur.n); saveSent();
     closeOvl();
-    toast(`${cur.n}번 등록 완료 — 잠시 후 자동 반입됩니다`);
+    toast($("mPrice").value ? `${cur.n}번 등록 완료 (가격 포함)` 
+                            : `${cur.n}번 등록 — ⚠ 가격을 안 넣으면 카드에 값이 빕니다`, 3200);
     document.querySelectorAll(`.shot .cam[data-n="${cur.n}"]`)
       .forEach(el => el.closest(".shot").remove());
     const left = document.querySelectorAll(".shot").length;

@@ -134,7 +134,7 @@ def render_mode(entry: dict | None) -> str:
 # ------------------------------------------------------------------ 등록
 def put(cat: dict, *, name: str, brand: str = "", model: str = "", category: str = "",
         product_id: str = "", image: str = "", image_source: str = "", coupang_url: str = "",
-        price_band: str = "", updated: str = "") -> str:
+        price_band: str = "", price: int | None = None, updated: str = "") -> str:
     """카탈로그에 한 건 등록/갱신하고 slug를 돌려준다.
 
     게시용 링크는 **우리 링크만** 받는다. 남의 제휴 코드가 붙은 URL은 조용히 버리고
@@ -154,6 +154,10 @@ def put(cat: dict, *, name: str, brand: str = "", model: str = "", category: str
         "image_source": image_source or prev.get("image_source", ""),
         "coupang_url": coupang_url or prev.get("coupang_url", ""),
         "price_band": price_band or prev.get("price_band", ""),
+        # 가격은 **사람이 캡처할 때 넣는 값**이다. 쿠팡 오픈 API는 미발급이고 네이버 쇼핑
+        # 검색 API는 2026-07-31에 종료돼 자동 수집 경로가 전부 닫혔다. 그런데 카드의
+        # 「정확한 상품명 + 가격」과 대체재의 「더 싸다」가 둘 다 이 값에 걸려 있다.
+        "price": price if price is not None else prev.get("price"),
         "updated": updated or prev.get("updated", ""),
     }
     cat["products"][slug] = entry

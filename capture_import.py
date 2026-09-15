@@ -20,8 +20,28 @@ import catalog
 
 INBOX = catalog.INBOX_DIR
 NUMBERED = re.compile(r"^(\d{1,4})\s*번?\s*[-_.]?\s*(.*)$")
+# 가격 표시는 **`@`로 명시**한다. 모델명에 숫자가 흔해서(800ml·10kg·MNDW-110) 끝자리
+# 숫자를 가격으로 보면 반드시 틀린다. `3 락앤락 밀폐용기 @32900` 처럼 적는다.
+PRICE = re.compile(r"@\s*([\d,]{3,12})")
 EXTS = (".png", ".jpg", ".jpeg", ".webp")
 SOURCE = "capture"          # 사람이 직접 캡처한 실제 상품 사진
+
+
+def read_price(stem: str) -> tuple[str, int | None]:
+    """파일명에서 `@가격`을 떼어 낸다 → (가격 뺀 파일명, 가격).
+
+    가격이 없으면 그대로 돌려준다 — 예전 파일명(`3.png`)이 계속 동작해야 한다.
+    """
+    m = PRICE.search(stem)
+    if not m:
+        return stem, None
+    try:
+        won = int(m.group(1).replace(",", ""))
+    except ValueError:
+        return stem, None
+    if not (100 <= won <= 50_000_000):        # 오타 방어 — 자릿수가 터무니없으면 버린다
+        return PRICE.sub("", stem).strip(), None
+    return PRICE.sub("", stem).strip(), won
 
 
 def read_stem(stem: str, q: dict) -> tuple[str, int | None]:
@@ -64,13 +84,16 @@ def scan(inbox: str = INBOX) -> list[str]:
 def import_one(cat: dict, path: str, today: str = "", q: dict | None = None) -> str:
     """캡처 1장을 카탈로그에 등록하고 파일을 assets/products/로 옮긴다."""
     q = q if q is not None else catalog.queue_load()
-    stem, num = read_stem(os.path.splitext(os.path.basename(path))[0], q)
+    raw, price = read_price(os.path.splitext(os.path.basename(path))[0])
+    stem, num = read_stem(raw, q)
     if not stem:
         print(f"[capture] ⚠ 번호표에 없는 번호({num}) — 건너뜀: {os.path.basename(path)}")
         return ""
     brand, model = split_name(stem)
     slug = catalog.put(cat, name=stem, brand=brand, model=model, category=model or stem,
-                       image_source=SOURCE, updated=today)
+                       image_source=SOURCE, price=price, updated=today)
+    if price:
+        print(f"[capture] 💰 {stem} — {price:,}원")
     dest = os.path.join(catalog.IMAGE_DIR, slug + os.path.splitext(path)[1].lower())
     os.makedirs(catalog.IMAGE_DIR, exist_ok=True)
     shutil.move(path, dest)
