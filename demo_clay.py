@@ -64,33 +64,41 @@ def main() -> None:
     if not os.path.exists(photo):
         raise SystemExit(f"실사진이 없다: {photo} — 재현하지 않는다")
 
-    # (카드, 콕이 표정, 동작 시퀀스, 콕이 크기)
+    # (카드, 콕이 기본 그림, 동작 시퀀스, 크기, 바꿔 낄 짝 그림)
+    #
+    # 짝 그림 규칙: **같은 손에 같은 것을 든 그림끼리만 바꾼다.**
+    # 돋보기를 든 컷에 팔 내린 그림을 끼우면 0.1초간 돋보기가 사라져 깜빡인다.
+    #   idle  ↔ blink      (둘 다 맨손)
+    #   stamp ↔ stamp_up   (둘 다 도장을 들고 있다)
     beats = [
         # ① 낮춰 부르기 — 콕이는 무심하게 서 있다
         (card(photo, top="이번 주 4위", big="그냥\n플라스틱 가위", sub="3,900원"),
-         "idle", [("pop", 0.45), ("hold", 1.0)], 520),
+         "idle", [("pop", 0.45), ("blink", 1.0)], 520, ("blink",)),
         # ② 숫자 충돌 — 콕이가 먼저 놀란다
         (card(photo, big="검색 1.5배", sub="9월 둘째 주부터", accent=(47, 143, 104)),
-         "magnify", [("surprise", 0.75), ("hold", 0.7)], 620),
+         "magnify", [("surprise", 0.75), ("hold", 0.7)], 620, ()),
         # ③ 이유 — 갸웃하다가 깨닫는다
         (card(photo, top="왜?", big="레이저로\n선이 보인다", sub="손 떨려도 반듯하게"),
-         "think", [("tilt", 1.0), ("hold", 0.4)], 560),
+         "think", [("tilt", 1.0), ("hold", 0.4)], 560, ()),
         (card(photo, top="그래서", big="아직 다들\n모릅니다", sub="관련 영상 1개"),
-         "idea", [("idea", 0.8), ("hold", 0.5)], 560),
+         "idea", [("idea", 0.8), ("hold", 0.5)], 560, ()),
         # ④ 판정 — 후회의 언어로(238만짜리 프레임)
         (card(photo, tag="예감", big="안 사면\n후회할 것", sub="지금이 제일 쌉니다"),
-         "stamp", [("stamp", 0.9), ("hold", 0.7)], 660),
+         "stamp", [("stamp", 0.9), ("hold", 0.7)], 660, ("up",)),
     ]
 
     parts = []
-    for i, (bg, face, spec, size) in enumerate(beats):
+    for i, (bg, face, spec, size, extra) in enumerate(beats):
         sprite = visuals.koki(face, box=(size, size))
         if sprite is None:
             raise SystemExit(f"클레이 에셋 없음: {face}")
+        # 짝 그림은 없으면 조용히 빠진다 — 에셋 한 장 때문에 렌더가 죽으면 안 된다
+        bank = visuals.poses(*extra)
         p = f"{OUT}/beat{i}.mp4"
-        clay.animate(bg, sprite, KOKI_FOOT, spec, p)
+        clay.animate(bg, sprite, KOKI_FOOT, spec, p, poses=bank)
         parts.append(p)
-        print(f"[demo] {i+1}/{len(beats)} {face} {clay.seconds(spec)}초")
+        got = "+".join(bank) or "단일"
+        print(f"[demo] {i+1}/{len(beats)} {face}({got}) {clay.seconds(spec)}초")
 
     lst = f"{OUT}/list.txt"
     with open(lst, "w") as f:

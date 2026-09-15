@@ -30,6 +30,7 @@ FPS = 30
 STEP = 3            # 비디오 3프레임 = 클레이 1프레임 → 체감 10fps
 BOIL_PX = 2         # 프레임마다 흔들리는 폭(px)
 BOIL_DEG = 0.6      # 프레임마다 흔들리는 각도
+BLINK_EVERY = 9     # 클레이 프레임 9장(0.9초)마다 한 장 눈을 감는다
 
 
 # ---------------------------------------------------------------- 에셋 정리
@@ -138,7 +139,9 @@ def react(n: int, kind: str = "surprise") -> list[dict]:
             out.append({"scale": (1 - 0.06 * b, 1 + 0.08 * b), "offset": (0, -int(30 * b))})
         elif kind == "stamp":                       # 도장 — 들었다가 쾅, 착지에서 크게 눌림
             if t < 0.45:
-                out.append({"scale": (1.0, 1.0), "offset": (0, -int(38 * (t / 0.45)))})
+                # 팔을 든 별도 포즈가 있으면 쓴다 — 없으면 같은 그림이 위로 뜰 뿐이다
+                out.append({"scale": (1.0, 1.0), "pose": "up",
+                            "offset": (0, -int(38 * (t / 0.45)))})
             else:
                 k = (t - 0.45) / 0.55
                 sx, sy = squash(k, 0.22)
@@ -153,7 +156,23 @@ def hold(n: int) -> list[dict]:
     return [{"scale": (1.0, 1.0)} for _ in range(n)]
 
 
-MOVES = {"pop": pop_in, "surprise": lambda n: react(n, "surprise"),
+def blink(n: int) -> list[dict]:
+    """정지하되 이따금 눈을 감는다.
+
+    홀드가 1초를 넘어가면 인형이 살아 있는 게 아니라 **죽어 있는** 것으로 보인다.
+    깜빡임 한 장이면 그 인상이 뒤집힌다 — 클레이 애니가 눈만 따로 만드는 이유다.
+    깜빡임은 한 클레이 프레임(0.1초)만 지속한다. 길면 조는 것처럼 보인다.
+    """
+    out = []
+    for i in range(n):
+        k = {"scale": (1.0, 1.0)}
+        if i % BLINK_EVERY == BLINK_EVERY - 1:
+            k["pose"] = "blink"
+        out.append(k)
+    return out
+
+
+MOVES = {"pop": pop_in, "blink": blink, "surprise": lambda n: react(n, "surprise"),
          "tilt": lambda n: react(n, "tilt"), "idea": lambda n: react(n, "idea"),
          "stamp": lambda n: react(n, "stamp"), "hold": hold}
 
@@ -178,27 +197,45 @@ def _step_frames(spec: list[tuple[str, float]], fps: int = FPS,
 def animate(base: Image.Image, sprite: Image.Image, center: tuple[int, int],
             spec: list[tuple[str, float]], out: str, fps: int = FPS,
             step: int = STEP, seed: int = 7, work: str | None = None,
-            clean: bool = True) -> str:
+            clean: bool = True, poses: dict[str, Image.Image] | None = None) -> str:
     """고정 배경 위에서 sprite만 스톱모션으로 움직여 mp4를 만든다.
 
     base   : 카드(상품 실사진 등) — **절대 움직이지 않는다**
     sprite : 콕이 등 클레이 PNG(투명 배경)
     spec   : [("pop", 0.5), ("hold", 0.3), ("surprise", 0.7)] 처럼 동작·길이
+    poses  : {"blink": PNG, "up": PNG} — 특정 키프레임에서 바꿔 끼울 **다른 그림**
+
+    코드 변형(스쿼시·보일)만으로는 표정이 안 바뀐다. 그건 같은 인형을 흔드는 것이다.
+    중간 포즈를 한 장 더 넣으면 그때부터 **연기**가 된다 — 2프레임이면 충분하다.
     """
     work = work or f"{out}.frames"
     shutil.rmtree(work, ignore_errors=True)
     os.makedirs(work, exist_ok=True)
 
     base = base.convert("RGBA")
-    sprite = sprite.convert("RGBA")
-    if clean:
-        sprite = deghost(sprite)          # 발밑 흰 받침 제거 — 어두운 사진 위에서 얼룩으로 보인다
+
+    def prep(im: Image.Image) -> Image.Image:
+        im = im.convert("RGBA")
+        # 발밑 흰 받침 제거 — 어두운 사진 위에서 얼룩으로 보인다
+        return deghost(im) if clean else im
+
+    sprite = prep(sprite)
+    # 포즈마다 생성 크기가 다르다. **몸통 폭**을 기준으로 맞춘다 —
+    # 높이로 맞추면 팔을 든 포즈에서 몸이 쪼그라들어 다른 인형처럼 보인다.
+    bank = {}
+    for k, v in (poses or {}).items():
+        im = prep(v)
+        if im.width != sprite.width:
+            r = sprite.width / im.width
+            im = im.resize((sprite.width, max(int(im.height * r), 1)), Image.LANCZOS)
+        bank[k] = im
     frames = _step_frames(spec, fps, step)
 
     for i, f in enumerate(frames):
         # 보일도 클레이 프레임 단위로 — 매 비디오 프레임 흔들면 지직거린다
         (bx, by), brot = boil(i // step, seed)
-        s = _xform(sprite, f.get("scale", (1.0, 1.0)), rot=f.get("rot", 0.0) + brot)
+        src = bank.get(f.get("pose") or "", sprite)
+        s = _xform(src, f.get("scale", (1.0, 1.0)), rot=f.get("rot", 0.0) + brot)
         dx, dy = f.get("offset", (0, 0))
         # 발밑을 기준으로 붙인다 — 스쿼시가 바닥에서 눌려야 무게가 느껴진다
         x = center[0] - s.width // 2 + dx + bx

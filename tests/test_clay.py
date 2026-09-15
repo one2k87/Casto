@@ -1,4 +1,6 @@
 """클레이 스톱모션 문법 — 질감은 그림이 아니라 움직임의 규칙에서 나온다."""
+import itertools
+
 from PIL import Image
 
 import clay
@@ -68,7 +70,7 @@ def _sprite_with_ghost() -> Image.Image:
             px[x, y] = (214, 178, 130, 255)            # 몸통
     px[8, 8] = (251, 246, 236, 255)                    # 크림색 손 — 내부라 살아야 한다
     for y in range(16, 20):
-        for x in range(0, 20):
+        for x in range(20):
             px[x, y] = (240, 240, 240, 255)            # 바닥 받침 — 테두리에 닿아 있다
     return im
 
@@ -84,3 +86,41 @@ def test_바닥_받침만_지우고_캐릭터는_남긴다():
 def test_무채색만_지운다():
     """콕이는 크래프트(편차 84)·크림(편차 15)이고 받침은 R≈G≈B다."""
     assert clay.deghost(_sprite_with_ghost()).load()[2, 2][3] == 0     # 원래 투명
+
+
+# ── 중간 포즈(2프레임 연기) ────────────────────────────────────────────────
+def test_깜빡임은_가끔_한_프레임만():
+    """계속 감으면 조는 것이고, 안 감으면 죽은 인형이다."""
+    keys = clay.blink(30)
+    shut = [i for i, k in enumerate(keys) if k.get("pose") == "blink"]
+    assert shut, "한 번도 안 깜빡인다"
+    gaps = [b - a for a, b in itertools.pairwise(shut)]
+    assert all(g > 1 for g in gaps), "연속으로 감고 있다"
+    assert len(shut) < len(keys) / 4, "너무 자주 감는다"
+
+
+def test_도장은_들_때와_칠_때_그림이_다르다():
+    """같은 그림을 위로 띄우면 '든' 게 아니라 '뜬' 것이다."""
+    keys = clay.react(20, "stamp")
+    up = [k.get("pose") for k in keys[:8]]
+    hit = [k.get("pose") for k in keys[-6:]]
+    assert "up" in up
+    assert set(hit) == {None}
+
+
+def test_포즈가_없으면_기존_그림을_쓴다():
+    """에셋 한 장이 없다고 렌더가 죽으면 안 된다 — 품질만 떨어진다."""
+    for k in clay._step_frames([("blink", 0.6)]):
+        assert k["scale"] == (1.0, 1.0)      # 변형은 없고 그림만 갈린다
+
+
+def test_포즈는_몸통_폭에_맞춰_들어간다():
+    """생성 크기가 제각각이라 그대로 얹으면 프레임마다 다른 인형이 된다."""
+    base = Image.new("RGB", (60, 80), (10, 10, 10))
+    main = Image.new("RGBA", (40, 40), (214, 178, 130, 255))
+    tall = Image.new("RGBA", (80, 120), (214, 178, 130, 255))   # 2배로 생성된 포즈
+    import os as _os
+    out = clay.animate(base, main, (30, 70), [("blink", 0.4)],
+                       "/tmp/_pose_test.mp4", poses={"blink": tall}, clean=False)
+    assert _os.path.exists(out)
+    _os.remove(out)

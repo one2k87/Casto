@@ -38,13 +38,28 @@ ASSETS = {
     "stamp":   "koki_stamp.png",    # 도장 쾅 + 개봉 — 오늘의 콕 / 조건콕
     "nope":    "koki_nope.png",     # 도리도리(부정어 금지, 다음 기회 예고) — 다음콕
 }
+
+# 중간 포즈 — **없어도 발행은 된다.** 있으면 정지 그림이 2프레임 연기가 된다.
+# 클레이 애니메이션의 생명은 보간이 아니라 '다른 그림 한 장'이다. 코드 변형(스쿼시·보일)은
+# 같은 인형을 흔들 뿐이라 표정이 안 바뀐다. 그래서 핵심 동작마다 짝 그림을 한 장씩 둔다.
+# 이 표는 clay.animate(poses=...)에 그대로 넘어간다.
+EXTRA = {
+    "blink":    "koki_blink.png",     # idle 짝 — 눈 감은 한 장(홀드가 죽어 보이지 않게)
+    "up":       "koki_stamp_up.png",  # stamp 짝 — 도장을 머리 위로 든 순간
+    "surprise": "koki_surprise.png",  # 놀람 — 양손 들고 눈 크게
+    "point":    "koki_point.png",     # 가리킴 — 순위·상품 지목
+    "cheer":    "koki_cheer.png",     # 환호 — 1위 발표
+    "shrug":    "koki_shrug.png",     # 갸웃 — "왜 갑자기?"
+    "lean":     "koki_lean.png",      # 들여다봄 — 확대·관찰
+    "hide":     "koki_hide.png",      # 눈 가림 — 가격 공개 직전
+}
 CHAR_BOX = (int(W * 0.62), int(H * 0.30))   # 캐릭터 최대 크기
 CHAR_CENTER = (W // 2, int(H * 0.34))
 
 
 def path(name: str) -> str | None:
     """에셋 경로. 없으면 None → 호출부가 카드로 폴백한다."""
-    f = ASSETS.get(name)
+    f = ASSETS.get(name) or EXTRA.get(name)
     if not f:
         return None
     p = os.path.join(ASSET_DIR, f)
@@ -57,7 +72,18 @@ def ready() -> bool:
 
 
 def missing() -> list[str]:
+    """**필수** 에셋 중 없는 것. 중간 포즈(EXTRA)는 품질 옵션이라 여기 안 센다."""
     return [f"{k} ({v})" for k, v in ASSETS.items() if not path(k)]
+
+
+def poses(*names: str) -> dict:
+    """clay.animate(poses=...)에 넘길 짝 그림 묶음. 없는 것은 조용히 빠진다."""
+    out = {}
+    for n in names:
+        im = koki(n)
+        if im is not None:
+            out[n] = im
+    return out
 
 
 def koki(name: str, box: tuple[int, int] | None = None) -> Image.Image | None:
