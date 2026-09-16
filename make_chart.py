@@ -131,9 +131,20 @@ def scenes_for(ch: dict, script: dict) -> list[dict]:
     reasons = {i.get("key"): i for i in script.get("items", [])}
     scenes = [{"kind": "cover", "voice": script.get("hook_voice", "이거, 보신 적 있죠?")}]
     ordered = sorted(ch["entries"], key=lambda e: -e["rank"])     # 5 → 1
+    # 판정 문구는 세대를 **번갈아** 쓴다. 한 편이 "먼저 알면 앞서간다"로만 채워지면
+    # 기성세대는 매번 뒤처졌다는 말만 듣고 나간다(보고서 §3-5의 이중 타깃).
+    side = 0
     for i, e in enumerate(ordered):
         it = reasons.get(e["key"], {})
+        verdict = chart.tag_line(e, "young" if side % 2 == 0 else "old")
+        if verdict:
+            side += 1
+        elif e["rank"] == 1:
+            # 1위 칸은 이 편의 결승점이다. 태그가 없다고 비워두면 가장 중요한 칸이
+            # 가장 밋밋해진다. 순위 자체가 말해주는 것만 쓴다 — 지어내지 않는다.
+            verdict = "이번 주 가장 많이 보였습니다"
         scenes.append({"kind": "item", "entry": e, "idx": i, "reason": it.get("reason", ""),
+                       "verdict": verdict or "",
                        "voice": it.get("voice") or e.get("headline") or e["display"]})
     scenes.append({"kind": "outro", "voice": script.get("outro_voice", "다음 주 일요일에 또 옵니다.")})
     return scenes
@@ -152,7 +163,8 @@ def render(ch: dict, script: dict, c: dict) -> str:
             outro_card(ch, c, png)
         else:
             cards.card_rank(sc["entry"], c, png, idx=sc["idx"], total=n,
-                            reason=sc["reason"], week=ch["week"])
+                            reason=sc["reason"], week=ch["week"],
+                            verdict=sc.get("verdict", ""))
         mp3 = f"{OUT}/ch_{i}.mp3"
         asyncio.run(tts(sc["voice"], mp3, c["video"]["voice"]))
         d = dur(mp3) + 0.3
@@ -182,6 +194,9 @@ def build_caption(ch: dict, script: dict, c: dict, total: float) -> str:
         tag = (e.get("tag") or {}).get("label")
         head = f"{e['rank']}. {e['display']}" + (f" · {tag}" if tag else "")
         lines.append(head)
+        v = chart.tag_line(e, "old")          # 설명란은 검색으로 들어온 사람이 읽는다
+        if v:
+            lines.append(f"   {v}")
         if it.get("reason"):
             lines.append(f"   {it['reason']}")
         if e.get("price"):

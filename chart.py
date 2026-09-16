@@ -48,6 +48,21 @@ TAGS = {
                "old": "예전에 보셨던 그거예요"},
 }
 
+def tag_line(entry: dict, side: str = "young") -> str | None:
+    """상태 태그의 **한 줄 판정**. 태그가 없으면 None — 근거 없는 판정은 하지 않는다.
+
+    이 한 줄이 차트 편의 감정을 진다. 실측(2026-09-13/15)에서 차트 자체를 본문으로
+    쓴 영상은 828회·76회로 죽었고, 후회·판정의 언어가 붙은 것이 238만·172만으로
+    살았다. 다만 "안 사면 후회한다" 같은 말을 데이터 없이 얹지는 않는다 —
+    여기 문구는 전부 수요 추이와 공급량에서 나온 판정이다.
+
+    side: young=먼저 알면 앞서간다 / old=몰라도 아직 안 늦었다.
+    한 편 안에 둘 다 나와야 두 세대가 같이 남는다(보고서 §3-5).
+    """
+    t = TAGS.get(entry.get("status") or "")
+    return t.get(side) if t else None
+
+
 # 순위 산식의 가중치. 신뢰도 순이다(전략 5-4-9): 사람이 **찾는** 신호가 가장 무겁고,
 # 크리에이터가 **만드는** 신호는 서로를 보고 따라 만드는 자기참조 거품이라 가장 가볍다.
 WEIGHTS = {"demand": 3.0, "reach": 2.0, "channels": 2.0, "mentions": 1.0}
@@ -71,6 +86,42 @@ def signals(p: dict) -> dict:
         "spike": sp,
         "videos": len(vids),
     }
+
+
+def _fingerprint(v: dict) -> tuple:
+    """영상 한 편의 지문. 스냅샷에 영상 id가 없어서 (채널·조회수·나이)로 대신한다."""
+    return (v.get("channel_id"), v.get("views"), v.get("age_days"))
+
+
+DUP_OVERLAP = 0.8      # 근거 영상이 이만큼 겹치면 같은 이야기로 본다(자카드)
+
+
+def dedupe_videos(rows: list[dict], order: list[int]) -> list[int]:
+    """같은 영상 묶음이 두 상품에 붙어 있으면 **두 유행이 아니라 한 이야기**다.
+
+    2026-09-15 실측: `에그 크래커`와 `계란 흰자 분리기`가 **완전히 같은 영상 6편**을
+    근거로 1·2위에 나란히 섰다. 화면에서 연속 두 칸이 "6개 채널 · 합계 17,143회"를
+    똑같이 말했다 — 시청자에게는 숫자를 지어낸 것으로 보인다. 순위도 그만큼 부풀었다.
+
+    ⚠️ 겹침은 **자카드**로 재야 한다(교집합 ÷ 합집합). 포함률로 재면 영상 1편짜리
+    상품이 50편짜리 큰 묶음 안에 들어간다는 이유로 전부 지워진다 — 실제로 5개 중
+    4개가 사라졌다. 큰 묶음에 작은 게 들어 있는 것은 같은 이야기가 아니다.
+    영상을 위에서부터 선점시키는 방식도 같은 이유로 버렸다: 이 니치에서는
+    '생활꿀템' 모음 쇼츠 하나가 여러 상품에 동시에 걸리는 게 정상이다.
+
+    돌려주는 것은 남길 행의 인덱스(원래 순서 유지). 신호는 손대지 않는다 —
+    근거를 깎으면 화면의 숫자가 실제 수집치와 달라진다.
+    """
+    keep, claimed = [], []
+    for i in order:
+        vids = rows[i].get("videos") or []
+        if vids:
+            fps = {_fingerprint(v) for v in vids}
+            if any(len(fps & c) / len(fps | c) >= DUP_OVERLAP for c in claimed):
+                continue
+            claimed.append(fps)
+        keep.append(i)
+    return keep
 
 
 def _ranked(values: list[float | None]) -> list[float | None]:
@@ -231,6 +282,10 @@ def build(week: str | None = None, top: int = TOP_N, today: dt.date | None = Non
 
     scores = score_all(rows)
     order = sorted(range(len(rows)), key=lambda i: scores[i], reverse=True)
+    # 근거가 거의 그대로 겹치는 뒤엣것은 뺀다 — 같은 이야기를 두 칸에 쓰지 않는다
+    kept = dedupe_videos(rows, order)
+    merged = [rows[i]["name"] for i in order if i not in set(kept)]
+    order = kept
 
     cat = catalog.load()
     entries, seen, no_photo = [], set(), []
@@ -277,7 +332,9 @@ def build(week: str | None = None, top: int = TOP_N, today: dt.date | None = Non
     return {"week": week, "date": latest.get("date"), "source_days": len(snaps),
             "prev_week": (prev or {}).get("week"), "entries": entries, "out": dropped,
             # 순위는 높은데 사진이 없어 못 올린 것들 — 다음 캡처 우선순위가 된다
-            "needs_photo": no_photo[:8]}
+            "needs_photo": no_photo[:8],
+            # 같은 영상 묶음이라 한 칸으로 합친 것들 — 왜 빠졌는지 남긴다
+            "merged": merged}
 
 
 def save(chart: dict) -> str:

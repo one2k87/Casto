@@ -56,11 +56,13 @@ def delta_text(delta: dict | None) -> str:
 
 
 def card_rank(entry: dict, c: dict, path: str, idx: int = 0, total: int = 0,
-              reason: str = "", week: str = "") -> str:
+              reason: str = "", week: str = "", verdict: str = "") -> str:
     """차트 한 칸. 실사진 전면 + 순위 + 상태 태그 + 상품명 + 가격 + 유행 크기 + 이유.
 
     entry: chart.build()의 entries 한 개(rank·display·image·price·tag·headline·delta)
     reason: 대본이 만든 **한 줄 이유**(왜 갑자기 보이는가). 없으면 headline이 그 자리를 쓴다.
+    verdict: 상태 태그의 한 줄 판정(chart.tag_line). 이 한 줄이 편의 감정을 진다 —
+             정보만 있는 차트는 실측에서 828회로 죽었다. 없으면 그리지 않는다.
     """
     photo = entry.get("image")
     if not photo or not os.path.exists(photo):
@@ -76,8 +78,11 @@ def card_rank(entry: dict, c: dict, path: str, idx: int = 0, total: int = 0,
     d.ellipse([70, 210, 226, 366], fill=(255, 255, 255))
     d.text((148, 288), str(rank), font=font(92), anchor="mm", fill=SHADOW)
     if week:
+        # 1위 칸은 이 편의 결승점이다 — 주차 대신 그렇게 말해준다
+        top = "이번 주 1위" if rank == 1 else week
         d.text((252, 250), "콕픽 차트", font=font(38), anchor="lm", fill=INK)
-        d.text((252, 316), week, font=font(38, bold=False), anchor="lm", fill=(220, 226, 220))
+        d.text((252, 316), top, font=font(38, bold=(rank == 1)),
+               anchor="lm", fill=INK if rank == 1 else (220, 226, 220))
 
     # ── 변동 — 지난주 대비. 이게 있어야 매주 볼 이유가 생긴다(빌보드 논리)
     dt_ = entry.get("delta") or {}
@@ -95,20 +100,29 @@ def card_rank(entry: dict, c: dict, path: str, idx: int = 0, total: int = 0,
         _chip(d, 70, 410, tag["label"], TAG_COLOR.get(entry.get("status"), (120, 120, 130)))
 
     # ── 상품명 — 카탈로그의 정식 상품명. 발굴 키워드를 띄우면 검색이 안 된다
-    punch_text(d, entry.get("display") or entry.get("name", ""), 1120, size=104,
+    punch_text(d, entry.get("display") or entry.get("name", ""), 1080, size=104,
                accent=TAG_COLOR.get(entry.get("status")))
+
+    y = 1270
+    # ── 판정 한 줄 — 태그가 있을 때만. 근거 없는 판정은 붙이지 않는다
+    if verdict:
+        d.text((W // 2, y), verdict, font=font(64), anchor="mm",
+               fill=TAG_COLOR.get(entry.get("status"), INK),
+               stroke_width=9, stroke_fill=SHADOW)
+        y += 110
 
     # ── 한 줄 이유 → 없으면 유행 크기가 그 자리를 쓴다
     line = reason or entry.get("headline") or ""
     if line:
-        for j, ln in enumerate(wrap(d, line, font(54), W - 200)[:2]):
-            d.text((W // 2, 1330 + j * 68), ln, font=font(54), fill=INK, anchor="mm",
+        for j, ln in enumerate(wrap(d, line, font(50), W - 200)[:2]):
+            d.text((W // 2, y + j * 62), ln, font=font(50), fill=INK, anchor="mm",
                    stroke_width=7, stroke_fill=SHADOW)
+        y += 62 * min(len(wrap(d, line, font(50), W - 200)), 2) + 26
 
     # ── 가격 — **없으면 그 줄을 비운다.** 화면의 글자는 전부 사실이어야 한다
     price = entry.get("price")
     if price:
-        d.text((W // 2, 1520), f"{int(price):,}원", font=font(78), anchor="mm",
+        d.text((W // 2, max(y, 1500)), f"{int(price):,}원", font=font(78), anchor="mm",
                fill=INK, stroke_width=9, stroke_fill=SHADOW)
 
     # ── 유행 크기 — 숫자로 말한다. '요즘 난리난' 같은 추상어는 이 니치에서 죽는다

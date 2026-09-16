@@ -94,3 +94,44 @@ def test_유행_크기는_숫자로_말한다():
 
 def test_아무_신호도_없으면_문구를_만들지_않는다():
     assert C.headline(_p("k", "x")) is None
+
+
+# ── 같은 근거로 두 칸 ──────────────────────────────────────────────────────
+def _v(ch, views, age=5):
+    return {"channel_id": ch, "views": views, "age_days": age}
+
+
+def test_같은_영상_묶음이면_한_칸만_준다():
+    """2026-09-15 실측: 에그 크래커와 계란 흰자 분리기가 **완전히 같은 영상 6편**으로
+    1·2위에 나란히 섰다. 화면에서 연속 두 칸이 같은 숫자를 말하면 지어낸 것으로 보인다."""
+    vids = [_v(f"c{i}", 1000 + i) for i in range(6)]
+    rows = [{"key": "a", "name": "A", "videos": list(vids)},
+            {"key": "b", "name": "B", "videos": list(reversed(vids))},
+            {"key": "c", "name": "C", "videos": [_v("z", 9999)]}]
+    kept = C.dedupe_videos(rows, [0, 1, 2])
+    assert kept == [0, 2], "같은 근거인 B가 남았거나 무관한 C가 잘못 빠졌다"
+
+
+def test_큰_묶음_안에_들어간다고_지우지_않는다():
+    """포함률로 재면 영상 1편짜리가 50편짜리 안에 있다는 이유로 전부 지워진다.
+    실제로 첫 구현에서 5칸 중 4칸이 사라졌다 — 자카드로 재야 한다."""
+    big = [_v(f"c{i}", 100 + i) for i in range(50)]
+    rows = [{"key": "big", "name": "큰묶음", "videos": big},
+            {"key": "one", "name": "한편", "videos": [big[7]]}]
+    assert C.dedupe_videos(rows, [0, 1]) == [0, 1]
+
+
+def test_영상이_없는_행은_중복으로_안_뺀다():
+    """근거가 없는 것과 근거가 겹치는 것은 다르다. 없으면 그냥 통과시킨다."""
+    rows = [{"key": "a", "name": "A", "videos": [_v("c", 10)]},
+            {"key": "b", "name": "B", "videos": []},
+            {"key": "c", "name": "C"}]
+    assert C.dedupe_videos(rows, [0, 1, 2]) == [0, 1, 2]
+
+
+def test_뺀_이유를_남긴다():
+    """조용히 사라지면 '왜 이번 주엔 없지?'를 사람이 매번 조사하게 된다."""
+    vids = [_v(f"c{i}", 1000 + i) for i in range(5)]
+    rows = [{"key": "a", "name": "A", "videos": list(vids)},
+            {"key": "b", "name": "B", "videos": list(vids)}]
+    assert C.dedupe_videos(rows, [0, 1]) == [0]

@@ -32,43 +32,6 @@
   },
   {
    "rank": 2,
-   "key": "egg_white_separator",
-   "name": "계란 흰자 분리기",
-   "display": "계란 흰자 분리기",
-   "image": "assets/products/계란-흰자-분리기.jpg",
-   "price": null,
-   "coupang_url": "",
-   "score": 58.5,
-   "status": "now",
-   "tag": {
-    "emoji": "✅",
-    "label": "유행중",
-    "young": "지금이 정점입니다",
-    "old": "아직 안 늦었어요"
-   },
-   "headline": "6개 채널 · 합계 17,143회",
-   "signals": {
-    "demand": 1.3,
-    "reach": 17143,
-    "channels": 6,
-    "mentions": 1,
-    "videos": 6
-   },
-   "spike": {
-    "ratio": 1.3,
-    "trend": "flat",
-    "peak": 100.0,
-    "base": 26.7,
-    "peak_days_ago": 44
-   },
-   "delta": {
-    "move": "new",
-    "text": "NEW",
-    "prev_rank": null
-   }
-  },
-  {
-   "rank": 3,
    "key": "늘어나는_밀폐용기",
    "name": "늘어나는 밀폐용기",
    "display": "늘어나는 밀폐용기",
@@ -105,7 +68,7 @@
    }
   },
   {
-   "rank": 4,
+   "rank": 3,
    "key": "laser_guide_scissors",
    "name": "레이저 가이드 가위",
    "display": "레이저가이드가위",
@@ -120,7 +83,7 @@
     "young": "아직 다들 모릅니다",
     "old": "지금 알면 빠른 편이에요"
    },
-   "headline": "9월 둘째 주부터 검색 1.5배",
+   "headline": "9월 셋째 주부터 검색 1.5배",
    "signals": {
     "demand": 1.5,
     "reach": 2683,
@@ -143,7 +106,7 @@
    }
   },
   {
-   "rank": 5,
+   "rank": 4,
    "key": "retro_handset",
    "name": "레트로 수화기",
    "display": "레트로 수화기",
@@ -173,17 +136,59 @@
     "text": "NEW",
     "prev_rank": null
    }
+  },
+  {
+   "rank": 5,
+   "key": "hand_pinch_guard",
+   "name": "손끼임 방지가드",
+   "display": "손끼임 방지가드",
+   "image": "assets/products/손끼임-방지가드.jpg",
+   "price": null,
+   "coupang_url": "",
+   "score": 30.8,
+   "status": "fading",
+   "tag": {
+    "emoji": "🍂",
+    "label": "끝물",
+    "young": "이제 새로 살 필요는 없어요",
+    "old": "이건 몰라도 됩니다"
+   },
+   "headline": "4개 채널 · 합계 5,334회",
+   "signals": {
+    "demand": 0.7,
+    "reach": 5334,
+    "channels": 4,
+    "mentions": 6,
+    "videos": 4
+   },
+   "spike": {
+    "ratio": 0.7,
+    "trend": "down",
+    "peak": 100.0,
+    "base": 42.7,
+    "peak_days_ago": 58
+   },
+   "delta": {
+    "move": "new",
+    "text": "NEW",
+    "prev_rank": null
+   }
   }
  ],
  "out": [],
  "needs_photo": [
   "주방 슬라이딩 선반",
   "자동 과일껍질제거기",
-  "스텐 선반",
   "넘침방지 냄비뚜껑",
   "자동 키친타올 디스펜서",
   "자동 과일깎이",
   "코에서 계란 흰자 주방용품",
   "접이식 플러스 도마"
+ ],
+ "merged": [
+  "스텐 선반",
+  "계란 흰자 분리기",
+  "레이저 가이드 가위",
+  "레트로 수화기"
  ]
 }
