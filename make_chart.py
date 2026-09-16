@@ -20,12 +20,13 @@ from __future__ import annotations
 import asyncio
 import json
 import os
+import re
 import subprocess
 
 import cards
 import chart
 from common import cfg, llm_json, telegram_msg, telegram_video
-from make_short import H, W, dur, font, tts, wrap
+from make_short import H, W, dur, font, tts
 
 OUT = "out"
 
@@ -104,29 +105,44 @@ def cover_card(ch: dict, script: dict, c: dict, path: str) -> str:
 
 
 def outro_card(ch: dict, c: dict, path: str) -> str:
-    """마무리 — 다음 주 약속. 순위 채널이 구조적으로 못 하는 것이 **예고**다."""
+    """마무리 — **표지와 같은 구도**로 끝낸다.
+
+    쇼츠는 끝나면 자동으로 다시 시작한다. 마지막 프레임이 첫 프레임과 같으면
+    이음매가 안 보이고, 그대로 한 번 더 본다. 재생률이 10%만 붙어도 배포가 붙는다
+    (2026-09-16 벤치마크). 그래서 배경·어둡기·스크림을 표지와 **글자 하나까지 맞춘다**.
+
+    질문 하나만 남기는 것도 의도다. "심사받고 싶은 제품을 댓글로"는 요구가 커서
+    답이 안 나온다 — 좋아요 0/125가 그 결과였다. 한 단어로 답할 수 있어야 한다.
+    """
     from PIL import Image, ImageDraw
 
-    from make_short import fill_frame, scrim
+    from make_short import fill_frame, punch_text, scrim
     img = Image.new("RGB", (W, H))
-    fill_frame(img, ch["entries"][0]["image"], dim=0.55)
-    scrim(img, top_h=800, bot_h=800, strength=200)
+    fill_frame(img, ch["entries"][0]["image"], dim=0.3)      # 표지와 같은 값
+    scrim(img, top_h=700, bot_h=900, strength=195)           # 표지와 같은 값
     d = ImageDraw.Draw(img)
-    for j, ln in enumerate(["다음 주 일요일", "같은 시간에"]):
-        d.text((W // 2, 780 + j * 130), ln, font=font(88), anchor="mm",
-               fill=(255, 255, 255), stroke_width=9, stroke_fill=(20, 30, 26))
-    for j, ln in enumerate(wrap(d, "심사받고 싶은 제품은 댓글로 신청받습니다", font(52), W - 220)[:2]):
-        d.text((W // 2, 1180 + j * 70), ln, font=font(52), anchor="mm",
-               fill=(226, 232, 226), stroke_width=6, stroke_fill=(20, 30, 26))
+    d.text((W // 2, 300), "콕픽 차트", font=font(56), anchor="mm", fill=(235, 240, 236))
+    d.text((W // 2, 380), "다음 주 일요일", font=font(42, bold=False), anchor="mm",
+           fill=(205, 212, 205))
+    punch_text(d, "써보신 거 있나요?", 1020, size=118, accent=(47, 143, 104))
+    d.text((W // 2, 1300), "댓글에 한 줄", font=font(70), anchor="mm",
+           fill=(255, 255, 255), stroke_width=9, stroke_fill=(20, 30, 26))
+    d.text((W // 2, 1420), "같은 시간에 또 옵니다", font=font(50, bold=False), anchor="mm",
+           fill=(226, 232, 226), stroke_width=6, stroke_fill=(20, 30, 26))
     img.save(path)
     return path
 
 
 # ------------------------------------------------------------------ 조립
 def scenes_for(ch: dict, script: dict) -> list[dict]:
-    """표지 → **5위부터 1위까지** → 마무리.
+    """표지 → **5위부터 1위까지**(한 칸당 2컷) → 마무리.
 
     1위를 먼저 주면 그 뒤를 볼 이유가 사라진다. 카운트다운은 완주 장치다.
+
+    한 칸을 두 컷으로 쪼갠다 — ①순위+상품명 ②판정+이유+가격.
+    잘 되는 쇼츠는 **2~4초에 한 번** 화면이 바뀐다(2026-09-16 벤치마크). 한 칸을
+    5초 동안 그대로 두면 그 정지 자체가 이탈 지점이다. 내레이션은 두 컷에 걸쳐
+    그대로 흐르므로 길이는 늘지 않고 **컷 수만 두 배**가 된다.
     """
     reasons = {i.get("key"): i for i in script.get("items", [])}
     scenes = [{"kind": "cover", "voice": script.get("hook_voice", "이거, 보신 적 있죠?")}]
@@ -143,9 +159,16 @@ def scenes_for(ch: dict, script: dict) -> list[dict]:
             # 1위 칸은 이 편의 결승점이다. 태그가 없다고 비워두면 가장 중요한 칸이
             # 가장 밋밋해진다. 순위 자체가 말해주는 것만 쓴다 — 지어내지 않는다.
             verdict = "이번 주 가장 많이 보였습니다"
-        scenes.append({"kind": "item", "entry": e, "idx": i, "reason": it.get("reason", ""),
-                       "verdict": verdict or "",
-                       "voice": it.get("voice") or e.get("headline") or e["display"]})
+        voice = it.get("voice") or e.get("headline") or e["display"]
+        # 내레이션을 두 컷에 나눠 싣는다. 문장이 하나뿐이면 앞 컷은 상품명만 읽는다.
+        parts = [x.strip() for x in re.split(r"(?<=[.!?])\s+", voice) if x.strip()]
+        first = parts[0] if parts else e["display"]
+        rest = " ".join(parts[1:]) if len(parts) > 1 else ""
+        scenes.append({"kind": "item", "entry": e, "idx": i, "beat": "name",
+                       "reason": "", "verdict": "", "voice": first})
+        scenes.append({"kind": "item", "entry": e, "idx": i, "beat": "why",
+                       "reason": it.get("reason", ""), "verdict": verdict or "",
+                       "voice": rest or (it.get("reason") or e.get("headline") or "")})
     scenes.append({"kind": "outro", "voice": script.get("outro_voice", "다음 주 일요일에 또 옵니다.")})
     return scenes
 
@@ -153,7 +176,7 @@ def scenes_for(ch: dict, script: dict) -> list[dict]:
 def render(ch: dict, script: dict, c: dict) -> str:
     os.makedirs(OUT, exist_ok=True)
     scenes = scenes_for(ch, script)
-    n = sum(1 for s in scenes if s["kind"] == "item")
+    n = len(ch["entries"])          # 진행 점은 **상품 수**다(컷 수가 아니다)
     segs = []
     for i, sc in enumerate(scenes):
         png = f"{OUT}/ch_{i}.png"
@@ -164,7 +187,7 @@ def render(ch: dict, script: dict, c: dict) -> str:
         else:
             cards.card_rank(sc["entry"], c, png, idx=sc["idx"], total=n,
                             reason=sc["reason"], week=ch["week"],
-                            verdict=sc.get("verdict", ""))
+                            verdict=sc.get("verdict", ""), beat=sc.get("beat", "full"))
         mp3 = f"{OUT}/ch_{i}.mp3"
         asyncio.run(tts(sc["voice"], mp3, c["video"]["voice"]))
         d = dur(mp3) + 0.3

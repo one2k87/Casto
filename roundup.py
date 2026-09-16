@@ -20,15 +20,24 @@ import evidence
 import learn
 from common import llm_json
 
-VOICE_MAX = 42        # 한 씬 내레이션 상한(자) — 8자/초 × 약 5초
+# 2026-09-16 실측으로 전면 재단했다. Studio 기준 시청률 17.6% / 19.2%였고
+# 업계는 50% 미만을 **구조적 결함**으로 본다. 원인의 대부분은 길이 하나였다:
+#     13초 ÷ 74초 = 17.6%   →   13초 ÷ 24초 = 54%
+# 절대 시청시간을 1초도 못 늘려도 길이만 줄이면 시청률이 3배가 된다.
+# 벤치마크는 15~30초에서 80%가 나오고 45초를 넘으면 급락한다고 말한다.
+VOICE_MAX = 24        # 한 씬 내레이션 상한(자) — 8자/초 × 약 3초
+VERDICT_MAX = 36      # 판정 씬만 예외. 이 편의 결승점이라 이유 한 줄을 지킨다
 N_ITEMS = 3          # 4개는 조회수가 떨어진다(9.2천 vs 3개 46만~473만, 2026-09-10 실측)
 NUM = ["①", "②", "③"]
 CPS = 8              # 한국어 TTS 체감 속도(자/초) — 길이 검산의 기준
 SCENE_PAD = 0.4      # 씬 경계 여백(초)
-SHORTS_MAX_SEC = 60  # 이 선을 넘으면 쇼츠가 아니다(유튜브 규격) — 검산의 하드 상한
+# 유튜브 규격상 쇼츠 상한은 60초지만, 그건 **발행 가능한 한계**이지 볼 만한 길이가 아니다.
+# 우리 하드 상한은 30초다 — 이 선을 넘으면 시청률이 구조적으로 무너진다.
+SHORTS_MAX_SEC = 30  # 검산의 하드 상한(초)
+TARGET_SEC = 24      # 겨냥하는 길이
 
 
-def fit_voice(base, extra):
+def fit_voice(base, extra, cap: int | None = None):
     """상한에 들어갈 때만 덧붙인다 — 자세함이 길이가 되는 것을 막는 단일 관문.
 
     2026-09-10에 detail을 그대로 읽혀 88초가 나갔다. 그때 고친 건 comic 씬 하나였고
@@ -39,7 +48,37 @@ def fit_voice(base, extra):
     if not extra:
         return base
     joined = f"{base} {extra}".strip()
-    return joined if len(joined) <= VOICE_MAX else base
+    return joined if len(joined) <= (cap or VOICE_MAX) else base
+
+
+# 제목에서 **우리 사정**을 말하는 표현들. 2026-09-16 실측:
+# 이 표현으로 시작한 우리 제목 3편의 편당 조회수가 62.5회였고, 같은 니치에서
+# 이긴 제목들은 전부 시청자의 문제·결과·가격을 말했다(편당 143,400회).
+BANNED_TITLE = ("요즘 난리난", "요즘 유행", "다시 유행한다는", "자꾸 보이더라",
+                "어쩐지", "요즘 이거", "난리난")
+
+
+def clean_title(title: str, items: list[str], win: int = 0,
+                recent: list[str] | None = None, use: str = "") -> str:
+    """제목 규칙 3가지를 **코드로** 건다. 프롬프트만으로는 계속 새어 나온다.
+
+    ① 우리 사정("요즘 유행")을 지운다  ② 최근 편과 같은 머리로 시작하지 않는다
+    ③ 둘 다 걸리면 승자 상품 + 쓸모로 다시 만든다.
+
+    프롬프트에도 같은 규칙이 있지만, 그쪽은 **부탁**이고 여기는 **관문**이다.
+    3편 중 2편이 같은 템플릿으로 나간 뒤에 배운 것이다.
+    """
+    t = (title or "").strip()
+    for bad in BANNED_TITLE:
+        t = t.replace(bad, "").strip(" ,·-")
+    t = " ".join(t.split())
+    head = t[:10]
+    dup = any(head and (r or "")[:10] == head for r in (recent or []))
+    if len(t) < 8 or dup:
+        name = items[win] if 0 <= win < len(items) else (items[0] if items else "")
+        u = (use or "").strip().rstrip(".")
+        t = f"{u}, {name}" if u else name
+    return t[:80]
 
 
 def est_seconds(scenes):
@@ -87,20 +126,25 @@ def build_script(items, trends, c, post=None, retries=2):
 {co_line}
 각 상품이 **왜 지금 유행인지**를 원인→결과로 설명하세요. 아래 JSON만 출력합니다.
 
-{{"items": [
-  {{"cause": "유행의 계기 한 줄(화면 자막, 24자 이내). 바깥에서 온 구체적 사건이어야 함",
-    "cause_detail": "그 계기를 한 문장 더(내레이션용, **20자 이내**)",
+{{"hook": "**첫 3초 자막**(12자 이내). 시청자가 이 영상에서 얻는 **결과**를 먼저 말한다.
+         채널 사정('이번 주 유행')이 아니라 시청자의 문제·결과·가격이어야 한다.
+         ✅ '라면 안 넘치게' '3,900원으로 해결' '칼 없이 사과 껍질'
+         ❌ '이번 주 유행템 3개' '갑자기 많이 보이는 것'",
+ "hook_voice": "훅 내레이션 1문장(16자 이내, 구어체)",
+ "items": [
+  {{"cause": "유행의 계기 한 줄(화면 자막, 16자 이내). 바깥에서 온 구체적 사건이어야 함",
+    "cause_detail": "그 계기를 한 문장 더(내레이션용, **12자 이내**)",
     "cause_scene": "계기 장면을 영어로 묘사(그림 지시문). 상품 자체는 절대 묘사 금지 — 상황·사람·다른 유행·계절·매대만",
-    "effect": "그래서 생긴 결과 한 줄(화면 자막, 24자 이내)",
-    "effect_detail": "결과를 한 문장 더(내레이션용, **20자 이내**). 관측한 숫자가 있으면 여기 넣을 것",
+    "effect": "그래서 생긴 결과 한 줄(화면 자막, 16자 이내)",
+    "effect_detail": "결과를 한 문장 더(내레이션용, **12자 이내**). 관측한 숫자가 있으면 여기 넣을 것",
     "effect_scene": "결과 장면을 영어로 묘사(그림 지시문). 역시 상품 자체 묘사 금지",
-    "use": "어떻게 쓰는 물건인지 한 줄(14자 이내)",
+    "use": "어떻게 쓰는 물건인지 한 줄(10자 이내)",
     "confidence": "high" | "low"}},
   ... 정확히 {len(items)}개, 위 번호 순서대로
  ],
  "winner": 0,
  "verdict": "buy" | "cond" | "later",
- "verdict_reason": "왜 이걸 골랐는지 한 줄(15자 이내)",
+ "verdict_reason": "왜 이걸 골랐는지 한 줄(12자 이내)",
  "condition": "조건콕일 때만 '자취생이면'처럼 조건(8자 이내), 아니면 빈 문자열",
  "title": "쇼츠 제목(35자 이내)",
  "hashtags": ["#태그", ... 6개]}}
@@ -121,9 +165,15 @@ def build_script(items, trends, c, post=None, retries=2):
 - **cause_scene / effect_scene에 상품 이름을 쓰지 마세요.** 상품은 실제 사진으로 나갑니다.
   그림은 '왜'를 설명하는 상황만 그립니다. (상품명이 섞이면 코드가 그 컷을 버립니다)
 - winner는 0-based 인덱스. **셋 중 하나만** 도장을 받습니다.
-- 제목 규칙(2026-09-10 실측): 숫자 + 후회/발견 프레임 + 사회적 증거로 만든다.
-  ✅ "어쩐지 자꾸 보이더라, 요즘 난리난 주방템 3가지"
+- **제목 규칙 3가지**(2026-09-16 실측 교체). 같은 니치에서 이긴 제목을 그대로 뜯어본 결과다.
+  ① 상품이 해결하는 **문제나 결과**를 먼저 쓴다  ② **숫자나 가격**을 하나 넣는다
+  ③ "요즘 유행/난리난/자꾸 보이더라"는 **쓰지 않는다** — 그건 우리 사정이지 시청자가 얻는 게 아니다.
+  ✅ "좁은 주방이 2배 넓어지는 틈새 선반"     (편당 143,400회)
+  ✅ "9천원대로 이게 된다고? 넘침 걱정 없는 냄비뚜껑"
+  ✅ "라면 넘치는 거 이제 끝입니다"
+  ❌ "요즘 이거 다시 유행한다는 주방템 3가지"  (우리가 쓴 제목 — 62.5회)
   ❌ 브랜드명 나열 — 조회수가 자릿수로 떨어진다.
+- **모든 문장을 짧게.** 이 편은 24초에 끝난다. 한 씬 내레이션이 24자를 넘으면 코드가 잘라낸다.
 - **부정어 금지** — '별로다/사지 마라' 대신 '아직'의 뉘앙스.
 - **구어체로 쓰세요.** `~습니다/~됩니다/~입니다` 금지. 말하듯이 짧게 끊습니다.
   문어체는 TTS가 읽을 때 가장 크게 티가 나는 지점입니다.
@@ -163,10 +213,20 @@ def build_scenes(s, items, c, proofs=None):
     rows = s.get("items", [])
     n = len(items)
 
+    # ── 씬 구성 (2026-09-16 재단: 13씬 73초 → 7씬 24초) ─────────────────
+    # 잘라낸 것은 **상품마다 붙던 인과 2컷**이다. 3개 상품 × (원인+결과) = 6씬 27초였다.
+    # 인과는 이 채널의 정체성이라 없앨 수 없지만, 6번 반복할 필요도 없다.
+    # **승자 하나에만** 남긴다 — 어차피 도장을 받는 건 하나고, 시청자가 끝까지 남는
+    # 이유도 그것이다. 나머지 둘의 인과는 설명란으로 내린다(§build_caption).
+    hook_cap = (s.get("hook") or "").strip()
+    hook_voice = (s.get("hook_voice") or "").strip()
     scenes = [
-        {"kind": "hook", "caption": f"이번 주\n갑자기 많이 보이는 것 {n}",
-         "voice": f"이번 주 갑자기 많이 보이는 것 {n}개."},
-        {"kind": "ask", "caption": "왜 갑자기?", "voice": "왜 갑자기 보일까요?"},
+        # 0초는 **결과**다. 채널 사정("이번 주 유행")이 아니라 시청자가 얻는 것.
+        # 이탈의 50~60%가 첫 3초에 일어난다 — 여기서 채널 소개를 하면 그대로 넘어간다.
+        {"kind": "hook", "idx": (s.get("winner") if isinstance(s.get("winner"), int)
+                                 and 0 <= s.get("winner") < n else 0),
+         "caption": hook_cap or f"이번 주 쓸 만한 것 {n}",
+         "voice": (hook_voice or hook_cap or f"쓸 만한 것 {n}개.")[:VOICE_MAX]},
     ]
     # **역순으로 공개한다: ③ → ② → ①.**
     # `Best3` 관례가 역순인 데는 이유가 있다 — 1번이 마지막이면 **1번을 보려고 남는다.**
@@ -179,28 +239,18 @@ def build_scenes(s, items, c, proofs=None):
         scenes.append({"kind": "item", "idx": i, "name": name, "use": use,
                        "caption": f"{NUM[i]} {name}",
                        "voice": fit_voice(f"{name}.", f"{use}." if use else "")})
-        # 증거 화면은 **별도 씬으로 넣지 않는다.**
-        # 처음엔 상품마다 증거 씬을 하나씩 끼웠더니 16씬 41.6초가 됐다(목표 35초).
-        # 그런데 증거가 답하는 질문은 「왜?」 컷과 **같다** — 그래서 씬을 늘리는 대신
-        # 「왜?」 컷의 **배경**을 만화에서 그래프로 바꾼다. 길이는 그대로, 질감만 바뀐다.
-        pf = (proofs or {}).get(i)
-        for kind in ("cause", "effect"):
-            line = (r.get(kind) or "").strip()
-            if not line:
-                continue
-            # 화면 자막은 짧게(한눈에), 내레이션은 한 문장 더 — 자세함은 귀로 들어간다.
-            # 자막까지 길게 하면 3초 안에 못 읽고 이탈한다.
-            # 자세함에는 값이 있다 — **길이**다. detail을 그대로 읽혔더니 88초가 나왔다
-            # (목표 30초, 2026-09-10 실측). 한국어 TTS는 대략 8자/초라
-            # 한 씬 내레이션이 40자를 넘으면 5초를 먹는다. 그래서 상한을 둔다.
-            detail = (r.get(f"{kind}_detail") or "").strip()
-            voice = fit_voice(f"{line}.", detail) if detail else line  # 넘치면 자막 줄만 읽는다
-            scenes.append({"kind": "comic", "idx": i, "phase": kind,
-                           "badge": "왜?" if kind == "cause" else "그래서",
-                           "caption": line, "voice": voice,
-                           # 원인 컷에 증거가 있으면 그래프를 배경으로 쓴다
-                           "proof": (pf or {}).get("kind") if kind == "cause" else None,
-                           "low": (r.get("confidence") == "low")})
+
+    # 인과는 승자 한 번만. 배경은 증거 그래프가 있으면 그것을 쓴다.
+    win0 = s.get("winner", 0)
+    win0 = win0 if isinstance(win0, int) and 0 <= win0 < n else 0
+    rw = rows[win0] if win0 < len(rows) else {}
+    cause = (rw.get("cause") or "").strip()
+    if cause:
+        scenes.append({"kind": "comic", "idx": win0, "phase": "cause", "badge": "왜?",
+                       "caption": cause,
+                       "voice": fit_voice(f"{cause}.", (rw.get("cause_detail") or "").strip()),
+                       "proof": ((proofs or {}).get(win0) or {}).get("kind"),
+                       "low": (rw.get("confidence") == "low")})
 
     win = s.get("winner", 0)
     win = win if isinstance(win, int) and 0 <= win < n else 0
@@ -215,16 +265,18 @@ def build_scenes(s, items, c, proofs=None):
     head = (f"오늘의 콕은 {items[win]}." if v["key"] == "오늘의 콕"
             else f"{voice} {items[win]}.")
     cta = "링크는 설명란에."
-    body = fit_voice(head, reason)
+    body = fit_voice(head, reason, VERDICT_MAX)
     scenes.append({"kind": "verdict", "verdict": v, "idx": win, "name": items[win],
                    "caption": f"{cap}\n{items[win]}",
                    "voice": f"{body} {cta}"})
+    # 마지막 컷 = **첫 컷과 같은 구도**. 쇼츠는 끝나면 자동으로 다시 시작하는데,
+    # 이음매가 안 보이면 그대로 한 번 더 본다. 재생률 10%만 붙어도 배포가 붙는다.
+    # 예고(teaser) 씬은 뺐다 — 3초를 먹으면서 루프를 끊었다.
     t = next_teaser()
     if t:
-        # 판정 뒤 1.5초 — 답은 주지 않고 **질문만** 남긴다
-        scenes.append({"kind": "teaser", "label": t["label"], "product": t["product"],
-                       "caption": f"다음 콕\n{t['product']}",
-                       "voice": f"다음 편, {t['product']}{josa(t['product'])} 콕일까요?"})
+        scenes.append({"kind": "loop", "idx": win, "name": items[win],
+                       "caption": f"다음 편\n{t['product']}",
+                       "voice": f"다음 편은 {t['product']}."[:VOICE_MAX]})
     return scenes, v, win
 
 
@@ -277,10 +329,18 @@ def build_caption(s, v, items, entries, c, total, post=None):
     win = win if isinstance(win, int) and 0 <= win < len(items) else 0
 
     lines = [f"📦 {s.get('title', '')}", ""]
+    rows = s.get("items", [])
     for i, name in enumerate(items):
         mark = f" {v['emoji']}" if i == win else ""
         url = (entries[i] or {}).get("coupang_url", "")
         lines.append(f"{NUM[i]} {name}{mark}" + (f"\n   🛒 {url}" if url else ""))
+        # 화면에서는 승자 하나만 인과를 보여준다(24초 재단). 나머지 둘의 인과는
+        # 여기로 내린다 — 버리는 게 아니라 **검색되는 자리로 옮기는** 것이다.
+        # 상품명이 설명란에 두 번 이상 나오는 효과도 같이 생긴다(키워드 밀도).
+        r = rows[i] if i < len(rows) else {}
+        why = (r.get("cause") or "").strip()
+        if why:
+            lines.append(f"   왜 갑자기 보이나 — {why}")
     lines += ["", f"오늘의 콕: {items[win]}"]
     if post:
         lines.append(f"📄 더 자세한 비교는 픽담: {post['link']}")

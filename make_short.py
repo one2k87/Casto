@@ -403,11 +403,25 @@ def big_text(d, text, y, size=92, fill=(255, 255, 255), stroke=None, maxw=W - 15
 
 
 def card_hook(sc, c, shots, i, total):
-    """0~3초 — 물건 3개가 **화면을 꽉 채워** 쏟아진다.
+    """0~3초 — **결과 한 줄 + 실사진**. 마지막 루프 컷도 같은 카드를 쓴다.
 
-    이전엔 작은 흰 카드 3장을 부채꼴로 놓고 아래를 비워 뒀다. 실측한 화면들은
-    전부 사진이 프레임을 채운다 — 빈 파스텔은 이 장르에 없다.
+    2026-09-16 재단: 예전엔 물건 3개를 가로로 쌓아 채널의 목록을 보여줬다. 그건
+    **우리 사정**이다. 이탈의 50~60%가 첫 3초에 일어나고, 그 3초에 시청자가 알고
+    싶은 건 "내가 뭘 얻나"뿐이다. 그래서 승자 한 개를 화면 가득 놓고 결과를 쓴다.
+    (승자를 모르면 예전처럼 3분할로 폴백한다 — 발행은 멈추지 않는다)
+
+    마지막 컷이 이 카드를 다시 쓰는 이유는 **루프**다. 쇼츠는 끝나면 자동으로 다시
+    시작하는데 이음매가 안 보이면 그대로 한 번 더 본다. 재생률 10%면 배포가 붙는다.
     """
+    one = sc.get("idx")
+    if isinstance(one, int) and 0 <= one < len(shots) and shots[one]:
+        img, d, sage = base_card(c, i, total)
+        fill_frame(img, shots[one], dim=0.10)
+        scrim(img, top_h=560, bot_h=620)
+        d = ImageDraw.Draw(img)
+        punch_text(d, sc["caption"], 300, size=98, accent=(214, 90, 78))
+        visuals.paste_koki(img, "idle", (155, 1560), (215, 215))
+        return img
     got = [p for p in shots if p]
     img, d, sage = base_card(c, i, total)
     if got:
@@ -465,7 +479,7 @@ def card_item(sc, c, shot, i, total):
     return img
 
 
-def card_comic(sc, c, panel, i, total, proof=False):
+def card_comic(sc, c, panel, i, total, proof=False, shots=None):
     """인과 컷 — 만화도 **화면 전체**로. 상품은 여기 안 나온다.
 
     `proof=True`면 배경이 증거 그래프다. 그때는 스크림을 얕게 준다 —
@@ -473,6 +487,18 @@ def card_comic(sc, c, panel, i, total, proof=False):
     """
     img, d, sage = base_card(c, i, total)
     filled = fill_frame(img, panel) if (panel and os.path.exists(panel)) else False
+    if not filled:
+        # 만화 생성이 실패한 날 배경이 **빈 파스텔**로 남았다. 우리 실측 결론이
+        # "빈 파스텔은 이 장르에 없다"인데 정작 우리 폴백이 그것이었다.
+        # 24초 재단으로 이 컷은 편당 하나뿐이라 더 크게 티가 난다 — 상품 사진으로 덮는다.
+        # 승자 사진은 이미 훅·판정·루프 세 컷이 쓰고 있다. 여기까지 같은 그림이면
+        # 7컷 중 5컷이 한 장이 된다 — 컷을 쪼갠 의미가 없어진다. **다른 상품**을 쓴다.
+        one = sc.get("idx")
+        got = [x for j, x in enumerate(shots or []) if x and j != one]
+        if not got and isinstance(one, int) and 0 <= one < len(shots or []):
+            got = [(shots or [])[one]]
+        if got:
+            filled = fill_frame(img, got[0], dim=0.34)
     if filled:
         scrim(img, top_h=0 if proof else 520, bot_h=420 if proof else 760,
               strength=110 if proof else 170)
@@ -562,7 +588,8 @@ def card_teaser(sc, c, i, total):
 def scene_card_v2(sc, i, total, c, shots, panels, out="out"):
     """씬 하나를 그려 파일로 저장하고 경로를 반환한다."""
     kind = sc["kind"]
-    if kind == "hook":
+    if kind in ("hook", "loop"):
+        # 루프 컷은 훅과 **같은 카드**다 — 이음매가 보이면 루프가 아니다
         img = card_hook(sc, c, shots, i, total)
     elif kind == "ask":
         img = card_ask(sc, c, i, total)
@@ -572,7 +599,7 @@ def scene_card_v2(sc, i, total, c, shots, panels, out="out"):
         # 증거가 있으면 만화 대신 그래프를 배경으로 — 같은 질문에 더 센 답이다
         src = panels.get(("proof", sc["idx"])) if sc.get("proof") else None
         img = card_comic(sc, c, (src or panels.get((sc["idx"], sc["phase"])) or {}).get("path"),
-                         i, total, proof=bool(src))
+                         i, total, proof=bool(src), shots=shots)
     elif kind == "verdict":
         img = card_verdict(sc, c, shots, sc["idx"], i, total)
     elif kind == "teaser":
@@ -710,9 +737,26 @@ def main():
 
     s = roundup.build_script(items, trends, c, post)
 
+    # 제목 관문 — 프롬프트는 부탁이고 여기는 강제다.
+    # 2026-09-16까지 발행한 3편 중 2편이 "요즘 이거 다시 유행한다는 …"으로 똑같이 나갔다.
+    _win = s.get("winner", 0)
+    _win = _win if isinstance(_win, int) and 0 <= _win < len(items) else 0
+    _rows = s.get("items") or []
+    _use = (_rows[_win].get("use") if _win < len(_rows) else "") or ""
+    _past = sched._load(sched.PUBLISH_LOG, []) if hasattr(sched, "_load") else []
+    _recent = [e.get("title", "") for e in _past[-6:]] if isinstance(_past, list) else []
+    _fixed = roundup.clean_title(s.get("title", ""), items, _win, _recent, _use)
+    if _fixed != (s.get("title") or "").strip():
+        print(f"[casto] 제목 교체 — 「{s.get('title','')}」 → 「{_fixed}」")
+    s["title"] = _fixed
+
     # 인과 만화 — 상품은 절대 그리지 않는다(comic.guard가 강제한다)
+    # 24초 재단 이후 화면에 나가는 인과는 **승자 하나뿐**이다. 셋 다 그리면
+    # 쓰지도 않을 컷 4장을 매일 생성하게 된다(비용·시간 둘 다).
     panels = {}
     for i, name in enumerate(items):
+        if i != _win:
+            continue
         row = dict((s.get("items") or [{}] * len(items))[i] if i < len(s.get("items", [])) else {})
         row["name"] = name
         made = comic.panels(row, c["brand"], out_dir="out", font=font(62))
@@ -750,12 +794,13 @@ def main():
         # 씬 여백을 **씬 종류마다 다르게** 준다.
         # 모든 씬이 정확히 같은 간격으로 바뀌면 그 규칙성 자체가 "기계가 만들었다"로 읽힌다
         # (전략 3판 3절). 훅은 치고 빠지고, 판정은 한 박자 쉰다.
-        PAD = {"hook": 0.10, "ask": 0.15, "item": 0.30, "comic": 0.22,
-               "verdict": 0.55, "teaser": 0.35}
+        PAD = {"hook": 0.10, "ask": 0.15, "item": 0.22, "comic": 0.20,
+               "verdict": 0.45, "teaser": 0.35, "loop": 0.10}
         d = dur(mp3) + PAD.get(sc["kind"], 0.25)
         seg = f"out/seg{i}.mp4"
         img = scene_card_v2(sc, i, len(scenes), c, shots, panels)
-        style = {"hook": "pop", "verdict": "pop", "teaser": "pop"}.get(sc["kind"], "zoom")
+        style = {"hook": "pop", "verdict": "pop", "teaser": "pop",
+                 "loop": "pop"}.get(sc["kind"], "zoom")
         vid = visuals.motion_clip([img], d, f"out/mo{i}.mp4", style=style)
         subprocess.run(["ffmpeg", "-y", "-i", vid, "-i", mp3,
                         "-t", f"{d:.2f}", "-r", "30", "-pix_fmt", "yuv420p",

@@ -28,7 +28,7 @@ def test_순위는_거꾸로_센다():
     """1위를 먼저 주면 그 뒤를 볼 이유가 사라진다. 카운트다운이 완주 장치다."""
     sc = make_chart.scenes_for(_chart(), {"items": []})
     ranks = [s["entry"]["rank"] for s in sc if s["kind"] == "item"]
-    assert ranks == [5, 4, 3, 2, 1]
+    assert ranks == [5, 5, 4, 4, 3, 3, 2, 2, 1, 1]      # 한 칸당 2컷
     assert sc[0]["kind"] == "cover" and sc[-1]["kind"] == "outro"
 
 
@@ -103,3 +103,33 @@ def test_슬롯_출력은_한_줄이다():
     off = subprocess.run(["python3", "schedule.py", "--slot", "2026-09-16"],
                          capture_output=True, text=True, check=True).stdout.strip()
     assert off == "none"
+
+
+# ── 24초 재단 이후 (2026-09-16) ────────────────────────────────────────────
+def test_한_칸이_두_컷으로_쪼개진다():
+    """잘 되는 쇼츠는 2~4초에 한 번 화면이 바뀐다. 한 칸을 5초 세워두면
+    그 정지가 이탈 지점이 된다."""
+    sc = make_chart.scenes_for(_chart(5), {"items": []})
+    items = [s for s in sc if s["kind"] == "item"]
+    assert len(items) == 10
+    assert [s["beat"] for s in items[:2]] == ["name", "why"]
+    # 진행 점은 상품 수를 센다 — 컷 수를 세면 점이 10개가 된다
+    assert {s["idx"] for s in items} == {0, 1, 2, 3, 4}
+
+
+def test_내레이션은_두_컷에_나눠_실린다():
+    """길이는 그대로 두고 컷만 늘린다. 문장을 복제하면 영상이 두 배가 된다."""
+    ch = _chart(3)
+    script = {"items": [{"key": e["key"], "voice": "앞 문장. 뒤 문장."} for e in ch["entries"]]}
+    sc = [s for s in make_chart.scenes_for(ch, script) if s["kind"] == "item"]
+    assert sc[0]["voice"] == "앞 문장."
+    assert sc[1]["voice"] == "뒤 문장."
+
+
+def test_첫_컷에는_판정을_안_그린다(tmp_path):
+    """읽을 게 하나면 0.5초에 읽힌다. 첫 컷에 다 넣으면 쪼갠 의미가 없다."""
+    a = cards.card_rank(_entry(), {}, str(tmp_path / "n.png"), beat="name",
+                        reason="이유", verdict="판정")
+    b = cards.card_rank(_entry(), {}, str(tmp_path / "w.png"), beat="why",
+                        reason="이유", verdict="판정")
+    assert list(Image.open(a).getdata()) != list(Image.open(b).getdata())

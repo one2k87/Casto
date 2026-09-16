@@ -56,13 +56,18 @@ def delta_text(delta: dict | None) -> str:
 
 
 def card_rank(entry: dict, c: dict, path: str, idx: int = 0, total: int = 0,
-              reason: str = "", week: str = "", verdict: str = "") -> str:
+              reason: str = "", week: str = "", verdict: str = "",
+              beat: str = "full") -> str:
     """차트 한 칸. 실사진 전면 + 순위 + 상태 태그 + 상품명 + 가격 + 유행 크기 + 이유.
 
     entry: chart.build()의 entries 한 개(rank·display·image·price·tag·headline·delta)
     reason: 대본이 만든 **한 줄 이유**(왜 갑자기 보이는가). 없으면 headline이 그 자리를 쓴다.
     verdict: 상태 태그의 한 줄 판정(chart.tag_line). 이 한 줄이 편의 감정을 진다 —
              정보만 있는 차트는 실측에서 828회로 죽었다. 없으면 그리지 않는다.
+    beat:    한 상품을 두 컷으로 쪼갠다 — "name"(순위·상품명) → "why"(판정·이유·가격).
+             잘 되는 쇼츠는 2~4초에 한 번 화면이 바뀐다. 한 칸을 5초 동안 그대로
+             두면 그 정지 자체가 이탈 지점이 된다(2026-09-16 실측·벤치마크).
+             "full"은 예전처럼 한 컷에 전부 — 데일리·미리보기용으로 남겨둔다.
     """
     photo = entry.get("image")
     if not photo or not os.path.exists(photo):
@@ -102,6 +107,11 @@ def card_rank(entry: dict, c: dict, path: str, idx: int = 0, total: int = 0,
     # ── 상품명 — 카탈로그의 정식 상품명. 발굴 키워드를 띄우면 검색이 안 된다
     punch_text(d, entry.get("display") or entry.get("name", ""), 1080, size=104,
                accent=TAG_COLOR.get(entry.get("status")))
+
+    # 첫 컷은 순위와 이름만 — 읽을 게 하나면 0.5초에 읽힌다
+    if beat == "name":
+        img.save(path)
+        return path
 
     y = 1270
     # ── 판정 한 줄 — 태그가 있을 때만. 근거 없는 판정은 붙이지 않는다

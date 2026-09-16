@@ -53,17 +53,10 @@ def test_추정_길이가_쇼츠_상한을_넘지_않는다():
         assert sec < roundup.SHORTS_MAX_SEC, f"{verdict}: {sec:.1f}초"
 
 
-def test_정상_입력은_목표_길이_근처다():
-    c = _c()
-    scenes, _, _ = roundup.build_scenes(_script(), ITEMS, c)
-    sec = roundup.est_seconds(scenes)
-    assert sec <= c["video"]["target_sec"] + 15, f"{sec:.1f}초"
-
-
 def test_판정_씬은_길어도_CTA를_버리지_않는다():
     """설명란 유도는 쿠팡 전환의 유일한 입구 — 길이와 맞바꾸지 않는다."""
     scenes, _, _ = roundup.build_scenes(_script(long=True), ITEMS, _c())
-    verdict = [s for s in scenes if s["kind"] == "verdict"][0]
+    verdict = next(s for s in scenes if s["kind"] == "verdict")
     assert verdict["voice"].endswith("링크는 설명란에.")
 
 
@@ -72,3 +65,65 @@ def test_fit_voice는_들어갈_때만_붙인다():
     assert roundup.fit_voice("짧다.", "가" * roundup.VOICE_MAX) == "짧다."
     assert roundup.fit_voice("짧다.", "") == "짧다."
     assert roundup.fit_voice("짧다.", None) == "짧다."
+
+
+# ── 24초 재단 (2026-09-16) ────────────────────────────────────────────────
+def test_씬이_일곱개를_넘지_않는다():
+    """13씬 73초를 7씬 24초로 재단했다. Studio 실측 시청률 17.6%의 원인이 길이였다:
+    13초 ÷ 74초 = 17.6% → 13초 ÷ 24초 = 54%. 내용을 안 고쳐도 3배가 된다."""
+    scenes, _, _ = roundup.build_scenes(_script(long=True), ITEMS, _c())
+    assert len(scenes) <= 7, [s["kind"] for s in scenes]
+
+
+def test_인과는_승자_하나에만_붙는다():
+    """상품마다 원인·결과를 달면 6씬 27초다. 도장을 받는 건 하나고
+    시청자가 끝까지 남는 이유도 그것이다 — 나머지는 설명란으로 내린다."""
+    scenes, _, win = roundup.build_scenes(_script(), ITEMS, _c())
+    comics = [s for s in scenes if s["kind"] == "comic"]
+    assert len(comics) <= 1
+    if comics:
+        assert comics[0]["idx"] == win
+
+
+def test_첫_컷은_결과다():
+    """0초는 채널 사정이 아니라 시청자가 얻는 것이다 — 이탈의 50~60%가 여기서 난다."""
+    s = _script()
+    s["hook"] = "라면 안 넘치게"
+    s["hook_voice"] = "라면 넘치는 거, 이제 끝입니다."
+    scenes, _, win = roundup.build_scenes(s, ITEMS, _c())
+    assert scenes[0]["kind"] == "hook"
+    assert scenes[0]["caption"] == "라면 안 넘치게"
+    assert scenes[0]["idx"] == win        # 승자 사진 한 장으로 채운다
+
+
+def test_마지막_컷은_루프다():
+    """쇼츠는 끝나면 자동으로 다시 시작한다. 이음매가 안 보이면 한 번 더 본다."""
+    scenes, _, _ = roundup.build_scenes(_script(), ITEMS, _c())
+    assert scenes[-1]["kind"] in ("loop", "verdict")
+
+
+def test_정상_입력이_목표_길이_안에_있다():
+    """느슨한 상한(+15초)으로는 73초가 그대로 통과했다. 목표 근처로 조인다."""
+    c = _c()
+    scenes, _, _ = roundup.build_scenes(_script(), ITEMS, c)
+    assert roundup.est_seconds(scenes) <= c["video"]["target_sec"] + 4
+
+
+# ── 제목 관문 ─────────────────────────────────────────────────────────────
+def test_우리_사정을_말하는_제목은_버린다():
+    """2026-09-16 실측: 이 표현으로 시작한 우리 제목 3편이 편당 62.5회,
+    같은 니치에서 이긴 제목(문제·결과·가격)은 편당 143,400회였다."""
+    got = roundup.clean_title("요즘 이거 다시 유행한다는 주방템 3가지", ITEMS, 0, use="접으면 반")
+    assert "유행" not in got and "요즘" not in got
+    assert ITEMS[0] in got
+
+
+def test_좋은_제목은_건드리지_않는다():
+    good = "좁은 주방이 2배 넓어지는 틈새 선반"
+    assert roundup.clean_title(good, ITEMS, 0) == good
+
+
+def test_최근_편과_같은_머리로_시작하지_않는다():
+    """3편 중 2편이 같은 템플릿으로 나갔다 — 프롬프트만으로는 계속 새어 나온다."""
+    t = "라면 넘치는 거 이제 끝입니다"
+    assert roundup.clean_title(t, ITEMS, 0, recent=[t]) != t
