@@ -1,0 +1,194 @@
+{
+ "week": "2026-W39",
+ "date": "2026-09-15",
+ "source_days": 4,
+ "prev_week": "2026-W38",
+ "entries": [
+  {
+   "rank": 1,
+   "key": "egg_cracker",
+   "name": "에그 크래커",
+   "display": "에그크래커",
+   "image": "assets/products/에그크래커.jpg",
+   "price": null,
+   "coupang_url": "",
+   "score": 61.6,
+   "status": null,
+   "tag": {},
+   "headline": "6개 채널 · 합계 17,143회",
+   "signals": {
+    "demand": null,
+    "reach": 17143,
+    "channels": 6,
+    "mentions": 21,
+    "videos": 6
+   },
+   "spike": null,
+   "delta": {
+    "move": "same",
+    "text": "—",
+    "prev_rank": 1
+   }
+  },
+  {
+   "rank": 2,
+   "key": "늘어나는_밀폐용기",
+   "name": "늘어나는 밀폐용기",
+   "display": "늘어나는 밀폐용기",
+   "image": "assets/products/늘어나는-밀폐용기.jpg",
+   "price": null,
+   "coupang_url": "",
+   "score": 54.6,
+   "status": "now",
+   "tag": {
+    "emoji": "✅",
+    "label": "유행중",
+    "young": "지금이 정점입니다",
+    "old": "아직 안 늦었어요"
+   },
+   "headline": "5개 채널 · 합계 43,336회",
+   "signals": {
+    "demand": 1.0,
+    "reach": 43336,
+    "channels": 5,
+    "mentions": null,
+    "videos": 5
+   },
+   "spike": {
+    "ratio": 1.0,
+    "trend": "flat",
+    "peak": 100.0,
+    "base": 49.6,
+    "peak_days_ago": 40
+   },
+   "delta": {
+    "move": "same",
+    "text": "—",
+    "prev_rank": 2
+   }
+  },
+  {
+   "rank": 3,
+   "key": "laser_guide_scissors",
+   "name": "레이저 가이드 가위",
+   "display": "레이저가이드가위",
+   "image": "assets/products/레이저가이드가위.jpg",
+   "price": null,
+   "coupang_url": "",
+   "score": 42.9,
+   "status": "hot",
+   "tag": {
+    "emoji": "🔥",
+    "label": "예감",
+    "young": "아직 다들 모릅니다",
+    "old": "지금 알면 빠른 편이에요"
+   },
+   "headline": "9월 넷째 주부터 검색 1.5배",
+   "signals": {
+    "demand": 1.5,
+    "reach": 2683,
+    "channels": 1,
+    "mentions": 8,
+    "videos": 1
+   },
+   "spike": {
+    "ratio": 1.5,
+    "trend": "up",
+    "peak": 100.0,
+    "base": 21.6,
+    "peak_days_ago": 0,
+    "days_ago": 1
+   },
+   "delta": {
+    "move": "same",
+    "text": "—",
+    "prev_rank": 3
+   }
+  },
+  {
+   "rank": 4,
+   "key": "retro_handset",
+   "name": "레트로 수화기",
+   "display": "레트로 수화기",
+   "image": "assets/products/레트로-수화기.jpg",
+   "price": null,
+   "coupang_url": "",
+   "score": 34.2,
+   "status": null,
+   "tag": {},
+   "headline": "최근 언급 98건",
+   "signals": {
+    "demand": 1.2,
+    "reach": 1323,
+    "channels": 1,
+    "mentions": 98,
+    "videos": 1
+   },
+   "spike": {
+    "ratio": 1.2,
+    "trend": "flat",
+    "peak": 100.0,
+    "base": 52.4,
+    "peak_days_ago": 0
+   },
+   "delta": {
+    "move": "same",
+    "text": "—",
+    "prev_rank": 4
+   }
+  },
+  {
+   "rank": 5,
+   "key": "hand_pinch_guard",
+   "name": "손끼임 방지가드",
+   "display": "손끼임 방지가드",
+   "image": "assets/products/손끼임-방지가드.jpg",
+   "price": null,
+   "coupang_url": "",
+   "score": 30.8,
+   "status": "fading",
+   "tag": {
+    "emoji": "🍂",
+    "label": "끝물",
+    "young": "이제 새로 살 필요는 없어요",
+    "old": "이건 몰라도 됩니다"
+   },
+   "headline": "4개 채널 · 합계 5,334회",
+   "signals": {
+    "demand": 0.7,
+    "reach": 5334,
+    "channels": 4,
+    "mentions": 6,
+    "videos": 4
+   },
+   "spike": {
+    "ratio": 0.7,
+    "trend": "down",
+    "peak": 100.0,
+    "base": 42.7,
+    "peak_days_ago": 58
+   },
+   "delta": {
+    "move": "same",
+    "text": "—",
+    "prev_rank": 5
+   }
+  }
+ ],
+ "out": [],
+ "needs_photo": [
+  "주방 슬라이딩 선반",
+  "자동 과일껍질제거기",
+  "넘침방지 냄비뚜껑",
+  "자동 키친타올 디스펜서",
+  "자동 과일깎이",
+  "코에서 계란 흰자 주방용품",
+  "접이식 플러스 도마"
+ ],
+ "merged": [
+  "스텐 선반",
+  "계란 흰자 분리기",
+  "레이저 가이드 가위",
+  "레트로 수화기"
+ ]
+}
