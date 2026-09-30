@@ -115,12 +115,34 @@ def test_포즈가_없으면_기존_그림을_쓴다():
 
 
 def test_포즈는_몸통_폭에_맞춰_들어간다():
-    """생성 크기가 제각각이라 그대로 얹으면 프레임마다 다른 인형이 된다."""
-    base = Image.new("RGB", (60, 80), (10, 10, 10))
+    """생성 크기가 제각각이라 그대로 얹으면 프레임마다 다른 인형이 된다.
+
+    ⚠️ 예전엔 이걸 확인하려고 clay.animate를 불렀다. animate는 마지막에 ffmpeg로
+    인코딩하는데, 트렌드 수집 워크플로에는 ffmpeg가 없다(수집만 하니까).
+    그래서 이 테스트 하나가 **수집을 16일간 멈췄다**(2026-09-16 ~ 10-01).
+    단위 테스트는 외부 바이너리 없이 돌아야 한다.
+    """
     main = Image.new("RGBA", (40, 40), (214, 178, 130, 255))
     tall = Image.new("RGBA", (80, 120), (214, 178, 130, 255))   # 2배로 생성된 포즈
-    import os as _os
-    out = clay.animate(base, main, (30, 70), [("blink", 0.4)],
-                       "/tmp/_pose_test.mp4", poses={"blink": tall}, clean=False)
-    assert _os.path.exists(out)
-    _os.remove(out)
+    bank = clay.fit_poses(main, {"blink": tall})
+    assert bank["blink"].width == main.width        # 폭을 맞춘다
+    assert bank["blink"].height == 60               # 비율은 지킨다(120 × 40/80)
+
+
+def test_ffmpeg_없이_테스트가_돈다():
+    """수집·게시 워크플로는 ffmpeg를 설치하지 않는다. 테스트가 그걸 요구하면
+    영상과 무관한 잡이 통째로 죽는다 — 실제로 그렇게 죽었다."""
+    import pathlib
+    # 바늘을 조각으로 만든다 — 통째로 적으면 이 파일 자신이 걸린다
+    # 막는 것은 **ffmpeg 의존**이다. python을 부르는 건 상관없다(러너에 늘 있다).
+    needles = [a + b for a, b in (("clay.", "animate("), ("make_chart.", "render("),
+                                  ("roundup.", "render("), ("ff", "mpeg"))]
+    bad = []
+    for f in sorted(pathlib.Path("tests").glob("test_*.py")):
+        if f.name == pathlib.Path(__file__).name:
+            continue
+        t = f.read_text(encoding="utf-8")
+        hit = [n for n in needles if n in t]
+        if hit:
+            bad.append(f"{f.name}: {hit}")
+    assert not bad, "ffmpeg가 필요한 테스트: " + "; ".join(bad)

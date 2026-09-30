@@ -194,6 +194,27 @@ def _step_frames(spec: list[tuple[str, float]], fps: int = FPS,
     return frames
 
 
+def fit_poses(sprite: Image.Image, poses: dict | None, prep=None) -> dict:
+    """짝 그림들을 기준 그림에 맞춘다. **몸통 폭**이 기준이다.
+
+    높이로 맞추면 팔을 든 포즈에서 몸이 쪼그라들어 다른 인형처럼 보인다.
+
+    ⚠️ animate 안에 있던 코드를 밖으로 뺐다. 이걸 테스트하려면 animate를 불러야 했고,
+    animate는 마지막에 ffmpeg로 인코딩한다 — 그래서 **ffmpeg가 없는 워크플로에서
+    테스트가 죽었다.** 트렌드 수집이 2026-09-16부터 16일간 그것 때문에 멈췄다.
+    단위 테스트가 외부 바이너리에 의존하면 그 테스트는 게이트가 아니라 지뢰다.
+    """
+    prep = prep or (lambda im: im.convert("RGBA"))
+    bank = {}
+    for k, v in (poses or {}).items():
+        im = prep(v)
+        if im.width != sprite.width:
+            r = sprite.width / im.width
+            im = im.resize((sprite.width, max(int(im.height * r), 1)), Image.LANCZOS)
+        bank[k] = im
+    return bank
+
+
 def animate(base: Image.Image, sprite: Image.Image, center: tuple[int, int],
             spec: list[tuple[str, float]], out: str, fps: int = FPS,
             step: int = STEP, seed: int = 7, work: str | None = None,
@@ -220,15 +241,7 @@ def animate(base: Image.Image, sprite: Image.Image, center: tuple[int, int],
         return deghost(im) if clean else im
 
     sprite = prep(sprite)
-    # 포즈마다 생성 크기가 다르다. **몸통 폭**을 기준으로 맞춘다 —
-    # 높이로 맞추면 팔을 든 포즈에서 몸이 쪼그라들어 다른 인형처럼 보인다.
-    bank = {}
-    for k, v in (poses or {}).items():
-        im = prep(v)
-        if im.width != sprite.width:
-            r = sprite.width / im.width
-            im = im.resize((sprite.width, max(int(im.height * r), 1)), Image.LANCZOS)
-        bank[k] = im
+    bank = fit_poses(sprite, poses, prep)
     frames = _step_frames(spec, fps, step)
 
     for i, f in enumerate(frames):
