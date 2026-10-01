@@ -1,5 +1,5 @@
 {
- "next": 37,
+ "next": 49,
  "items": {
   "1": {
    "name": "늘어나는 밀폐용기",
@@ -383,6 +383,108 @@
    "url": "https://www.coupang.com/np/search?q=%EC%A3%BC%EB%B0%A9+%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%94%A9+%EC%84%A0%EB%B0%98",
    "hold": true,
    "note": "35번과 같은 물건으로 보임 — 35번으로 캡처"
+  },
+  "37": {
+   "name": "쿠팡추천템",
+   "slug": "",
+   "key": "쿠팡추천템",
+   "done": false,
+   "search": "쿠팡추천템",
+   "url": "https://www.coupang.com/np/search?q=%EC%BF%A0%ED%8C%A1%EC%B6%94%EC%B2%9C%ED%85%9C"
+  },
+  "38": {
+   "name": "주방용품",
+   "slug": "",
+   "key": "주방용품",
+   "done": false,
+   "search": "주방용품",
+   "url": "https://www.coupang.com/np/search?q=%EC%A3%BC%EB%B0%A9%EC%9A%A9%ED%92%88",
+   "hold": true,
+   "note": "27번과 같은 물건으로 보임 — 27번으로 캡처"
+  },
+  "39": {
+   "name": "주방꿀템",
+   "slug": "",
+   "key": "주방꿀템",
+   "done": false,
+   "search": "주방꿀템",
+   "url": "https://www.coupang.com/np/search?q=%EC%A3%BC%EB%B0%A9%EA%BF%80%ED%85%9C"
+  },
+  "40": {
+   "name": "살림",
+   "slug": "",
+   "key": "살림",
+   "done": false,
+   "search": "살림",
+   "url": "https://www.coupang.com/np/search?q=%EC%82%B4%EB%A6%BC",
+   "hold": true,
+   "note": "42번과 같은 물건으로 보임 — 42번으로 캡처"
+  },
+  "41": {
+   "name": "신박한아이템",
+   "slug": "",
+   "key": "신박한아이템",
+   "done": false,
+   "search": "신박한아이템",
+   "url": "https://www.coupang.com/np/search?q=%EC%8B%A0%EB%B0%95%ED%95%9C%EC%95%84%EC%9D%B4%ED%85%9C"
+  },
+  "42": {
+   "name": "살림꿀템",
+   "slug": "",
+   "key": "살림꿀템",
+   "done": false,
+   "search": "살림꿀템",
+   "url": "https://www.coupang.com/np/search?q=%EC%82%B4%EB%A6%BC%EA%BF%80%ED%85%9C",
+   "hold": true,
+   "note": "40번과 같은 물건으로 보임 — 40번으로 캡처"
+  },
+  "43": {
+   "name": "쿠팡꿀템",
+   "slug": "",
+   "key": "쿠팡꿀템",
+   "done": false,
+   "search": "쿠팡꿀템",
+   "url": "https://www.coupang.com/np/search?q=%EC%BF%A0%ED%8C%A1%EA%BF%80%ED%85%9C"
+  },
+  "44": {
+   "name": "생활꿀템",
+   "slug": "",
+   "key": "생활꿀템",
+   "done": false,
+   "search": "생활꿀템",
+   "url": "https://www.coupang.com/np/search?q=%EC%83%9D%ED%99%9C%EA%BF%80%ED%85%9C"
+  },
+  "45": {
+   "name": "다이소추천템",
+   "slug": "",
+   "key": "다이소추천템",
+   "done": false,
+   "search": "다이소추천템",
+   "url": "https://www.coupang.com/np/search?q=%EB%8B%A4%EC%9D%B4%EC%86%8C%EC%B6%94%EC%B2%9C%ED%85%9C"
+  },
+  "46": {
+   "name": "자취꿀템",
+   "slug": "",
+   "key": "자취꿀템",
+   "done": false,
+   "search": "자취꿀템",
+   "url": "https://www.coupang.com/np/search?q=%EC%9E%90%EC%B7%A8%EA%BF%80%ED%85%9C"
+  },
+  "47": {
+   "name": "다이소꿀템",
+   "slug": "",
+   "key": "다이소꿀템",
+   "done": false,
+   "search": "다이소꿀템",
+   "url": "https://www.coupang.com/np/search?q=%EB%8B%A4%EC%9D%B4%EC%86%8C%EA%BF%80%ED%85%9C"
+  },
+  "48": {
+   "name": "주방템",
+   "slug": "",
+   "key": "주방템",
+   "done": false,
+   "search": "주방템",
+   "url": "https://www.coupang.com/np/search?q=%EC%A3%BC%EB%B0%A9%ED%85%9C"
   }
  }
 }
