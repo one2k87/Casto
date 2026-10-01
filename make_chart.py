@@ -65,12 +65,12 @@ def build_script(ch: dict, c: dict, llm=llm_json) -> dict:
    {{"key": "위 데이터의 key 그대로",
      "reason": "**왜 갑자기 보이는가** 한 줄 (22자 이내). 반드시 위 데이터의 signals/headline으로
                설명할 것. 데이터에 없는 효능·후기·가격을 지어내면 안 된다",
-     "voice": "내레이션 1~2문장 (45자 내외, 구어체). 상태 태그가 있으면 그 온도를 살린다:
+     "voice": "내레이션 **1문장 20자 이내**, 구어체. 상태 태그가 있으면 그 온도를 살린다:
               예감=아직 다들 모른다 / 유행중=지금이 정점 / 끝물=이제 새로 살 필요는 없다 /
               재점화=예전에 보셨던 그거"}}
    ... 위 데이터의 모든 항목
  ],
- "outro_voice": "마무리 1~2문장 — 다음 주에도 같은 시간에 온다는 약속 + 댓글 심사신청 유도"}}
+ "outro_voice": "마무리 1문장 16자 이내 — 다음 주 같은 시간 약속"}}
 
 규칙
 - **없는 숫자를 만들지 말 것.** headline/signals에 있는 수치만 쓴다.
@@ -133,6 +133,36 @@ def outro_card(ch: dict, c: dict, path: str) -> str:
     return path
 
 
+# ------------------------------------------------------------------ 길이
+# 2026-10-01 Studio 역산: 9/27 차트 편이 **60초**로 나갔다(시청률 30.5%는 18초 시청).
+# 데일리는 24초로 재단했는데 조회가 나오는 유일한 포맷이 가장 길었다. 칸당 음성 45자 ×5에
+# 훅·마무리를 더하면 300자 — 8자/초로도 37초, 실제 TTS는 더 느리다. 상한을 코드로 건다.
+HOOK_MAX = 14          # 표지 내레이션(자)
+ITEM_MAX = 22          # 칸의 둘째 컷(판정·이유) 내레이션(자). 첫째 컷은 상품명만 읽는다
+OUTRO_MAX = 16         # 마무리(자)
+CHART_MAX_SEC = 33     # 추정 길이 하드 상한 — 넘으면 렌더하지 않는다
+HOOK_DEFAULT = "이거, 보신 적 있죠?"
+OUTRO_DEFAULT = "다음 주 일요일에 또 옵니다."
+
+
+def _first_sentence(text: str) -> str:
+    parts = [x.strip() for x in re.split(r"(?<=[.!?])\s+", (text or "").strip()) if x.strip()]
+    return parts[0] if parts else ""
+
+
+def fit(text: str, cap: int, fallback: str = "") -> str:
+    """첫 문장이 상한 안이면 쓰고, 아니면 대체문을 쓴다. 문장 중간을 자르지 않는다 —
+    잘린 문장은 들리는 순간 '기계가 만든 것'이 된다."""
+    s = _first_sentence(text)
+    return s if s and len(s) <= cap else fallback
+
+
+def est_seconds(scenes: list[dict]) -> float:
+    """렌더 전 길이 추정 — 데일리와 같은 잣대(`roundup.CPS`·`SCENE_PAD`)."""
+    import roundup
+    return roundup.est_seconds(scenes)
+
+
 # ------------------------------------------------------------------ 조립
 def scenes_for(ch: dict, script: dict) -> list[dict]:
     """표지 → **5위부터 1위까지**(한 칸당 2컷) → 마무리.
@@ -141,11 +171,14 @@ def scenes_for(ch: dict, script: dict) -> list[dict]:
 
     한 칸을 두 컷으로 쪼갠다 — ①순위+상품명 ②판정+이유+가격.
     잘 되는 쇼츠는 **2~4초에 한 번** 화면이 바뀐다(2026-09-16 벤치마크). 한 칸을
-    5초 동안 그대로 두면 그 정지 자체가 이탈 지점이다. 내레이션은 두 컷에 걸쳐
-    그대로 흐르므로 길이는 늘지 않고 **컷 수만 두 배**가 된다.
+    5초 동안 그대로 두면 그 정지 자체가 이탈 지점이다.
+
+    길이는 여기서 결정된다: 첫째 컷은 **상품명만**, 둘째 컷은 `ITEM_MAX` 안의 한 문장.
+    LLM이 길게 쓰면 이유(reason, 22자 이내)로, 그것도 길면 상품명으로 내려간다.
     """
     reasons = {i.get("key"): i for i in script.get("items", [])}
-    scenes = [{"kind": "cover", "voice": script.get("hook_voice", "이거, 보신 적 있죠?")}]
+    scenes = [{"kind": "cover",
+               "voice": fit(script.get("hook_voice", ""), HOOK_MAX, HOOK_DEFAULT)}]
     ordered = sorted(ch["entries"], key=lambda e: -e["rank"])     # 5 → 1
     # 판정 문구는 세대를 **번갈아** 쓴다. 한 편이 "먼저 알면 앞서간다"로만 채워지면
     # 기성세대는 매번 뒤처졌다는 말만 듣고 나간다(보고서 §3-5의 이중 타깃).
@@ -159,23 +192,28 @@ def scenes_for(ch: dict, script: dict) -> list[dict]:
             # 1위 칸은 이 편의 결승점이다. 태그가 없다고 비워두면 가장 중요한 칸이
             # 가장 밋밋해진다. 순위 자체가 말해주는 것만 쓴다 — 지어내지 않는다.
             verdict = "이번 주 가장 많이 보였습니다"
-        voice = it.get("voice") or e.get("headline") or e["display"]
-        # 내레이션을 두 컷에 나눠 싣는다. 문장이 하나뿐이면 앞 컷은 상품명만 읽는다.
-        parts = [x.strip() for x in re.split(r"(?<=[.!?])\s+", voice) if x.strip()]
-        first = parts[0] if parts else e["display"]
-        rest = " ".join(parts[1:]) if len(parts) > 1 else ""
+        # 첫째 컷은 순위와 상품명만 읽는다(짧고 확실하다). 둘째 컷은 상한 안의 한 문장 —
+        # LLM voice → reason → headline 순으로 내려가고, 전부 길면 비워 둔다(카드가 말한다).
+        why = (fit(it.get("voice", ""), ITEM_MAX)
+               or fit(it.get("reason", ""), ITEM_MAX)
+               or fit(e.get("headline", ""), ITEM_MAX)
+               or verdict or e["display"])          # TTS는 빈 문장을 못 읽는다
         scenes.append({"kind": "item", "entry": e, "idx": i, "beat": "name",
-                       "reason": "", "verdict": "", "voice": first})
+                       "reason": "", "verdict": "", "voice": f"{e['rank']}위, {e['display']}."})
         scenes.append({"kind": "item", "entry": e, "idx": i, "beat": "why",
                        "reason": it.get("reason", ""), "verdict": verdict or "",
-                       "voice": rest or (it.get("reason") or e.get("headline") or "")})
-    scenes.append({"kind": "outro", "voice": script.get("outro_voice", "다음 주 일요일에 또 옵니다.")})
+                       "voice": why})
+    scenes.append({"kind": "outro",
+                   "voice": fit(script.get("outro_voice", ""), OUTRO_MAX, OUTRO_DEFAULT)})
     return scenes
 
 
 def render(ch: dict, script: dict, c: dict) -> str:
     os.makedirs(OUT, exist_ok=True)
     scenes = scenes_for(ch, script)
+    est = est_seconds(scenes)
+    if est > CHART_MAX_SEC:
+        raise SystemExit(f"[chart] 추정 {est:.0f}초 — {CHART_MAX_SEC}초를 넘기면 내지 않는다")
     n = len(ch["entries"])          # 진행 점은 **상품 수**다(컷 수가 아니다)
     segs = []
     for i, sc in enumerate(scenes):
@@ -211,7 +249,12 @@ def build_caption(ch: dict, script: dict, c: dict, total: float) -> str:
     """설명란 — 순위·이유·**쿠팡 링크**. 링크가 없으면 그 줄을 비운다(가짜 링크 금지)."""
     dis = c["disclosure"]
     reasons = {i.get("key"): i for i in script.get("items", [])}
-    lines = [f"📊 {script.get('title', '')}", ""]
+    lines = []
+    # 첫 줄 = 1위 쿠팡 링크. 접힌 설명란에서 보이는 건 첫 줄뿐이다(2026-10-01 설계).
+    top = ch["entries"][0] if ch.get("entries") else {}
+    if top.get("coupang_url"):
+        lines += [f"🛒 1위 {top['display']} 쿠팡 → {top['coupang_url']}", ""]
+    lines += [f"📊 {script.get('title', '')}", ""]
     for e in ch["entries"]:
         it = reasons.get(e["key"], {})
         tag = (e.get("tag") or {}).get("label")
@@ -235,20 +278,77 @@ def build_caption(ch: dict, script: dict, c: dict, total: float) -> str:
     return "\n".join(lines)
 
 
+def chart_title(script: dict, ch: dict, recent: list[str]) -> str:
+    """차트 제목 관문 — 데일리와 같은 `roundup.clean_title`을 거친다.
+
+    2026-10-01 실측: 공개 4편 중 3편의 제목이 같았다. 차트 편이 제목을 안 남겨
+    `publish.py`가 9/14 데일리의 `last_caption.json`을 그대로 올렸기 때문이다.
+    """
+    import roundup
+    names = [e["display"] for e in ch.get("entries", [])]
+    top = names[0] if names else ""
+    t = roundup.clean_title(script.get("title", ""), names, 0, recent,
+                            use=f"이번 주 {len(names)}개 중 1위")
+    return t or f"이번 주 가장 많이 보인 {top}"
+
+
+def record(ch: dict, script: dict, title: str, cap: str, total: float) -> None:
+    """`last_caption.json` + `publish_log` — 데일리 경로와 같은 두 파일에 남긴다.
+
+    `publish.py`는 제목·날짜를 `last_caption.json`에서 읽는다. 차트가 안 쓰면 **지난 데일리의
+    제목과 날짜로** 올라간다(2026-09-27 실제 사고). 학습 루프도 이 로그만 본다.
+    """
+    import datetime as dt
+
+    import catalog
+    import schedule as sched
+    today = dt.date.today().isoformat()
+    top = ch["entries"][0]
+    names = [e["display"] for e in ch["entries"]]
+    os.makedirs("data", exist_ok=True)
+    with open("data/last_caption.json", "w", encoding="utf-8") as f:
+        json.dump({"date": today, "title": title, "description": cap,
+                   "product": " / ".join(names), "verdict": "chart",
+                   "seconds": round(total, 1), "coupang_url": top.get("coupang_url", ""),
+                   "items": names, "winner": top["display"], "week": ch["week"]},
+                  f, ensure_ascii=False, indent=1)
+    try:
+        sched.record_publish(
+            date=today, slot="chart", key=catalog.slugify(top["display"]), verdict="chart",
+            title=title, product=top["display"], products=names, format="chart5",
+            price_band=top.get("price_band", ""), category=top.get("category", ""),
+            has_photo=True, brand=top.get("brand", ""),
+            hook=script.get("hook", ""), seconds=round(total, 1),
+            links=sum(1 for e in ch["entries"] if e.get("coupang_url")))
+    except Exception as e:                                   # noqa: BLE001
+        print("[chart] 발행 이력 기록 실패(무시):", e)
+
+
 def main() -> None:
+    import schedule as sched
     c = cfg()
     ch = chart.build()
     chart.save(ch)
     print(chart.report(ch))
     script = build_script(ch, c)
+    recent = [r.get("title", "") for r in sched._load(sched.PUBLISH_LOG, [])][-12:]
+    script["title"] = chart_title(script, ch, recent)
     os.makedirs(OUT, exist_ok=True)
     with open(f"{OUT}/chart_script.json", "w", encoding="utf-8") as f:
         json.dump(script, f, ensure_ascii=False, indent=1)
     path = render(ch, script, c)
-    cap = build_caption(ch, script, c, dur(path))
+    total = dur(path)
+    cap = build_caption(ch, script, c, total)
     with open(f"{OUT}/chart_caption.txt", "w", encoding="utf-8") as f:
         f.write(cap)
-    telegram_video(path, cap) or telegram_msg(f"콕픽 차트 {ch['week']} 생성 완료")
+    record(ch, script, script["title"], cap, total)
+    missing = [e["display"] for e in ch["entries"] if not e.get("coupang_url")]
+    warn = (f"\n⚠️ 쿠팡 링크 없음 {len(missing)}/{len(ch['entries'])}: {', '.join(missing)}"
+            if missing else "")
+    if os.getenv("MAKE_UPLOAD_HOOK"):
+        telegram_msg(f"📊 차트 {ch['week']} 생성 완료 — 유튜브 자동 게시 중\n{script['title']}{warn}")
+    else:
+        telegram_video(path, cap) or telegram_msg(f"콕픽 차트 {ch['week']} 생성 완료{warn}")
 
 
 if __name__ == "__main__":

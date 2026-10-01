@@ -328,7 +328,14 @@ def build_caption(s, v, items, entries, c, total, post=None):
     win = s.get("winner", 0)
     win = win if isinstance(win, int) and 0 <= win < len(items) else 0
 
-    lines = [f"📦 {s.get('title', '')}", ""]
+    # **첫 줄 = 승자 쿠팡 링크.** 쇼츠 설명란은 접혀 있어 첫 줄만 보인다(2026-10-01 설계).
+    # 영상이 「링크는 설명란에」라고 말하는데 첫 줄이 제목이면 시청자는 한 번 더 눌러야 한다.
+    # 링크가 없으면 줄을 만들지 않는다 — 가짜 링크·'준비 중' 문구 금지.
+    lines = []
+    win_url = (entries[win] or {}).get("coupang_url", "") if win < len(entries) else ""
+    if win_url:
+        lines += [f"🛒 {items[win]} 쿠팡 → {win_url}", ""]
+    lines += [f"📦 {s.get('title', '')}", ""]
     rows = s.get("items", [])
     for i, name in enumerate(items):
         mark = f" {v['emoji']}" if i == win else ""
@@ -342,8 +349,9 @@ def build_caption(s, v, items, entries, c, total, post=None):
         if why:
             lines.append(f"   왜 갑자기 보이나 — {why}")
     lines += ["", f"오늘의 콕: {items[win]}"]
-    if post:
-        lines.append(f"📄 더 자세한 비교는 픽담: {post['link']}")
+    # 픽담 줄은 **이번 편 상품을 다룬 글**일 때만. 무관한 글로 보내는 CTA는 이탈이다(2026-10-01).
+    if post and post.get("link") and (post.get("matched") in items):
+        lines.append(f"📄 {post['matched']} 자세한 비교는 픽담: {post['link']}")
     return "\n".join(lines + [
         "",
         " ".join(tags),

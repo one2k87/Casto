@@ -169,3 +169,31 @@ def test_램프업_폴백은_같은_상품을_반복하지_않는다():
     """폴백이 늘 ready[0]이면 첫 네 편이 전부 같은 상품이 된다."""
     assert sch._unused(["a", "b", "c"], [{"product": "a"}]) == "b"
     assert sch._unused(["a", "b"], [{"key": "a"}, {"key": "b"}]) == "a"   # 다 썼으면 처음으로
+
+
+# ── 상품 선택 (2026-10-01) ─────────────────────────────────────────────────
+def test_쿨다운은_풀_크기에_맞춰_줄어든다():
+    """ready 17종에 '최근 6편 제외'를 고정으로 걸어 화요일 데일리가 2주 결번이었다."""
+    import schedule as s
+    ready = [f"p{i}" for i in range(17)]
+    log = [{"products": [f"p{i}", f"p{i+1}", f"p{i+2}"]} for i in range(0, 15, 3)]  # 5편
+    got = s.choose_items(ready, log, set(), 3)
+    assert len(got) == 3                                       # 결번이 아니다
+    assert "p15" in got and "p16" in got                       # 한 번도 안 나온 것이 먼저
+
+
+def test_풀이_작아도_결번은_없다():
+    import schedule as s
+    ready = ["a", "b", "c", "d"]
+    log = [{"products": ["a", "b", "c"]}, {"products": ["d", "a", "b"]}]
+    got = s.choose_items(ready, log, set(), 3)
+    assert len(got) == 3 and got[0] == "c"                     # 가장 오래전 것부터 채운다
+
+
+def test_링크_있는_상품이_먼저_선다():
+    """링크 없는 영상은 조회가 나와도 수수료 0 — 같은 조건이면 링크 있는 쪽이 나간다."""
+    import schedule as s
+    ready = [f"p{i}" for i in range(10)]
+    got = s.choose_items(ready, [], {"p7", "p9"}, 3)
+    assert got[:2] == ["p7", "p9"]
+    assert len(got) == 3

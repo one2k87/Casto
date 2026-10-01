@@ -43,15 +43,60 @@ def font(size, bold=True):
     return ImageFont.load_default()
 
 
-def latest_post(site):
-    r = requests.get(f"{site}/wp-json/wp/v2/posts?per_page=1&_fields=title,link,content,excerpt", timeout=30)
-    p = r.json()[0]
+def _post_dict(p: dict) -> dict:
     raw = p["content"]["rendered"]
     block = catalog.parse_kokpick_block(raw)   # 태그 제거 전에 뽑아야 한다(주석도 태그로 지워진다)
     text = re.sub(r"<[^>]+>", " ", raw)
     text = html.unescape(re.sub(r"\s+", " ", text))[:4000]
     return {"title": html.unescape(p["title"]["rendered"]), "link": p["link"], "text": text,
             "block": block}
+
+
+def latest_post(site):
+    r = requests.get(f"{site}/wp-json/wp/v2/posts?per_page=1&_fields=title,link,content,excerpt", timeout=30)
+    return _post_dict(r.json()[0])
+
+
+def _compact(s: str) -> str:
+    import unicodedata
+    return re.sub(r"[\s\-_·,./()]+", "", unicodedata.normalize("NFKC", s or "")).lower()
+
+
+def post_matches(post: dict, names: list[str], aliases: dict | None = None) -> str | None:
+    """이 글이 **이번 편 상품 중 하나**를 다루는가. 다루는 상품명을 돌려주고, 아니면 None.
+
+    2026-10-01 실측: 흰자분리기 영상의 설명란이 음식물처리기 필터 글로 가고 있었다 —
+    `latest_post`가 "픽담 최신 글 1편"을 무조건 집었기 때문이다. 무관한 글로 보내는 CTA는
+    클릭 한 번을 이탈로 바꾼다. 그래서 KOKPICK 블록의 product나 제목에 **상품명이 들어 있을
+    때만** 맞는다고 본다. 띄어쓰기·기호 차이는 무시하고, 짧은 쪽이 긴 쪽에 포함되면 같은 물건.
+    """
+    block = post.get("block") or {}
+    cands = [_compact(block.get("product", "")), _compact(post.get("title", ""))]
+    for name in names:
+        # 대장의 표시명은 브랜드·모델까지 붙어 길다("무아스 마그넷 무선 LED 무드등 MLL37").
+        # 글 제목은 품목명("무드등")으로 쓰므로 **카테고리명도 같은 물건의 이름**으로 본다.
+        for alias in [name] + list((aliases or {}).get(name) or []):
+            n = _compact(alias)
+            if len(n) < 2:
+                continue
+            for cc in cands:
+                if cc and (n in cc or (len(cc) >= 3 and cc in n)):
+                    return name
+    return None
+
+
+def matching_post(site: str, names: list[str], aliases: dict | None = None,
+                  n: int = 30) -> dict | None:
+    """최근 글 n편 중 이번 편 상품을 다루는 첫 글. 없으면 None — 설명란에 픽담 줄이 안 들어간다."""
+    r = requests.get(f"{site}/wp-json/wp/v2/posts?per_page={n}&_fields=title,link,content",
+                     timeout=30)
+    for p in r.json():
+        post = _post_dict(p)
+        hit = post_matches(post, names, aliases)
+        if hit:
+            post["matched"] = hit
+            return post
+    return None
 
 
 # ---------------------------------------------------------------- 상품 확정
@@ -702,9 +747,8 @@ def pick_items(n=roundup.N_ITEMS):
     cat = catalog.load()
     ready = sched.ready_products()
     log = sched._load(sched.PUBLISH_LOG, []) if hasattr(sched, "_load") else []
-    recent = {x for e in log[-6:] for x in (e.get("products") or [e.get("product")]) if x}
-    fresh = [x for x in ready if x not in recent] or ready
-    picked = fresh[:n]
+    links = {x for x in ready if (catalog.find(cat, name=x) or {}).get("coupang_url")}
+    picked = sched.choose_items(ready, log, links, n)       # 쿨다운은 풀 크기에 맞춰, 링크 우선
     entries = [catalog.find(cat, name=x) for x in picked]
     shots = [catalog.image_path(e) if catalog.render_mode(e) == "exact" else None
              for e in entries]
@@ -730,8 +774,10 @@ def main():
 
     post = None
     try:
-        post = latest_post(c["source_site"])
-        print("[casto] 참고 글:", post["title"])
+        post = matching_post(c["source_site"], items,
+                             {n: [(e or {}).get("category", "")] for n, e in zip(items, entries)})
+        print("[casto] 참고 글:", f"{post['matched']} ← {post['title']}" if post
+              else "없음 — 이번 편 상품을 다룬 픽담 글이 없어 설명란에 픽담 줄을 넣지 않는다")
     except Exception as e:                                   # 픽담이 비어도 발행은 된다
         print("[casto] 참고 글 없음(무시):", e)
 
@@ -844,10 +890,14 @@ def main():
 
     # 자동 게시(publish.py)가 켜져 있으면 mp4를 폰으로 보내지 않는다 — 링크만 간다.
     # 웹훅이 없을 때만 예전처럼 mp4를 보내 수동 업로드 폴백을 유지한다.
+    # 링크 없는 상품은 조회가 나와도 수수료가 0이다 — 어떤 상품이 비었는지 폰으로 바로 알린다.
+    _missing = [x for x, e in zip(items, entries) if not (e or {}).get("coupang_url")]
+    _warn = (f"\n⚠️ 쿠팡 링크 없음 {len(_missing)}/{len(items)}: {', '.join(_missing)}"
+             "\n→ 앱 🔗 카드에서 붙여넣으면 다음 편부터 설명란 첫 줄에 들어갑니다") if _missing else ""
     if os.getenv("MAKE_UPLOAD_HOOK"):
-        telegram_msg(f"🎬 쇼츠 생성 완료 — 유튜브 자동 게시 중\n{s.get('title', '')}")
+        telegram_msg(f"🎬 쇼츠 생성 완료 — 유튜브 자동 게시 중\n{s.get('title', '')}{_warn}")
     else:
-        telegram_video("out/short.mp4", cap) or telegram_msg("쇼츠 생성 완료(전송 실패) — Actions 아티팩트 확인")
+        telegram_video("out/short.mp4", cap + _warn) or telegram_msg("쇼츠 생성 완료(전송 실패) — Actions 아티팩트 확인")
     print(f"[casto] 완료 — {total:.0f}초, out/short.mp4 (목표 {c['video']['target_sec']}초)")
     if total > c["video"]["target_sec"] + 8:
         print(f"[casto] ⚠ 규격 초과({total:.0f}초) — 내레이션이 길다.")

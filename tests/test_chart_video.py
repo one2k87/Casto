@@ -118,12 +118,71 @@ def test_한_칸이_두_컷으로_쪼개진다():
 
 
 def test_내레이션은_두_컷에_나눠_실린다():
-    """길이는 그대로 두고 컷만 늘린다. 문장을 복제하면 영상이 두 배가 된다."""
+    """첫 컷은 순위·상품명만, 둘째 컷은 상한 안의 한 문장. 문장을 복제하면 영상이 두 배가 된다."""
     ch = _chart(3)
-    script = {"items": [{"key": e["key"], "voice": "앞 문장. 뒤 문장."} for e in ch["entries"]]}
+    script = {"items": [{"key": e["key"], "voice": "앞 문장 하나. 뒤 문장."} for e in ch["entries"]]}
     sc = [s for s in make_chart.scenes_for(ch, script) if s["kind"] == "item"]
-    assert sc[0]["voice"] == "앞 문장."
-    assert sc[1]["voice"] == "뒤 문장."
+    assert sc[0]["voice"] == "3위, 상품3."
+    assert sc[1]["voice"] == "앞 문장 하나."
+    assert "앞 문장" not in sc[0]["voice"]
+
+
+# ── 60초 사고 이후 (2026-10-01) ────────────────────────────────────────────
+def test_차트는_33초를_넘기지_않는다():
+    """9/27 차트 편이 60초로 나갔다(Studio 역산). LLM이 45자씩 써도 추정 길이가 상한 안이어야 한다."""
+    ch = _chart(5)
+    long = "이건 정말 요즘 어디서나 보이는 제품이라서 안 사면 손해라는 말이 나올 정도입니다 정말로요. 두 번째 문장도 깁니다."
+    script = {"hook_voice": long, "outro_voice": long,
+              "items": [{"key": e["key"], "voice": long, "reason": long} for e in ch["entries"]]}
+    sc = make_chart.scenes_for(ch, script)
+    assert make_chart.est_seconds(sc) <= make_chart.CHART_MAX_SEC
+    assert all(s["voice"] for s in sc)                     # TTS는 빈 문장을 못 읽는다
+    assert all(len(s["voice"]) <= 30 for s in sc)
+
+
+def test_긴_문장은_자르지_않고_대체한다():
+    """잘린 문장은 들리는 순간 기계 티가 난다 — 상한을 넘으면 통째로 대체문으로 간다."""
+    assert make_chart.fit("짧다.", 10, "대체") == "짧다."
+    assert make_chart.fit("이 문장은 분명히 상한보다 길다.", 10, "대체") == "대체"
+    assert make_chart.fit("", 10, "대체") == "대체"
+    sc = make_chart.scenes_for(_chart(3), {"hook_voice": "이 문장은 열네 자를 훌쩍 넘기는 훅입니다."})
+    assert sc[0]["voice"] == make_chart.HOOK_DEFAULT
+
+
+def test_설명란_첫_줄은_1위_링크다():
+    """접힌 설명란에서 보이는 건 첫 줄뿐이다. 링크가 없으면 첫 줄은 제목이다(가짜 줄 금지)."""
+    c = {"disclosure": {"coupang": "c", "ai": "a"}}
+    ch = _chart(3)
+    cap = make_chart.build_caption(ch, {"title": "제목", "items": []}, c, 24)
+    assert cap.splitlines()[0] == "📊 제목"
+    ch["entries"][0]["coupang_url"] = "https://link.coupang.com/a/TOP"
+    cap = make_chart.build_caption(ch, {"title": "제목", "items": []}, c, 24)
+    assert cap.splitlines()[0].startswith("🛒") and "link.coupang.com/a/TOP" in cap.splitlines()[0]
+
+
+def test_차트_제목은_관문을_거친다():
+    """공개 4편 중 3편이 같은 제목이었다 — 차트가 제목을 안 남겨 지난 데일리 제목으로 올라갔다."""
+    ch = _chart(5)
+    t = make_chart.chart_title({"title": "요즘 이거 다시 유행한다는 주방템 3가지"}, ch,
+                               recent=["요즘 이거 다시 유행한다는 주방템 3가지"])
+    assert "요즘 이거" not in t and "다시 유행한다는" not in t
+    assert "상품1" in t
+    assert make_chart.chart_title({"title": "에그크래커 vs 밀폐용기, 이번 주 5개"}, ch, []) \
+        == "에그크래커 vs 밀폐용기, 이번 주 5개"
+
+
+def test_차트_기록은_데일리와_같은_두_파일에_남는다(tmp_path, monkeypatch):
+    """publish.py는 last_caption.json에서 제목·날짜를 읽는다. 차트가 안 쓰면 지난 편으로 올라간다."""
+    import json
+    monkeypatch.chdir(tmp_path)
+    ch = _chart(3)
+    ch["entries"][0]["coupang_url"] = "https://link.coupang.com/a/TOP"
+    make_chart.record(ch, {"hook": "훅"}, "제목", "설명", 27.3)
+    last = json.load(open("data/last_caption.json", encoding="utf-8"))
+    assert last["title"] == "제목" and last["verdict"] == "chart" and last["winner"] == "상품1"
+    assert last["coupang_url"].endswith("/TOP")
+    log = json.load(open("data/publish_log.json", encoding="utf-8"))
+    assert log[-1]["slot"] == "chart" and log[-1]["format"] == "chart5" and log[-1]["links"] == 1
 
 
 def test_첫_컷에는_판정을_안_그린다(tmp_path):

@@ -291,6 +291,33 @@ def describe(p: dict) -> str:
     return "\n".join(lines)
 
 
+def choose_items(ready: list[str], log: list[dict], links: set | None = None,
+                 n: int = 3, window: int | None = None) -> list[str]:
+    """이번 편 상품 n개 — **쿨다운은 풀 크기에 맞춰 줄고, 링크 있는 상품이 앞에 선다.**
+
+    2026-10-01 실측: ready 17종에서 "최근 6편에 나온 것 제외"를 고정으로 걸었더니 남는 게
+    2종이라 화요일 데일리가 2주째 결번이었다. 쿨다운은 풀이 작으면 같이 작아져야 한다.
+      window = min(6, len(ready)//n - 1)  → 17종이면 4편, 9종이면 2편, 6종 이하면 0편
+    그 다음 순서는 ①쿠팡 링크 있음 ②가장 오래전에 다룬 것. 링크 없는 영상은 조회가 나와도
+    수수료가 0이라, 같은 조건이면 링크 있는 상품이 먼저 나간다(수익 로드맵 1-4).
+    """
+    links = links or set()
+    if window is None:
+        window = max(0, min(6, len(ready) // max(n, 1) - 1))
+    last = {}
+    for i, e in enumerate(log):
+        for x in (e.get("products") or [e.get("product")]):
+            if x:
+                last[x] = i
+    recent = {x for e in log[-window:] for x in (e.get("products") or [e.get("product")]) if x} \
+        if window else set()
+    key = lambda x: (0 if x in links else 1, last.get(x, -1))        # noqa: E731
+    pool = sorted([x for x in ready if x not in recent], key=key)
+    if len(pool) < n:                       # 쿨다운 때문에 모자라면 결번 대신 가장 오래된 것으로 채운다
+        pool += sorted([x for x in ready if x in recent], key=lambda x: last.get(x, -1))
+    return pool[:n]
+
+
 def ready_products() -> list[str]:
     """실사진까지 확보돼 **정확한 상품으로 만들 수 있는** 소재 목록."""
     try:
