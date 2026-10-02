@@ -1,5 +1,5 @@
 {
- "next": 49,
+ "next": 51,
  "items": {
   "1": {
    "name": "늘어나는 밀폐용기",
@@ -485,6 +485,24 @@
    "done": false,
    "search": "주방템",
    "url": "https://www.coupang.com/np/search?q=%EC%A3%BC%EB%B0%A9%ED%85%9C"
+  },
+  "49": {
+   "name": "살림 아이템",
+   "slug": "",
+   "key": "살림아이템",
+   "done": false,
+   "search": "살림 아이템",
+   "url": "https://www.coupang.com/np/search?q=%EC%82%B4%EB%A6%BC+%EC%95%84%EC%9D%B4%ED%85%9C",
+   "hold": true,
+   "note": "40번과 같은 물건으로 보임 — 40번으로 캡처"
+  },
+  "50": {
+   "name": "쿠팡템",
+   "slug": "",
+   "key": "쿠팡템",
+   "done": false,
+   "search": "쿠팡템",
+   "url": "https://www.coupang.com/np/search?q=%EC%BF%A0%ED%8C%A1%ED%85%9C"
   }
  }
 }

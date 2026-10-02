@@ -1,16 +1,6 @@
 {
- "updated": "2026-10-02",
+ "updated": "2026-10-03",
  "items": [
-  {
-   "date": "2026-10-04",
-   "weekday": "일",
-   "label": "10/4(일)",
-   "slot": "chart",
-   "product": "콕픽 차트 2026-W40",
-   "slug": "콕픽-차트-2026-w40",
-   "photo": false,
-   "link": false
-  },
   {
    "date": "2026-10-06",
    "weekday": "화",
@@ -22,13 +12,23 @@
    "link": false
   },
   {
-   "date": "2026-10-11",
-   "weekday": "일",
-   "label": "10/11(일)",
-   "slot": "chart",
-   "product": "콕픽 차트 2026-W40",
-   "slug": "콕픽-차트-2026-w40",
-   "photo": false,
+   "date": "2026-10-13",
+   "weekday": "화",
+   "label": "10/13(화)",
+   "slot": "deep1",
+   "product": "얼음틀 얼음보관통",
+   "slug": "얼음틀-얼음보관통",
+   "photo": true,
+   "link": false
+  },
+  {
+   "date": "2026-10-20",
+   "weekday": "화",
+   "label": "10/20(화)",
+   "slot": "deep1",
+   "product": "씨밀렉스 라이스키퍼 쌀통 10kg",
+   "slug": "씨밀렉스-라이스키퍼-쌀통-10kg",
+   "photo": true,
    "link": false
   }
  ]
