@@ -6,19 +6,19 @@
   "price_band": "중가",
   "brand": "",
   "product_id": "",
-  "evidence": "영상 34개, 채널 17개에서 반복 등장하며 '신박한 아이템' 등 구체적인 상품을 지칭하는 경우가 많음",
+  "evidence": "제목에 33개 영상, 16개 채널에서 반복 등장",
   "category": "50000008",
   "last_found": "2026-10-03",
   "first_seen": "2026-10-03"
  },
  "주방용품": {
   "name": "주방용품",
-  "search_keyword": "신박한 주방용품",
-  "en_keyword": "",
+  "search_keyword": "주방용품",
+  "en_keyword": "kitchenware",
   "price_band": "중가",
   "brand": "",
   "product_id": "",
-  "evidence": "영상 17개, 채널 14개에서 반복 등장하며 '일본에서 개발한 신박한 냄비' 등 특정 상품을 지칭하는 경우가 많음",
+  "evidence": "제목에 19개 영상, 16개 채널에서 반복 등장",
   "category": "50000008",
   "last_found": "2026-10-03",
   "first_seen": "2026-10-03"
@@ -30,7 +30,7 @@
   "price_band": "중가",
   "brand": "",
   "product_id": "",
-  "evidence": "영상 16개, 채널 14개에서 반복 등장하며 '신박한 주방템' 등 구체적인 상품을 지칭하는 경우가 많음",
+  "evidence": "제목에 14개 영상, 12개 채널에서 반복 등장",
   "category": "50000008",
   "last_found": "2026-10-03",
   "first_seen": "2026-10-03"
@@ -42,7 +42,7 @@
   "price_band": "중가",
   "brand": "",
   "product_id": "",
-  "evidence": "영상 14개, 채널 9개에서 반복 등장하며 '살림 아이템', '살림 청소템' 등 구체적인 상품을 지칭하는 경우가 많음",
+  "evidence": "제목에 14개 영상, 10개 채널에서 '살림' 표현 반복 등장",
   "category": "50000008",
   "last_found": "2026-10-03",
   "first_seen": "2026-10-03"
@@ -52,9 +52,9 @@
   "search_keyword": "다이소 추천템",
   "en_keyword": "",
   "price_band": "저가",
-  "brand": "",
+  "brand": "다이소",
   "product_id": "",
-  "evidence": "영상 14개, 채널 7개에서 반복 등장하며 '다이소 청소템', '다이소 꿀템' 등 구체적인 상품을 지칭하는 경우가 많음",
+  "evidence": "제목에 12개 영상, 7개 채널에서 반복 등장",
   "category": "50000008",
   "last_found": "2026-10-03",
   "first_seen": "2026-10-03"
@@ -66,19 +66,19 @@
   "price_band": "중가",
   "brand": "",
   "product_id": "",
-  "evidence": "영상 11개, 채널 7개에서 반복 등장하며 '쿠팡 청소템', '쿠팡 꿀템 3가지' 등 구체적인 상품을 지칭하는 경우가 많음",
+  "evidence": "제목에 7개 영상, 5개 채널에서 반복 등장",
   "category": "50000008",
   "last_found": "2026-10-03",
   "first_seen": "2026-10-03"
  },
  "신박한아이템": {
-  "name": "신박한아이템",
+  "name": "신박한 아이템",
   "search_keyword": "신박한 아이템",
   "en_keyword": "",
   "price_band": "중가",
   "brand": "",
   "product_id": "",
-  "evidence": "영상 8개, 채널 7개에서 반복 등장하며 '신박한 살림 아이템' 등 구체적인 상품을 지칭하는 경우가 많음",
+  "evidence": "제목에 8개 영상, 7개 채널에서 반복 등장",
   "category": "50000008",
   "last_found": "2026-10-03",
   "first_seen": "2026-10-03"
@@ -102,7 +102,7 @@
   "price_band": "중가",
   "brand": "",
   "product_id": "",
-  "evidence": "영상 11개, 채널 6개에서 반복 등장하며 '양념통', '조미료통', '주방용품' 등 구체적인 상품을 지칭하는 경우가 많음",
+  "evidence": "제목에 13개 영상, 9개 채널에서 반복 등장",
   "category": "50000008",
   "last_found": "2026-10-03",
   "first_seen": "2026-10-03"
@@ -114,7 +114,7 @@
   "price_band": "중가",
   "brand": "",
   "product_id": "",
-  "evidence": "영상 10개, 채널 6개에서 반복 등장하며 '휴대용 레이저 마킹기', '식탁' 등 구체적인 상품을 지칭하는 경우가 많음",
+  "evidence": "제목에 10개 영상, 7개 채널에서 반복 등장",
   "category": "50000008",
   "last_found": "2026-10-03",
   "first_seen": "2026-10-03"
@@ -126,7 +126,7 @@
   "price_band": "중가",
   "brand": "",
   "product_id": "",
-  "evidence": "영상 6개, 채널 6개에서 반복 등장하며 '일본 주부 주방템', '신박한 주방템' 등 구체적인 상품을 지칭하는 경우가 많음",
+  "evidence": "제목에 8개 영상, 7개 채널에서 반복 등장",
   "category": "50000008",
   "last_found": "2026-10-03",
   "first_seen": "2026-10-03"
@@ -138,7 +138,19 @@
   "price_band": "중가",
   "brand": "",
   "product_id": "",
-  "evidence": "영상 9개, 채널 5개에서 반복 등장하며 '찐 재구매템', '쿠팡 살림템' 등 구체적인 상품을 지칭하는 경우가 많음",
+  "evidence": "제목에 8개 영상, 5개 채널에서 반복 등장",
+  "category": "50000008",
+  "last_found": "2026-10-03",
+  "first_seen": "2026-10-03"
+ },
+ "생활용품": {
+  "name": "생활용품",
+  "search_keyword": "생활용품",
+  "en_keyword": "household goods",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 5개 영상, 5개 채널에서 반복 등장",
   "category": "50000008",
   "last_found": "2026-10-03",
   "first_seen": "2026-10-03"
@@ -223,18 +235,6 @@
   "brand": "",
   "product_id": "",
   "evidence": "제목에 '쿠팡꿀템'이 영상 11개, 채널 8개에서 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-10-02",
-  "first_seen": "2026-10-02"
- },
- "saenghwal_kkultem": {
-  "name": "생활꿀템",
-  "search_keyword": "생활 꿀템",
-  "en_keyword": "",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "제목에 '생활꿀템'이 영상 8개, 채널 8개에서 반복 등장",
   "category": "50000008",
   "last_found": "2026-10-02",
   "first_seen": "2026-10-02"

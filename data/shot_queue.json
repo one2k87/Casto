@@ -1,5 +1,5 @@
 {
- "next": 51,
+ "next": 52,
  "items": {
   "1": {
    "name": "늘어나는 밀폐용기",
@@ -503,6 +503,14 @@
    "done": false,
    "search": "쿠팡템",
    "url": "https://www.coupang.com/np/search?q=%EC%BF%A0%ED%8C%A1%ED%85%9C"
+  },
+  "51": {
+   "name": "생활용품",
+   "slug": "",
+   "key": "생활용품",
+   "done": false,
+   "search": "생활용품",
+   "url": "https://www.coupang.com/np/search?q=%EC%83%9D%ED%99%9C%EC%9A%A9%ED%92%88"
   }
  }
 }
