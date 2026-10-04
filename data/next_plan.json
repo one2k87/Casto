@@ -1,34 +1,34 @@
 {
- "updated": "2026-10-03",
+ "updated": "2026-10-04",
  "items": [
   {
    "date": "2026-10-06",
    "weekday": "화",
    "label": "10/6(화)",
    "slot": "deep1",
-   "product": "레이저가이드가위",
-   "slug": "레이저가이드가위",
-   "photo": true,
+   "product": "쿠팡꿀템",
+   "slug": "쿠팡꿀템",
+   "photo": false,
    "link": false
   },
   {
-   "date": "2026-10-13",
-   "weekday": "화",
-   "label": "10/13(화)",
-   "slot": "deep1",
-   "product": "얼음틀 얼음보관통",
-   "slug": "얼음틀-얼음보관통",
-   "photo": true,
+   "date": "2026-10-08",
+   "weekday": "목",
+   "label": "10/8(목)",
+   "slot": "deep2",
+   "product": "스크럽대디",
+   "slug": "스크럽대디",
+   "photo": false,
    "link": false
   },
   {
-   "date": "2026-10-20",
-   "weekday": "화",
-   "label": "10/20(화)",
-   "slot": "deep1",
-   "product": "씨밀렉스 라이스키퍼 쌀통 10kg",
-   "slug": "씨밀렉스-라이스키퍼-쌀통-10kg",
-   "photo": true,
+   "date": "2026-10-10",
+   "weekday": "토",
+   "label": "10/10(토)",
+   "slot": "season",
+   "product": "전기장판",
+   "slug": "전기장판",
+   "photo": false,
    "link": false
   }
  ]
