@@ -1,4 +1,16 @@
 {
+ "쿠팡추천템": {
+  "name": "쿠팡추천템",
+  "search_keyword": "쿠팡 추천템",
+  "en_keyword": "",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 30개 영상, 18개 채널에서 반복 등장하여 유행으로 판단",
+  "category": "50000008",
+  "last_found": "2026-10-06",
+  "first_seen": "2026-10-03"
+ },
  "cooker_sauce_dispenser": {
   "name": "양념통",
   "search_keyword": "누름식 양념통, 숟가락 일체형 양념통",
@@ -142,18 +154,6 @@
   "category": "50000008",
   "last_found": "2026-10-04",
   "first_seen": "2026-10-04"
- },
- "쿠팡추천템": {
-  "name": "쿠팡추천템",
-  "search_keyword": "쿠팡 추천템",
-  "en_keyword": "",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "제목에 33개 영상, 16개 채널에서 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-10-03",
-  "first_seen": "2026-10-03"
  },
  "주방용품": {
   "name": "주방용품",
