@@ -125,7 +125,8 @@ def _compact(s: str) -> str:
     return re.sub(r"[\s\-_·,./()|]+", "", unicodedata.normalize("NFKC", s or "")).lower()
 
 
-def apply_links(docs: list[dict], cat: dict | None = None, today: str | None = None) -> dict:
+def apply_links(docs: list[dict], cat: dict | None = None, today: str | None = None,
+                fetch_images: bool = True) -> dict:
     """아티팩트 `links/*` 중 pending을 대장에 쓴다. 돌려주는 값: {applied: [id…], skipped: {id: 이유}}.
 
     규칙: 파트너스 링크 형식만(남의 추적 코드 차단은 catalog.register가 한 번 더 본다),
@@ -175,6 +176,13 @@ def apply_links(docs: list[dict], cat: dict | None = None, today: str | None = N
         e["coupang_url"] = url
         if price is not None:
             e["price"] = price
+        # 파트너스 「링크 생성 → 이미지+텍스트」가 준 **쿠팡 제공 이미지**(ads-partners/coupangcdn)만
+        # 받는다. 타인 후기·캡처 이미지는 가이드 금지 항목이고, 다른 호스트는 block_image_url이 버린다.
+        img = catalog.block_image_url({"image_url": (d.get("image") or "").strip()})
+        if img and not e.get("image") and fetch_images:
+            local = catalog.cache_image(img, slug)
+            if local:
+                e["image"], e["image_source"] = local, "coupang_partners"
         e["updated"] = today
         applied.append(did)
     return {"applied": applied, "skipped": skipped}

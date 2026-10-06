@@ -48,3 +48,19 @@ def test_이미_반영된_문서는_건너뛴다():
     cat = _cat()
     docs = [{"_id": link_intake._id("에그크래커"), "url": "https://link.coupang.com/a/A", "status": "applied"}]
     assert link_intake.apply_links(docs, cat)["applied"] == []
+
+
+def test_쿠팡_제공_이미지만_캐시한다(monkeypatch):
+    """파트너스 배너 이미지(ads-partners/coupangcdn)는 홍보용 제공물. 다른 호스트는 버린다."""
+    cat = _cat()
+    cat["products"]["레트로-수화기"]["image"] = ""            # 사진이 없던 상품에만 들어간다
+    calls = []
+    monkeypatch.setattr(link_intake.catalog, "cache_image", lambda url, slug: calls.append(url) or f"assets/products/{slug}.jpg")
+    docs = [{"_id": link_intake._id("레트로-수화기"), "url": "https://link.coupang.com/a/A",
+             "image": "https://ads-partners.coupang.com/image1/x.jpg"},
+            {"_id": link_intake._id("에그크래커"), "url": "https://link.coupang.com/a/B",
+             "image": "https://evil.example.com/x.jpg"}]
+    link_intake.apply_links(docs, cat, today="2026-10-06")
+    assert calls == ["https://ads-partners.coupang.com/image1/x.jpg"]
+    assert cat["products"]["레트로-수화기"]["image_source"] == "coupang_partners"
+    assert cat["products"]["에그크래커"]["image"] == "a.jpg"       # 기존 캡처 유지, 외부 이미지 무시
