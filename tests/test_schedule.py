@@ -197,3 +197,18 @@ def test_링크_있는_상품이_먼저_선다():
     got = s.choose_items(ready, [], {"p7", "p9"}, 3)
     assert got[:2] == ["p7", "p9"]
     assert len(got) == 3
+
+
+# ── 편성 기준일 (2026-10-06) ───────────────────────────────────────────────
+def test_자정을_넘겨_돌아도_전날_작업이다(monkeypatch):
+    """크론이 4~9시간 늦어 19:40 KST 작업이 월요일 00:29에 돌았고 일요일 차트가 결번됐다(10/4)."""
+    import datetime as dt
+    import common
+    monkeypatch.delenv("CASTO_DATE", raising=False)
+    kst = dt.timezone(dt.timedelta(hours=9))
+    assert common.op_date(dt.datetime(2026, 10, 5, 0, 29, tzinfo=kst)) == dt.date(2026, 10, 4)
+    assert common.op_date(dt.datetime(2026, 10, 5, 4, 22, tzinfo=kst)) == dt.date(2026, 10, 4)
+    assert common.op_date(dt.datetime(2026, 10, 4, 19, 40, tzinfo=kst)) == dt.date(2026, 10, 4)
+    assert common.op_date(dt.datetime(2026, 10, 4, 10, 0, tzinfo=kst)) == dt.date(2026, 10, 4)
+    monkeypatch.setenv("CASTO_DATE", "2026-10-11")
+    assert common.op_date(dt.datetime(2026, 10, 12, 3, 0, tzinfo=kst)) == dt.date(2026, 10, 11)

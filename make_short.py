@@ -864,7 +864,8 @@ def main():
     with open("out/caption.txt", "w", encoding="utf-8") as f:
         f.write(cap)
     os.makedirs("data", exist_ok=True)
-    today = __import__("datetime").date.today().isoformat()
+    from common import op_date
+    today = op_date().isoformat()          # 크론이 자정을 넘겨 돌아도 편성일로 기록한다
     with open("data/last_caption.json", "w", encoding="utf-8") as f:
         json.dump({"date": today, "title": s.get("title", ""), "description": cap,
                    "product": " / ".join(items), "verdict": v["key"],

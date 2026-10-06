@@ -333,6 +333,10 @@ if __name__ == "__main__":
     # `--slot [날짜]`는 슬롯 이름만 한 줄로 찍는다 — 워크플로가 분기하는 데 쓴다.
     # 사람이 읽는 요약과 기계가 읽는 값을 섞으면 grep으로 파싱하다 조용히 틀린다.
     args = sys.argv[1:]
+    if args and args[0] == "--today":
+        from common import op_date
+        print(op_date().isoformat())
+        sys.exit(0)
     if args and args[0] == "--slot":
         d = dt.date.fromisoformat(args[1]) if len(args) > 1 else dt.date.today()
         print(slot_for(d) or "none")

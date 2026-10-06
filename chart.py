@@ -214,7 +214,8 @@ def _snapshots() -> list[dict]:
 
 
 def week_id(d: dt.date | None = None) -> str:
-    d = d or dt.date.today()
+    from common import op_date
+    d = d or op_date()          # 일요일 23시 크론이 월요일 새벽에 돌면 다음 주가 돼 버린다
     y, w, _ = d.isocalendar()
     return f"{y}-W{w:02d}"
 

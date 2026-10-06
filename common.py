@@ -1,7 +1,22 @@
 """캐스토 공용 유틸 — LLM(Gemini REST)·텔레그램·설정 로드.
 Scripto/Picto와 독립 실행되도록 의존성을 최소화했다(requests만)."""
+import datetime as _dt
 import json, os, time
 import requests
+
+
+def op_date(now=None):
+    """**편성 기준일.** GitHub 크론은 4~9시간씩 늦게 돈다(2026-10-02~05 실측: 10:40Z 크론이
+    15:29Z·16:49Z에 발화). 19:40 KST 작업이 자정을 넘겨 돌면 `date.today()`는 다음 날이 되고,
+    일요일 차트가 "월요일=발행 없음"으로 결번된다(10/4 실제 사고). 그래서 하루의 경계를
+    **KST 오전 10시**에 둔다: 그 전에 도는 실행은 전날 작업으로 본다. 워크플로가 `CASTO_DATE`를
+    주면 그 값을 쓴다(마커·기록·편성이 같은 날짜를 보도록).
+    """
+    env = os.getenv("CASTO_DATE", "").strip()
+    if env:
+        return _dt.date.fromisoformat(env)
+    now = now or _dt.datetime.now(_dt.timezone(_dt.timedelta(hours=9)))
+    return (now - _dt.timedelta(hours=10)).date()
 
 def cfg():
     c = json.load(open("casto.json", encoding="utf-8"))

@@ -24,17 +24,21 @@ def _s():
             "hashtags": []}
 
 
-def test_설명란_첫_줄은_승자_링크다():
+def test_설명란은_고지_한_줄_뒤_승자_링크다():
+    """파트너스 가이드(9/17판): 고지 문구는 설명란 첫 부분. 접힌 설명란엔 두 줄이 보이니 둘째 줄이 링크."""
     entries = [{"coupang_url": "https://link.coupang.com/a/WIN"}, {}, {}]
     cap = roundup.build_caption(_s(), _v(), ITEMS, entries, _c(), 24)
-    first = cap.splitlines()[0]
-    assert first.startswith("🛒") and "link.coupang.com/a/WIN" in first and ITEMS[0] in first
+    ln = cap.splitlines()
+    assert ln[0] == _c()["disclosure"]["coupang"]
+    assert ln[1].startswith("🛒") and "link.coupang.com/a/WIN" in ln[1] and ITEMS[0] in ln[1]
+    assert cap.count(_c()["disclosure"]["coupang"]) == 1          # 고지는 한 번만
 
 
-def test_링크가_없으면_첫_줄은_제목이다():
+def test_링크가_없으면_고지_다음이_제목이다():
     """'링크 준비 중' 같은 가짜 줄을 만들지 않는다."""
     cap = roundup.build_caption(_s(), _v(), ITEMS, [{}, {}, {}], _c(), 24)
-    assert cap.splitlines()[0] == "📦 제목"
+    ln = cap.splitlines()
+    assert ln[0] == _c()["disclosure"]["coupang"] and ln[2] == "📦 제목"
     assert "준비 중" not in cap and "🛒" not in cap
 
 

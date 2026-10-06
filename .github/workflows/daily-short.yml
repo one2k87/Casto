@@ -15,10 +15,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # 편성 기준일: GitHub 크론은 4~9시간씩 늦게 돈다(2026-10-02~05 실측). 19:40 KST 작업이 자정을
+      # 넘겨 돌면 '오늘'이 다음 날이 돼 일요일 차트가 "월요일=발행 없음"으로 결번됐다(10/4 사고).
+      # 하루의 경계를 KST 10시에 두어 그 전 실행은 전날 작업으로 본다. 아래 모든 단계가 이 값을 쓴다.
+      - name: 편성 기준일
+        id: day
+        run: |
+          TODAY=$(TZ=Asia/Seoul date -d '-10 hours' +%F)
+          echo "today=$TODAY" >> "$GITHUB_OUTPUT"
+          echo "CASTO_DATE=$TODAY" >> "$GITHUB_ENV"
+          echo "기준일: $TODAY (지금 KST $(TZ=Asia/Seoul date '+%F %H:%M'))"
       - name: 중복 실행 가드 (오늘 이미 만들었으면 스킵)
         id: dup
         run: |
-          if [ "${{ github.event_name }}" = "schedule" ] && [ -f data/last_short.txt ] && [ "$(cat data/last_short.txt)" = "$(TZ=Asia/Seoul date +%F)" ]; then
+          if [ "${{ github.event_name }}" = "schedule" ] && [ -f data/last_short.txt ] && [ "$(cat data/last_short.txt)" = "${{ steps.day.outputs.today }}" ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"; echo "오늘 쇼츠 이미 생성됨 — 백업 크론 스킵"
           else
             echo "skip=false" >> "$GITHUB_OUTPUT"
@@ -32,7 +42,7 @@ jobs:
         id: plan
         if: steps.dup.outputs.skip != 'true'
         run: |
-          TODAY=$(TZ=Asia/Seoul date +%F)
+          TODAY="${{ steps.day.outputs.today }}"
           PLAN=$(TZ=Asia/Seoul python schedule.py "$TODAY")
           echo "$PLAN"
           # 슬롯은 사람이 읽는 요약을 grep하지 않고 전용 출력으로 받는다 — 문구가 바뀌면
@@ -108,9 +118,9 @@ jobs:
       - name: 성공 마커 커밋 (중복 가드용)
         if: steps.dup.outputs.skip != 'true' && steps.plan.outputs.skip != 'true'
         run: |
-          TZ=Asia/Seoul date +%F > data/last_short.txt
+          echo "${{ steps.day.outputs.today }}" > data/last_short.txt
           git config user.name casto-bot && git config user.email casto@solvup.local
-          git add -A data && git commit -m "marker: $(TZ=Asia/Seoul date +%F) ${{ steps.plan.outputs.slot }} 생성" || true
+          git add -A data && git commit -m "marker: ${{ steps.day.outputs.today }} ${{ steps.plan.outputs.slot }} 생성" || true
           git pull --rebase --autostash origin main && git push origin main || true
       - name: 실패 알림
         if: failure()

@@ -25,7 +25,7 @@ import subprocess
 
 import cards
 import chart
-from common import cfg, llm_json, telegram_msg, telegram_video
+from common import cfg, llm_json, op_date, telegram_msg, telegram_video
 from make_short import H, W, dur, font, tts
 
 OUT = "out"
@@ -249,12 +249,13 @@ def build_caption(ch: dict, script: dict, c: dict, total: float) -> str:
     """설명란 — 순위·이유·**쿠팡 링크**. 링크가 없으면 그 줄을 비운다(가짜 링크 금지)."""
     dis = c["disclosure"]
     reasons = {i.get("key"): i for i in script.get("items", [])}
-    lines = []
-    # 첫 줄 = 1위 쿠팡 링크. 접힌 설명란에서 보이는 건 첫 줄뿐이다(2026-10-01 설계).
+    # 1줄 고지 → 2줄 1위 링크 → 제목. 고지는 가이드가 요구하는 「첫 부분」, 링크는 접힌
+    # 설명란에서 보이는 둘째 줄(2026-10-01/06 설계).
+    lines = [dis["coupang"]]
     top = ch["entries"][0] if ch.get("entries") else {}
     if top.get("coupang_url"):
-        lines += [f"🛒 1위 {top['display']} 쿠팡 → {top['coupang_url']}", ""]
-    lines += [f"📊 {script.get('title', '')}", ""]
+        lines.append(f"🛒 1위 {top['display']} 쿠팡 → {top['coupang_url']}")
+    lines += ["", f"📊 {script.get('title', '')}", ""]
     for e in ch["entries"]:
         it = reasons.get(e["key"], {})
         tag = (e.get("tag") or {}).get("label")
@@ -273,7 +274,7 @@ def build_caption(ch: dict, script: dict, c: dict, total: float) -> str:
     lines += ["다음 주 일요일 같은 시간에 이어집니다.",
               "심사받고 싶은 제품은 댓글로 신청해주세요.", "",
               "#콕픽차트 #유행템 #요즘유행하는거 #쇼핑", "",
-              dis["coupang"], dis["ai"],
+              dis["ai"],
               f"({total:.0f}초 · {ch['week']} · 수집 {ch.get('source_days')}일)"]
     return "\n".join(lines)
 
@@ -298,11 +299,10 @@ def record(ch: dict, script: dict, title: str, cap: str, total: float) -> None:
     `publish.py`는 제목·날짜를 `last_caption.json`에서 읽는다. 차트가 안 쓰면 **지난 데일리의
     제목과 날짜로** 올라간다(2026-09-27 실제 사고). 학습 루프도 이 로그만 본다.
     """
-    import datetime as dt
-
     import catalog
     import schedule as sched
-    today = dt.date.today().isoformat()
+    from common import op_date
+    today = op_date().isoformat()
     top = ch["entries"][0]
     names = [e["display"] for e in ch["entries"]]
     os.makedirs("data", exist_ok=True)
@@ -327,7 +327,7 @@ def record(ch: dict, script: dict, title: str, cap: str, total: float) -> None:
 def main() -> None:
     import schedule as sched
     c = cfg()
-    ch = chart.build()
+    ch = chart.build(today=op_date())
     chart.save(ch)
     print(chart.report(ch))
     script = build_script(ch, c)

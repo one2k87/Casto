@@ -313,8 +313,8 @@ def next_teaser(path: str = "data/next_plan.json") -> dict | None:
             items = json.load(f).get("items") or []
     except Exception:                                        # noqa: BLE001
         return None
-    import datetime as dt
-    today = dt.date.today().isoformat()
+    from common import op_date
+    today = op_date().isoformat()
     for it in items:
         if it.get("date", "") > today and it.get("product"):
             return {"label": it.get("label", ""), "product": it["product"]}
@@ -328,14 +328,14 @@ def build_caption(s, v, items, entries, c, total, post=None):
     win = s.get("winner", 0)
     win = win if isinstance(win, int) and 0 <= win < len(items) else 0
 
-    # **첫 줄 = 승자 쿠팡 링크.** 쇼츠 설명란은 접혀 있어 첫 줄만 보인다(2026-10-01 설계).
-    # 영상이 「링크는 설명란에」라고 말하는데 첫 줄이 제목이면 시청자는 한 번 더 눌러야 한다.
-    # 링크가 없으면 줄을 만들지 않는다 — 가짜 링크·'준비 중' 문구 금지.
-    lines = []
+    # **1줄 고지 → 2줄 승자 링크 → 제목.** 파트너스 공식 가이드(9/17판)가 고지 문구를 설명란
+    # **첫 부분**에 요구한다(famto 10/1 현행확인). 쇼츠 설명란은 접혀 있어 앞 두 줄만 보이므로
+    # 고지 바로 아래에 링크를 둔다. 링크가 없으면 그 줄을 만들지 않는다 — 가짜 링크·'준비 중' 금지.
+    lines = [dis["coupang"]]
     win_url = (entries[win] or {}).get("coupang_url", "") if win < len(entries) else ""
     if win_url:
-        lines += [f"🛒 {items[win]} 쿠팡 → {win_url}", ""]
-    lines += [f"📦 {s.get('title', '')}", ""]
+        lines.append(f"🛒 {items[win]} 쿠팡 → {win_url}")
+    lines += ["", f"📦 {s.get('title', '')}", ""]
     rows = s.get("items", [])
     for i, name in enumerate(items):
         mark = f" {v['emoji']}" if i == win else ""
@@ -356,7 +356,6 @@ def build_caption(s, v, items, entries, c, total, post=None):
         "",
         " ".join(tags),
         "",
-        dis["coupang"],
         dis["ai"],
         f"({total:.0f}초 · 트렌드 {c.get('_trends_updated', '-')} 기준)",
     ])

@@ -149,15 +149,16 @@ def test_긴_문장은_자르지_않고_대체한다():
     assert sc[0]["voice"] == make_chart.HOOK_DEFAULT
 
 
-def test_설명란_첫_줄은_1위_링크다():
+def test_설명란은_고지_뒤_1위_링크다():
     """접힌 설명란에서 보이는 건 첫 줄뿐이다. 링크가 없으면 첫 줄은 제목이다(가짜 줄 금지)."""
     c = {"disclosure": {"coupang": "c", "ai": "a"}}
     ch = _chart(3)
     cap = make_chart.build_caption(ch, {"title": "제목", "items": []}, c, 24)
-    assert cap.splitlines()[0] == "📊 제목"
+    assert cap.splitlines()[0] == "c" and cap.splitlines()[2] == "📊 제목"      # 고지 → (빈 줄) → 제목
     ch["entries"][0]["coupang_url"] = "https://link.coupang.com/a/TOP"
     cap = make_chart.build_caption(ch, {"title": "제목", "items": []}, c, 24)
-    assert cap.splitlines()[0].startswith("🛒") and "link.coupang.com/a/TOP" in cap.splitlines()[0]
+    assert cap.splitlines()[0] == "c"
+    assert cap.splitlines()[1].startswith("🛒") and "link.coupang.com/a/TOP" in cap.splitlines()[1]
 
 
 def test_차트_제목은_관문을_거친다():
