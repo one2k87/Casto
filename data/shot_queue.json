@@ -1,5 +1,5 @@
 {
- "next": 64,
+ "next": 67,
  "items": {
   "1": {
    "name": "늘어나는 밀폐용기",
@@ -617,6 +617,32 @@
    "done": false,
    "search": "비누 스펀지",
    "url": "https://www.coupang.com/np/search?q=%EB%B9%84%EB%88%84+%EC%8A%A4%ED%8E%80%EC%A7%80"
+  },
+  "64": {
+   "name": "추천템",
+   "slug": "",
+   "key": "추천템",
+   "done": false,
+   "search": "추천템",
+   "url": "https://www.coupang.com/np/search?q=%EC%B6%94%EC%B2%9C%ED%85%9C",
+   "hold": true,
+   "note": "37번과 같은 물건으로 보임 — 37번으로 캡처"
+  },
+  "65": {
+   "name": "자취방",
+   "slug": "",
+   "key": "자취방",
+   "done": false,
+   "search": "자취방",
+   "url": "https://www.coupang.com/np/search?q=%EC%9E%90%EC%B7%A8%EB%B0%A9"
+  },
+  "66": {
+   "name": "3가지",
+   "slug": "",
+   "key": "3가지",
+   "done": false,
+   "search": "3가지",
+   "url": "https://www.coupang.com/np/search?q=3%EA%B0%80%EC%A7%80"
   }
  }
 }
