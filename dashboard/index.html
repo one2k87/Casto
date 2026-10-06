@@ -737,7 +737,12 @@ async function loadLinkNeeds(){
     let due = 0;
     try{
       const plan = await get("data/next_plan.json", true);
-      const when = new Map((plan.items || []).map((it, i) => [it.slug, {i, label: it.label}]));
+      // 2026-10-06부터 편성 한 줄에 상품이 3개(차트 5개) — products 배열의 슬러그 전부가 '급함'이다
+      const when = new Map();
+      (plan.items || []).forEach((it, i) => {
+        const slugs = (it.products || []).map(p => p.slug);
+        (slugs.length ? slugs : [it.slug]).forEach(s => { if(!when.has(s)) when.set(s, {i, label: it.label}); });
+      });
       rows.forEach(r => { const m = when.get(r.slug); if(m){ r.rank = m.i; r.due = m.label; } });
       rows.sort((a,b) => (a.rank ?? 99) - (b.rank ?? 99));
       due = rows.filter(r => r.due).length;

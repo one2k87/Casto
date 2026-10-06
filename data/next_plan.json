@@ -2,34 +2,144 @@
  "updated": "2026-10-06",
  "items": [
   {
-   "date": "2026-10-06",
-   "weekday": "화",
-   "label": "10/6(화)",
-   "slot": "deep1",
-   "product": "쿠팡꿀템",
-   "slug": "쿠팡꿀템",
-   "photo": false,
-   "link": false
-  },
-  {
    "date": "2026-10-08",
    "weekday": "목",
    "label": "10/8(목)",
    "slot": "deep2",
-   "product": "스크럽대디",
-   "slug": "스크럽대디",
-   "photo": false,
-   "link": false
+   "product": "레이저가이드가위 · 얼음틀 얼음보관통 · 씨밀렉스 라이스키퍼 쌀통 10kg",
+   "slug": "레이저가이드가위",
+   "products": [
+    {
+     "name": "레이저가이드가위",
+     "slug": "레이저가이드가위",
+     "photo": true,
+     "link": false,
+     "band": "mid"
+    },
+    {
+     "name": "얼음틀 얼음보관통",
+     "slug": "얼음틀-얼음보관통",
+     "photo": true,
+     "link": false,
+     "band": "low"
+    },
+    {
+     "name": "씨밀렉스 라이스키퍼 쌀통 10kg",
+     "slug": "씨밀렉스-라이스키퍼-쌀통-10kg",
+     "photo": true,
+     "link": false,
+     "band": "mid"
+    }
+   ],
+   "photo": true,
+   "link": false,
+   "links": "0/3",
+   "hot": []
   },
   {
    "date": "2026-10-10",
    "weekday": "토",
    "label": "10/10(토)",
    "slot": "season",
-   "product": "전기장판",
-   "slug": "전기장판",
-   "photo": false,
-   "link": false
+   "product": "미닉스 3인용 미니 식기세척기 PRO MNDW-110 · 에그크래커 · 신일전자 삶는 미니세탁기 3kg SWM-1500WSJ",
+   "slug": "미닉스-3인용-미니-식기세척기-pro-mndw-110",
+   "products": [
+    {
+     "name": "미닉스 3인용 미니 식기세척기 PRO MNDW-110",
+     "slug": "미닉스-3인용-미니-식기세척기-pro-mndw-110",
+     "photo": true,
+     "link": false,
+     "band": "high"
+    },
+    {
+     "name": "에그크래커",
+     "slug": "에그크래커",
+     "photo": true,
+     "link": false,
+     "band": "low"
+    },
+    {
+     "name": "신일전자 삶는 미니세탁기 3kg SWM-1500WSJ",
+     "slug": "신일전자-삶는-미니세탁기-3kg-swm-1500wsj",
+     "photo": true,
+     "link": false,
+     "band": "mid"
+    }
+   ],
+   "photo": true,
+   "link": false,
+   "links": "0/3",
+   "hot": []
+  },
+  {
+   "date": "2026-10-13",
+   "weekday": "화",
+   "label": "10/13(화)",
+   "slot": "deep1",
+   "product": "무아스 마그넷 무선 LED 무드등 MLL37 · 조셉조셉 찹투팟 플러스 접이식도마 · 코멧 길이조절 접시정리대",
+   "slug": "무아스-마그넷-무선-led-무드등-mll37",
+   "products": [
+    {
+     "name": "무아스 마그넷 무선 LED 무드등 MLL37",
+     "slug": "무아스-마그넷-무선-led-무드등-mll37",
+     "photo": true,
+     "link": false,
+     "band": "low"
+    },
+    {
+     "name": "조셉조셉 찹투팟 플러스 접이식도마",
+     "slug": "조셉조셉-찹투팟-플러스-접이식도마",
+     "photo": true,
+     "link": false,
+     "band": "low"
+    },
+    {
+     "name": "코멧 길이조절 접시정리대",
+     "slug": "코멧-길이조절-접시정리대",
+     "photo": true,
+     "link": false,
+     "band": "mid"
+    }
+   ],
+   "photo": true,
+   "link": false,
+   "links": "0/3",
+   "hot": []
+  },
+  {
+   "date": "2026-10-15",
+   "weekday": "목",
+   "label": "10/15(목)",
+   "slot": "deep2",
+   "product": "계란 흰자 분리기 · 레트로 수화기 · 손끼임 방지가드",
+   "slug": "계란-흰자-분리기",
+   "products": [
+    {
+     "name": "계란 흰자 분리기",
+     "slug": "계란-흰자-분리기",
+     "photo": true,
+     "link": false,
+     "band": "low"
+    },
+    {
+     "name": "레트로 수화기",
+     "slug": "레트로-수화기",
+     "photo": true,
+     "link": false,
+     "band": "low"
+    },
+    {
+     "name": "손끼임 방지가드",
+     "slug": "손끼임-방지가드",
+     "photo": true,
+     "link": false,
+     "band": "low"
+    }
+   ],
+   "photo": true,
+   "link": false,
+   "links": "0/3",
+   "hot": []
   }
  ]
 }

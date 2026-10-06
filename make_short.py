@@ -748,7 +748,14 @@ def pick_items(n=roundup.N_ITEMS):
     ready = sched.ready_products()
     log = sched._load(sched.PUBLISH_LOG, []) if hasattr(sched, "_load") else []
     links = {x for x in ready if (catalog.find(cat, name=x) or {}).get("coupang_url")}
-    picked = sched.choose_items(ready, log, links, n)       # 쿨다운은 풀 크기에 맞춰, 링크 우선
+    bands = {x: sched.band_of(catalog.find(cat, name=x), x) for x in ready}
+    try:
+        board = json.load(open("data/trend_board.json", encoding="utf-8"))
+    except (OSError, ValueError):
+        board = {}
+    hot = sched.hot_names(board, ready)
+    # 링크 우선 · 핫이슈 6:4(48h) · 가격대 60/30/10 · 쿨다운은 풀 크기에 맞춰 (famto 10/1 규칙)
+    picked = sched.choose_items(ready, log, links, n, bands=bands, hot=hot)
     entries = [catalog.find(cat, name=x) for x in picked]
     shots = [catalog.image_path(e) if catalog.render_mode(e) == "exact" else None
              for e in entries]
@@ -792,6 +799,13 @@ def main():
     _past = sched._load(sched.PUBLISH_LOG, []) if hasattr(sched, "_load") else []
     _recent = [e.get("title", "") for e in _past[-6:]] if isinstance(_past, list) else []
     _fixed = roundup.clean_title(s.get("title", ""), items, _win, _recent, _use)
+    # 쇼츠 제목 = 픽담 GSC 실측 검색어(famto 10/1 승인). 이번 편 상품을 사람들이 실제로 치는 말로
+    # 검색한 기록이 있으면 그 말을 제목 앞에 둔다 — 구글 동영상 팩·유튜브 검색 두 군데에 같이 붙는다.
+    import search_terms
+    _q = search_terms.best_for(items)
+    if _q:
+        _fixed = search_terms.title_with(_q, _fixed)
+        print(f"[casto] 검색어 제목 — 「{_q}」")
     if _fixed != (s.get("title") or "").strip():
         print(f"[casto] 제목 교체 — 「{s.get('title','')}」 → 「{_fixed}」")
     s["title"] = _fixed

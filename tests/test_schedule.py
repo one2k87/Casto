@@ -212,3 +212,35 @@ def test_자정을_넘겨_돌아도_전날_작업이다(monkeypatch):
     assert common.op_date(dt.datetime(2026, 10, 4, 10, 0, tzinfo=kst)) == dt.date(2026, 10, 4)
     monkeypatch.setenv("CASTO_DATE", "2026-10-11")
     assert common.op_date(dt.datetime(2026, 10, 12, 3, 0, tzinfo=kst)) == dt.date(2026, 10, 11)
+
+
+def test_가격대는_60_30_10으로_수렴한다():
+    """famto 10/1: 저가 60 · 중가 30 · 고가 10. 고가만 있는 풀이 아니면 고가가 세 편에 한 번을 넘지 않는다."""
+    import schedule as s
+    ready = [f"L{i}" for i in range(8)] + [f"M{i}" for i in range(5)] + [f"H{i}" for i in range(4)]
+    bands = {x: {"L": "low", "M": "mid", "H": "high"}[x[0]] for x in ready}
+    log, hist = [], []
+    for _ in range(10):
+        pick = s.choose_items(ready, log, set(), 3, bands=bands)
+        log.append({"products": pick}); hist += pick
+    share = {b: sum(1 for x in hist if bands[x] == b) / len(hist) for b in ("low", "mid", "high")}
+    assert 0.5 <= share["low"] <= 0.7 and 0.2 <= share["mid"] <= 0.4 and share["high"] <= 0.2
+
+
+def test_핫이슈는_편당_둘까지():
+    """6:4 — 핫이슈가 넷이어도 한 편에 둘만, 나머지는 에버그린."""
+    import schedule as s
+    ready = [f"p{i}" for i in range(9)]
+    hot = {"p0", "p1", "p2", "p3"}
+    pick = s.choose_items(ready, [], set(), 3, hot=hot)
+    assert sum(1 for x in pick if x in hot) == 2
+
+
+def test_보드가_묵으면_핫이슈가_없다():
+    import datetime as dt
+    import schedule as s
+    board = {"updated": "2026-10-04", "deep_dive": [{"name": "스크럽대디", "delta": "new"}]}
+    assert s.hot_names(board, ["스크럽대디 수세미"], dt.date(2026, 10, 6)) == {"스크럽대디 수세미"}
+    assert s.hot_names(board, ["스크럽대디 수세미"], dt.date(2026, 10, 7)) == set()
+    assert s.hot_names({"updated": "2026-10-06", "deep_dive": [{"name": "양념통", "delta": "flat"}]},
+                       ["양념통"], dt.date(2026, 10, 6)) == set()

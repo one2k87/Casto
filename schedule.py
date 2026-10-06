@@ -291,17 +291,69 @@ def describe(p: dict) -> str:
     return "\n".join(lines)
 
 
-def choose_items(ready: list[str], log: list[dict], links: set | None = None,
-                 n: int = 3, window: int | None = None) -> list[str]:
-    """이번 편 상품 n개 — **쿨다운은 풀 크기에 맞춰 줄고, 링크 있는 상품이 앞에 선다.**
+# ── 편성 규칙 (famto 2026-10-01 결정, 10-06 구현) ─────────────────────────────
+# 가격대: 저가(1~3만) 60 · 중가(3~6만) 30 · 고가 10 — 쇼츠는 '보고 바로 사는' 물건이 맞고
+# 고가는 픽담 비교글 CTA로 넘긴다. 핫이슈 6 : 에버그린 4 — 핫이슈는 트렌드 보드에서 '새로/상승'인
+# 상품(보드는 매일 갱신되므로 new/up은 48시간 안의 신호다; 보드가 이틀 이상 묵으면 핫이슈 없음).
+BAND_TARGET = {"low": 0.6, "mid": 0.3, "high": 0.1}
+HOT_PER_EPISODE = 2          # 3개 중 2개 = 6:4
+HOT_MAX_AGE_DAYS = 2         # 유효기한 48h
+BAND_WINDOW = 9              # 가격대 비율은 최근 9개 상품(3편) 기준으로 맞춘다
+BAND_KO = {"저가": "low", "중가": "mid", "고가": "high"}
+# 브랜드 확정 항목은 price_band가 비어 있다 — 품목명으로 가격대를 짐작한다(편성·표시용).
+BAND_HINT = {"쌀통": "mid", "세탁기": "mid", "무드등": "low", "정리대": "mid", "식기세척기": "high",
+             "회전냄비": "high", "도마": "low", "신발장": "mid", "분리기": "low", "수화기": "low",
+             "방지가드": "low", "스프레이": "low", "트레이": "low", "가위": "mid", "밀폐용기": "mid",
+             "얼음": "low", "크래커": "low", "청소기": "high", "처리기": "high", "커피": "mid",
+             "공기청정기": "mid", "선풍기": "low", "가습기": "low", "키보드": "mid", "전기장판": "low",
+             "스크럽": "low"}
 
-    2026-10-01 실측: ready 17종에서 "최근 6편에 나온 것 제외"를 고정으로 걸었더니 남는 게
-    2종이라 화요일 데일리가 2주째 결번이었다. 쿨다운은 풀이 작으면 같이 작아져야 한다.
+
+def band_of(entry: dict | None, name: str = "") -> str:
+    """상품의 가격대(low/mid/high). 대장 값 → 품목명 힌트 → 'mid'."""
+    e = entry or {}
+    b = BAND_KO.get(e.get("price_band", ""), "")
+    if b:
+        return b
+    for k, v in BAND_HINT.items():
+        if k in (e.get("display") or name or ""):
+            return v
+    return "mid"
+
+
+def hot_names(board: dict, ready: list[str], today: dt.date | None = None) -> set:
+    """지금 핫이슈인 실사진 상품들. 보드가 이틀 넘게 묵었으면 비어 있다(48h 유효기한)."""
+    from common import op_date
+    today = today or op_date()
+    try:
+        upd = dt.date.fromisoformat(str(board.get("updated", ""))[:10])
+    except ValueError:
+        return set()
+    if (today - upd).days > HOT_MAX_AGE_DAYS:
+        return set()
+    rows = [r for r in (board.get("deep_dive") or []) + (board.get("briefing") or []) + (board.get("all") or [])
+            if r.get("delta") in ("new", "up") and not r.get("blocked")]
+    out = set()
+    for r in rows:
+        nm = (r.get("name") or "").replace(" ", "")
+        for x in ready:
+            if nm and (nm in x.replace(" ", "") or x.replace(" ", "") in nm):
+                out.add(x)
+    return out
+
+
+def choose_items(ready: list[str], log: list[dict], links: set | None = None,
+                 n: int = 3, window: int | None = None, bands: dict | None = None,
+                 hot: set | None = None) -> list[str]:
+    """이번 편 상품 n개.
+
+    점수 = 링크(+3) + 핫이슈(+2, 편당 2개까지) + 가격대 부족분(목표 60/30/10 대비 ×3)
+           − 최근 사용(0~1). 쿨다운(최근 window편 제외)은 풀 크기에 맞춰 줄어든다:
       window = min(6, len(ready)//n - 1)  → 17종이면 4편, 9종이면 2편, 6종 이하면 0편
-    그 다음 순서는 ①쿠팡 링크 있음 ②가장 오래전에 다룬 것. 링크 없는 영상은 조회가 나와도
-    수수료가 0이라, 같은 조건이면 링크 있는 상품이 먼저 나간다(수익 로드맵 1-4).
+    2026-10-01 실측: 고정 6편 쿨다운으로 화요일 데일리가 2주 결번이었다.
+    링크 없는 영상은 조회가 나와도 수수료가 0이라 링크가 가장 큰 가중치다(수익 로드맵 1-4).
     """
-    links = links or set()
+    links, bands, hot = links or set(), bands or {}, hot or set()
     if window is None:
         window = max(0, min(6, len(ready) // max(n, 1) - 1))
     last = {}
@@ -311,11 +363,35 @@ def choose_items(ready: list[str], log: list[dict], links: set | None = None,
                 last[x] = i
     recent = {x for e in log[-window:] for x in (e.get("products") or [e.get("product")]) if x} \
         if window else set()
-    key = lambda x: (0 if x in links else 1, last.get(x, -1))        # noqa: E731
-    pool = sorted([x for x in ready if x not in recent], key=key)
+    pool = [x for x in ready if x not in recent]
     if len(pool) < n:                       # 쿨다운 때문에 모자라면 결번 대신 가장 오래된 것으로 채운다
         pool += sorted([x for x in ready if x in recent], key=lambda x: last.get(x, -1))
-    return pool[:n]
+    # 가격대 현황: 최근 BAND_WINDOW개 상품
+    hist = [x for e in log for x in (e.get("products") or [e.get("product")]) if x][-BAND_WINDOW:]
+    counts = {"low": 0, "mid": 0, "high": 0}
+    for x in hist:
+        counts[bands.get(x, "mid")] += 1
+    picked, hot_used = [], 0
+    L = max(len(log), 1)
+    while len(picked) < n and pool:
+        tot = sum(counts.values()) + len(picked)
+        def score(x):
+            b = bands.get(x, "mid")
+            share = counts[b] / tot if tot else 0.0
+            s = 0.0
+            s += 3.0 if x in links else 0.0
+            if x in hot:                        # 편당 둘까지만 핫이슈, 그 뒤는 에버그린이 앞선다
+                s += 2.0 if hot_used < HOT_PER_EPISODE else -0.5
+            s += (BAND_TARGET[b] - share) * 3.0
+            s -= (last.get(x, -1) + 1) / L
+            return s
+        best = max(pool, key=score)
+        pool.remove(best)
+        picked.append(best)
+        counts[bands.get(best, "mid")] += 1
+        if best in hot:
+            hot_used += 1
+    return picked
 
 
 def ready_products() -> list[str]:
