@@ -115,6 +115,10 @@ jobs:
           else
             python publish.py public out/short.mp4 out/caption.txt
           fi
+      # 재배포 준비(릴스·틱톡·Threads) — 계정이 생기기 전까지는 캡션 파일만 만들어 보존한다
+      - name: 재배포 캡션
+        if: steps.dup.outputs.skip != 'true' && steps.plan.outputs.skip != 'true'
+        run: python redistribute.py || true
       - name: 성공 마커 커밋 (중복 가드용)
         if: steps.dup.outputs.skip != 'true' && steps.plan.outputs.skip != 'true'
         run: |
@@ -148,5 +152,6 @@ jobs:
             out/short.mp4
             out/chart.mp4
             out/chart_caption.txt
+            out/redistribute/
           if-no-files-found: ignore
           retention-days: 7
