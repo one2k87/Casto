@@ -98,7 +98,22 @@ def image_path(entry: dict | None) -> str | None:
     if not entry:
         return None
     p = entry.get("image") or ""
-    return p if p and os.path.exists(p) else None
+    if p and os.path.exists(p):
+        return p
+    # 링크 투입 페이지가 준 **쿠팡 제공 이미지 URL**이 있으면 이 자리에서 받는다(2026-10-06).
+    # 반영 세션(클로드 컨테이너)은 쿠팡 CDN이 막혀 있을 수 있지만 Actions 러너는 열려 있다.
+    url = block_image_url({"image_url": entry.get("image_url", "")})
+    if url and url not in _TRIED:
+        _TRIED.add(url)                      # 한 프로세스에서 한 번만 시도 — 막힌 망에서 20초씩 기다리지 않는다
+        slug = entry.get("slug") or slugify(entry.get("display") or "x")
+        local = cache_image(url, slug)
+        if local:
+            entry["image"] = local
+            return local
+    return None
+
+
+_TRIED: set = set()
 
 
 def display_name(entry: dict | None, fallback: str = "") -> str:

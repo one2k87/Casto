@@ -179,10 +179,12 @@ def apply_links(docs: list[dict], cat: dict | None = None, today: str | None = N
         # 파트너스 「링크 생성 → 이미지+텍스트」가 준 **쿠팡 제공 이미지**(ads-partners/coupangcdn)만
         # 받는다. 타인 후기·캡처 이미지는 가이드 금지 항목이고, 다른 호스트는 block_image_url이 버린다.
         img = catalog.block_image_url({"image_url": (d.get("image") or "").strip()})
-        if img and not e.get("image") and fetch_images:
-            local = catalog.cache_image(img, slug)
-            if local:
-                e["image"], e["image_source"] = local, "coupang_partners"
+        if img and not e.get("image"):
+            e["image_url"], e["image_source"] = img, "coupang_partners"   # 러너가 image_path()에서 받는다
+            if fetch_images:
+                local = catalog.cache_image(img, slug)
+                if local:
+                    e["image"] = local
         e["updated"] = today
         applied.append(did)
     return {"applied": applied, "skipped": skipped}
