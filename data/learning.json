@@ -1,10 +1,66 @@
 {
- "videos": 5,
- "matched": 2,
+ "videos": 6,
+ "matched": 3,
  "min_n": 3,
- "axes": {},
- "notes": [
-  "표본 2편 — 3편이 모이기 전에는 축별 판단을 하지 않는다. 숫자 3개로 결론 내는 것이 이 단계에서 가장 흔한 사고다."
+ "axes": {
+  "verdict": {
+   "buy": {
+    "n": 3,
+    "lift": 1.0,
+    "avg_views": 293.0
+   }
+  },
+  "has_photo": {
+   "True": {
+    "n": 3,
+    "lift": 1.0,
+    "avg_views": 293.0
+   }
+  },
+  "format": {
+   "roundup3": {
+    "n": 3,
+    "lift": 1.0,
+    "avg_views": 293.0
+   }
+  }
+ },
+ "notes": [],
+ "mean_views": 293.0,
+ "mean_engagement": 0.0018,
+ "best": [
+  {
+   "title": "냉장고 속 계란 위생, 900건 언급된 이걸로 끝!",
+   "product": "계란보관 트레이",
+   "views": 729,
+   "score": 2.744
+  },
+  {
+   "title": "요즘 이거 다시 유행한다는 자동회전 냄비",
+   "product": "바이탈플랜트 롤팬 뉴오리지널 자동회전냄비 25cm",
+   "views": 79,
+   "score": 0.135
+  },
+  {
+   "title": "요즘 이거 다시 유행한다는 주방템 3가지",
+   "product": "계란 흰자 분리기",
+   "views": 71,
+   "score": 0.121
+  }
+ ],
+ "worst": [
+  {
+   "title": "요즘 이거 다시 유행한다는 주방템 3가지",
+   "product": "계란 흰자 분리기",
+   "views": 71,
+   "score": 0.121
+  },
+  {
+   "title": "요즘 이거 다시 유행한다는 자동회전 냄비",
+   "product": "바이탈플랜트 롤팬 뉴오리지널 자동회전냄비 25cm",
+   "views": 79,
+   "score": 0.135
+  }
  ],
  "hints": []
 }
