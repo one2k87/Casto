@@ -1,4 +1,16 @@
 {
+ "coupang_recommend_items": {
+  "name": "쿠팡추천템",
+  "search_keyword": "쿠팡 추천템, 살림 꿀템, 주방 꿀템",
+  "en_keyword": "",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '쿠팡추천템'이 영상 25개/채널 16개에서 반복 등장",
+  "category": "50000008",
+  "last_found": "2026-10-08",
+  "first_seen": "2026-10-08"
+ },
  "쿠팡추천템": {
   "name": "쿠팡추천템",
   "search_keyword": "쿠팡 추천템",
@@ -223,18 +235,6 @@
   "brand": "",
   "product_id": "",
   "evidence": "제목에 '전동채칼'이 1회 등장, '🥕 이래서 전동채칼 쓰나 봐요! 채소 손질이 순식간 🌶️' 영상에서 언급",
-  "category": "50000008",
-  "last_found": "2026-10-04",
-  "first_seen": "2026-10-04"
- },
- "vegetable_spinner": {
-  "name": "야채 탈수기",
-  "search_keyword": "샐러드 야채 탈수기, 채소 물기 제거기",
-  "en_keyword": "vegetable spinner",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "제목에 '야채탈수기'가 1회 등장, '샐러드가 자꾸 물맛 나는 이유' 영상에서 언급",
   "category": "50000008",
   "last_found": "2026-10-04",
   "first_seen": "2026-10-04"
