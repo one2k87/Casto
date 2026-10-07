@@ -7,32 +7,32 @@
    "buy": {
     "n": 3,
     "lift": 1.0,
-    "avg_views": 293.0
+    "avg_views": 293.3
    }
   },
   "has_photo": {
    "True": {
     "n": 3,
     "lift": 1.0,
-    "avg_views": 293.0
+    "avg_views": 293.3
    }
   },
   "format": {
    "roundup3": {
     "n": 3,
     "lift": 1.0,
-    "avg_views": 293.0
+    "avg_views": 293.3
    }
   }
  },
  "notes": [],
- "mean_views": 293.0,
+ "mean_views": 293.3,
  "mean_engagement": 0.0018,
  "best": [
   {
    "title": "냉장고 속 계란 위생, 900건 언급된 이걸로 끝!",
    "product": "계란보관 트레이",
-   "views": 729,
+   "views": 730,
    "score": 2.744
   },
   {
