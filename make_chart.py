@@ -245,6 +245,15 @@ def render(ch: dict, script: dict, c: dict) -> str:
     return out
 
 
+def catalog_simple_link() -> str:
+    """링크 투입 페이지의 「쿠팡 꿀템 간편 링크」 — 대장 `simple_links.chart`. 없으면 빈 문자열."""
+    try:
+        import catalog
+        return (catalog.load().get("simple_links") or {}).get("chart", "")
+    except Exception:                                      # noqa: BLE001
+        return ""
+
+
 def build_caption(ch: dict, script: dict, c: dict, total: float) -> str:
     """설명란 — 순위·이유·**쿠팡 링크**. 링크가 없으면 그 줄을 비운다(가짜 링크 금지)."""
     dis = c["disclosure"]
@@ -253,8 +262,11 @@ def build_caption(ch: dict, script: dict, c: dict, total: float) -> str:
     # 설명란에서 보이는 둘째 줄(2026-10-01/06 설계).
     lines = [dis["coupang"]]
     top = ch["entries"][0] if ch.get("entries") else {}
+    simple = (catalog_simple_link() or "")
     if top.get("coupang_url"):
         lines.append(f"🛒 1위 {top['display']} 쿠팡 → {top['coupang_url']}")
+    elif simple:                       # 1위 링크가 없으면 간편 링크(검색 결과 페이지)가 둘째 줄
+        lines.append(f"🛒 이번 주 차트 상품 모아보기 → {simple}")
     lines += ["", f"📊 {script.get('title', '')}", ""]
     for e in ch["entries"]:
         it = reasons.get(e["key"], {})
@@ -271,6 +283,8 @@ def build_caption(ch: dict, script: dict, c: dict, total: float) -> str:
         if e.get("coupang_url"):
             lines.append(f"   {e['coupang_url']}")
         lines.append("")
+    if simple and top.get("coupang_url"):
+        lines += [f"🛒 전체 모아보기 → {simple}", ""]
     lines += ["다음 주 일요일 같은 시간에 이어집니다.",
               "심사받고 싶은 제품은 댓글로 신청해주세요.", "",
               "#콕픽차트 #유행템 #요즘유행하는거 #쇼핑", "",

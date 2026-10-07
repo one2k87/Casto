@@ -108,8 +108,9 @@ def image_path(entry: dict | None) -> str | None:
         slug = entry.get("slug") or slugify(entry.get("display") or "x")
         local = cache_image(url, slug)
         if local:
-            entry["image"] = local
-            return local
+            import link_intake
+            entry["image"] = link_intake.crop_banner(local)
+            return entry["image"]
     return None
 
 

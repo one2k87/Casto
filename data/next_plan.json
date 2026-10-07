@@ -1,39 +1,39 @@
 {
- "updated": "2026-10-06",
+ "updated": "2026-10-07",
  "items": [
   {
    "date": "2026-10-08",
    "weekday": "목",
    "label": "10/8(목)",
    "slot": "deep2",
-   "product": "레이저가이드가위 · 얼음틀 얼음보관통 · 씨밀렉스 라이스키퍼 쌀통 10kg",
+   "product": "레이저가이드가위 · 전기장판 · 스크럽대디",
    "slug": "레이저가이드가위",
    "products": [
     {
      "name": "레이저가이드가위",
      "slug": "레이저가이드가위",
      "photo": true,
-     "link": false,
+     "link": true,
      "band": "mid"
     },
     {
-     "name": "얼음틀 얼음보관통",
-     "slug": "얼음틀-얼음보관통",
+     "name": "전기장판",
+     "slug": "전기장판-1-3만",
      "photo": true,
-     "link": false,
+     "link": true,
      "band": "low"
     },
     {
-     "name": "씨밀렉스 라이스키퍼 쌀통 10kg",
-     "slug": "씨밀렉스-라이스키퍼-쌀통-10kg",
+     "name": "스크럽대디",
+     "slug": "스크럽대디",
      "photo": true,
-     "link": false,
-     "band": "mid"
+     "link": true,
+     "band": "low"
     }
    ],
    "photo": true,
-   "link": false,
-   "links": "0/3",
+   "link": true,
+   "links": "3/3",
    "hot": []
   },
   {
@@ -41,34 +41,34 @@
    "weekday": "토",
    "label": "10/10(토)",
    "slot": "season",
-   "product": "미닉스 3인용 미니 식기세척기 PRO MNDW-110 · 에그크래커 · 신일전자 삶는 미니세탁기 3kg SWM-1500WSJ",
-   "slug": "미닉스-3인용-미니-식기세척기-pro-mndw-110",
+   "product": "씨밀렉스 라이스키퍼 쌀통 10kg · 신일전자 삶는 미니세탁기 3kg SWM-1500WSJ · 얼음틀 얼음보관통",
+   "slug": "씨밀렉스-라이스키퍼-쌀통-10kg",
    "products": [
     {
-     "name": "미닉스 3인용 미니 식기세척기 PRO MNDW-110",
-     "slug": "미닉스-3인용-미니-식기세척기-pro-mndw-110",
+     "name": "씨밀렉스 라이스키퍼 쌀통 10kg",
+     "slug": "씨밀렉스-라이스키퍼-쌀통-10kg",
      "photo": true,
-     "link": false,
-     "band": "high"
-    },
-    {
-     "name": "에그크래커",
-     "slug": "에그크래커",
-     "photo": true,
-     "link": false,
-     "band": "low"
+     "link": true,
+     "band": "mid"
     },
     {
      "name": "신일전자 삶는 미니세탁기 3kg SWM-1500WSJ",
      "slug": "신일전자-삶는-미니세탁기-3kg-swm-1500wsj",
      "photo": true,
-     "link": false,
+     "link": true,
      "band": "mid"
+    },
+    {
+     "name": "얼음틀 얼음보관통",
+     "slug": "얼음틀-얼음보관통",
+     "photo": true,
+     "link": true,
+     "band": "low"
     }
    ],
    "photo": true,
-   "link": false,
-   "links": "0/3",
+   "link": true,
+   "links": "3/3",
    "hot": []
   },
   {
@@ -76,34 +76,34 @@
    "weekday": "화",
    "label": "10/13(화)",
    "slot": "deep1",
-   "product": "무아스 마그넷 무선 LED 무드등 MLL37 · 조셉조셉 찹투팟 플러스 접이식도마 · 코멧 길이조절 접시정리대",
-   "slug": "무아스-마그넷-무선-led-무드등-mll37",
+   "product": "미닉스 3인용 미니 식기세척기 PRO MNDW-110 · 에그크래커 · 무아스 마그넷 무선 LED 무드등 MLL37",
+   "slug": "미닉스-3인용-미니-식기세척기-pro-mndw-110",
    "products": [
+    {
+     "name": "미닉스 3인용 미니 식기세척기 PRO MNDW-110",
+     "slug": "미닉스-3인용-미니-식기세척기-pro-mndw-110",
+     "photo": true,
+     "link": true,
+     "band": "high"
+    },
+    {
+     "name": "에그크래커",
+     "slug": "에그크래커",
+     "photo": true,
+     "link": true,
+     "band": "low"
+    },
     {
      "name": "무아스 마그넷 무선 LED 무드등 MLL37",
      "slug": "무아스-마그넷-무선-led-무드등-mll37",
      "photo": true,
-     "link": false,
+     "link": true,
      "band": "low"
-    },
-    {
-     "name": "조셉조셉 찹투팟 플러스 접이식도마",
-     "slug": "조셉조셉-찹투팟-플러스-접이식도마",
-     "photo": true,
-     "link": false,
-     "band": "low"
-    },
-    {
-     "name": "코멧 길이조절 접시정리대",
-     "slug": "코멧-길이조절-접시정리대",
-     "photo": true,
-     "link": false,
-     "band": "mid"
     }
    ],
    "photo": true,
-   "link": false,
-   "links": "0/3",
+   "link": true,
+   "links": "3/3",
    "hot": []
   },
   {
@@ -111,34 +111,34 @@
    "weekday": "목",
    "label": "10/15(목)",
    "slot": "deep2",
-   "product": "계란 흰자 분리기 · 레트로 수화기 · 손끼임 방지가드",
-   "slug": "계란-흰자-분리기",
+   "product": "조셉조셉 찹투팟 플러스 접이식도마 · 코멧 길이조절 접시정리대 · 바이탈플랜트 롤팬 뉴오리지널 자동회전냄비 25cm",
+   "slug": "조셉조셉-찹투팟-플러스-접이식도마",
    "products": [
     {
-     "name": "계란 흰자 분리기",
-     "slug": "계란-흰자-분리기",
+     "name": "조셉조셉 찹투팟 플러스 접이식도마",
+     "slug": "조셉조셉-찹투팟-플러스-접이식도마",
      "photo": true,
-     "link": false,
+     "link": true,
      "band": "low"
     },
     {
-     "name": "레트로 수화기",
-     "slug": "레트로-수화기",
+     "name": "코멧 길이조절 접시정리대",
+     "slug": "코멧-길이조절-접시정리대",
      "photo": true,
-     "link": false,
-     "band": "low"
+     "link": true,
+     "band": "mid"
     },
     {
-     "name": "손끼임 방지가드",
-     "slug": "손끼임-방지가드",
+     "name": "바이탈플랜트 롤팬 뉴오리지널 자동회전냄비 25cm",
+     "slug": "바이탈플랜트-롤팬-뉴오리지널-자동회전냄비-25cm",
      "photo": true,
-     "link": false,
-     "band": "low"
+     "link": true,
+     "band": "high"
     }
    ],
    "photo": true,
-   "link": false,
-   "links": "0/3",
+   "link": true,
+   "links": "3/3",
    "hot": []
   }
  ]

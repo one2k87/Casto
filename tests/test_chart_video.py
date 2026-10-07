@@ -149,8 +149,9 @@ def test_긴_문장은_자르지_않고_대체한다():
     assert sc[0]["voice"] == make_chart.HOOK_DEFAULT
 
 
-def test_설명란은_고지_뒤_1위_링크다():
+def test_설명란은_고지_뒤_1위_링크다(monkeypatch):
     """접힌 설명란에서 보이는 건 첫 줄뿐이다. 링크가 없으면 첫 줄은 제목이다(가짜 줄 금지)."""
+    monkeypatch.setattr(make_chart, "catalog_simple_link", lambda: "")
     c = {"disclosure": {"coupang": "c", "ai": "a"}}
     ch = _chart(3)
     cap = make_chart.build_caption(ch, {"title": "제목", "items": []}, c, 24)
@@ -159,6 +160,18 @@ def test_설명란은_고지_뒤_1위_링크다():
     cap = make_chart.build_caption(ch, {"title": "제목", "items": []}, c, 24)
     assert cap.splitlines()[0] == "c"
     assert cap.splitlines()[1].startswith("🛒") and "link.coupang.com/a/TOP" in cap.splitlines()[1]
+
+
+def test_간편_링크는_1위_링크가_없을_때_둘째_줄(monkeypatch):
+    """「쿠팡 꿀템」 간편 링크(검색 결과 페이지)는 상품이 아니라 차트 전체의 입구다."""
+    monkeypatch.setattr(make_chart, "catalog_simple_link", lambda: "https://link.coupang.com/a/ALL")
+    c = {"disclosure": {"coupang": "c", "ai": "a"}}
+    ch = _chart(3)
+    cap = make_chart.build_caption(ch, {"title": "제목", "items": []}, c, 24)
+    assert "모아보기 → https://link.coupang.com/a/ALL" in cap.splitlines()[1]
+    ch["entries"][0]["coupang_url"] = "https://link.coupang.com/a/TOP"
+    cap = make_chart.build_caption(ch, {"title": "제목", "items": []}, c, 24)
+    assert "/a/TOP" in cap.splitlines()[1] and "전체 모아보기 → https://link.coupang.com/a/ALL" in cap
 
 
 def test_차트_제목은_관문을_거친다():

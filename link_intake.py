@@ -35,7 +35,7 @@ TOP = [
     {"slug": "씨밀렉스-라이스키퍼-쌀통-10kg"},
     {"id": "c-scrubdaddy", "product": "스크럽대디", "query": "스크럽대디 수세미", "kind": "상품", "band": "low",
      "note": "사진 없음 — 링크 후 캡처 필요"},
-    {"id": "c-heatpad", "product": "전기장판 (1~3만)", "query": "전기장판 1인용", "kind": "상품", "band": "low",
+    {"id": "c-heatpad", "product": "전기장판", "query": "전기장판 1인용", "kind": "상품", "band": "low",
      "note": "시즌(10~11월) · 사진 없음 — 링크 후 캡처 필요"},
 ]
 # 같은 물건의 옛 일반 항목(사진 없음) — 브랜드 확정본이 따로 있으므로 큐에서 뺀다.
@@ -121,6 +121,49 @@ def build_queue(cat: dict | None = None) -> list[dict]:
     return out
 
 
+def crop_banner(path: str) -> str:
+    """파트너스 「이미지+텍스트」 배너(120×240@2x = 240×480)에서 **제품 사진만** 남긴다.
+
+    배너는 위에서부터 쿠팡 로고 → 제품 사진 → 상품명 → 로켓 배지 → 쇼핑하기 버튼이 고정 배치다
+    (2026-10-07 실측: 밴드 18~49 / 79~289 / 316~338 / 346~374 / 396~452). 로고·버튼이 화면에
+    나가면 광고 배너처럼 읽히고 쿠팡 상호 노출 문제도 생기므로 제품 밴드만 쓴다. 레이아웃이
+    다르면(밴드가 안 맞으면) 손대지 않고 원본을 둔다.
+    """
+    try:
+        from PIL import Image
+        im = Image.open(path).convert("RGB")
+    except Exception:                                      # noqa: BLE001
+        return path
+    w, h = im.size
+    if not (abs(w / h - 0.5) < 0.05 and 200 <= w <= 1000):   # 세로 2:1 배너만
+        return path
+    px = im.load()
+    rows = []
+    for y in range(h):
+        n = sum(1 for x in range(0, w, 2) if sum(abs(c - 255) for c in px[x, y]) > 45)
+        rows.append(n / (w / 2))
+    bands, start = [], None
+    for y, v in enumerate(rows):
+        if v > 0.02 and start is None:
+            start = y
+        if v <= 0.02 and start is not None:
+            bands.append((start, y)); start = None
+    if start is not None:
+        bands.append((start, h))
+    # 로고 밴드(맨 위) 다음에 오는 가장 큰 밴드가 제품 사진이다
+    body = [b for b in bands if b[0] > h * 0.08 and b[1] < h * 0.66]
+    if not body:
+        return path
+    y0, y1 = min(b[0] for b in body), max(b[1] for b in body)
+    if y1 - y0 < h * 0.15:
+        return path
+    pad = int(h * 0.02)
+    box = (0, max(0, y0 - pad), w, min(h, y1 + pad))
+    out = im.crop(box)
+    out.save(path, quality=92)
+    return path
+
+
 def _compact(s: str) -> str:
     return re.sub(r"[\s\-_·,./()|]+", "", unicodedata.normalize("NFKC", s or "")).lower()
 
@@ -153,6 +196,11 @@ def apply_links(docs: list[dict], cat: dict | None = None, today: str | None = N
             price = None
         if price is not None and not (100 <= price <= 50_000_000):
             price = None
+        # 간편 링크(검색 결과 페이지)는 상품이 아니다 — 대장에 넣지 않고 차트 설명란용으로 따로 둔다.
+        if did == "c-kkultem" or "간편" in (d.get("product") or ""):
+            cat.setdefault("simple_links", {})["chart"] = url
+            applied.append(did)
+            continue
         slug = by_id.get(did)
         if not slug:
             # 대장 밖 품목 — 이름으로 한 번 더 찾고, 없으면 새로 등록(사진 없음).
@@ -184,7 +232,7 @@ def apply_links(docs: list[dict], cat: dict | None = None, today: str | None = N
             if fetch_images:
                 local = catalog.cache_image(img, slug)
                 if local:
-                    e["image"] = local
+                    e["image"] = crop_banner(local)
         e["updated"] = today
         applied.append(did)
     return {"applied": applied, "skipped": skipped}

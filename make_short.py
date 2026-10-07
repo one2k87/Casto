@@ -350,6 +350,9 @@ def scene_card(sc, i, total, c, shot=None, label="", note="", hit=False):
 
 
 # ---------------------------------------------------------------- 2판 카드 렌더
+SMALL_PHOTO = 600        # 이보다 작은 사진은 전면 확대 대신 블러 배경 + 가운데 배치
+
+
 def fill_frame(img, path, dim=0.0):
     """사진을 **화면 전체로** 채운다(cover). 이 장르의 기본 문법이다.
 
@@ -366,9 +369,20 @@ def fill_frame(img, path, dim=0.0):
     except Exception:                                        # noqa: BLE001
         return False
     r = max(W / im.width, H / im.height)
+    small = min(im.size) < SMALL_PHOTO          # 파트너스 배너에서 자른 240px급 사진(2026-10-07)
     im = im.resize((max(int(im.width * r), W), max(int(im.height * r), H)), Image.LANCZOS)
     im = im.crop(((im.width - W) // 2, (im.height - H) // 2,
                   (im.width - W) // 2 + W, (im.height - H) // 2 + H))
+    if small:
+        # 8배 확대를 그대로 보이면 뭉개진다. 배경은 흐리게 깔고(의도된 연출로 읽힌다)
+        # 제품은 화면 폭의 78%로 가운데 — 확대 배율을 3.5배 안쪽으로 묶는다.
+        from PIL import ImageFilter
+        im = im.filter(ImageFilter.GaussianBlur(28))
+        src = Image.open(path).convert("RGB")
+        tw = int(W * 0.78)
+        th = max(int(src.height * tw / src.width), 1)
+        fg = src.resize((tw, th), Image.LANCZOS)
+        im.paste(fg, ((W - tw) // 2, max(0, int(H * 0.36) - th // 2)))   # 자막(53%~) 위에 둔다
     if dim:
         im = Image.blend(im, Image.new("RGB", (W, H), (0, 0, 0)), dim)
     img.paste(im, (0, 0))
