@@ -261,7 +261,8 @@ def shootable(name: str, cat: dict | None = None) -> dict | None:
         flat = name.replace(" ", "")
         for k, v in prods.items():
             full = f"{v.get('brand', '')}{v.get('model', '')}".replace(" ", "")
-            if k.replace("-", "") == flat or (full and full == flat):
+            disp = (v.get("display") or "").replace(" ", "")
+            if k.replace("-", "") == flat or (full and full == flat) or (len(flat) >= 3 and disp == flat):
                 entry = v
                 break
     return entry if (entry or {}).get("image") else None
