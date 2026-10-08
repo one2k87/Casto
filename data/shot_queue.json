@@ -1,5 +1,5 @@
 {
- "next": 67,
+ "next": 70,
  "items": {
   "1": {
    "name": "늘어나는 밀폐용기",
@@ -643,6 +643,34 @@
    "done": false,
    "search": "3가지",
    "url": "https://www.coupang.com/np/search?q=3%EA%B0%80%EC%A7%80"
+  },
+  "67": {
+   "name": "꿀템추천",
+   "slug": "",
+   "key": "꿀템추천",
+   "done": false,
+   "search": "꿀템추천",
+   "url": "https://www.coupang.com/np/search?q=%EA%BF%80%ED%85%9C%EC%B6%94%EC%B2%9C"
+  },
+  "68": {
+   "name": "자취방템",
+   "slug": "",
+   "key": "자취방템",
+   "done": false,
+   "search": "자취방템",
+   "url": "https://www.coupang.com/np/search?q=%EC%9E%90%EC%B7%A8%EB%B0%A9%ED%85%9C",
+   "hold": true,
+   "note": "65번과 같은 물건으로 보임 — 65번으로 캡처"
+  },
+  "69": {
+   "name": "살림꿀팁",
+   "slug": "",
+   "key": "살림꿀팁",
+   "done": false,
+   "search": "살림꿀팁",
+   "url": "https://www.coupang.com/np/search?q=%EC%82%B4%EB%A6%BC%EA%BF%80%ED%8C%81",
+   "hold": true,
+   "note": "40번과 같은 물건으로 보임 — 40번으로 캡처"
   }
  }
 }
