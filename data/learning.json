@@ -7,33 +7,33 @@
    "buy": {
     "n": 3,
     "lift": 1.0,
-    "avg_views": 293.3
+    "avg_views": 293.7
    }
   },
   "has_photo": {
    "True": {
     "n": 3,
     "lift": 1.0,
-    "avg_views": 293.3
+    "avg_views": 293.7
    }
   },
   "format": {
    "roundup3": {
     "n": 3,
     "lift": 1.0,
-    "avg_views": 293.3
+    "avg_views": 293.7
    }
   }
  },
  "notes": [],
- "mean_views": 293.3,
+ "mean_views": 293.7,
  "mean_engagement": 0.0018,
  "best": [
   {
    "title": "냉장고 속 계란 위생, 900건 언급된 이걸로 끝!",
    "product": "계란보관 트레이",
-   "views": 730,
-   "score": 2.744
+   "views": 731,
+   "score": 2.745
   },
   {
    "title": "요즘 이거 다시 유행한다는 자동회전 냄비",
