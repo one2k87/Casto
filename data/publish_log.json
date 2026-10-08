@@ -112,5 +112,25 @@
   "hook": "2일 전 유튜브 영상 뜬 오일 스프레이",
   "seconds": 26.4,
   "video_id": "okTtQJMPtkI"
+ },
+ {
+  "date": "2026-10-08",
+  "slot": "",
+  "key": "레이저가이드가위",
+  "verdict": "buy",
+  "title": "삐뚤빼뚤 커팅? 이거 하나로 고민 끝!",
+  "product": "레이저가이드가위",
+  "products": [
+   "레이저가이드가위",
+   "전기장판",
+   "스크럽대디"
+  ],
+  "format": "roundup3",
+  "price_band": "중가",
+  "category": "레이저가이드가위",
+  "has_photo": true,
+  "hook": "올해 10월, 살림 유튜버들 사이 인기템",
+  "seconds": 28.2,
+  "video_id": "uTcGMo9pdnI"
  }
 ]
