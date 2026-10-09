@@ -1,41 +1,6 @@
 {
- "updated": "2026-10-08",
+ "updated": "2026-10-09",
  "items": [
-  {
-   "date": "2026-10-08",
-   "weekday": "목",
-   "label": "10/8(목)",
-   "slot": "deep2",
-   "product": "레이저가이드가위 · 전기장판 · 스크럽대디",
-   "slug": "레이저가이드가위",
-   "products": [
-    {
-     "name": "레이저가이드가위",
-     "slug": "레이저가이드가위",
-     "photo": true,
-     "link": true,
-     "band": "mid"
-    },
-    {
-     "name": "전기장판",
-     "slug": "전기장판-1-3만",
-     "photo": true,
-     "link": true,
-     "band": "low"
-    },
-    {
-     "name": "스크럽대디",
-     "slug": "스크럽대디",
-     "photo": true,
-     "link": true,
-     "band": "low"
-    }
-   ],
-   "photo": true,
-   "link": true,
-   "links": "3/3",
-   "hot": []
-  },
   {
    "date": "2026-10-10",
    "weekday": "토",
@@ -134,6 +99,41 @@
      "photo": true,
      "link": true,
      "band": "high"
+    }
+   ],
+   "photo": true,
+   "link": true,
+   "links": "3/3",
+   "hot": []
+  },
+  {
+   "date": "2026-10-17",
+   "weekday": "토",
+   "label": "10/17(토)",
+   "slot": "season",
+   "product": "계란 흰자 분리기 · 레트로 수화기 · 손끼임 방지가드",
+   "slug": "계란-흰자-분리기",
+   "products": [
+    {
+     "name": "계란 흰자 분리기",
+     "slug": "계란-흰자-분리기",
+     "photo": true,
+     "link": true,
+     "band": "low"
+    },
+    {
+     "name": "레트로 수화기",
+     "slug": "레트로-수화기",
+     "photo": true,
+     "link": true,
+     "band": "low"
+    },
+    {
+     "name": "손끼임 방지가드",
+     "slug": "손끼임-방지가드",
+     "photo": true,
+     "link": true,
+     "band": "low"
     }
    ],
    "photo": true,
