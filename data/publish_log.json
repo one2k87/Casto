@@ -132,5 +132,25 @@
   "hook": "올해 10월, 살림 유튜버들 사이 인기템",
   "seconds": 28.2,
   "video_id": "uTcGMo9pdnI"
+ },
+ {
+  "date": "2026-10-10",
+  "slot": "",
+  "key": "씨밀렉스-라이스키퍼-쌀통-10kg",
+  "verdict": "later",
+  "title": "없으면 살림 못 한다던데, 진짜일까?",
+  "product": "씨밀렉스 라이스키퍼 쌀통 10kg",
+  "products": [
+   "씨밀렉스 라이스키퍼 쌀통 10kg",
+   "신일전자 삶는 미니세탁기 3kg SWM-1500WSJ",
+   "얼음틀 얼음보관통"
+  ],
+  "format": "roundup3",
+  "category": "라이스키퍼 쌀통 10kg",
+  "has_photo": true,
+  "brand": "씨밀렉스",
+  "hook": "쌀벌레 걱정 없는 요즘",
+  "seconds": 33.3,
+  "video_id": "fI0ycqUTFHo"
  }
 ]
