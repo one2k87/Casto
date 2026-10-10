@@ -7,45 +7,45 @@
    "buy": {
     "n": 4,
     "lift": 1.0,
-    "avg_views": 517.0
+    "avg_views": 514.2
    }
   },
   "has_photo": {
    "True": {
     "n": 4,
     "lift": 1.0,
-    "avg_views": 517.0
+    "avg_views": 514.2
    }
   },
   "format": {
    "roundup3": {
     "n": 4,
     "lift": 1.0,
-    "avg_views": 517.0
+    "avg_views": 514.2
    }
   }
  },
  "notes": [],
- "mean_views": 517.0,
+ "mean_views": 514.2,
  "mean_engagement": 0.0018,
  "best": [
   {
    "title": "냉장고 속 계란 위생, 900건 언급된 이걸로 끝!",
    "product": "계란보관 트레이",
    "views": 731,
-   "score": 2.235
+   "score": 2.239
   },
   {
    "title": "삐뚤빼뚤 커팅? 이거 하나로 고민 끝!",
    "product": "레이저가이드가위",
-   "views": 1186,
-   "score": 1.619
+   "views": 1175,
+   "score": 1.615
   },
   {
    "title": "요즘 이거 다시 유행한다는 자동회전 냄비",
    "product": "바이탈플랜트 롤팬 뉴오리지널 자동회전냄비 25cm",
    "views": 80,
-   "score": 0.077
+   "score": 0.078
   }
  ],
  "worst": [
@@ -59,7 +59,7 @@
    "title": "요즘 이거 다시 유행한다는 자동회전 냄비",
    "product": "바이탈플랜트 롤팬 뉴오리지널 자동회전냄비 25cm",
    "views": 80,
-   "score": 0.077
+   "score": 0.078
   }
  ],
  "hints": []
