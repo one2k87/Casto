@@ -1,15 +1,23 @@
 {
- "date": "2026-10-11",
- "subscribers": 1,
+ "date": "2026-10-12",
+ "subscribers": 2,
  "total_views": 2110,
- "video_count": 6,
+ "video_count": 7,
  "hidden_subscriber_count": false,
  "videos": [
+  {
+   "id": "fI0ycqUTFHo",
+   "title": "없으면 살림 못 한다던데, 진짜일까?",
+   "published": "2026-10-10",
+   "views": 534,
+   "likes": 1,
+   "comments": 0
+  },
   {
    "id": "uTcGMo9pdnI",
    "title": "삐뚤빼뚤 커팅? 이거 하나로 고민 끝!",
    "published": "2026-10-08",
-   "views": 1175,
+   "views": 1174,
    "likes": 2,
    "comments": 0
   },
