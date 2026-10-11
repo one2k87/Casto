@@ -1,41 +1,6 @@
 {
- "updated": "2026-10-10",
+ "updated": "2026-10-11",
  "items": [
-  {
-   "date": "2026-10-10",
-   "weekday": "토",
-   "label": "10/10(토)",
-   "slot": "season",
-   "product": "씨밀렉스 라이스키퍼 쌀통 10kg · 신일전자 삶는 미니세탁기 3kg SWM-1500WSJ · 얼음틀 얼음보관통",
-   "slug": "씨밀렉스-라이스키퍼-쌀통-10kg",
-   "products": [
-    {
-     "name": "씨밀렉스 라이스키퍼 쌀통 10kg",
-     "slug": "씨밀렉스-라이스키퍼-쌀통-10kg",
-     "photo": true,
-     "link": true,
-     "band": "mid"
-    },
-    {
-     "name": "신일전자 삶는 미니세탁기 3kg SWM-1500WSJ",
-     "slug": "신일전자-삶는-미니세탁기-3kg-swm-1500wsj",
-     "photo": true,
-     "link": true,
-     "band": "mid"
-    },
-    {
-     "name": "얼음틀 얼음보관통",
-     "slug": "얼음틀-얼음보관통",
-     "photo": true,
-     "link": true,
-     "band": "low"
-    }
-   ],
-   "photo": true,
-   "link": true,
-   "links": "3/3",
-   "hot": []
-  },
   {
    "date": "2026-10-13",
    "weekday": "화",
@@ -131,6 +96,41 @@
     {
      "name": "손끼임 방지가드",
      "slug": "손끼임-방지가드",
+     "photo": true,
+     "link": true,
+     "band": "low"
+    }
+   ],
+   "photo": true,
+   "link": true,
+   "links": "3/3",
+   "hot": []
+  },
+  {
+   "date": "2026-10-20",
+   "weekday": "화",
+   "label": "10/20(화)",
+   "slot": "deep1",
+   "product": "이케아 트로네스 신발장 52×39×18cm 2개입 · 늘어나는 밀폐용기 · 오일 스프레이",
+   "slug": "이케아-트로네스-신발장-52-39-18cm-2개입",
+   "products": [
+    {
+     "name": "이케아 트로네스 신발장 52×39×18cm 2개입",
+     "slug": "이케아-트로네스-신발장-52-39-18cm-2개입",
+     "photo": true,
+     "link": true,
+     "band": "mid"
+    },
+    {
+     "name": "늘어나는 밀폐용기",
+     "slug": "늘어나는-밀폐용기",
+     "photo": true,
+     "link": true,
+     "band": "mid"
+    },
+    {
+     "name": "오일 스프레이",
+     "slug": "오일-스프레이",
      "photo": true,
      "link": true,
      "band": "low"

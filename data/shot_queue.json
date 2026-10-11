@@ -1,5 +1,5 @@
 {
- "next": 70,
+ "next": 76,
  "items": {
   "1": {
    "name": "늘어나는 밀폐용기",
@@ -671,6 +671,60 @@
    "url": "https://www.coupang.com/np/search?q=%EC%82%B4%EB%A6%BC%EA%BF%80%ED%8C%81",
    "hold": true,
    "note": "40번과 같은 물건으로 보임 — 40번으로 캡처"
+  },
+  "70": {
+   "name": "미니 밥솥",
+   "slug": "",
+   "key": "미니밥솥",
+   "done": false,
+   "search": "미니 밥솥",
+   "url": "https://www.coupang.com/np/search?q=%EB%AF%B8%EB%8B%88+%EB%B0%A5%EC%86%A5",
+   "hold": true,
+   "note": "14번과 같은 물건으로 보임 — 14번으로 캡처"
+  },
+  "71": {
+   "name": "접이식 실리콘 도마",
+   "slug": "",
+   "key": "접이식실리콘도마",
+   "done": false,
+   "search": "접이식 실리콘 도마",
+   "url": "https://www.coupang.com/np/search?q=%EC%A0%91%EC%9D%B4%EC%8B%9D+%EC%8B%A4%EB%A6%AC%EC%BD%98+%EB%8F%84%EB%A7%88",
+   "hold": true,
+   "note": "11번과 같은 물건으로 보임 — 11번으로 캡처"
+  },
+  "72": {
+   "name": "채소 다지기",
+   "slug": "",
+   "key": "채소다지기",
+   "done": false,
+   "search": "채소 다지기",
+   "url": "https://www.coupang.com/np/search?q=%EC%B1%84%EC%86%8C+%EB%8B%A4%EC%A7%80%EA%B8%B0"
+  },
+  "73": {
+   "name": "아보카도 도구",
+   "slug": "",
+   "key": "아보카도도구",
+   "done": false,
+   "search": "아보카도 도구",
+   "url": "https://www.coupang.com/np/search?q=%EC%95%84%EB%B3%B4%EC%B9%B4%EB%8F%84+%EB%8F%84%EA%B5%AC"
+  },
+  "74": {
+   "name": "주방세제 디스펜서",
+   "slug": "",
+   "key": "주방세제디스펜서",
+   "done": false,
+   "search": "주방세제 디스펜서",
+   "url": "https://www.coupang.com/np/search?q=%EC%A3%BC%EB%B0%A9%EC%84%B8%EC%A0%9C+%EB%94%94%EC%8A%A4%ED%8E%9C%EC%84%9C",
+   "hold": true,
+   "note": "32번과 같은 물건으로 보임 — 32번으로 캡처"
+  },
+  "75": {
+   "name": "쌀 보관 용기",
+   "slug": "",
+   "key": "쌀보관용기",
+   "done": false,
+   "search": "쌀 보관 용기",
+   "url": "https://www.coupang.com/np/search?q=%EC%8C%80+%EB%B3%B4%EA%B4%80+%EC%9A%A9%EA%B8%B0"
   }
  }
 }
