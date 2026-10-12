@@ -2,7 +2,7 @@
 
     python make_pick.py cands   # assets/pick/cand_{1,2,3}.png + contact.png
     python make_pick.py sheet   # assets/koki/koki_sheet.png (턴어라운드·표정)
-    python make_pick.py pick 2  # 2안을 픽이로 확정 → assets/pick/pick_idle.png + pick_sheet.png
+    python make_pick.py cast    # 확정 배역(2026-10-12): 1안=아내, 2안=남편, 3안=안내 캐릭터 → assets/cast/
 
 왜 1회인가: `faces.py` 주석대로 생성 모델은 두 번째 그림부터 표류한다. 그래서 후보는 한 번만 뽑고,
 확정 뒤 **레퍼런스 시트 한 장**을 만들어 이후 모든 장면 생성의 참고 이미지로 고정한다.
@@ -66,6 +66,30 @@ def sheet(ref: str = KOKI, out: str = "assets/koki/koki_sheet.png") -> str | Non
     return imagegen.generate(f"{imagegen.STYLE}. Make {SHEET}.", out, refs=[ref], aspect="3:2")
 
 
+# 사용자 확정(2026-10-12): 부부 = 1안(코랄·쇼핑백, 아내)·2안(라벤더·폰, 남편), 3안(버터·카드)은 콕픽 안내 캐릭터
+# (설명·상품 안내·판정 도장). 이름은 사용자가 정한다 — 코드는 배역 키로만 부른다.
+CAST = {"wife": 1, "husband": 2, "guide": 3}
+CAST_DIR = "assets/cast"
+
+
+def cast() -> list[str]:
+    """후보 → 배역 고정 + 배역마다 레퍼런스 시트 1장. 이후 모든 장면 생성이 이 시트를 참고로 받는다."""
+    os.makedirs(CAST_DIR, exist_ok=True)
+    made = []
+    for role, n in CAST.items():
+        src = os.path.join(OUT, f"cand_{n}.png")
+        if not os.path.exists(src):
+            print(f"[cast] {src} 없음 — 건너뜀")
+            continue
+        idle = os.path.join(CAST_DIR, f"{role}_idle.png")
+        shutil.copyfile(src, idle)
+        made.append(idle)
+        out = sheet(idle, os.path.join(CAST_DIR, f"{role}_sheet.png"))
+        if out:
+            made.append(out)
+    return made
+
+
 def pick(n: int) -> None:
     src = os.path.join(OUT, f"cand_{n}.png")
     if not os.path.exists(src):
@@ -82,5 +106,7 @@ if __name__ == "__main__":
         print(cands())
     elif cmd == "sheet":
         print(sheet())
+    elif cmd == "cast":
+        print(cast())
     elif cmd == "pick":
         pick(int(sys.argv[2]))
