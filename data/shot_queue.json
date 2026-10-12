@@ -1,5 +1,5 @@
 {
- "next": 76,
+ "next": 82,
  "items": {
   "1": {
    "name": "늘어나는 밀폐용기",
@@ -725,6 +725,60 @@
    "done": false,
    "search": "쌀 보관 용기",
    "url": "https://www.coupang.com/np/search?q=%EC%8C%80+%EB%B3%B4%EA%B4%80+%EC%9A%A9%EA%B8%B0"
+  },
+  "76": {
+   "name": "과자 밀봉기",
+   "slug": "",
+   "key": "과자밀봉기",
+   "done": false,
+   "search": "과자 밀봉기",
+   "url": "https://www.coupang.com/np/search?q=%EA%B3%BC%EC%9E%90+%EB%B0%80%EB%B4%89%EA%B8%B0"
+  },
+  "77": {
+   "name": "만능 채칼",
+   "slug": "",
+   "key": "만능채칼",
+   "done": false,
+   "search": "만능 채칼",
+   "url": "https://www.coupang.com/np/search?q=%EB%A7%8C%EB%8A%A5+%EC%B1%84%EC%B9%BC",
+   "hold": true,
+   "note": "58번과 같은 물건으로 보임 — 58번으로 캡처"
+  },
+  "78": {
+   "name": "냉동실 정리",
+   "slug": "",
+   "key": "냉동실정리",
+   "done": false,
+   "search": "냉동실 정리",
+   "url": "https://www.coupang.com/np/search?q=%EB%83%89%EB%8F%99%EC%8B%A4+%EC%A0%95%EB%A6%AC"
+  },
+  "79": {
+   "name": "밥 식히는 미니 선풍기",
+   "slug": "",
+   "key": "밥식히는미니선풍기",
+   "done": false,
+   "search": "밥 식히는 미니 선풍기",
+   "url": "https://www.coupang.com/np/search?q=%EB%B0%A5+%EC%8B%9D%ED%9E%88%EB%8A%94+%EB%AF%B8%EB%8B%88+%EC%84%A0%ED%92%8D%EA%B8%B0",
+   "hold": true,
+   "note": "70번과 같은 물건으로 보임 — 70번으로 캡처"
+  },
+  "80": {
+   "name": "주방가위",
+   "slug": "",
+   "key": "주방가위",
+   "done": false,
+   "search": "주방가위",
+   "url": "https://www.coupang.com/np/search?q=%EC%A3%BC%EB%B0%A9%EA%B0%80%EC%9C%84"
+  },
+  "81": {
+   "name": "쌀 보관",
+   "slug": "",
+   "key": "쌀보관",
+   "done": false,
+   "search": "쌀 보관",
+   "url": "https://www.coupang.com/np/search?q=%EC%8C%80+%EB%B3%B4%EA%B4%80",
+   "hold": true,
+   "note": "4번과 같은 물건으로 보임 — 4번으로 캡처"
   }
  }
 }
