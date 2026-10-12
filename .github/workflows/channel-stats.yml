@@ -31,6 +31,26 @@ jobs:
       # 성과가 갱신된 직후 학습을 돌린다 — 다음 영상 대본이 이 결과를 프롬프트로 받는다
       - name: 학습 루프
         run: python learn.py
+      # 정체성 실험: 24h/72h/7d 자리 채우기(매일) + 일요일엔 블록 리뷰를 텔레그램으로
+      - name: 실험 갱신
+        run: python experiments.py update || true
+      - name: 실험 주간 리뷰 (일요일)
+        if: ${{ always() }}
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          if [ "$(date +%u)" != "7" ]; then echo "일요일이 아님 — 리뷰 생략"; exit 0; fi
+          python experiments.py review > out_review.txt || true
+          cat out_review.txt
+          python - <<'PY'
+          import os, urllib.parse, urllib.request
+          tok, chat = os.getenv("TELEGRAM_TOKEN"), os.getenv("TELEGRAM_CHAT_ID")
+          txt = open("out_review.txt", encoding="utf-8").read().strip() if os.path.exists("out_review.txt") else ""
+          if tok and chat and txt:
+              urllib.request.urlopen("https://api.telegram.org/bot%s/sendMessage" % tok,
+                  urllib.parse.urlencode({"chat_id": chat, "text": txt[:3900]}).encode())
+          PY
 
       - name: 결과 커밋
         run: |

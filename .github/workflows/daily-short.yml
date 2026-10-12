@@ -119,6 +119,10 @@ jobs:
       - name: 재배포 캡션
         if: steps.dup.outputs.skip != 'true' && steps.plan.outputs.skip != 'true'
         run: python redistribute.py || true
+      # 정체성 실험(3개월, docs/정체성_실험_3개월_2026-10-12.md): 오늘 편의 변수·예측 등급을 남긴다
+      - name: 실험 기록
+        if: steps.dup.outputs.skip != 'true' && steps.plan.outputs.skip != 'true'
+        run: python experiments.py log-publish "${{ steps.day.outputs.today }}" || true
       - name: 성공 마커 커밋 (중복 가드용)
         if: steps.dup.outputs.skip != 'true' && steps.plan.outputs.skip != 'true'
         run: |
