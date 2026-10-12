@@ -14,19 +14,19 @@
    "True": {
     "n": 5,
     "lift": 1.0,
-    "avg_views": 518.0
+    "avg_views": 517.6
    }
   },
   "format": {
    "roundup3": {
     "n": 5,
     "lift": 1.0,
-    "avg_views": 518.0
+    "avg_views": 517.6
    }
   }
  },
  "notes": [],
- "mean_views": 518.0,
+ "mean_views": 517.6,
  "mean_engagement": 0.0018,
  "best": [
   {
@@ -39,13 +39,13 @@
    "title": "삐뚤빼뚤 커팅? 이거 하나로 고민 끝!",
    "product": "레이저가이드가위",
    "views": 1174,
-   "score": 1.6
+   "score": 1.601
   },
   {
    "title": "없으면 살림 못 한다던데, 진짜일까?",
    "product": "씨밀렉스 라이스키퍼 쌀통 10kg",
-   "views": 534,
-   "score": 1.037
+   "views": 532,
+   "score": 1.036
   }
  ],
  "worst": [
