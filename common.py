@@ -2,7 +2,6 @@
 Scripto/Picto와 독립 실행되도록 의존성을 최소화했다(requests만)."""
 import datetime as _dt
 import json, os, time
-import requests
 
 
 def op_date(now=None):
@@ -50,6 +49,7 @@ def llm(prompt, max_tokens=8000, temperature=0.8, retries=3, json_mode=False, se
         gen.pop("responseMimeType", None)   # 도구 사용 시 JSON 강제와 같이 못 쓴다
     last = ""
     for i in range(retries):
+        import requests  # 지연 import — 편성 확인(schedule.py)은 requests 없이도 돌아야 한다(10/11 사고)
         r = requests.post(url, json=body, timeout=180,
                           headers={"x-goog-api-key": key, "Content-Type": "application/json"})
         if r.status_code == 400 and search and ("tool" in r.text.lower() or "search" in r.text.lower()):
@@ -147,6 +147,7 @@ def telegram_video(path, caption=""):
     if not (tok and chat):
         print("[tg] 토큰 없음 — 전송 생략"); return False
     with open(path, "rb") as f:
+        import requests  # 지연 import — 편성 확인(schedule.py)은 requests 없이도 돌아야 한다(10/11 사고)
         r = requests.post(f"https://api.telegram.org/bot{tok}/sendVideo",
                           data={"chat_id": chat, "caption": caption[:1000]},
                           files={"video": f}, timeout=300)
@@ -157,6 +158,7 @@ def telegram_msg(text):
     tok, chat = os.getenv("TELEGRAM_TOKEN", ""), os.getenv("TELEGRAM_CHAT_ID", "")
     if not (tok and chat):
         return False
+    import requests  # 지연 import — 편성 확인(schedule.py)은 requests 없이도 돌아야 한다(10/11 사고)
     requests.post(f"https://api.telegram.org/bot{tok}/sendMessage",
                   data={"chat_id": chat, "text": text[:4000]}, timeout=30)
     return True

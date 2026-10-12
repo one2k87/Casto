@@ -38,6 +38,12 @@ jobs:
       - uses: actions/setup-python@v5
         if: steps.dup.outputs.skip != 'true'
         with: { python-version: "3.12" }
+      # 편성 확인은 의존성 설치 **전**에 돈다(발행 없는 날 apt 3분을 아끼려고). 그런데 일요일 차트 편성은
+      # chart.build → common(requests)·PIL 을 건드려 10/11 두 번 다 ModuleNotFoundError 로 죽었다(실측).
+      # 가벼운 pip 둘만 먼저 깐다 — apt(ffmpeg·폰트)는 여전히 발행일에만.
+      - name: 편성용 최소 의존성
+        if: steps.dup.outputs.skip != 'true'
+        run: pip install -q requests pillow
       - name: 편성 확인 (오늘 발행일인가)
         id: plan
         if: steps.dup.outputs.skip != 'true'
