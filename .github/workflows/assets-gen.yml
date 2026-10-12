@@ -2,6 +2,9 @@ name: 캐릭터·점토 자산 생성
 # 파일럿(블록 0) 1회성 생성 — 픽이 후보 3안, 레퍼런스 시트, 픽이 확정. 키는 시크릿에만 있으니 여기서 돌린다.
 # 결과는 assets/에 커밋되고 텔레그램으로 알린다. famto가 받아 사용자에게 보여 준다.
 on:
+  # famto가 토큰 없이 돌리는 길: assets/pick/request.txt 에 "cands" / "sheet" / "pick 2" 를 적어 푸시한다
+  push:
+    paths: ["assets/pick/request.txt"]
   workflow_dispatch:
     inputs:
       job:
@@ -32,10 +35,15 @@ jobs:
         env:
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
         run: |
-          if [ "${{ inputs.job }}" = "pick" ]; then
-            python make_pick.py pick "${{ inputs.n }}"
+          JOB="${{ inputs.job }}"; N="${{ inputs.n }}"
+          if [ "${{ github.event_name }}" = "push" ]; then
+            read -r JOB N < assets/pick/request.txt
+          fi
+          echo "job=$JOB n=$N"
+          if [ "$JOB" = "pick" ]; then
+            python make_pick.py pick "$N"
           else
-            python make_pick.py "${{ inputs.job }}"
+            python make_pick.py "$JOB"
           fi
       - name: 결과 커밋
         run: |
@@ -59,7 +67,8 @@ jobs:
           if not (tok and chat):
               raise SystemExit(0)
           n = len(glob.glob("assets/pick/*.png")) + len(glob.glob("assets/koki/*_sheet.png"))
-          msg = f"🎨 자산 생성 '${{ inputs.job }}' 끝 — 저장소 assets/ 에 {n}장. famto가 보여 줄게요."
+          job = open("assets/pick/request.txt").read().split()[0] if os.path.exists("assets/pick/request.txt") else "${{ inputs.job }}"
+          msg = f"🎨 자산 생성 '{job}' 끝 — 저장소 assets/ 에 {n}장. famto가 보여 줄게요."
           urllib.request.urlopen("https://api.telegram.org/bot%s/sendMessage" % tok,
               urllib.parse.urlencode({"chat_id": chat, "text": msg}).encode())
           PY
