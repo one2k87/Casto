@@ -26,7 +26,7 @@ REVIEW_MD = "data/experiments_review.md"
 
 # 실험 변수의 기본값 — 블록에서 돌리지 않는 변수는 직전 승자, 승자가 없으면 이 값으로 고정한다.
 DEFAULTS = {"narrative": "A_사고해결", "hook": "문제장면", "length": "22s",
-            "ending": "실물가격", "title": "문제숫자"}
+            "ending": "도장서랍", "title": "문제숫자"}   # 2026-10-13 포맷 3판(조합 1) 반영
 
 BLOCKS = [
     {"n": 1, "start": "2026-10-13", "end": "2026-10-26", "var": "narrative",
@@ -36,7 +36,7 @@ BLOCKS = [
     {"n": 3, "start": "2026-11-10", "end": "2026-11-23", "var": "length",
      "values": ["16s", "22s"], "metric": "avg_view_pct"},
     {"n": 4, "start": "2026-11-24", "end": "2026-12-07", "var": "ending",
-     "values": ["실물가격", "도장개그", "픽담예고"], "metric": "ctr"},
+     "values": ["실물가격", "도장서랍", "픽담예고"], "metric": "ctr"},
     {"n": 5, "start": "2026-12-08", "end": "2026-12-21", "var": "title",
      "values": ["문제숫자", "대사인용", "질문형"], "metric": "views_24h"},
     {"n": 6, "start": "2026-12-22", "end": "2027-01-10", "var": None,
