@@ -1,0 +1,207 @@
+"""「콕이네 집」 대본 생성기 — 포맷 3판(docs/콕픽_포맷_3판_콕이네집_2026-10-13.md) 8컷을 JSON으로 만든다.
+
+흐름: 상품 사실(이름·카테고리·가격·링크·우리 데이터 근거) + 상황(라이브러리) → LLM → `check()`(정직 검사)
+→ 통과 못 하면 `fallback()`(템플릿 대사). 폴백 사실은 대본에 `fallback=True`로 남겨 발행 로그가 안다.
+
+정직 규칙(§4)은 여기서 **코드로** 건다. 프롬프트에 "하지 마"라고 적는 것만으로는 안 지켜진다(픽담 integrity 교훈).
+  · 금지어(체험 주장·과장·후기 인용)가 대사에 있으면 탈락
+  · 가격을 모르는데 대사에 원화 숫자가 있으면 탈락
+  · 판정 근거(reason)에 제공한 evidence에 없는 숫자가 있으면 탈락
+  · 컷이 8개가 아니거나 대사 줄이 12자를 크게 넘기면 탈락
+이름은 자리표시자 {wife} {husband} {guide} — 렌더 때 `casto.json` cast.names 로 치환한다(미정이면 그대로 두지 않고
+'아내·남편·콕픽'으로 치환해 영상엔 중괄호가 안 나간다).
+"""
+from __future__ import annotations
+
+import json
+import random
+import re
+
+ROLES = ("wife", "husband", "guide")
+BANNED = ("써 보니", "써보니", "직접 써", "써봤", "써 봤", "최고", "인생템", "100%", "무조건", "효과 보장",
+          "평점", "리뷰가", "후기가", "다들 극찬", "대박")
+MAX_LINE = 14          # 자막 두 줄 안. 12자 목표, 14자까지 허용
+STAMPS = ("콕", "글쎄", "패스")
+
+# 상황 라이브러리(포맷 3판 §5). 상품은 여기 '끼운다'.
+SITUATIONS = [
+    {"id": 1, "scene": "아침 계란 요리 중 노른자 터짐", "fits": ["계란", "흰자", "달걀"]},
+    {"id": 2, "scene": "야식 라면, 냄비 넘침", "fits": ["냄비", "라면", "조리"]},
+    {"id": 3, "scene": "설거지 산, 수세미 전쟁", "fits": ["수세미", "세척", "식기세척", "설거지"]},
+    {"id": 4, "scene": "손님 오기 30분 전 청소", "fits": ["청소", "먼지", "걸레"]},
+    {"id": 5, "scene": "장마철 빨래 안 마름", "fits": ["건조", "제습", "빨래", "세탁"]},
+    {"id": 6, "scene": "택배 상자 뜯다 손 베임", "fits": ["커터", "수납", "박스"]},
+    {"id": 7, "scene": "냉장고 정리, 유통기한 지난 것 발견", "fits": ["용기", "밀폐", "보관", "트레이"]},
+    {"id": 8, "scene": "주말 늦잠 브런치", "fits": ["토스터", "커피", "팬"]},
+    {"id": 9, "scene": "쌀통에 벌레", "fits": ["쌀통", "라이스"]},
+    {"id": 10, "scene": "가위가 안 들어 포장 못 뜯음", "fits": ["가위", "칼"]},
+    {"id": 11, "scene": "문 닫히다 손 끼일 뻔", "fits": ["끼임", "안전", "가드"]},
+    {"id": 12, "scene": "반찬통 뚜껑 짝 못 찾음", "fits": ["반찬통", "뚜껑"]},
+]
+
+CUT_PLAN = [  # (컷, 담당, 역할 설명) — 포맷 3판 §2
+    (1, "wife", "일상 속 사고. 상품 때문이 아니라 일상 때문에. 훅 한 줄"),
+    (2, "husband", "아내의 엉뚱한 시도에 한 박자 늦은 건조한 리액션"),
+    (3, "wife", "남편이 밀어 준 택배/이미 사 둔 상품을 발견. '이게 뭐야?'류"),
+    (4, "wife", "점토 상품을 써 보는 장면. 결과가 눈에 보임"),
+    (5, "husband", "한 줄 감상 받아치기. '그게 그 용도야'류"),
+    (6, "guide", "실물 카드 소개 + 판정 도장. 상품명(+가격) 그리고 '판정은—'"),
+    (7, "wife", "서랍 꼬리: '저번에 산 그거…' 서랍에서 안 쓴 템 발굴"),
+    (8, "husband", "루프 컷. 컷 1과 같은 장소로 돌아오며 짧은 한마디(또는 무대사)"),
+]
+
+
+def pick_situation(product: dict, rnd: random.Random | None = None) -> dict:
+    """상품명·카테고리에 맞는 상황. 없으면 무작위 — 억지로 맞추진 않는다(상황 추가는 사람이)."""
+    text = f"{product.get('display', '')} {product.get('category', '')}"
+    hits = [s for s in SITUATIONS if any(k in text for k in s["fits"])]
+    rnd = rnd or random.Random(product.get("display", ""))
+    return rnd.choice(hits or SITUATIONS)
+
+
+def decide(evidence: dict) -> tuple[str, str]:
+    """판정(§3). 근거 넷 중 있는 것만 센다. 근거가 없으면 '글쎄 — 데이터 부족'."""
+    pos = neg = 0
+    notes = []
+    s = evidence.get("search_trend")            # "up" | "flat" | "down" | None
+    if s == "up":
+        pos += 1; notes.append("검색 상승")
+    elif s == "down":
+        neg += 1; notes.append("검색 하락")
+    m = evidence.get("mentions")                # 언급 수(정수) | None
+    if isinstance(m, (int, float)) and m >= 100:
+        pos += 1; notes.append(f"언급 {int(m)}건")
+    b = evidence.get("blog_verdict")            # "positive" | "negative" | None
+    if b == "positive":
+        pos += 1; notes.append("비교글 긍정")
+    elif b == "negative":
+        neg += 1; notes.append("비교글은 다른 제품")
+    if evidence.get("price_band") == "고가" and pos < 2:
+        neg += 1; notes.append("가격 부담")
+    if neg >= 1 and pos < 2:
+        return "패스", " · ".join(notes) or "근거 부족"
+    if pos >= 2:
+        return "콕", " · ".join(notes)
+    return "글쎄", (" · ".join(notes) + " · " if notes else "") + "데이터 부족"
+
+
+def _prompt(product: dict, situation: dict, evidence: dict, stamp: str, reason: str, narrative: str) -> str:
+    price = product.get("price")
+    facts = product.get("facts") or []
+    return f"""당신은 20초짜리 클레이 시트콤 「콕이네 집」의 작가다. 등장: {{wife}}(아내, 유행템 다 사고 싶음, 행동이 먼저,
+짧고 빠른 말투), {{husband}}(남편, 느긋·현실파, 한 박자 늦고 건조), {{guide}}(콕픽 안내 캐릭터, 이야기 밖에서 들어와
+상품을 안내하고 판정 도장을 찍음, 또박또박).
+
+상품: {product.get('display')} (카테고리: {product.get('category', '')})
+가격: {price if price else '모름 — 가격을 말하지 말 것'}
+상품의 확인된 기능(이것 외의 효과·수치는 말하지 말 것): {', '.join(facts) if facts else '이름에서 바로 알 수 있는 기본 용도만'}
+상황(여기에 상품을 끼운다, 상품 때문에 사고가 나면 안 됨): {situation['scene']}
+서사 유형: {narrative}
+판정(이미 정해짐, 바꾸지 말 것): {stamp} — 근거: {reason}
+
+8컷을 쓴다. 컷마다 담당·역할이 정해져 있다:
+{chr(10).join(f'{n}. {who}: {desc}' for n, who, desc in CUT_PLAN)}
+
+규칙:
+- 대사는 한 컷에 한 줄, 12자 이내(자막 두 줄). 말은 캐릭터만. 설명 내레이션 없음.
+- "써 보니", "최고", "인생템", "100%", "무조건", "효과 보장", 리뷰·평점 인용 금지. 체험 주장 금지.
+- 상품 때문에 사는 게 아니라 이미 집에 있다(남편이 밀어 주거나 아내가 사 둠).
+- 컷 6의 대사는 "{product.get('display')}{', ' + format(int(price), ',') + '원' if price else ''}. 판정은—" 형태로 끝내고 도장은 별도 필드.
+- 컷 8은 컷 1과 같은 장소. 짧게.
+- scene 필드는 영어로, 이미지 생성용: 장소·인물 배치·동작·표정. 상품은 "the clay toy product"라고만 부른다(브랜드명 금지).
+  캐릭터는 wife/husband/guide로만 부른다.
+
+JSON: {{"title": "제목(생활 문제형, 숫자 있으면 좋음, 20자 이내)", "hook": "컷1 큰 자막 한 줄(10자 이내)",
+"cuts": [{{"n":1,"who":"wife","line":"...","scene":"..."}}, … 8개], "drawer_item": "컷7에서 발굴되는 지난 템 이름(짧게)"}}"""
+
+
+def check(script: dict, product: dict, evidence: dict) -> list[str]:
+    """정직·형식 검사. 빈 리스트면 통과. 사유를 전부 모아 돌려준다(하나 고치면 다음이 터지지 않게)."""
+    errs = []
+    cuts = script.get("cuts") or []
+    if len(cuts) != 8:
+        errs.append(f"컷 수 {len(cuts)} ≠ 8")
+    for c in cuts:
+        line = str(c.get("line", ""))
+        if c.get("who") not in ROLES:
+            errs.append(f"컷{c.get('n')} 담당 불명 {c.get('who')}")
+        for b in BANNED:
+            if b in line:
+                errs.append(f"컷{c.get('n')} 금지어 '{b}'")
+        limit = 30 if c.get("n") == 6 else MAX_LINE      # 컷 6은 상품명+가격이 들어가 길다
+        if len(line.replace(" ", "")) > limit:
+            errs.append(f"컷{c.get('n')} 대사 {len(line)}자 — 너무 김")
+        if not product.get("price") and re.search(r"\d[\d,]*\s*원", line):
+            errs.append(f"컷{c.get('n')} 가격 모름인데 원화 숫자")
+        if not c.get("scene"):
+            errs.append(f"컷{c.get('n')} scene 없음")
+    # 판정 근거의 숫자는 evidence에서 온 것만
+    reason = str(script.get("reason", ""))
+    allowed = {str(int(evidence["mentions"]))} if isinstance(evidence.get("mentions"), (int, float)) else set()
+    for num in re.findall(r"\d+", reason):
+        if num not in allowed:
+            errs.append(f"판정 근거에 출처 없는 숫자 {num}")
+    if script.get("stamp") not in STAMPS:
+        errs.append(f"도장 불명 {script.get('stamp')}")
+    return errs
+
+
+def fallback(product: dict, situation: dict, stamp: str, reason: str) -> dict:
+    """생성 실패 시 템플릿 대사(§6). 밋밋하지만 거짓은 없다."""
+    name = product.get("display", "이것")
+    price = product.get("price")
+    kitchen = "the same cozy clay kitchen, cream walls, mint counter"
+    cuts = [
+        (1, "wife", "아 또!", f"{kitchen}; wife mid-accident at the counter, {situation['scene']} mood, startled"),
+        (2, "husband", "…또?", f"{kitchen}; husband at the table looking over his phone, deadpan"),
+        (3, "wife", "이게 뭐야?", f"{kitchen}; husband slides a small parcel box across the table, the clay toy product pops out, wife curious"),
+        (4, "wife", "어, 되네?", f"{kitchen}; wife using the clay toy product at the counter, result visible, eyes wide"),
+        (5, "husband", "그게 그 용도야", f"{kitchen}; husband shrugs lightly, small smile"),
+        (6, "guide", f"{name}{', ' + format(int(price), ',') + '원' if price else ''}. 판정은—",
+         "plain cream studio backdrop; guide character standing center holding a blank white card up, presenting"),
+        (7, "wife", "저번에 산 건… 서랍.", f"{kitchen}; wife opening a kitchen drawer stuffed with unused gadgets, sheepish"),
+        (8, "husband", "", f"{kitchen}; same framing as cut 1, husband sipping coffee, wife back at the counter"),
+    ]
+    return {"title": f"{name}, 진짜 필요할까?", "hook": situation["scene"][:10],
+            "cuts": [{"n": n, "who": w, "line": l, "scene": s} for n, w, l, s in cuts],
+            "drawer_item": "지난주 템", "stamp": stamp, "reason": reason, "fallback": True}
+
+
+def build(product: dict, evidence: dict | None = None, narrative: str = "A_사고해결",
+          situation: dict | None = None, use_llm: bool = True) -> dict:
+    evidence = evidence or {}
+    situation = situation or pick_situation(product)
+    stamp, reason = decide(evidence)
+    script = None
+    if use_llm:
+        try:
+            from common import llm_json
+            script = llm_json(_prompt(product, situation, evidence, stamp, reason, narrative),
+                              max_tokens=3000, temperature=0.9)
+            script["stamp"], script["reason"] = stamp, reason
+            errs = check(script, product, evidence)
+            if errs:
+                print("[clay_script] ⛔ 정직·형식 검사 탈락:", "; ".join(errs))
+                script = None
+        except Exception as e:  # noqa: BLE001
+            print(f"[clay_script] 생성 실패({e}) — 폴백")
+            script = None
+    if script is None:
+        script = fallback(product, situation, stamp, reason)
+    script.update({"product": product.get("display"), "slug": product.get("slug"), "situation": situation["scene"],
+                   "narrative": narrative, "price": product.get("price"), "coupang_url": product.get("coupang_url")})
+    return script
+
+
+def substitute_names(script: dict, names: dict | None) -> dict:
+    """{wife} 등 자리표시자 치환. 미정이면 '아내·남편·콕픽' — 영상에 중괄호가 나가지 않게."""
+    names = {"wife": "아내", "husband": "남편", "guide": "콕픽", **(names or {})}
+    def sub(s: str) -> str:
+        for k, v in names.items():
+            s = s.replace("{" + k + "}", v)
+        return s
+    out = json.loads(json.dumps(script, ensure_ascii=False))
+    for c in out.get("cuts", []):
+        c["line"] = sub(str(c.get("line", "")))
+    out["title"] = sub(str(out.get("title", "")))
+    return out
