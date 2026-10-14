@@ -1,0 +1,63 @@
+{
+ "title": "노른자가 또 터졌네!",
+ "hook": "아침부터 사고!",
+ "cuts": [
+  {
+   "n": 1,
+   "who": "wife",
+   "line": "아잇, 노른자 터졌잖아!",
+   "scene": "Kitchen. Wife looking frustrated at a broken egg in a frying pan."
+  },
+  {
+   "n": 2,
+   "who": "husband",
+   "line": "그러게, 조심 좀.",
+   "scene": "Kitchen. Husband sips coffee, glancing at wife without much emotion."
+  },
+  {
+   "n": 3,
+   "who": "wife",
+   "line": "어? 이게 뭐야?",
+   "scene": "Kitchen. Wife finds a small, colorful clay toy product on the counter, pushed towards her by husband."
+  },
+  {
+   "n": 4,
+   "who": "wife",
+   "line": "오, 신기하다!",
+   "scene": "Kitchen. Wife carefully uses the clay toy product to separate egg white from yolk into two bowls. Yolk is intact."
+  },
+  {
+   "n": 5,
+   "who": "husband",
+   "line": "그게 그 용도야.",
+   "scene": "Kitchen. Husband watches wife, a slight shrug as he states the obvious."
+  },
+  {
+   "n": 6,
+   "who": "guide",
+   "line": "계란 흰자 분리기. 판정은—",
+   "scene": "White background. Guide character holding up a product card for 'the clay toy product'. A '글쎄' (Hmm) stamp appears on the card."
+  },
+  {
+   "n": 7,
+   "who": "wife",
+   "line": "저번에 산 그거…",
+   "scene": "Kitchen. Wife opens a drawer, revealing a forgotten kitchen gadget, a lemon squeezer."
+  },
+  {
+   "n": 8,
+   "who": "husband",
+   "line": "…",
+   "scene": "Kitchen. Husband is back at the counter, calmly sipping coffee, in the same spot as cut 1."
+  }
+ ],
+ "drawer_item": "레몬즙 짜개",
+ "stamp": "글쎄",
+ "reason": "데이터 부족",
+ "product": "계란 흰자 분리기",
+ "slug": "계란-흰자-분리기",
+ "situation": "아침 계란 요리 중 노른자 터짐",
+ "narrative": "A_사고해결",
+ "price": null,
+ "coupang_url": "https://link.coupang.com/a/hEcTTxurnM"
+}
