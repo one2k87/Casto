@@ -1,10 +1,26 @@
 {
- "date": "2026-10-14",
+ "date": "2026-10-15",
  "subscribers": 2,
- "total_views": 3813,
- "video_count": 7,
+ "total_views": 3814,
+ "video_count": 9,
  "hidden_subscriber_count": false,
  "videos": [
+  {
+   "id": "PB8cfP49DHc",
+   "title": "unknown",
+   "published": "2026-10-13",
+   "views": 3,
+   "likes": 0,
+   "comments": 0
+  },
+  {
+   "id": "InDKrRtgNcU",
+   "title": "unknown",
+   "published": "2026-10-13",
+   "views": 1,
+   "likes": 0,
+   "comments": 0
+  },
   {
    "id": "fI0ycqUTFHo",
    "title": "없으면 살림 못 한다던데, 진짜일까?",
