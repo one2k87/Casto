@@ -1,0 +1,64 @@
+{
+ "title": "터진 노른자 재앙",
+ "hook": "아 또 터졌어!",
+ "cuts": [
+  {
+   "n": 1,
+   "who": "wife",
+   "line": "아 또 터졌어…",
+   "scene": "Kitchen. Wife stares at a broken egg yolk in a frying pan, looking exasperated. Her face is scrunched up."
+  },
+  {
+   "n": 2,
+   "who": "husband",
+   "line": "계란이 널 싫어하나 봐",
+   "scene": "Kitchen. Husband, leaning against the counter, sips coffee. He glances at the wife with a dry expression, slow to react."
+  },
+  {
+   "n": 3,
+   "who": "wife",
+   "line": "이게 뭐야?",
+   "scene": "Kitchen. Wife spots a small, clay toy product on the counter, next to the pan. She picks it up, looking puzzled."
+  },
+  {
+   "n": 4,
+   "who": "wife",
+   "line": "어? 왜 돼?",
+   "scene": "Kitchen. Wife uses the clay toy product to separate the egg white from the yolk. Her eyes widen in surprise as it works."
+  },
+  {
+   "n": 5,
+   "who": "husband",
+   "line": "그거 네가 산 거잖아",
+   "scene": "Kitchen. Husband, still sipping coffee, gives a slight, knowing smirk. His tone is flat and teasing."
+  },
+  {
+   "n": 6,
+   "who": "guide",
+   "line": "계란 흰자 분리기. 판정은—",
+   "scene": "Guide character appears, holding up a product card for 'the clay toy product'. A '글쎄' (Hmm) stamp appears on the card. Guide looks directly at the camera, speaking clearly."
+  },
+  {
+   "n": 7,
+   "who": "wife",
+   "line": "저번에 산 그거…",
+   "scene": "Kitchen. Wife, now holding the separated egg, looks speculatively towards a kitchen drawer, as if remembering something else she bought."
+  },
+  {
+   "n": 8,
+   "who": "husband",
+   "line": "서랍 열지 마",
+   "scene": "Kitchen. Husband is back to sipping coffee, looking at the wife with a resigned expression as she eyes the drawer. The scene is similar to Cut 1."
+  }
+ ],
+ "drawer_item": "말린 키위",
+ "stamp": "글쎄",
+ "reason": "데이터 부족",
+ "punched": true,
+ "product": "계란 흰자 분리기",
+ "slug": "계란-흰자-분리기",
+ "situation": "아침 계란 요리 중 노른자 터짐",
+ "narrative": "A_사고해결",
+ "price": null,
+ "coupang_url": "https://link.coupang.com/a/hEcTTxurnM"
+}
