@@ -338,7 +338,7 @@ def main(argv: list[str]) -> None:
         print(json.dumps(row, ensure_ascii=False))
     elif cmd == "log-publish":
         from common import op_date
-        row = log_publish(rows, argv[1] if len(argv) > 1 else op_date())
+        row = log_publish(rows, argv[1] if len(argv) > 1 else str(op_date()))
         if row:
             save(rows)
             print(f"[experiments] 기록 {row['video_id']} format={row['format']} "

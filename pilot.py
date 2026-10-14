@@ -66,7 +66,7 @@ def main(argv: list[str]) -> None:
     allow_veo = "--no-veo" not in argv
     use_llm = "--no-llm" not in argv
     c = cfg()
-    today = op_date()
+    today = str(op_date())          # op_date는 date 객체 — 경로엔 문자열
     out = os.path.join("pilot", today)
     os.makedirs(out, exist_ok=True)
 
