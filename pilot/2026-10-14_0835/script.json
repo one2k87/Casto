@@ -1,0 +1,64 @@
+{
+ "title": "노른자가 또!",
+ "hook": "아 또 터졌네!",
+ "cuts": [
+  {
+   "n": 1,
+   "who": "wife",
+   "line": "아 또 터졌어…",
+   "scene": "Kitchen. wife, frustrated, looking at a broken egg yolk in a bowl. hands in exasperation."
+  },
+  {
+   "n": 2,
+   "who": "husband",
+   "line": "계란이 널 피해",
+   "scene": "Kitchen. husband, leaning against the counter, observing wife with a dry expression. A beat later."
+  },
+  {
+   "n": 3,
+   "who": "wife",
+   "line": "뭐야 이거,",
+   "scene": "Kitchen. wife, eyes wide, picking up the clay toy product from the counter next to her."
+  },
+  {
+   "n": 4,
+   "who": "wife",
+   "line": "또 언제 샀어?",
+   "scene": "Kitchen. wife, surprised, uses the clay toy product to separate the egg white and yolk successfully."
+  },
+  {
+   "n": 5,
+   "who": "husband",
+   "line": "네가 산 거야.",
+   "scene": "Kitchen. husband, still leaning, a slight smirk playing on his lips. His line is a beat late."
+  },
+  {
+   "n": 6,
+   "who": "guide",
+   "line": "계란 흰자 분리기. 판정은—",
+   "scene": "White background. guide appears, holding a product card with '계란 흰자 분리기' and then a stamp with '글쎄'."
+  },
+  {
+   "n": 7,
+   "who": "wife",
+   "line": "저번에 산 그거…",
+   "scene": "Kitchen. wife, already moving towards a cabinet, a hopeful glint in her eyes, about to open it."
+  },
+  {
+   "n": 8,
+   "who": "husband",
+   "line": "서랍 열지 마.",
+   "scene": "Kitchen. husband, still in the same spot, flatly delivers the line, looking at wife who is about to open the drawer."
+  }
+ ],
+ "drawer_item": "달걀 껍질 분리기",
+ "stamp": "글쎄",
+ "reason": "데이터 부족",
+ "punched": true,
+ "product": "계란 흰자 분리기",
+ "slug": "계란-흰자-분리기",
+ "situation": "아침 계란 요리 중 노른자 터짐",
+ "narrative": "A_사고해결",
+ "price": null,
+ "coupang_url": "https://link.coupang.com/a/hEcTTxurnM"
+}
