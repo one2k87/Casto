@@ -102,21 +102,21 @@ def card_png(product: dict, out: str) -> str:
     """컷 6 실물 카드 — 상품 사진(실사진만)·이름·가격(있을 때만). 화면 위쪽 62%를 쓴다."""
     im = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(im)
-    x0, y0, x1, y1 = 90, 150, W - 90, int(H * 0.62)
+    x0, y0, x1, y1 = 120, 120, W - 120, int(H * 0.50)      # 안내 캐릭터 얼굴이 아래에 보이게(파일럿 1호 피드백)
     _rounded(d, (x0 + 10, y0 + 14, x1 + 10, y1 + 14), 40, (0, 0, 0, 60))
     _rounded(d, (x0, y0, x1, y1), 40, (255, 255, 255, 245))
     photo = product.get("image")
     if photo and os.path.exists(photo):
         p = Image.open(photo).convert("RGB")
-        box = (x1 - x0 - 80, y1 - y0 - 260)
+        box = (x1 - x0 - 80, y1 - y0 - 230)
         r = min(box[0] / p.width, box[1] / p.height)
         p = p.resize((max(1, int(p.width * r)), max(1, int(p.height * r))), Image.LANCZOS)
         im.paste(p, (x0 + 40 + (box[0] - p.width) // 2, y0 + 40 + (box[1] - p.height) // 2))
     name = product.get("display", "")
-    d.text(((x0 + x1) / 2, y1 - 150), name[:22], font=font(58), fill=(40, 40, 40), anchor="mm")
+    d.text(((x0 + x1) / 2, y1 - 140), name[:22], font=font(54), fill=(40, 40, 40), anchor="mm")
     price = product.get("price")
     sub = f"{int(price):,}원" if price else "가격은 링크에서"
-    d.text(((x0 + x1) / 2, y1 - 75), sub, font=font(44, bold=False), fill=(90, 90, 90), anchor="mm")
+    d.text(((x0 + x1) / 2, y1 - 70), sub, font=font(42, bold=False), fill=(90, 90, 90), anchor="mm")
     im.save(out)
     return out
 
@@ -124,7 +124,7 @@ def card_png(product: dict, out: str) -> str:
 def stamp_png(stamp: str, out: str) -> str:
     im = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(im)
-    cx, cy, r = int(W * 0.74), int(H * 0.40), 180
+    cx, cy, r = int(W * 0.76), int(H * 0.34), 170
     col = STAMP_COLOR.get(stamp, (47, 93, 78))
     d.ellipse((cx - r, cy - r, cx + r, cy + r), outline=col + (255,), width=18)
     d.text((cx, cy), stamp, font=font(150 if len(stamp) == 1 else 110), fill=col + (255,), anchor="mm")

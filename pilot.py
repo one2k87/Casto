@@ -67,7 +67,9 @@ def main(argv: list[str]) -> None:
     use_llm = "--no-llm" not in argv
     c = cfg()
     today = str(op_date())          # op_date는 date 객체 — 경로엔 문자열
-    out = os.path.join("pilot", today)
+    # 같은 날 두 번 돌리면 키프레임을 재사용해 버린다(10/14 2호 사고 방지) — 실행마다 새 폴더
+    run_id = dt.datetime.now(dt.timezone(dt.timedelta(hours=9))).strftime("%H%M")
+    out = os.path.join("pilot", f"{today}_{run_id}")
     os.makedirs(out, exist_ok=True)
 
     product = product_from_catalog(slug)

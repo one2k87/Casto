@@ -16,6 +16,15 @@ SET = os.path.join(CAST, "set_kitchen.png")
 CLAY_DIR = "assets/clay"
 WORLD = ("the same cozy handmade clay kitchen set: cream walls, mint green counter, kraft-brown wooden table, "
          "small window with soft daylight, a few clay props (kettle, mug, fruit bowl)")
+# 파일럿 1호 실측(10/14): 디오라마가 화면 가운데 작게 앉아 세로 화면의 절반이 비었고, 컷 3·5에서 아내가
+# 흰색·길쭉한 캐릭터로 표류했다. → 프레이밍과 캐릭터를 말로 못 박는다. 참고 이미지 순서도 고정(1=아내, 2=남편).
+FRAMING = ("FRAMING: vertical 9:16 for a phone. Medium-close shot at character eye level. The characters fill "
+           "60-80% of the frame height. The kitchen fills the frame edge to edge — NO miniature box, NO visible "
+           "stage edges, NO empty margins, NO tabletop around the set. Think of a camera standing inside the kitchen")
+CAST_LOCK = ("CHARACTERS (never swap, never recolor, never add a third person): "
+             "WIFE = the short CORAL-PINK square/boxy clay character with big round glossy eyes (reference image 1). "
+             "HUSBAND = the tall slim LAVENDER-PURPLE clay character with small dot eyes (reference image 2). "
+             "Keep each one's exact color and body shape in every frame")
 
 
 def ensure_set() -> str | None:
@@ -28,6 +37,7 @@ def ensure_set() -> str | None:
 
 def refs_for(cut: dict, clay_product: str | None) -> list[str]:
     who = cut.get("who", "wife")
+    # 순서 고정: 1=아내 시트, 2=남편 시트, 3=세트, 4=점토 상품 — 프롬프트가 번호로 가리킨다
     refs = [os.path.join(CAST, f"{r}_sheet.png") for r in ("wife", "husband")]
     if who == "guide" or cut.get("n") == 6:
         refs = [os.path.join(CAST, "guide_sheet.png")]
@@ -43,12 +53,13 @@ def prompt_for(cut: dict) -> str:
     base = (f"{imagegen.STYLE}. One frame of a stop-motion clay sitcom. Use EXACTLY the characters from the reference "
             f"sheets (same colors, proportions, clay texture, dot eyes). ")
     if n == 6:
-        return (base + "Plain cream studio backdrop (no kitchen). The guide character stands center-right holding up a "
-                "blank white rectangular card (leave the card empty for compositing). Presenting pose. "
-                f"Scene: {cut.get('scene', '')}. Vertical 9:16, character full body, no text")
-    return (base + f"Location: {WORLD}. Scene: {cut.get('scene', '')}. "
+        return (base + "Plain cream studio backdrop (no kitchen). The GUIDE (butter-yellow boxy clay character, "
+                "reference image 1) stands in the LOWER HALF of the frame, full body, holding up a blank white "
+                "rectangular card above its head with both hands (card empty — it will be composited). "
+                f"Scene: {cut.get('scene', '')}. Vertical 9:16, no text, no letters, no speech bubbles")
+    return (base + f"{CAST_LOCK}. Location: {WORLD}. {FRAMING}. Scene: {cut.get('scene', '')}. "
             "If 'the clay toy product' appears, draw it exactly like the product reference image (a clay toy), "
-            "never as a real photo. Vertical 9:16, medium shot, no text, no speech bubbles")
+            "never as a real photo. No text, no speech bubbles")
 
 
 def build(script: dict, out_dir: str, clay_product: str | None = None) -> dict[int, str]:

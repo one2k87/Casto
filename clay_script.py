@@ -20,7 +20,7 @@ import re
 ROLES = ("wife", "husband", "guide")
 BANNED = ("써 보니", "써보니", "직접 써", "써봤", "써 봤", "최고", "인생템", "100%", "무조건", "효과 보장",
           "평점", "리뷰가", "후기가", "다들 극찬", "대박")
-MAX_LINE = 14          # 자막 두 줄 안. 12자 목표, 14자까지 허용
+MAX_LINE = 18          # 자막 두 줄 안. 구어체는 12자에 안 들어간다 — 18자까지(사용자 10/14 피드백)
 STAMPS = ("콕", "글쎄", "패스")
 
 # 상황 라이브러리(포맷 3판 §5). 상품은 여기 '끼운다'.
@@ -85,12 +85,38 @@ def decide(evidence: dict) -> tuple[str, str]:
     return "글쎄", (" · ".join(notes) + " · " if notes else "") + "데이터 부족"
 
 
+STYLE_GUIDE = """[말투 바이블 — 진짜 부부처럼]
+- 반말. 서로를 "자기/여보"보다는 이름이나 "야"로 부른다. 존댓말·안내문 말투 금지.
+- 모든 대사는 **반응**이거나 **태도**다. 상황을 설명하는 대사("노른자가 터졌네", "그게 그 용도야")는 쓰지 않는다 —
+  화면이 이미 보여 준다. 설명이 필요하면 자막 카드가 한다.
+- 웃음은 남편의 **건조한 한 방**에서 난다. 핀잔·눙침·한 박자 늦은 지적. 절대 친절하게 설명하지 않는다.
+- 아내는 감탄·억울함·우기기. 말끝이 짧고 빠르다("아 또!", "이거 왜 돼?", "내가 산 거 아니야").
+- 컷 5(남편의 한 방)가 이 편의 펀치라인이다. 상품 칭찬이 아니라 **아내를 놀리는 말**이어야 한다.
+- 컷 7·8은 러닝개그: 아내가 "저번에 산 그거"를 찾고, 남편은 "서랍 열지 마"류로 막는다.
+- 줄임표·감탄사 OK. 이모지·영어 금지. 한 줄 18자 이내.
+
+[좋은 예 — 계란 흰자 분리기]
+1 아내: 아 또 터졌어… 세 번째야
+2 남편: 계란이 너 싫어하나 봐
+3 아내: 뭐야 이거, 언제 샀어?
+4 아내: 어? 왜 돼?
+5 남편: 그거 네가 산 거야. 지난달에.
+7 아내: 지난달에 산 게 또 있다고?
+8 남편: 서랍 열지 마
+
+[나쁜 예 — 쓰지 말 것]
+"노른자 터졌잖아!"(설명) / "그러게, 조심 좀."(훈계, 재미 없음) / "오, 신기하다!"(감상 없음) / "그게 그 용도야."(로봇)
+"""
+
+
 def _prompt(product: dict, situation: dict, evidence: dict, stamp: str, reason: str, narrative: str) -> str:
     price = product.get("price")
     facts = product.get("facts") or []
-    return f"""당신은 20초짜리 클레이 시트콤 「콕이네 집」의 작가다. 등장: {{wife}}(아내, 유행템 다 사고 싶음, 행동이 먼저,
-짧고 빠른 말투), {{husband}}(남편, 느긋·현실파, 한 박자 늦고 건조), {{guide}}(콕픽 안내 캐릭터, 이야기 밖에서 들어와
-상품을 안내하고 판정 도장을 찍음, 또박또박).
+    return f"""당신은 20초짜리 클레이 시트콤 「콕이네 집」의 코미디 작가다. 시트콤이다 — 광고 대본이 아니다.
+등장: {{wife}}(아내, 유행템 다 사고 싶음, 행동이 먼저, 감탄·억울함·우기기), {{husband}}(남편, 느긋·현실파, 건조한 한 방,
+한 박자 늦음), {{guide}}(콕픽 안내 캐릭터, 이야기 밖에서 들어와 상품 카드와 판정 도장. 또박또박).
+
+{STYLE_GUIDE}
 
 상품: {product.get('display')} (카테고리: {product.get('category', '')})
 가격: {price if price else '모름 — 가격을 말하지 말 것'}
@@ -99,20 +125,35 @@ def _prompt(product: dict, situation: dict, evidence: dict, stamp: str, reason: 
 서사 유형: {narrative}
 판정(이미 정해짐, 바꾸지 말 것): {stamp} — 근거: {reason}
 
-8컷을 쓴다. 컷마다 담당·역할이 정해져 있다:
+8컷. 컷마다 담당·역할:
 {chr(10).join(f'{n}. {who}: {desc}' for n, who, desc in CUT_PLAN)}
 
-규칙:
-- 대사는 한 컷에 한 줄, 12자 이내(자막 두 줄). 말은 캐릭터만. 설명 내레이션 없음.
+추가 규칙:
 - "써 보니", "최고", "인생템", "100%", "무조건", "효과 보장", 리뷰·평점 인용 금지. 체험 주장 금지.
-- 상품 때문에 사는 게 아니라 이미 집에 있다(남편이 밀어 주거나 아내가 사 둠).
-- 컷 6의 대사는 "{product.get('display')}{', ' + format(int(price), ',') + '원' if price else ''}. 판정은—" 형태로 끝내고 도장은 별도 필드.
-- 컷 8은 컷 1과 같은 장소. 짧게.
-- scene 필드는 영어로, 이미지 생성용: 장소·인물 배치·동작·표정. 상품은 "the clay toy product"라고만 부른다(브랜드명 금지).
-  캐릭터는 wife/husband/guide로만 부른다.
+- 상품은 이미 집에 있다(남편이 밀어 주거나 아내가 사 둔 것). 찾아 나서지 않는다.
+- 컷 6의 대사는 "{product.get('display')}{', ' + format(int(price), ',') + '원' if price else ''}. 판정은—" 으로 끝낸다.
+- 컷 8은 컷 1과 같은 장소. 한 마디 또는 빈 문자열.
+- scene 필드는 영어, 이미지 생성용: 장소·인물 배치·동작·표정. 상품은 "the clay toy product"라고만(브랜드명 금지).
+  캐릭터는 wife/husband/guide로만.
 
-JSON: {{"title": "제목(생활 문제형, 숫자 있으면 좋음, 20자 이내)", "hook": "컷1 큰 자막 한 줄(10자 이내)",
-"cuts": [{{"n":1,"who":"wife","line":"...","scene":"..."}}, … 8개], "drawer_item": "컷7에서 발굴되는 지난 템 이름(짧게)"}}"""
+JSON: {{"title": "제목(생활 문제형, 20자 이내)", "hook": "컷1 큰 자막(10자 이내, 설명 말고 감정)",
+"cuts": [{{"n":1,"who":"wife","line":"...","scene":"..."}}, … 8개], "drawer_item": "컷7 서랍에서 나오는 지난 템(짧게)"}}"""
+
+
+def _punch_up(script: dict) -> str:
+    """2차 패스 — 설명형·로봇 대사를 부부 말투로 다시 쓴다. 구조·담당·scene은 유지."""
+    lines = "\n".join(f"{c.get('n')} {c.get('who')}: {c.get('line')}" for c in script.get("cuts", []))
+    return f"""아래는 클레이 시트콤 「콕이네 집」 초고다. 대사만 고친다 — 컷 번호·담당·scene은 그대로.
+{STYLE_GUIDE}
+
+초고:
+{lines}
+
+고칠 기준: 상황을 설명하는 줄, 훈계하는 줄, "신기하다"처럼 감상만 있는 줄, 로봇 같은 줄은 전부 부부의 **반응**으로 바꾼다.
+컷 5는 반드시 남편이 아내를 놀리는 한 방. 컷 6(guide)은 손대지 않는다. 컷 8은 "서랍" 러닝개그로 닫는다.
+금지어("써 보니", "최고", "인생템", "100%", "무조건", "효과 보장")와 가격·수치 추가 금지. 한 줄 18자 이내.
+
+JSON: {{"cuts": [{{"n":1,"line":"..."}}, … 8개]}}"""
 
 
 def check(script: dict, product: dict, evidence: dict) -> list[str]:
@@ -152,15 +193,15 @@ def fallback(product: dict, situation: dict, stamp: str, reason: str) -> dict:
     price = product.get("price")
     kitchen = "the same cozy clay kitchen, cream walls, mint counter"
     cuts = [
-        (1, "wife", "아 또!", f"{kitchen}; wife mid-accident at the counter, {situation['scene']} mood, startled"),
-        (2, "husband", "…또?", f"{kitchen}; husband at the table looking over his phone, deadpan"),
-        (3, "wife", "이게 뭐야?", f"{kitchen}; husband slides a small parcel box across the table, the clay toy product pops out, wife curious"),
-        (4, "wife", "어, 되네?", f"{kitchen}; wife using the clay toy product at the counter, result visible, eyes wide"),
-        (5, "husband", "그게 그 용도야", f"{kitchen}; husband shrugs lightly, small smile"),
+        (1, "wife", "아 또… 세 번째야", f"{kitchen}; wife mid-accident at the counter, {situation['scene']} mood, startled"),
+        (2, "husband", "오늘은 뭐가 널 싫어해?", f"{kitchen}; husband at the table looking over his phone, deadpan"),
+        (3, "wife", "뭐야 이거, 언제 샀어?", f"{kitchen}; husband slides a small parcel box across the table, the clay toy product pops out, wife curious"),
+        (4, "wife", "어? 왜 돼?", f"{kitchen}; wife using the clay toy product at the counter, result visible, eyes wide"),
+        (5, "husband", "그거 네가 산 거야. 지난달에.", f"{kitchen}; husband shrugs lightly, small smile"),
         (6, "guide", f"{name}{', ' + format(int(price), ',') + '원' if price else ''}. 판정은—",
          "plain cream studio backdrop; guide character standing center holding a blank white card up, presenting"),
-        (7, "wife", "저번에 산 건… 서랍.", f"{kitchen}; wife opening a kitchen drawer stuffed with unused gadgets, sheepish"),
-        (8, "husband", "", f"{kitchen}; same framing as cut 1, husband sipping coffee, wife back at the counter"),
+        (7, "wife", "지난달에 산 게 또 있다고?", f"{kitchen}; wife opening a kitchen drawer stuffed with unused gadgets, sheepish"),
+        (8, "husband", "서랍 열지 마", f"{kitchen}; same framing as cut 1, husband sipping coffee, wife back at the counter"),
     ]
     return {"title": f"{name}, 진짜 필요할까?", "hook": situation["scene"][:10],
             "cuts": [{"n": n, "who": w, "line": l, "scene": s} for n, w, l, s in cuts],
@@ -177,12 +218,26 @@ def build(product: dict, evidence: dict | None = None, narrative: str = "A_사�
         try:
             from common import llm_json
             script = llm_json(_prompt(product, situation, evidence, stamp, reason, narrative),
-                              max_tokens=3000, temperature=0.9)
+                              max_tokens=3000, temperature=1.0)
             script["stamp"], script["reason"] = stamp, reason
+            draft = json.loads(json.dumps(script, ensure_ascii=False))
+            try:   # 2차 패스: 대사만 부부 말투로 — 실패하면 초고로 간다
+                fixed = llm_json(_punch_up(script), max_tokens=1500, temperature=1.0)
+                by_n = {int(c["n"]): c.get("line", "") for c in fixed.get("cuts", []) if "n" in c}
+                for c in script["cuts"]:
+                    if int(c["n"]) != 6 and by_n.get(int(c["n"])) is not None:
+                        c["line"] = by_n[int(c["n"])]
+                script["punched"] = True
+            except Exception as e:  # noqa: BLE001
+                print(f"[clay_script] 펀치업 실패({e}) — 초고 사용")
             errs = check(script, product, evidence)
             if errs:
-                print("[clay_script] ⛔ 정직·형식 검사 탈락:", "; ".join(errs))
-                script = None
+                print("[clay_script] ⛔ 펀치업본 탈락:", "; ".join(errs), "— 초고로 재검사")
+                script = draft
+                errs = check(script, product, evidence)
+                if errs:
+                    print("[clay_script] ⛔ 초고도 탈락:", "; ".join(errs))
+                    script = None
         except Exception as e:  # noqa: BLE001
             print(f"[clay_script] 생성 실패({e}) — 폴백")
             script = None
