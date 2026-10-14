@@ -143,100 +143,100 @@
   "last_found": "2026-10-14",
   "first_seen": "2026-10-14"
  },
- "미니_밥솥": {
-  "name": "미니 밥솥",
-  "search_keyword": "휴대용 미니 밥솥",
-  "en_keyword": "mini rice cooker",
+ "쿠팡추천템": {
+  "name": "쿠팡추천템",
+  "search_keyword": "쿠팡 추천템",
+  "en_keyword": "",
   "price_band": "중가",
   "brand": "",
   "product_id": "",
-  "evidence": "영상 11개 / 채널 11개에서 '미니밥솥'으로 언급됨",
+  "evidence": "제목에 24개 영상, 17개 채널에서 반복 등장",
   "category": "50000008",
-  "last_found": "2026-10-13",
-  "first_seen": "2026-10-13"
+  "last_found": "2026-10-14",
+  "first_seen": "2026-10-14"
  },
- "자동_병따개": {
-  "name": "자동 병따개",
-  "search_keyword": "자동 병 오프너",
-  "en_keyword": "automatic bottle opener",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "영상 13개 / 채널 11개에서 '자동병따개'로 언급됨",
-  "category": "50000008",
-  "last_found": "2026-10-13",
-  "first_seen": "2026-10-13"
- },
- "접이식_도마": {
-  "name": "접이식 도마",
-  "search_keyword": "접이식 도마",
-  "en_keyword": "folding cutting board",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "영상 5개 / 채널 5개에서 '접이식도마'로 언급됨",
-  "category": "50000008",
-  "last_found": "2026-10-13",
-  "first_seen": "2026-10-13"
- },
- "과자_밀봉기": {
-  "name": "과자 밀봉기",
-  "search_keyword": "과자 밀봉기",
-  "en_keyword": "snack bag sealer",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "영상 4개 / 채널 4개에서 '과자밀봉기'로 언급됨",
-  "category": "50000008",
-  "last_found": "2026-10-13",
-  "first_seen": "2026-10-13"
- },
- "채소_다지기": {
-  "name": "채소 다지기",
-  "search_keyword": "만능 채소 다지기",
-  "en_keyword": "vegetable chopper",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "영상 7개 / 채널 5개에서 '채소다지기'로 언급됨",
-  "category": "50000008",
-  "last_found": "2026-10-13",
-  "first_seen": "2026-10-13"
- },
- "만능_채칼": {
-  "name": "만능 채칼",
-  "search_keyword": "김장 만능 채칼",
-  "en_keyword": "multi slicer",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "영상 17개 / 채널 14개에서 '만능채칼'로 언급됨",
-  "category": "50000008",
-  "last_found": "2026-10-13",
-  "first_seen": "2026-10-13"
- },
- "냉동실_정리": {
-  "name": "냉동실 정리",
-  "search_keyword": "냉동실 정리 용품",
-  "en_keyword": "freezer organizer",
+ "주방꿀템": {
+  "name": "주방꿀템",
+  "search_keyword": "주방 꿀템",
+  "en_keyword": "",
   "price_band": "중가",
   "brand": "",
   "product_id": "",
-  "evidence": "영상 17개 / 채널 14개에서 '냉동실정리'로 언급됨",
+  "evidence": "제목에 20개 영상, 16개 채널에서 반복 등장",
   "category": "50000008",
-  "last_found": "2026-10-13",
-  "first_seen": "2026-10-13"
+  "last_found": "2026-10-14",
+  "first_seen": "2026-10-14"
  },
- "밥_식히는_미니_선풍기": {
-  "name": "밥 식히는 미니 선풍기",
-  "search_keyword": "밥 식히는 미니 선풍기",
-  "en_keyword": "mini rice cooling fan",
-  "price_band": "저가",
+ "신박한아이템": {
+  "name": "신박한아이템",
+  "search_keyword": "신박한 아이템",
+  "en_keyword": "",
+  "price_band": "중가",
   "brand": "",
   "product_id": "",
-  "evidence": "영상 9개 / 채널 8개에서 '밥식히는미니선풍기'로 언급됨",
+  "evidence": "제목에 15개 영상, 11개 채널에서 반복 등장",
   "category": "50000008",
-  "last_found": "2026-10-13",
-  "first_seen": "2026-10-13"
+  "last_found": "2026-10-14",
+  "first_seen": "2026-10-14"
+ },
+ "생활꿀템": {
+  "name": "생활꿀템",
+  "search_keyword": "생활 꿀템",
+  "en_keyword": "",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 13개 영상, 11개 채널에서 반복 등장",
+  "category": "50000008",
+  "last_found": "2026-10-14",
+  "first_seen": "2026-10-14"
+ },
+ "살림꿀템": {
+  "name": "살림꿀템",
+  "search_keyword": "살림 꿀템",
+  "en_keyword": "",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 11개 영상, 11개 채널에서 반복 등장",
+  "category": "50000008",
+  "last_found": "2026-10-14",
+  "first_seen": "2026-10-14"
+ },
+ "주방용품": {
+  "name": "주방용품",
+  "search_keyword": "주방용품",
+  "en_keyword": "",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 11개 영상, 10개 채널에서 반복 등장",
+  "category": "50000008",
+  "last_found": "2026-10-14",
+  "first_seen": "2026-10-14"
+ },
+ "주방템": {
+  "name": "주방템",
+  "search_keyword": "주방템",
+  "en_keyword": "",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 10개 영상, 9개 채널에서 반복 등장",
+  "category": "50000008",
+  "last_found": "2026-10-14",
+  "first_seen": "2026-10-14"
+ },
+ "자취": {
+  "name": "자취",
+  "search_keyword": "자취 꿀템",
+  "en_keyword": "",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 9개 영상, 9개 채널에서 반복 등장 (자취남, 자취템, 자취생활템 등 관련 표현)",
+  "category": "50000008",
+  "last_found": "2026-10-14",
+  "first_seen": "2026-10-14"
  }
 }

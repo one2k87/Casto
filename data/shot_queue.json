@@ -1,5 +1,5 @@
 {
- "next": 84,
+ "next": 85,
  "items": {
   "1": {
    "name": "늘어나는 밀폐용기",
@@ -795,6 +795,16 @@
    "done": false,
    "search": "싱크대정리",
    "url": "https://www.coupang.com/np/search?q=%EC%8B%B1%ED%81%AC%EB%8C%80%EC%A0%95%EB%A6%AC"
+  },
+  "84": {
+   "name": "자취",
+   "slug": "",
+   "key": "자취",
+   "done": false,
+   "search": "자취",
+   "url": "https://www.coupang.com/np/search?q=%EC%9E%90%EC%B7%A8",
+   "hold": true,
+   "note": "46번과 같은 물건으로 보임 — 46번으로 캡처"
   }
  }
 }
