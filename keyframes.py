@@ -18,13 +18,17 @@ WORLD = ("the same cozy handmade clay kitchen set: cream walls, mint green count
          "small window with soft daylight, a few clay props (kettle, mug, fruit bowl)")
 # 파일럿 1호 실측(10/14): 디오라마가 화면 가운데 작게 앉아 세로 화면의 절반이 비었고, 컷 3·5에서 아내가
 # 흰색·길쭉한 캐릭터로 표류했다. → 프레이밍과 캐릭터를 말로 못 박는다. 참고 이미지 순서도 고정(1=아내, 2=남편).
-FRAMING = ("FRAMING: vertical 9:16 for a phone. Medium-close shot at character eye level. The characters fill "
-           "60-80% of the frame height. The kitchen fills the frame edge to edge — NO miniature box, NO visible "
-           "stage edges, NO empty margins, NO tabletop around the set. Think of a camera standing inside the kitchen")
-CAST_LOCK = ("CHARACTERS (never swap, never recolor, never add a third person): "
-             "WIFE = the short CORAL-PINK square/boxy clay character with big round glossy eyes (reference image 1). "
-             "HUSBAND = the tall slim LAVENDER-PURPLE clay character with small dot eyes (reference image 2). "
-             "Keep each one's exact color and body shape in every frame")
+# 2호 실측(10/15): 방은 커졌지만 여전히 와이드샷이 절반, 아내가 '동작'하는 컷(3·4)에서 길쭉한 분홍 원통으로 변함.
+# → 몸 형태를 기하로 못 박고("정육면체 vs 원통"), 와이드샷을 금지하고 가구를 잘라도 된다고 말한다.
+FRAMING = ("FRAMING: vertical 9:16 phone video. CLOSE framing — show only PART of the kitchen (one counter and a "
+           "table edge); cropping furniture is fine. The characters' bodies fill at least 70% of the frame height, "
+           "heads in the upper third. Camera at character eye level, standing inside the kitchen. "
+           "NO wide shot of the whole room, NO miniature box, NO visible stage edges, NO empty floor area")
+CAST_LOCK = ("EXACTLY TWO characters, never a third, never swapped or recolored. "
+             "WIFE = a CORAL-PINK CUBE: a boxy body as wide as it is tall, with short stubby arms and legs and big "
+             "round glossy eyes (reference image 1). She is NEVER tall, NEVER a cylinder, NEVER slim. "
+             "HUSBAND = the ONLY tall slim LAVENDER-PURPLE CYLINDER character with small dot eyes (reference image 2). "
+             "Keep each body shape and color identical in every frame, even when they move or hold things")
 
 
 def ensure_set() -> str | None:
