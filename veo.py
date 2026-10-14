@@ -19,18 +19,27 @@ import time
 
 import requests
 
-MODEL = os.getenv("VEO_MODEL", "veo-3.1-lite-generate-preview")
+MODEL = os.getenv("VEO_MODEL", "veo-3.1-lite-generate-preview")   # 호환용 — 실제 순서는 MODELS
 BASE = "https://generativelanguage.googleapis.com/v1beta"
 PRICE_PER_SEC = {"720p": 0.05, "1080p": 0.08}         # benchlm 2026-09-11 기준 ❓ 청구서로 재확인
 BUDGET_USD_MONTH = float(os.getenv("VEO_BUDGET_USD", "70"))   # ≈ ₩10만
 USAGE = "data/veo_usage.json"
 
 
-def _b64(path: str) -> dict:
+def _b64(path: str, style: str = "inline") -> dict:
+    """이미지 인코딩 두 가지. 3호 실측(10/15): lite-generate-preview 가 inlineData 에 400
+    "`inlineData` isn't supported by this model" — 그래서 Vertex식 bytesBase64Encoded 도 시도한다."""
     with open(path, "rb") as f:
         data = base64.b64encode(f.read()).decode()
     mime = "image/jpeg" if path.lower().endswith((".jpg", ".jpeg")) else "image/png"
+    if style == "bytes":
+        return {"bytesBase64Encoded": data, "mimeType": mime}
     return {"inlineData": {"mimeType": mime, "data": data}}
+
+
+# 모델·인코딩 후보. 앞에서부터 시도하고 400이면 다음으로 — 실패 요청은 과금되지 않는다.
+MODELS = [m for m in (os.getenv("VEO_MODEL"), "veo-3.1-lite-generate-preview", "veo-3.1-lite-preview") if m]
+ENCODINGS = ("inline", "bytes")
 
 
 # ---------------------------------------------------------------- 예산
@@ -68,10 +77,11 @@ def within_budget(seconds: int, resolution: str, path: str = USAGE, now: dt.date
 
 
 # ---------------------------------------------------------------- 요청
-def request_body(prompt: str, first: str, last: str | None, seconds: int, resolution: str) -> dict:
-    inst = {"prompt": prompt, "image": _b64(first)}
+def request_body(prompt: str, first: str, last: str | None, seconds: int, resolution: str,
+                 style: str = "inline") -> dict:
+    inst = {"prompt": prompt, "image": _b64(first, style)}
     if last:
-        inst["lastFrame"] = _b64(last)
+        inst["lastFrame"] = _b64(last, style)
     return {"instances": [inst],
             "parameters": {"aspectRatio": "9:16", "resolution": resolution,
                            "durationSeconds": seconds, "numberOfVideos": 1}}
@@ -92,19 +102,27 @@ def clip(prompt: str, first: str, out_path: str, last: str | None = None, second
         print(f"[veo] ⛔ 월 예산 ${BUDGET_USD_MONTH} 초과 — 클레이 모션으로 폴백")
         return None
     headers = {"x-goog-api-key": key, "Content-Type": "application/json"}
-    try:
-        r = requests.post(f"{BASE}/models/{MODEL}:predictLongRunning",
-                          json=request_body(prompt, first, last, seconds, resolution),
-                          headers=headers, timeout=60)
-    except Exception as e:  # noqa: BLE001
-        print(f"[veo] 요청 예외: {e}")
-        return None
-    if r.status_code != 200:
-        print(f"[veo] 요청 실패 {r.status_code}: {r.text[:200]}")
-        return None
-    op = r.json().get("name")
+    op = None
+    for model in MODELS:
+        for style in ENCODINGS:
+            try:
+                r = requests.post(f"{BASE}/models/{model}:predictLongRunning",
+                                  json=request_body(prompt, first, last, seconds, resolution, style),
+                                  headers=headers, timeout=60)
+            except Exception as e:  # noqa: BLE001
+                print(f"[veo] {model}/{style} 요청 예외: {e}")
+                continue
+            if r.status_code != 200:
+                print(f"[veo] {model}/{style} 실패 {r.status_code}: {r.text[:160].replace(chr(10), ' ')}")
+                continue
+            op = r.json().get("name")
+            if op:
+                print(f"[veo] ✅ 접수 {model}/{style}")
+                break
+            print(f"[veo] {model}/{style} operation 이름 없음")
+        if op:
+            break
     if not op:
-        print("[veo] operation 이름 없음")
         return None
     t0 = time.time()
     while time.time() - t0 < timeout:

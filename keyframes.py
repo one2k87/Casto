@@ -66,11 +66,44 @@ def prompt_for(cut: dict) -> str:
             "never as a real photo. No text, no speech bubbles")
 
 
+# 일관성 관문(10/15): 3호에서 7컷 중 1컷(컷 3)이 여전히 길쭉한 분홍 캐릭터였다. 프롬프트만으로는 100%가 안 되니
+# 생성 뒤 그림을 **검사**하고 틀리면 다시 뽑는다(최대 RETRIES회). 검사 비용은 장당 ₩1 안팎, 재생성은 ₩55.
+RETRIES = 2
+QA_QUESTION = """이 그림은 클레이 시트콤의 한 컷이다. 다음을 JSON으로 답하라:
+{"characters": 등장 캐릭터 수(정수), "wife_ok": 코랄/분홍 캐릭터가 '정육면체(네모 상자) 몸'이면 true, 길쭉하거나 원통이면 false,
+ "husband_ok": 보라/라벤더 캐릭터가 '길쭉한 원통 몸'이면 true (없으면 true), "extra_person": 코랄·라벤더 외 다른 인물이 있으면 true,
+ "has_text": 그림 안에 글자·숫자가 있으면 true, "close_shot": 캐릭터가 화면 높이의 절반 이상을 차지하면 true}"""
+
+
+def passes(path: str, cut: dict) -> tuple[bool, str]:
+    qa = imagegen.vision_check(path, QA_QUESTION)
+    if qa is None:
+        return True, "검사 생략"
+    n = int(cut.get("n", 0))
+    problems = []
+    if n != 6:
+        if qa.get("wife_ok") is False:
+            problems.append("아내 형태")
+        if qa.get("husband_ok") is False:
+            problems.append("남편 형태")
+        if qa.get("extra_person"):
+            problems.append("제3 인물")
+        if isinstance(qa.get("characters"), int) and qa["characters"] > 2:
+            problems.append(f"인물 {qa['characters']}명")
+        if qa.get("close_shot") is False:
+            problems.append("와이드샷")
+    if qa.get("has_text"):
+        problems.append("글자")
+    return (not problems), ", ".join(problems) or "통과"
+
+
 def build(script: dict, out_dir: str, clay_product: str | None = None) -> dict[int, str]:
-    """{컷번호: 그림 경로}. 생성 실패한 컷은 빠진다(렌더러가 직전 컷으로 메운다)."""
+    """{컷번호: 그림 경로}. 생성 실패한 컷은 빠진다(렌더러가 직전 컷으로 메운다). 검사 결과는 qa.json에 남긴다."""
+    import json as _json
     os.makedirs(out_dir, exist_ok=True)
     ensure_set()
     made: dict[int, str] = {}
+    qa_log: dict[str, list] = {}
     for cut in script.get("cuts", []):
         n = int(cut.get("n", 0))
         if n == 8:
@@ -79,8 +112,25 @@ def build(script: dict, out_dir: str, clay_product: str | None = None) -> dict[i
         if os.path.exists(path):
             made[n] = path
             continue
-        if imagegen.generate(prompt_for(cut), path, refs=refs_for(cut, clay_product), aspect="9:16"):
+        best = None
+        for attempt in range(RETRIES + 1):
+            cand = os.path.join(out_dir, f"kf{n}_try{attempt}.png")
+            if not imagegen.generate(prompt_for(cut), cand, refs=refs_for(cut, clay_product), aspect="9:16"):
+                continue
+            ok, why = passes(cand, cut)
+            qa_log.setdefault(str(n), []).append({"attempt": attempt, "ok": ok, "why": why})
+            print(f"[keyframes] 컷{n} 시도{attempt}: {why}")
+            best = best or cand
+            if ok:
+                best = cand
+                break
+        if best:
+            os.replace(best, path)
             made[n] = path
+        for junk in [f for f in os.listdir(out_dir) if f.startswith(f"kf{n}_try")]:
+            os.remove(os.path.join(out_dir, junk))          # 탈락한 시도는 남기지 않는다(저장소 부피)
+    with open(os.path.join(out_dir, "qa.json"), "w", encoding="utf-8") as f:
+        _json.dump(qa_log, f, ensure_ascii=False, indent=1)
     if 1 in made:
         made[8] = made[1]
     return made

@@ -91,3 +91,31 @@ def clay_product(photo: str, name: str, out_path: str) -> str | None:
     """실사진 → 점토 상품 1장. 이름은 힌트로만 — 글자·로고는 그리지 않는다."""
     prompt = f"{STYLE}. Make {CLAY_PRODUCT_STYLE}. The object is a {name}."
     return generate(prompt, out_path, refs=[photo], aspect="1:1")
+
+
+# ---------------------------------------------------------------- 시각 검사(키프레임 일관성 관문)
+def vision_check(path: str, question: str, timeout: int = 90) -> dict | None:
+    """그림 한 장에 대해 JSON 답을 받는다 — 캐릭터 일관성 관문용. 키 없으면 None(검사 생략)."""
+    import json as _json
+    key = os.getenv("LLM_API_KEY", "")
+    if not key or not os.path.exists(path):
+        return None
+    data, mime = _b64(path)
+    model = os.getenv("LLM_MODEL") or "gemini-2.5-flash"
+    body = {"contents": [{"parts": [{"text": question + "\n\n[출력] 순수 JSON만."},
+                                    {"inline_data": {"mime_type": mime, "data": data}}]}],
+            "generationConfig": {"responseMimeType": "application/json", "temperature": 0.0,
+                                 "thinkingConfig": {"thinkingBudget": 0}}}
+    try:
+        r = requests.post(comic.GENERATE.format(model), json=body, timeout=timeout,
+                          headers={"x-goog-api-key": key, "Content-Type": "application/json"})
+        if r.status_code != 200:
+            print(f"[vision] 실패 {r.status_code}: {r.text[:120]}")
+            return None
+        txt = r.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
+        if txt.startswith("```"):
+            txt = txt.split("```")[1].lstrip("json").strip()
+        return _json.loads(txt)
+    except Exception as e:  # noqa: BLE001
+        print(f"[vision] 예외: {e}")
+        return None
