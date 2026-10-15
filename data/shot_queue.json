@@ -1,5 +1,5 @@
 {
- "next": 85,
+ "next": 88,
  "items": {
   "1": {
    "name": "늘어나는 밀폐용기",
@@ -805,6 +805,34 @@
    "url": "https://www.coupang.com/np/search?q=%EC%9E%90%EC%B7%A8",
    "hold": true,
    "note": "46번과 같은 물건으로 보임 — 46번으로 캡처"
+  },
+  "85": {
+   "name": "살림템추천",
+   "slug": "",
+   "key": "살림템추천",
+   "done": false,
+   "search": "살림템추천",
+   "url": "https://www.coupang.com/np/search?q=%EC%82%B4%EB%A6%BC%ED%85%9C%EC%B6%94%EC%B2%9C",
+   "hold": true,
+   "note": "40번과 같은 물건으로 보임 — 40번으로 캡처"
+  },
+  "86": {
+   "name": "3가지 살림 꿀팁",
+   "slug": "",
+   "key": "3가지살림꿀팁",
+   "done": false,
+   "search": "3가지 살림 꿀팁",
+   "url": "https://www.coupang.com/np/search?q=3%EA%B0%80%EC%A7%80+%EC%82%B4%EB%A6%BC+%EA%BF%80%ED%8C%81",
+   "hold": true,
+   "note": "40번과 같은 물건으로 보임 — 40번으로 캡처"
+  },
+  "87": {
+   "name": "미친 활용법",
+   "slug": "",
+   "key": "미친활용법",
+   "done": false,
+   "search": "미친 활용법",
+   "url": "https://www.coupang.com/np/search?q=%EB%AF%B8%EC%B9%9C+%ED%99%9C%EC%9A%A9%EB%B2%95"
   }
  }
 }
