@@ -54,8 +54,10 @@ PRESETS = {
         "cast_lock": ("EXACTLY TWO animals, never a third animal, never a human, never swapped. "
                       "WIFE = a small WHITE Holland Lop RABBIT with floppy ears, big dark eyes and a thin PINK collar "
                       "with a tiny bell (reference image 1); quick, alert, always mid-motion. "
-                      "HUSBAND = a big brown two-toed SLOTH with a gentle sleepy smile, long arms and a NAVY bandana "
-                      "(reference image 2); slow, relaxed, usually leaning or hanging on something. "
+                      "HUSBAND = a big brown SLOTH with a gentle sleepy smile and a NAVY bandana (reference image 2), "
+                      "standing or sitting UPRIGHT like a person: two legs on the ground, TWO arms only, arms relaxed at "
+                      "the sides or leaning on the counter — NEVER hanging spread-eagled, NEVER four limbs splayed "
+                      "out, NEVER upside down; slow, relaxed. "
                       "Keep each animal's species, fur color and collar/bandana identical in every frame"),
         "guide_desc": ("the GUIDE: a MEERKAT standing bolt upright on its hind legs wearing small round glasses and a "
                        "mustard-yellow bow tie (reference image 1)"),
@@ -69,7 +71,9 @@ PRESETS = {
         # 캐릭터 후보(1회 생성). 종·색·소품이 식별자다 — 시각 검사가 이걸로 같은 개체인지 본다.
         "cands": {
             "wife": "a small white Holland Lop rabbit with floppy ears, big dark shiny eyes, thin pink collar with a tiny bell, alert quick expression",
-            "husband": "a big brown two-toed sloth with a gentle sleepy smile, long arms, navy bandana around the neck, calm relaxed expression",
+            "husband": ("a big brown sloth with a gentle sleepy smile and a navy bandana around the neck, standing upright "
+                        "on two legs like a person with its two arms relaxed at its sides (upper body and two arms only, "
+                        "like a human posture — not hanging, not spread-eagled), calm relaxed expression"),
             "guide": "a meerkat standing bolt upright on its hind legs, small round glasses, mustard-yellow bow tie, tidy presenter look",
         },
     },

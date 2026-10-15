@@ -109,6 +109,7 @@ def cats() -> list[str]:
                 continue
         made.append(idle)
         sheet_prompt = (f"{d['look']}. A photographic reference sheet of the SAME animal from the reference image, "
+                        f"same upright posture as the reference (standing on two legs, two arms only, never hanging), "
                         f"3x2 grid on a plain light-gray background: front view, 3/4 view, side view, back view, "
                         f"then front view surprised (wide eyes, open mouth), front view sulking (narrowed eyes, ears back). "
                         f"Identical species, fur color, eye color and collar/accessory in every cell. No text")
