@@ -47,7 +47,7 @@ jobs:
         run: |
           git config user.name casto-bot && git config user.email casto@solvup.local
           find pilot -path '*/render' -prune -o -type f -print | grep -v request.txt | xargs -r git add -f
-          for p in assets/clay assets/cast assets/cast_photo assets/photo_products data/veo_usage.json; do [ -e "$p" ] && git add -A "$p"; done; true
+          for p in assets/clay assets/cast assets/cast_photo assets/cast_animal assets/photo_products data/veo_usage.json; do [ -e "$p" ] && git add -A "$p"; done; true
           if git diff --cached --quiet; then echo "::warning::산출물 없음"; else
             git commit -m "pilot: $(date +%F) 콕이네 집" && git pull --rebase --autostash origin main && git push origin main
           fi

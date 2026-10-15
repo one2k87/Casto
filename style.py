@@ -18,6 +18,7 @@ NAME = os.getenv("CASTO_STYLE", "photo")
 PRESETS = {
     "clay": {
         "cast_dir": "assets/cast",
+        "species": {"wife": "character", "husband": "character", "guide": "character"},
         "product_dir": "assets/clay",
         "look": ("3D clay / plasticine illustration, soft matte texture, rounded soft edges, kawaii, "
                  "studio soft lighting with gentle shadows, pastel palette: mint #B0E0D2, cream #FBF6EC, "
@@ -38,34 +39,38 @@ PRESETS = {
         "cands": {},
     },
     "photo": {
-        "cast_dir": "assets/cast_photo",
+        # 사용자 결정(2026-10-15 저녁): "고양이·강아지는 흔하다. 남편은 아주 느리고 인상 좋은 나무늘보, 아내는 빠른 토끼."
+        # 느린 남편 × 빠른 아내 — 종(種) 자체가 성격 대비다. 안내 캐릭터는 늘 꼿꼿이 서는 미어캣(진행자 체형).
+        "cast_dir": "assets/cast_animal",
         "product_dir": "assets/photo_products",
+        "species": {"wife": "rabbit", "husband": "sloth", "guide": "meerkat"},
         "look": ("photorealistic, shot on a 35mm full-frame camera, 50mm lens, natural window daylight, shallow depth "
-                 "of field, true-to-life fur and skin textures, realistic color, subtle film grain, no text, no letters, "
+                 "of field, true-to-life fur textures, realistic color, subtle film grain, no text, no letters, "
                  "no watermark, no cartoon, no illustration"),
         "world": ("the same real Korean apartment kitchen: white cabinets, light wood countertop, a window with soft "
                   "morning light over the sink, a small wooden dining table, real everyday props (kettle, mugs, fruit "
-                  "bowl, dish rack). The cats live here like people: they stand on their hind legs at the counter, "
-                  "hold things with their paws, sit on chairs at the table"),
-        "cast_lock": ("EXACTLY TWO cats, never a third animal, never a human, never swapped. "
-                      "WIFE = the small ORANGE TABBY cat with big round green eyes and a thin white collar with a tiny "
-                      "pink bell (reference image 1). HUSBAND = the bigger GRAY (blue) British Shorthair cat with "
-                      "copper-orange eyes and a navy bandana (reference image 2). Keep each cat's breed, coat color, "
-                      "eye color and collar identical in every frame"),
-        "guide_desc": ("the GUIDE: a fluffy CREAM-WHITE Ragdoll cat with blue eyes wearing small round glasses and a "
+                  "bowl, dish rack). The animals live here like people: they stand upright at the counter, hold things "
+                  "with their paws, sit on chairs at the table"),
+        "cast_lock": ("EXACTLY TWO animals, never a third animal, never a human, never swapped. "
+                      "WIFE = a small WHITE Holland Lop RABBIT with floppy ears, big dark eyes and a thin PINK collar "
+                      "with a tiny bell (reference image 1); quick, alert, always mid-motion. "
+                      "HUSBAND = a big brown two-toed SLOTH with a gentle sleepy smile, long arms and a NAVY bandana "
+                      "(reference image 2); slow, relaxed, usually leaning or hanging on something. "
+                      "Keep each animal's species, fur color and collar/bandana identical in every frame"),
+        "guide_desc": ("the GUIDE: a MEERKAT standing bolt upright on its hind legs wearing small round glasses and a "
                        "mustard-yellow bow tie (reference image 1)"),
         "product_word": "the real product",
         "product_rule": ("render it EXACTLY like the product reference photo — same shape, color, proportions, parts, "
                          "material and branding placement — as a real physical object in the scene; never invent features"),
-        "qa": """이 사진은 고양이 부부 시트콤의 한 컷이다. JSON으로 답하라:
-{"characters": 등장 동물·사람 수(정수), "wife_ok": '주황색 태비 고양이(흰 목걸이)'가 있고 작은 쪽이면 true, 없거나 색이 다르면 false,
- "husband_ok": '회색 브리티시숏헤어 고양이(남색 반다나)'가 있거나(없으면 true), 다른 색이면 false, "extra_person": 고양이 두 마리 외의 동물이나 사람이 있으면 true,
- "has_text": 사진 안에 글자·숫자가 있으면 true, "close_shot": 고양이가 화면 높이의 절반 이상을 차지하면 true, "photoreal": 실사 사진처럼 보이면 true, 그림/만화면 false}""",
-        # 캐릭터 후보(1회 생성). 색·눈·소품이 식별자다 — 시각 검사가 이걸로 같은 고양이인지 본다.
+        "qa": """이 사진은 동물 부부 시트콤의 한 컷이다. JSON으로 답하라:
+{"characters": 등장 동물·사람 수(정수), "wife_ok": '흰 토끼(귀 늘어짐, 분홍 목걸이)'가 있으면 true, 없거나 다른 동물/색이면 false,
+ "husband_ok": '갈색 나무늘보(남색 반다나)'가 있거나(없으면 true), 다른 동물이면 false, "extra_person": 토끼·나무늘보 외의 동물이나 사람이 있으면 true,
+ "has_text": 사진 안에 글자·숫자가 있으면 true, "close_shot": 동물이 화면 높이의 절반 이상을 차지하면 true, "photoreal": 실사 사진처럼 보이면 true, 그림/만화면 false}""",
+        # 캐릭터 후보(1회 생성). 종·색·소품이 식별자다 — 시각 검사가 이걸로 같은 개체인지 본다.
         "cands": {
-            "wife": "a small orange tabby cat, big round green eyes, thin white collar with a tiny pink bell, curious lively expression",
-            "husband": "a big gray (blue) British Shorthair cat, copper-orange eyes, navy bandana, calm deadpan expression",
-            "guide": "a fluffy cream-white Ragdoll cat, blue eyes, small round glasses, mustard-yellow bow tie, tidy presenter look",
+            "wife": "a small white Holland Lop rabbit with floppy ears, big dark shiny eyes, thin pink collar with a tiny bell, alert quick expression",
+            "husband": "a big brown two-toed sloth with a gentle sleepy smile, long arms, navy bandana around the neck, calm relaxed expression",
+            "guide": "a meerkat standing bolt upright on its hind legs, small round glasses, mustard-yellow bow tie, tidy presenter look",
         },
     },
 }
@@ -81,6 +86,7 @@ PRODUCT_WORD = P["product_word"]
 PRODUCT_RULE = P["product_rule"]
 QA_QUESTION = P["qa"]
 CANDS = P["cands"]
+SPECIES = P.get("species", {})
 IS_PHOTO = NAME == "photo"
 
 PRODUCT_QA = """두 사진을 비교하라. 첫 번째는 실제 판매 사진, 두 번째는 생성된 장면이다. JSON으로 답하라:

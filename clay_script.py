@@ -149,8 +149,8 @@ def _prompt(product: dict, situation: dict, evidence: dict, stamp: str, reason: 
 - 컷 6의 대사는 "{product.get('display')}{', ' + format(int(price), ',') + '원' if price else ''}. 판정은—" 으로 끝낸다.
 - 컷 8은 컷 1과 같은 장소. 한 마디 또는 빈 문자열.
 - scene 필드는 영어, 이미지 생성용: 장소·인물 배치·동작·표정. 상품은 "{__import__('style').PRODUCT_WORD}"라고만(브랜드명 금지).
-  캐릭터는 wife/husband/guide로만. 실사 고양이 컨셉이면 "the wife cat", "the husband cat"으로 부르고, 고양이가 사람처럼
-  뒷발로 서서 앞발로 물건을 다루는 장면으로 쓴다.
+  캐릭터는 "the wife {__import__('style').SPECIES.get('wife','')}", "the husband {__import__('style').SPECIES.get('husband','')}"로 부르고,
+  동물이 사람처럼 서서 앞발로 물건을 다루는 장면으로 쓴다. 남편은 **느리게**(기대거나 매달려 있음), 아내는 **빠르게**(동작 중) 그린다.
 
 JSON: {{"title": "제목(생활 문제형, 20자 이내)", "hook": "컷1 큰 자막(10자 이내, 설명 말고 감정)",
 "cuts": [{{"n":1,"who":"wife","line":"...","scene":"..."}}, … 8개], "drawer_item": "컷7 서랍에서 나오는 지난 템(짧게)"}}"""

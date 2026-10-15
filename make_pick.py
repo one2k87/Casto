@@ -102,16 +102,16 @@ def cats() -> list[str]:
     for role, desc in d["cands"].items():
         idle = os.path.join(out_dir, f"{role}_idle.png")
         if not os.path.exists(idle):
-            prompt = (f"{d['look']}. A single real cat: {desc}. Sitting upright facing the camera, full body visible, "
+            prompt = (f"{d['look']}. A single real animal: {desc}. Facing the camera, full body visible, "
                       f"plain light-gray studio background, eye-level, no text, no props other than described")
             if not imagegen.generate(prompt, idle, refs=[], aspect="1:1"):
                 print(f"[cats] {role} 생성 실패")
                 continue
         made.append(idle)
-        sheet_prompt = (f"{d['look']}. A photographic reference sheet of the SAME cat from the reference image, "
-                        f"3x2 grid on a plain light-gray background: front view sitting, 3/4 view, side view, back view, "
+        sheet_prompt = (f"{d['look']}. A photographic reference sheet of the SAME animal from the reference image, "
+                        f"3x2 grid on a plain light-gray background: front view, 3/4 view, side view, back view, "
                         f"then front view surprised (wide eyes, open mouth), front view sulking (narrowed eyes, ears back). "
-                        f"Identical breed, coat markings, eye color and collar/accessory in every cell. No text")
+                        f"Identical species, fur color, eye color and collar/accessory in every cell. No text")
         out = imagegen.generate(sheet_prompt, os.path.join(out_dir, f"{role}_sheet.png"), refs=[idle], aspect="3:2")
         if out:
             made.append(out)

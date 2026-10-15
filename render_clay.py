@@ -22,12 +22,12 @@ W, H = 1080, 1920
 HARD_CAP = 25.0
 FONTS = ["/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
          "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc"]
-VOICE = {"wife": ("ko-KR-SunHiNeural", "+10%", "+0Hz"),
-         "husband": ("ko-KR-InJoonNeural", "-4%", "-10Hz"),
+VOICE = {"wife": ("ko-KR-SunHiNeural", "+16%", "+0Hz"),          # 빠른 토끼
+         "husband": ("ko-KR-InJoonNeural", "-14%", "-12Hz"),      # 느린 나무늘보(10/15)
          "guide": ("ko-KR-SunHiNeural", "-4%", "+25Hz")}
 COLOR = {"wife": (236, 128, 104), "husband": (176, 150, 214), "guide": (214, 178, 100)}
 STAMP_COLOR = {"콕": (47, 93, 78), "글쎄": (214, 150, 40), "패스": (190, 60, 60)}
-MIN_CUT = {1: 2.2, 2: 2.0, 3: 2.4, 4: 3.0, 5: 2.0, 6: 5.0, 7: 2.4, 8: 1.8}
+MIN_CUT = {1: 2.2, 2: 2.4, 3: 2.4, 4: 3.0, 5: 2.6, 6: 5.0, 7: 2.4, 8: 1.8}   # 남편 컷(2·5)은 느리게 — 0.4초 여유
 
 
 def font(size: int, bold: bool = True) -> ImageFont.FreeTypeFont:
@@ -58,8 +58,8 @@ ELEVEN_VOICES = {"wife": os.getenv("ELEVEN_VOICE_WIFE", "EXAVITQu4vr4xnSDxMaL"),
                  "husband": os.getenv("ELEVEN_VOICE_HUSBAND", "pNInz6obpgDQGcFmaJgB"),
                  "guide": os.getenv("ELEVEN_VOICE_GUIDE", "21m00Tcm4TlvDq8ikWAM")}
 ELEVEN_MODEL = os.getenv("ELEVEN_MODEL", "eleven_multilingual_v2")
-ELEVEN_STYLE = {"wife": {"stability": 0.35, "similarity_boost": 0.8, "style": 0.6},
-                "husband": {"stability": 0.7, "similarity_boost": 0.8, "style": 0.2},
+ELEVEN_STYLE = {"wife": {"stability": 0.3, "similarity_boost": 0.8, "style": 0.7, "speed": 1.12},
+                "husband": {"stability": 0.8, "similarity_boost": 0.8, "style": 0.15, "speed": 0.85},
                 "guide": {"stability": 0.6, "similarity_boost": 0.8, "style": 0.3}}
 
 
