@@ -52,10 +52,45 @@ async def _tts(text: str, path: str, voice: str, rate: str, pitch: str) -> None:
     await edge_tts.Communicate(text, voice, rate=rate, pitch=pitch).save(path)
 
 
+# ElevenLabs(사용자 구독 중, 10/15 결정): ELEVEN_API_KEY 가 있으면 먼저 쓰고, 없거나 실패하면 edge-tts.
+# 배역별 보이스 ID는 ELEVEN_VOICE_WIFE/HUSBAND/GUIDE 로 바꾼다(기본은 다국어 프리메이드 보이스 — 한국어 됨, 취향은 사용자가 고른다).
+ELEVEN_VOICES = {"wife": os.getenv("ELEVEN_VOICE_WIFE", "EXAVITQu4vr4xnSDxMaL"),
+                 "husband": os.getenv("ELEVEN_VOICE_HUSBAND", "pNInz6obpgDQGcFmaJgB"),
+                 "guide": os.getenv("ELEVEN_VOICE_GUIDE", "21m00Tcm4TlvDq8ikWAM")}
+ELEVEN_MODEL = os.getenv("ELEVEN_MODEL", "eleven_multilingual_v2")
+ELEVEN_STYLE = {"wife": {"stability": 0.35, "similarity_boost": 0.8, "style": 0.6},
+                "husband": {"stability": 0.7, "similarity_boost": 0.8, "style": 0.2},
+                "guide": {"stability": 0.6, "similarity_boost": 0.8, "style": 0.3}}
+
+
+def tts_eleven(text: str, role: str, path: str) -> str | None:
+    key = os.getenv("ELEVEN_API_KEY", "")
+    if not key:
+        return None
+    import requests
+    vid = ELEVEN_VOICES.get(role, ELEVEN_VOICES["wife"])
+    try:
+        r = requests.post(f"https://api.elevenlabs.io/v1/text-to-speech/{vid}",
+                          headers={"xi-api-key": key, "Content-Type": "application/json", "Accept": "audio/mpeg"},
+                          json={"text": text, "model_id": ELEVEN_MODEL, "language_code": "ko",
+                                "voice_settings": ELEVEN_STYLE.get(role, ELEVEN_STYLE["wife"])}, timeout=60)
+        if r.status_code != 200:
+            print(f"[render] ElevenLabs {role} 실패 {r.status_code}: {r.text[:120]}")
+            return None
+        with open(path, "wb") as f:
+            f.write(r.content)
+        return path if dur(path) > 0 else None
+    except Exception as e:  # noqa: BLE001
+        print(f"[render] ElevenLabs 예외({role}): {e}")
+        return None
+
+
 def tts_line(text: str, role: str, path: str) -> str | None:
     text = (text or "").strip()
     if not text:
         return None
+    if tts_eleven(text, role, path):
+        return path
     voice, rate, pitch = VOICE.get(role, VOICE["wife"])
     try:
         asyncio.run(_tts(text, path, voice, rate, pitch))

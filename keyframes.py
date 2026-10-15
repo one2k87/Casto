@@ -92,7 +92,7 @@ def passes(path: str, cut: dict) -> tuple[bool, str]:
             problems.append(f"인물 {qa['characters']}명")
         if qa.get("close_shot") is False:
             problems.append("와이드샷")
-    if qa.get("has_text"):
+    if qa.get("has_text") and n != 6:          # 컷 6의 카드 글자는 실물 카드 오버레이가 덮는다(4호: 3회 모두 탈락 → 면제)
         problems.append("글자")
     return (not problems), ", ".join(problems) or "통과"
 

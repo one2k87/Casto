@@ -15,6 +15,7 @@ import base64
 import datetime as dt
 import json
 import os
+import re
 import time
 
 import requests
@@ -87,6 +88,19 @@ def request_body(prompt: str, first: str, last: str | None, seconds: int, resolu
                            "durationSeconds": seconds, "numberOfVideos": 1}}
 
 
+def _drop_key(body: dict, key: str) -> bool:
+    """거부된 키를 parameters 또는 instances[0]에서 뺀다. 이미지 키(image/lastFrame)는 빼지 않는다."""
+    if key in ("image", "lastFrame", "prompt"):
+        return False
+    if key in body.get("parameters", {}):
+        body["parameters"].pop(key)
+        return True
+    if key in body.get("instances", [{}])[0]:
+        body["instances"][0].pop(key)
+        return True
+    return False
+
+
 def clip(prompt: str, first: str, out_path: str, last: str | None = None, seconds: int = 4,
          resolution: str = "720p", timeout: int = 600, poll: int = 10) -> str | None:
     """첫(·끝) 프레임 → mp4. 실패·예산 초과·키 없음이면 None."""
@@ -105,21 +119,29 @@ def clip(prompt: str, first: str, out_path: str, last: str | None = None, second
     op = None
     for model in MODELS:
         for style in ENCODINGS:
-            try:
-                r = requests.post(f"{BASE}/models/{model}:predictLongRunning",
-                                  json=request_body(prompt, first, last, seconds, resolution, style),
-                                  headers=headers, timeout=60)
-            except Exception as e:  # noqa: BLE001
-                print(f"[veo] {model}/{style} 요청 예외: {e}")
-                continue
-            if r.status_code != 200:
-                print(f"[veo] {model}/{style} 실패 {r.status_code}: {r.text[:160].replace(chr(10), ' ')}")
-                continue
-            op = r.json().get("name")
-            if op:
-                print(f"[veo] ✅ 접수 {model}/{style}")
+            body = request_body(prompt, first, last, seconds, resolution, style)
+            # 4호 실측(10/15): bytes 인코딩은 통과했지만 `numberOfVideos` isn't supported — 모델이 거부하는
+            # 키를 응답에서 읽어 빼고 다시 보낸다(최대 4회). 거부된 요청은 과금되지 않는다.
+            for _ in range(4):
+                try:
+                    r = requests.post(f"{BASE}/models/{model}:predictLongRunning", json=body,
+                                      headers=headers, timeout=60)
+                except Exception as e:  # noqa: BLE001
+                    print(f"[veo] {model}/{style} 요청 예외: {e}")
+                    break
+                if r.status_code == 200:
+                    op = r.json().get("name")
+                    if op:
+                        print(f"[veo] ✅ 접수 {model}/{style} keys={sorted(body['parameters'])}")
+                    break
+                msg = r.text[:200].replace("\n", " ")
+                print(f"[veo] {model}/{style} 실패 {r.status_code}: {msg}")
+                m = re.search(r"`(\w+)` isn't supported", r.text)
+                if r.status_code == 400 and m and _drop_key(body, m.group(1)):
+                    continue
                 break
-            print(f"[veo] {model}/{style} operation 이름 없음")
+            if op:
+                break
         if op:
             break
     if not op:

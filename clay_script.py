@@ -85,7 +85,21 @@ def decide(evidence: dict) -> tuple[str, str]:
     return "글쎄", (" · ".join(notes) + " · " if notes else "") + "데이터 부족"
 
 
-STYLE_GUIDE = """[말투 바이블 — 진짜 부부처럼]
+BIBLE = "docs/콕이네집_바이블.md"
+
+
+def load_bible(path: str = BIBLE) -> str | None:
+    """바이블의 <!-- prompt:start --> ~ <!-- prompt:end --> 구간. 사용자가 파일을 고치면 다음 편부터 반영된다."""
+    try:
+        with open(path, encoding="utf-8") as f:
+            t = f.read()
+        a, b = t.index("\n<!-- prompt:start -->"), t.index("\n<!-- prompt:end -->")   # 줄 머리의 표식만
+        return t[a + len("\n<!-- prompt:start -->"):b].strip()
+    except (OSError, ValueError):
+        return None
+
+
+_BUILTIN_GUIDE = """[말투 바이블 — 진짜 부부처럼]
 - 반말. 서로를 "자기/여보"보다는 이름이나 "야"로 부른다. 존댓말·안내문 말투 금지.
 - 모든 대사는 **반응**이거나 **태도**다. 상황을 설명하는 대사("노른자가 터졌네", "그게 그 용도야")는 쓰지 않는다 —
   화면이 이미 보여 준다. 설명이 필요하면 자막 카드가 한다.
@@ -107,6 +121,7 @@ STYLE_GUIDE = """[말투 바이블 — 진짜 부부처럼]
 [나쁜 예 — 쓰지 말 것]
 "노른자 터졌잖아!"(설명) / "그러게, 조심 좀."(훈계, 재미 없음) / "오, 신기하다!"(감상 없음) / "그게 그 용도야."(로봇)
 """
+STYLE_GUIDE = load_bible() or _BUILTIN_GUIDE
 
 
 def _prompt(product: dict, situation: dict, evidence: dict, stamp: str, reason: str, narrative: str) -> str:

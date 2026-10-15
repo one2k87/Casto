@@ -33,6 +33,10 @@ jobs:
           LLM_MODEL: ${{ secrets.LLM_MODEL }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          ELEVEN_API_KEY: ${{ secrets.ELEVEN_API_KEY }}
+          ELEVEN_VOICE_WIFE: ${{ vars.ELEVEN_VOICE_WIFE }}
+          ELEVEN_VOICE_HUSBAND: ${{ vars.ELEVEN_VOICE_HUSBAND }}
+          ELEVEN_VOICE_GUIDE: ${{ vars.ELEVEN_VOICE_GUIDE }}
         run: |
           ARGS="${{ inputs.args }}"
           if [ "${{ github.event_name }}" = "push" ]; then ARGS="$(cat pilot/request.txt)"; fi
