@@ -1,0 +1,64 @@
+{
+ "title": "계란 노른자 구출 작전",
+ "hook": "이번이 마지막",
+ "cuts": [
+  {
+   "n": 1,
+   "who": "wife",
+   "line": "아 또… 망했어 세 번째야",
+   "scene": "Kitchen. The wife rabbit, frustrated, looking at a broken egg yolk in a bowl. Her ears are drooped. A messy kitchen counter is behind her."
+  },
+  {
+   "n": 2,
+   "who": "husband",
+   "line": "노른자가 너 피하나 봐",
+   "scene": "Kitchen. The husband sloth, leaning lazily against a cabinet, holding a newspaper. He glances over at the wife with a dry expression."
+  },
+  {
+   "n": 3,
+   "who": "wife",
+   "line": "이건 뭐야, 또 샀어?",
+   "scene": "Kitchen. The wife rabbit picks up 'the real product' from a pile of mail on the counter, her eyes wide with curiosity."
+  },
+  {
+   "n": 4,
+   "who": "wife",
+   "line": "어? 왜… 잘 되네?",
+   "scene": "Kitchen. The wife rabbit, with a surprised expression, uses 'the real product' to separate an egg yolk perfectly. Her ears perk up."
+  },
+  {
+   "n": 5,
+   "who": "husband",
+   "line": "누가 샀더라? 월급날에.",
+   "scene": "Kitchen. The husband sloth sips his coffee slowly, looking at the wife with a knowing smirk. He doesn't move much."
+  },
+  {
+   "n": 6,
+   "who": "guide",
+   "line": "계란 흰자 분리기. 판정은—",
+   "scene": "A clean, bright studio. The guide character stands next to a floating card showing 'the real product'. A '글쎄' stamp appears on the card."
+  },
+  {
+   "n": 7,
+   "who": "wife",
+   "line": "저번에 산 그거… 어디 있지?",
+   "scene": "Kitchen. The wife rabbit, still holding 'the real product', looks around for more items, her gaze drifting towards a drawer."
+  },
+  {
+   "n": 8,
+   "who": "husband",
+   "line": "서랍. 열지 마.",
+   "scene": "Kitchen. The husband sloth, still leaning against the cabinet, sighs softly, looking at the wife with a tired but resigned expression. The broken egg is still in the bowl."
+  }
+ ],
+ "drawer_item": "달걀 톡톡이",
+ "stamp": "글쎄",
+ "reason": "데이터 부족",
+ "punched": true,
+ "product": "계란 흰자 분리기",
+ "slug": "계란-흰자-분리기",
+ "situation": "아침 계란 요리 중 노른자 터짐",
+ "narrative": "A_사고해결",
+ "price": null,
+ "coupang_url": "https://link.coupang.com/a/hEcTTxurnM"
+}

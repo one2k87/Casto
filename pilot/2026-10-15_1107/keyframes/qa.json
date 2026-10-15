@@ -1,0 +1,81 @@
+{
+ "1": [
+  {
+   "attempt": 0,
+   "ok": true,
+   "why": "통과"
+  }
+ ],
+ "2": [
+  {
+   "attempt": 0,
+   "ok": true,
+   "why": "통과"
+  }
+ ],
+ "3": [
+  {
+   "attempt": 0,
+   "ok": false,
+   "why": "아내 형태, 실사 아님"
+  },
+  {
+   "attempt": 1,
+   "ok": false,
+   "why": "실사 아님"
+  },
+  {
+   "attempt": 2,
+   "ok": false,
+   "why": "실사 아님"
+  }
+ ],
+ "4": [
+  {
+   "attempt": 0,
+   "ok": false,
+   "why": "실사 아님"
+  },
+  {
+   "attempt": 1,
+   "ok": false,
+   "why": "실사 아님"
+  },
+  {
+   "attempt": 2,
+   "ok": false,
+   "why": "실사 아님"
+  }
+ ],
+ "5": [
+  {
+   "attempt": 0,
+   "ok": false,
+   "why": "아내 형태"
+  },
+  {
+   "attempt": 1,
+   "ok": false,
+   "why": "아내 형태"
+  },
+  {
+   "attempt": 2,
+   "ok": false,
+   "why": "실사 아님"
+  }
+ ],
+ "6": [
+  {
+   "attempt": 0,
+   "ok": true,
+   "why": "통과"
+  }
+ ],
+ "7": [
+  {
+   "attempt": 0,
+   "ok": true,
+   "why": "통과"
+  }
+ ]
+}
