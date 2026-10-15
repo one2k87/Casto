@@ -53,7 +53,10 @@ PRESETS = {
                   "with their paws, sit on chairs at the table"),
         "cast_lock": ("EXACTLY TWO animals, never a third animal, never a human, never swapped. "
                       "WIFE = a small WHITE Holland Lop RABBIT with floppy ears, big dark eyes and a thin PINK collar "
-                      "with a tiny bell (reference image 1); quick, alert, always mid-motion. "
+                      "with a tiny bell (reference image 1); quick, alert, always mid-motion. She stays a REAL rabbit: "
+                      "natural rabbit anatomy, fur and proportions, standing on her hind legs the way real rabbits do, "
+                      "holding small objects between her front paws — NEVER a cartoon mascot, NEVER humanoid body, "
+                      "NEVER plush-toy look. "
                       "HUSBAND = a big brown SLOTH with a gentle sleepy smile and a NAVY bandana (reference image 2), "
                       "standing or sitting UPRIGHT like a person: two legs on the ground, TWO arms only, arms relaxed at "
                       "the sides or leaning on the counter — NEVER hanging spread-eagled, NEVER four limbs splayed "

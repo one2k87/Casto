@@ -53,7 +53,8 @@ def prompt_for(cut: dict) -> str:
         return (base + f"Plain light-gray studio backdrop (no kitchen). {style.GUIDE_DESC} sits upright in the LOWER "
                 "HALF of the frame, full body, holding up a blank white rectangular card above its head with both "
                 "front paws (card empty — it will be composited). "
-                f"Scene: {cut.get('scene', '')}. Vertical 9:16, no text, no letters, no speech bubbles")
+                f"Scene: {str(cut.get('scene', '')).replace(style.PRODUCT_WORD, 'a card')}. "
+                "Vertical 9:16, no text, no letters, no speech bubbles")      # 'the real product'가 글자로 그려지는 걸 막는다(2호)
     return (base + f"{CAST_LOCK}. Location: {WORLD}. {FRAMING}. Scene: {cut.get('scene', '')}. "
             f"If '{style.PRODUCT_WORD}' appears, {style.PRODUCT_RULE}. No text, no speech bubbles")
 
