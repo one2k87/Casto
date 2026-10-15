@@ -1,0 +1,56 @@
+{
+ "1": [
+  {
+   "attempt": 0,
+   "ok": true,
+   "why": "통과"
+  }
+ ],
+ "2": [
+  {
+   "attempt": 0,
+   "ok": true,
+   "why": "통과"
+  }
+ ],
+ "3": [
+  {
+   "attempt": 0,
+   "ok": false,
+   "why": "글자"
+  },
+  {
+   "attempt": 1,
+   "ok": true,
+   "why": "통과"
+  }
+ ],
+ "4": [
+  {
+   "attempt": 0,
+   "ok": true,
+   "why": "통과"
+  }
+ ],
+ "5": [
+  {
+   "attempt": 0,
+   "ok": true,
+   "why": "통과"
+  }
+ ],
+ "6": [
+  {
+   "attempt": 0,
+   "ok": true,
+   "why": "통과"
+  }
+ ],
+ "7": [
+  {
+   "attempt": 0,
+   "ok": true,
+   "why": "통과"
+  }
+ ]
+}

@@ -1,0 +1,64 @@
+{
+ "title": "3번째 터진 노른자",
+ "hook": "이번에도 터짐",
+ "cuts": [
+  {
+   "n": 1,
+   "who": "wife",
+   "line": "아 또 터졌어… 세 번째야",
+   "scene": "the wife cat, grumpy, looking at a broken egg yolk in a frying pan on a kitchen counter"
+  },
+  {
+   "n": 2,
+   "who": "husband",
+   "line": "계란이 너 싫어하나 봐",
+   "scene": "the husband cat, calm, sipping coffee, looking at the wife cat with a slight smirk"
+  },
+  {
+   "n": 3,
+   "who": "wife",
+   "line": "이게 뭐야, 언제 샀어?",
+   "scene": "the wife cat, surprised, picking up the real product from a box that the husband cat just pushed towards her"
+  },
+  {
+   "n": 4,
+   "who": "wife",
+   "line": "어? 왜 돼?",
+   "scene": "the wife cat, amazed, using the real product to separate an egg, with clear white in one bowl and yolk in another"
+  },
+  {
+   "n": 5,
+   "who": "husband",
+   "line": "네가 안 쓰고 박아둔 거지",
+   "scene": "the husband cat, looking at the wife cat with a knowing look, sipping coffee"
+  },
+  {
+   "n": 6,
+   "who": "guide",
+   "line": "계란 흰자 분리기. 판정은—",
+   "scene": "the guide cat, standing beside a floating product card of the real product, holding a '글쎄' stamp"
+  },
+  {
+   "n": 7,
+   "who": "wife",
+   "line": "그 박아둔 게 또 있다고?",
+   "scene": "the wife cat, looking suspiciously at a kitchen drawer"
+  },
+  {
+   "n": 8,
+   "who": "husband",
+   "line": "서랍 열지 마",
+   "scene": "the husband cat, calm, looking at the wife cat in the same kitchen setting as cut 1"
+  }
+ ],
+ "drawer_item": "계란 흰자 분리기",
+ "stamp": "글쎄",
+ "reason": "데이터 부족",
+ "punched": true,
+ "product": "계란 흰자 분리기",
+ "slug": "계란-흰자-분리기",
+ "situation": "아침 계란 요리 중 노른자 터짐",
+ "narrative": "A_사고해결",
+ "price": null,
+ "coupang_url": "https://link.coupang.com/a/hEcTTxurnM"
+}
