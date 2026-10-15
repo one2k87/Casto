@@ -1,0 +1,64 @@
+{
+ "title": "노른자 터짐 방지 대작전",
+ "hook": "이번엔 안 돼!",
+ "cuts": [
+  {
+   "n": 1,
+   "who": "wife",
+   "line": "아 또… 세 번째야",
+   "scene": "Kitchen counter. The wife rabbit is holding a broken egg, looking frustrated. Yolky mess on the counter. The husband sloth is leaning against a fridge, observing lazily."
+  },
+  {
+   "n": 2,
+   "who": "husband",
+   "line": "계란이 너 싫어하나 봐",
+   "scene": "Close up on the husband sloth, a small, dry smile playing on his lips. He slowly sips coffee."
+  },
+  {
+   "n": 3,
+   "who": "wife",
+   "line": "이건 뭐야, 언제 샀어?",
+   "scene": "The wife rabbit spots a small, peculiar device on the counter next to a pile of unopened mail. She picks it up curiously."
+  },
+  {
+   "n": 4,
+   "who": "wife",
+   "line": "어? 왜 돼?",
+   "scene": "The wife rabbit uses the real product to separate an egg. White drips perfectly into a bowl. Her eyes widen in surprise."
+  },
+  {
+   "n": 5,
+   "who": "husband",
+   "line": "네가 산 거야. 월급날에.",
+   "scene": "The husband sloth watches the wife, a faint smirk. He slowly sets down his coffee cup."
+  },
+  {
+   "n": 6,
+   "who": "guide",
+   "line": "계란 흰자 분리기. 판정은—",
+   "scene": "The guide character (a small, dapper bird) pops into frame. A product card with 'the real product' appears next to it. A large '글쎄' stamp thuds onto the card."
+  },
+  {
+   "n": 7,
+   "who": "wife",
+   "line": "그럼 저번에 산 건…",
+   "scene": "The wife rabbit looks around, her eyes darting towards a nearby kitchen drawer. Her expression is one of dawning realization."
+  },
+  {
+   "n": 8,
+   "who": "husband",
+   "line": "서랍. 열지 마.",
+   "scene": "The husband sloth is back at the fridge, still leaning, arm casually blocking the drawer. The wife rabbit looks defeated but pauses."
+  }
+ ],
+ "drawer_item": "계란찜 용기",
+ "stamp": "글쎄",
+ "reason": "데이터 부족",
+ "punched": true,
+ "product": "계란 흰자 분리기",
+ "slug": "계란-흰자-분리기",
+ "situation": "아침 계란 요리 중 노른자 터짐",
+ "narrative": "A_사고해결",
+ "price": null,
+ "coupang_url": "https://link.coupang.com/a/hEcTTxurnM"
+}
