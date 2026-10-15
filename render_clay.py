@@ -215,7 +215,12 @@ def _segment(video: str, overlays: list[tuple[str, float]], audio: str | None, s
     if a_inputs:
         parts = []
         for j, (idx, at) in enumerate(a_inputs):
-            fc.append(f"[{idx}:a]adelay={int(at * 1000)}|{int(at * 1000)},apad[a{j}]")
+            tempo = ""
+            if j == 0 and audio:
+                vd = dur(audio)
+                if vd > seconds - 0.2:                   # 대사가 컷보다 길면 최대 1.25배까지 빠르게
+                    tempo = f"atempo={min(1.25, vd / max(seconds - 0.2, 0.5)):.3f},"
+            fc.append(f"[{idx}:a]{tempo}adelay={int(at * 1000)}|{int(at * 1000)},apad[a{j}]")
             parts.append(f"[a{j}]")
         fc.append(f"{''.join(parts)}amix=inputs={len(parts)}:duration=longest:dropout_transition=0,"
                   f"atrim=duration={seconds:.2f}[aout]")
@@ -229,22 +234,22 @@ def _segment(video: str, overlays: list[tuple[str, float]], audio: str | None, s
 
 
 def plan_durations(cuts: list[dict], voice_dur: dict[int, float]) -> dict[int, float]:
-    """컷 길이: 대사 길이 + 0.5초, 컷 최소값 이상. 25초를 넘기면 컷 2 축소 → 컷 5 제거(0)."""
+    """컷 길이: 대사 길이 + 0.4초, 컷 최소값 이상. 25초를 넘기면 **컷을 빼지 않고** 비례 축소한다.
+
+    5호 실측(10/15): 예전 규칙(컷 2 축소 → 컷 5 제거)이 펀치라인인 컷 5를 통째로 날렸다. 어떤 컷도 빼지 않는다.
+    축소로 대사보다 컷이 짧아지면 `_segment`가 음성을 최대 1.25배까지 빠르게 튼다(atempo).
+    """
     d = {}
     for c in cuts:
         n = int(c["n"])
-        d[n] = max(MIN_CUT.get(n, 2.0), voice_dur.get(n, 0.0) + 0.5)
+        d[n] = max(MIN_CUT.get(n, 2.0), voice_dur.get(n, 0.0) + 0.4)
     total = sum(d.values())
-    if total > HARD_CAP and 2 in d:
-        d[2] = max(1.2, d[2] - (total - HARD_CAP))
-        total = sum(d.values())
-    if total > HARD_CAP and 5 in d:
-        d[5] = 0.0
-        total = sum(d.values())
-    if total > HARD_CAP:                      # 그래도 넘치면 전 컷 비례 축소 — 컷을 더 빼진 않는다
-        k = HARD_CAP / total
+    if total > HARD_CAP:
+        fixed = d.get(6, 0.0)                              # 카드·도장 컷은 길이를 지킨다
+        k = (HARD_CAP - fixed) / max(total - fixed, 0.01)
         for n in d:
-            d[n] = round(d[n] * k, 2)
+            if n != 6:
+                d[n] = round(max(1.2, d[n] * k), 2)
     return d
 
 

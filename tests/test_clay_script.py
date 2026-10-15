@@ -61,10 +61,10 @@ def test_컷_길이_계획은_25초_캡을_지킨다():
     cuts = [{"n": n} for n in range(1, 9)]
     d = rc.plan_durations(cuts, {n: 1.0 for n in range(1, 9)})
     assert sum(d.values()) <= rc.HARD_CAP and all(d[n] >= 1.0 for n in d)
-    # 대사가 길어 넘치면 컷 2 축소 → 컷 5 제거, 6·7·8은 유지
+    # 대사가 길어 넘치면 어떤 컷도 빼지 않고 비례 축소 — 컷 5(펀치라인)가 살아 있어야 한다(5호 사고)
     d = rc.plan_durations(cuts, {n: 4.5 for n in range(1, 9)})
-    assert sum(d.values()) <= rc.HARD_CAP + 0.05
-    assert d[5] == 0.0 and all(d[n] >= 0.75 * rc.MIN_CUT[n] for n in (6, 7, 8))   # 6·7·8은 빠지지 않는다
+    assert sum(d.values()) <= rc.HARD_CAP + 0.1
+    assert all(d[n] >= 1.2 for n in range(1, 9)) and d[6] >= rc.MIN_CUT[6]
 
 
 def test_캡션은_고지_첫줄_링크_둘째줄_구독은_캡션에():
