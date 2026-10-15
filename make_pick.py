@@ -3,6 +3,7 @@
     python make_pick.py cands   # assets/pick/cand_{1,2,3}.png + contact.png
     python make_pick.py sheet   # assets/koki/koki_sheet.png (턴어라운드·표정)
     python make_pick.py cast    # 확정 배역(2026-10-12): 1안=아내, 2안=남편, 3안=안내 캐릭터 → assets/cast/
+    python make_pick.py cats    # 실사 고양이 배역(2026-10-15): style.CANDS 로 3마리 + 시트 → assets/cast_photo/
 
 왜 1회인가: `faces.py` 주석대로 생성 모델은 두 번째 그림부터 표류한다. 그래서 후보는 한 번만 뽑고,
 확정 뒤 **레퍼런스 시트 한 장**을 만들어 이후 모든 장면 생성의 참고 이미지로 고정한다.
@@ -90,6 +91,35 @@ def cast() -> list[str]:
     return made
 
 
+def cats() -> list[str]:
+    """실사 컨셉(10/15): style.CANDS 설명으로 고양이 3마리를 한 번 생성하고, 각자 레퍼런스 시트를 만든다.
+    참고 이미지 없이 첫 장을 뽑고(실사는 콕이 점토를 참고하면 안 된다), 시트는 그 첫 장을 참고로 만든다."""
+    import style
+    d = style.PRESETS["photo"]
+    out_dir = d["cast_dir"]
+    os.makedirs(out_dir, exist_ok=True)
+    made = []
+    for role, desc in d["cands"].items():
+        idle = os.path.join(out_dir, f"{role}_idle.png")
+        if not os.path.exists(idle):
+            prompt = (f"{d['look']}. A single real cat: {desc}. Sitting upright facing the camera, full body visible, "
+                      f"plain light-gray studio background, eye-level, no text, no props other than described")
+            if not imagegen.generate(prompt, idle, refs=[], aspect="1:1"):
+                print(f"[cats] {role} 생성 실패")
+                continue
+        made.append(idle)
+        sheet_prompt = (f"{d['look']}. A photographic reference sheet of the SAME cat from the reference image, "
+                        f"3x2 grid on a plain light-gray background: front view sitting, 3/4 view, side view, back view, "
+                        f"then front view surprised (wide eyes, open mouth), front view sulking (narrowed eyes, ears back). "
+                        f"Identical breed, coat markings, eye color and collar/accessory in every cell. No text")
+        out = imagegen.generate(sheet_prompt, os.path.join(out_dir, f"{role}_sheet.png"), refs=[idle], aspect="3:2")
+        if out:
+            made.append(out)
+    if made:
+        _contact([p for p in made if p.endswith("_idle.png")], os.path.join(out_dir, "contact.png"))
+    return made
+
+
 def pick(n: int) -> None:
     src = os.path.join(OUT, f"cand_{n}.png")
     if not os.path.exists(src):
@@ -108,5 +138,7 @@ if __name__ == "__main__":
         print(sheet())
     elif cmd == "cast":
         print(cast())
+    elif cmd == "cats":
+        print(cats())
     elif cmd == "pick":
         pick(int(sys.argv[2]))

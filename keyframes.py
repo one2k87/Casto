@@ -11,31 +11,24 @@ import os
 
 import imagegen
 
-CAST = "assets/cast"
+import style
+
+CAST = style.CAST_DIR
 SET = os.path.join(CAST, "set_kitchen.png")
-CLAY_DIR = "assets/clay"
-WORLD = ("the same cozy handmade clay kitchen set: cream walls, mint green counter, kraft-brown wooden table, "
-         "small window with soft daylight, a few clay props (kettle, mug, fruit bowl)")
-# 파일럿 1호 실측(10/14): 디오라마가 화면 가운데 작게 앉아 세로 화면의 절반이 비었고, 컷 3·5에서 아내가
-# 흰색·길쭉한 캐릭터로 표류했다. → 프레이밍과 캐릭터를 말로 못 박는다. 참고 이미지 순서도 고정(1=아내, 2=남편).
-# 2호 실측(10/15): 방은 커졌지만 여전히 와이드샷이 절반, 아내가 '동작'하는 컷(3·4)에서 길쭉한 분홍 원통으로 변함.
-# → 몸 형태를 기하로 못 박고("정육면체 vs 원통"), 와이드샷을 금지하고 가구를 잘라도 된다고 말한다.
+WORLD = style.WORLD
+# 파일럿 1~3호 실측(10/14~15): 디오라마가 작고 와이드샷이 많았고, 아내가 '동작'하는 컷에서 몸 형태가 표류했다.
+# → 프레이밍과 캐릭터를 말로 못 박고(style.CAST_LOCK), 생성 뒤 시각 검사로 거른다. 참고 순서 고정(1=아내, 2=남편).
 FRAMING = ("FRAMING: vertical 9:16 phone video. CLOSE framing — show only PART of the kitchen (one counter and a "
            "table edge); cropping furniture is fine. The characters' bodies fill at least 70% of the frame height, "
            "heads in the upper third. Camera at character eye level, standing inside the kitchen. "
            "NO wide shot of the whole room, NO miniature box, NO visible stage edges, NO empty floor area")
-CAST_LOCK = ("EXACTLY TWO characters, never a third, never swapped or recolored. "
-             "WIFE = a CORAL-PINK CUBE: a boxy body as wide as it is tall, with short stubby arms and legs and big "
-             "round glossy eyes (reference image 1). She is NEVER tall, NEVER a cylinder, NEVER slim. "
-             "HUSBAND = the ONLY tall slim LAVENDER-PURPLE CYLINDER character with small dot eyes (reference image 2). "
-             "Keep each body shape and color identical in every frame, even when they move or hold things")
+CAST_LOCK = style.CAST_LOCK
 
 
 def ensure_set() -> str | None:
     if os.path.exists(SET):
         return SET
-    prompt = (f"{imagegen.STYLE}. An empty stage set for a stop-motion sitcom: {WORLD}. Wide shot, eye level, "
-              f"nobody in the scene, no text")
+    prompt = (f"{style.LOOK}. An empty set for a sitcom: {WORLD}. Wide shot, eye level, nobody in the scene, no text")
     return imagegen.generate(prompt, SET, refs=[os.path.join(CAST, "wife_idle.png")], aspect="9:16")
 
 
@@ -54,25 +47,21 @@ def refs_for(cut: dict, clay_product: str | None) -> list[str]:
 
 def prompt_for(cut: dict) -> str:
     n = cut.get("n")
-    base = (f"{imagegen.STYLE}. One frame of a stop-motion clay sitcom. Use EXACTLY the characters from the reference "
-            f"sheets (same colors, proportions, clay texture, dot eyes). ")
+    base = (f"{style.LOOK}. One frame of a sitcom. Use EXACTLY the characters from the reference sheets "
+            f"(same colors, markings, proportions). ")
     if n == 6:
-        return (base + "Plain cream studio backdrop (no kitchen). The GUIDE (butter-yellow boxy clay character, "
-                "reference image 1) stands in the LOWER HALF of the frame, full body, holding up a blank white "
-                "rectangular card above its head with both hands (card empty — it will be composited). "
+        return (base + f"Plain light-gray studio backdrop (no kitchen). {style.GUIDE_DESC} sits upright in the LOWER "
+                "HALF of the frame, full body, holding up a blank white rectangular card above its head with both "
+                "front paws (card empty — it will be composited). "
                 f"Scene: {cut.get('scene', '')}. Vertical 9:16, no text, no letters, no speech bubbles")
     return (base + f"{CAST_LOCK}. Location: {WORLD}. {FRAMING}. Scene: {cut.get('scene', '')}. "
-            "If 'the clay toy product' appears, draw it exactly like the product reference image (a clay toy), "
-            "never as a real photo. No text, no speech bubbles")
+            f"If '{style.PRODUCT_WORD}' appears, {style.PRODUCT_RULE}. No text, no speech bubbles")
 
 
 # 일관성 관문(10/15): 3호에서 7컷 중 1컷(컷 3)이 여전히 길쭉한 분홍 캐릭터였다. 프롬프트만으로는 100%가 안 되니
 # 생성 뒤 그림을 **검사**하고 틀리면 다시 뽑는다(최대 RETRIES회). 검사 비용은 장당 ₩1 안팎, 재생성은 ₩55.
 RETRIES = 2
-QA_QUESTION = """이 그림은 클레이 시트콤의 한 컷이다. 다음을 JSON으로 답하라:
-{"characters": 등장 캐릭터 수(정수), "wife_ok": 코랄/분홍 캐릭터가 '정육면체(네모 상자) 몸'이면 true, 길쭉하거나 원통이면 false,
- "husband_ok": 보라/라벤더 캐릭터가 '길쭉한 원통 몸'이면 true (없으면 true), "extra_person": 코랄·라벤더 외 다른 인물이 있으면 true,
- "has_text": 그림 안에 글자·숫자가 있으면 true, "close_shot": 캐릭터가 화면 높이의 절반 이상을 차지하면 true}"""
+QA_QUESTION = style.QA_QUESTION
 
 
 def passes(path: str, cut: dict) -> tuple[bool, str]:
@@ -92,6 +81,8 @@ def passes(path: str, cut: dict) -> tuple[bool, str]:
             problems.append(f"인물 {qa['characters']}명")
         if qa.get("close_shot") is False:
             problems.append("와이드샷")
+        if style.IS_PHOTO and qa.get("photoreal") is False:
+            problems.append("실사 아님")
     if qa.get("has_text") and n != 6:          # 컷 6의 카드 글자는 실물 카드 오버레이가 덮는다(4호: 3회 모두 탈락 → 면제)
         problems.append("글자")
     return (not problems), ", ".join(problems) or "통과"

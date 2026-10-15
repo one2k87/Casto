@@ -316,5 +316,6 @@ def caption(script: dict, product: dict, disclosure: str, pickdam: dict | None =
         lines.append(f"🔁 대신 이거 → {script['alt_url']}")
     if pickdam and pickdam.get("link"):
         lines.append(f"📄 {pickdam.get('title', '픽담 비교')} → {pickdam['link']}")
-    lines += ["", "구독은 여기서 👉", "", "#콕이네집 #콕픽 #살림템 #주방꿀템 #쿠팡추천"]
+    lines += ["", "🎬 장면은 AI로 연출했고, 상품 카드 사진은 실제 판매 이미지입니다.",
+              "구독은 여기서 👉", "", "#콕이네집 #콕픽 #살림템 #주방꿀템 #쿠팡추천"]
     return "\n".join(lines)

@@ -148,8 +148,9 @@ def _prompt(product: dict, situation: dict, evidence: dict, stamp: str, reason: 
 - 상품은 이미 집에 있다(남편이 밀어 주거나 아내가 사 둔 것). 찾아 나서지 않는다.
 - 컷 6의 대사는 "{product.get('display')}{', ' + format(int(price), ',') + '원' if price else ''}. 판정은—" 으로 끝낸다.
 - 컷 8은 컷 1과 같은 장소. 한 마디 또는 빈 문자열.
-- scene 필드는 영어, 이미지 생성용: 장소·인물 배치·동작·표정. 상품은 "the clay toy product"라고만(브랜드명 금지).
-  캐릭터는 wife/husband/guide로만.
+- scene 필드는 영어, 이미지 생성용: 장소·인물 배치·동작·표정. 상품은 "{__import__('style').PRODUCT_WORD}"라고만(브랜드명 금지).
+  캐릭터는 wife/husband/guide로만. 실사 고양이 컨셉이면 "the wife cat", "the husband cat"으로 부르고, 고양이가 사람처럼
+  뒷발로 서서 앞발로 물건을 다루는 장면으로 쓴다.
 
 JSON: {{"title": "제목(생활 문제형, 20자 이내)", "hook": "컷1 큰 자막(10자 이내, 설명 말고 감정)",
 "cuts": [{{"n":1,"who":"wife","line":"...","scene":"..."}}, … 8개], "drawer_item": "컷7 서랍에서 나오는 지난 템(짧게)"}}"""
@@ -206,12 +207,12 @@ def fallback(product: dict, situation: dict, stamp: str, reason: str) -> dict:
     """생성 실패 시 템플릿 대사(§6). 밋밋하지만 거짓은 없다."""
     name = product.get("display", "이것")
     price = product.get("price")
-    kitchen = "the same cozy clay kitchen, cream walls, mint counter"
+    kitchen = "the shared kitchen set from the reference image"
     cuts = [
         (1, "wife", "아 또… 세 번째야", f"{kitchen}; wife mid-accident at the counter, {situation['scene']} mood, startled"),
         (2, "husband", "오늘은 뭐가 널 싫어해?", f"{kitchen}; husband at the table looking over his phone, deadpan"),
-        (3, "wife", "뭐야 이거, 언제 샀어?", f"{kitchen}; husband slides a small parcel box across the table, the clay toy product pops out, wife curious"),
-        (4, "wife", "어? 왜 돼?", f"{kitchen}; wife using the clay toy product at the counter, result visible, eyes wide"),
+        (3, "wife", "뭐야 이거, 언제 샀어?", f"{kitchen}; husband slides a small parcel box across the table, {__import__('style').PRODUCT_WORD} pops out, wife curious"),
+        (4, "wife", "어? 왜 돼?", f"{kitchen}; wife using {__import__('style').PRODUCT_WORD} at the counter, result visible, eyes wide"),
         (5, "husband", "그거 네가 산 거야. 지난달에.", f"{kitchen}; husband shrugs lightly, small smile"),
         (6, "guide", f"{name}{', ' + format(int(price), ',') + '원' if price else ''}. 판정은—",
          "plain cream studio backdrop; guide character standing center holding a blank white card up, presenting"),

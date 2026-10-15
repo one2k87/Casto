@@ -94,16 +94,19 @@ def clay_product(photo: str, name: str, out_path: str) -> str | None:
 
 
 # ---------------------------------------------------------------- 시각 검사(키프레임 일관성 관문)
-def vision_check(path: str, question: str, timeout: int = 90) -> dict | None:
-    """그림 한 장에 대해 JSON 답을 받는다 — 캐릭터 일관성 관문용. 키 없으면 None(검사 생략)."""
+def vision_check(path, question: str, timeout: int = 90) -> dict | None:
+    """그림(한 장 또는 여러 장)에 대해 JSON 답을 받는다 — 일관성 관문·상품 대조용. 키 없으면 None(검사 생략)."""
     import json as _json
     key = os.getenv("LLM_API_KEY", "")
-    if not key or not os.path.exists(path):
+    paths = [path] if isinstance(path, str) else list(path)
+    if not key or not all(os.path.exists(x) for x in paths):
         return None
-    data, mime = _b64(path)
     model = os.getenv("LLM_MODEL") or "gemini-2.5-flash"
-    body = {"contents": [{"parts": [{"text": question + "\n\n[출력] 순수 JSON만."},
-                                    {"inline_data": {"mime_type": mime, "data": data}}]}],
+    parts = [{"text": question + "\n\n[출력] 순수 JSON만."}]
+    for x in paths:
+        data, mime = _b64(x)
+        parts.append({"inline_data": {"mime_type": mime, "data": data}})
+    body = {"contents": [{"parts": parts}],
             "generationConfig": {"responseMimeType": "application/json", "temperature": 0.0,
                                  "thinkingConfig": {"thinkingBudget": 0}}}
     try:
@@ -119,3 +122,25 @@ def vision_check(path: str, question: str, timeout: int = 90) -> dict | None:
     except Exception as e:  # noqa: BLE001
         print(f"[vision] 예외: {e}")
         return None
+
+
+def photo_product(photo: str, name: str, out_path: str, retries: int = 2) -> str | None:
+    """실사 컨셉(10/15): 실제 판매 사진을 참고로 '같은 물건'을 실사풍으로 한 장 — 흰 배경 스튜디오 컷.
+    시각 검사가 "같은 제품"이라고 해야 채택. 두 번 실패하면 None → 렌더러는 실물 카드만 쓴다."""
+    import style
+    prompt = (f"{style.LOOK}. A product photo of {name}: {style.PRODUCT_RULE}. Plain white seamless background, "
+              f"soft studio light, the object centered and fully visible, no hands, no text")
+    for i in range(retries + 1):
+        cand = f"{out_path}.try{i}.png"
+        if not generate(prompt, cand, refs=[photo], aspect="1:1"):
+            continue
+        qa = vision_check([photo, cand], style.PRODUCT_QA)
+        ok = qa is None or (qa.get("same_product") and qa.get("photoreal", True))
+        print(f"[imagegen] 상품 대조 시도{i}: {'통과' if ok else (qa or {}).get('diff') or '불일치'}")
+        if ok:
+            os.replace(cand, out_path)
+            for j in range(retries + 1):
+                try: os.remove(f"{out_path}.try{j}.png")
+                except OSError: pass
+            return out_path
+    return None

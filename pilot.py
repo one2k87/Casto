@@ -20,7 +20,9 @@ import keyframes
 import render_clay
 from common import cfg, op_date
 
-CLAY_DIR = "assets/clay"
+import style
+
+CLAY_DIR = style.PRODUCT_DIR
 
 
 def product_from_catalog(slug: str) -> dict:
@@ -40,6 +42,8 @@ def ensure_clay(product: dict) -> str | None:
     if not photo or not os.path.exists(photo):
         print("[pilot] 실사진이 없어 점토 상품을 만들 수 없다")
         return None
+    if style.IS_PHOTO:
+        return imagegen.photo_product(photo, product.get("display", ""), path)
     return imagegen.clay_product(photo, product.get("display", ""), path)
 
 
