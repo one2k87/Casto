@@ -18,10 +18,13 @@ SET = os.path.join(CAST, "set_kitchen.png")
 WORLD = style.WORLD
 # 파일럿 1~3호 실측(10/14~15): 디오라마가 작고 와이드샷이 많았고, 아내가 '동작'하는 컷에서 몸 형태가 표류했다.
 # → 프레이밍과 캐릭터를 말로 못 박고(style.CAST_LOCK), 생성 뒤 시각 검사로 거른다. 참고 순서 고정(1=아내, 2=남편).
-FRAMING = ("FRAMING: vertical 9:16 phone video. CLOSE framing — show only PART of the kitchen (one counter and a "
+FRAMING = ("FRAMING: vertical 9:16 phone video. MEDIUM CLOSE-UP — show only PART of the kitchen (one counter and a "
            "table edge); cropping furniture is fine. The characters' bodies fill at least 70% of the frame height, "
-           "heads in the upper third. Camera at character eye level, standing inside the kitchen. "
-           "NO wide shot of the whole room, NO miniature box, NO visible stage edges, NO empty floor area")
+           "the taller character's head almost touches the top edge, the bottom edge crops them at the hips. "
+           "Camera at character eye level, standing inside the kitchen. The characters stand on the kitchen FLOOR "
+           "beside the counter or table (NEVER on top of a table or counter) — the tabletop is at their waist. "
+           "NO wide shot of the whole room, NO full table with chairs visible, NO miniature box, NO visible stage edges, "
+           "NO empty floor area")      # 10호: 컷 2·3·5가 식탁 '위'에 올라선 와이드샷으로 나왔다(인물 35%)
 CAST_LOCK = style.CAST_LOCK
 
 
@@ -82,6 +85,8 @@ def passes(path: str, cut: dict) -> tuple[bool, str]:
             problems.append(f"인물 {qa['characters']}명")
         if qa.get("close_shot") is False:
             problems.append("와이드샷")
+        if qa.get("on_furniture"):
+            problems.append("가구 위")
         if style.IS_PHOTO and qa.get("photoreal") is False:
             problems.append("실사 아님")
     if qa.get("has_text") and n != 6:          # 컷 6의 카드 글자는 실물 카드 오버레이가 덮는다(4호: 3회 모두 탈락 → 면제)

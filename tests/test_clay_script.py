@@ -62,9 +62,26 @@ def test_컷_길이_계획은_25초_캡을_지킨다():
     d = rc.plan_durations(cuts, {n: 1.0 for n in range(1, 9)})
     assert sum(d.values()) <= rc.HARD_CAP and all(d[n] >= 1.0 for n in d)
     # 대사가 길어 넘치면 어떤 컷도 빼지 않고 비례 축소 — 컷 5(펀치라인)가 살아 있어야 한다(5호 사고)
-    d = rc.plan_durations(cuts, {n: 4.5 for n in range(1, 9)})
+    d = rc.plan_durations(cuts, {n: 3.2 for n in range(1, 9)})
     assert sum(d.values()) <= rc.HARD_CAP + 0.1
     assert all(d[n] >= 1.2 for n in range(1, 9)) and d[6] >= rc.MIN_CUT[6]
+    # 10호 사고: 대사는 절대 잘리지 않는다 — 캡을 넘기더라도 '대사/1.25배속 + 0.2' 아래로는 안 내린다
+    d = rc.plan_durations(cuts, {n: 4.5 for n in range(1, 9)})
+    assert all(d[n] >= 4.5 / 1.25 + 0.2 - 0.01 for n in range(1, 9) if n != 6)
+
+
+def test_남편_컷은_아내_컷보다_길고_남편_대사는_안_당긴다():
+    cuts = [{"n": n, "who": w} for n, w in zip(range(1, 9), ["wife", "husband"] * 4)]
+    d = rc.plan_durations(cuts, {n: 2.0 for n in range(1, 9)})
+    assert d[2] > d[1] and d[5] > d[4]                     # 같은 길이 대사면 남편 컷이 길다(뜸+여운)
+    d = rc.plan_durations(cuts, {n: 3.0 for n in range(1, 9)})
+    assert all(d[n] >= rc.LEAD["husband"] + 3.0 + 0.2 - 0.01 for n in (2, 4, 8))   # 남편은 1.0배속 — 대사 전체가 들어간다
+
+
+def test_남편_줄임표는_자막에만_남고_음성에선_빠진다():
+    assert rc.speakable("…계란이… 너 싫어하나 봐", "husband") == "계란이, 너 싫어하나 봐"
+    assert rc.speakable("…또?", "husband") == "또?"
+    assert rc.speakable("아 또… 세 번째야", "wife") == "아 또… 세 번째야"
 
 
 def test_캡션은_고지_첫줄_링크_둘째줄_구독은_캡션에():

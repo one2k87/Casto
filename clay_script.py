@@ -150,7 +150,8 @@ def _prompt(product: dict, situation: dict, evidence: dict, stamp: str, reason: 
 - 상품은 이미 집에 있다(남편이 밀어 주거나 아내가 사 둔 것). 찾아 나서지 않는다.
 - 컷 6의 대사는 "{product.get('display')}{', ' + format(int(price), ',') + '원' if price else ''}. 판정은—" 으로 끝낸다.
 - 컷 8은 컷 1과 같은 장소. 한 마디 또는 빈 문자열.
-- scene 필드는 영어, 이미지 생성용: 장소·인물 배치·동작·표정. 상품은 "{__import__('style').PRODUCT_WORD}"라고만(브랜드명 금지).
+- scene 필드는 영어, 이미지 생성용: 장소·인물 배치·동작·표정. 인물은 바닥에 서서 조리대/식탁 '옆'에 있다("standing at the counter",
+  절대 "on the table"). 카메라는 medium close-up(허리 위). 상품은 "{__import__('style').PRODUCT_WORD}"라고만(브랜드명 금지).
   캐릭터는 "the wife {__import__('style').SPECIES.get('wife','')}", "the husband {__import__('style').SPECIES.get('husband','')}"로 부르고,
   동물이 사람처럼 서서 앞발로 물건을 다루는 장면으로 쓴다. 아내 컷은 "mid-motion, quick, doing two things at once",
   남편 컷은 "very slow, barely moving, mid-blink, relaxed"를 꼭 넣는다 — 속도 대비가 화면에도 보여야 한다.

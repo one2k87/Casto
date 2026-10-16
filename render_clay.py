@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import asyncio
 import os
+import re
 import shutil
 import subprocess
 
@@ -30,7 +31,7 @@ STAMP_COLOR = {"콕": (47, 93, 78), "글쎄": (214, 150, 40), "패스": (190, 60
 # 속도 대비가 곧 편집(10/16): 아내 컷은 짧고 빠르게, 남편 컷은 앞에 뜸·뒤에 여운을 두고 길게 홀드한다.
 MIN_CUT = {1: 2.0, 2: 3.0, 3: 2.0, 4: 2.8, 5: 3.2, 6: 5.0, 7: 2.0, 8: 2.4}
 LEAD = {"wife": 0.0, "husband": 0.5, "guide": 0.2}       # 대사 시작 전 뜸(초)
-TAIL = {"wife": 0.3, "husband": 0.9, "guide": 0.4}       # 대사 끝난 뒤 여운(초)
+TAIL = {"wife": 0.3, "husband": 0.6, "guide": 0.4}       # 대사 끝난 뒤 여운(초) — 남편 0.9는 10호에서 총 27초를 만들었다
 MOTION = {"wife": ("The wife rabbit moves QUICKLY: snappy, darting movements, ears flick, hands busy, "
                    "doing two things at once, lively and fast-paced"),
           "husband": ("The husband sloth moves EXTREMELY SLOWLY: almost frozen, one slow blink, a slow head turn, "
@@ -93,8 +94,18 @@ def tts_eleven(text: str, role: str, path: str) -> str | None:
         return None
 
 
+def speakable(text: str, role: str) -> str:
+    """TTS에 넘길 글. 남편의 줄임표는 자막용 연출이다 — 음성에서 그대로 읽히면 '…' 하나에 0.7초씩 늘어나
+    10호에서 네 어절 대사가 5초가 됐다. 뜸은 LEAD(앞 0.5초)가 이미 주니 앞 줄임표는 지우고 가운데 줄임표는 쉼표로."""
+    t = (text or "").strip()
+    if role == "husband":
+        t = re.sub(r"^[…\.\s]+", "", t)
+        t = re.sub(r"\s*…+\s*", ", ", t).strip(", ")
+    return t
+
+
 def tts_line(text: str, role: str, path: str) -> str | None:
-    text = (text or "").strip()
+    text = speakable(text, role)
     if not text:
         return None
     if tts_eleven(text, role, path):
@@ -194,7 +205,9 @@ def sfx(kind: str, out: str) -> str | None:
 def motion(keyframe: str, seconds: float, out: str, prompt: str, allow_veo: bool = True) -> tuple[str, str]:
     """(mp4, 'veo'|'kenburns'). Veo는 4초 클립을 받아 길이에 맞춰 자르거나 마지막 프레임을 늘린다."""
     if allow_veo:
-        raw = veo.clip(prompt, keyframe, out + ".veo.mp4", seconds=4)
+        # 컷이 4초를 꽤 넘으면(남편 컷) 6초 클립을 받는다 — 4초 클립을 2초 넘게 정지시키면 '느림'이 아니라 '멈춤'으로 보인다
+        want = 4 if seconds <= 4.4 else 6 if seconds <= 6.4 else 8
+        raw = veo.clip(prompt, keyframe, out + ".veo.mp4", seconds=want)
         if raw:
             vf = f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},tpad=stop_mode=clone:stop_duration=6"
             subprocess.run(["ffmpeg", "-y", "-i", raw, "-an", "-t", f"{seconds:.2f}", "-vf", vf, "-r", "30",
@@ -245,23 +258,31 @@ def plan_durations(cuts: list[dict], voice_dur: dict[int, float]) -> dict[int, f
     """컷 길이: 뜸(LEAD) + 대사 + 여운(TAIL), 컷 최소값 이상. 25초를 넘기면 **컷을 빼지 않고** 비례 축소한다.
 
     5호 실측(10/15): 예전 규칙(컷 2 축소 → 컷 5 제거)이 펀치라인인 컷 5를 통째로 날렸다. 어떤 컷도 빼지 않는다.
-    속도 대비(10/16): 축소는 아내·안내 컷에서만 한다. 남편 컷은 뜸+대사 아래로 줄이지 않는다(느림이 캐릭터).
-    축소로 대사보다 컷이 짧아지면 `_segment`가 아내 음성을 최대 1.25배까지 빠르게 튼다(atempo).
+    10호 실측(10/16): 남편 컷을 절대 안 줄이니 아내 컷이 1.2초 바닥까지 눌려 대사가 잘렸다(컷 2 6.5초 ↔ 컷 3 1.2초).
+    그래서 축소는 **모든 컷이 '대사가 안 잘리는 최소'(need)까지** 비례로 하고, 그 아래로는 절대 안 내린다.
+    need = 뜸 + 대사/허용 배속 + 0.2 (아내·안내는 1.25배속 허용, 남편은 1.0 — 느림이 캐릭터). 컷 6은 고정.
+    need 합이 25초를 넘으면 넘긴다(대사를 자르는 것보다 2~3초 긴 편이 낫다) — 로그로 남긴다.
     """
-    d, floor = {}, {}
+    want, need = {}, {}
     for c in cuts:
         n, who = int(c["n"]), c.get("who", "wife")
         v = voice_dur.get(n, 0.0)
-        d[n] = round(max(MIN_CUT.get(n, 2.0), LEAD.get(who, 0.0) + v + TAIL.get(who, 0.4)), 2)
-        floor[n] = d[n] if (n == 6 or who == "husband") else 1.2       # 카드·도장 컷과 남편 컷은 길이를 지킨다
-    total = sum(d.values())
-    if total > HARD_CAP:
-        fixed = sum(v for n, v in d.items() if floor[n] == v)
-        k = (HARD_CAP - fixed) / max(total - fixed, 0.01)
-        for n in d:
-            if floor[n] != d[n]:
-                d[n] = round(max(floor[n], d[n] * k), 2)
-    return d
+        tempo = 1.0 if who == "husband" else 1.25
+        want[n] = round(max(MIN_CUT.get(n, 2.0), LEAD.get(who, 0.0) + v + TAIL.get(who, 0.4)), 2)
+        need[n] = round(max(1.2, LEAD.get(who, 0.0) + v / tempo + 0.2), 2)
+        if n == 6:
+            need[n] = want[n]                                  # 카드·도장 컷은 길이를 지킨다
+    total = sum(want.values())
+    if total <= HARD_CAP:
+        return want
+    slack = {n: want[n] - need[n] for n in want}               # 줄일 수 있는 여유
+    over = total - HARD_CAP
+    room = sum(slack.values())
+    if room <= 0:
+        print(f"[render] ⚠ 대사만으로 {sum(need.values()):.1f}초 — 25초 캡을 넘긴다(대사는 안 자른다)")
+        return need
+    k = min(1.0, over / room)                                  # 여유를 같은 비율로 깎는다
+    return {n: round(want[n] - slack[n] * k, 2) for n in want}
 
 
 def render(script: dict, frames: dict[int, str], product: dict, out_dir: str = "out/clay",
