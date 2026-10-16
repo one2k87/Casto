@@ -1,0 +1,64 @@
+{
+ "title": "노른자 지뢰밭",
+ "hook": "세 번째 실패",
+ "cuts": [
+  {
+   "n": 1,
+   "who": "wife",
+   "line": "아 또… 세 번째야",
+   "scene": "The wife rabbit standing at the counter, mid-motion, quick, doing two things at once, holding a cracked egg with a broken yolk, frustrated expression, kitchen background."
+  },
+  {
+   "n": 2,
+   "who": "husband",
+   "line": "…계란이 너… 싫어하나 봐.",
+   "scene": "The husband sloth standing at the counter, very slow, barely moving, mid-blink, relaxed expression, looking at the wife, kitchen background."
+  },
+  {
+   "n": 3,
+   "who": "wife",
+   "line": "이건 뭐야, 언제 샀어, 왜 말 안 했어!",
+   "scene": "The wife rabbit standing at the counter, quick, pointing an accusing finger at a small gadget, the real product, on the counter, questioning expression."
+  },
+  {
+   "n": 4,
+   "who": "wife",
+   "line": "어? 오… 뭐야, 왜 돼?",
+   "scene": "The wife rabbit standing at the counter, mid-motion, quick, doing two things at once, using the real product with another egg, surprised and impressed expression as it works."
+  },
+  {
+   "n": 5,
+   "who": "husband",
+   "line": "그거… 네가 버린 거 아니었어?",
+   "scene": "The husband sloth standing at the counter, very slow, barely moving, mid-blink, relaxed, a slight smirk, looking at the wife, kitchen background."
+  },
+  {
+   "n": 6,
+   "who": "guide",
+   "line": "계란 흰자 분리기. 판정은— 글쎄.",
+   "scene": "A guide character entering the scene, holding up a product card with the real product shown, then stamping it with a '글쎄' verdict. Standing beside the counter, clear and direct."
+  },
+  {
+   "n": 7,
+   "who": "wife",
+   "line": "저번에 산 그건 어디 있지, 서랍에 있나?",
+   "scene": "The wife rabbit standing at the counter, quick, already turning towards a kitchen drawer, looking curious and slightly mischievous, mid-motion."
+  },
+  {
+   "n": 8,
+   "who": "husband",
+   "line": "…열지 마.",
+   "scene": "The husband sloth standing at the counter, very slow, barely moving, mid-blink, relaxed, but with a hint of warning in his eyes, kitchen background, similar to cut 1."
+  }
+ ],
+ "drawer_item": "달걀 찌는 기계",
+ "stamp": "글쎄",
+ "reason": "데이터 부족",
+ "punched": true,
+ "product": "계란 흰자 분리기",
+ "slug": "계란-흰자-분리기",
+ "situation": "아침 계란 요리 중 노른자 터짐",
+ "narrative": "A_사고해결",
+ "price": null,
+ "coupang_url": "https://link.coupang.com/a/hEcTTxurnM"
+}

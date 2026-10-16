@@ -1,0 +1,42 @@
+{
+ "date": "2026-10-16",
+ "slug": "계란-흰자-분리기",
+ "product": "계란 흰자 분리기",
+ "clay": "assets/photo_products/계란-흰자-분리기.png",
+ "fallback_script": false,
+ "stamp": "글쎄",
+ "reason": "데이터 부족",
+ "keyframes": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8
+ ],
+ "seconds": 31.85,
+ "sources": {
+  "1": "veo",
+  "2": "veo",
+  "3": "veo",
+  "4": "veo",
+  "5": "veo",
+  "6": "kenburns",
+  "7": "veo",
+  "8": "veo"
+ },
+ "dropped": [],
+ "durations": {
+  "1": 2.72,
+  "2": 4.97,
+  "3": 3.31,
+  "4": 3.69,
+  "5": 5.38,
+  "6": 5.26,
+  "7": 3.04,
+  "8": 3.32
+ },
+ "veo_spent_usd": 11.6
+}
