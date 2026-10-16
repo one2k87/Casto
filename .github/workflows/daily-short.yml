@@ -112,6 +112,10 @@ jobs:
         env:
           MAKE_UPLOAD_HOOK: ${{ secrets.MAKE_UPLOAD_HOOK }}
           YT_API_KEY: ${{ secrets.YT_API_KEY }}
+          # 좀비 수리용 소유자 토큰(2026-10-16, yt_auth.py 로 1회 발급). 없으면 수리 생략 + 보류 스위치 유지.
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}

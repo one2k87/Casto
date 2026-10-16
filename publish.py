@@ -147,6 +147,81 @@ def find_new_video(channel_id: str, title: str, since: dt.datetime,
     return None
 
 
+# ------------------------------------------------------------------ ④-b 좀비 수리 (채널 소유자 OAuth)
+# 2026-10-16: Make의 uploadVideo가 간헐 [403]을 내면 파일만 올라가고 제목 "unknown"·설명 빈 공개 영상이 남는다
+# (10/13·10/15 네 번 = 좀비 네 편). Make 커뮤니티에 2025-10부터 같은 보고, 원인 미상. 우리가 고칠 수 있는 건
+# 업로드 뒤의 일이다: 소유자 토큰으로 그 영상에 제목·설명·태그를 붙여 '정상 발행'으로 되살리고, 중복은 비공개.
+# 시크릿 YT_CLIENT_ID / YT_CLIENT_SECRET / YT_REFRESH_TOKEN (yt_auth.py 로 1회 발급). 없으면 이 단계는 조용히 건너뛴다.
+ORPHAN_TITLES = {"unknown", "untitled", ""}
+
+
+def oauth_token() -> str | None:
+    cid, sec, rt = os.getenv("YT_CLIENT_ID", ""), os.getenv("YT_CLIENT_SECRET", ""), os.getenv("YT_REFRESH_TOKEN", "")
+    if not (cid and sec and rt):
+        return None
+    try:
+        r = requests.post("https://oauth2.googleapis.com/token", timeout=30, data={
+            "client_id": cid, "client_secret": sec, "refresh_token": rt, "grant_type": "refresh_token"})
+        return r.json().get("access_token") if r.status_code == 200 else None
+    except requests.RequestException:
+        return None
+
+
+def my_recent_videos(token: str, limit: int = 10) -> list[dict]:
+    """소유자 기준 최신 업로드 [{id,title,published,privacy}] — search.list(forMine) 100유닛 + videos.list 1유닛."""
+    h = {"Authorization": f"Bearer {token}"}
+    try:
+        r = requests.get("https://www.googleapis.com/youtube/v3/search", headers=h, timeout=30, params={
+            "part": "id", "forMine": "true", "type": "video", "order": "date", "maxResults": limit})
+        ids = [i["id"]["videoId"] for i in r.json().get("items", [])] if r.status_code == 200 else []
+        if not ids:
+            return []
+        v = requests.get("https://www.googleapis.com/youtube/v3/videos", headers=h, timeout=30, params={
+            "part": "snippet,status", "id": ",".join(ids)})
+        out = []
+        for it in v.json().get("items", []) if v.status_code == 200 else []:
+            sn, st = it.get("snippet", {}), it.get("status", {})
+            out.append({"id": it["id"], "title": sn.get("title", ""), "published": sn.get("publishedAt", ""),
+                        "privacy": st.get("privacyStatus", ""), "category": sn.get("categoryId", "")})
+        return out
+    except requests.RequestException:
+        return []
+
+
+def set_metadata(token: str, vid: str, payload: dict, privacy: str = "public") -> bool:
+    body = {"id": vid, "snippet": {"title": payload["title"], "description": payload["description"],
+                                   "tags": payload.get("tags") or [], "categoryId": payload.get("category_id") or CATEGORY_HOWTO},
+            "status": {"privacyStatus": privacy, "selfDeclaredMadeForKids": False}}
+    r = requests.put("https://www.googleapis.com/youtube/v3/videos", timeout=60, params={"part": "snippet,status"},
+                     headers={"Authorization": f"Bearer {token}"}, json=body)
+    print(f"[publish] 수리 {vid} → {r.status_code} {r.text[:120].replace(chr(10), ' ') if r.status_code != 200 else ''}")
+    return r.status_code == 200
+
+
+def repair_orphans(payload: dict, since: dt.datetime) -> str | None:
+    """Make가 403으로 죽은 뒤 남긴 '제목 unknown' 공개 영상을 오늘 편으로 되살린다. 돌려주는 값 = 살린 영상 id."""
+    tok = oauth_token()
+    if not tok:
+        print("[publish] 소유자 토큰 없음 — 좀비 수리 생략(YT_REFRESH_TOKEN 시크릿)")
+        return None
+    cutoff = (since - dt.timedelta(minutes=15)).strftime("%Y-%m-%dT%H:%M:%S")
+    orphans = [v for v in my_recent_videos(tok) if v["title"].strip().lower() in ORPHAN_TITLES
+               and v["published"][:19] >= cutoff and v["privacy"] != "private"]
+    if not orphans:
+        print("[publish] 좀비 없음")
+        return None
+    orphans.sort(key=lambda v: v["published"])
+    keep, extra = orphans[0], orphans[1:]
+    fixed = set_metadata(tok, keep["id"], payload, privacy=payload.get("privacy", "public"))
+    for v in extra:                                        # 같은 날 두 번 올라간 중복은 숨긴다
+        set_metadata(tok, v["id"], {**payload, "title": f"(중복) {payload['title']}"}, privacy="private")
+    if not fixed:
+        set_metadata(tok, keep["id"], {**payload, "title": f"(수리 실패) {payload['title']}"}, privacy="private")
+        return None
+    print("[publish] ♻️ 좀비를 오늘 편으로 되살림:", keep["id"])
+    return keep["id"]
+
+
 # ------------------------------------------------------------------ ⑤ 기록
 def record_video(video_id: str, date: str) -> None:
     """publish_log의 오늘 행과 last_caption에 video_id를 남긴다 — 대시보드가 이걸로 '게시됨'을 띄운다."""
@@ -170,7 +245,9 @@ def record_video(video_id: str, date: str) -> None:
 
 # ------------------------------------------------------------------ 진입점
 def on_hold() -> str | None:
-    """보류 중이면 사유 문자열, 아니면 None."""
+    """보류 중이면 사유 문자열, 아니면 None. 소유자 토큰(좀비 수리)이 있으면 보류를 자동 해제한다."""
+    if os.getenv("YT_REFRESH_TOKEN"):
+        return None
     try:
         with open(HOLD_FILE, encoding="utf-8") as f:
             return f.read().strip() or "사유 없음"
@@ -236,6 +313,8 @@ def publish(video_path: str = "out/short.mp4", caption_path: str = "out/caption.
     vid = (body or {}).get("video_id") or (body or {}).get("id")
     if not vid:
         vid = find_new_video((c.get("channel") or {}).get("id", ""), title, started)
+    if not vid:
+        vid = repair_orphans(payload, started)
     if not vid:
         telegram_msg(f"⚠️ 유튜브 게시 확인 실패 — Make 시나리오 실행 기록을 확인하세요\n제목: {title}")
         return False
