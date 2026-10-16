@@ -21,6 +21,7 @@ ROLES = ("wife", "husband", "guide")
 BANNED = ("써 보니", "써보니", "직접 써", "써봤", "써 봤", "최고", "인생템", "100%", "무조건", "효과 보장",
           "평점", "리뷰가", "후기가", "다들 극찬", "대박")
 MAX_LINE = 18          # 자막 두 줄 안. 구어체는 12자에 안 들어간다 — 18자까지(사용자 10/14 피드백)
+MAX_LINE_WIFE = 24     # 빠른 아내는 2~3마디를 잇는다(10/16 속도 대비) — 자막은 두 줄로 접는다(render_clay.wrap_line)
 STAMPS = ("콕", "글쎄", "패스")
 
 # 상황 라이브러리(포맷 3판 §5). 상품은 여기 '끼운다'.
@@ -178,6 +179,17 @@ def _punch_up(script: dict) -> str:
 JSON: {{"cuts": [{{"n":1,"line":"..."}}, … 8개]}}"""
 
 
+def _shorten(script: dict, errs: list[str]) -> str:
+    """길이 초과 줄만 줄여 달라는 3차 패스. 뜻·말투는 유지."""
+    bad = sorted({int(m.group(1)) for e in errs for m in [re.match(r"컷(\d+)", e)] if m})
+    lines = "\n".join(f"{c.get('n')} {c.get('who')}: {c.get('line')}" for c in script.get("cuts", []) if int(c.get("n", 0)) in bad)
+    return f"""아래 대사가 자막에 안 들어간다. 뜻과 말투(아내는 빠르고 급하게, 남편은 느리고 짧게)는 그대로 두고 **글자 수만** 줄여라.
+아내(wife) 줄은 공백 빼고 {MAX_LINE_WIFE}자 이내(2~3마디 유지), 남편(husband) 줄은 {MAX_LINE}자 이내·6어절 이내, 그 외 {MAX_LINE}자 이내.
+{lines}
+
+JSON: {{"cuts": [{{"n":번호,"line":"..."}}, …]}}"""
+
+
 def check(script: dict, product: dict, evidence: dict) -> list[str]:
     """정직·형식 검사. 빈 리스트면 통과. 사유를 전부 모아 돌려준다(하나 고치면 다음이 터지지 않게)."""
     errs = []
@@ -191,7 +203,7 @@ def check(script: dict, product: dict, evidence: dict) -> list[str]:
         for b in BANNED:
             if b in line:
                 errs.append(f"컷{c.get('n')} 금지어 '{b}'")
-        limit = 30 if c.get("n") == 6 else MAX_LINE      # 컷 6은 상품명+가격이 들어가 길다
+        limit = 30 if c.get("n") == 6 else MAX_LINE_WIFE if c.get("who") == "wife" else MAX_LINE   # 컷 6은 상품명+가격
         if len(line.replace(" ", "")) > limit:
             errs.append(f"컷{c.get('n')} 대사 {len(line)}자 — 너무 김")
         if c.get("who") == "husband" and len(line.split()) > 6:        # 느린 남편은 말이 적다(10/16 속도 대비)
@@ -255,6 +267,18 @@ def build(product: dict, evidence: dict | None = None, narrative: str = "A_사�
             except Exception as e:  # noqa: BLE001
                 print(f"[clay_script] 펀치업 실패({e}) — 초고 사용")
             errs = check(script, product, evidence)
+            if errs and all("너무 김" in e or "어절 초과" in e for e in errs):
+                # 길이만 문제면 버리지 않고 그 줄만 줄여 달라고 한다(12호: 좋은 대본이 글자 수로 폴백됐다)
+                try:
+                    fixed = llm_json(_shorten(script, errs), max_tokens=800, temperature=0.7)
+                    by_n = {int(c["n"]): c.get("line", "") for c in fixed.get("cuts", []) if "n" in c}
+                    for c in script["cuts"]:
+                        if int(c["n"]) != 6 and by_n.get(int(c["n"])):
+                            c["line"] = by_n[int(c["n"])]
+                    rejected.append({"stage": "shorten", "errors": errs, "fixed": by_n})
+                    errs = check(script, product, evidence)
+                except Exception as e:  # noqa: BLE001
+                    print(f"[clay_script] 줄이기 실패({e})")
             if errs:
                 print("[clay_script] ⛔ 펀치업본 탈락:", "; ".join(errs), "— 초고로 재검사")
                 rejected.append({"stage": "punch_up", "errors": errs,

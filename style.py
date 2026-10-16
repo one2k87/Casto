@@ -56,7 +56,8 @@ PRESETS = {
                       "with a tiny bell (reference image 1); quick, alert, always mid-motion. She stays a REAL rabbit: "
                       "natural rabbit anatomy, fur and proportions, standing on her hind legs the way real rabbits do, "
                       "holding small objects between her front paws — NEVER a cartoon mascot, NEVER humanoid body, "
-                      "NEVER plush-toy look. "
+                      "NEVER plush-toy look. She is knee-high to the sloth, so at the counter she stands on HER small "
+                      "wooden STEP STOOL (her signature prop) — never on top of the counter or the table. "
                       "HUSBAND = a big brown SLOTH with a gentle sleepy smile and a NAVY bandana (reference image 2), "
                       "standing or sitting UPRIGHT like a person: two legs on the ground, TWO arms only, arms relaxed at "
                       "the sides or leaning on the counter — NEVER hanging spread-eagled, NEVER four limbs splayed "
@@ -71,7 +72,7 @@ PRESETS = {
 {"characters": 등장 동물·사람 수(정수), "wife_ok": '흰 토끼(귀 늘어짐, 분홍 목걸이)'가 있으면 true, 없거나 다른 동물/색이면 false,
  "husband_ok": '갈색 나무늘보(남색 반다나)'가 있거나(없으면 true), 다른 동물이면 false, "extra_person": 토끼·나무늘보 외의 동물이나 사람이 있으면 true,
  "has_text": 사진 안에 글자·숫자가 있으면 true, "close_shot": 가장 큰 동물의 키가 화면 높이의 60% 이상이면 true(식탁과 의자가 통째로 보이는 넓은 샷이면 false),
- "on_furniture": 동물이 식탁·조리대 '위에' 올라서 있으면 true, "photoreal": 실사 사진처럼 보이면 true, 그림/만화/인형/플러시면 false}""",
+ "on_furniture": 동물이 식탁·조리대 '위에' 올라서 있으면 true(발판·의자·바닥에 서 있으면 false), "photoreal": 실사 사진처럼 보이면 true, 그림/만화/인형/플러시면 false}""",
         # 캐릭터 후보(1회 생성). 종·색·소품이 식별자다 — 시각 검사가 이걸로 같은 개체인지 본다.
         "cands": {
             "wife": "a small white Holland Lop rabbit with floppy ears, big dark shiny eyes, thin pink collar with a tiny bell, alert quick expression",

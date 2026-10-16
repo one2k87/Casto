@@ -124,6 +124,24 @@ def _rounded(d: ImageDraw.ImageDraw, box, r, fill):
     d.rounded_rectangle(box, radius=r, fill=fill)
 
 
+def wrap_line(text: str, width_of, max_w: float) -> list[str]:
+    """자막을 최대 두 줄로. 쉼표·공백·줄임표 뒤에서 끊는다(12호: 아내의 빠른 다절 대사가 한 줄 1080px를 넘쳤다)."""
+    text = (text or "").strip()
+    if not text or width_of(text) <= max_w:
+        return [text]
+    cands = [i + 1 for i, ch in enumerate(text[:-1]) if ch in ",、 …?!"]
+    best = None
+    for i in cands:
+        a, b = text[:i].rstrip(), text[i:].lstrip()
+        if a and b and width_of(a) <= max_w and width_of(b) <= max_w:
+            if best is None or abs(len(a) - len(b)) < abs(len(best[0]) - len(best[1])):
+                best = (a, b)
+    if best:
+        return list(best)
+    mid = len(text) // 2
+    return [text[:mid].rstrip(), text[mid:].lstrip()]
+
+
 def subtitle_png(line: str, role: str, out: str, hook: str | None = None) -> str:
     """하단 자막(배역 색 태그) + (컷 1) 상단 훅. 투명 PNG."""
     im = Image.new("RGBA", (W, H), (0, 0, 0, 0))
@@ -138,9 +156,12 @@ def subtitle_png(line: str, role: str, out: str, hook: str | None = None) -> str
     if line:
         f = font(66)
         y = int(H * 0.78)
-        tw = d.textlength(line, font=f)
-        _rounded(d, (W / 2 - tw / 2 - 40, y - 56, W / 2 + tw / 2 + 40, y + 56), 30, (0, 0, 0, 170))
-        d.text((W / 2, y), line, font=f, fill=(255, 255, 255), anchor="mm")
+        rows = wrap_line(line, lambda t: d.textlength(t, font=f), W - 200)
+        tw = max(d.textlength(r, font=f) for r in rows)
+        hh = 56 + 36 * (len(rows) - 1)
+        _rounded(d, (W / 2 - tw / 2 - 40, y - hh, W / 2 + tw / 2 + 40, y + hh), 30, (0, 0, 0, 170))
+        for i, r in enumerate(rows):
+            d.text((W / 2, y + (i - (len(rows) - 1) / 2) * 76), r, font=f, fill=(255, 255, 255), anchor="mm")
         # 배역 태그 — 색으로 누가 말하는지
         tag = {"wife": "아내", "husband": "남편", "guide": "콕픽"}.get(role, "")
         if tag:
