@@ -15,6 +15,9 @@ import style
 
 CAST = style.CAST_DIR
 SET = os.path.join(CAST, "set_kitchen.png")
+# 11호(10/16): 세트 참고가 '식탁+의자+바닥'이 다 보이는 와이드샷이라 생성기가 그 구도를 그대로 베꼈다(21장 전부 와이드샷 탈락).
+# 장면 참고는 조리대·창만 잘라 낸 클로즈 버전을 준다 — 색·가구는 같고 구도만 가깝다.
+SET_CLOSE = os.path.join(CAST, "set_kitchen_close.png")
 WORLD = style.WORLD
 # 파일럿 1~3호 실측(10/14~15): 디오라마가 작고 와이드샷이 많았고, 아내가 '동작'하는 컷에서 몸 형태가 표류했다.
 # → 프레이밍과 캐릭터를 말로 못 박고(style.CAST_LOCK), 생성 뒤 시각 검사로 거른다. 참고 순서 고정(1=아내, 2=남편).
@@ -41,6 +44,8 @@ def refs_for(cut: dict, clay_product: str | None) -> list[str]:
     refs = [os.path.join(CAST, f"{r}_sheet.png") for r in ("wife", "husband")]
     if who == "guide" or cut.get("n") == 6:
         refs = [os.path.join(CAST, "guide_sheet.png")]
+    elif os.path.exists(SET_CLOSE):
+        refs.append(SET_CLOSE)
     elif os.path.exists(SET):
         refs.append(SET)
     if cut.get("n") in (3, 4, 5) and clay_product and os.path.exists(clay_product):
@@ -58,7 +63,8 @@ def prompt_for(cut: dict) -> str:
                 "front paws (card empty — it will be composited). "
                 f"Scene: {str(cut.get('scene', '')).replace(style.PRODUCT_WORD, 'a card')}. "
                 "Vertical 9:16, no text, no letters, no speech bubbles")      # 'the real product'가 글자로 그려지는 걸 막는다(2호)
-    return (base + f"{CAST_LOCK}. Location: {WORLD}. {FRAMING}. Scene: {cut.get('scene', '')}. "
+    return (base + f"{CAST_LOCK}. Location: {WORLD} — reference image 3 shows the kitchen's colors and cabinets only; "
+            f"do NOT copy its framing. {FRAMING}. Scene: {cut.get('scene', '')}. "
             f"If '{style.PRODUCT_WORD}' appears, {style.PRODUCT_RULE}. No text, no speech bubbles")
 
 

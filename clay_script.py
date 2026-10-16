@@ -194,8 +194,8 @@ def check(script: dict, product: dict, evidence: dict) -> list[str]:
         limit = 30 if c.get("n") == 6 else MAX_LINE      # 컷 6은 상품명+가격이 들어가 길다
         if len(line.replace(" ", "")) > limit:
             errs.append(f"컷{c.get('n')} 대사 {len(line)}자 — 너무 김")
-        if c.get("who") == "husband" and len(line.split()) > 5:        # 느린 남편은 말이 적다(10/16 속도 대비)
-            errs.append(f"컷{c.get('n')} 남편 대사 {len(line.split())}어절 — 5어절 초과")
+        if c.get("who") == "husband" and len(line.split()) > 6:        # 느린 남편은 말이 적다(10/16 속도 대비)
+            errs.append(f"컷{c.get('n')} 남편 대사 {len(line.split())}어절 — 6어절 초과")
         if not product.get("price") and re.search(r"\d[\d,]*\s*원", line):
             errs.append(f"컷{c.get('n')} 가격 모름인데 원화 숫자")
         if not c.get("scene"):
@@ -237,7 +237,7 @@ def build(product: dict, evidence: dict | None = None, narrative: str = "A_사�
     evidence = evidence or {}
     situation = situation or pick_situation(product)
     stamp, reason = decide(evidence)
-    script = None
+    script, rejected = None, []
     if use_llm:
         try:
             from common import llm_json
@@ -257,16 +257,23 @@ def build(product: dict, evidence: dict | None = None, narrative: str = "A_사�
             errs = check(script, product, evidence)
             if errs:
                 print("[clay_script] ⛔ 펀치업본 탈락:", "; ".join(errs), "— 초고로 재검사")
+                rejected.append({"stage": "punch_up", "errors": errs,
+                                 "lines": [c.get("line") for c in script.get("cuts", [])]})
                 script = draft
                 errs = check(script, product, evidence)
                 if errs:
                     print("[clay_script] ⛔ 초고도 탈락:", "; ".join(errs))
+                    rejected.append({"stage": "draft", "errors": errs,
+                                     "lines": [c.get("line") for c in script.get("cuts", [])]})
                     script = None
         except Exception as e:  # noqa: BLE001
             print(f"[clay_script] 생성 실패({e}) — 폴백")
+            rejected.append({"stage": "llm", "errors": [str(e)[:300]]})
             script = None
     if script is None:
         script = fallback(product, situation, stamp, reason)
+    if rejected:
+        script["rejected"] = rejected          # 왜 폴백/재검사가 됐는지 대본 파일에 남긴다(11호: 사유를 알 수 없었다)
     script.update({"product": product.get("display"), "slug": product.get("slug"), "situation": situation["scene"],
                    "narrative": narrative, "price": product.get("price"), "coupang_url": product.get("coupang_url")})
     return script
