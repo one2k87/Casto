@@ -1,0 +1,64 @@
+{
+ "title": "노른자 터뜨리는 기술",
+ "hook": "세 번째 실패",
+ "cuts": [
+  {
+   "n": 1,
+   "who": "wife",
+   "line": "아 또… 세 번째야",
+   "scene": "The wife rabbit, mid-motion, quick, doing two things at once, holding a broken egg, looks frustrated in a kitchen."
+  },
+  {
+   "n": 2,
+   "who": "husband",
+   "line": "…계란이… 너 싫어하나 봐",
+   "scene": "The husband sloth, very slow, barely moving, mid-blink, relaxed, stands next to the wife, observing with a calm expression."
+  },
+  {
+   "n": 3,
+   "who": "wife",
+   "line": "이건 뭐야, 언제 샀어, 왜 말 안 했어",
+   "scene": "The wife rabbit, mid-motion, quick, doing two things at once, picks up the real product from the counter, surprised."
+  },
+  {
+   "n": 4,
+   "who": "wife",
+   "line": "어? 왜 돼? 왜 잘 돼?",
+   "scene": "The wife rabbit, mid-motion, quick, doing two things at once, successfully uses the real product, eyes wide in disbelief."
+  },
+  {
+   "n": 5,
+   "who": "husband",
+   "line": "…산 사람도 모르나 봐",
+   "scene": "The husband sloth, very slow, barely moving, mid-blink, relaxed, looks at the wife with a knowing, slightly amused expression."
+  },
+  {
+   "n": 6,
+   "who": "guide",
+   "line": "계란 흰자 분리기. 판정은—",
+   "scene": "The guide character, standing in the scene with a product card and a judgment stamp, speaks clearly. The real product is displayed."
+  },
+  {
+   "n": 7,
+   "who": "wife",
+   "line": "근데 저번에 산 그거, 거품기는 어디 갔지",
+   "scene": "The wife rabbit, mid-motion, quick, doing two things at once, glances towards a closed drawer, looking for another item."
+  },
+  {
+   "n": 8,
+   "who": "husband",
+   "line": "서랍… 열지 마",
+   "scene": "The husband sloth, very slow, barely moving, mid-blink, relaxed, is in the kitchen, casually blocking access to a drawer."
+  }
+ ],
+ "drawer_item": "거품기",
+ "stamp": "글쎄",
+ "reason": "데이터 부족",
+ "punched": true,
+ "product": "계란 흰자 분리기",
+ "slug": "계란-흰자-분리기",
+ "situation": "아침 계란 요리 중 노른자 터짐",
+ "narrative": "A_사고해결",
+ "price": null,
+ "coupang_url": "https://link.coupang.com/a/hEcTTxurnM"
+}
