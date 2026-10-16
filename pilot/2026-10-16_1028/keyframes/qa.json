@@ -1,0 +1,101 @@
+{
+ "1": [
+  {
+   "attempt": 0,
+   "ok": false,
+   "why": "가구 위"
+  },
+  {
+   "attempt": 1,
+   "ok": false,
+   "why": "가구 위"
+  },
+  {
+   "attempt": 2,
+   "ok": false,
+   "why": "가구 위"
+  }
+ ],
+ "2": [
+  {
+   "attempt": 0,
+   "ok": false,
+   "why": "와이드샷"
+  },
+  {
+   "attempt": 1,
+   "ok": true,
+   "why": "통과"
+  }
+ ],
+ "3": [
+  {
+   "attempt": 0,
+   "ok": false,
+   "why": "실사 아님"
+  },
+  {
+   "attempt": 1,
+   "ok": false,
+   "why": "와이드샷, 가구 위, 실사 아님"
+  },
+  {
+   "attempt": 2,
+   "ok": false,
+   "why": "가구 위"
+  }
+ ],
+ "4": [
+  {
+   "attempt": 0,
+   "ok": false,
+   "why": "아내 형태"
+  },
+  {
+   "attempt": 1,
+   "ok": true,
+   "why": "통과"
+  }
+ ],
+ "5": [
+  {
+   "attempt": 0,
+   "ok": false,
+   "why": "가구 위"
+  },
+  {
+   "attempt": 1,
+   "ok": false,
+   "why": "가구 위"
+  },
+  {
+   "attempt": 2,
+   "ok": false,
+   "why": "가구 위"
+  }
+ ],
+ "6": [
+  {
+   "attempt": 0,
+   "ok": true,
+   "why": "통과"
+  }
+ ],
+ "7": [
+  {
+   "attempt": 0,
+   "ok": false,
+   "why": "가구 위"
+  },
+  {
+   "attempt": 1,
+   "ok": false,
+   "why": "와이드샷, 가구 위"
+  },
+  {
+   "attempt": 2,
+   "ok": false,
+   "why": "와이드샷"
+  }
+ ]
+}
