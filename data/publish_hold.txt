@@ -1,0 +1,1 @@
+2026-10-16 famto: Make youtube:uploadVideo [403] Forbidden (10/13·10/15 네 번 연속). 파일만 올라가 제목 "unknown" 공개 영상이 생기는 좀비 업로드를 막기 위해 보류. 원인 확인 후 이 파일을 지우면 자동 게시 재개.

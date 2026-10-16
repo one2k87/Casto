@@ -34,6 +34,10 @@ from common import cfg, telegram_msg
 
 PUBLISH_LOG = "data/publish_log.json"
 LAST_CAPTION = "data/last_caption.json"
+# 보류 스위치(2026-10-16): 이 파일이 있으면 Make 웹훅을 부르지 않고 텔레그램 mp4 폴백으로 간다.
+# 10/13·10/15 Make의 youtube:uploadVideo가 [403]을 내면서 파일만 올라가 제목 "unknown"·설명 빈 공개 영상이
+# 네 편 생겼다(좀비 업로드). 원인을 고치기 전까지 호출 자체를 막는다. 파일 내용 = 보류 사유.
+HOLD_FILE = "data/publish_hold.txt"
 CATEGORY_HOWTO = "26"                  # Howto & Style — 살림·주방 채널의 관례 카테고리
 
 
@@ -165,11 +169,33 @@ def record_video(video_id: str, date: str) -> None:
 
 
 # ------------------------------------------------------------------ 진입점
+def on_hold() -> str | None:
+    """보류 중이면 사유 문자열, 아니면 None."""
+    try:
+        with open(HOLD_FILE, encoding="utf-8") as f:
+            return f.read().strip() or "사유 없음"
+    except OSError:
+        return None
+
+
 def publish(video_path: str = "out/short.mp4", caption_path: str = "out/caption.txt",
             privacy: str = "public") -> bool:
     hook = os.getenv("MAKE_UPLOAD_HOOK", "")
     if not hook:
         print("[publish] MAKE_UPLOAD_HOOK 없음 — 자동 게시 생략(텔레그램 수동 폴백)")
+        return False
+    hold = on_hold()
+    if hold:
+        print("[publish] ⏸ 자동 게시 보류:", hold)
+        if os.path.exists(video_path):
+            from common import telegram_video
+            try:
+                with open(caption_path, encoding="utf-8") as f:
+                    cap = f.read()
+            except OSError:
+                cap = ""
+            telegram_video(video_path, f"⏸ 자동 게시 보류 중 — 직접 올려 주세요\n보류 사유: {hold}\n\n{cap}"[:1000]) \
+                or telegram_msg(f"⏸ 자동 게시 보류 중({hold}) — mp4 전송 실패, Actions 아티팩트에서 받으세요")
         return False
     if not os.path.exists(video_path):
         print("[publish] 영상 없음:", video_path)
@@ -228,5 +254,6 @@ if __name__ == "__main__":
     ok = publish(video_path=_a[1] if len(_a) > 1 else "out/short.mp4",
                  caption_path=_a[2] if len(_a) > 2 else "out/caption.txt",
                  privacy=_a[0] if _a else "public")
-    # 웹훅이 아직 등록 안 된 상태는 실패가 아니다(수동 폴백). 등록됐는데 못 올렸을 때만 빨간불.
-    sys.exit(0 if ok or not os.getenv("MAKE_UPLOAD_HOOK") else 1)
+    # 웹훅이 아직 등록 안 된 상태는 실패가 아니다(수동 폴백). 보류 중도 실패가 아니다(마커를 남겨 백업 크론 중복을 막는다).
+    # 등록됐는데 못 올렸을 때만 빨간불.
+    sys.exit(0 if ok or not os.getenv("MAKE_UPLOAD_HOOK") or on_hold() else 1)
