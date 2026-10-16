@@ -1,0 +1,64 @@
+{
+ "title": "계란 흰자 분리기, 진짜 필요할까?",
+ "hook": "아침 계란 요리 중",
+ "cuts": [
+  {
+   "n": 1,
+   "who": "wife",
+   "line": "아 또, 또 터졌어, 세 번째야",
+   "scene": "the shared kitchen set from the reference image; wife mid-accident at the counter, mid-motion, quick, doing two things at once, 아침 계란 요리 중 노른자 터짐 mood, startled"
+  },
+  {
+   "n": 2,
+   "who": "husband",
+   "line": "…또?",
+   "scene": "the shared kitchen set from the reference image; husband at the table, very slow, barely moving, mid-blink over his phone, deadpan"
+  },
+  {
+   "n": 3,
+   "who": "wife",
+   "line": "뭐야 이거, 언제 샀어, 왜 말 안 했어",
+   "scene": "the shared kitchen set from the reference image; husband slides a small parcel box across the table very slowly, the real product pops out, wife mid-motion, quick, grabbing it"
+  },
+  {
+   "n": 4,
+   "who": "wife",
+   "line": "어? 왜 돼?",
+   "scene": "the shared kitchen set from the reference image; wife using the real product at the counter, result visible, eyes wide"
+  },
+  {
+   "n": 5,
+   "who": "husband",
+   "line": "그거… 네가 산 거야",
+   "scene": "the shared kitchen set from the reference image; husband very slow, barely moving, small smile, one slow blink"
+  },
+  {
+   "n": 6,
+   "who": "guide",
+   "line": "계란 흰자 분리기. 판정은—",
+   "scene": "plain cream studio backdrop; guide character standing center holding a blank white card up, presenting"
+  },
+  {
+   "n": 7,
+   "who": "wife",
+   "line": "지난달에 산 게 또 있다고?",
+   "scene": "the shared kitchen set from the reference image; wife opening a kitchen drawer stuffed with unused gadgets, sheepish"
+  },
+  {
+   "n": 8,
+   "who": "husband",
+   "line": "서랍… 열지 마",
+   "scene": "the shared kitchen set from the reference image; same framing as cut 1, husband very slowly lifting a coffee cup, wife back at the counter mid-motion"
+  }
+ ],
+ "drawer_item": "지난주 템",
+ "stamp": "글쎄",
+ "reason": "데이터 부족",
+ "fallback": true,
+ "product": "계란 흰자 분리기",
+ "slug": "계란-흰자-분리기",
+ "situation": "아침 계란 요리 중 노른자 터짐",
+ "narrative": "A_사고해결",
+ "price": null,
+ "coupang_url": "https://link.coupang.com/a/hEcTTxurnM"
+}
