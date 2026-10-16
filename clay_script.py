@@ -40,14 +40,14 @@ SITUATIONS = [
 ]
 
 CUT_PLAN = [  # (컷, 담당, 역할 설명) — 포맷 3판 §2
-    (1, "wife", "일상 속 사고. 상품 때문이 아니라 일상 때문에. 훅 한 줄"),
-    (2, "husband", "아내의 엉뚱한 시도에 한 박자 늦은 건조한 리액션"),
-    (3, "wife", "남편이 밀어 준 택배/이미 사 둔 상품을 발견. '이게 뭐야?'류"),
+    (1, "wife", "일상 속 사고. 상품 때문이 아니라 일상 때문에. 훅 한 줄. 빠르게 2~3마디 이어 붙임"),
+    (2, "husband", "아내의 엉뚱한 시도에 한 박자 늦은 건조한 리액션. 2~4어절, 줄임표로 뜸"),
+    (3, "wife", "남편이 밀어 준 택배/이미 사 둔 상품을 발견. '뭐야 이거, 언제 샀어, 왜 말 안 했어'처럼 숨 없이"),
     (4, "wife", "점토 상품을 써 보는 장면. 결과가 눈에 보임"),
-    (5, "husband", "한 줄 감상 받아치기. '그게 그 용도야'류"),
+    (5, "husband", "느린 한 방(펀치라인). 아내를 놀리는 말, 2~4어절, 설명 금지"),
     (6, "guide", "실물 카드 소개 + 판정 도장. 상품명(+가격) 그리고 '판정은—'"),
     (7, "wife", "서랍 꼬리: '저번에 산 그거…' 서랍에서 안 쓴 템 발굴"),
-    (8, "husband", "루프 컷. 컷 1과 같은 장소로 돌아오며 짧은 한마디(또는 무대사)"),
+    (8, "husband", "루프 컷. 컷 1과 같은 장소로 돌아오며 느린 한마디(또는 무대사)"),
 ]
 
 
@@ -128,8 +128,10 @@ def _prompt(product: dict, situation: dict, evidence: dict, stamp: str, reason: 
     price = product.get("price")
     facts = product.get("facts") or []
     return f"""당신은 20초짜리 클레이 시트콤 「콕이네 집」의 코미디 작가다. 시트콤이다 — 광고 대본이 아니다.
-등장: {{wife}}(아내, 유행템 다 사고 싶음, 행동이 먼저, 감탄·억울함·우기기), {{husband}}(남편, 느긋·현실파, 건조한 한 방,
-한 박자 늦음), {{guide}}(콕픽 안내 캐릭터, 이야기 밖에서 들어와 상품 카드와 판정 도장. 또박또박).
+등장: {{wife}}(아내, 빠른 토끼 — 유행템 다 사고 싶음, 행동이 먼저, 말이 빠르고 많음, 감탄·억울함·우기기),
+{{husband}}(남편, 아주 느린 나무늘보 — 느긋·현실파, 말이 적고 느림, 뜸 들인 건조한 한 방), {{guide}}(콕픽 안내 캐릭터,
+이야기 밖에서 들어와 상품 카드와 판정 도장. 또박또박).
+**이 편의 재미는 둘의 속도 대비다.** 아내 줄은 2~3마디를 쉼표로 이어 붙여 급하게, 남편 줄은 2~4어절에 줄임표로 느리게.
 
 {STYLE_GUIDE}
 
@@ -150,7 +152,8 @@ def _prompt(product: dict, situation: dict, evidence: dict, stamp: str, reason: 
 - 컷 8은 컷 1과 같은 장소. 한 마디 또는 빈 문자열.
 - scene 필드는 영어, 이미지 생성용: 장소·인물 배치·동작·표정. 상품은 "{__import__('style').PRODUCT_WORD}"라고만(브랜드명 금지).
   캐릭터는 "the wife {__import__('style').SPECIES.get('wife','')}", "the husband {__import__('style').SPECIES.get('husband','')}"로 부르고,
-  동물이 사람처럼 서서 앞발로 물건을 다루는 장면으로 쓴다. 남편은 **느리게**(기대거나 매달려 있음), 아내는 **빠르게**(동작 중) 그린다.
+  동물이 사람처럼 서서 앞발로 물건을 다루는 장면으로 쓴다. 아내 컷은 "mid-motion, quick, doing two things at once",
+  남편 컷은 "very slow, barely moving, mid-blink, relaxed"를 꼭 넣는다 — 속도 대비가 화면에도 보여야 한다.
 
 JSON: {{"title": "제목(생활 문제형, 20자 이내)", "hook": "컷1 큰 자막(10자 이내, 설명 말고 감정)",
 "cuts": [{{"n":1,"who":"wife","line":"...","scene":"..."}}, … 8개], "drawer_item": "컷7 서랍에서 나오는 지난 템(짧게)"}}"""
@@ -167,6 +170,8 @@ def _punch_up(script: dict) -> str:
 
 고칠 기준: 상황을 설명하는 줄, 훈계하는 줄, "신기하다"처럼 감상만 있는 줄, 로봇 같은 줄은 전부 부부의 **반응**으로 바꾼다.
 컷 5는 반드시 남편이 아내를 놀리는 한 방. 컷 6(guide)은 손대지 않는다. 컷 8은 "서랍" 러닝개그로 닫는다.
+속도 대비: 아내(wife) 줄은 2~3마디를 쉼표로 숨 없이 잇고, 남편(husband) 줄은 2~4어절 + 줄임표로 뜸을 들인다.
+남편 줄이 5어절을 넘으면 잘라서 한 생각만 남긴다.
 금지어("써 보니", "최고", "인생템", "100%", "무조건", "효과 보장")와 가격·수치 추가 금지. 한 줄 18자 이내.
 
 JSON: {{"cuts": [{{"n":1,"line":"..."}}, … 8개]}}"""
@@ -188,6 +193,8 @@ def check(script: dict, product: dict, evidence: dict) -> list[str]:
         limit = 30 if c.get("n") == 6 else MAX_LINE      # 컷 6은 상품명+가격이 들어가 길다
         if len(line.replace(" ", "")) > limit:
             errs.append(f"컷{c.get('n')} 대사 {len(line)}자 — 너무 김")
+        if c.get("who") == "husband" and len(line.split()) > 5:        # 느린 남편은 말이 적다(10/16 속도 대비)
+            errs.append(f"컷{c.get('n')} 남편 대사 {len(line.split())}어절 — 5어절 초과")
         if not product.get("price") and re.search(r"\d[\d,]*\s*원", line):
             errs.append(f"컷{c.get('n')} 가격 모름인데 원화 숫자")
         if not c.get("scene"):
@@ -209,15 +216,15 @@ def fallback(product: dict, situation: dict, stamp: str, reason: str) -> dict:
     price = product.get("price")
     kitchen = "the shared kitchen set from the reference image"
     cuts = [
-        (1, "wife", "아 또… 세 번째야", f"{kitchen}; wife mid-accident at the counter, {situation['scene']} mood, startled"),
-        (2, "husband", "오늘은 뭐가 널 싫어해?", f"{kitchen}; husband at the table looking over his phone, deadpan"),
-        (3, "wife", "뭐야 이거, 언제 샀어?", f"{kitchen}; husband slides a small parcel box across the table, {__import__('style').PRODUCT_WORD} pops out, wife curious"),
+        (1, "wife", "아 또, 또 터졌어, 세 번째야", f"{kitchen}; wife mid-accident at the counter, mid-motion, quick, doing two things at once, {situation['scene']} mood, startled"),
+        (2, "husband", "…또?", f"{kitchen}; husband at the table, very slow, barely moving, mid-blink over his phone, deadpan"),
+        (3, "wife", "뭐야 이거, 언제 샀어, 왜 말 안 했어", f"{kitchen}; husband slides a small parcel box across the table very slowly, {__import__('style').PRODUCT_WORD} pops out, wife mid-motion, quick, grabbing it"),
         (4, "wife", "어? 왜 돼?", f"{kitchen}; wife using {__import__('style').PRODUCT_WORD} at the counter, result visible, eyes wide"),
-        (5, "husband", "그거 네가 산 거야. 지난달에.", f"{kitchen}; husband shrugs lightly, small smile"),
+        (5, "husband", "그거… 네가 산 거야", f"{kitchen}; husband very slow, barely moving, small smile, one slow blink"),
         (6, "guide", f"{name}{', ' + format(int(price), ',') + '원' if price else ''}. 판정은—",
          "plain cream studio backdrop; guide character standing center holding a blank white card up, presenting"),
         (7, "wife", "지난달에 산 게 또 있다고?", f"{kitchen}; wife opening a kitchen drawer stuffed with unused gadgets, sheepish"),
-        (8, "husband", "서랍 열지 마", f"{kitchen}; same framing as cut 1, husband sipping coffee, wife back at the counter"),
+        (8, "husband", "서랍… 열지 마", f"{kitchen}; same framing as cut 1, husband very slowly lifting a coffee cup, wife back at the counter mid-motion"),
     ]
     return {"title": f"{name}, 진짜 필요할까?", "hook": situation["scene"][:10],
             "cuts": [{"n": n, "who": w, "line": l, "scene": s} for n, w, l, s in cuts],

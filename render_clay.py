@@ -22,12 +22,20 @@ W, H = 1080, 1920
 HARD_CAP = 25.0
 FONTS = ["/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
          "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc"]
-VOICE = {"wife": ("ko-KR-SunHiNeural", "+16%", "+0Hz"),          # 빠른 토끼
-         "husband": ("ko-KR-InJoonNeural", "-14%", "-12Hz"),      # 느린 나무늘보(10/15)
+VOICE = {"wife": ("ko-KR-SunHiNeural", "+13%", "+0Hz"),          # 빠른 토끼 — 상한 +13%("거슬리면 안 됨", 10/16)
+         "husband": ("ko-KR-InJoonNeural", "-18%", "-12Hz"),      # 아주 느린 나무늘보(10/16)
          "guide": ("ko-KR-SunHiNeural", "-4%", "+25Hz")}
 COLOR = {"wife": (236, 128, 104), "husband": (176, 150, 214), "guide": (214, 178, 100)}
 STAMP_COLOR = {"콕": (47, 93, 78), "글쎄": (214, 150, 40), "패스": (190, 60, 60)}
-MIN_CUT = {1: 2.2, 2: 2.4, 3: 2.4, 4: 3.0, 5: 2.6, 6: 5.0, 7: 2.4, 8: 1.8}   # 남편 컷(2·5)은 느리게 — 0.4초 여유
+# 속도 대비가 곧 편집(10/16): 아내 컷은 짧고 빠르게, 남편 컷은 앞에 뜸·뒤에 여운을 두고 길게 홀드한다.
+MIN_CUT = {1: 2.0, 2: 3.0, 3: 2.0, 4: 2.8, 5: 3.2, 6: 5.0, 7: 2.0, 8: 2.4}
+LEAD = {"wife": 0.0, "husband": 0.5, "guide": 0.2}       # 대사 시작 전 뜸(초)
+TAIL = {"wife": 0.3, "husband": 0.9, "guide": 0.4}       # 대사 끝난 뒤 여운(초)
+MOTION = {"wife": ("The wife rabbit moves QUICKLY: snappy, darting movements, ears flick, hands busy, "
+                   "doing two things at once, lively and fast-paced"),
+          "husband": ("The husband sloth moves EXTREMELY SLOWLY: almost frozen, one slow blink, a slow head turn, "
+                      "relaxed and unhurried, nothing else moves"),
+          "guide": "The presenter moves little; calm, upright, steady"}
 
 
 def font(size: int, bold: bool = True) -> ImageFont.FreeTypeFont:
@@ -58,8 +66,8 @@ ELEVEN_VOICES = {"wife": os.getenv("ELEVEN_VOICE_WIFE", "EXAVITQu4vr4xnSDxMaL"),
                  "husband": os.getenv("ELEVEN_VOICE_HUSBAND", "pNInz6obpgDQGcFmaJgB"),
                  "guide": os.getenv("ELEVEN_VOICE_GUIDE", "21m00Tcm4TlvDq8ikWAM")}
 ELEVEN_MODEL = os.getenv("ELEVEN_MODEL", "eleven_multilingual_v2")
-ELEVEN_STYLE = {"wife": {"stability": 0.3, "similarity_boost": 0.8, "style": 0.7, "speed": 1.12},
-                "husband": {"stability": 0.8, "similarity_boost": 0.8, "style": 0.15, "speed": 0.85},
+ELEVEN_STYLE = {"wife": {"stability": 0.3, "similarity_boost": 0.8, "style": 0.7, "speed": 1.10},
+                "husband": {"stability": 0.8, "similarity_boost": 0.8, "style": 0.15, "speed": 0.78},
                 "guide": {"stability": 0.6, "similarity_boost": 0.8, "style": 0.3}}
 
 
@@ -197,14 +205,14 @@ def motion(keyframe: str, seconds: float, out: str, prompt: str, allow_veo: bool
 
 
 def _segment(video: str, overlays: list[tuple[str, float]], audio: str | None, seconds: float, out: str,
-             extra_audio: list[tuple[str, float]] | None = None) -> str:
-    """영상 + 오버레이(PNG, 등장 시각) + 음성(+효과음) → 길이 고정 세그먼트."""
+             extra_audio: list[tuple[str, float]] | None = None, lead: float = 0.0, max_tempo: float = 1.25) -> str:
+    """영상 + 오버레이(PNG, 등장 시각) + 음성(+효과음) → 길이 고정 세그먼트. lead=대사 시작 전 뜸(초)."""
     cmd = ["ffmpeg", "-y", "-i", video]
     for png, _ in overlays:
         cmd += ["-loop", "1", "-i", png]
     a_inputs = []
     if audio:
-        cmd += ["-i", audio]; a_inputs.append((len(overlays) + 1, 0.0))
+        cmd += ["-i", audio]; a_inputs.append((len(overlays) + 1, lead))
     for path, at in (extra_audio or []):
         cmd += ["-i", path]; a_inputs.append((len(overlays) + 1 + len(a_inputs), at))
     fc, last = [], "[0:v]"
@@ -218,8 +226,8 @@ def _segment(video: str, overlays: list[tuple[str, float]], audio: str | None, s
             tempo = ""
             if j == 0 and audio:
                 vd = dur(audio)
-                if vd > seconds - 0.2:                   # 대사가 컷보다 길면 최대 1.25배까지 빠르게
-                    tempo = f"atempo={min(1.25, vd / max(seconds - 0.2, 0.5)):.3f},"
+                if vd > seconds - lead - 0.2 and max_tempo > 1.0:   # 대사가 컷보다 길면 빠르게(남편은 max_tempo=1 — 절대 안 당김)
+                    tempo = f"atempo={min(max_tempo, vd / max(seconds - lead - 0.2, 0.5)):.3f},"
             fc.append(f"[{idx}:a]{tempo}adelay={int(at * 1000)}|{int(at * 1000)},apad[a{j}]")
             parts.append(f"[a{j}]")
         fc.append(f"{''.join(parts)}amix=inputs={len(parts)}:duration=longest:dropout_transition=0,"
@@ -234,22 +242,25 @@ def _segment(video: str, overlays: list[tuple[str, float]], audio: str | None, s
 
 
 def plan_durations(cuts: list[dict], voice_dur: dict[int, float]) -> dict[int, float]:
-    """컷 길이: 대사 길이 + 0.4초, 컷 최소값 이상. 25초를 넘기면 **컷을 빼지 않고** 비례 축소한다.
+    """컷 길이: 뜸(LEAD) + 대사 + 여운(TAIL), 컷 최소값 이상. 25초를 넘기면 **컷을 빼지 않고** 비례 축소한다.
 
     5호 실측(10/15): 예전 규칙(컷 2 축소 → 컷 5 제거)이 펀치라인인 컷 5를 통째로 날렸다. 어떤 컷도 빼지 않는다.
-    축소로 대사보다 컷이 짧아지면 `_segment`가 음성을 최대 1.25배까지 빠르게 튼다(atempo).
+    속도 대비(10/16): 축소는 아내·안내 컷에서만 한다. 남편 컷은 뜸+대사 아래로 줄이지 않는다(느림이 캐릭터).
+    축소로 대사보다 컷이 짧아지면 `_segment`가 아내 음성을 최대 1.25배까지 빠르게 튼다(atempo).
     """
-    d = {}
+    d, floor = {}, {}
     for c in cuts:
-        n = int(c["n"])
-        d[n] = max(MIN_CUT.get(n, 2.0), voice_dur.get(n, 0.0) + 0.4)
+        n, who = int(c["n"]), c.get("who", "wife")
+        v = voice_dur.get(n, 0.0)
+        d[n] = round(max(MIN_CUT.get(n, 2.0), LEAD.get(who, 0.0) + v + TAIL.get(who, 0.4)), 2)
+        floor[n] = d[n] if (n == 6 or who == "husband") else 1.2       # 카드·도장 컷과 남편 컷은 길이를 지킨다
     total = sum(d.values())
     if total > HARD_CAP:
-        fixed = d.get(6, 0.0)                              # 카드·도장 컷은 길이를 지킨다
+        fixed = sum(v for n, v in d.items() if floor[n] == v)
         k = (HARD_CAP - fixed) / max(total - fixed, 0.01)
         for n in d:
-            if n != 6:
-                d[n] = round(max(1.2, d[n] * k), 2)
+            if floor[n] != d[n]:
+                d[n] = round(max(floor[n], d[n] * k), 2)
     return d
 
 
@@ -279,8 +290,9 @@ def render(script: dict, frames: dict[int, str], product: dict, out_dir: str = "
             dropped.append(n); continue
         last_frame = frame
         seconds = durs[n]
-        clip, src = motion(frame, seconds, os.path.join(out_dir, f"m{n}.mp4"), c.get("scene", ""),
-                           allow_veo=allow_veo and n != 6)
+        who = c.get("who", "wife")
+        clip, src = motion(frame, seconds, os.path.join(out_dir, f"m{n}.mp4"),
+                           f"{c.get('scene', '')}. {MOTION.get(who, '')}", allow_veo=allow_veo and n != 6)
         sources[n] = src
         overlays = [(subtitle_png(c.get("line", ""), c.get("who", ""), os.path.join(out_dir, f"s{n}.png"),
                                   hook=script.get("hook") if n == 1 else None), 0.0)]
@@ -293,7 +305,8 @@ def render(script: dict, frames: dict[int, str], product: dict, out_dir: str = "
                 extra.append((stamp_wav, max(1.5, vd.get(6, 0) + 0.2)))
         if n == 7 and drawer_wav:
             extra.append((drawer_wav, 0.6))
-        seg = _segment(clip, overlays, voices.get(n), seconds, os.path.join(out_dir, f"seg{n}.mp4"), extra)
+        seg = _segment(clip, overlays, voices.get(n), seconds, os.path.join(out_dir, f"seg{n}.mp4"), extra,
+                       lead=LEAD.get(who, 0.0), max_tempo=1.0 if who == "husband" else 1.25)
         segs.append(seg)
     lst = os.path.join(out_dir, "list.txt")
     with open(lst, "w") as f:
