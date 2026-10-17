@@ -1,5 +1,5 @@
 {
- "next": 94,
+ "next": 101,
  "items": {
   "1": {
    "name": "늘어나는 밀폐용기",
@@ -887,6 +887,66 @@
    "url": "https://www.coupang.com/np/search?q=%EC%95%84%EB%B3%B4%EC%B9%B4%EB%8F%84+%EC%BB%A4%ED%84%B0",
    "hold": true,
    "note": "73번과 같은 물건으로 보임 — 73번으로 캡처"
+  },
+  "94": {
+   "name": "버튼식 설거지 장갑",
+   "slug": "",
+   "key": "버튼식설거지장갑",
+   "done": false,
+   "search": "버튼식 설거지 장갑",
+   "url": "https://www.coupang.com/np/search?q=%EB%B2%84%ED%8A%BC%EC%8B%9D+%EC%84%A4%EA%B1%B0%EC%A7%80+%EC%9E%A5%EA%B0%91"
+  },
+  "95": {
+   "name": "김치 싹둑 가위",
+   "slug": "",
+   "key": "김치싹둑가위",
+   "done": false,
+   "search": "김치 싹둑 가위",
+   "url": "https://www.coupang.com/np/search?q=%EA%B9%80%EC%B9%98+%EC%8B%B9%EB%91%91+%EA%B0%80%EC%9C%84"
+  },
+  "96": {
+   "name": "휴대 미니 밥솥",
+   "slug": "",
+   "key": "휴대미니밥솥",
+   "done": false,
+   "search": "휴대 미니 밥솥",
+   "url": "https://www.coupang.com/np/search?q=%ED%9C%B4%EB%8C%80+%EB%AF%B8%EB%8B%88+%EB%B0%A5%EC%86%A5",
+   "hold": true,
+   "note": "70번과 같은 물건으로 보임 — 70번으로 캡처"
+  },
+  "97": {
+   "name": "틈새 청소 솔",
+   "slug": "",
+   "key": "틈새청소솔",
+   "done": false,
+   "search": "틈새 청소 솔",
+   "url": "https://www.coupang.com/np/search?q=%ED%8B%88%EC%83%88+%EC%B2%AD%EC%86%8C+%EC%86%94"
+  },
+  "98": {
+   "name": "과일 회전 세척기",
+   "slug": "",
+   "key": "과일회전세척기",
+   "done": false,
+   "search": "과일 회전 세척기",
+   "url": "https://www.coupang.com/np/search?q=%EA%B3%BC%EC%9D%BC+%ED%9A%8C%EC%A0%84+%EC%84%B8%EC%B2%99%EA%B8%B0"
+  },
+  "99": {
+   "name": "분리형 주방가위",
+   "slug": "",
+   "key": "분리형주방가위",
+   "done": false,
+   "search": "분리형 주방가위",
+   "url": "https://www.coupang.com/np/search?q=%EB%B6%84%EB%A6%AC%ED%98%95+%EC%A3%BC%EB%B0%A9%EA%B0%80%EC%9C%84",
+   "hold": true,
+   "note": "80번과 같은 물건으로 보임 — 80번으로 캡처"
+  },
+  "100": {
+   "name": "프라이팬 정리대",
+   "slug": "",
+   "key": "프라이팬정리대",
+   "done": false,
+   "search": "프라이팬 정리대",
+   "url": "https://www.coupang.com/np/search?q=%ED%94%84%EB%9D%BC%EC%9D%B4%ED%8C%AC+%EC%A0%95%EB%A6%AC%EB%8C%80"
   }
  }
 }

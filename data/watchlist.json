@@ -1,4 +1,148 @@
 {
+ "냉동실_정리_얼음팩": {
+  "name": "냉동실 정리 얼음팩",
+  "search_keyword": "냉동실 정리 얼음팩 트레이",
+  "en_keyword": "",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '냉동실정리', '얼음팩'이 등장했으며, '사람들이 찾아낸 미친 활용법'이라는 문구로 유행을 판단",
+  "category": "50000008",
+  "last_found": "2026-10-17",
+  "first_seen": "2026-10-16"
+ },
+ "스푼겸_깔때기": {
+  "name": "스푼겸 깔때기",
+  "search_keyword": "스푼 깔때기 일체형",
+  "en_keyword": "",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '스푼 만든 사람 천재! 가루가 하나도 안 아깝겠네?스푼겸 깔때기'라는 문구로 유행을 판단",
+  "category": "50000008",
+  "last_found": "2026-10-17",
+  "first_seen": "2026-10-16"
+ },
+ "오뚝이_주걱": {
+  "name": "오뚝이 주걱",
+  "search_keyword": "밥알 안 붙는 오뚝이 주걱",
+  "en_keyword": "",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '일반 주걱 다 버렸습니다... 밥알 절대 안 묻는 미친 오뚝이 주걱!'이라는 문구로 유행을 판단",
+  "category": "50000008",
+  "last_found": "2026-10-17",
+  "first_seen": "2026-10-16"
+ },
+ "아보카도_커터": {
+  "name": "아보카도 커터",
+  "search_keyword": "아보카도 자르기 씨 제거 도구",
+  "en_keyword": "",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '아보카도 자르기부터 씨 제거까지, 이거 하나로 끝🥑'이라는 문구로 유행을 판단",
+  "category": "50000008",
+  "last_found": "2026-10-17",
+  "first_seen": "2026-10-16"
+ },
+ "버튼식_설거지_장갑": {
+  "name": "버튼식 설거지 장갑",
+  "search_keyword": "버튼식 세제 디스펜서 설거지 장갑",
+  "en_keyword": "",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '장갑 찾고 세제 짜던 설거지, 이젠 버튼 꾹｜신박한 주방템' 이라는 문구로 유행을 판단",
+  "category": "50000008",
+  "last_found": "2026-10-17",
+  "first_seen": "2026-10-17"
+ },
+ "김치_싹둑_가위": {
+  "name": "김치 싹둑 가위",
+  "search_keyword": "김치 통째로 자르는 가위",
+  "en_keyword": "",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '김치 꺼내지 말고 통째로 싹둑! 신박한 주방템'이라는 문구로 유행을 판단",
+  "category": "50000008",
+  "last_found": "2026-10-17",
+  "first_seen": "2026-10-17"
+ },
+ "밥식히는_미니_선풍기": {
+  "name": "밥 식히는 미니 선풍기",
+  "search_keyword": "밥 식히는 미니 선풍기",
+  "en_keyword": "",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '밥식히는미니선풍기'가 직접적으로 언급",
+  "category": "50000003",
+  "last_found": "2026-10-17",
+  "first_seen": "2026-10-17"
+ },
+ "휴대_미니_밥솥": {
+  "name": "휴대 미니 밥솥",
+  "search_keyword": "휴대용 미니 밥솥",
+  "en_keyword": "",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '휴대 미니 밥솥 #미니밥솥 #만능밥솥 #자취꿀템 #혼밥템'이 직접적으로 언급",
+  "category": "50000003",
+  "last_found": "2026-10-17",
+  "first_seen": "2026-10-17"
+ },
+ "틈새_청소_솔": {
+  "name": "틈새 청소 솔",
+  "search_keyword": "틈새 청소 솔",
+  "en_keyword": "",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '살림 잘하는 집엔 무조건 하나씩 있는 틈새 청소 솔'이라는 문구로 유행을 판단",
+  "category": "50000008",
+  "last_found": "2026-10-17",
+  "first_seen": "2026-10-17"
+ },
+ "과일_회전_세척기": {
+  "name": "과일 회전 세척기",
+  "search_keyword": "물로 회전하는 과일 세척기",
+  "en_keyword": "",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '물만 틀었는데 과일이 돈다?🍓 #신기한아이템 #주방용품 #살림템추천'이라는 문구로 유행을 판단",
+  "category": "50000008",
+  "last_found": "2026-10-17",
+  "first_seen": "2026-10-17"
+ },
+ "주방가위_분리형": {
+  "name": "분리형 주방가위",
+  "search_keyword": "분리형 세척 주방가위",
+  "en_keyword": "",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '주방가위 사이까지 씻고 싶은 분들 #주방가위'라는 문구로 유행을 판단",
+  "category": "50000008",
+  "last_found": "2026-10-17",
+  "first_seen": "2026-10-17"
+ },
+ "프라이팬_정리대": {
+  "name": "프라이팬 정리대",
+  "search_keyword": "프라이팬 수납 정리대",
+  "en_keyword": "",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "제목에 '프라이팬 하나 꺼내다 전부 무너진다면 #프라이팬정리 #주방수납 #정리'라는 문구로 유행을 판단",
+  "category": "50000004",
+  "last_found": "2026-10-17",
+  "first_seen": "2026-10-17"
+ },
  "미니_밥솥": {
   "name": "미니 밥솥",
   "search_keyword": "휴대 미니 밥솥, 자취 미니밥솥",
@@ -11,18 +155,6 @@
   "last_found": "2026-10-16",
   "first_seen": "2026-10-16"
  },
- "냉동실_정리_얼음팩": {
-  "name": "냉동실 정리 얼음팩",
-  "search_keyword": "냉동실 정리 용기 얼음팩",
-  "en_keyword": "",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "쇼츠 제목에 '사람들이 찾아낸 미친 활용법'과 함께 '냉동실정리', '주방꿀템', '얼음팩' 해시태그로 4개 채널에서 언급됨.",
-  "category": "50000008",
-  "last_found": "2026-10-16",
-  "first_seen": "2026-10-16"
- },
  "채소_다지기": {
   "name": "채소 다지기",
   "search_keyword": "수동 채소 다지기",
@@ -31,18 +163,6 @@
   "brand": "",
   "product_id": "",
   "evidence": "'양파 썰고 줍기까지 하고 있었다면' 문구와 '채소다지기', '주방템', '살림꿀팁' 해시태그로 12개 채널에서 '주방템'으로 언급됨.",
-  "category": "50000008",
-  "last_found": "2026-10-16",
-  "first_seen": "2026-10-16"
- },
- "스푼겸_깔때기": {
-  "name": "스푼겸 깔때기",
-  "search_keyword": "가루 스푼 깔때기",
-  "en_keyword": "spoon funnel",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "'스푼 만든 사람 천재! 가루가 하나도 안 아깝겠네?' 문구와 '신박한아이템', '살림꿀템' 해시태그로 10개 채널에서 언급됨.",
   "category": "50000008",
   "last_found": "2026-10-16",
   "first_seen": "2026-10-16"
@@ -83,18 +203,6 @@
   "last_found": "2026-10-16",
   "first_seen": "2026-10-16"
  },
- "오뚝이_주걱": {
-  "name": "오뚝이 주걱",
-  "search_keyword": "밥알 안 묻는 오뚝이 주걱",
-  "en_keyword": "",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "'밥알 절대 안 묻는 미친 오뚝이 주걱!' 문구와 함께 '절대'라는 표현으로 4개 채널에서 언급됨.",
-  "category": "50000008",
-  "last_found": "2026-10-16",
-  "first_seen": "2026-10-16"
- },
  "자동회전_냄비": {
   "name": "자동회전 냄비",
   "search_keyword": "자동회전 냄비",
@@ -103,18 +211,6 @@
   "brand": "",
   "product_id": "",
   "evidence": "'고기를 넣었더니 냄비가 혼자 볶는다고? 신기한 자동회전냄비!' 문구와 함께 '냄비' 해시태그로 3개 채널에서 언급됨.",
-  "category": "50000008",
-  "last_found": "2026-10-16",
-  "first_seen": "2026-10-16"
- },
- "아보카도_커터": {
-  "name": "아보카도 커터",
-  "search_keyword": "아보카도 자르기 씨 제거 도구",
-  "en_keyword": "avocado slicer",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "'아보카도 자르기부터 씨 제거까지, 이거 하나로 끝' 문구와 '아보카도', '주방꿀' 해시태그로 6개 채널에서 '쿠팡꿀템'으로 언급됨.",
   "category": "50000008",
   "last_found": "2026-10-16",
   "first_seen": "2026-10-16"
@@ -142,101 +238,5 @@
   "category": "50000008",
   "last_found": "2026-10-15",
   "first_seen": "2026-10-14"
- },
- "신박한아이템": {
-  "name": "신박한아이템",
-  "search_keyword": "신박한 아이템",
-  "en_keyword": "",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "제목에 16개 영상, 11개 채널에서 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-10-15",
-  "first_seen": "2026-10-14"
- },
- "생활꿀템": {
-  "name": "생활꿀템",
-  "search_keyword": "생활 꿀템",
-  "en_keyword": "",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "제목에 14개 영상, 12개 채널에서 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-10-15",
-  "first_seen": "2026-10-14"
- },
- "살림꿀템": {
-  "name": "살림꿀템",
-  "search_keyword": "살림 꿀템",
-  "en_keyword": "",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "제목에 13개 영상, 13개 채널에서 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-10-15",
-  "first_seen": "2026-10-14"
- },
- "주방템": {
-  "name": "주방템",
-  "search_keyword": "주방템",
-  "en_keyword": "",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "제목에 8개 영상, 7개 채널에서 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-10-15",
-  "first_seen": "2026-10-14"
- },
- "살림꿀팁": {
-  "name": "살림꿀팁",
-  "search_keyword": "살림 꿀팁",
-  "en_keyword": "",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "제목에 7개 영상, 7개 채널에서 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-10-15",
-  "first_seen": "2026-10-15"
- },
- "살림템추천": {
-  "name": "살림템추천",
-  "search_keyword": "살림템 추천",
-  "en_keyword": "",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "제목에 7개 영상, 7개 채널에서 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-10-15",
-  "first_seen": "2026-10-15"
- },
- "3가지_살림꿀팁": {
-  "name": "3가지 살림 꿀팁",
-  "search_keyword": "3가지 살림 꿀팁",
-  "en_keyword": "",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "제목에 6개 영상, 6개 채널에서 '3가지' 표현이 특정 상품과 함께 등장",
-  "category": "50000008",
-  "last_found": "2026-10-15",
-  "first_seen": "2026-10-15"
- },
- "자취꿀템": {
-  "name": "자취 꿀템",
-  "search_keyword": "자취 꿀템",
-  "en_keyword": "",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "제목에 6개 영상, 6개 채널에서 '자취' 표현이 꿀템과 함께 등장",
-  "category": "50000008",
-  "last_found": "2026-10-15",
-  "first_seen": "2026-10-15"
  }
 }
