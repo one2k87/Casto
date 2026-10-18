@@ -1,49 +1,21 @@
 {
- "updated": "2026-10-17",
+ "updated": "2026-10-18",
  "items": [
-  {
-   "date": "2026-10-17",
-   "weekday": "토",
-   "label": "10/17(토)",
-   "slot": "season",
-   "product": "미닉스 3인용 미니 식기세척기 PRO MNDW-110 · 에그크래커 · 무아스 마그넷 무선 LED 무드등 MLL37",
-   "slug": "미닉스-3인용-미니-식기세척기-pro-mndw-110",
-   "products": [
-    {
-     "name": "미닉스 3인용 미니 식기세척기 PRO MNDW-110",
-     "slug": "미닉스-3인용-미니-식기세척기-pro-mndw-110",
-     "photo": true,
-     "link": true,
-     "band": "high"
-    },
-    {
-     "name": "에그크래커",
-     "slug": "에그크래커",
-     "photo": true,
-     "link": true,
-     "band": "low"
-    },
-    {
-     "name": "무아스 마그넷 무선 LED 무드등 MLL37",
-     "slug": "무아스-마그넷-무선-led-무드등-mll37",
-     "photo": true,
-     "link": true,
-     "band": "low"
-    }
-   ],
-   "photo": true,
-   "link": true,
-   "links": "3/3",
-   "hot": []
-  },
   {
    "date": "2026-10-20",
    "weekday": "화",
    "label": "10/20(화)",
    "slot": "deep1",
-   "product": "조셉조셉 찹투팟 플러스 접이식도마 · 코멧 길이조절 접시정리대 · 바이탈플랜트 롤팬 뉴오리지널 자동회전냄비 25cm",
-   "slug": "조셉조셉-찹투팟-플러스-접이식도마",
+   "product": "바이탈플랜트 롤팬 뉴오리지널 자동회전냄비 25cm · 조셉조셉 찹투팟 플러스 접이식도마 · 코멧 길이조절 접시정리대",
+   "slug": "바이탈플랜트-롤팬-뉴오리지널-자동회전냄비-25cm",
    "products": [
+    {
+     "name": "바이탈플랜트 롤팬 뉴오리지널 자동회전냄비 25cm",
+     "slug": "바이탈플랜트-롤팬-뉴오리지널-자동회전냄비-25cm",
+     "photo": true,
+     "link": true,
+     "band": "high"
+    },
     {
      "name": "조셉조셉 찹투팟 플러스 접이식도마",
      "slug": "조셉조셉-찹투팟-플러스-접이식도마",
@@ -57,19 +29,14 @@
      "photo": true,
      "link": true,
      "band": "mid"
-    },
-    {
-     "name": "바이탈플랜트 롤팬 뉴오리지널 자동회전냄비 25cm",
-     "slug": "바이탈플랜트-롤팬-뉴오리지널-자동회전냄비-25cm",
-     "photo": true,
-     "link": true,
-     "band": "high"
     }
    ],
    "photo": true,
    "link": true,
    "links": "3/3",
-   "hot": []
+   "hot": [
+    "바이탈플랜트 롤팬 뉴오리지널 자동회전냄비 25cm"
+   ]
   },
   {
    "date": "2026-10-22",
@@ -134,6 +101,41 @@
      "photo": true,
      "link": true,
      "band": "low"
+    }
+   ],
+   "photo": true,
+   "link": true,
+   "links": "3/3",
+   "hot": []
+  },
+  {
+   "date": "2026-10-27",
+   "weekday": "화",
+   "label": "10/27(화)",
+   "slot": "deep1",
+   "product": "전기장판 · 스크럽대디 · 레이저가이드가위",
+   "slug": "전기장판-1-3만",
+   "products": [
+    {
+     "name": "전기장판",
+     "slug": "전기장판-1-3만",
+     "photo": true,
+     "link": true,
+     "band": "low"
+    },
+    {
+     "name": "스크럽대디",
+     "slug": "스크럽대디",
+     "photo": true,
+     "link": true,
+     "band": "low"
+    },
+    {
+     "name": "레이저가이드가위",
+     "slug": "레이저가이드가위",
+     "photo": true,
+     "link": true,
+     "band": "mid"
     }
    ],
    "photo": true,
