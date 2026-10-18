@@ -154,9 +154,10 @@
    "product_id": "",
    "image": "",
    "image_source": "",
-   "coupang_url": "",
+   "coupang_url": "https://link.coupang.com/a/hXKTSGlvUG",
    "price_band": "중가",
-   "updated": "2026-09-08"
+   "updated": "2026-10-18",
+   "price": 17650
   },
   "미니-가습기-무선": {
    "display": "미니 가습기 무선",
@@ -166,9 +167,10 @@
    "product_id": "",
    "image": "",
    "image_source": "",
-   "coupang_url": "",
+   "coupang_url": "https://link.coupang.com/a/hXKWgfWGsu",
    "price_band": "저가",
-   "updated": "2026-09-08"
+   "updated": "2026-10-18",
+   "price": 25830
   },
   "음식물-쓰레기처리기": {
    "display": "음식물 쓰레기처리기",
@@ -178,9 +180,10 @@
    "product_id": "",
    "image": "",
    "image_source": "",
-   "coupang_url": "",
+   "coupang_url": "https://link.coupang.com/a/hXKYH34NEq",
    "price_band": "고가",
-   "updated": "2026-09-08"
+   "updated": "2026-10-18",
+   "price": 345130
   },
   "캡슐-커피-머신-소형": {
    "display": "캡슐 커피 머신 소형",
@@ -190,9 +193,10 @@
    "product_id": "",
    "image": "",
    "image_source": "",
-   "coupang_url": "",
+   "coupang_url": "https://link.coupang.com/a/hXK0ywoBtk",
    "price_band": "중가",
-   "updated": "2026-09-08"
+   "updated": "2026-10-18",
+   "price": 69000
   },
   "차량용-공기청정기": {
    "display": "차량용 공기청정기",
@@ -202,9 +206,10 @@
    "product_id": "",
    "image": "",
    "image_source": "",
-   "coupang_url": "",
+   "coupang_url": "https://link.coupang.com/a/hXK2sDnbY4",
    "price_band": "중가",
-   "updated": "2026-09-08"
+   "updated": "2026-10-18",
+   "price": 23900
   },
   "무선-물걸레-청소기": {
    "display": "무선 물걸레 청소기",
@@ -214,9 +219,10 @@
    "product_id": "",
    "image": "",
    "image_source": "",
-   "coupang_url": "",
+   "coupang_url": "https://link.coupang.com/a/hXK4w6QPpQ",
    "price_band": "고가",
-   "updated": "2026-09-08"
+   "updated": "2026-10-18",
+   "price": 69000
   },
   "휴대용-선풍기-넥밴드": {
    "display": "휴대용 선풍기 넥밴드",
@@ -226,9 +232,10 @@
    "product_id": "",
    "image": "",
    "image_source": "",
-   "coupang_url": "",
+   "coupang_url": "https://link.coupang.com/a/hXK6bQTUg8",
    "price_band": "저가",
-   "updated": "2026-09-08"
+   "updated": "2026-10-18",
+   "price": 13990
   },
   "씨밀렉스-라이스키퍼-쌀통-10kg": {
    "display": "씨밀렉스 라이스키퍼 쌀통 10kg",
@@ -382,9 +389,10 @@
    "product_id": "",
    "image": "assets/products/계란보관-트레이.jpg",
    "image_source": "capture",
-   "coupang_url": "",
+   "coupang_url": "https://link.coupang.com/a/hXKRS3mnE4",
    "price_band": "",
-   "updated": "2026-09-09"
+   "updated": "2026-10-18",
+   "price": 6590
   },
   "전기장판-1-3만": {
    "display": "전기장판",
@@ -413,6 +421,32 @@
    "price": null,
    "updated": "2026-10-07",
    "image_url": "https://image11.coupangcdn.com/image/affiliate/banner/3972ba859a2c3b3645f41b9e01172862@2x.jpg"
+  },
+  "hanilmedical-탄소열선-고급-전기요-hl-d205-25-북극곰-m-100-x-180-cm": {
+   "display": "HanilMedical 탄소열선 고급 전기요 HL-D205(25), 북극곰, M (100 x 180 cm)",
+   "brand": "",
+   "model": "",
+   "category": "HanilMedical 탄소열선 고급 전기요 HL-D205(25), 북극곰, M (100 x 180 cm)",
+   "product_id": "",
+   "image": "",
+   "image_source": "",
+   "coupang_url": "https://link.coupang.com/a/hXKOXTrDAy",
+   "price_band": "",
+   "price": 29800,
+   "updated": "2026-10-18"
+  },
+  "스크럽대디-수세미-랜덤발송-3개입-1개": {
+   "display": "스크럽대디 수세미 랜덤발송, 3개입, 1개",
+   "brand": "",
+   "model": "",
+   "category": "스크럽대디 수세미 랜덤발송, 3개입, 1개",
+   "product_id": "",
+   "image": "",
+   "image_source": "",
+   "coupang_url": "https://link.coupang.com/a/hXKLZADBmu",
+   "price_band": "",
+   "price": 15900,
+   "updated": "2026-10-18"
   }
  },
  "simple_links": {
