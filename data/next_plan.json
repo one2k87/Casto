@@ -1,12 +1,12 @@
 {
- "updated": "2026-10-18",
+ "updated": "2026-10-19",
  "items": [
   {
    "date": "2026-10-20",
    "weekday": "화",
    "label": "10/20(화)",
    "slot": "deep1",
-   "product": "바이탈플랜트 롤팬 뉴오리지널 자동회전냄비 25cm · 조셉조셉 찹투팟 플러스 접이식도마 · 코멧 길이조절 접시정리대",
+   "product": "바이탈플랜트 롤팬 뉴오리지널 자동회전냄비 25cm · 코멧 길이조절 접시정리대 · 조셉조셉 찹투팟 플러스 접이식도마",
    "slug": "바이탈플랜트-롤팬-뉴오리지널-자동회전냄비-25cm",
    "products": [
     {
@@ -17,18 +17,18 @@
      "band": "high"
     },
     {
-     "name": "조셉조셉 찹투팟 플러스 접이식도마",
-     "slug": "조셉조셉-찹투팟-플러스-접이식도마",
-     "photo": true,
-     "link": true,
-     "band": "low"
-    },
-    {
      "name": "코멧 길이조절 접시정리대",
      "slug": "코멧-길이조절-접시정리대",
      "photo": true,
      "link": true,
      "band": "mid"
+    },
+    {
+     "name": "조셉조셉 찹투팟 플러스 접이식도마",
+     "slug": "조셉조셉-찹투팟-플러스-접이식도마",
+     "photo": true,
+     "link": true,
+     "band": "low"
     }
    ],
    "photo": true,
@@ -43,9 +43,16 @@
    "weekday": "목",
    "label": "10/22(목)",
    "slot": "deep2",
-   "product": "계란 흰자 분리기 · 레트로 수화기 · 손끼임 방지가드",
-   "slug": "계란-흰자-분리기",
+   "product": "이케아 트로네스 신발장 52×39×18cm 2개입 · 계란 흰자 분리기 · 레트로 수화기",
+   "slug": "이케아-트로네스-신발장-52-39-18cm-2개입",
    "products": [
+    {
+     "name": "이케아 트로네스 신발장 52×39×18cm 2개입",
+     "slug": "이케아-트로네스-신발장-52-39-18cm-2개입",
+     "photo": true,
+     "link": true,
+     "band": "mid"
+    },
     {
      "name": "계란 흰자 분리기",
      "slug": "계란-흰자-분리기",
@@ -56,13 +63,6 @@
     {
      "name": "레트로 수화기",
      "slug": "레트로-수화기",
-     "photo": true,
-     "link": true,
-     "band": "low"
-    },
-    {
-     "name": "손끼임 방지가드",
-     "slug": "손끼임-방지가드",
      "photo": true,
      "link": true,
      "band": "low"
@@ -78,22 +78,22 @@
    "weekday": "토",
    "label": "10/24(토)",
    "slot": "season",
-   "product": "이케아 트로네스 신발장 52×39×18cm 2개입 · 늘어나는 밀폐용기 · 오일 스프레이",
-   "slug": "이케아-트로네스-신발장-52-39-18cm-2개입",
+   "product": "늘어나는 밀폐용기 · 손끼임 방지가드 · 오일 스프레이",
+   "slug": "늘어나는-밀폐용기",
    "products": [
-    {
-     "name": "이케아 트로네스 신발장 52×39×18cm 2개입",
-     "slug": "이케아-트로네스-신발장-52-39-18cm-2개입",
-     "photo": true,
-     "link": true,
-     "band": "mid"
-    },
     {
      "name": "늘어나는 밀폐용기",
      "slug": "늘어나는-밀폐용기",
      "photo": true,
      "link": true,
      "band": "mid"
+    },
+    {
+     "name": "손끼임 방지가드",
+     "slug": "손끼임-방지가드",
+     "photo": true,
+     "link": true,
+     "band": "low"
     },
     {
      "name": "오일 스프레이",
@@ -113,19 +113,19 @@
    "weekday": "화",
    "label": "10/27(화)",
    "slot": "deep1",
-   "product": "전기장판 · 스크럽대디 · 레이저가이드가위",
-   "slug": "전기장판-1-3만",
+   "product": "계란보관 트레이 · 전기장판 · 레이저가이드가위",
+   "slug": "계란보관-트레이",
    "products": [
     {
-     "name": "전기장판",
-     "slug": "전기장판-1-3만",
+     "name": "계란보관 트레이",
+     "slug": "계란보관-트레이",
      "photo": true,
      "link": true,
      "band": "low"
     },
     {
-     "name": "스크럽대디",
-     "slug": "스크럽대디",
+     "name": "전기장판",
+     "slug": "전기장판-1-3만",
      "photo": true,
      "link": true,
      "band": "low"
