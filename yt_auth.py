@@ -31,7 +31,7 @@ def main(path: str) -> None:
         raw = json.load(f)
     c = raw.get("installed") or raw.get("web") or raw
     cid, sec = c["client_id"], c["client_secret"]
-    redirect = f"http://localhost:{PORT}/"
+    redirect = f"http://127.0.0.1:{PORT}/"       # 데스크톱 앱은 루프백 주소면 등록 없이 허용(구글 문서: 127.0.0.1 권장)
     url = "https://accounts.google.com/o/oauth2/v2/auth?" + urllib.parse.urlencode({
         "client_id": cid, "redirect_uri": redirect, "response_type": "code", "scope": SCOPES,
         "access_type": "offline", "prompt": "consent", "include_granted_scopes": "true"})
@@ -47,7 +47,7 @@ def main(path: str) -> None:
         def log_message(self, *a):  # noqa: D102
             pass
 
-    srv = http.server.HTTPServer(("localhost", PORT), H)
+    srv = http.server.HTTPServer(("127.0.0.1", PORT), H)
     threading.Thread(target=srv.handle_request, daemon=True).start()
     print("브라우저에서 승인하세요. 자동으로 열리지 않으면 이 주소를 여세요:\n", url)
     webbrowser.open(url)
