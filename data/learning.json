@@ -1,65 +1,65 @@
 {
- "videos": 9,
- "matched": 5,
+ "videos": 10,
+ "matched": 6,
  "min_n": 3,
  "axes": {
   "verdict": {
    "buy": {
-    "n": 4,
-    "lift": 0.991,
-    "avg_views": 513.5
+    "n": 5,
+    "lift": 0.952,
+    "avg_views": 411.6
    }
   },
   "has_photo": {
    "True": {
-    "n": 5,
+    "n": 6,
     "lift": 1.0,
-    "avg_views": 517.2
+    "avg_views": 431.7
    }
   },
   "format": {
    "roundup3": {
-    "n": 5,
+    "n": 6,
     "lift": 1.0,
-    "avg_views": 517.2
+    "avg_views": 431.7
    }
   }
  },
  "notes": [],
- "mean_views": 517.2,
- "mean_engagement": 0.0018,
+ "mean_views": 431.7,
+ "mean_engagement": 0.0015,
  "best": [
   {
    "title": "냉장고 속 계란 위생, 900건 언급된 이걸로 끝!",
    "product": "계란보관 트레이",
    "views": 732,
-   "score": 2.219
+   "score": 2.661
   },
   {
    "title": "삐뚤빼뚤 커팅? 이거 하나로 고민 끝!",
    "product": "레이저가이드가위",
    "views": 1171,
-   "score": 1.599
+   "score": 1.917
   },
   {
    "title": "없으면 살림 못 한다던데, 진짜일까?",
    "product": "씨밀렉스 라이스키퍼 쌀통 10kg",
    "views": 532,
-   "score": 1.036
+   "score": 1.243
   }
  ],
  "worst": [
   {
+   "title": "침실 무드등 추천해줘, 좁은 주방이 2배 넓어지는 살림템",
+   "product": "미닉스 3인용 미니 식기세척기 PRO MNDW-110",
+   "views": 4,
+   "score": 0.005
+  },
+  {
    "title": "요즘 이거 다시 유행한다는 주방템 3가지",
    "product": "계란 흰자 분리기",
    "views": 71,
-   "score": 0.069
-  },
-  {
-   "title": "요즘 이거 다시 유행한다는 자동회전 냄비",
-   "product": "바이탈플랜트 롤팬 뉴오리지널 자동회전냄비 25cm",
-   "views": 80,
-   "score": 0.077
+   "score": 0.082
   }
  ],
  "hints": []
