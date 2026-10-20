@@ -143,6 +143,18 @@
   "last_found": "2026-10-20",
   "first_seen": "2026-10-20"
  },
+ "주방템": {
+  "name": "신기한 주방템",
+  "search_keyword": "신기한 주방템",
+  "en_keyword": "",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "15개 채널에서 언급된 '신기한 주방템' 표현",
+  "category": "50000008",
+  "last_found": "2026-10-20",
+  "first_seen": "2026-10-20"
+ },
  "jybangggultem": {
   "name": "주방꿀템",
   "search_keyword": "주방꿀템, 살림꿀템",
@@ -223,18 +235,6 @@
   "brand": "",
   "product_id": "",
   "evidence": "16개 영상, 10개 채널에서 새롭고 기발한 아이템을 지칭하는 데 사용됨",
-  "category": "50000008",
-  "last_found": "2026-10-18",
-  "first_seen": "2026-10-18"
- },
- "kupanggultem": {
-  "name": "쿠팡꿀템",
-  "search_keyword": "쿠팡꿀템, 쿠팡추천템",
-  "en_keyword": "",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "9개 영상, 8개 채널에서 쿠팡에서 구매할 수 있는 유용한 아이템을 지칭하는 데 사용됨",
   "category": "50000008",
   "last_found": "2026-10-18",
   "first_seen": "2026-10-18"
