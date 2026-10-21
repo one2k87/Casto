@@ -1,43 +1,6 @@
 {
- "updated": "2026-10-20",
+ "updated": "2026-10-21",
  "items": [
-  {
-   "date": "2026-10-20",
-   "weekday": "화",
-   "label": "10/20(화)",
-   "slot": "deep1",
-   "product": "바이탈플랜트 롤팬 뉴오리지널 자동회전냄비 25cm · 코멧 길이조절 접시정리대 · 조셉조셉 찹투팟 플러스 접이식도마",
-   "slug": "바이탈플랜트-롤팬-뉴오리지널-자동회전냄비-25cm",
-   "products": [
-    {
-     "name": "바이탈플랜트 롤팬 뉴오리지널 자동회전냄비 25cm",
-     "slug": "바이탈플랜트-롤팬-뉴오리지널-자동회전냄비-25cm",
-     "photo": true,
-     "link": true,
-     "band": "high"
-    },
-    {
-     "name": "코멧 길이조절 접시정리대",
-     "slug": "코멧-길이조절-접시정리대",
-     "photo": true,
-     "link": true,
-     "band": "mid"
-    },
-    {
-     "name": "조셉조셉 찹투팟 플러스 접이식도마",
-     "slug": "조셉조셉-찹투팟-플러스-접이식도마",
-     "photo": true,
-     "link": true,
-     "band": "low"
-    }
-   ],
-   "photo": true,
-   "link": true,
-   "links": "3/3",
-   "hot": [
-    "바이탈플랜트 롤팬 뉴오리지널 자동회전냄비 25cm"
-   ]
-  },
   {
    "date": "2026-10-22",
    "weekday": "목",
@@ -136,6 +99,41 @@
      "photo": true,
      "link": true,
      "band": "mid"
+    }
+   ],
+   "photo": true,
+   "link": true,
+   "links": "3/3",
+   "hot": []
+  },
+  {
+   "date": "2026-10-29",
+   "weekday": "목",
+   "label": "10/29(목)",
+   "slot": "deep2",
+   "product": "씨밀렉스 라이스키퍼 쌀통 10kg · 스크럽대디 · 얼음틀 얼음보관통",
+   "slug": "씨밀렉스-라이스키퍼-쌀통-10kg",
+   "products": [
+    {
+     "name": "씨밀렉스 라이스키퍼 쌀통 10kg",
+     "slug": "씨밀렉스-라이스키퍼-쌀통-10kg",
+     "photo": true,
+     "link": true,
+     "band": "mid"
+    },
+    {
+     "name": "스크럽대디",
+     "slug": "스크럽대디",
+     "photo": true,
+     "link": true,
+     "band": "low"
+    },
+    {
+     "name": "얼음틀 얼음보관통",
+     "slug": "얼음틀-얼음보관통",
+     "photo": true,
+     "link": true,
+     "band": "low"
     }
    ],
    "photo": true,

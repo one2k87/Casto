@@ -1,5 +1,5 @@
 {
- "next": 111,
+ "next": 112,
  "items": {
   "1": {
    "name": "늘어나는 밀폐용기",
@@ -1039,6 +1039,16 @@
    "done": false,
    "search": "신기한 주방템",
    "url": "https://www.coupang.com/np/search?q=%EC%8B%A0%EA%B8%B0%ED%95%9C+%EC%A3%BC%EB%B0%A9%ED%85%9C",
+   "hold": true,
+   "note": "48번과 같은 물건으로 보임 — 48번으로 캡처"
+  },
+  "111": {
+   "name": "신박한 주방템",
+   "slug": "",
+   "key": "신박한주방템",
+   "done": false,
+   "search": "신박한 주방템",
+   "url": "https://www.coupang.com/np/search?q=%EC%8B%A0%EB%B0%95%ED%95%9C+%EC%A3%BC%EB%B0%A9%ED%85%9C",
    "hold": true,
    "note": "48번과 같은 물건으로 보임 — 48번으로 캡처"
   }
