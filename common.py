@@ -27,7 +27,7 @@ DEFAULT_MODEL = "gemini-3.8-flash"
 FALLBACK_MODELS = ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite"]
 
 
-def llm(prompt, max_tokens=8000, temperature=0.8, retries=3, json_mode=False, search=False):
+def llm(prompt, max_tokens=8000, temperature=0.8, retries=6, json_mode=False, search=False):
     """Gemini generateContent 단순 REST 호출. 실패 시 재시도.
 
     **thinking 함정(2026-09-07 실측)**: Gemini 2.5 Flash는 사고 토큰이 maxOutputTokens에
@@ -66,6 +66,25 @@ def llm(prompt, max_tokens=8000, temperature=0.8, retries=3, json_mode=False, se
             if json_mode:
                 gen["responseMimeType"] = "application/json"
             continue
+        if r.status_code == 429:
+            # 무료 등급 쿼터(10/30 실측: 새 Free Tier 키). 검색 그라운딩 쿼터가 가장 작다 → 먼저 끄고,
+            # 그래도 429면 다음 모델(모델별 쿼터가 따로 잡힌다)로. 사유는 전문을 찍는다(200자 절단으로 원인을 못 봤다).
+            print(f"[llm] 429 쿼터: {r.text[:1200].replace(chr(10), ' ')}")
+            if search:
+                print("[llm] 검색 그라운딩을 끄고 재시도")
+                body.pop("tools", None)
+                search = False
+                if json_mode:
+                    gen["responseMimeType"] = "application/json"
+                time.sleep(15)
+                continue
+            if fallbacks:
+                nxt = fallbacks.pop(0)
+                print(f"[llm] {model} 쿼터 소진 — {nxt} 로 폴백")
+                model = nxt
+                url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+                time.sleep(15)
+                continue
         if r.status_code == 404 and fallbacks:
             nxt = fallbacks.pop(0)
             print(f"[llm] {model} 404({r.text[:80].replace(chr(10), ' ')}) — {nxt} 로 폴백")
@@ -94,7 +113,7 @@ def llm(prompt, max_tokens=8000, temperature=0.8, retries=3, json_mode=False, se
     if last:
         print("[llm] 재시도 후에도 잘림 — 마지막 응답으로 복구를 시도한다")
         return last
-    raise RuntimeError(f"LLM 호출 실패: {r.status_code} {r.text[:200]}")
+    raise RuntimeError(f"LLM 호출 실패: {r.status_code} {r.text[:1200]}")
 
 def repair_truncated_json(text):
     """잘린 JSON에서 **마지막까지 온전한 부분만** 살려낸다.
