@@ -1,0 +1,61 @@
+name: 재게시 (보류됐던 편 올리기)
+# 보류 스위치(publish_hold) 때문에 텔레그램으로만 나간 편을, 토큰 등록 뒤 **다시 만들지 않고** 그대로 유튜브에 올린다.
+# 실행: Actions → 이 워크플로 → Run workflow → run_id 에 '쇼츠 자동 제작' 실행 번호(URL 끝 숫자)를 넣는다.
+# 영상은 그 실행의 아티팩트(short-<번호>, 7일 보존)에서 받고, 제목·설명은 그 실행이 커밋한 data/last_caption.json 을 쓴다.
+# 2026-10-30 famto 실행 설계 v1 ①(게시 복구) — 10/30 편(run 41020240095)이 첫 대상.
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "쇼츠 자동 제작 실행 ID (예: 41020240095)"
+        required: true
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  republish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -q requests
+      - name: 아티팩트 받기
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p out
+          gh run download "${{ github.event.inputs.run_id }}" --dir _art --repo "${{ github.repository }}"
+          MP4=$(find _art -name short.mp4 | head -1)
+          [ -n "$MP4" ] || { echo "short.mp4 없음 — 아티팩트가 만료(7일)됐거나 실행 번호가 틀림"; exit 1; }
+          cp "$MP4" out/short.mp4
+          CAP=$(find _art -name caption.txt | head -1); [ -n "$CAP" ] && cp "$CAP" out/caption.txt || true
+          ls -la out
+      - name: 설명란 복원 (아티팩트에 caption.txt 가 없으면 last_caption.json 에서)
+        run: |
+          [ -s out/caption.txt ] || python - <<'PY'
+          import json
+          d = json.load(open("data/last_caption.json", encoding="utf-8"))
+          open("out/caption.txt", "w", encoding="utf-8").write(d.get("description", ""))
+          print("caption.txt ←", d.get("date"), d.get("title"))
+          PY
+      - name: 유튜브 게시
+        env:
+          MAKE_UPLOAD_HOOK: ${{ secrets.MAKE_UPLOAD_HOOK }}
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          if [ -z "$YT_REFRESH_TOKEN" ]; then echo "YT_REFRESH_TOKEN 시크릿이 없다 — 보류 그대로(좀비 위험). 토큰 먼저."; exit 1; fi
+          python publish.py public out/short.mp4 out/caption.txt
+      - name: 기록 커밋
+        run: |
+          git config user.name casto-bot && git config user.email casto@solvup.local
+          git add -A data && git commit -m "republish: run ${{ github.event.inputs.run_id }} 게시" || true
+          git pull --rebase --autostash origin main && git push origin main || true
