@@ -230,5 +230,24 @@
   "brand": "이케아",
   "hook": "원룸 자취생 짐 폭발",
   "seconds": 33.0
+ },
+ {
+  "date": "2026-10-30",
+  "slot": "",
+  "key": "음식물-쓰레기처리기",
+  "verdict": "buy",
+  "title": "음식물 처리기 필터 교체 주기, 주방 악취 0초 컷! 삶의 질 올려주는 3가지",
+  "product": "음식물 쓰레기처리기",
+  "products": [
+   "HanilMedical 탄소열선 고급 전기요 HL-D205(25), 북극곰, M (100 x 180 cm)",
+   "미니 가습기 무선",
+   "음식물 쓰레기처리기"
+  ],
+  "format": "roundup3",
+  "price_band": "고가",
+  "category": "음식물 쓰레기처리기",
+  "has_photo": false,
+  "hook": "11월 한파주의보 발령",
+  "seconds": 30.3
  }
 ]
