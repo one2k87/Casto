@@ -48,6 +48,7 @@ jobs:
         if: ${{ inputs.board_only != true }}
         env:
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          VEO_API_KEY: ${{ secrets.VEO_API_KEY }}      # 유료(Veo·이미지)는 선불 프로젝트 키 — 10/26 키 분리
           LLM_MODEL: ${{ secrets.LLM_MODEL }}
           YT_API_KEY: ${{ secrets.YT_API_KEY }}
           # 레거시(개발자센터, 2027-06-30 만료)

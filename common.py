@@ -21,6 +21,12 @@ def cfg():
     c = json.load(open("casto.json", encoding="utf-8"))
     return c
 
+# 2026-10-30(famto 전체 공지): 새 Free Tier 프로젝트는 2.5 계열 접근이 막힌다(404 "no longer available to new users").
+# 기본값을 3.8-flash로, 404면 폴백 목록을 차례로 시도한다. 시크릿 LLM_MODEL/FALLBACK_MODELS 가 있으면 그게 우선.
+DEFAULT_MODEL = "gemini-3.8-flash"
+FALLBACK_MODELS = ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite"]
+
+
 def llm(prompt, max_tokens=8000, temperature=0.8, retries=3, json_mode=False, search=False):
     """Gemini generateContent 단순 REST 호출. 실패 시 재시도.
 
@@ -31,9 +37,10 @@ def llm(prompt, max_tokens=8000, temperature=0.8, retries=3, json_mode=False, se
     한도를 올려 재시도한다(조용히 깨진 JSON을 넘기지 않는다).
     """
     key = os.getenv("LLM_API_KEY", "")
-    model = os.getenv("LLM_MODEL") or "gemini-2.5-flash"   # 시크릿 미등록 시 env가 빈 문자열이라 or 필수(404 실측)
+    model = os.getenv("LLM_MODEL") or DEFAULT_MODEL   # 시크릿 미등록 시 env가 빈 문자열이라 or 필수(404 실측)
     if not key:
         raise SystemExit("LLM_API_KEY 시크릿이 없습니다")
+    fallbacks = [m.strip() for m in (os.getenv("FALLBACK_MODELS") or ",".join(FALLBACK_MODELS)).split(",") if m.strip()]
     # 키는 x-goog-api-key 헤더로 전달 — 신형 키(AQ.…)는 ?key= 쿼리 방식에서 404가 난다(2026-09-02 실측)
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
     gen = {"maxOutputTokens": max_tokens, "temperature": temperature,
@@ -58,6 +65,12 @@ def llm(prompt, max_tokens=8000, temperature=0.8, retries=3, json_mode=False, se
             search = False
             if json_mode:
                 gen["responseMimeType"] = "application/json"
+            continue
+        if r.status_code == 404 and fallbacks:
+            nxt = fallbacks.pop(0)
+            print(f"[llm] {model} 404({r.text[:80].replace(chr(10), ' ')}) — {nxt} 로 폴백")
+            model = nxt
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
             continue
         if r.status_code == 400 and "thinking" in r.text.lower():
             # 사고 비활성화를 지원하지 않는 모델 → 옵션을 빼고 즉시 재시도

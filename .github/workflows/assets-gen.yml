@@ -34,6 +34,7 @@ jobs:
       - name: 생성
         env:
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          VEO_API_KEY: ${{ secrets.VEO_API_KEY }}      # 유료(Veo·이미지)는 선불 프로젝트 키 — 10/26 키 분리
         run: |
           JOB="${{ inputs.job }}"; N="${{ inputs.n }}"
           if [ "${{ github.event_name }}" = "push" ]; then

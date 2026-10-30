@@ -56,9 +56,9 @@ def _attempts(prompt: str, refs: list[str], aspect: str):
 
 def generate(prompt: str, out_path: str, refs: list[str] | None = None, aspect: str = "1:1",
              timeout: int = 180) -> str | None:
-    key = os.getenv("LLM_API_KEY", "")
+    key = os.getenv("VEO_API_KEY") or os.getenv("LLM_API_KEY", "")   # 이미지 생성은 유료 → 선불 프로젝트 키(10/26 키 분리)
     if not key:
-        print("[imagegen] LLM_API_KEY 없음 — 생성 건너뜀")
+        print("[imagegen] VEO_API_KEY/LLM_API_KEY 없음 — 생성 건너뜀")
         return None
     refs = [p for p in (refs or []) if os.path.exists(p)]
     headers = {"x-goog-api-key": key, "Content-Type": "application/json"}
@@ -101,7 +101,8 @@ def vision_check(path, question: str, timeout: int = 90) -> dict | None:
     paths = [path] if isinstance(path, str) else list(path)
     if not key or not all(os.path.exists(x) for x in paths):
         return None
-    model = os.getenv("LLM_MODEL") or "gemini-2.5-flash"
+    from common import DEFAULT_MODEL
+    model = os.getenv("LLM_MODEL") or DEFAULT_MODEL
     parts = [{"text": question + "\n\n[출력] 순수 JSON만."}]
     for x in paths:
         data, mime = _b64(x)

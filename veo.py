@@ -104,9 +104,12 @@ def _drop_key(body: dict, key: str) -> bool:
 def clip(prompt: str, first: str, out_path: str, last: str | None = None, seconds: int = 4,
          resolution: str = "720p", timeout: int = 600, poll: int = 10) -> str | None:
     """첫(·끝) 프레임 → mp4. 실패·예산 초과·키 없음이면 None."""
-    key = os.getenv("LLM_API_KEY", "")
+    if os.getenv("VEO_DISABLED", "").lower() in ("1", "true", "yes"):
+        print("[veo] VEO_DISABLED — 생성 건너뜀(켄번즈 폴백)")      # 10/30 스프린트: 시트콤 동결
+        return None
+    key = os.getenv("VEO_API_KEY") or os.getenv("LLM_API_KEY", "")   # 10/26 키 분리: Veo는 선불 프로젝트 키
     if not key:
-        print("[veo] LLM_API_KEY 없음 — 생성 건너뜀")
+        print("[veo] VEO_API_KEY/LLM_API_KEY 없음 — 생성 건너뜀")
         return None
     if seconds not in (4, 6, 8):
         raise ValueError("Veo 길이는 4·6·8초")

@@ -22,7 +22,7 @@ def yt_titles(queries, region="KR", per=12):
                              params={"key": key, "q": q, "part": "snippet", "type": "video",
                                      "videoDuration": "short", "order": "viewCount",
                                      "regionCode": region, "relevanceLanguage": "ko",
-                                     "publishedAfter": (datetime.datetime.utcnow() - datetime.timedelta(days=30)).isoformat("T") + "Z",
+                                     "publishedAfter": (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=30)).strftime("%Y-%m-%dT%H:%M:%S") + "Z",
                                      "maxResults": per}, timeout=30)
             for it in r.json().get("items", []):
                 items.append(it["snippet"]["title"])
