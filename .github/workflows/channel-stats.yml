@@ -34,6 +34,10 @@ jobs:
       # 정체성 실험: 24h/72h/7d 자리 채우기(매일) + 일요일엔 블록 리뷰를 텔레그램으로
       - name: 실험 갱신
         run: python experiments.py update || true
+      # C5 증거(famto 10/30 ⑤): 매주 월요일 evidence/C/<날짜>/summary.json — YPP 확장 관문 진척·비용
+      - name: C 증거 수집 (월요일)
+        run: |
+          if [ "$(TZ=Asia/Seoul date +%u)" = "1" ]; then python evidence_c.py || true; else echo "월요일 아님 — 건너뜀"; fi
       - name: 실험 주간 리뷰 (일요일)
         if: ${{ always() }}
         env:
@@ -54,6 +58,7 @@ jobs:
 
       - name: 결과 커밋
         run: |
+          git add -A evidence 2>/dev/null || true
           git config user.name casto-bot && git config user.email casto@solvup.local
           git add -A data
           if git diff --cached --quiet; then

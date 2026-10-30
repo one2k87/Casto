@@ -49,6 +49,24 @@ RAMP_MAX_PER_WEEK = 2
 # 두 번 답할 필요가 없고, 주 결산은 주가 끝난 뒤가 맞다.
 WEEKDAY_SLOT = {1: "deep1", 3: "deep2", 5: "season", 6: "chart"}
 
+# 2026-10-30 famto 실행 설계 v1(수익 스프린트 11/1~11/15): **제품 쇼츠 매일 1편**, 겨울 시즌·고단가 우선.
+# 일요일 차트는 실사진 5종이 안 되면 결번 대신 시즌 편으로 간다. 끝나면 WEEKDAY_SLOT 로 돌아간다(날짜 자동).
+SPRINT_FROM, SPRINT_UNTIL = dt.date(2026, 10, 30), dt.date(2026, 11, 15)
+SPRINT_SLOT = {0: "season", 1: "deep1", 2: "deep2", 3: "season", 4: "deep1", 5: "deep2", 6: "chart"}
+WINTER_PRIORITY = ("전기요", "전기장판", "가습기", "음식물", "온풍기", "온수매트", "히터", "난방", "김장")
+
+
+def sprint_daily(date: dt.date) -> bool:
+    flag = os.getenv("CASTO_SPRINT_DAILY", "")
+    if flag:
+        return flag.lower() in ("1", "true", "yes")
+    return SPRINT_FROM <= date <= SPRINT_UNTIL
+
+
+def season_boost(name: str) -> float:
+    """겨울 시즌 상품 가중치(스프린트 중 choose_items 에 더해진다)."""
+    return 2.5 if any(k in (name or "") for k in WINTER_PRIORITY) else 0.0
+
 SLOT_SPEC = {
     "chart":  {"format": "chart",     "ranking": "chart",     "price_band": "혼합",
                "why": "일요일 「콕픽 차트」 — 그 주에 뜬 것 5개. 순위·상태 태그·한 줄 이유"},
@@ -151,6 +169,8 @@ def slot_for(date: dt.date, ramp: bool | None = None) -> str | None:
     '이번 주 유행'을 말할 근거가 없어 만들지 않는다(빈약한 브리핑은 채널 정체성을 흐린다).
     """
     ramp = ramping() if ramp is None else ramp
+    if not ramp and sprint_daily(date):
+        return SPRINT_SLOT.get(date.weekday())
     return (RAMP_SLOT if ramp else WEEKDAY_SLOT).get(date.weekday())
 
 
@@ -241,7 +261,7 @@ def plan(date: dt.date, board: dict, log: list[dict] | None = None,
     days = snapshot_days()
     slot = slot_for(date, ramp)
     if slot is None:
-        pace = "주 2편: 화·일(램프업)" if ramp else "주 4편: 화·목·토·일"
+        pace = "주 2편: 화·일(램프업)" if ramp else ("매일(스프린트)" if sprint_daily(date) else "주 4편: 화·목·토·일")
         return {"date": date.isoformat(), "publish": False, "ramp": ramp, "snapshot_days": days,
                 "reason": f"{'월화수목금토일'[date.weekday()]}요일은 발행일이 아니다({pace})"}
     if ramp and ready is not None and not ready:
@@ -250,6 +270,11 @@ def plan(date: dt.date, board: dict, log: list[dict] | None = None,
                            "캡처를 먼저 등록할 것(앱 📷)")}
     spec = SLOT_SPEC[slot]
     product = pick_product(slot, board, log, date.month, ready if ramp else None)
+    if product is None and slot == "chart" and sprint_daily(date):
+        # 스프린트 중 일요일 차트가 안 되면 결번 대신 시즌 편(10/30 famto: 매일 1편)
+        slot = "season"
+        spec = SLOT_SPEC[slot]
+        product = pick_product(slot, board, log, date.month, ready if ramp else None)
     out = {
         "date": date.isoformat(), "publish": True, "slot": slot,
         "ramp": ramp, "snapshot_days": days, "ready": ready or [],
@@ -373,6 +398,11 @@ def choose_items(ready: list[str], log: list[dict], links: set | None = None,
         counts[bands.get(x, "mid")] += 1
     picked, hot_used = [], 0
     L = max(len(log), 1)
+    try:
+        from common import op_date
+        _sprint_now = sprint_daily(op_date())
+    except Exception:                                      # noqa: BLE001
+        _sprint_now = False
     while len(picked) < n and pool:
         tot = sum(counts.values()) + len(picked)
         def score(x):
@@ -383,6 +413,8 @@ def choose_items(ready: list[str], log: list[dict], links: set | None = None,
             if x in hot:                        # 편당 둘까지만 핫이슈, 그 뒤는 에버그린이 앞선다
                 s += 2.0 if hot_used < HOT_PER_EPISODE else -0.5
             s += (BAND_TARGET[b] - share) * 3.0
+            if _sprint_now:
+                s += season_boost(x)                 # 겨울 시즌·고단가 우선(10/30 스프린트)
             s -= (last.get(x, -1) + 1) / L
             return s
         best = max(pool, key=score)
