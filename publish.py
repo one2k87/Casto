@@ -198,6 +198,30 @@ def set_metadata(token: str, vid: str, payload: dict, privacy: str = "public") -
     return r.status_code == 200
 
 
+def whoami() -> dict | None:
+    """소유자 토큰이 **어느 채널**의 것인지. channels.list(mine=true) — 1유닛."""
+    tok = oauth_token()
+    if not tok:
+        return None
+    try:
+        r = requests.get("https://www.googleapis.com/youtube/v3/channels", timeout=30,
+                         params={"part": "snippet", "mine": "true"}, headers={"Authorization": f"Bearer {tok}"})
+        items = r.json().get("items", []) if r.status_code == 200 else []
+    except requests.RequestException:
+        items = []
+    if not items:
+        return {}
+    return {"id": items[0]["id"], "title": items[0]["snippet"].get("title", "")}
+
+
+def token_ok() -> bool:
+    """토큰 채널 = casto.json 의 콕픽 채널인가. 개인 계정 토큰이면 좀비 수리가 엉뚱한 채널을 본다(11/2 첫 등록)."""
+    me = whoami()
+    want = (cfg().get("channel") or {}).get("id", "")
+    print(f"[publish] 토큰 채널: {me} / 기대: {want}")
+    return bool(me) and me.get("id") == want
+
+
 def repair_orphans(payload: dict, since: dt.datetime) -> str | None:
     """Make가 403으로 죽은 뒤 남긴 '제목 unknown' 공개 영상을 오늘 편으로 되살린다. 돌려주는 값 = 살린 영상 id."""
     tok = oauth_token()
@@ -330,6 +354,8 @@ if __name__ == "__main__":
     # 사용: python publish.py [public|private] [영상경로] [설명경로]
     # 일요일 차트 편은 out/chart.mp4를 올리므로 경로를 받을 수 있어야 한다.
     _a = sys.argv[1:]
+    if _a and _a[0] == "--whoami":
+        sys.exit(0 if token_ok() else 1)
     ok = publish(video_path=_a[1] if len(_a) > 1 else "out/short.mp4",
                  caption_path=_a[2] if len(_a) > 2 else "out/caption.txt",
                  privacy=_a[0] if _a else "public")

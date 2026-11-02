@@ -53,6 +53,8 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           if [ -z "$YT_REFRESH_TOKEN" ]; then echo "YT_REFRESH_TOKEN 시크릿이 없다 — 보류 그대로(좀비 위험). 토큰 먼저."; exit 1; fi
+          # 토큰이 콕픽 채널 것인지 먼저 확인 — 아니면 게시하지 않는다(좀비 수리가 엉뚱한 채널을 보게 됨)
+          python publish.py --whoami || { echo "토큰 채널이 콕픽이 아니다 — 브랜드 계정으로 다시 발급할 것"; exit 1; }
           python publish.py public out/short.mp4 out/caption.txt
       - name: 기록 커밋
         run: |
