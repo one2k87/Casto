@@ -447,7 +447,16 @@ if __name__ == "__main__":
         sys.exit(0)
     if args and args[0] == "--slot":
         d = dt.date.fromisoformat(args[1]) if len(args) > 1 else dt.date.today()
-        print(slot_for(d) or "none")
+        sl = slot_for(d)
+        if sl == "chart" and sprint_daily(d):
+            # 11/1 run 실측: plan()은 차트 불가 → 시즌으로 바꿨는데 워크플로는 --slot 만 보고 make_chart.py 로 가서 실패.
+            # 기계가 읽는 슬롯도 plan()과 같은 결론을 내야 한다.
+            try:
+                p = plan(d, _load("data/trend_board.json", {}), _load(PUBLISH_LOG, []), ready_products())
+                sl = p.get("slot", sl) if p.get("publish") else sl
+            except Exception as e:                       # noqa: BLE001
+                print(f"[편성] 차트 판정 실패({e}) — chart 유지", file=sys.stderr)
+        print(sl or "none")
         sys.exit(0)
     day = dt.date.fromisoformat(sys.argv[1]) if len(sys.argv) > 1 else dt.date.today()
     board = _load("data/trend_board.json", {})

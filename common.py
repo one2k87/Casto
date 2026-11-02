@@ -55,10 +55,26 @@ def llm(prompt, max_tokens=8000, temperature=0.8, retries=6, json_mode=False, se
         body["tools"] = [{"google_search": {}}]
         gen.pop("responseMimeType", None)   # 도구 사용 시 JSON 강제와 같이 못 쓴다
     last = ""
+    r = None
     for i in range(retries):
         import requests  # 지연 import — 편성 확인(schedule.py)은 requests 없이도 돌아야 한다(10/11 사고)
-        r = requests.post(url, json=body, timeout=180,
-                          headers={"x-goog-api-key": key, "Content-Type": "application/json"})
+        try:
+            r = requests.post(url, json=body, timeout=180,
+                              headers={"x-goog-api-key": key, "Content-Type": "application/json"})
+        except requests.RequestException as e:
+            # 10/31 run #125 실측: 검색 그라운딩 호출이 180초 읽기 타임아웃 → 예외가 재시도 루프를 뚫고 나가 편 결번.
+            # 네트워크 예외도 재시도 대상으로 — 그라운딩이 켜져 있으면 끄고(가장 느린 경로), 아니면 폴백 모델로.
+            print(f"[llm] 요청 예외({type(e).__name__}) — 재시도")
+            if search:
+                body.pop("tools", None)
+                search = False
+                if json_mode:
+                    gen["responseMimeType"] = "application/json"
+            elif fallbacks:
+                model = fallbacks.pop(0)
+                url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+            time.sleep(5)
+            continue
         if r.status_code == 400 and search and ("tool" in r.text.lower() or "search" in r.text.lower()):
             print("[llm] 검색 그라운딩 미지원 — 끄고 재시도(근거 없이 씀)")
             body.pop("tools", None)
@@ -113,6 +129,8 @@ def llm(prompt, max_tokens=8000, temperature=0.8, retries=6, json_mode=False, se
     if last:
         print("[llm] 재시도 후에도 잘림 — 마지막 응답으로 복구를 시도한다")
         return last
+    if r is None:
+        raise RuntimeError("LLM 호출 실패: 모든 시도가 네트워크 예외(타임아웃)")
     raise RuntimeError(f"LLM 호출 실패: {r.status_code} {r.text[:1200]}")
 
 def repair_truncated_json(text):
