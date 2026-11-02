@@ -36,6 +36,37 @@ def _code_from(text: str) -> str:
     return text if len(text) > 20 and " " not in text else ""
 
 
+def exchange(body: bytes) -> dict:
+    """승인 코드 → 토큰. 파이썬 SSL 인증서가 없으면 맥 기본 curl(시스템 키체인)로 같은 요청을 보낸다.
+
+    2026-11-02 사용자 실측: python.org 설치판 파이썬 3.14 는 「Install Certificates」를 안 돌리면
+    CERTIFICATE_VERIFY_FAILED 로 죽는다. curl 은 macOS 키체인을 써서 그대로 된다. 요청 본문(시크릿 포함)은
+    명령줄이 아니라 표준입력으로 넘긴다 — ps 에 안 보이게.
+    """
+    try:
+        with urllib.request.urlopen("https://oauth2.googleapis.com/token", body) as r:
+            return json.load(r)
+    except urllib.error.HTTPError as e:
+        sys.exit("토큰 교환 실패 " + str(e.code) + ": " + e.read().decode()[:300]
+                 + "\n(코드는 1회용·10분 유효 — 명령을 처음부터 다시 실행하세요)")
+    except urllib.error.URLError as e:
+        if "CERTIFICATE_VERIFY_FAILED" not in str(e):
+            raise
+        print("(파이썬 인증서가 없어 맥 기본 curl 로 토큰을 받습니다)")
+        import subprocess
+        out = subprocess.run(["curl", "-sS", "-X", "POST", "https://oauth2.googleapis.com/token",
+                              "-H", "Content-Type: application/x-www-form-urlencoded", "--data-binary", "@-"],
+                             input=body, capture_output=True)
+        try:
+            tok = json.loads(out.stdout.decode() or "{}")
+        except ValueError:
+            tok = {}
+        if out.returncode != 0 or "error" in tok or not tok:
+            sys.exit("토큰 교환 실패(curl): " + (out.stdout.decode() or out.stderr.decode())[:300]
+                     + "\n(코드는 1회용·10분 유효 — 명령을 처음부터 다시 실행하세요)")
+        return tok
+
+
 def main(path: str) -> None:
     with open(path, encoding="utf-8") as f:
         raw = json.load(f)
@@ -105,12 +136,7 @@ def main(path: str) -> None:
         sys.exit("승인이 취소됐습니다(" + got["error"] + ") — 다시 실행하세요.")
     body = urllib.parse.urlencode({"code": got["code"], "client_id": cid, "client_secret": sec,
                                    "redirect_uri": redirect, "grant_type": "authorization_code"}).encode()
-    try:
-        with urllib.request.urlopen("https://oauth2.googleapis.com/token", body) as r:
-            tok = json.load(r)
-    except urllib.error.HTTPError as e:
-        sys.exit("토큰 교환 실패 " + str(e.code) + ": " + e.read().decode()[:300]
-                 + "\n(코드는 1회용·10분 유효 — 명령을 처음부터 다시 실행하세요)")
+    tok = exchange(body)
     rt = tok.get("refresh_token")
     if not rt:
         print("refresh_token이 없습니다 — 이미 승인된 앱이면 https://myaccount.google.com/permissions 에서 접근 권한을 지우고 다시 실행하세요.")
