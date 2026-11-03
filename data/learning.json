@@ -6,8 +6,8 @@
   "verdict": {
    "buy": {
     "n": 6,
-    "lift": 0.927,
-    "avg_views": 348.7
+    "lift": 0.926,
+    "avg_views": 348.5
    }
   },
   "has_photo": {
@@ -21,12 +21,12 @@
    "roundup3": {
     "n": 7,
     "lift": 1.0,
-    "avg_views": 374.9
+    "avg_views": 374.7
    }
   }
  },
  "notes": [],
- "mean_views": 374.9,
+ "mean_views": 374.7,
  "mean_engagement": 0.0013,
  "best": [
   {
@@ -45,7 +45,7 @@
    "title": "없으면 살림 못 한다던데, 진짜일까?",
    "product": "씨밀렉스 라이스키퍼 쌀통 10kg",
    "views": 532,
-   "score": 1.44
+   "score": 1.441
   }
  ],
  "worst": [
@@ -58,8 +58,8 @@
   {
    "title": "음식물 처리기 필터 교체 주기, 주방 악취 0초 컷! 삶의 질 올려주는 3가지",
    "product": "음식물 쓰레기처리기",
-   "views": 34,
-   "score": 0.045
+   "views": 33,
+   "score": 0.044
   }
  ],
  "hints": []
