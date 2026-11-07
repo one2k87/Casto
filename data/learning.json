@@ -7,13 +7,13 @@
    "buy": {
     "n": 6,
     "lift": 0.927,
-    "avg_views": 348.3
+    "avg_views": 348.8
    }
   },
   "has_photo": {
    "True": {
     "n": 6,
-    "lift": 1.16,
+    "lift": 1.159,
     "avg_views": 431.7
    }
   },
@@ -21,31 +21,31 @@
    "roundup3": {
     "n": 7,
     "lift": 1.0,
-    "avg_views": 374.6
+    "avg_views": 375.0
    }
   }
  },
  "notes": [],
- "mean_views": 374.6,
+ "mean_views": 375.0,
  "mean_engagement": 0.0013,
  "best": [
   {
    "title": "냉장고 속 계란 위생, 900건 언급된 이걸로 끝!",
    "product": "계란보관 트레이",
    "views": 732,
-   "score": 3.093
+   "score": 3.091
   },
   {
    "title": "삐뚤빼뚤 커팅? 이거 하나로 고민 끝!",
    "product": "레이저가이드가위",
    "views": 1171,
-   "score": 2.217
+   "score": 2.215
   },
   {
    "title": "없으면 살림 못 한다던데, 진짜일까?",
    "product": "씨밀렉스 라이스키퍼 쌀통 10kg",
    "views": 532,
-   "score": 1.441
+   "score": 1.44
   }
  ],
  "worst": [
@@ -58,8 +58,8 @@
   {
    "title": "음식물 처리기 필터 교체 주기, 주방 악취 0초 컷! 삶의 질 올려주는 3가지",
    "product": "음식물 쓰레기처리기",
-   "views": 32,
-   "score": 0.043
+   "views": 35,
+   "score": 0.047
   }
  ],
  "hints": []
