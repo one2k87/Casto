@@ -1,5 +1,5 @@
 {
- "next": 130,
+ "next": 138,
  "items": {
   "1": {
    "name": "늘어나는 밀폐용기",
@@ -1211,6 +1211,80 @@
    "done": false,
    "search": "아크릴 서랍",
    "url": "https://www.coupang.com/np/search?q=%EC%95%84%ED%81%AC%EB%A6%B4+%EC%84%9C%EB%9E%8D"
+  },
+  "130": {
+   "name": "보관형 다기능 채칼",
+   "slug": "",
+   "key": "보관형다기능채칼",
+   "done": false,
+   "search": "보관형 다기능 채칼",
+   "url": "https://www.coupang.com/np/search?q=%EB%B3%B4%EA%B4%80%ED%98%95+%EB%8B%A4%EA%B8%B0%EB%8A%A5+%EC%B1%84%EC%B9%BC",
+   "hold": true,
+   "note": "58번과 같은 물건으로 보임 — 58번으로 캡처"
+  },
+  "131": {
+   "name": "기울어지는 쌀통",
+   "slug": "",
+   "key": "기울어지는쌀통",
+   "done": false,
+   "search": "기울어지는 쌀통",
+   "url": "https://www.coupang.com/np/search?q=%EA%B8%B0%EC%9A%B8%EC%96%B4%EC%A7%80%EB%8A%94+%EC%8C%80%ED%86%B5",
+   "hold": true,
+   "note": "4번과 같은 물건으로 보임 — 4번으로 캡처"
+  },
+  "132": {
+   "name": "미니 전기쿠커",
+   "slug": "",
+   "key": "미니전기쿠커",
+   "done": false,
+   "search": "미니 전기쿠커",
+   "url": "https://www.coupang.com/np/search?q=%EB%AF%B8%EB%8B%88+%EC%A0%84%EA%B8%B0%EC%BF%A0%EC%BB%A4",
+   "hold": true,
+   "note": "14번과 같은 물건으로 보임 — 14번으로 캡처"
+  },
+  "133": {
+   "name": "도마 가위",
+   "slug": "",
+   "key": "도마가위",
+   "done": false,
+   "search": "도마 가위",
+   "url": "https://www.coupang.com/np/search?q=%EB%8F%84%EB%A7%88+%EA%B0%80%EC%9C%84",
+   "hold": true,
+   "note": "71번과 같은 물건으로 보임 — 71번으로 캡처"
+  },
+  "134": {
+   "name": "전동 오일 스프레이",
+   "slug": "",
+   "key": "전동오일스프레이",
+   "done": false,
+   "search": "전동 오일 스프레이",
+   "url": "https://www.coupang.com/np/search?q=%EC%A0%84%EB%8F%99+%EC%98%A4%EC%9D%BC+%EC%8A%A4%ED%94%84%EB%A0%88%EC%9D%B4",
+   "hold": true,
+   "note": "24번과 같은 물건으로 보임 — 24번으로 캡처"
+  },
+  "135": {
+   "name": "원터치 쌀세척볼",
+   "slug": "",
+   "key": "원터치쌀세척볼",
+   "done": false,
+   "search": "원터치 쌀세척볼",
+   "url": "https://www.coupang.com/np/search?q=%EC%9B%90%ED%84%B0%EC%B9%98+%EC%8C%80%EC%84%B8%EC%B2%99%EB%B3%BC"
+  },
+  "136": {
+   "name": "된장 머들러",
+   "slug": "",
+   "key": "된장머들러",
+   "done": false,
+   "search": "된장 머들러",
+   "url": "https://www.coupang.com/np/search?q=%EB%90%9C%EC%9E%A5+%EB%A8%B8%EB%93%A4%EB%9F%AC"
+  },
+  "137": {
+   "name": "닌자 정수기",
+   "slug": "",
+   "key": "닌자정수기",
+   "done": false,
+   "search": "닌자 정수기",
+   "url": "https://www.coupang.com/np/search?q=%EB%8B%8C%EC%9E%90+%EC%A0%95%EC%88%98%EA%B8%B0"
   }
  }
 }
