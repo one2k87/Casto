@@ -250,5 +250,25 @@
   "hook": "11월 한파주의보 발령",
   "seconds": 30.3,
   "video_id": "gqzJwxuGUgk"
+ },
+ {
+  "date": "2026-11-08",
+  "slot": "",
+  "key": "전기장판",
+  "verdict": "cond",
+  "title": "원룸 찌릿한 추위 끝내는 침대 꿀템 3가지",
+  "product": "전기장판",
+  "products": [
+   "전기장판",
+   "휴대용 선풍기 넥밴드",
+   "스크럽대디 수세미 랜덤발송, 3개입, 1개"
+  ],
+  "format": "roundup3",
+  "price_band": "저가",
+  "category": "전기장판",
+  "has_photo": false,
+  "hook": "2026년 11월 한파",
+  "seconds": 32.3,
+  "video_id": "tBaPipRRlgo"
  }
 ]

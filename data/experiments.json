@@ -1,1 +1,19 @@
-[]
+[
+ {
+  "kind": "episode",
+  "video_id": "tBaPipRRlgo",
+  "date": "2026-11-08",
+  "title": "원룸 찌릿한 추위 끝내는 침대 꿀템 3가지",
+  "product": "전기장판",
+  "format": "legacy",
+  "block": 2,
+  "variables": {
+   "narrative": "A_사고해결",
+   "hook": "문제장면",
+   "length": "22s",
+   "ending": "도장서랍",
+   "title": "문제숫자"
+  },
+  "predicted": "B"
+ }
+]
