@@ -7,7 +7,7 @@
    "buy": {
     "n": 6,
     "lift": 0.927,
-    "avg_views": 348.8
+    "avg_views": 349.0
    }
   },
   "has_photo": {
@@ -21,12 +21,12 @@
    "roundup3": {
     "n": 7,
     "lift": 1.0,
-    "avg_views": 375.0
+    "avg_views": 375.1
    }
   }
  },
  "notes": [],
- "mean_views": 375.0,
+ "mean_views": 375.1,
  "mean_engagement": 0.0013,
  "best": [
   {
@@ -58,8 +58,8 @@
   {
    "title": "음식물 처리기 필터 교체 주기, 주방 악취 0초 컷! 삶의 질 올려주는 3가지",
    "product": "음식물 쓰레기처리기",
-   "views": 35,
-   "score": 0.047
+   "views": 36,
+   "score": 0.048
   }
  ],
  "hints": []
