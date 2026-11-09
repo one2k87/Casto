@@ -1,10 +1,26 @@
 {
- "date": "2026-11-09",
+ "date": "2026-11-10",
  "subscribers": 2,
- "total_views": 3855,
- "video_count": 9,
+ "total_views": 4107,
+ "video_count": 11,
  "hidden_subscriber_count": false,
  "videos": [
+  {
+   "id": "bOMwjFyRCFk",
+   "title": "무릎 안 꿇고 바닥 3분 만에 끝내는 법",
+   "published": "2026-11-09",
+   "views": 0,
+   "likes": 0,
+   "comments": 0
+  },
+  {
+   "id": "tBaPipRRlgo",
+   "title": "원룸 찌릿한 추위 끝내는 침대 꿀템 3가지",
+   "published": "2026-11-08",
+   "views": 251,
+   "likes": 0,
+   "comments": 0
+  },
   {
    "id": "gqzJwxuGUgk",
    "title": "음식물 처리기 필터 교체 주기, 주방 악취 0초 컷! 삶의 질 올려주는 3가지",
