@@ -27,6 +27,17 @@ DEFAULT_MODEL = "gemini-3.8-flash"
 FALLBACK_MODELS = ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite"]
 
 
+def _key_order(model, search, free_key, paid_key):
+    """2026-11-09 키 분배: 검색 그라운딩이거나 Lite가 아니면 유료 키 먼저, 아니면 무료 키 먼저.
+    유료 키 = LLM_API_KEY_PAID, 없으면 VEO_API_KEY."""
+    order = [paid_key, free_key] if (search or "lite" not in (model or "").lower()) else [free_key, paid_key]
+    out = []
+    for k in order:
+        if k and k not in out:
+            out.append(k)
+    return out
+
+
 def llm(prompt, max_tokens=8000, temperature=0.8, retries=6, json_mode=False, search=False):
     """Gemini generateContent 단순 REST 호출. 실패 시 재시도.
 
@@ -36,10 +47,11 @@ def llm(prompt, max_tokens=8000, temperature=0.8, retries=6, json_mode=False, se
     `responseMimeType`으로 스키마를 강제한다. 잘림은 finishReason=MAX_TOKENS로 판별해
     한도를 올려 재시도한다(조용히 깨진 JSON을 넘기지 않는다).
     """
-    key = os.getenv("LLM_API_KEY", "")
-    model = os.getenv("LLM_MODEL") or DEFAULT_MODEL   # 시크릿 미등록 시 env가 빈 문자열이라 or 필수(404 실측)
-    if not key:
+    free_key = os.getenv("LLM_API_KEY", "").strip()
+    paid_key = (os.getenv("LLM_API_KEY_PAID") or os.getenv("VEO_API_KEY") or "").strip()
+    if not free_key and not paid_key:
         raise SystemExit("LLM_API_KEY 시크릿이 없습니다")
+    model = os.getenv("LLM_MODEL") or DEFAULT_MODEL   # 시크릿 미등록 시 env가 빈 문자열이라 or 필수(404 실측)
     fallbacks = [m.strip() for m in (os.getenv("FALLBACK_MODELS") or ",".join(FALLBACK_MODELS)).split(",") if m.strip()]
     # 키는 x-goog-api-key 헤더로 전달 — 신형 키(AQ.…)는 ?key= 쿼리 방식에서 404가 난다(2026-09-02 실측)
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
@@ -54,62 +66,94 @@ def llm(prompt, max_tokens=8000, temperature=0.8, retries=6, json_mode=False, se
         # 이게 없으면 그럴듯한 문장을 지어낸다(2026-09-10).
         body["tools"] = [{"google_search": {}}]
         gen.pop("responseMimeType", None)   # 도구 사용 시 JSON 강제와 같이 못 쓴다
+    keys = _key_order(model, search, free_key, paid_key)
+    key_i = 0
+    overloaded = 0
     last = ""
     r = None
-    for i in range(retries):
+
+    def _label():
+        return "유료" if keys[key_i] == paid_key else "무료"
+
+    def _other_key(reason):
+        """같은 모델을 다른 키로 다시 보낸다. 다른 키가 없으면 False."""
+        nonlocal key_i, overloaded
+        if key_i + 1 >= len(keys):
+            return False
+        key_i += 1
+        overloaded = 0
+        print(f"[llm] {reason} — {_label()} 키로 같은 요청 재시도")
+        return True
+
+    def _next_model(reason):
+        """다음 폴백 모델로 넘어간다. 키 순서는 새 모델 기준으로 다시 잡는다."""
+        nonlocal model, url, keys, key_i, overloaded
+        if not fallbacks:
+            return False
+        nxt = fallbacks.pop(0)
+        print(f"[llm] {model} {reason} — {nxt} 로 폴백")
+        model = nxt
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+        keys = _key_order(model, search, free_key, paid_key)
+        key_i = 0
+        overloaded = 0
+        return True
+
+    def _no_search(why):
+        nonlocal search
+        print(f"[llm] {why}")
+        body.pop("tools", None)
+        search = False
+        if json_mode:
+            gen["responseMimeType"] = "application/json"
+
+    # 키·모델 전환에 쓰는 시도까지 감안해 여유를 둔다.
+    for i in range(retries + 4):
         import requests  # 지연 import — 편성 확인(schedule.py)은 requests 없이도 돌아야 한다(10/11 사고)
         try:
             r = requests.post(url, json=body, timeout=180,
-                              headers={"x-goog-api-key": key, "Content-Type": "application/json"})
+                              headers={"x-goog-api-key": keys[key_i], "Content-Type": "application/json"})
         except requests.RequestException as e:
             # 10/31 run #125 실측: 검색 그라운딩 호출이 180초 읽기 타임아웃 → 예외가 재시도 루프를 뚫고 나가 편 결번.
             # 네트워크 예외도 재시도 대상으로 — 그라운딩이 켜져 있으면 끄고(가장 느린 경로), 아니면 폴백 모델로.
             print(f"[llm] 요청 예외({type(e).__name__}) — 재시도")
             if search:
-                body.pop("tools", None)
-                search = False
-                if json_mode:
-                    gen["responseMimeType"] = "application/json"
-            elif fallbacks:
-                model = fallbacks.pop(0)
-                url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+                _no_search("[llm] 검색 그라운딩을 끄고 재시도")
+            else:
+                _next_model("타임아웃")
             time.sleep(5)
             continue
         if r.status_code == 400 and search and ("tool" in r.text.lower() or "search" in r.text.lower()):
-            print("[llm] 검색 그라운딩 미지원 — 끄고 재시도(근거 없이 씀)")
-            body.pop("tools", None)
-            search = False
-            if json_mode:
-                gen["responseMimeType"] = "application/json"
+            _no_search("[llm] 검색 그라운딩 미지원 — 끄고 재시도(근거 없이 씀)")
             continue
         if r.status_code == 429:
-            # 무료 등급 쿼터(10/30 실측: 새 Free Tier 키). 검색 그라운딩 쿼터가 가장 작다 → 먼저 끄고,
-            # 그래도 429면 다음 모델(모델별 쿼터가 따로 잡힌다)로. 사유는 전문을 찍는다(200자 절단으로 원인을 못 봤다).
-            print(f"[llm] 429 쿼터: {r.text[:1200].replace(chr(10), ' ')}")
+            # 쿼터(10/30 실측: 새 Free Tier 키). 키를 먼저 바꾸고(11/9 키 분배), 그래도 429면 그라운딩을 끄고,
+            # 그다음 모델(모델별 쿼터가 따로 잡힌다)로. 사유는 전문을 찍는다(200자 절단으로 원인을 못 봤다).
+            print(f"[llm] 429 쿼터({_label()} 키): {r.text[:1200].replace(chr(10), ' ')}")
+            if _other_key("429"):
+                continue
             if search:
-                print("[llm] 검색 그라운딩을 끄고 재시도")
-                body.pop("tools", None)
-                search = False
-                if json_mode:
-                    gen["responseMimeType"] = "application/json"
+                _no_search("[llm] 검색 그라운딩을 끄고 재시도")
                 time.sleep(15)
                 continue
-            if fallbacks:
-                nxt = fallbacks.pop(0)
-                print(f"[llm] {model} 쿼터 소진 — {nxt} 로 폴백")
-                model = nxt
-                url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+            if _next_model("쿼터 소진"):
                 time.sleep(15)
                 continue
-        if r.status_code == 404 and fallbacks:
-            nxt = fallbacks.pop(0)
-            print(f"[llm] {model} 404({r.text[:80].replace(chr(10), ' ')}) — {nxt} 로 폴백")
-            model = nxt
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+        if r.status_code == 404:
+            if _other_key("404"):
+                continue
+            if _next_model(f"404({r.text[:80].replace(chr(10), ' ')})"):
+                continue
+        if r.status_code in (401, 403) and _other_key(f"{r.status_code} 인증 오류"):
             continue
-        if r.status_code == 400 and "thinking" in r.text.lower():
-            # 사고 비활성화를 지원하지 않는 모델 → 옵션을 빼고 즉시 재시도
-            print("[llm] thinkingConfig 미지원 모델 — 옵션 제거 후 재시도")
+        if r.status_code in (500, 503):
+            overloaded += 1
+            print(f"[llm] {r.status_code} 과부하({overloaded}회, {model} {_label()} 키)")
+            if overloaded >= 2 and (_other_key(str(r.status_code)) or _next_model(str(r.status_code))):
+                continue
+        if r.status_code == 400 and "thinkingConfig" in gen:
+            # 사고 설정을 모르는 모델은 문구 없이 'invalid argument'로만 거절한다(11/1~3 폴백 400 실측) → 빼고 재시도
+            print("[llm] 400 — thinkingConfig 제거 후 재시도")
             gen.pop("thinkingConfig", None)
             continue
         if r.status_code == 200:
@@ -122,6 +166,8 @@ def llm(prompt, max_tokens=8000, temperature=0.8, retries=6, json_mode=False, se
                     gen["maxOutputTokens"] = min(gen["maxOutputTokens"] * 2, 32000)
                     last = text
                     continue
+                if key_i > 0:
+                    print(f"[llm] {_label()} 키로 성공")
                 return text
             except (KeyError, IndexError, TypeError):
                 pass

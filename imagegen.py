@@ -97,7 +97,7 @@ def clay_product(photo: str, name: str, out_path: str) -> str | None:
 def vision_check(path, question: str, timeout: int = 90) -> dict | None:
     """그림(한 장 또는 여러 장)에 대해 JSON 답을 받는다 — 일관성 관문·상품 대조용. 키 없으면 None(검사 생략)."""
     import json as _json
-    key = os.getenv("LLM_API_KEY", "")
+    key = os.getenv("LLM_API_KEY_PAID") or os.getenv("LLM_API_KEY", "")   # 11/9 키 분배: 이미지 입력은 유료 우선
     paths = [path] if isinstance(path, str) else list(path)
     if not key or not all(os.path.exists(x) for x in paths):
         return None

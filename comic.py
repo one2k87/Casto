@@ -130,7 +130,7 @@ def _attempts(prompt: str):
 
 def generate(scene: str, product: str, out_path: str, timeout: int = 120) -> str | None:
     """클레이 만화 컷 한 장. 실패하면 None(호출부가 폴백한다)."""
-    key = os.getenv("LLM_API_KEY", "")
+    key = os.getenv("LLM_API_KEY_PAID") or os.getenv("LLM_API_KEY", "")   # 11/9 키 분배: 이미지는 유료 우선
     if not key:
         return None
     try:

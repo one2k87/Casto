@@ -30,6 +30,7 @@ jobs:
       - name: 파일럿 제작
         env:
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          LLM_API_KEY_PAID: ${{ secrets.LLM_API_KEY_PAID }}
           VEO_API_KEY: ${{ secrets.VEO_API_KEY }}      # 유료(Veo·이미지)는 선불 프로젝트 키 — 10/26 키 분리
           VEO_DISABLED: ${{ vars.VEO_DISABLED }}     # 10/30 스프린트: Variables 에 1 이면 Veo 끔(켄번즈 폴백)
           LLM_MODEL: ${{ secrets.LLM_MODEL }}

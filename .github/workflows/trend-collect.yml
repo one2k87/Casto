@@ -48,8 +48,9 @@ jobs:
         if: ${{ inputs.board_only != true }}
         env:
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          LLM_API_KEY_PAID: ${{ secrets.LLM_API_KEY_PAID }}
           VEO_API_KEY: ${{ secrets.VEO_API_KEY }}      # 유료(Veo·이미지)는 선불 프로젝트 키 — 10/26 키 분리
-          LLM_MODEL: ${{ secrets.LLM_MODEL }}
+          LLM_MODEL: gemini-3.5-flash-lite   # 내부 작업은 Lite(무료 키 우선)
           YT_API_KEY: ${{ secrets.YT_API_KEY }}
           # 레거시(개발자센터, 2027-06-30 만료)
           NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
