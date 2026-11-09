@@ -1,4 +1,100 @@
 {
+ "mini_electric_cooker": {
+  "name": "미니전기쿠커",
+  "search_keyword": "미니 전기쿠커 전기머그컵",
+  "en_keyword": "mini electric cooker",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "쿠팡추천템 영상 38개, 자취필수템 키워드 반복 등장",
+  "category": "50000003",
+  "last_found": "2026-11-09",
+  "first_seen": "2026-11-08"
+ },
+ "electric_oil_spray": {
+  "name": "전동 스프레이",
+  "search_keyword": "식용유 전동 스프레이 오일병",
+  "en_keyword": "electric oil spray",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "주방꿀템 및 생활용품 카테고리에서 신기한 아이템으로 노출",
+  "category": "50000008",
+  "last_found": "2026-11-09",
+  "first_seen": "2026-11-08"
+ },
+ "electric_mug": {
+  "name": "전기머그컵",
+  "search_keyword": "전기 머그컵 미니쿠커",
+  "en_keyword": "electric mug",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "미니전기쿠커와 함께 자취필수템, 주방꿀템 키워드로 다수 노출",
+  "category": "50000003",
+  "last_found": "2026-11-09",
+  "first_seen": "2026-11-09"
+ },
+ "multi_slicer": {
+  "name": "다기능 채칼",
+  "search_keyword": "다기능 채칼 야채 감자칼 보관형",
+  "en_keyword": "multi slicer vegetable cutter",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "주방꿀템·살림꿀템 키워드에 다수 등장",
+  "category": "50000008",
+  "last_found": "2026-11-09",
+  "first_seen": "2026-11-09"
+ },
+ "inclined_rice_dispenser": {
+  "name": "기울어진 쌀통",
+  "search_keyword": "기울어진 쌀통 주방용품",
+  "en_keyword": "inclined rice dispenser",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "주방용품 및 쌀통 키워드로 반복 노출",
+  "category": "50000008",
+  "last_found": "2026-11-09",
+  "first_seen": "2026-11-09"
+ },
+ "cutting_kitchen_scissors": {
+  "name": "도마가위",
+  "search_keyword": "도마 가위 칼 도마 합친 주방가위",
+  "en_keyword": "cutting kitchen scissors",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "주방용품 및 신박한아이템 영상 다수 노출",
+  "category": "50000008",
+  "last_found": "2026-11-09",
+  "first_seen": "2026-11-09"
+ },
+ "miso_muddler": {
+  "name": "된장머들러",
+  "search_keyword": "된장 머들러 주방꿀템",
+  "en_keyword": "",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "살림꿀팁 및 주방꿀템 키워드 영상 다수 노출",
+  "category": "50000008",
+  "last_found": "2026-11-09",
+  "first_seen": "2026-11-09"
+ },
+ "electric_chopper": {
+  "name": "전동다지기",
+  "search_keyword": "야채 다지기 대파 전동다지기",
+  "en_keyword": "electric food chopper",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "살림템추천 및 주방꿀템 키워드 영상 다수 노출",
+  "category": "50000008",
+  "last_found": "2026-11-09",
+  "first_seen": "2026-11-09"
+ },
  "storage_vegetable_peeler": {
   "name": "보관형 다기능 채칼",
   "search_keyword": "보관형 다기능 채칼 감자칼",
@@ -23,18 +119,6 @@
   "last_found": "2026-11-08",
   "first_seen": "2026-11-08"
  },
- "mini_electric_cooker": {
-  "name": "미니 전기쿠커",
-  "search_keyword": "미니 전기쿠커 전기머그컵",
-  "en_keyword": "",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "‘쿠팡추천템’(16개 채널), ‘자취필수템’(4개 채널) 태그 영상 예시에서 확인",
-  "category": "50000003",
-  "last_found": "2026-11-08",
-  "first_seen": "2026-11-08"
- },
  "cutting_board_scissors": {
   "name": "도마 가위",
   "search_keyword": "칼 도마 일체형 주방가위 도마가위",
@@ -43,18 +127,6 @@
   "brand": "",
   "product_id": "",
   "evidence": "‘주방용품’(8개 채널) 영상 예시에서 도마 없이 채소 손질하는 가위로 확인",
-  "category": "50000008",
-  "last_found": "2026-11-08",
-  "first_seen": "2026-11-08"
- },
- "electric_oil_spray": {
-  "name": "전동 오일 스프레이",
-  "search_keyword": "식용유 전동 스프레이",
-  "en_keyword": "",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "‘이제’(5개 채널), ‘마세요’(4개 채널) 영상 예시에서 식용유 전동 스프레이로 등장",
   "category": "50000008",
   "last_found": "2026-11-08",
   "first_seen": "2026-11-08"
@@ -166,77 +238,5 @@
   "category": "50000008",
   "last_found": "2026-11-02",
   "first_seen": "2026-11-02"
- },
- "smart_four_cooker": {
-  "name": "4구스마트쿠커",
-  "search_keyword": "4구스마트쿠커 멀티쿠커",
-  "en_keyword": "multi cooker",
-  "price_band": "고가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "주방필수템(4개 채널) 예시 문구에 구체적 제품명으로 등장",
-  "category": "50000003",
-  "last_found": "2026-11-02",
-  "first_seen": "2026-11-02"
- },
- "wall_hanging_bathtub": {
-  "name": "벽에 거는 욕조",
-  "search_keyword": "벽에 거는 신기한 욕조",
-  "en_keyword": "",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "쿠팡템(4개 채널) 예시에서 벽에 거는 신기한 욕조로 명시",
-  "category": "50000008",
-  "last_found": "2026-11-02",
-  "first_seen": "2026-11-02"
- },
- "metal_mirror_board": {
-  "name": "메탈거울보드",
-  "search_keyword": "이케아 메탈거울보드",
-  "en_keyword": "",
-  "price_band": "중가",
-  "brand": "이케아",
-  "product_id": "",
-  "evidence": "이케아추천템(4개 채널) 예시에서 현관 인테리어 아이템으로 명시",
-  "category": "50000004",
-  "last_found": "2026-11-02",
-  "first_seen": "2026-11-02"
- },
- "acrylic_drawer": {
-  "name": "아크릴 서랍",
-  "search_keyword": "아크릴 서랍",
-  "en_keyword": "acrylic drawer",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "자취방(4개 채널) 예시에서 공간 활용 추천템으로 언급",
-  "category": "50000004",
-  "last_found": "2026-11-02",
-  "first_seen": "2026-11-02"
- },
- "automatic_stirring_pot": {
-  "name": "자동회전 냄비",
-  "search_keyword": "자동 회전 냄비 고기 볶는 냄비",
-  "en_keyword": "",
-  "price_band": "고가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "제목에 '고기를 넣었더니 냄비가 혼자 볶는다고? 신기한 자동회전냄비!' 표현이 등장하며, 영상 5개/채널 5개에서 '냄비'로 언급됨.",
-  "category": "50000008",
-  "last_found": "2026-10-22",
-  "first_seen": "2026-10-20"
- },
- "kitchen_vegetable_slicer": {
-  "name": "야채 슬라이서",
-  "search_keyword": "야채 슬라이서 채칼",
-  "en_keyword": "",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "제목에 '야채 슬라이서 야채 채칼' 표현이 반복 등장하며, 영상 17개/채널 16개에서 '주방용품'으로 언급됨.",
-  "category": "50000008",
-  "last_found": "2026-10-22",
-  "first_seen": "2026-10-22"
  }
 }
