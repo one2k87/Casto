@@ -15,5 +15,22 @@
    "title": "문제숫자"
   },
   "predicted": "B"
+ },
+ {
+  "kind": "episode",
+  "video_id": "bOMwjFyRCFk",
+  "date": "2026-11-09",
+  "title": "무릎 안 꿇고 바닥 3분 만에 끝내는 법",
+  "product": "무선 물걸레 청소기",
+  "format": "legacy",
+  "block": 2,
+  "variables": {
+   "narrative": "A_사고해결",
+   "hook": "문제장면",
+   "length": "22s",
+   "ending": "도장서랍",
+   "title": "문제숫자"
+  },
+  "predicted": "C"
  }
 ]

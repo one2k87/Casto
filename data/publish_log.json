@@ -270,5 +270,25 @@
   "hook": "2026년 11월 한파",
   "seconds": 32.3,
   "video_id": "tBaPipRRlgo"
+ },
+ {
+  "date": "2026-11-09",
+  "slot": "",
+  "key": "무선-물걸레-청소기",
+  "verdict": "buy",
+  "title": "무릎 안 꿇고 바닥 3분 만에 끝내는 법",
+  "product": "무선 물걸레 청소기",
+  "products": [
+   "접이식 블루투스 키보드",
+   "캡슐 커피 머신 소형",
+   "무선 물걸레 청소기"
+  ],
+  "format": "roundup3",
+  "price_band": "고가",
+  "category": "무선 물걸레 청소기",
+  "has_photo": false,
+  "hook": "2학기 개강 후 카페 공부족 급증",
+  "seconds": 31.2,
+  "video_id": "bOMwjFyRCFk"
  }
 ]
