@@ -120,7 +120,8 @@ def _attempts(prompt: str):
             yield (f"interactions/{model}", INTERACTIONS, {
                 "model": model,
                 "input": [{"type": "text", "text": prompt}],
-                "response_format": {"type": "image", "mime_type": "image/png",
+                # 11/8·11/9 실측: interactions 는 'image/png' 를 400으로 거절한다("Supported values: 'image/jpeg'")
+                "response_format": {"type": "image", "mime_type": "image/jpeg",
                                     "aspect_ratio": "4:3", "image_size": "1K"}})
         else:
             yield (f"generateContent/{model}", GENERATE.format(model), {
@@ -128,17 +129,79 @@ def _attempts(prompt: str):
                 "generationConfig": {"responseModalities": ["IMAGE"]}})
 
 
-def generate(scene: str, product: str, out_path: str, timeout: int = 120) -> str | None:
-    """클레이 만화 컷 한 장. 실패하면 None(호출부가 폴백한다)."""
-    key = os.getenv("LLM_API_KEY_PAID") or os.getenv("LLM_API_KEY", "")   # 11/9 키 분배: 이미지는 유료 우선
-    if not key:
+CF_MODEL = "@cf/black-forest-labs/flux-1-schnell"
+CF_RUN = "https://api.cloudflare.com/client/v4/accounts/{}/ai/run/" + CF_MODEL
+
+
+def paid_allowed() -> bool:
+    """Gemini 이미지(유료)는 `IMAGE_ALLOW_PAID=1` 일 때만 — 기본은 끔(2026-11-09 사용자 승인: 이미지 무료화)."""
+    return os.getenv("IMAGE_ALLOW_PAID", "").strip().lower() in ("1", "true", "yes", "on")
+
+
+def _save(raw: bytes, out_path: str) -> str | None:
+    """받은 바이트(JPEG/PNG 무엇이든)를 **실제 PNG** 로 저장 — 확장자와 내용이 어긋나지 않게."""
+    import io
+    try:
+        im = Image.open(io.BytesIO(raw))
+        im.load()
+    except Exception as e:                               # noqa: BLE001
+        print(f"[comic] 이미지 디코딩 실패: {e}")
         return None
+    os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
+    im.convert("RGB").save(out_path)
+    return out_path
+
+
+def cf_generate(prompt: str, out_path: str, timeout: int = 120) -> str | None:
+    """Cloudflare Workers AI FLUX-1-schnell(무료 일일 할당) 한 장. 키가 없으면 조용히 None.
+
+    REST: POST /accounts/{id}/ai/run/@cf/black-forest-labs/flux-1-schnell, Bearer 토큰,
+    입력 {prompt(≤2048자), steps(≤8)} → 응답 result.image(base64). 2026-11-10 문서 확인.
+    """
+    acc, tok = os.getenv("CF_ACCOUNT_ID", "").strip(), os.getenv("CF_API_TOKEN", "").strip()
+    if not (acc and tok):
+        return None
+    try:
+        r = requests.post(CF_RUN.format(acc), json={"prompt": prompt[:2048], "steps": 4},
+                          headers={"Authorization": f"Bearer {tok}"}, timeout=timeout)
+    except Exception as e:                               # noqa: BLE001
+        print(f"[comic] cf/flux-1-schnell 예외: {e}")
+        return None
+    if r.status_code != 200:
+        print(f"[comic] cf/flux-1-schnell 실패 {r.status_code}: {r.text[:160]}")
+        return None
+    try:
+        j = r.json()
+        data = (j.get("result") or {}).get("image") or j.get("image")
+    except Exception as e:                               # noqa: BLE001
+        print(f"[comic] cf/flux-1-schnell 응답 파싱 실패: {e}")
+        return None
+    if not data:
+        print("[comic] cf/flux-1-schnell 응답에 이미지가 없다")
+        return None
+    got = _save(base64.b64decode(data), out_path)
+    if got:
+        print("[comic] ✅ cf/flux-1-schnell 로 생성(무료)")
+    return got
+
+
+def generate(scene: str, product: str, out_path: str, timeout: int = 120) -> str | None:
+    """클레이 만화 컷 한 장. 순서: ① CF FLUX(무료) ② IMAGE_ALLOW_PAID=1 일 때만 Gemini(유료) ③ None(호출부 폴백)."""
     try:
         prompt = _prompt(scene, product)
     except ProductDrawAttempt as e:
         print(f"[comic] ⛔ {e} — 이 컷은 만들지 않는다(폴백)")
         return None
 
+    got = cf_generate(prompt, out_path, timeout=timeout)
+    if got:
+        return got
+    if not paid_allowed():
+        print("[comic] 무료 생성 실패/키 없음 — 유료 Gemini 이미지는 꺼져 있음(IMAGE_ALLOW_PAID) → 폴백 카드")
+        return None
+    key = os.getenv("LLM_API_KEY_PAID") or os.getenv("LLM_API_KEY", "")   # 11/9 키 분배: 이미지는 유료 우선
+    if not key:
+        return None
     headers = {"x-goog-api-key": key, "Content-Type": "application/json"}
     for label, url, body in _attempts(prompt):
         try:
@@ -157,11 +220,9 @@ def generate(scene: str, product: str, out_path: str, timeout: int = 120) -> str
         if not data:
             print(f"[comic] {label} 응답에 이미지가 없다")
             continue
-        os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
-        with open(out_path, "wb") as f:
-            f.write(base64.b64decode(data))
-        print(f"[comic] ✅ {label} 로 생성")
-        return out_path
+        if _save(base64.b64decode(data), out_path):
+            print(f"[comic] ✅ {label} 로 생성(유료)")
+            return out_path
     return None
 
 

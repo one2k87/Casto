@@ -425,10 +425,11 @@ def punch_text(d, text, y, size=104, maxw=W - 120, fill=(255, 255, 255),
     return y0
 
 
-def base_card(c, i=0, total=1):
+def base_card(c, i=0, total=1, photo=None):
     """모든 2판 씬의 바탕 — 그라데이션 + 로고 + 하단 CTA + 진행 점.
 
     바탕을 한 곳에서 그려야 12개 씬이 같은 채널로 보인다.
+    photo(2026-11-10): 상황 스톡 사진(Pexels) 경로가 있으면 화면 전체 배경으로 깔고 그림자를 얹는다.
     """
     b = c["brand"]
     cream, mint, sage = tuple(b["cream"]), tuple(b["mint"]), tuple(b["sage"])
@@ -441,9 +442,11 @@ def base_card(c, i=0, total=1):
             t = y / H
             d0.line([(0, y), (W, y)],
                     fill=tuple(int(cream[j] + (mint[j] - cream[j]) * t) for j in range(3)))
+    on_photo = bool(photo) and fill_frame(img, photo, dim=0.18)   # 그림자(scrim)는 호출부가 얹는다
+    ink = (255, 255, 255) if on_photo else sage                    # 사진 위에선 로고·CTA를 흰색으로
     d = ImageDraw.Draw(img)
-    d.text((W // 2, 128), "콕픽 KOKPICK", font=font(46), fill=sage, anchor="mm")
-    d.text((W // 2, 1808), "링크는 설명란 · 비교는 픽담", font=font(38), fill=sage, anchor="mm")
+    d.text((W // 2, 128), "콕픽 KOKPICK", font=font(46), fill=ink, anchor="mm")
+    d.text((W // 2, 1808), "링크는 설명란 · 비교는 픽담", font=font(38), fill=ink, anchor="mm")
     for k in range(total):
         x = W // 2 + (k - total / 2 + .5) * 26
         d.ellipse([x - 7, 1862, x + 7, 1876], fill=sage if k <= i else (255, 255, 255))
@@ -482,7 +485,8 @@ def card_hook(sc, c, shots, i, total):
         visuals.paste_koki(img, "idle", (155, 1560), (215, 215))
         return img
     got = [p for p in shots if p]
-    img, d, sage = base_card(c, i, total)
+    # 실사진이 하나도 없는 편(11/8·11/9 실측: has_photo=false)은 시청자 상황 스톡 사진(Pexels)을 깐다 — 상품 아님
+    img, d, sage = base_card(c, i, total, photo=None if got else sc.get("bg"))
     if got:
         band = H // max(len(got), 1)
         for k, p in enumerate(got):
@@ -506,8 +510,14 @@ def card_hook(sc, c, shots, i, total):
 
 
 def card_ask(sc, c, i, total):
-    """3~5초 — 콕이가 질문을 세운다. 여기서부터가 이 채널의 차별점이다."""
-    img, d, sage = base_card(c, i, total)
+    """3~5초 — 콕이가 질문을 세운다. 여기서부터가 이 채널의 차별점이다.
+
+    sc["bg"]: 시청자 상황을 보여주는 실사 스톡 사진(Pexels, 상품 아님). 없으면 기존 바탕.
+    """
+    img, d, sage = base_card(c, i, total, photo=sc.get("bg"))
+    if sc.get("bg"):
+        scrim(img, top_h=420, bot_h=820)
+        d = ImageDraw.Draw(img)
     if visuals.paste_koki(img, "magnify", (W // 2, 720), (720, 720)):
         d = ImageDraw.Draw(img)                     # 클레이 콕이(돋보기 포함)
     else:
@@ -856,6 +866,16 @@ def main():
         print("[casto]   증거 화면 없음 — 수집 데이터가 아직 얕다(그래프를 지어내지 않는다)")
 
     scenes, v, win = roundup.build_scenes(s, items, c, proofs=proofs)
+    # 상황 배경(무료 스톡) — 실사진이 하나도 없는 편의 훅·루프 컷에만, 상품이 아닌 '시청자의 상황' 사진.
+    # 키(PEXELS_API_KEY)가 없거나 실사진이 있으면 호출하지 않는다(쓰지 않을 사진의 크레딧이 설명란에 붙지 않게).
+    import stock
+    credits = []
+    bg = None if any(shots) else stock.photo(s.get("stock_query", ""), "out/stock_hook.jpg")
+    if bg:
+        credits.append(bg)
+        for sc in scenes:
+            if sc.get("kind") in ("hook", "loop"):
+                sc["bg"] = bg["path"]
     print(f"[casto] 2판 규격 — {len(scenes)}씬 · 오늘의 콕: {items[win]} [{v['caption']}]")
     sfx = make_kok_sfx(c["video"]["sfx"]["kok"])
 
@@ -888,7 +908,7 @@ def main():
     subprocess.run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", "out/list.txt",
                     "-c", "copy", "out/short.mp4"], check=True, capture_output=True)
     total = dur("out/short.mp4")
-    cap = roundup.build_caption(s, v, items, entries, c, total, post)
+    cap = roundup.build_caption(s, v, items, entries, c, total, post, credits=credits)
     with open("out/caption.txt", "w", encoding="utf-8") as f:
         f.write(cap)
     os.makedirs("data", exist_ok=True)

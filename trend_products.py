@@ -104,6 +104,22 @@ def match_videos(pool: list[dict], product: dict) -> list[VideoStat]:
     return out
 
 
+def _products_of(data) -> list:
+    """LLM 응답에서 상품 목록을 꺼낸다 — {"products":[...]} 가 정상이지만 배열만 오기도 한다.
+
+    11/10 run #73 실측: 3.5 Flash-Lite 가 객체 대신 **배열**을 돌려줘 `data.get` 에서 AttributeError 로
+    수집 전체가 죽었다. 배열이면 그 자체(또는 [{"products":[...]}] 껍데기)를 목록으로 쓴다.
+    """
+    if isinstance(data, dict):
+        got = data.get("products")
+        return got if isinstance(got, list) else []
+    if isinstance(data, list):
+        if len(data) == 1 and isinstance(data[0], dict) and isinstance(data[0].get("products"), list):
+            return data[0]["products"]
+        return data
+    return []
+
+
 def discover(c: dict, per_query: int = 50) -> tuple[list[dict], list[dict]]:
     """후보 발굴 — **링크로 특정된 실제 상품**을 찾는다.
 
@@ -174,8 +190,8 @@ def discover(c: dict, per_query: int = 50) -> tuple[list[dict], list[dict]]:
 - 채널명·유행어·비제품 표현은 제외합니다""")
 
     out = []
-    for p in data.get("products", [])[:12]:
-        if p.get("key") and p.get("name"):
+    for p in _products_of(data)[:12]:
+        if isinstance(p, dict) and p.get("key") and p.get("name"):
             out.append(p)
     print(f"[discover] 최종 후보 {len(out)}개: {', '.join(p['name'] for p in out)}")
     return out, videos

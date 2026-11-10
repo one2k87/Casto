@@ -92,6 +92,10 @@ jobs:
         env:
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
           LLM_API_KEY_PAID: ${{ secrets.LLM_API_KEY_PAID }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}        # 11/9 이미지 무료화 — 만화 컷 CF FLUX(무료)
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}      # 상황 스톡 사진(무료, 설명란 크레딧 자동)
+          IMAGE_ALLOW_PAID: ${{ vars.IMAGE_ALLOW_PAID }}     # Variables 에 1 일 때만 Gemini 이미지(유료)
           VEO_API_KEY: ${{ secrets.VEO_API_KEY }}      # 유료(Veo·이미지)는 선불 프로젝트 키 — 10/26 키 분리
           LLM_MODEL: ${{ secrets.LLM_MODEL }}
           YT_API_KEY: ${{ secrets.YT_API_KEY }}
@@ -103,6 +107,10 @@ jobs:
         env:
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
           LLM_API_KEY_PAID: ${{ secrets.LLM_API_KEY_PAID }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}        # 11/9 이미지 무료화 — 만화 컷 CF FLUX(무료)
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}      # 상황 스톡 사진(무료, 설명란 크레딧 자동)
+          IMAGE_ALLOW_PAID: ${{ vars.IMAGE_ALLOW_PAID }}     # Variables 에 1 일 때만 Gemini 이미지(유료)
           VEO_API_KEY: ${{ secrets.VEO_API_KEY }}      # 유료(Veo·이미지)는 선불 프로젝트 키 — 10/26 키 분리
           LLM_MODEL: ${{ secrets.LLM_MODEL }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}

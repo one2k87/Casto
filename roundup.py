@@ -131,6 +131,7 @@ def build_script(items, trends, c, post=None, retries=2):
          ✅ '라면 안 넘치게' '3,900원으로 해결' '칼 없이 사과 껍질'
          ❌ '이번 주 유행템 3개' '갑자기 많이 보이는 것'",
  "hook_voice": "훅 내레이션 1문장(16자 이내, 구어체)",
+ "stock_query": "첫 장면 배경에 깔 실사 스톡 사진 검색어(영어 2~4단어). 시청자의 **상황·장소**만 — 상품·브랜드 금지. 예: 'cold winter bedroom', 'small kitchen counter'",
  "items": [
   {{"cause": "유행의 계기 한 줄(화면 자막, 16자 이내). 바깥에서 온 구체적 사건이어야 함",
     "cause_detail": "그 계기를 한 문장 더(내레이션용, **12자 이내**)",
@@ -321,7 +322,7 @@ def next_teaser(path: str = "data/next_plan.json") -> dict | None:
     return None
 
 
-def build_caption(s, v, items, entries, c, total, post=None):
+def build_caption(s, v, items, entries, c, total, post=None, credits=None):
     """설명란 — 상품 3개 전부의 링크를 넣는다. 정확한 상품명이 검색을 만든다."""
     dis = c["disclosure"]
     tags = list(dict.fromkeys(["#오늘의콕", "#콕픽"] + list(s.get("hashtags", []))))[:8]
@@ -352,7 +353,9 @@ def build_caption(s, v, items, entries, c, total, post=None):
     # 픽담 줄은 **이번 편 상품을 다룬 글**일 때만. 무관한 글로 보내는 CTA는 이탈이다(2026-10-01).
     if post and post.get("link") and (post.get("matched") in items):
         lines.append(f"📄 {post['matched']} 자세한 비교는 픽담: {post['link']}")
-    return "\n".join(lines + [
+    import stock
+    credit = stock.credit_lines(credits)       # Pexels 사진을 썼을 때만(약관: 링크·작가 크레딧)
+    return "\n".join(lines + ([""] + credit if credit else []) + [
         "",
         " ".join(tags),
         "",

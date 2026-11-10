@@ -47,6 +47,8 @@ def main():
  "hashtags": [해시태그 10개],
  "avoid": [피해야 할 낡은 패턴 3개]}}"""
     data = llm_json(prompt)
+    if isinstance(data, list) and data and isinstance(data[0], dict):
+        data = data[0]          # 객체 대신 [객체] 로 오는 응답(11/10 trend_products #73 같은 유형) 방어
     data["updated"] = datetime.date.today().isoformat()
     data["source"] = src
     os.makedirs("data", exist_ok=True)

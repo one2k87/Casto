@@ -45,7 +45,7 @@ def _attempts(prompt: str, refs: list[str], aspect: str):
         if model.startswith("gemini-3"):
             yield (f"interactions/{model}", comic.INTERACTIONS, {
                 "model": model, "input": parts_i,
-                "response_format": {"type": "image", "mime_type": "image/png",
+                "response_format": {"type": "image", "mime_type": "image/jpeg",   # png는 400(11/8 실측)
                                     "aspect_ratio": aspect, "image_size": "1K"}})
         else:
             yield (f"generateContent/{model}", comic.GENERATE.format(model), {
@@ -56,6 +56,10 @@ def _attempts(prompt: str, refs: list[str], aspect: str):
 
 def generate(prompt: str, out_path: str, refs: list[str] | None = None, aspect: str = "1:1",
              timeout: int = 180) -> str | None:
+    if not comic.paid_allowed():
+        # 2026-11-09 이미지 무료화: 참고 이미지 기반 생성은 Gemini(유료)뿐 → 기본 끔. 호출부가 폴백한다.
+        print("[imagegen] 유료 이미지 생성 꺼짐(IMAGE_ALLOW_PAID) — 건너뜀")
+        return None
     key = os.getenv("VEO_API_KEY") or os.getenv("LLM_API_KEY", "")   # 이미지 생성은 유료 → 선불 프로젝트 키(10/26 키 분리)
     if not key:
         print("[imagegen] VEO_API_KEY/LLM_API_KEY 없음 — 생성 건너뜀")
@@ -79,9 +83,8 @@ def generate(prompt: str, out_path: str, refs: list[str] | None = None, aspect: 
         if not data:
             print(f"[imagegen] {label} 응답에 이미지 없음")
             continue
-        os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
-        with open(out_path, "wb") as f:
-            f.write(base64.b64decode(data))
+        if not comic._save(base64.b64decode(data), out_path):   # jpeg 응답도 실제 PNG로 저장
+            continue
         print(f"[imagegen] ✅ {label} → {out_path} (참고 {len(refs)}장)")
         return out_path
     return None
