@@ -34,5 +34,22 @@
   },
   "predicted": "C",
   "views_24h": 0
+ },
+ {
+  "kind": "episode",
+  "video_id": "QToDkIWtvh0",
+  "date": "2026-11-10",
+  "title": "오일 스프레이 단점, 기름 낭비 1초 만에 줄이는 방법 3가지",
+  "product": "오일 스프레이",
+  "format": "legacy",
+  "block": 3,
+  "variables": {
+   "narrative": "A_사고해결",
+   "hook": "문제장면",
+   "length": "16s",
+   "ending": "도장서랍",
+   "title": "문제숫자"
+  },
+  "predicted": "B"
  }
 ]

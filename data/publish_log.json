@@ -290,5 +290,25 @@
   "hook": "2학기 개강 후 카페 공부족 급증",
   "seconds": 31.2,
   "video_id": "bOMwjFyRCFk"
+ },
+ {
+  "date": "2026-11-10",
+  "slot": "",
+  "key": "오일-스프레이",
+  "verdict": "buy",
+  "title": "오일 스프레이 단점, 기름 낭비 1초 만에 줄이는 방법 3가지",
+  "product": "오일 스프레이",
+  "products": [
+   "손끼임 방지가드",
+   "차량용 공기청정기",
+   "오일 스프레이"
+  ],
+  "format": "roundup3",
+  "category": "스프레이",
+  "has_photo": false,
+  "brand": "오일",
+  "hook": "11월 실내활동 증가",
+  "seconds": 27.2,
+  "video_id": "QToDkIWtvh0"
  }
 ]
