@@ -1,41 +1,6 @@
 {
- "updated": "2026-11-09",
+ "updated": "2026-11-10",
  "items": [
-  {
-   "date": "2026-11-09",
-   "weekday": "월",
-   "label": "11/9(월)",
-   "slot": "season",
-   "product": "접이식 블루투스 키보드 · 캡슐 커피 머신 소형 · 무선 물걸레 청소기",
-   "slug": "접이식-블루투스-키보드",
-   "products": [
-    {
-     "name": "접이식 블루투스 키보드",
-     "slug": "접이식-블루투스-키보드",
-     "photo": false,
-     "link": true,
-     "band": "mid"
-    },
-    {
-     "name": "캡슐 커피 머신 소형",
-     "slug": "캡슐-커피-머신-소형",
-     "photo": false,
-     "link": true,
-     "band": "mid"
-    },
-    {
-     "name": "무선 물걸레 청소기",
-     "slug": "무선-물걸레-청소기",
-     "photo": false,
-     "link": true,
-     "band": "high"
-    }
-   ],
-   "photo": false,
-   "link": true,
-   "links": "3/3",
-   "hot": []
-  },
   {
    "date": "2026-11-10",
    "weekday": "화",
@@ -134,6 +99,41 @@
      "photo": true,
      "link": true,
      "band": "low"
+    }
+   ],
+   "photo": true,
+   "link": true,
+   "links": "3/3",
+   "hot": []
+  },
+  {
+   "date": "2026-11-13",
+   "weekday": "금",
+   "label": "11/13(금)",
+   "slot": "deep1",
+   "product": "레이저가이드가위 · 미닉스 3인용 미니 식기세척기 PRO MNDW-110 · 씨밀렉스 라이스키퍼 쌀통 10kg",
+   "slug": "레이저가이드가위",
+   "products": [
+    {
+     "name": "레이저가이드가위",
+     "slug": "레이저가이드가위",
+     "photo": true,
+     "link": true,
+     "band": "mid"
+    },
+    {
+     "name": "미닉스 3인용 미니 식기세척기 PRO MNDW-110",
+     "slug": "미닉스-3인용-미니-식기세척기-pro-mndw-110",
+     "photo": true,
+     "link": true,
+     "band": "high"
+    },
+    {
+     "name": "씨밀렉스 라이스키퍼 쌀통 10kg",
+     "slug": "씨밀렉스-라이스키퍼-쌀통-10kg",
+     "photo": true,
+     "link": true,
+     "band": "mid"
     }
    ],
    "photo": true,

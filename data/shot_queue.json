@@ -1,5 +1,5 @@
 {
- "next": 142,
+ "next": 143,
  "items": {
   "1": {
    "name": "늘어나는 밀폐용기",
@@ -1321,6 +1321,16 @@
    "done": false,
    "search": "전동다지기",
    "url": "https://www.coupang.com/np/search?q=%EC%A0%84%EB%8F%99%EB%8B%A4%EC%A7%80%EA%B8%B0"
+  },
+  "142": {
+   "name": "접이식 빨래건조대",
+   "slug": "",
+   "key": "접이식빨래건조대",
+   "done": false,
+   "search": "접이식 빨래건조대",
+   "url": "https://www.coupang.com/np/search?q=%EC%A0%91%EC%9D%B4%EC%8B%9D+%EB%B9%A8%EB%9E%98%EA%B1%B4%EC%A1%B0%EB%8C%80",
+   "hold": true,
+   "note": "11번과 같은 물건으로 보임 — 11번으로 캡처"
   }
  }
 }
