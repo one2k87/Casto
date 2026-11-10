@@ -15,7 +15,10 @@
    "title": "문제숫자"
   },
   "predicted": "B",
-  "views_24h": 251
+  "views_24h": 251,
+  "views_72h": 251,
+  "growth_72h": 0.0,
+  "pushed": false
  },
  {
   "kind": "episode",
@@ -50,6 +53,7 @@
    "ending": "도장서랍",
    "title": "문제숫자"
   },
-  "predicted": "B"
+  "predicted": "B",
+  "views_24h": 0
  }
 ]

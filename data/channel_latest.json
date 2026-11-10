@@ -1,15 +1,23 @@
 {
- "date": "2026-11-10",
+ "date": "2026-11-11",
  "subscribers": 2,
- "total_views": 4107,
- "video_count": 11,
+ "total_views": 4106,
+ "video_count": 12,
  "hidden_subscriber_count": false,
  "videos": [
+  {
+   "id": "QToDkIWtvh0",
+   "title": "오일 스프레이 단점, 기름 낭비 1초 만에 줄이는 방법 3가지",
+   "published": "2026-11-10",
+   "views": 0,
+   "likes": 0,
+   "comments": 0
+  },
   {
    "id": "bOMwjFyRCFk",
    "title": "무릎 안 꿇고 바닥 3분 만에 끝내는 법",
    "published": "2026-11-09",
-   "views": 0,
+   "views": 59,
    "likes": 0,
    "comments": 0
   },
@@ -25,7 +33,7 @@
    "id": "gqzJwxuGUgk",
    "title": "음식물 처리기 필터 교체 주기, 주방 악취 0초 컷! 삶의 질 올려주는 3가지",
    "published": "2026-11-02",
-   "views": 36,
+   "views": 38,
    "likes": 0,
    "comments": 0
   },

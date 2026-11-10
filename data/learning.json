@@ -1,62 +1,62 @@
 {
- "videos": 15,
- "matched": 9,
+ "videos": 16,
+ "matched": 10,
  "min_n": 3,
  "axes": {
   "verdict": {
    "buy": {
-    "n": 7,
-    "lift": 0.976,
-    "avg_views": 299.1
+    "n": 8,
+    "lift": 0.953,
+    "avg_views": 269.4
    }
   },
   "has_photo": {
    "True": {
     "n": 6,
-    "lift": 1.425,
+    "lift": 1.568,
     "avg_views": 431.7
    },
    "False": {
-    "n": 3,
-    "lift": 0.15,
-    "avg_views": 95.7
+    "n": 4,
+    "lift": 0.148,
+    "avg_views": 87.0
    }
   },
   "format": {
    "roundup3": {
-    "n": 9,
+    "n": 10,
     "lift": 1.0,
-    "avg_views": 319.7
+    "avg_views": 293.8
    }
   }
  },
  "notes": [],
- "mean_views": 319.7,
- "mean_engagement": 0.001,
+ "mean_views": 293.8,
+ "mean_engagement": 0.0009,
  "best": [
   {
    "title": "냉장고 속 계란 위생, 900건 언급된 이걸로 끝!",
    "product": "계란보관 트레이",
    "views": 732,
-   "score": 3.865
+   "score": 4.268
   },
   {
    "title": "삐뚤빼뚤 커팅? 이거 하나로 고민 끝!",
    "product": "레이저가이드가위",
    "views": 1171,
-   "score": 2.672
+   "score": 2.927
   },
   {
    "title": "없으면 살림 못 한다던데, 진짜일까?",
    "product": "씨밀렉스 라이스키퍼 쌀통 10kg",
    "views": 532,
-   "score": 1.772
+   "score": 1.949
   }
  ],
  "worst": [
   {
-   "title": "무릎 안 꿇고 바닥 3분 만에 끝내는 법",
-   "product": "무선 물걸레 청소기",
+   "title": "오일 스프레이 단점, 기름 낭비 1초 만에 줄이는 방법 3가지",
+   "product": "오일 스프레이",
    "views": 0,
    "score": 0.0
   },
@@ -64,10 +64,10 @@
    "title": "침실 무드등 추천해줘, 좁은 주방이 2배 넓어지는 살림템",
    "product": "미닉스 3인용 미니 식기세척기 PRO MNDW-110",
    "views": 4,
-   "score": 0.006
+   "score": 0.007
   }
  ],
  "hints": [
-  "실제 상품사진: 'True'가 'False'보다 잘 됨(lift 1.425 vs 0.15, n=6/3)"
+  "실제 상품사진: 'True'가 'False'보다 잘 됨(lift 1.568 vs 0.148, n=6/4)"
  ]
 }
