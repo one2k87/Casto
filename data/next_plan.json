@@ -1,41 +1,6 @@
 {
- "updated": "2026-11-10",
+ "updated": "2026-11-11",
  "items": [
-  {
-   "date": "2026-11-10",
-   "weekday": "화",
-   "label": "11/10(화)",
-   "slot": "deep1",
-   "product": "손끼임 방지가드 · 차량용 공기청정기 · 오일 스프레이",
-   "slug": "손끼임-방지가드",
-   "products": [
-    {
-     "name": "손끼임 방지가드",
-     "slug": "손끼임-방지가드",
-     "photo": true,
-     "link": true,
-     "band": "low"
-    },
-    {
-     "name": "차량용 공기청정기",
-     "slug": "차량용-공기청정기",
-     "photo": false,
-     "link": true,
-     "band": "mid"
-    },
-    {
-     "name": "오일 스프레이",
-     "slug": "오일-스프레이",
-     "photo": true,
-     "link": true,
-     "band": "low"
-    }
-   ],
-   "photo": false,
-   "link": true,
-   "links": "3/3",
-   "hot": []
-  },
   {
    "date": "2026-11-11",
    "weekday": "수",
@@ -137,6 +102,41 @@
     }
    ],
    "photo": true,
+   "link": true,
+   "links": "3/3",
+   "hot": []
+  },
+  {
+   "date": "2026-11-14",
+   "weekday": "토",
+   "label": "11/14(토)",
+   "slot": "deep2",
+   "product": "미니 가습기 무선 · HanilMedical 탄소열선 고급 전기요 HL-D205(25), 북극곰, M (100 x 180 cm) · 음식물 쓰레기처리기",
+   "slug": "미니-가습기-무선",
+   "products": [
+    {
+     "name": "미니 가습기 무선",
+     "slug": "미니-가습기-무선",
+     "photo": false,
+     "link": true,
+     "band": "low"
+    },
+    {
+     "name": "HanilMedical 탄소열선 고급 전기요 HL-D205(25), 북극곰, M (100 x 180 cm)",
+     "slug": "hanilmedical-탄소열선-고급-전기요-hl-d205-25-북극곰-m-100-x-180-cm",
+     "photo": false,
+     "link": true,
+     "band": "mid"
+    },
+    {
+     "name": "음식물 쓰레기처리기",
+     "slug": "음식물-쓰레기처리기",
+     "photo": false,
+     "link": true,
+     "band": "high"
+    }
+   ],
+   "photo": false,
    "link": true,
    "links": "3/3",
    "hot": []

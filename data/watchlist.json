@@ -6,10 +6,82 @@
   "price_band": "중가",
   "brand": "",
   "product_id": "",
-  "evidence": "미니전기쿠커 및 전기머그컵 자취필수템 채널 3개 이상 반복 등장",
+  "evidence": "쿠팡추천템 34개 영상, 13개 채널 등장",
   "category": "50000003",
-  "last_found": "2026-11-11",
+  "last_found": "2026-11-12",
   "first_seen": "2026-11-08"
+ },
+ "electric_chopper": {
+  "name": "전동 다지기",
+  "search_keyword": "자동 대파 전동다지기",
+  "en_keyword": "electric food chopper",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "살림템추천 채널 다수 등장",
+  "category": "50000008",
+  "last_found": "2026-11-12",
+  "first_seen": "2026-11-09"
+ },
+ "multi_functional_mandoline": {
+  "name": "다기능 채칼",
+  "search_keyword": "다기능 채칼 야채 감자칼 보관형",
+  "en_keyword": "mandoline slicer",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "주방꿀템, 살림꿀템 채널 다수 등장",
+  "category": "50000008",
+  "last_found": "2026-11-12",
+  "first_seen": "2026-11-12"
+ },
+ "knife_scissors_combo": {
+  "name": "도마 가위",
+  "search_keyword": "칼 도마 일체형 가위",
+  "en_keyword": "cutter scissors",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "주방꿀템, 주방용품 관련 다수 채널 등장",
+  "category": "50000008",
+  "last_found": "2026-11-12",
+  "first_seen": "2026-11-12"
+ },
+ "electric_spray": {
+  "name": "전동 스프레이",
+  "search_keyword": "식용유 전동 스프레이",
+  "en_keyword": "electric oil sprayer",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "마세요, 이제 키워드 연계 채널 등장",
+  "category": "50000008",
+  "last_found": "2026-11-12",
+  "first_seen": "2026-11-12"
+ },
+ "measuring_spoon": {
+  "name": "계량스푼",
+  "search_keyword": "스마트 계량스푼",
+  "en_keyword": "digital measuring spoon",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "이렇게 키워드 연계 채널 등장",
+  "category": "50000008",
+  "last_found": "2026-11-12",
+  "first_seen": "2026-11-12"
+ },
+ "mini_dishwasher": {
+  "name": "미니 식기세척기",
+  "search_keyword": "소형 미니 식기세척기",
+  "en_keyword": "mini dishwasher",
+  "price_band": "고가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "이렇게 키워드 연계 채널 등장",
+  "category": "50000003",
+  "last_found": "2026-11-12",
+  "first_seen": "2026-11-12"
  },
  "electric_oil_spray": {
   "name": "전동 스프레이",
@@ -22,18 +94,6 @@
   "category": "50000008",
   "last_found": "2026-11-11",
   "first_seen": "2026-11-08"
- },
- "electric_chopper": {
-  "name": "전동 다지기",
-  "search_keyword": "전동 야채 다지기 자동 다지기",
-  "en_keyword": "electric food chopper",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "야채다지기 및 대파썰기 전동다지기로 살림템추천 채널 3개 이상 노출",
-  "category": "50000008",
-  "last_found": "2026-11-11",
-  "first_seen": "2026-11-09"
  },
  "multi_functional_mandoline_slicer": {
   "name": "다기능 채칼",
@@ -178,65 +238,5 @@
   "category": "50000008",
   "last_found": "2026-11-08",
   "first_seen": "2026-11-08"
- },
- "doenjang_muddler": {
-  "name": "된장 머들러",
-  "search_keyword": "된장 머들러",
-  "en_keyword": "",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "‘살림꿀팁’(4개 채널) 태그 영상 예시에서 확인",
-  "category": "50000008",
-  "last_found": "2026-11-08",
-  "first_seen": "2026-11-08"
- },
- "ninja_water_purifier": {
-  "name": "닌자 정수기",
-  "search_keyword": "닌자 정수기",
-  "en_keyword": "",
-  "price_band": "고가",
-  "brand": "닌자",
-  "product_id": "",
-  "evidence": "‘쇼핑쇼츠’(4개 채널), ‘링크’(4개 채널) 영상 예시에서 22번 링크 상품으로 확인",
-  "category": "50000003",
-  "last_found": "2026-11-08",
-  "first_seen": "2026-11-08"
- },
- "vegetable_slicer_peeler": {
-  "name": "야채 슬라이서 채칼",
-  "search_keyword": "야채 슬라이서 야채 채칼",
-  "en_keyword": "vegetable slicer",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "주방꿀템(16개 채널), 살림꿀템(11개 채널), 신박한아이템(9개 채널) 등 다수 반복 노출 예시로 직접 언급",
-  "category": "50000008",
-  "last_found": "2026-11-02",
-  "first_seen": "2026-11-02"
- },
- "storage_potato_peeler": {
-  "name": "보관형 감자칼",
-  "search_keyword": "다기능 채칼 야채 감자칼 보관형",
-  "en_keyword": "",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "살림꿀템, 신박한아이템, 생활꿀템, 다이소꿀템 등 4개 이상 키워드 예시에서 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-11-02",
-  "first_seen": "2026-11-02"
- },
- "dish_drying_rack": {
-  "name": "식기건조대",
-  "search_keyword": "식기건조대",
-  "en_keyword": "dish drying rack",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "생활꿀템(8개 채널), 생활꿀템 신박한아이템(4개 채널) 예시 문구에 직접 등장",
-  "category": "50000008",
-  "last_found": "2026-11-02",
-  "first_seen": "2026-11-02"
  }
 }
