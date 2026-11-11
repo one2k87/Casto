@@ -1,23 +1,31 @@
 {
- "date": "2026-11-11",
+ "date": "2026-11-12",
  "subscribers": 2,
- "total_views": 4106,
- "video_count": 12,
+ "total_views": 5329,
+ "video_count": 13,
  "hidden_subscriber_count": false,
  "videos": [
+  {
+   "id": "8HdsDBqul0A",
+   "title": "좁은 냉장고 2배 넓어지는 꿀템",
+   "published": "2026-11-11",
+   "views": 0,
+   "likes": 0,
+   "comments": 0
+  },
   {
    "id": "QToDkIWtvh0",
    "title": "오일 스프레이 단점, 기름 낭비 1초 만에 줄이는 방법 3가지",
    "published": "2026-11-10",
-   "views": 0,
-   "likes": 0,
+   "views": 1168,
+   "likes": 1,
    "comments": 0
   },
   {
    "id": "bOMwjFyRCFk",
    "title": "무릎 안 꿇고 바닥 3분 만에 끝내는 법",
    "published": "2026-11-09",
-   "views": 59,
+   "views": 56,
    "likes": 0,
    "comments": 0
   },
