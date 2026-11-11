@@ -1,0 +1,53 @@
+name: 클레이 A/B 비교
+# 2026-11-11 사용자 "a와 b 비교 1편". pilot/ab/request.txt 에 "a pilot/ab/ep1" 또는 "b pilot/ab/ep1" 을 적어 푸시하면 돈다.
+# a = 무료 스톱모션(CF FLUX.2 klein + 보간) → A.mp4, 시작 프레임(start/)·음성(audio/)·컷 길이(durations.json) 커밋
+# b = flow/cutNN.mp4(Flow에서 만든 클립)를 같은 음성·자막으로 조립 → B.mp4 + 나란히 비교본. 발행은 하지 않는다.
+on:
+  push:
+    paths: ["pilot/ab/request.txt"]
+  workflow_dispatch:
+    inputs:
+      args:
+        description: "a|b <에피소드 폴더>"
+        required: true
+        default: "a pilot/ab/ep1"
+
+permissions:
+  contents: write
+
+jobs:
+  ab:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Seoul
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: 의존성
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-cjk
+          pip install -q requests pillow edge-tts
+      - name: 제작
+        env:
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          ELEVEN_API_KEY: ${{ secrets.ELEVEN_API_KEY }}
+          ELEVEN_VOICE_WIFE: ${{ vars.ELEVEN_VOICE_WIFE }}
+          ELEVEN_VOICE_HUSBAND: ${{ vars.ELEVEN_VOICE_HUSBAND }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          ARGS="${{ inputs.args }}"
+          if [ "${{ github.event_name }}" = "push" ]; then ARGS="$(cat pilot/ab/request.txt)"; fi
+          echo "args: $ARGS"
+          python clay_ab.py $ARGS
+      - name: 결과 커밋 (렌더 중간물 제외)
+        if: ${{ always() }}
+        run: |
+          git config user.name casto-bot && git config user.email casto@solvup.local
+          find pilot/ab -path '*/render' -prune -o -type f -print | grep -v request.txt | xargs -r git add -f
+          [ -d assets/clay_animal ] && git add -A assets/clay_animal; true
+          if git diff --cached --quiet; then echo "::warning::산출물 없음"; else
+            git commit -m "clay A/B: $(cat pilot/ab/request.txt 2>/dev/null || echo manual) [skip ci]" && git pull --rebase --autostash origin main && git push origin main
+          fi
