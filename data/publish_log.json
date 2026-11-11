@@ -310,5 +310,25 @@
   "hook": "11월 실내활동 증가",
   "seconds": 27.2,
   "video_id": "QToDkIWtvh0"
+ },
+ {
+  "date": "2026-11-11",
+  "slot": "",
+  "key": "계란보관-트레이",
+  "verdict": "buy",
+  "title": "좁은 냉장고 2배 넓어지는 꿀템",
+  "product": "계란보관 트레이",
+  "products": [
+   "계란보관 트레이",
+   "스크럽대디",
+   "늘어나는 밀폐용기"
+  ],
+  "format": "roundup3",
+  "category": "트레이",
+  "has_photo": true,
+  "brand": "계란보관",
+  "hook": "트레이더스 60구 판란 유행",
+  "seconds": 28.3,
+  "video_id": "8HdsDBqul0A"
  }
 ]

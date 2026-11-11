@@ -55,5 +55,22 @@
   },
   "predicted": "B",
   "views_24h": 0
+ },
+ {
+  "kind": "episode",
+  "video_id": "8HdsDBqul0A",
+  "date": "2026-11-11",
+  "title": "좁은 냉장고 2배 넓어지는 꿀템",
+  "product": "계란보관 트레이",
+  "format": "legacy",
+  "block": 3,
+  "variables": {
+   "narrative": "A_사고해결",
+   "hook": "문제장면",
+   "length": "16s",
+   "ending": "도장서랍",
+   "title": "문제숫자"
+  },
+  "predicted": "B"
  }
 ]
