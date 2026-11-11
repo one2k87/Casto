@@ -508,6 +508,63 @@ def stage_design4(out_dir: str) -> None:
               open(os.path.join(out_dir, "report.json"), "w"), indent=1)
 
 
+CAST_V5 = {
+    "wife": ("assets/cast_animal/wife_idle.png",
+             "the white lop-eared rabbit in image 0 as the WIFE character: LOVABLE and adorable. Keep her white fur, long "
+             "floppy ears with soft pink insides, tiny pink nose and the thin pink collar with a small silver bell",
+             {1: "big sparkling eyes, rosy round cheeks, a tiny sweet smile, round chubby body, paws together at her chest",
+              2: "a bright happy open-mouth smile, slightly tilted head, fluffy round cheeks, short stubby body",
+              3: "shy cute look with eyes sparkling, blush, a little heart-shaped nose, very round mochi-like body"}),
+    "guide": ("assets/cast_animal/guide_idle.png",
+              "the meerkat in image 0 as the GUIDE character: PLAYFUL and mischievous, full of cheeky energy. Keep his "
+              "slim upright meerkat body, sandy fur, dark eye rings, the round tortoiseshell glasses and the gold bow tie",
+              {1: "a cheeky wink and a big toothy grin, one paw giving a thumbs-up",
+               2: "eyebrows wiggling, a sly playful smirk, leaning to one side, one paw pushing up the glasses",
+               3: "laughing with eyes squeezed shut, tail curled up behind him, bouncing on his toes"}),
+    "husband": ("assets/cast_animal/husband_idle.png",
+                "the sloth in image 0 as the HUSBAND character: STURDY and dependable, a bit slow and dull, but very "
+                "gentle and kind. Keep his warm brown sloth fur, light face, long arms and the navy-blue bandana; soft "
+                "rounded mitten hands instead of sharp claws, no dark eye patches",
+                {1: "a big broad sturdy body, droopy half-closed sleepy eyes, a slow gentle smile, arms hanging relaxed",
+                 2: "a large solid barrel-shaped body, round small kind eyes, a calm content smile, head slightly tilted",
+                 3: "a huge cuddly body like a gentle giant, sleepy blinking eyes, a soft slightly open-mouth smile"}),
+}
+CLAY_CHAR = ("Make a CUTE handmade claymation character (stop-motion plasticine with subtle fingerprint texture, soft "
+             "matte clay, rounded shapes, slightly big head, simple readable mascot shapes that could later become "
+             "plush toys and stickers). Keep the animal recognizable. Soft studio light, plain warm cream background. "
+             "ONLY this one character, full body, front view, centered, no text, no other figures.")
+
+
+def stage_design5(out_dir: str) -> None:
+    """11/11 사용자: 원래 실사 배역 3장(토끼·나무늘보·미어캣)을 참고로 클레이 캐릭터.
+    토끼(아내) 귀엽게 · 미어캣(안내) 장난기 많게 · 나무늘보(남편) 듬직하고 둔하지만 순하게. 각 3안."""
+    os.makedirs(out_dir, exist_ok=True)
+    order = ("wife", "husband", "guide")
+    tiles = []
+    for role in order:
+        ref, desc, looks = CAST_V5[role]
+        for k, look in looks.items():
+            p = os.path.join(out_dir, f"{role}_v5_{k}.png")
+            if not os.path.exists(p):
+                klein(f"{CLAY_CHAR} Turn {desc}. Expression and pose: {look}.", p, refs=[ref], w=640, h=768,
+                      seed=SEED * 23 + k * 37 + len(role))
+            if os.path.exists(p):
+                tiles.append((role, k, p))
+    tw, th = 320, 384
+    sheet = Image.new("RGB", (tw * 3, (th + 40) * 3), (250, 247, 240))
+    from PIL import ImageDraw
+    d = ImageDraw.Draw(sheet)
+    f = rc.font(28)
+    name = {"wife": "토끼(아내)", "husband": "늘보(남편)", "guide": "미어캣(안내)"}
+    for role, k, p in tiles:
+        y = order.index(role) * (th + 40) + 40
+        sheet.paste(Image.open(p).convert("RGB").resize((tw, th)), ((k - 1) * tw, y))
+        d.text(((k - 1) * tw + 14, y - 34), f"{name[role]} {k}", font=f, fill=(40, 40, 40))
+    sheet.save(os.path.join(out_dir, "candidates.jpg"), quality=90)
+    json.dump({"images": NEURONS["images"], "neurons_est": round(NEURONS["est"])},
+              open(os.path.join(out_dir, "report.json"), "w"), indent=1)
+
+
 if __name__ == "__main__":
     stage, ep_dir = sys.argv[1], sys.argv[2]
-    {"a": stage_a, "b": stage_b, "design": stage_design, "design2": stage_design2, "design3": stage_design3, "design4": stage_design4}[stage](ep_dir)
+    {"a": stage_a, "b": stage_b, "design": stage_design, "design2": stage_design2, "design3": stage_design3, "design4": stage_design4, "design5": stage_design5}[stage](ep_dir)
