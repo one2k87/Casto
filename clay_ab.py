@@ -518,8 +518,8 @@ CAST_V5 = {
     "guide": ("assets/cast_animal/guide_idle.png",
               "the meerkat in image 0 as the GUIDE character: PLAYFUL and mischievous, full of cheeky energy. Keep his "
               "slim upright meerkat body, sandy fur, dark eye rings, the round tortoiseshell glasses and the gold bow tie",
-              {1: "a cheeky wink and a big toothy grin, one paw giving a thumbs-up",
-               2: "eyebrows wiggling, a sly playful smirk, leaning to one side, one paw pushing up the glasses",
+              {1: "a cheeky wink and a big happy grin, waving one small paw hello",
+               2: "a playful mischievous smile, head tilted to one side, one paw touching the rim of his glasses",
                3: "laughing with eyes squeezed shut, tail curled up behind him, bouncing on his toes"}),
     "husband": ("assets/cast_animal/husband_idle.png",
                 "the sloth in image 0 as the HUSBAND character: STURDY and dependable, a bit slow and dull, but very "
@@ -547,7 +547,7 @@ def stage_design5(out_dir: str) -> None:
             p = os.path.join(out_dir, f"{role}_v5_{k}.png")
             if not os.path.exists(p):
                 klein(f"{CLAY_CHAR} Turn {desc}. Expression and pose: {look}.", p, refs=[ref], w=640, h=768,
-                      seed=SEED * 23 + k * 37 + len(role))
+                      seed=SEED * 23 + k * 37 + len(role) + (500 if role == "guide" else 0))   # 11/11 미어캣 1·2 출력 필터(3030) → 시드·문구 교체
             if os.path.exists(p):
                 tiles.append((role, k, p))
     tw, th = 320, 384
