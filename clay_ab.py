@@ -403,6 +403,71 @@ def stage_design2(out_dir: str) -> None:
                      files={"photo": fh}, timeout=60)
 
 
+MASCOT = ("Character-mascot design that could later become plush toys, stickers and emoji: very simple readable "
+          "shapes, an iconic silhouette, a BIG round head (about half of the total height), large glossy eyes with two "
+          "white highlights, tiny soft limbs, everything soft and rounded, adorable and heartwarming. Handmade "
+          "claymation plasticine with subtle fingerprint texture, soft studio light, plain warm cream background. "
+          "ONLY this one character, full body, front view, centered, no text, no props, no other figures.")
+RABBIT_V3 = {
+    1: "Make her CUTER: rounder chubbier face, bigger sparkling eyes, a tiny smiling mouth, rosy round blush, short stubby body",
+    2: "Make her CUTER: an even rounder bun-shaped body, ears a little longer and fluffier, a small heart-shaped pink nose, cheerful open smile",
+    3: "Make her CUTER: a slightly smaller body and bigger head, eyes like shiny black beads with big highlights, a small pink bow next to one ear",
+    4: "Make her CUTER: a soft pear-shaped body, tiny paws held together at her chest, bright happy eyes, a little tuft of fur on the forehead",
+}
+SLOTH_V3 = {
+    1: "a BIG but CUTE sloth: a large soft round marshmallow-like body twice the rabbit's size, a round face with a cream heart-shaped face patch, small round sparkling eyes, a gentle shy smile",
+    2: "a BIG but CUTE sloth: a huge huggable bean-shaped body, short stubby legs, long soft arms hanging down, a peanut-shaped cream face patch, sleepy happy half-moon eyes, rosy cheeks",
+    3: "a BIG but CUTE sloth: a chunky round teddy-bear-like body, a big round head, a cream face patch, big round eyes with highlights, a small round nose, a content little smile",
+    4: "a BIG but CUTE sloth: a soft pear-shaped big body with a round tummy, tiny feet, long soft arms, a cream oval face patch, droopy relaxed sweet eyes, a wide gentle smile",
+}
+
+
+def stage_design3(out_dir: str) -> None:
+    """11/11 사용자: "늘보는 남자니까 덩치는 있지만 더 귀엽게, 토끼도 더 귀엽게 — 동물 아이덴티티는 지키되 나중에 캐릭터화(굿즈)".
+    토끼 = 확정 4번을 더 귀엽게 4안 / 늘보 = 2차의 손수건 늘보를 참고로 큰 덩치 + 귀여움 4안. 남색 손수건·분홍 목줄은 공통."""
+    os.makedirs(out_dir, exist_ok=True)
+    rabbit_ref = "pilot/ab/design/wife_4.png"
+    sloth_refs = ["pilot/ab/design2/husband_v2_2.png", "pilot/ab/design2/husband_v2_1.png"]
+    tiles = []
+    for k, look in RABBIT_V3.items():
+        p = os.path.join(out_dir, f"wife_v3_{k}.png")
+        if not os.path.exists(p):
+            klein(f"Redesign the white lop-eared rabbit in image 0 as the same character. Keep her white fur, floppy "
+                  f"pink-lined ears and the thin pink collar with a tiny gold bell. {look}. {MASCOT}",
+                  p, refs=[rabbit_ref], w=640, h=768, seed=SEED * 13 + k * 19)
+        if os.path.exists(p):
+            tiles.append(("wife", k, p))
+    for k, look in SLOTH_V3.items():
+        p = os.path.join(out_dir, f"husband_v3_{k}.png")
+        if not os.path.exists(p):
+            klein("Redesign the sloth in image 0 as the husband of the rabbit in image 1. Keep him a recognizable "
+                  "SLOTH (warm cocoa-brown fur, long arms, slow gentle vibe) with the navy-blue bandana, but NO dark "
+                  f"eye patches and NO sharp claws (soft rounded mitten hands). Make him {look}. {MASCOT}",
+                  p, refs=[sloth_refs[0], rabbit_ref], w=640, h=768, seed=SEED * 17 + k * 23)
+        if os.path.exists(p):
+            tiles.append(("husband", k, p))
+    tw, th = 320, 384
+    sheet = Image.new("RGB", (tw * 4, (th + 40) * 2), (250, 247, 240))
+    from PIL import ImageDraw
+    d = ImageDraw.Draw(sheet)
+    f = rc.font(28)
+    for role, k, p in tiles:
+        y = 40 if role == "wife" else th + 80
+        sheet.paste(Image.open(p).convert("RGB").resize((tw, th)), ((k - 1) * tw, y))
+        d.text(((k - 1) * tw + 14, y - 34), f"{'토끼' if role == 'wife' else '늘보'} {k}", font=f, fill=(40, 40, 40))
+    cs = os.path.join(out_dir, "candidates.jpg")
+    sheet.save(cs, quality=90)
+    json.dump({"images": NEURONS["images"], "neurons_est": round(NEURONS["est"])},
+              open(os.path.join(out_dir, "report.json"), "w"), indent=1)
+    import requests as _rq
+    tok, chat = os.getenv("TELEGRAM_TOKEN", ""), os.getenv("TELEGRAM_CHAT_ID", "")
+    if tok and chat:
+        with open(cs, "rb") as fh:
+            _rq.post(f"https://api.telegram.org/bot{tok}/sendPhoto", data={"chat_id": chat,
+                     "caption": "캐릭터 3차 — 더 귀엽게(굿즈로도 쓸 수 있게). 토끼 1~4 · 늘보 1~4 중 골라 주세요"},
+                     files={"photo": fh}, timeout=60)
+
+
 if __name__ == "__main__":
     stage, ep_dir = sys.argv[1], sys.argv[2]
-    {"a": stage_a, "b": stage_b, "design": stage_design, "design2": stage_design2}[stage](ep_dir)
+    {"a": stage_a, "b": stage_b, "design": stage_design, "design2": stage_design2, "design3": stage_design3}[stage](ep_dir)
