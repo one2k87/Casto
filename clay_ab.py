@@ -350,6 +350,59 @@ def stage_design(out_dir: str) -> None:
         telegram_msg("캐릭터 후보 생성 완료(사진 전송 실패)")
 
 
+SLOTH_V2 = {
+    1: "a tiny clay leaf tucked behind one ear, a soft fluffy tuft of fur on top of the head",
+    2: "a cozy oatmeal-colored knit cardigan worn over the navy bandana, hands resting on the belly",
+    3: "round soft cheeks with a faint warm blush, a little sprout-shaped hair curl on top of the head",
+    4: "a small clay acorn charm hanging from the navy bandana, holding a warm mug with both hands",
+}
+
+
+def stage_design2(out_dir: str) -> None:
+    """11/11 사용자: 토끼 = 4번 확정. 늘보는 다시 — 원래 배역(10/15)의 남색 손수건은 지키고, 우리만의 친근한 늘보.
+    토끼 4번을 '같은 세계의 짝'으로 같이 넣어 스타일(질감·비율·조명)을 맞춘다."""
+    os.makedirs(out_dir, exist_ok=True)
+    import shutil
+    shutil.copy("pilot/ab/design/wife_4.png", os.path.join(CAST, "wife.png"))       # 토끼 확정본
+    front = _front("assets/cast_animal/husband_sheet.png")
+    rabbit = "pilot/ab/design/wife_4.png"
+    tiles = []
+    for k, extra in SLOTH_V2.items():
+        p = os.path.join(out_dir, f"husband_v2_{k}.png")
+        if not os.path.exists(p):
+            klein("Create an ORIGINAL, friendly, lovable claymation SLOTH character as the partner of the rabbit in "
+                  "image 1 — exactly the same clay material, the same soft studio lighting, the same cream background "
+                  "and the same cute chibi proportions as image 1 (big round head, short round body). Base him on the "
+                  "sloth in image 0 but make him a stylized cute character: warm cocoa-brown clay fur, a light cream "
+                  "face, gentle crescent-shaped smiling eyes, a big kind smile, long arms with soft rounded mitten "
+                  f"hands, the navy-blue bandana around his neck, {extra}. Easygoing, warm, huggable. "
+                  "ONLY this one character, full body, front view, centered, no text, no other figures",
+                  p, refs=[front, rabbit], w=640, h=768, seed=SEED * 11 + k * 17)
+        if os.path.exists(p):
+            tiles.append((k, p))
+    tw, th = 320, 384
+    sheet = Image.new("RGB", (tw * 5, th + 40), (250, 247, 240))
+    from PIL import ImageDraw
+    d = ImageDraw.Draw(sheet)
+    f = rc.font(28)
+    sheet.paste(Image.open(rabbit).convert("RGB").resize((tw, th)), (0, 40))
+    d.text((14, 6), "토끼 4 (확정)", font=f, fill=(40, 40, 40))
+    for k, p in tiles:
+        sheet.paste(Image.open(p).convert("RGB").resize((tw, th)), (k * tw, 40))
+        d.text((k * tw + 14, 6), f"늘보 {k}", font=f, fill=(40, 40, 40))
+    cs = os.path.join(out_dir, "candidates.jpg")
+    sheet.save(cs, quality=90)
+    json.dump({"images": NEURONS["images"], "neurons_est": round(NEURONS["est"])},
+              open(os.path.join(out_dir, "report.json"), "w"), indent=1)
+    import requests as _rq
+    tok, chat = os.getenv("TELEGRAM_TOKEN", ""), os.getenv("TELEGRAM_CHAT_ID", "")
+    if tok and chat:
+        with open(cs, "rb") as fh:
+            _rq.post(f"https://api.telegram.org/bot{tok}/sendPhoto", data={"chat_id": chat,
+                     "caption": "늘보 후보 2차 — 토끼 4번과 같은 세계로. 1~4 중 골라 캐스토 채팅에 알려 주세요"},
+                     files={"photo": fh}, timeout=60)
+
+
 if __name__ == "__main__":
     stage, ep_dir = sys.argv[1], sys.argv[2]
-    {"a": stage_a, "b": stage_b, "design": stage_design}[stage](ep_dir)
+    {"a": stage_a, "b": stage_b, "design": stage_design, "design2": stage_design2}[stage](ep_dir)
