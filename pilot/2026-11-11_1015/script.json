@@ -1,0 +1,81 @@
+{
+ "title": "노른자 3번째 터진 날",
+ "hook": "3번째 터짐",
+ "cuts": [
+  {
+   "n": 1,
+   "who": "wife",
+   "line": "아 또 터졌어, 벌써 세 번째야",
+   "scene": "Claymation kitchen, medium close-up. The wife rabbit is standing at the counter, mid-motion, quick, doing two things at once, holding a cracked egg with yellow yolk running down her paws, exasperated expression."
+  },
+  {
+   "n": 2,
+   "who": "husband",
+   "line": "…닭한테 사과해",
+   "scene": "Claymation kitchen, medium close-up. The husband sloth stands next to the counter, very slow, barely moving, mid-blink, relaxed, sipping tea with an expressionless dry face."
+  },
+  {
+   "n": 3,
+   "who": "wife",
+   "line": "이건 뭐야, 언제 왔어, 왜 냅둬?",
+   "scene": "Claymation kitchen, medium close-up. The wife rabbit grabs a small clay tool pushed on the counter, mid-motion, quick, doing two things at once, ears twitching in rapid curiosity."
+  },
+  {
+   "n": 4,
+   "who": "wife",
+   "line": "어? 뭐야, 쏙 빠지네?",
+   "scene": "Claymation kitchen, medium close-up. The wife rabbit cracks an egg over the real product, yellow yolk resting intact inside the separator while white drips neatly below, mouth open in fast surprise."
+  },
+  {
+   "n": 5,
+   "who": "husband",
+   "line": "…네가 산 거야, 저번주에",
+   "scene": "Claymation kitchen, medium close-up. The husband sloth watches without moving a muscle, very slow, barely moving, mid-blink, relaxed, delivering a dry punchline with deadpan eyes."
+  },
+  {
+   "n": 6,
+   "who": "guide",
+   "line": "계란 흰자 분리기. 판정은—",
+   "scene": "Claymation studio background, medium close-up. The guide cock character stands beside a floating product card of the real product with a pending stamp, holding a pointer stick, sharp and cheerful."
+  },
+  {
+   "n": 7,
+   "who": "wife",
+   "line": "그럼 지난달에 산 쌍알 분리기는?",
+   "scene": "Claymation kitchen drawer area, medium close-up. The wife rabbit rummages into an open kitchen drawer, mid-motion, quick, tossing kitchen gadgets aside frantically."
+  },
+  {
+   "n": 8,
+   "who": "husband",
+   "line": "서랍… 닫아라",
+   "scene": "Claymation kitchen counter, medium close-up, looping back to cut 1. The husband sloth stands at the counter, very slow, barely moving, mid-blink, relaxed, calmly staring into the distance."
+  }
+ ],
+ "drawer_item": "쌍알 계란 분리기",
+ "stamp": "글쎄",
+ "reason": "데이터 부족",
+ "rejected": [
+  {
+   "stage": "punch_up",
+   "errors": [
+    "컷4 금지어 '대박'"
+   ],
+   "lines": [
+    "아 또 터졌어, 벌써 세 개째야",
+    "…닭한테 사과해라",
+    "이건 뭐야, 언제 왔어, 택배 또 깠지?",
+    "어? 뭐야, 쑥 들어가, 대박",
+    "…네가 시켰잖아, 술 마시고",
+    "계란 흰자 분리기. 판정은—",
+    "저번에 산 분리기는 어디 뒀어?",
+    "…서랍 열지 마"
+   ]
+  }
+ ],
+ "product": "계란 흰자 분리기",
+ "slug": "계란-흰자-분리기",
+ "situation": "아침 계란 요리 중 노른자 터짐",
+ "narrative": "A_사고해결",
+ "price": null,
+ "coupang_url": "https://link.coupang.com/a/hEcTTxurnM"
+}
