@@ -289,6 +289,67 @@ def stage_b(ep_dir: str) -> None:
         telegram_video(cmp_, "[A | B 나란히] 왼쪽 A(무료 스톱모션) · 오른쪽 B(Flow)")
 
 
+DESIGN = {
+    "wife": ("Design a LOVABLE claymation character based on the white lop-eared rabbit in image 0. Soft white clay "
+             "body, chubby round cheeks with a faint pink blush, big sparkly dark eyes with white highlights, tiny pink "
+             "nose, long floppy ears with pink inner ears, a thin pink collar with a tiny gold bell, slightly oversized "
+             "head (cute chibi proportions), standing upright on two legs, happy lively expression. A stylized cute "
+             "CHARACTER, not a realistic animal."),
+    "husband": ("Design a FRIENDLY claymation character based on the sloth in image 0. Warm light-brown clay body, a "
+                "round soft pale-beige face, small kind sleepy eyes and a big warm gentle smile, NO dark eye patches, "
+                "NO sharp claws (soft rounded mitten hands), a navy-blue bandana around the neck, a soft round belly, "
+                "chibi proportions with a big round head, standing upright on two legs, relaxed easygoing expression. "
+                "A stylized cute CHARACTER, not a realistic animal."),
+}
+DESIGN_TAIL = ("ONLY this one character in the picture, full body, front view, centered, plain warm cream background, "
+               "handmade stop-motion plasticine with subtle fingerprint texture, soft studio light, no text, no props, "
+               "no other figures")
+
+
+def _front(sheet: str) -> Image.Image:
+    """배역 시트(3x2) 왼쪽 위 칸 = 정면."""
+    im = Image.open(sheet).convert("RGB")
+    return im.crop((0, 0, im.width // 3, im.height // 2))
+
+
+def stage_design(out_dir: str) -> None:
+    """캐릭터 디자인 후보 4장씩(사용자가 고른다). 원본 = 10/15 실사 배역 시트의 정면."""
+    os.makedirs(out_dir, exist_ok=True)
+    src = {"wife": "assets/cast_animal/wife_sheet.png", "husband": "assets/cast_animal/husband_sheet.png"}
+    tiles = []
+    for role in ("wife", "husband"):
+        front = _front(src[role])
+        for k in range(1, 5):
+            p = os.path.join(out_dir, f"{role}_{k}.png")
+            if not os.path.exists(p):
+                klein(f"{DESIGN[role]} {DESIGN_TAIL}", p, refs=[front], w=640, h=768, seed=SEED * 7 + k * 31 + len(role))
+            if os.path.exists(p):
+                tiles.append((role, k, p))
+    tw, th = 320, 384
+    sheet = Image.new("RGB", (tw * 4, th * 2 + 40), (250, 247, 240))
+    from PIL import ImageDraw
+    d = ImageDraw.Draw(sheet)
+    f = rc.font(28)
+    for role, k, p in tiles:
+        y = 0 if role == "wife" else th + 40
+        sheet.paste(Image.open(p).convert("RGB").resize((tw, th)), ((k - 1) * tw, y))
+        d.text(((k - 1) * tw + 14, y + 10), f"{'토끼' if role == 'wife' else '늘보'} {k}", font=f, fill=(40, 40, 40))
+    cs = os.path.join(out_dir, "candidates.jpg")
+    sheet.save(cs, quality=90)
+    json.dump({"images": NEURONS["images"], "neurons_est": round(NEURONS["est"])},
+              open(os.path.join(out_dir, "report.json"), "w"), indent=1)
+    from common import telegram_msg
+    import requests as _rq
+    tok, chat = os.getenv("TELEGRAM_TOKEN", ""), os.getenv("TELEGRAM_CHAT_ID", "")
+    if tok and chat:
+        with open(cs, "rb") as fh:
+            _rq.post(f"https://api.telegram.org/bot{tok}/sendPhoto", data={"chat_id": chat,
+                     "caption": "콕이네 집 캐릭터 후보 — 토끼 1~4 / 늘보 1~4 중 하나씩 골라 캐스토 채팅에 알려 주세요"},
+                     files={"photo": fh}, timeout=60)
+    else:
+        telegram_msg("캐릭터 후보 생성 완료(사진 전송 실패)")
+
+
 if __name__ == "__main__":
     stage, ep_dir = sys.argv[1], sys.argv[2]
-    {"a": stage_a, "b": stage_b}[stage](ep_dir)
+    {"a": stage_a, "b": stage_b, "design": stage_design}[stage](ep_dir)
