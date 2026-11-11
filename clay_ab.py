@@ -468,6 +468,46 @@ def stage_design3(out_dir: str) -> None:
                      files={"photo": fh}, timeout=60)
 
 
+SLOTH_V4 = {
+    1: "a big soft round snowman-shaped body (two stacked balls: a huge round head on a bigger round body)",
+    2: "a big chubby bean-shaped body like a giant plush cushion, the head blending softly into the body",
+    3: "a big round dumpling-shaped body with a smaller tummy patch, head slightly tilted, very huggable",
+    4: "a big egg-shaped body sitting-standing lazily, long soft arms resting on the round tummy",
+}
+
+
+def stage_design4(out_dir: str) -> None:
+    """3차 늘보는 옛 실사 늘보 참고가 비율을 끌고 가 '덜 귀여움' → 참고 없이(토끼 3차 스타일만) 마스코트 비율로."""
+    os.makedirs(out_dir, exist_ok=True)
+    style = "pilot/ab/design3/wife_v3_1.png"
+    tiles = []
+    for k, body in SLOTH_V4.items():
+        p = os.path.join(out_dir, f"husband_v4_{k}.png")
+        if not os.path.exists(p):
+            klein("An ORIGINAL cute mascot SLOTH character, the husband of the rabbit in image 0 — the same clay "
+                  "material, the same lighting, the same background and the same level of cuteness as image 0. "
+                  f"He is clearly bigger than her: {body}. Warm cocoa-brown clay fur, a large plain cream face with "
+                  "NO dark eye patches, two big glossy round black eyes with white highlights, a tiny round dark nose, "
+                  "a small sweet smile, soft pink blush, short stubby legs, long soft arms with round mitten hands "
+                  "(no claws), a navy-blue bandana around his neck. Gentle, sleepy-happy, slow vibe. "
+                  f"{MASCOT}", p, refs=[style], w=640, h=768, seed=SEED * 19 + k * 29)
+        if os.path.exists(p):
+            tiles.append((k, p))
+    tw, th = 320, 384
+    sheet = Image.new("RGB", (tw * 5, th + 40), (250, 247, 240))
+    from PIL import ImageDraw
+    d = ImageDraw.Draw(sheet)
+    f = rc.font(28)
+    sheet.paste(Image.open(style).convert("RGB").resize((tw, th)), (0, 40))
+    d.text((14, 6), "토끼(3차) 기준", font=f, fill=(40, 40, 40))
+    for k, p in tiles:
+        sheet.paste(Image.open(p).convert("RGB").resize((tw, th)), (k * tw, 40))
+        d.text((k * tw + 14, 6), f"늘보 {k}", font=f, fill=(40, 40, 40))
+    sheet.save(os.path.join(out_dir, "candidates.jpg"), quality=90)
+    json.dump({"images": NEURONS["images"], "neurons_est": round(NEURONS["est"])},
+              open(os.path.join(out_dir, "report.json"), "w"), indent=1)
+
+
 if __name__ == "__main__":
     stage, ep_dir = sys.argv[1], sys.argv[2]
-    {"a": stage_a, "b": stage_b, "design": stage_design, "design2": stage_design2, "design3": stage_design3}[stage](ep_dir)
+    {"a": stage_a, "b": stage_b, "design": stage_design, "design2": stage_design2, "design3": stage_design3, "design4": stage_design4}[stage](ep_dir)
