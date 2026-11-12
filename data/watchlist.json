@@ -6,10 +6,94 @@
   "price_band": "중가",
   "brand": "",
   "product_id": "",
-  "evidence": "쿠팡추천템 34개 영상, 13개 채널 등장",
+  "evidence": "쿠팡추천템 및 자취필수템 키워드 영상에서 확인됨",
   "category": "50000003",
-  "last_found": "2026-11-12",
+  "last_found": "2026-11-13",
   "first_seen": "2026-11-08"
+ },
+ "electric_oil_spray": {
+  "name": "전동 스프레이",
+  "search_keyword": "주방용 전동 오일 스프레이",
+  "en_keyword": "electric oil spray",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "채널 다수에서 '식용유 붓지 마세요' 관련 신기한 전동 스프레이로 소개됨",
+  "category": "50000008",
+  "last_found": "2026-11-13",
+  "first_seen": "2026-11-08"
+ },
+ "multi_functional_slicer": {
+  "name": "다기능 채칼",
+  "search_keyword": "다기능 채칼 야채 감자칼",
+  "en_keyword": "multi-functional vegetable slicer",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "주방꿀템 영상 23개, 채널 17개, 살림꿀템 영상 33개 등 다수 반복 등장",
+  "category": "50000008",
+  "last_found": "2026-11-13",
+  "first_seen": "2026-11-13"
+ },
+ "kitchen_scissor_knife": {
+  "name": "도마 가위",
+  "search_keyword": "칼 도마 일체형 주방가위",
+  "en_keyword": "kitchen scissor knife",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "주방꿀템 및 주방용품 키워드 관련 영상 다수 등장",
+  "category": "50000008",
+  "last_found": "2026-11-13",
+  "first_seen": "2026-11-13"
+ },
+ "mini_lp_magnet": {
+  "name": "미니 LP 자석",
+  "search_keyword": "미니 LP 냉장고 자석",
+  "en_keyword": "mini lp magnet",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "냉장고 및 쿠팡추천템 키워드 영상에서 확인됨",
+  "category": "50000004",
+  "last_found": "2026-11-13",
+  "first_seen": "2026-11-13"
+ },
+ "vegetable_chopper": {
+  "name": "전동 야채다지기",
+  "search_keyword": "전동 야채다지기 자동 다지기",
+  "en_keyword": "electric vegetable chopper",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "살림템추천 및 야채다지기 관련 키워드 영상에서 확인됨",
+  "category": "50000008",
+  "last_found": "2026-11-13",
+  "first_seen": "2026-11-13"
+ },
+ "multi_blade_scissor": {
+  "name": "다중날 주방가위",
+  "search_keyword": "다중날 파채가위 주방가위",
+  "en_keyword": "multi-blade kitchen scissors",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "살림템추천 및 쇼핑쇼츠 키워드 영상에서 확인됨",
+  "category": "50000008",
+  "last_found": "2026-11-13",
+  "first_seen": "2026-11-13"
+ },
+ "mini_dryer": {
+  "name": "한경희 미니건조기",
+  "search_keyword": "한경희 미니건조기 의류건조기",
+  "en_keyword": "mini clothes dryer",
+  "price_band": "고가",
+  "brand": "한경희",
+  "product_id": "",
+  "evidence": "원룸 및 미니건조기 관련 키워드 영상에서 확인됨",
+  "category": "50000003",
+  "last_found": "2026-11-13",
+  "first_seen": "2026-11-13"
  },
  "electric_chopper": {
   "name": "전동 다지기",
@@ -83,18 +167,6 @@
   "last_found": "2026-11-12",
   "first_seen": "2026-11-12"
  },
- "electric_oil_spray": {
-  "name": "전동 스프레이",
-  "search_keyword": "식용유 전동 스프레이",
-  "en_keyword": "electric oil sprayer",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "신기한 전동 스프레이 및 식용유 뿌리는 도구로 채널 5개 채택",
-  "category": "50000008",
-  "last_found": "2026-11-11",
-  "first_seen": "2026-11-08"
- },
  "multi_functional_mandoline_slicer": {
   "name": "다기능 채칼",
   "search_keyword": "다기능 야채 채칼 감자칼 보관형",
@@ -166,77 +238,5 @@
   "category": "50000008",
   "last_found": "2026-11-09",
   "first_seen": "2026-11-09"
- },
- "cutting_kitchen_scissors": {
-  "name": "도마가위",
-  "search_keyword": "도마 가위 칼 도마 합친 주방가위",
-  "en_keyword": "cutting kitchen scissors",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "주방용품 및 신박한아이템 영상 다수 노출",
-  "category": "50000008",
-  "last_found": "2026-11-09",
-  "first_seen": "2026-11-09"
- },
- "miso_muddler": {
-  "name": "된장머들러",
-  "search_keyword": "된장 머들러 주방꿀템",
-  "en_keyword": "",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "살림꿀팁 및 주방꿀템 키워드 영상 다수 노출",
-  "category": "50000008",
-  "last_found": "2026-11-09",
-  "first_seen": "2026-11-09"
- },
- "storage_vegetable_peeler": {
-  "name": "보관형 다기능 채칼",
-  "search_keyword": "보관형 다기능 채칼 감자칼",
-  "en_keyword": "",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "‘주방꿀템’(17개 채널), ‘살림꿀템’(12개 채널) 등 다수 영상 예시에서 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-11-08",
-  "first_seen": "2026-11-08"
- },
- "tilting_rice_box": {
-  "name": "기울어지는 쌀통",
-  "search_keyword": "기울어지는 쌀통",
-  "en_keyword": "",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "‘주방꿀템’(17개 채널), ‘주방용품’(8개 채널) 영상 예시에서 확인",
-  "category": "50000008",
-  "last_found": "2026-11-08",
-  "first_seen": "2026-11-08"
- },
- "cutting_board_scissors": {
-  "name": "도마 가위",
-  "search_keyword": "칼 도마 일체형 주방가위 도마가위",
-  "en_keyword": "",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "‘주방용품’(8개 채널) 영상 예시에서 도마 없이 채소 손질하는 가위로 확인",
-  "category": "50000008",
-  "last_found": "2026-11-08",
-  "first_seen": "2026-11-08"
- },
- "one_touch_rice_washing_bowl": {
-  "name": "원터치 쌀세척볼",
-  "search_keyword": "원터치 쌀세척볼",
-  "en_keyword": "",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "‘편해지’(4개 채널) 영상 예시에서 주방 살림 필수템으로 확인",
-  "category": "50000008",
-  "last_found": "2026-11-08",
-  "first_seen": "2026-11-08"
  }
 }

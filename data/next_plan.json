@@ -1,41 +1,6 @@
 {
- "updated": "2026-11-11",
+ "updated": "2026-11-12",
  "items": [
-  {
-   "date": "2026-11-11",
-   "weekday": "수",
-   "label": "11/11(수)",
-   "slot": "deep2",
-   "product": "계란보관 트레이 · 스크럽대디 · 늘어나는 밀폐용기",
-   "slug": "계란보관-트레이",
-   "products": [
-    {
-     "name": "계란보관 트레이",
-     "slug": "계란보관-트레이",
-     "photo": true,
-     "link": true,
-     "band": "low"
-    },
-    {
-     "name": "스크럽대디",
-     "slug": "스크럽대디",
-     "photo": true,
-     "link": true,
-     "band": "low"
-    },
-    {
-     "name": "늘어나는 밀폐용기",
-     "slug": "늘어나는-밀폐용기",
-     "photo": true,
-     "link": true,
-     "band": "mid"
-    }
-   ],
-   "photo": true,
-   "link": true,
-   "links": "3/3",
-   "hot": []
-  },
   {
    "date": "2026-11-12",
    "weekday": "목",
@@ -137,6 +102,41 @@
     }
    ],
    "photo": false,
+   "link": true,
+   "links": "3/3",
+   "hot": []
+  },
+  {
+   "date": "2026-11-17",
+   "weekday": "화",
+   "label": "11/17(화)",
+   "slot": "deep1",
+   "product": "전기장판 · 조셉조셉 찹투팟 플러스 접이식도마 · 계란 흰자 분리기",
+   "slug": "전기장판-1-3만",
+   "products": [
+    {
+     "name": "전기장판",
+     "slug": "전기장판-1-3만",
+     "photo": true,
+     "link": true,
+     "band": "low"
+    },
+    {
+     "name": "조셉조셉 찹투팟 플러스 접이식도마",
+     "slug": "조셉조셉-찹투팟-플러스-접이식도마",
+     "photo": true,
+     "link": true,
+     "band": "low"
+    },
+    {
+     "name": "계란 흰자 분리기",
+     "slug": "계란-흰자-분리기",
+     "photo": true,
+     "link": true,
+     "band": "low"
+    }
+   ],
+   "photo": true,
    "link": true,
    "links": "3/3",
    "hot": []

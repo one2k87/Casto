@@ -1,5 +1,5 @@
 {
- "next": 144,
+ "next": 148,
  "items": {
   "1": {
    "name": "늘어나는 밀폐용기",
@@ -1341,6 +1341,46 @@
    "url": "https://www.coupang.com/np/search?q=%EA%B3%84%EB%9F%89%EC%8A%A4%ED%91%BC",
    "hold": true,
    "note": "123번과 같은 물건으로 보임 — 123번으로 캡처"
+  },
+  "144": {
+   "name": "미니 LP 자석",
+   "slug": "",
+   "key": "미니lp자석",
+   "done": false,
+   "search": "미니 LP 자석",
+   "url": "https://www.coupang.com/np/search?q=%EB%AF%B8%EB%8B%88+LP+%EC%9E%90%EC%84%9D",
+   "hold": true,
+   "note": "70번과 같은 물건으로 보임 — 70번으로 캡처"
+  },
+  "145": {
+   "name": "전동 야채다지기",
+   "slug": "",
+   "key": "전동야채다지기",
+   "done": false,
+   "search": "전동 야채다지기",
+   "url": "https://www.coupang.com/np/search?q=%EC%A0%84%EB%8F%99+%EC%95%BC%EC%B1%84%EB%8B%A4%EC%A7%80%EA%B8%B0",
+   "hold": true,
+   "note": "57번과 같은 물건으로 보임 — 57번으로 캡처"
+  },
+  "146": {
+   "name": "다중날 주방가위",
+   "slug": "",
+   "key": "다중날주방가위",
+   "done": false,
+   "search": "다중날 주방가위",
+   "url": "https://www.coupang.com/np/search?q=%EB%8B%A4%EC%A4%91%EB%82%A0+%EC%A3%BC%EB%B0%A9%EA%B0%80%EC%9C%84",
+   "hold": true,
+   "note": "80번과 같은 물건으로 보임 — 80번으로 캡처"
+  },
+  "147": {
+   "name": "한경희 미니건조기",
+   "slug": "",
+   "key": "한경희미니건조기",
+   "done": false,
+   "search": "한경희 미니건조기",
+   "url": "https://www.coupang.com/np/search?q=%ED%95%9C%EA%B2%BD%ED%9D%AC+%EB%AF%B8%EB%8B%88%EA%B1%B4%EC%A1%B0%EA%B8%B0",
+   "hold": true,
+   "note": "90번과 같은 물건으로 보임 — 90번으로 캡처"
   }
  }
 }
