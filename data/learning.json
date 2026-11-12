@@ -1,73 +1,10 @@
 {
  "videos": 17,
- "matched": 11,
+ "matched": 0,
  "min_n": 3,
- "axes": {
-  "verdict": {
-   "buy": {
-    "n": 9,
-    "lift": 0.989,
-    "avg_views": 368.9
-   }
-  },
-  "has_photo": {
-   "True": {
-    "n": 7,
-    "lift": 1.211,
-    "avg_views": 370.0
-   },
-   "False": {
-    "n": 4,
-    "lift": 0.631,
-    "avg_views": 378.2
-   }
-  },
-  "format": {
-   "roundup3": {
-    "n": 11,
-    "lift": 1.0,
-    "avg_views": 373.0
-   }
-  }
- },
- "notes": [],
- "mean_views": 373.0,
- "mean_engagement": 0.0009,
- "best": [
-  {
-   "title": "냉장고 속 계란 위생, 900건 언급된 이걸로 끝!",
-   "product": "계란보관 트레이",
-   "views": 732,
-   "score": 4.006
-  },
-  {
-   "title": "삐뚤빼뚤 커팅? 이거 하나로 고민 끝!",
-   "product": "레이저가이드가위",
-   "views": 1171,
-   "score": 2.505
-  },
-  {
-   "title": "오일 스프레이 단점, 기름 낭비 1초 만에 줄이는 방법 3가지",
-   "product": "오일 스프레이",
-   "views": 1168,
-   "score": 2.061
-  }
+ "axes": {},
+ "notes": [
+  "표본 0편 — 3편이 모이기 전에는 축별 판단을 하지 않는다. 숫자 3개로 결론 내는 것이 이 단계에서 가장 흔한 사고다."
  ],
- "worst": [
-  {
-   "title": "좁은 냉장고 2배 넓어지는 꿀템",
-   "product": "계란보관 트레이",
-   "views": 0,
-   "score": 0.0
-  },
-  {
-   "title": "침실 무드등 추천해줘, 좁은 주방이 2배 넓어지는 살림템",
-   "product": "미닉스 3인용 미니 식기세척기 PRO MNDW-110",
-   "views": 4,
-   "score": 0.005
-  }
- ],
- "hints": [
-  "실제 상품사진: 'True'가 'False'보다 잘 됨(lift 1.211 vs 0.631, n=7/4)"
- ]
+ "hints": []
 }
