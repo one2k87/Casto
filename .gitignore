@@ -3,3 +3,7 @@
 out/
 __pycache__/
 out/demo_clay/
+
+# 스톱모션 렌더 중간 프레임
+*.mp4.frames/
+*.sfx.wav
