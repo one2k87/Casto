@@ -1,1 +1,1 @@
-pilot/stop/test2/shot.json pilot/stop/test2/test2.mp4 시험2(10초): 창가→거실 와이드→소파에 앉기→부엌, 잔잔한 배경음(ElevenLabs Music, 상업 이용 가능). 좋다/아니다만 답해 주세요
+pilot/stop/test3/shot.json pilot/stop/test3/test3.mp4 시험3(14초): 소파 대화→거실에서 부엌으로 이동→부엌→식탁에 앉기(식탁 레이어), 움직임 부드럽게. 좋다/아니다 한마디

@@ -3,9 +3,10 @@
 월레스와 그로밋 방식(아드만: 24fps 촬영, 캐릭터는 2프레임마다 한 포즈 = 'on twos', 카메라만 매 프레임):
   ①세트 고정   장면당 배경판 1장(set). 다시 생성하지 않는다. 캐릭터는 투명 PNG(스프라이트)로 따로 만들어 합성.
   ②홀드       포즈 사이를 보간하지 않는다. 포즈 n장을 정해진 '박자'만큼 2프레임 단위로 유지(12fps).
-  ③절차 움직임 숨쉬기(세로 1~2%), 접지 그림자 — 12fps 계단식으로만 바뀐다.
-  ④보일       2프레임마다 1px 흔들림 + 약한 조명 깜빡임(스톱모션 질감).
-  ⑤카메라     배경판에서 느린 밀기(push-in)만 매 프레임(24fps). 전환은 컷만(디졸브·모핑 금지).
+  ③절차 움직임 위치 이동(path)·깡충 높이·숨쉬기·살랑임은 매 프레임(24fps) ease 보간 — 2단계(11/13 사용자: "뚝뚝 끊긴다").
+  ④보일       1px 손떨림은 기본 끔(boil 옵션), 조명 깜빡임 0.4%만. 포즈 전환 반반 섞기(blend)는 잔상이 보여 기본 끔.
+  ⑤카메라     path 키프레임으로 매 프레임 이동 — 가로로 긴 파노라마 세트를 훑으며 방→방으로 옮겨 간다
+              (11/13 사용자: "배경 고정 말고 다른 배경으로 옮겨가도록"). 컷 사이 전환은 컷만(디졸브·모핑 금지).
 
 사용:  python clay_stop.py <shot.json> <out.mp4>
 shot.json 예시는 pilot/stop/test1/shot.json. 좌표는 1080x1920 기준 픽셀, 'feet'는 발바닥 중앙 위치.
@@ -75,53 +76,118 @@ def shadow(w: int, strength: float = 0.35) -> Image.Image:
 
 
 # ------------------------------------------------------------ 타임라인
-def pose_at(actor: dict, beat: int) -> tuple[str, int]:
-    """beat(12fps 박자) → (포즈 파일, 위로 띄울 px). timeline = [[포즈번호, 박자수, (띄움px)], ...]
-    loop=true면 반복, 아니면 마지막 포즈 유지. 띄움은 깡충 뛰기처럼 '포즈는 그대로, 몸만 공중'일 때."""
+def ease(t: float) -> float:
+    """천천히 출발·천천히 멈춤(smoothstep). 손으로 옮긴 인형처럼 끝에서 감속."""
+    t = min(max(t, 0.0), 1.0)
+    return t * t * (3 - 2 * t)
+
+
+def keyed(keys: list, t: float) -> list[float]:
+    """[[시각, v1, v2, ...], ...] 키프레임을 t(초)에서 ease 보간."""
+    if t <= keys[0][0]:
+        return list(keys[0][1:])
+    for k0, k1 in zip(keys, keys[1:]):
+        if t <= k1[0]:
+            u = ease((t - k0[0]) / max(k1[0] - k0[0], 1e-6))
+            return [x0 + (x1 - x0) * u for x0, x1 in zip(k0[1:], k1[1:])]
+    return list(keys[-1][1:])
+
+
+def pose_at(actor: dict, beat: float) -> tuple[str, float]:
+    """beat(12fps 박자, 소수 가능) → (포즈 파일, 위로 띄울 px).
+    timeline = [[포즈번호, 박자수, (띄움px)], ...] — loop=true면 반복, 아니면 마지막 포즈 유지.
+    포즈 그림은 박자 단위로만 바뀌지만(on twos) 띄움(깡충 높이)은 박자 사이를 매 프레임 이어서 포물선처럼 움직인다."""
     seq = actor["timeline"]
     total = sum(e[1] for e in seq)
-    b = beat % total if actor.get("loop", False) else min(beat, total - 1)
-    for e in seq:
-        if b < e[1]:
-            return actor["poses"][e[0]], (e[2] if len(e) > 2 else 0)
-        b -= e[1]
-    return actor["poses"][seq[-1][0]], 0
+
+    def at(bi: int):
+        b = bi % total if actor.get("loop", False) else min(bi, total - 1)
+        for e in seq:
+            if b < e[1]:
+                return actor["poses"][e[0]], (e[2] if len(e) > 2 else 0)
+            b -= e[1]
+        return actor["poses"][seq[-1][0]], 0
+
+    bi = int(beat)
+    path, l0 = at(bi)
+    _, l1 = at(bi + 1)
+    frac = beat - bi
+    return path, l0 + (l1 - l0) * frac
 
 
-def compose(set_img: Image.Image, actors: list[dict], beat: int, rng: random.Random, R: int = 1) -> Image.Image:
-    """한 박자(12fps)의 합성 화면. R=내부 배율(클로즈업은 2 — 확대해도 캐릭터가 뭉개지지 않게). 카메라는 나중에."""
+def place(a: dict, t: float) -> tuple[float, float]:
+    """발 위치: path=[[초, x, y], ...]가 있으면 ease 보간(걸어서 이동), 없으면 feet 고정."""
+    return tuple(keyed(a["path"], t)) if a.get("path") else tuple(a["feet"])
+
+
+def draw_actor(frame: Image.Image, a: dict, path: str, lift: float, t: float, fpos, R: int, rng) -> None:
+    ph = (a.get("pose_h") or {}).get(path, 1.0)               # 웅크림 같은 포즈만 키를 줄인다(예: 0.9)
+    sp, foot = sprite(path, round(a["height"] * ph * R), a.get("tint"))
+    lift *= R
+    cb = a.get("crop_bottom", 0.0)                            # 식탁·아일랜드 뒤: 몸 아래쪽(다리)을 잘라 '밑에 들어간' 것처럼
+    if cb:
+        sp = sp.crop((0, 0, sp.width, round(sp.height * (1 - cb))))
+        foot = sp.height
+    br = 1.0 + a.get("breath", 0.012) * math.sin(2 * math.pi * t / a.get("breath_sec", 2.6))
+    if br != 1.0:                                             # 숨쉬기: 발바닥 기준 세로만 살짝, 매 프레임 부드럽게
+        sp = sp.resize((sp.width, max(1, round(sp.height * br))), Image.LANCZOS)
+        foot = round(foot * br)
+    if a.get("flip"):
+        sp = sp.transpose(Image.FLIP_LEFT_RIGHT)
+    sway = a.get("sway", 0.0)                                 # 좌우 살랑(도) — 발 기준 회전
+    if sway:
+        ang = sway * math.sin(2 * math.pi * t / a.get("sway_sec", 1.8))
+        big = Image.new("RGBA", (sp.width * 2, sp.height * 2), (0, 0, 0, 0))
+        big.alpha_composite(sp, (sp.width // 2, sp.height - foot + sp.height // 2 + foot - sp.height))
+        big = big.rotate(ang, resample=Image.BICUBIC, center=(sp.width, sp.height // 2 + foot))
+        sp, foot = big, sp.height // 2 + foot
+    fx, fy = fpos[0] * R, fpos[1] * R
+    j = a.get("boil", 0)                                      # 손떨림(px) — 기본 0(11/13 사용자: 뚝뚝 끊김)
+    jx, jy = (rng.uniform(-j, j) * R, rng.uniform(-j, j) * R) if j else (0, 0)
+    if a.get("shadow", True):                                 # 앉은 캐릭터(소파 위)는 그림자 끔
+        base_w = sp.width if not sway else sp.width // 2
+        sh = shadow(round(base_w * a.get("shadow_w", 0.55)), 0.35 * (1 - min(lift, 120 * R) / (200 * R)))
+        frame.alpha_composite(sh, (round(fx - sh.width / 2), round(fy - sh.height / 2)))
+    frame.alpha_composite(sp, (round(fx - sp.width / 2 + jx), round(fy - foot - lift + jy)))
+
+
+def compose(set_img: Image.Image, actors: list[dict], t: float, beat: float, rng: random.Random, R: int = 1,
+            override: dict | None = None, props: list[dict] | None = None) -> Image.Image:
+    """한 프레임 합성. 포즈 그림은 박자(12fps)마다 바뀌고, 위치·높이·숨쉬기·살랑임은 매 프레임(24fps) 이어진다.
+    override = {배우이름: 포즈파일} — 포즈가 바뀌는 순간 직전 포즈와 반반 섞는 프레임용.
+    props = [{"prop": true, "img": 투명PNG, "pos": [x, 바닥y], "height": px}] — 세트를 '빈 배경판 + 가구 조각'으로 나눠
+    가구를 캐릭터와 함께 바닥 y로 정렬해 그린다. 식탁 뒤에 앉은 늘보는 식탁에 아랫몸이 가려진다(11/13 사용자 질문)."""
     frame = set_img.copy()
-    for a in sorted(actors, key=lambda a: a["feet"][1]):          # 뒤(위쪽)에 선 캐릭터부터
+    placed = [(a, place(a, t)) for a in actors]
+    for pr in props or []:                                         # 가구 소품(식탁·아일랜드 등) — 같은 깊이 정렬에 넣는다
+        placed.append((pr, tuple(pr["pos"])))
+    for a, pos in sorted(placed, key=lambda x: x[1][1]):          # 바닥 y가 작은(뒤쪽) 것부터 → 앞 가구가 뒤 캐릭터를 가린다
+        if a.get("prop"):
+            sp, foot = sprite(a["img"], round(a["height"] * R), a.get("tint"))
+            frame.alpha_composite(sp, (round(pos[0] * R - sp.width / 2), round(pos[1] * R - foot)))
+            continue
         path, lift = pose_at(a, beat)
-        ph = (a.get("pose_h") or {}).get(path, 1.0)           # 웅크림 같은 포즈만 키를 줄인다(예: 0.9)
-        sp, foot = sprite(path, round(a["height"] * ph * R), a.get("tint"))
-        lift *= R
-        breath = 1.0 + a.get("breath", 0.012) * math.sin(2 * math.pi * beat / a.get("breath_beats", 30))
-        if breath != 1.0:                                         # 발바닥 기준으로 세로만 살짝(숨쉬기)
-            sp = sp.resize((sp.width, max(1, round(sp.height * breath))), Image.LANCZOS)
-            foot = round(foot * breath)
-        if a.get("flip"):
-            sp = sp.transpose(Image.FLIP_LEFT_RIGHT)
-        fx, fy = a["feet"][0] * R, a["feet"][1] * R
-        jx, jy = rng.choice((-1, 0, 1)) * R, rng.choice((-1, 0, 1)) * R  # 보일: 손으로 만진 듯 1px
-        if a.get("shadow", True):                                 # 앉은 캐릭터(소파 위)는 그림자 대신 세트 그늘
-            sh = shadow(round(sp.width * a.get("shadow_w", 0.55)), 0.35 * (1 - min(lift, 120) / 200))
-            frame.alpha_composite(sh, (round(fx - sh.width / 2), round(fy - sh.height / 2)))
-        frame.alpha_composite(sp, (round(fx - sp.width / 2 + jx), round(fy - foot - lift + jy)))
+        if override and a.get("name") in override:
+            path = override[a["name"]]
+        draw_actor(frame, a, path, lift, t, pos, R, rng)
     return frame
 
 
-def camera(img: Image.Image, t: float, cam: dict) -> Image.Image:
-    """t(0~1) 진행도에 따라 zoom0→zoom1, 중심 c0→c1 로 매 프레임 이동(24fps) 후 1080x1920."""
-    z = cam.get("zoom0", 1.0) + (cam.get("zoom1", 1.0) - cam.get("zoom0", 1.0)) * t
-    c0, c1 = cam.get("c0", [0.5, 0.5]), cam.get("c1", cam.get("c0", [0.5, 0.5]))
-    cx = (c0[0] + (c1[0] - c0[0]) * t) * img.width
-    cy = (c0[1] + (c1[1] - c0[1]) * t) * img.height
-    vw = img.width / z
-    vh = vw * H / W
-    if vh > img.height:                                   # 세로가 모자라면 세로 기준
-        vh = img.height
-        vw = vh * W / H
+def camera(img: Image.Image, t: float, cam: dict, sec: float = 0.0) -> Image.Image:
+    """카메라: path=[[초, cx, cy, zoom], ...] 키프레임(ease) 또는 zoom0→zoom1·c0→c1(ease). 매 프레임 이동 후 1080x1920."""
+    if cam.get("path"):
+        cxf, cyf, z = keyed(cam["path"], sec)
+    else:
+        u = ease(t)
+        z = cam.get("zoom0", 1.0) + (cam.get("zoom1", 1.0) - cam.get("zoom0", 1.0)) * u
+        c0, c1 = cam.get("c0", [0.5, 0.5]), cam.get("c1", cam.get("c0", [0.5, 0.5]))
+        cxf, cyf = c0[0] + (c1[0] - c0[0]) * u, c0[1] + (c1[1] - c0[1]) * u
+    vh = img.height / z                                    # 세로 기준(가로로 긴 파노라마 세트도 같은 규칙)
+    vw = vh * W / H
+    if vw > img.width:
+        vw = img.width
+        vh = vw * H / W
+    cx, cy = cxf * img.width, cyf * img.height
     x0 = min(max(cx - vw / 2, 0), img.width - vw)
     y0 = min(max(cy - vh / 2, 0), img.height - vh)
     return img.crop((round(x0), round(y0), round(x0 + vw), round(y0 + vh))).resize((W, H), Image.LANCZOS)
@@ -130,23 +196,35 @@ def camera(img: Image.Image, t: float, cam: dict) -> Image.Image:
 # ------------------------------------------------------------ 컷 → 영상
 def render_cut(cut: dict, set_path: str, tmp: str, seed: int) -> list[str]:
     cam = cut.get("camera", {})
-    R = cut.get("res") or (2 if max(cam.get("zoom0", 1), cam.get("zoom1", 1)) > 1.3 else 1)
+    zmax = max([cam.get("zoom0", 1), cam.get("zoom1", 1)] + [k[3] for k in cam.get("path", [])])
+    R = cut.get("res") or (2 if zmax > 1.3 else 1)
     set_img = Image.open(set_path).convert("RGBA")
-    scale = max(W * R / set_img.width, H * R / set_img.height) * cut.get("set_scale", 1.0)
+    scale = (H * R / set_img.height) * cut.get("set_scale", 1.0)   # 세로를 화면 높이에 맞춘다(파노라마는 가로가 남음)
+    if set_img.width * scale < W * R:
+        scale = W * R / set_img.width
     if scale != 1.0:
         set_img = set_img.resize((round(set_img.width * scale), round(set_img.height * scale)), Image.LANCZOS)
     n = max(STEP, round(cut["seconds"] * FPS))
     rng = random.Random(seed)
-    files, held = [], None
+    actors = cut.get("actors", [])
+    files, prev = [], {}
+    fl = 0.0
     for f in range(n):
-        beat = f // STEP
-        if f % STEP == 0:                                           # 캐릭터·보일은 2프레임마다만
-            held = compose(set_img, cut.get("actors", []), beat, rng, R)
+        t = f / FPS
+        beat = f / STEP
+        cur = {a.get("name", str(i)): pose_at(a, beat)[0] for i, a in enumerate(actors)}
+        props = cut.get("props", [])
+        img = compose(set_img, actors, t, beat, rng, R, props=props)
+        changed = {k: prev[k] for k in cur if k in prev and prev[k] != cur[k]}
+        if changed and cut.get("blend", False):            # 포즈 전환 반반 섞기 — 빠른 동작에서 잔상이 보여(11/13 시험3) 기본 끔
+            img = Image.blend(img, compose(set_img, actors, t, beat, rng, R, override=changed, props=props), 0.45)
+        prev = cur
+        if f % STEP == 0:
             fl = rng.uniform(-1, 1)
-        img = camera(held, f / max(n - 1, 1), cut.get("camera", {}))
-        img = ImageEnhance.Brightness(img).enhance(1.0 + fl * cut.get("flicker", 0.006))
+        out = camera(img, f / max(n - 1, 1), cam, t)
+        out = ImageEnhance.Brightness(out).enhance(1.0 + fl * cut.get("flicker", 0.004))
         p = os.path.join(tmp, f"f{len(os.listdir(tmp)):05d}.png")
-        img.convert("RGB").save(p, compress_level=1)
+        out.convert("RGB").save(p, compress_level=1)
         files.append(p)
     return files
 
@@ -210,6 +288,10 @@ def render(shot_path: str, out: str) -> str:
                           for p in a["poses"]]
             if isinstance(a.get("pose_h"), list):                    # 포즈 순서대로 준 키 배율 → 파일 기준
                 a["pose_h"] = dict(zip(a["poses"], a["pose_h"]))
+        for pr in c.get("props", []):
+            pr["prop"] = True
+            src = j(pr["img"])
+            pr["img"] = src if src.endswith("_cut.png") else cutout(src, src.rsplit(".", 1)[0] + "_cut.png")
     total = 0.0
     for i, c in enumerate(shot["cuts"]):
         render_cut(c, j(c.get("set", shot["set"])), tmp, seed=shot.get("seed", 13) + i)
