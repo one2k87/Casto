@@ -1,0 +1,49 @@
+name: 원템포 스톱모션 렌더
+# 2026-11-13 렌더러 1단계(clay_stop.py). pilot/stop/request.txt 에 "<shot.json> <out.mp4> [텔레그램 설명]" 한 줄을 적어 푸시하면
+# 렌더 → 결과 mp4 커밋 → 텔레그램으로 영상 전송. 세션 없이 Actions에서 도는지 확인하는 용도이기도 하다. 발행은 하지 않는다.
+on:
+  push:
+    paths: ["pilot/stop/request.txt"]
+  workflow_dispatch:
+    inputs:
+      args:
+        description: "<shot.json> <out.mp4>"
+        required: true
+        default: "pilot/stop/test1/shot.json pilot/stop/test1/test1.mp4"
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Seoul
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: 의존성
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-cjk
+          pip install -q requests pillow "rembg[cpu]"
+      - name: 렌더 + 텔레그램
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          LINE="${{ inputs.args }}"
+          if [ "${{ github.event_name }}" = "push" ]; then LINE="$(head -1 pilot/stop/request.txt)"; fi
+          SHOT=$(echo "$LINE" | awk '{print $1}'); OUT=$(echo "$LINE" | awk '{print $2}')
+          NOTE=$(echo "$LINE" | cut -d' ' -f3-)
+          echo "shot=$SHOT out=$OUT"
+          python clay_stop.py "$SHOT" "$OUT"
+          python -c "import sys; from common import telegram_video; telegram_video(sys.argv[1], sys.argv[2])" "$OUT" "[원템포 시험 컷 · Actions 렌더] $NOTE"
+      - name: 결과 커밋 (중간 프레임 제외)
+        if: ${{ success() }}
+        run: |
+          git config user.name casto-bot && git config user.email casto@solvup.local
+          git add -f pilot/stop/*/*.mp4 pilot/stop/*/*_cut.png 2>/dev/null || true
+          if git diff --cached --quiet; then echo "변경 없음"; else
+            git commit -m "clay stop: $(head -1 pilot/stop/request.txt 2>/dev/null || echo manual) [skip ci]" && git pull --rebase --autostash origin main && git push origin main
+          fi

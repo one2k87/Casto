@@ -1,0 +1,1 @@
+pilot/stop/test1/shot.json pilot/stop/test1/test1.mp4 렌더러 1단계 5초(와이드 토끼 깡충·가리키기 → 늘보 느린 깜빡임, 방울·째깍). 좋다/아니다만 답해 주세요
