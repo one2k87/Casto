@@ -1,5 +1,5 @@
 {
- "next": 148,
+ "next": 149,
  "items": {
   "1": {
    "name": "늘어나는 밀폐용기",
@@ -1381,6 +1381,16 @@
    "url": "https://www.coupang.com/np/search?q=%ED%95%9C%EA%B2%BD%ED%9D%AC+%EB%AF%B8%EB%8B%88%EA%B1%B4%EC%A1%B0%EA%B8%B0",
    "hold": true,
    "note": "90번과 같은 물건으로 보임 — 90번으로 캡처"
+  },
+  "148": {
+   "name": "다중날 가위",
+   "slug": "",
+   "key": "다중날가위",
+   "done": false,
+   "search": "다중날 가위",
+   "url": "https://www.coupang.com/np/search?q=%EB%8B%A4%EC%A4%91%EB%82%A0+%EA%B0%80%EC%9C%84",
+   "hold": true,
+   "note": "95번과 같은 물건으로 보임 — 95번으로 캡처"
   }
  }
 }

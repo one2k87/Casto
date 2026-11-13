@@ -1,27 +1,99 @@
 {
  "mini_electric_cooker": {
   "name": "미니 전기쿠커",
-  "search_keyword": "미니 전기쿠커 전기머그컵",
+  "search_keyword": "미니 전기쿠커 전기머그컵 미니쿠커",
   "en_keyword": "mini electric cooker",
   "price_band": "중가",
   "brand": "",
   "product_id": "",
-  "evidence": "쿠팡추천템 및 자취필수템 키워드 영상에서 확인됨",
+  "evidence": "쿠팡추천템(영상 35개/채널 14개), 자취필수템(영상 10개/채널 3개) 반복 등장",
   "category": "50000003",
-  "last_found": "2026-11-13",
+  "last_found": "2026-11-14",
   "first_seen": "2026-11-08"
  },
  "electric_oil_spray": {
   "name": "전동 스프레이",
-  "search_keyword": "주방용 전동 오일 스프레이",
-  "en_keyword": "electric oil spray",
+  "search_keyword": "신기한 전동 식용유 스프레이",
+  "en_keyword": "electric oil sprayer",
   "price_band": "중가",
   "brand": "",
   "product_id": "",
-  "evidence": "채널 다수에서 '식용유 붓지 마세요' 관련 신기한 전동 스프레이로 소개됨",
+  "evidence": "마세요(영상 5개/채널 5개), 이제(영상 4개/채널 4개) 반복 등장",
   "category": "50000008",
-  "last_found": "2026-11-13",
+  "last_found": "2026-11-14",
   "first_seen": "2026-11-08"
+ },
+ "mini_lp_magnet": {
+  "name": "미니 LP 자석",
+  "search_keyword": "냉장고 미니 LP 자석",
+  "en_keyword": "mini lp magnet",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "냉장고(영상 4개/채널 4개), 집꾸미기(영상 9개/채널 3개) 반복 등장",
+  "category": "50000004",
+  "last_found": "2026-11-14",
+  "first_seen": "2026-11-13"
+ },
+ "mini_dryer": {
+  "name": "미니 건조기",
+  "search_keyword": "한경희 미니건조기 의류건조기",
+  "en_keyword": "mini clothes dryer",
+  "price_band": "고가",
+  "brand": "한경희",
+  "product_id": "",
+  "evidence": "원룸(영상 4개/채널 3개) 키워드 연관 상품",
+  "category": "50000003",
+  "last_found": "2026-11-14",
+  "first_seen": "2026-11-13"
+ },
+ "multi_function_slicer": {
+  "name": "다기능 채칼",
+  "search_keyword": "다기능 채칼 야채 감자칼 보관형",
+  "en_keyword": "multi-function vegetable slicer",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "주방꿀템(영상 23개/채널 17개), 살림꿀템(영상 32개/채널 9개) 반복 등장",
+  "category": "50000008",
+  "last_found": "2026-11-14",
+  "first_seen": "2026-11-14"
+ },
+ "kitchen_scissors_knife": {
+  "name": "도마 가위",
+  "search_keyword": "칼 도마 합친 주방 가위",
+  "en_keyword": "cleaver scissors",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "주방꿀템(영상 23개/채널 17개), 주방용품(영상 15개/채널 10개) 반복 등장",
+  "category": "50000008",
+  "last_found": "2026-11-14",
+  "first_seen": "2026-11-14"
+ },
+ "electric_food_chopper": {
+  "name": "전동 다지기",
+  "search_keyword": "대파 자동 전동 야채다지기",
+  "en_keyword": "electric food chopper",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "주방꿀템 살림꿀템(영상 5개/채널 3개), 살림템추천(영상 7개/채널 3개) 반복 등장",
+  "category": "50000008",
+  "last_found": "2026-11-14",
+  "first_seen": "2026-11-14"
+ },
+ "multi_blade_scissors": {
+  "name": "다중날 가위",
+  "search_keyword": "주방용 다중날 가위 파채가위",
+  "en_keyword": "multi-blade kitchen scissors",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "살림템추천(영상 7개/채널 3개), 쇼핑쇼츠(영상 4개/채널 3개) 반복 등장",
+  "category": "50000008",
+  "last_found": "2026-11-14",
+  "first_seen": "2026-11-14"
  },
  "multi_functional_slicer": {
   "name": "다기능 채칼",
@@ -47,18 +119,6 @@
   "last_found": "2026-11-13",
   "first_seen": "2026-11-13"
  },
- "mini_lp_magnet": {
-  "name": "미니 LP 자석",
-  "search_keyword": "미니 LP 냉장고 자석",
-  "en_keyword": "mini lp magnet",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "냉장고 및 쿠팡추천템 키워드 영상에서 확인됨",
-  "category": "50000004",
-  "last_found": "2026-11-13",
-  "first_seen": "2026-11-13"
- },
  "vegetable_chopper": {
   "name": "전동 야채다지기",
   "search_keyword": "전동 야채다지기 자동 다지기",
@@ -80,18 +140,6 @@
   "product_id": "",
   "evidence": "살림템추천 및 쇼핑쇼츠 키워드 영상에서 확인됨",
   "category": "50000008",
-  "last_found": "2026-11-13",
-  "first_seen": "2026-11-13"
- },
- "mini_dryer": {
-  "name": "한경희 미니건조기",
-  "search_keyword": "한경희 미니건조기 의류건조기",
-  "en_keyword": "mini clothes dryer",
-  "price_band": "고가",
-  "brand": "한경희",
-  "product_id": "",
-  "evidence": "원룸 및 미니건조기 관련 키워드 영상에서 확인됨",
-  "category": "50000003",
   "last_found": "2026-11-13",
   "first_seen": "2026-11-13"
  },
@@ -190,53 +238,5 @@
   "category": "50000008",
   "last_found": "2026-11-11",
   "first_seen": "2026-11-11"
- },
- "folding_laundry_dryer": {
-  "name": "접이식 빨래건조대",
-  "search_keyword": "김나영 접이식 빨래 건조대",
-  "en_keyword": "folding drying rack",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "김나영이 선택한 접이식 빨래 건조대로 빨래 키워드 영상 4개 채널 집계",
-  "category": "50000008",
-  "last_found": "2026-11-11",
-  "first_seen": "2026-11-11"
- },
- "electric_mug": {
-  "name": "전기머그컵",
-  "search_keyword": "전기 머그컵 미니쿠커",
-  "en_keyword": "electric mug",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "미니전기쿠커와 함께 자취필수템, 주방꿀템 키워드로 다수 노출",
-  "category": "50000003",
-  "last_found": "2026-11-09",
-  "first_seen": "2026-11-09"
- },
- "multi_slicer": {
-  "name": "다기능 채칼",
-  "search_keyword": "다기능 채칼 야채 감자칼 보관형",
-  "en_keyword": "multi slicer vegetable cutter",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "주방꿀템·살림꿀템 키워드에 다수 등장",
-  "category": "50000008",
-  "last_found": "2026-11-09",
-  "first_seen": "2026-11-09"
- },
- "inclined_rice_dispenser": {
-  "name": "기울어진 쌀통",
-  "search_keyword": "기울어진 쌀통 주방용품",
-  "en_keyword": "inclined rice dispenser",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "주방용품 및 쌀통 키워드로 반복 노출",
-  "category": "50000008",
-  "last_found": "2026-11-09",
-  "first_seen": "2026-11-09"
  }
 }
