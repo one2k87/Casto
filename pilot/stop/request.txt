@@ -1,1 +1,1 @@
-pilot/stop/test3/shot.json pilot/stop/test3/test3.mp4 시험3(14초): 소파 대화→거실에서 부엌으로 이동→부엌→식탁에 앉기(식탁 레이어), 움직임 부드럽게. 좋다/아니다 한마디
+pilot/stop/test3/shot.json pilot/stop/test3/test3.mp4 시험3 수정: 토끼 빠른 걸음(깡충 대신). 좋다/아니다 한마디
