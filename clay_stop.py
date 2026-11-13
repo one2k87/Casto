@@ -104,8 +104,9 @@ def compose(set_img: Image.Image, actors: list[dict], beat: int, rng: random.Ran
             sp = sp.transpose(Image.FLIP_LEFT_RIGHT)
         fx, fy = a["feet"][0] * R, a["feet"][1] * R
         jx, jy = rng.choice((-1, 0, 1)) * R, rng.choice((-1, 0, 1)) * R  # 보일: 손으로 만진 듯 1px
-        sh = shadow(round(sp.width * a.get("shadow_w", 0.55)), 0.35 * (1 - min(lift, 120) / 200))
-        frame.alpha_composite(sh, (round(fx - sh.width / 2), round(fy - sh.height / 2)))
+        if a.get("shadow", True):                                 # 앉은 캐릭터(소파 위)는 그림자 대신 세트 그늘
+            sh = shadow(round(sp.width * a.get("shadow_w", 0.55)), 0.35 * (1 - min(lift, 120) / 200))
+            frame.alpha_composite(sh, (round(fx - sh.width / 2), round(fy - sh.height / 2)))
         frame.alpha_composite(sp, (round(fx - sp.width / 2 + jx), round(fy - foot - lift + jy)))
     return frame
 
@@ -151,9 +152,14 @@ def render_cut(cut: dict, set_path: str, tmp: str, seed: int) -> list[str]:
 
 
 def mix_audio(shot: dict, total: float, out: str) -> str | None:
-    """효과음(방울·째깍 등)을 지정 시각에 얹는다. sfx 파일이 없으면 ffmpeg로 합성음."""
+    """효과음(방울·째깍 등)을 지정 시각에 얹고, 배경음(bgm)은 낮게 깔아 앞뒤 페이드. 없으면 None.
+    shot["bgm"] = {"name": "first_snow", "volume": 0.16, "offset": 0} — assets/bgm/<name>.mp3(없으면 bgm.ensure로 1회 생성)."""
     events = shot.get("sfx", [])
-    if not events:
+    bg = None
+    if shot.get("bgm"):
+        import bgm
+        bg = bgm.ensure(shot["bgm"]["name"], shot["bgm"].get("prompt"))
+    if not events and not bg:
         return None
     base = os.path.dirname(out)
     cmd, fc, labels = ["ffmpeg", "-y"], [], []
@@ -163,6 +169,13 @@ def mix_audio(shot: dict, total: float, out: str) -> str | None:
         ms = int(e["at"] * 1000)
         fc.append(f"[{i}:a]volume={e.get('vol', 1.0)},adelay={ms}|{ms},apad[a{i}]")
         labels.append(f"[a{i}]")
+    if bg:
+        k = len(events)
+        cmd += ["-stream_loop", "-1", "-ss", str(shot["bgm"].get("offset", 0)), "-i", bg]
+        fade_out = max(total - 0.8, 0)
+        fc.append(f"[{k}:a]atrim=duration={total:.3f},volume={shot['bgm'].get('volume', 0.16)},"
+                  f"afade=t=in:st=0:d=0.4,afade=t=out:st={fade_out:.2f}:d=0.8,aresample=44100,apad[a{k}]")
+        labels.append(f"[a{k}]")
     fc.append(f"{''.join(labels)}amix=inputs={len(labels)}:normalize=0,atrim=duration={total:.3f}[aout]")
     cmd += ["-filter_complex", ";".join(fc), "-map", "[aout]", "-ar", "44100", "-ac", "2", out]
     subprocess.run(cmd, check=True, capture_output=True)

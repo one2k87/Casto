@@ -1,0 +1,353 @@
+{
+ "title": "원템포 10초 시험 2 — 장소·구도 바꾸기(창가 → 거실 와이드 → 소파 앉기 → 부엌) + 잔잔한 배경음",
+ "set": "../test1/set.png",
+ "seed": 21,
+ "bgm": {
+  "name": "first_snow",
+  "volume": 0.16
+ },
+ "cuts": [
+  {
+   "seconds": 2.2,
+   "set": "set_window.png",
+   "camera": {
+    "zoom0": 1.0,
+    "zoom1": 1.06,
+    "c0": [
+     0.5,
+     0.55
+    ],
+    "c1": [
+     0.5,
+     0.56
+    ]
+   },
+   "actors": [
+    {
+     "name": "wife",
+     "poses": [
+      "../test1/r1.png",
+      "../test1/r2.png",
+      "../test1/r3.png"
+     ],
+     "pose_h": [
+      1.0,
+      1.0,
+      0.9
+     ],
+     "height": 600,
+     "feet": [
+      560,
+      1560
+     ],
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.0,
+     "timeline": [
+      [
+       2,
+       2
+      ],
+      [
+       0,
+       2,
+       70
+      ],
+      [
+       0,
+       1,
+       30
+      ],
+      [
+       0,
+       2
+      ],
+      [
+       1,
+       19
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "seconds": 2.0,
+   "set": "../test1/set.png",
+   "camera": {
+    "zoom0": 1.0,
+    "zoom1": 1.04,
+    "c0": [
+     0.5,
+     0.55
+    ],
+    "c1": [
+     0.52,
+     0.55
+    ]
+   },
+   "actors": [
+    {
+     "name": "wife",
+     "poses": [
+      "../test1/r1.png",
+      "../test1/r2.png",
+      "../test1/r3.png"
+     ],
+     "height": 560,
+     "feet": [
+      340,
+      1560
+     ],
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.0,
+     "timeline": [
+      [
+       1,
+       24
+      ]
+     ]
+    },
+    {
+     "name": "husband",
+     "poses": [
+      "../test1/s1.png",
+      "../test1/s2.png",
+      "../test1/s3.png",
+      "../test1/s4.png"
+     ],
+     "height": 930,
+     "feet": [
+      770,
+      1600
+     ],
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.012,
+     "breath_beats": 36,
+     "timeline": [
+      [
+       0,
+       8
+      ],
+      [
+       3,
+       16
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "seconds": 3.5,
+   "set": "set_sofa.png",
+   "camera": {
+    "zoom0": 1.12,
+    "zoom1": 1.18,
+    "c0": [
+     0.5,
+     0.53
+    ],
+    "c1": [
+     0.48,
+     0.53
+    ]
+   },
+   "actors": [
+    {
+     "name": "husband",
+     "poses": [
+      "ss1.png",
+      "ss2.png"
+     ],
+     "height": 560,
+     "feet": [
+      380,
+      1120
+     ],
+     "shadow": false,
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.012,
+     "breath_beats": 36,
+     "timeline": [
+      [
+       0,
+       14
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       0,
+       20
+      ]
+     ]
+    },
+    {
+     "name": "wife",
+     "poses": [
+      "rs1.png",
+      "rs2.png"
+     ],
+     "height": 380,
+     "feet": [
+      715,
+      1125
+     ],
+     "shadow": false,
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.0,
+     "loop": true,
+     "timeline": [
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       3
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "seconds": 2.3,
+   "set": "set_kitchen.png",
+   "camera": {
+    "zoom0": 1.0,
+    "zoom1": 1.05,
+    "c0": [
+     0.5,
+     0.56
+    ],
+    "c1": [
+     0.5,
+     0.57
+    ]
+   },
+   "actors": [
+    {
+     "name": "wife",
+     "poses": [
+      "../test1/r1.png",
+      "../test1/r2.png",
+      "../test1/r3.png"
+     ],
+     "pose_h": [
+      1.0,
+      1.0,
+      0.9
+     ],
+     "height": 480,
+     "feet": [
+      330,
+      1520
+     ],
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.0,
+     "timeline": [
+      [
+       2,
+       2
+      ],
+      [
+       0,
+       2,
+       60
+      ],
+      [
+       0,
+       1,
+       25
+      ],
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       20
+      ]
+     ]
+    },
+    {
+     "name": "husband",
+     "poses": [
+      "../test1/s1.png",
+      "../test1/s4.png"
+     ],
+     "height": 800,
+     "feet": [
+      780,
+      1560
+     ],
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.012,
+     "breath_beats": 36,
+     "timeline": [
+      [
+       0,
+       28
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "sfx": [
+  {
+   "kind": "bell",
+   "at": 0.05,
+   "vol": 0.9
+  },
+  {
+   "kind": "bell",
+   "at": 0.9,
+   "vol": 0.45
+  },
+  {
+   "kind": "tick",
+   "at": 2.6
+  },
+  {
+   "kind": "tick",
+   "at": 3.1
+  },
+  {
+   "kind": "tick",
+   "at": 3.6
+  },
+  {
+   "kind": "bell",
+   "at": 7.75,
+   "vol": 0.5
+  }
+ ]
+}
