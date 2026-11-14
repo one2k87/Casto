@@ -1,5 +1,5 @@
 {
- "next": 149,
+ "next": 152,
  "items": {
   "1": {
    "name": "늘어나는 밀폐용기",
@@ -1391,6 +1391,30 @@
    "url": "https://www.coupang.com/np/search?q=%EB%8B%A4%EC%A4%91%EB%82%A0+%EA%B0%80%EC%9C%84",
    "hold": true,
    "note": "95번과 같은 물건으로 보임 — 95번으로 캡처"
+  },
+  "149": {
+   "name": "자동디스펜서",
+   "slug": "",
+   "key": "자동디스펜서",
+   "done": false,
+   "search": "자동디스펜서",
+   "url": "https://www.coupang.com/np/search?q=%EC%9E%90%EB%8F%99%EB%94%94%EC%8A%A4%ED%8E%9C%EC%84%9C"
+  },
+  "150": {
+   "name": "거꾸로접히는우산",
+   "slug": "",
+   "key": "거꾸로접히는우산",
+   "done": false,
+   "search": "거꾸로접히는우산",
+   "url": "https://www.coupang.com/np/search?q=%EA%B1%B0%EA%BE%B8%EB%A1%9C%EC%A0%91%ED%9E%88%EB%8A%94%EC%9A%B0%EC%82%B0"
+  },
+  "151": {
+   "name": "양말보관함",
+   "slug": "",
+   "key": "양말보관함",
+   "done": false,
+   "search": "양말보관함",
+   "url": "https://www.coupang.com/np/search?q=%EC%96%91%EB%A7%90%EB%B3%B4%EA%B4%80%ED%95%A8"
   }
  }
 }
