@@ -1,0 +1,33 @@
+{
+ "date": "2026-11-16",
+ "channel_date": "2026-11-16",
+ "subscribers": 2,
+ "total_views": 0,
+ "video_count": 0,
+ "uploads_90d": 0,
+ "views_90d": 0,
+ "avg_views_per_video_90d": null,
+ "published_total": 11,
+ "cost": {
+  "veo_usd_total": 11.6,
+  "llm": "free tier",
+  "tts": "ElevenLabs 구독",
+  "per_episode_usd_est": 1.05
+ },
+ "minutes_per_episode": null,
+ "ypp_expanded_gate": {
+  "subscribers": {
+   "now": 2,
+   "need": 500
+  },
+  "public_uploads_90d": {
+   "now": 0,
+   "need": 3
+  },
+  "shorts_views_90d": {
+   "now": 0,
+   "need": 3000000
+  }
+ },
+ "top_videos_90d": []
+}
