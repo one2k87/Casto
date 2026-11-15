@@ -1,5 +1,5 @@
 {
- "next": 152,
+ "next": 154,
  "items": {
   "1": {
    "name": "늘어나는 밀폐용기",
@@ -1415,6 +1415,24 @@
    "done": false,
    "search": "양말보관함",
    "url": "https://www.coupang.com/np/search?q=%EC%96%91%EB%A7%90%EB%B3%B4%EA%B4%80%ED%95%A8"
+  },
+  "152": {
+   "name": "접이식계량스푼",
+   "slug": "",
+   "key": "접이식계량스푼",
+   "done": false,
+   "search": "접이식계량스푼",
+   "url": "https://www.coupang.com/np/search?q=%EC%A0%91%EC%9D%B4%EC%8B%9D%EA%B3%84%EB%9F%89%EC%8A%A4%ED%91%BC",
+   "hold": true,
+   "note": "143번과 같은 물건으로 보임 — 143번으로 캡처"
+  },
+  "153": {
+   "name": "자동섞이는컵",
+   "slug": "",
+   "key": "자동섞이는컵",
+   "done": false,
+   "search": "자동섞이는컵",
+   "url": "https://www.coupang.com/np/search?q=%EC%9E%90%EB%8F%99%EC%84%9E%EC%9D%B4%EB%8A%94%EC%BB%B5"
   }
  }
 }

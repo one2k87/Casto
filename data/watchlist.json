@@ -1,27 +1,63 @@
 {
  "mini_electric_cooker": {
   "name": "미니전기쿠커",
-  "search_keyword": "미니 전기쿠커 라면포트",
+  "search_keyword": "미니 전기쿠커",
   "en_keyword": "mini electric cooker",
-  "price_band": "중가",
+  "price_band": "저가",
   "brand": "",
   "product_id": "",
-  "evidence": "쿠팡추천템 영상 35개 / 채널 13개, 자취필수템 영상 10개 / 채널 3개 반복 등장",
+  "evidence": "쿠팡추천템 키워드 영상 32개 / 채널 13개 반복 등장",
   "category": "50000003",
-  "last_found": "2026-11-15",
+  "last_found": "2026-11-16",
   "first_seen": "2026-11-08"
  },
  "mini_lp_magnet": {
   "name": "미니LP자석",
-  "search_keyword": "냉장고 미니 LP 자석",
+  "search_keyword": "미니 LP 자석 냉장고",
   "en_keyword": "mini lp magnet",
   "price_band": "저가",
   "brand": "",
   "product_id": "",
-  "evidence": "집꾸미기 영상 9개 / 채널 3개 및 쿠팡추천템으로 등장",
+  "evidence": "집꾸미기 키워드 영상 9개 / 채널 3개 반복 등장",
   "category": "50000004",
-  "last_found": "2026-11-15",
+  "last_found": "2026-11-16",
   "first_seen": "2026-11-13"
+ },
+ "electric_mug": {
+  "name": "전기머그컵",
+  "search_keyword": "전기 머그컵",
+  "en_keyword": "electric mug",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "쿠팡추천템 키워드 영상 32개 / 채널 13개 반복 등장",
+  "category": "50000003",
+  "last_found": "2026-11-16",
+  "first_seen": "2026-11-15"
+ },
+ "folding_measuring_spoon": {
+  "name": "접이식계량스푼",
+  "search_keyword": "접이식 계량스푼",
+  "en_keyword": "folding measuring spoon",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "계량스푼 키워드 영상 3개 / 채널 3개 반복 등장",
+  "category": "50000008",
+  "last_found": "2026-11-16",
+  "first_seen": "2026-11-16"
+ },
+ "auto_stirring_cup": {
+  "name": "자동섞이는컵",
+  "search_keyword": "자동 섞이는 컵",
+  "en_keyword": "self stirring mug",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "집꾸미기 키워드 영상 9개 / 채널 3개 반복 등장",
+  "category": "50000008",
+  "last_found": "2026-11-16",
+  "first_seen": "2026-11-16"
  },
  "electric_chopper": {
   "name": "전동다지기",
@@ -56,18 +92,6 @@
   "product_id": "",
   "evidence": "주방용품 영상 16개 / 채널 10개, 주방꿀템 영상 21개 / 채널 15개 반복 등장",
   "category": "50000008",
-  "last_found": "2026-11-15",
-  "first_seen": "2026-11-15"
- },
- "electric_mug": {
-  "name": "전기머그컵",
-  "search_keyword": "보온 전기 머그컵 워머",
-  "en_keyword": "electric mug warmer",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "쿠팡추천템 영상 35개 / 채널 13개에 키워드로 등장",
-  "category": "50000003",
   "last_found": "2026-11-15",
   "first_seen": "2026-11-15"
  },
@@ -214,29 +238,5 @@
   "category": "50000008",
   "last_found": "2026-11-13",
   "first_seen": "2026-11-13"
- },
- "multi_blade_scissor": {
-  "name": "다중날 주방가위",
-  "search_keyword": "다중날 파채가위 주방가위",
-  "en_keyword": "multi-blade kitchen scissors",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "살림템추천 및 쇼핑쇼츠 키워드 영상에서 확인됨",
-  "category": "50000008",
-  "last_found": "2026-11-13",
-  "first_seen": "2026-11-13"
- },
- "multi_functional_mandoline": {
-  "name": "다기능 채칼",
-  "search_keyword": "다기능 채칼 야채 감자칼 보관형",
-  "en_keyword": "mandoline slicer",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "주방꿀템, 살림꿀템 채널 다수 등장",
-  "category": "50000008",
-  "last_found": "2026-11-12",
-  "first_seen": "2026-11-12"
  }
 }
