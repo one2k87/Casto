@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-15",
+ "updated": "2026-11-16",
  "items": [
   {
    "date": "2026-11-17",
@@ -76,57 +76,22 @@
    "weekday": "토",
    "label": "11/21(토)",
    "slot": "season",
-   "product": "미니 가습기 무선 · HanilMedical 탄소열선 고급 전기요 HL-D205(25), 북극곰, M (100 x 180 cm) · 음식물 쓰레기처리기",
-   "slug": "미니-가습기-무선",
+   "product": "조셉조셉 찹투팟 플러스 접이식도마 · 신일전자 삶는 미니세탁기 3kg SWM-1500WSJ · 계란 흰자 분리기",
+   "slug": "조셉조셉-찹투팟-플러스-접이식도마",
    "products": [
-    {
-     "name": "미니 가습기 무선",
-     "slug": "미니-가습기-무선",
-     "photo": false,
-     "link": true,
-     "band": "low"
-    },
-    {
-     "name": "HanilMedical 탄소열선 고급 전기요 HL-D205(25), 북극곰, M (100 x 180 cm)",
-     "slug": "hanilmedical-탄소열선-고급-전기요-hl-d205-25-북극곰-m-100-x-180-cm",
-     "photo": false,
-     "link": true,
-     "band": "mid"
-    },
-    {
-     "name": "음식물 쓰레기처리기",
-     "slug": "음식물-쓰레기처리기",
-     "photo": false,
-     "link": true,
-     "band": "high"
-    }
-   ],
-   "photo": false,
-   "link": true,
-   "links": "3/3",
-   "hot": []
-  },
-  {
-   "date": "2026-11-24",
-   "weekday": "화",
-   "label": "11/24(화)",
-   "slot": "deep1",
-   "product": "전기장판 · 조셉조셉 찹투팟 플러스 접이식도마 · 계란 흰자 분리기",
-   "slug": "전기장판-1-3만",
-   "products": [
-    {
-     "name": "전기장판",
-     "slug": "전기장판-1-3만",
-     "photo": true,
-     "link": true,
-     "band": "low"
-    },
     {
      "name": "조셉조셉 찹투팟 플러스 접이식도마",
      "slug": "조셉조셉-찹투팟-플러스-접이식도마",
      "photo": true,
      "link": true,
      "band": "low"
+    },
+    {
+     "name": "신일전자 삶는 미니세탁기 3kg SWM-1500WSJ",
+     "slug": "신일전자-삶는-미니세탁기-3kg-swm-1500wsj",
+     "photo": true,
+     "link": true,
+     "band": "mid"
     },
     {
      "name": "계란 흰자 분리기",
@@ -137,6 +102,41 @@
     }
    ],
    "photo": true,
+   "link": true,
+   "links": "3/3",
+   "hot": []
+  },
+  {
+   "date": "2026-11-24",
+   "weekday": "화",
+   "label": "11/24(화)",
+   "slot": "deep1",
+   "product": "레트로 수화기 · 코멧 길이조절 접시정리대 · 미니 가습기 무선",
+   "slug": "레트로-수화기",
+   "products": [
+    {
+     "name": "레트로 수화기",
+     "slug": "레트로-수화기",
+     "photo": true,
+     "link": true,
+     "band": "low"
+    },
+    {
+     "name": "코멧 길이조절 접시정리대",
+     "slug": "코멧-길이조절-접시정리대",
+     "photo": true,
+     "link": true,
+     "band": "mid"
+    },
+    {
+     "name": "미니 가습기 무선",
+     "slug": "미니-가습기-무선",
+     "photo": false,
+     "link": true,
+     "band": "low"
+    }
+   ],
+   "photo": false,
    "link": true,
    "links": "3/3",
    "hot": []

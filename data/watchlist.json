@@ -1,4 +1,64 @@
 {
+ "folding_measuring_spoon": {
+  "name": "접이식계량스푼",
+  "search_keyword": "접이식 계량스푼",
+  "en_keyword": "folding measuring spoon",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "계량스푼 키워드 영상 3개, 채널 3개 확인",
+  "category": "50000008",
+  "last_found": "2026-11-17",
+  "first_seen": "2026-11-16"
+ },
+ "auto_dispenser": {
+  "name": "자동디스펜서",
+  "search_keyword": "브렉스 자동 디스펜서",
+  "en_keyword": "automatic soap dispenser",
+  "price_band": "중가",
+  "brand": "브렉스",
+  "product_id": "",
+  "evidence": "디스펜서 키워드 영상 3개, 채널 3개 확인",
+  "category": "50000008",
+  "last_found": "2026-11-17",
+  "first_seen": "2026-11-15"
+ },
+ "mini_dryer": {
+  "name": "미니건조기",
+  "search_keyword": "한경희 미니건조기 의류건조기",
+  "en_keyword": "mini clothes dryer",
+  "price_band": "고가",
+  "brand": "한경희",
+  "product_id": "",
+  "evidence": "원룸 빨래 미니건조기 추천 채널 언급",
+  "category": "50000003",
+  "last_found": "2026-11-17",
+  "first_seen": "2026-11-13"
+ },
+ "multi_blade_scissors": {
+  "name": "다중날가위",
+  "search_keyword": "다중날 주방가위 5중날",
+  "en_keyword": "multi blade kitchen shears",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "주방용품 및 주방꿀템 채널 다수 언급",
+  "category": "50000008",
+  "last_found": "2026-11-17",
+  "first_seen": "2026-11-14"
+ },
+ "acrylic_mirror": {
+  "name": "아크릴거울",
+  "search_keyword": "붙이는 아크릴 전신거울",
+  "en_keyword": "adhesive acrylic mirror",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "생활용품 및 집꾸미기 채널 다수 언급",
+  "category": "50000004",
+  "last_found": "2026-11-17",
+  "first_seen": "2026-11-17"
+ },
  "mini_electric_cooker": {
   "name": "미니전기쿠커",
   "search_keyword": "미니 전기쿠커",
@@ -34,18 +94,6 @@
   "category": "50000003",
   "last_found": "2026-11-16",
   "first_seen": "2026-11-15"
- },
- "folding_measuring_spoon": {
-  "name": "접이식계량스푼",
-  "search_keyword": "접이식 계량스푼",
-  "en_keyword": "folding measuring spoon",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "계량스푼 키워드 영상 3개 / 채널 3개 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-11-16",
-  "first_seen": "2026-11-16"
  },
  "auto_stirring_cup": {
   "name": "자동섞이는컵",
@@ -95,18 +143,6 @@
   "last_found": "2026-11-15",
   "first_seen": "2026-11-15"
  },
- "auto_dispenser": {
-  "name": "자동디스펜서",
-  "search_keyword": "자동 주방 디스펜서",
-  "en_keyword": "automatic soap dispenser",
-  "price_band": "중가",
-  "brand": "브렉스",
-  "product_id": "",
-  "evidence": "디스펜서 영상 3개 / 채널 3개, 자동 영상 3개 / 채널 3개 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-11-15",
-  "first_seen": "2026-11-15"
- },
  "reverse_umbrella": {
   "name": "거꾸로접히는우산",
   "search_keyword": "거꾸로 3단 자동우산",
@@ -142,18 +178,6 @@
   "category": "50000008",
   "last_found": "2026-11-14",
   "first_seen": "2026-11-08"
- },
- "mini_dryer": {
-  "name": "미니 건조기",
-  "search_keyword": "한경희 미니건조기 의류건조기",
-  "en_keyword": "mini clothes dryer",
-  "price_band": "고가",
-  "brand": "한경희",
-  "product_id": "",
-  "evidence": "원룸(영상 4개/채널 3개) 키워드 연관 상품",
-  "category": "50000003",
-  "last_found": "2026-11-14",
-  "first_seen": "2026-11-13"
  },
  "multi_function_slicer": {
   "name": "다기능 채칼",
@@ -191,18 +215,6 @@
   "last_found": "2026-11-14",
   "first_seen": "2026-11-14"
  },
- "multi_blade_scissors": {
-  "name": "다중날 가위",
-  "search_keyword": "주방용 다중날 가위 파채가위",
-  "en_keyword": "multi-blade kitchen scissors",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "살림템추천(영상 7개/채널 3개), 쇼핑쇼츠(영상 4개/채널 3개) 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-11-14",
-  "first_seen": "2026-11-14"
- },
  "multi_functional_slicer": {
   "name": "다기능 채칼",
   "search_keyword": "다기능 채칼 야채 감자칼",
@@ -223,18 +235,6 @@
   "brand": "",
   "product_id": "",
   "evidence": "주방꿀템 및 주방용품 키워드 관련 영상 다수 등장",
-  "category": "50000008",
-  "last_found": "2026-11-13",
-  "first_seen": "2026-11-13"
- },
- "vegetable_chopper": {
-  "name": "전동 야채다지기",
-  "search_keyword": "전동 야채다지기 자동 다지기",
-  "en_keyword": "electric vegetable chopper",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "살림템추천 및 야채다지기 관련 키워드 영상에서 확인됨",
   "category": "50000008",
   "last_found": "2026-11-13",
   "first_seen": "2026-11-13"
