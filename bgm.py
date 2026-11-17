@@ -20,10 +20,10 @@ MODEL = os.getenv("ELEVEN_MUSIC_MODEL", "music_v2_5")
 
 # 원템포 기본 트랙(사운드 로고와 어울리게: 오르골·우쿨렐레, 잔잔, 가사 없음)
 TRACKS = {
-    "cozy_home": ("Gentle cozy instrumental for a cute claymation animation about a married rabbit and sloth couple "
-                  "at home. Soft music box and warm ukulele, light brushed percussion, slow relaxed tempo around 80 BPM, "
-                  "warm and heartwarming, a little playful, calm background bed under dialogue, no vocals, "
-                  "no sudden loud parts, seamless loop-friendly ending."),
+    "cozy_home": ("Warm cozy healing instrumental for a cute claymation couple show that comforts tired people after work. "
+                  "Soft fingerpicked acoustic guitar, gentle music box melody, felt piano, light warm string pad, "
+                  "slow relaxed tempo around 72 BPM, hopeful, heartwarming, lovely and tender like a warm blanket, "
+                  "calm background bed under dialogue, no drums, no vocals, no sudden changes, soft ending."),
     "first_snow": ("Quiet wintery instrumental for a cute claymation animation: celesta and soft glockenspiel with "
                    "gentle felt piano, sleigh-bell sparkle very subtle, slow tempo around 72 BPM, cozy and tender, "
                    "background bed under dialogue, no vocals, no drums, soft fade at the end."),

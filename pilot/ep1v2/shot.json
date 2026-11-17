@@ -1,0 +1,1109 @@
+{
+ "title": "원템포 1화 v2 — 원템포 인터뷰: 우리가 처음 만난 날 (힐링·진짜 대화)",
+ "plot": "interview",
+ "set": "../stop/test2/set_sofa.png",
+ "seed": 201,
+ "voice_mode": "natural",
+ "bgm": {
+  "name": "cozy_home",
+  "volume": 0.2
+ },
+ "cuts": [
+  {
+   "seconds": 2.0,
+   "set": "../stop/test2/set_sofa.png",
+   "camera": {
+    "zoom0": 1.32,
+    "zoom1": 1.4,
+    "c0": [
+     0.52,
+     0.47
+    ],
+    "c1": [
+     0.5,
+     0.47
+    ]
+   },
+   "card": "Q. 두 분은 처음에 어떻게 만났어요?",
+   "actors": [
+    {
+     "name": "husband",
+     "poses": [
+      "../stop/test2/ss1.png",
+      "ss_talk.png",
+      "ss_think.png",
+      "ss_rise.png",
+      "ss_warm.png",
+      "ss_hfmid.png",
+      "ss_hf.png",
+      "ss_wave.png",
+      "../stop/test2/ss2.png"
+     ],
+     "height": 560,
+     "feet": [
+      380,
+      1120
+     ],
+     "shadow": false,
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.015,
+     "breath_sec": 3.2,
+     "sway": 0.4,
+     "sway_sec": 3.0,
+     "timeline": [
+      [
+       0,
+       99
+      ]
+     ],
+     "talk": {
+      "0": "1"
+     }
+    },
+    {
+     "name": "wife",
+     "poses": [
+      "rs_closed.png",
+      "rs_talk.png",
+      "rs_run.png",
+      "rs_laugh.png",
+      "rs_blush.png",
+      "rs_hf.png",
+      "rs_wave.png"
+     ],
+     "height": 380,
+     "feet": [
+      715,
+      1125
+     ],
+     "shadow": false,
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.0,
+     "sway": 1.0,
+     "sway_sec": 0.9,
+     "timeline": [
+      [
+       0,
+       99
+      ]
+     ],
+     "talk": {
+      "0": "1"
+     }
+    }
+   ],
+   "lines": [
+    {
+     "who": "wife",
+     "text": "[excited] 아, 그거요? 제가 할게요, 제가!"
+    },
+    {
+     "who": "husband",
+     "text": "[hesitates] 나도… 할 수 있는데—"
+    },
+    {
+     "who": "wife",
+     "text": "[interrupting] —자기는 다 말하면 내일이야."
+    }
+   ],
+   "sfx": [
+    {
+     "kind": "ding",
+     "at": 0.0,
+     "vol": 0.7
+    },
+    {
+     "kind": "bell",
+     "at": 0.2,
+     "vol": 0.5
+    }
+   ]
+  },
+  {
+   "seconds": 2.0,
+   "set": "../stop/test2/set_sofa.png",
+   "camera": {
+    "zoom0": 2.1,
+    "zoom1": 2.2,
+    "c0": [
+     0.66,
+     0.5
+    ],
+    "c1": [
+     0.66,
+     0.5
+    ]
+   },
+   "actors": [
+    {
+     "name": "husband",
+     "poses": [
+      "../stop/test2/ss1.png",
+      "ss_talk.png",
+      "ss_think.png",
+      "ss_rise.png",
+      "ss_warm.png",
+      "ss_hfmid.png",
+      "ss_hf.png",
+      "ss_wave.png",
+      "../stop/test2/ss2.png"
+     ],
+     "height": 560,
+     "feet": [
+      380,
+      1120
+     ],
+     "shadow": false,
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.015,
+     "breath_sec": 3.2,
+     "sway": 0.4,
+     "sway_sec": 3.0,
+     "timeline": [
+      [
+       0,
+       99
+      ]
+     ],
+     "talk": {
+      "0": "1"
+     }
+    },
+    {
+     "name": "wife",
+     "poses": [
+      "rs_closed.png",
+      "rs_talk.png",
+      "rs_run.png",
+      "rs_laugh.png",
+      "rs_blush.png",
+      "rs_hf.png",
+      "rs_wave.png"
+     ],
+     "height": 380,
+     "feet": [
+      715,
+      1125
+     ],
+     "shadow": false,
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.0,
+     "sway": 1.0,
+     "sway_sec": 0.9,
+     "timeline": [
+      [
+       1,
+       8
+      ],
+      [
+       2,
+       10
+      ],
+      [
+       1,
+       99
+      ]
+     ],
+     "talk": {
+      "0": "1"
+     }
+    }
+   ],
+   "lines": [
+    {
+     "who": "wife",
+     "text": "그날 첫눈 왔거든요? 저 버스 놓칠까 봐 막 뛰어갔는데, 정류장에 이 사람이 딱 앉아 있는 거예요."
+    }
+   ]
+  },
+  {
+   "seconds": 2.0,
+   "set": "set_busstop.png",
+   "camera": {
+    "zoom0": 1.12,
+    "zoom1": 1.16,
+    "c0": [
+     0.45,
+     0.47
+    ],
+    "c1": [
+     0.46,
+     0.47
+    ]
+   },
+   "actors": [
+    {
+     "name": "husband",
+     "poses": [
+      "../stop/test2/ss1.png",
+      "ss_rise.png"
+     ],
+     "pose_h": [
+      1.0,
+      1.22
+     ],
+     "height": 430,
+     "feet": [
+      400,
+      965
+     ],
+     "shadow": false,
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.015,
+     "timeline": [
+      [
+       0,
+       14
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       0,
+       99
+      ]
+     ]
+    },
+    {
+     "name": "bus",
+     "poses": [
+      "bus.png"
+     ],
+     "height": 520,
+     "timeline": [
+      [
+       0,
+       999
+      ]
+     ],
+     "shadow": true,
+     "shadow_w": 0.9,
+     "breath": 0.0,
+     "tint": [
+      1.0,
+      0.97,
+      0.92
+     ],
+     "path": [
+      [
+       0,
+       1700,
+       1360
+      ],
+      [
+       0.95,
+       -700,
+       1360
+      ],
+      [
+       1.0,
+       1700,
+       1360
+      ],
+      [
+       1.95,
+       -700,
+       1360
+      ],
+      [
+       2.0,
+       1700,
+       1360
+      ],
+      [
+       2.95,
+       -700,
+       1360
+      ],
+      [
+       3.0,
+       1700,
+       1360
+      ]
+     ]
+    },
+    {
+     "name": "wife",
+     "poses": [
+      "../stop/test3/rw1.png",
+      "../stop/test3/rwp.png",
+      "../stop/test3/rw2.png"
+     ],
+     "height": 440,
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.0,
+     "loop": true,
+     "timeline": [
+      [
+       0,
+       1,
+       0
+      ],
+      [
+       1,
+       1,
+       6
+      ],
+      [
+       2,
+       1,
+       0
+      ],
+      [
+       1,
+       1,
+       6
+      ]
+     ],
+     "path": [
+      [
+       0,
+       -300,
+       1640
+      ],
+      [
+       2.6,
+       -300,
+       1640
+      ],
+      [
+       4.2,
+       330,
+       1640
+      ]
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "wife",
+     "text": "근데 버스가 오잖아요? 안 타. 또 와. 안 타. 또 와—"
+    }
+   ],
+   "hold": 0.4
+  },
+  {
+   "seconds": 2.0,
+   "set": "../stop/test2/set_sofa.png",
+   "camera": {
+    "zoom0": 2.1,
+    "zoom1": 2.2,
+    "c0": [
+     0.34,
+     0.47
+    ],
+    "c1": [
+     0.34,
+     0.47
+    ]
+   },
+   "actors": [
+    {
+     "name": "husband",
+     "poses": [
+      "../stop/test2/ss1.png",
+      "ss_talk.png",
+      "ss_think.png",
+      "ss_rise.png",
+      "ss_warm.png",
+      "ss_hfmid.png",
+      "ss_hf.png",
+      "ss_wave.png",
+      "../stop/test2/ss2.png"
+     ],
+     "height": 560,
+     "feet": [
+      380,
+      1120
+     ],
+     "shadow": false,
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.015,
+     "breath_sec": 3.2,
+     "sway": 0.4,
+     "sway_sec": 3.0,
+     "timeline": [
+      [
+       2,
+       10
+      ],
+      [
+       1,
+       99
+      ]
+     ],
+     "talk": {
+      "0": "1"
+     }
+    },
+    {
+     "name": "wife",
+     "poses": [
+      "rs_closed.png",
+      "rs_talk.png",
+      "rs_run.png",
+      "rs_laugh.png",
+      "rs_blush.png",
+      "rs_hf.png",
+      "rs_wave.png"
+     ],
+     "height": 380,
+     "feet": [
+      715,
+      1125
+     ],
+     "shadow": false,
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.0,
+     "sway": 1.0,
+     "sway_sec": 0.9,
+     "timeline": [
+      [
+       0,
+       99
+      ]
+     ],
+     "talk": {
+      "0": "1"
+     }
+    }
+   ],
+   "lines": [
+    {
+     "who": "husband",
+     "text": "[pause] …세 대째는… 탈 생각이었어요."
+    },
+    {
+     "who": "wife",
+     "text": "[laughs] 일어나다 말았잖아!"
+    }
+   ],
+   "sfx": [
+    {
+     "kind": "tick",
+     "at": 0.2
+    }
+   ]
+  },
+  {
+   "seconds": 2.0,
+   "set": "../stop/test2/set_sofa.png",
+   "camera": {
+    "zoom0": 1.5,
+    "zoom1": 1.58,
+    "c0": [
+     0.5,
+     0.47
+    ],
+    "c1": [
+     0.5,
+     0.46
+    ]
+   },
+   "actors": [
+    {
+     "name": "husband",
+     "poses": [
+      "../stop/test2/ss1.png",
+      "ss_talk.png",
+      "ss_think.png",
+      "ss_rise.png",
+      "ss_warm.png",
+      "ss_hfmid.png",
+      "ss_hf.png",
+      "ss_wave.png",
+      "../stop/test2/ss2.png"
+     ],
+     "height": 560,
+     "feet": [
+      380,
+      1120
+     ],
+     "shadow": false,
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.015,
+     "breath_sec": 3.2,
+     "sway": 0.4,
+     "sway_sec": 3.0,
+     "timeline": [
+      [
+       0,
+       14
+      ],
+      [
+       4,
+       99
+      ]
+     ],
+     "talk": {
+      "0": "1"
+     }
+    },
+    {
+     "name": "wife",
+     "poses": [
+      "rs_closed.png",
+      "rs_talk.png",
+      "rs_run.png",
+      "rs_laugh.png",
+      "rs_blush.png",
+      "rs_hf.png",
+      "rs_wave.png"
+     ],
+     "height": 380,
+     "feet": [
+      715,
+      1125
+     ],
+     "shadow": false,
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.0,
+     "sway": 1.0,
+     "sway_sec": 0.9,
+     "timeline": [
+      [
+       0,
+       30
+      ],
+      [
+       4,
+       99
+      ]
+     ],
+     "talk": {
+      "0": "1"
+     }
+    }
+   ],
+   "lines": [
+    {
+     "who": "husband",
+     "text": "눈이 예뻐서."
+    },
+    {
+     "who": "wife",
+     "text": "어? 아, 첫눈이?"
+    },
+    {
+     "who": "husband",
+     "text": "[sleepy] …아니. 뛰어오는 사람 눈이."
+    },
+    {
+     "who": "wife",
+     "text": "[surprised] …뭐야, 그거 처음 듣는데?"
+    }
+   ]
+  },
+  {
+   "seconds": 2.0,
+   "set": "../stop/test3/set_kitchen_empty.png",
+   "camera": {
+    "zoom0": 1.15,
+    "zoom1": 1.22,
+    "c0": [
+     0.5,
+     0.52
+    ],
+    "c1": [
+     0.5,
+     0.51
+    ]
+   },
+   "card": "Q. 서로 제일 다른 점은요?",
+   "actors": [
+    {
+     "name": "husband",
+     "poses": [
+      "../stop/test2/ss1.png",
+      "ss_talk.png",
+      "ss_think.png",
+      "ss_rise.png",
+      "ss_warm.png",
+      "ss_hfmid.png",
+      "ss_hf.png",
+      "ss_wave.png",
+      "../stop/test2/ss2.png"
+     ],
+     "height": 660,
+     "feet": [
+      360,
+      1180
+     ],
+     "shadow": false,
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.015,
+     "breath_sec": 3.2,
+     "sway": 0.4,
+     "sway_sec": 3.0,
+     "timeline": [
+      [
+       0,
+       99
+      ]
+     ],
+     "talk": {
+      "0": "1"
+     },
+     "crop_bottom": 0.3
+    },
+    {
+     "name": "wife",
+     "poses": [
+      "rs_closed.png",
+      "rs_talk.png",
+      "rs_run.png",
+      "rs_laugh.png",
+      "rs_blush.png",
+      "rs_hf.png",
+      "rs_wave.png"
+     ],
+     "height": 440,
+     "feet": [
+      730,
+      1190
+     ],
+     "shadow": false,
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.0,
+     "sway": 1.0,
+     "sway_sec": 0.9,
+     "timeline": [
+      [
+       0,
+       99
+      ]
+     ],
+     "talk": {
+      "0": "1"
+     },
+     "crop_bottom": 0.28
+    }
+   ],
+   "lines": [
+    {
+     "who": "wife",
+     "text": "저는 아침에 씻고, 화장하고, 커피까지 딱 십 분!"
+    },
+    {
+     "who": "husband",
+     "text": "저는… 일어나는 데 십 분."
+    },
+    {
+     "who": "wife",
+     "text": "[giggles] 눈 뜨는 데만 오 분 걸려요."
+    },
+    {
+     "who": "husband",
+     "text": "그건… 꿈이랑 인사하는 시간이야."
+    }
+   ],
+   "sfx": [
+    {
+     "kind": "ding",
+     "at": 0.0,
+     "vol": 0.7
+    }
+   ],
+   "props": [
+    {
+     "img": "../stop/test3/prop_table.png",
+     "pos": [
+      540,
+      1650
+     ],
+     "height": 780,
+     "tint": [
+      1.0,
+      1.0,
+      1.0
+     ]
+    }
+   ]
+  },
+  {
+   "seconds": 2.0,
+   "set": "../stop/test2/set_window.png",
+   "camera": {
+    "zoom0": 1.25,
+    "zoom1": 1.35,
+    "c0": [
+     0.5,
+     0.4
+    ],
+    "c1": [
+     0.5,
+     0.4
+    ]
+   },
+   "card": "Q. 마지막으로, 서로에게 한마디?",
+   "actors": [
+    {
+     "name": "husband",
+     "poses": [
+      "../stop/test2/ss1.png",
+      "ss_talk.png",
+      "ss_think.png",
+      "ss_rise.png",
+      "ss_warm.png",
+      "ss_hfmid.png",
+      "ss_hf.png",
+      "ss_wave.png",
+      "../stop/test2/ss2.png"
+     ],
+     "height": 540,
+     "feet": [
+      390,
+      940
+     ],
+     "shadow": false,
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.015,
+     "breath_sec": 3.2,
+     "sway": 0.4,
+     "sway_sec": 3.0,
+     "timeline": [
+      [
+       0,
+       30
+      ],
+      [
+       8,
+       6
+      ],
+      [
+       4,
+       99
+      ]
+     ],
+     "talk": {
+      "0": "1"
+     }
+    },
+    {
+     "name": "wife",
+     "poses": [
+      "rs_closed.png",
+      "rs_talk.png",
+      "rs_run.png",
+      "rs_laugh.png",
+      "rs_blush.png",
+      "rs_hf.png",
+      "rs_wave.png"
+     ],
+     "height": 370,
+     "feet": [
+      700,
+      945
+     ],
+     "shadow": false,
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.0,
+     "sway": 1.0,
+     "sway_sec": 0.9,
+     "timeline": [
+      [
+       0,
+       10
+      ],
+      [
+       4,
+       99
+      ]
+     ],
+     "talk": {
+      "0": "1"
+     }
+    }
+   ],
+   "lines": [
+    {
+     "who": "wife",
+     "text": "음… [warm] 천천히 와도 돼. 이제 기다리는 것도 좋아."
+    },
+    {
+     "who": "husband",
+     "text": "[warm] …나도. 너 따라 뛰는 거… 좋아."
+    },
+    {
+     "who": "wife",
+     "text": "[laughs] 뛴 적 없잖아."
+    },
+    {
+     "who": "husband",
+     "text": "마음은 뛰었어."
+    }
+   ],
+   "sfx": [
+    {
+     "kind": "ding",
+     "at": 0.0,
+     "vol": 0.7
+    },
+    {
+     "kind": "tick",
+     "at": 2.4
+    }
+   ]
+  },
+  {
+   "seconds": 3.2,
+   "set": "../stop/test2/set_window.png",
+   "camera": {
+    "zoom0": 1.45,
+    "zoom1": 1.6,
+    "c0": [
+     0.52,
+     0.38
+    ],
+    "c1": [
+     0.52,
+     0.37
+    ]
+   },
+   "actors": [
+    {
+     "name": "husband",
+     "poses": [
+      "../stop/test2/ss1.png",
+      "ss_talk.png",
+      "ss_think.png",
+      "ss_rise.png",
+      "ss_warm.png",
+      "ss_hfmid.png",
+      "ss_hf.png",
+      "ss_wave.png",
+      "../stop/test2/ss2.png"
+     ],
+     "height": 540,
+     "feet": [
+      390,
+      940
+     ],
+     "shadow": false,
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.015,
+     "breath_sec": 3.2,
+     "sway": 0.4,
+     "sway_sec": 3.0,
+     "timeline": [
+      [
+       4,
+       8
+      ],
+      [
+       5,
+       10
+      ],
+      [
+       6,
+       99
+      ]
+     ]
+    },
+    {
+     "name": "wife",
+     "poses": [
+      "rs_closed.png",
+      "rs_talk.png",
+      "rs_run.png",
+      "rs_laugh.png",
+      "rs_blush.png",
+      "rs_hf.png",
+      "rs_wave.png"
+     ],
+     "height": 370,
+     "feet": [
+      700,
+      945
+     ],
+     "shadow": false,
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.0,
+     "sway": 1.0,
+     "sway_sec": 0.9,
+     "timeline": [
+      [
+       5,
+       99
+      ]
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "kind": "clap",
+     "at": 1.55,
+     "vol": 1.0
+    }
+   ]
+  },
+  {
+   "seconds": 1.5,
+   "set": "../stop/test2/set_window.png",
+   "camera": {
+    "zoom0": 1.2,
+    "zoom1": 1.24,
+    "c0": [
+     0.5,
+     0.4
+    ],
+    "c1": [
+     0.5,
+     0.4
+    ]
+   },
+   "actors": [
+    {
+     "name": "husband",
+     "poses": [
+      "../stop/test2/ss1.png",
+      "ss_talk.png",
+      "ss_think.png",
+      "ss_rise.png",
+      "ss_warm.png",
+      "ss_hfmid.png",
+      "ss_hf.png",
+      "ss_wave.png",
+      "../stop/test2/ss2.png"
+     ],
+     "height": 540,
+     "feet": [
+      390,
+      940
+     ],
+     "shadow": false,
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.015,
+     "breath_sec": 3.2,
+     "sway": 0.4,
+     "sway_sec": 3.0,
+     "timeline": [
+      [
+       7,
+       99
+      ]
+     ]
+    },
+    {
+     "name": "wife",
+     "poses": [
+      "rs_closed.png",
+      "rs_talk.png",
+      "rs_run.png",
+      "rs_laugh.png",
+      "rs_blush.png",
+      "rs_hf.png",
+      "rs_wave.png"
+     ],
+     "height": 370,
+     "feet": [
+      700,
+      945
+     ],
+     "shadow": false,
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "breath": 0.0,
+     "sway": 1.0,
+     "sway_sec": 0.9,
+     "timeline": [
+      [
+       6,
+       99
+      ]
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "wife",
+     "text": "오늘도 고생했어요!"
+    },
+    {
+     "who": "husband",
+     "text": "…천천히 쉬어요."
+    }
+   ],
+   "sfx": [
+    {
+     "kind": "bell",
+     "at": 0.1,
+     "vol": 0.5
+    }
+   ]
+  }
+ ],
+ "sfx": []
+}

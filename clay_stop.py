@@ -152,7 +152,8 @@ def draw_actor(frame: Image.Image, a: dict, path: str, lift: float, t: float, fp
 
 
 def compose(set_img: Image.Image, actors: list[dict], t: float, beat: float, rng: random.Random, R: int = 1,
-            override: dict | None = None, props: list[dict] | None = None) -> Image.Image:
+            override: dict | None = None, props: list[dict] | None = None,
+            talking: dict | None = None) -> Image.Image:
     """한 프레임 합성. 포즈 그림은 박자(12fps)마다 바뀌고, 위치·높이·숨쉬기·살랑임은 매 프레임(24fps) 이어진다.
     override = {배우이름: 포즈파일} — 포즈가 바뀌는 순간 직전 포즈와 반반 섞는 프레임용.
     props = [{"prop": true, "img": 투명PNG, "pos": [x, 바닥y], "height": px}] — 세트를 '빈 배경판 + 가구 조각'으로 나눠
@@ -169,6 +170,13 @@ def compose(set_img: Image.Image, actors: list[dict], t: float, beat: float, rng
         path, lift = pose_at(a, beat)
         if override and a.get("name") in override:
             path = override[a["name"]]
+        tk = a.get("talk")                                        # 입모양: {"닫힌포즈": "열린포즈"} 짝 — 말하는 중 소리가 크면 열린 쪽
+        if tk and talking is not None:
+            pairs = {a["poses"][int(k)]: a["poses"][int(v)] for k, v in tk.items()}
+            rev = {v: k for k, v in pairs.items()}
+            closed = rev.get(path, path)
+            if closed in pairs:
+                path = pairs[closed] if talking.get(a.get("name")) else closed
         draw_actor(frame, a, path, lift, t, pos, R, rng)
     return frame
 
@@ -202,6 +210,8 @@ def subtitle_png(text: str, who: str, out: str) -> str:
     if os.path.exists(out):
         return out
     from render_clay import font, wrap_line
+    import dialogue
+    text = dialogue.caption(text)
     im = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(im)
     f = font(64)
@@ -224,6 +234,26 @@ def subtitle_png(text: str, who: str, out: str) -> str:
     return out
 
 
+def card_png(text: str, out: str) -> str:
+    """화면 위쪽 질문 카드(인터뷰어 질문·장면 제목) — 목소리 없는 글자. 화면 13% 높이."""
+    if os.path.exists(out):
+        return out
+    from render_clay import font, wrap_line
+    im = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    f = font(58)
+    rows = wrap_line(text, lambda t: d.textlength(t, font=f), W - 240)
+    tw = max(d.textlength(r, font=f) for r in rows)
+    y = int(H * 0.13)
+    hh = 50 + 36 * (len(rows) - 1)
+    d.rounded_rectangle((W / 2 - tw / 2 - 46, y - hh, W / 2 + tw / 2 + 46, y + hh), radius=40,
+                        fill=(255, 236, 240, 240), outline=(242, 140, 168, 255), width=5)
+    for i, r in enumerate(rows):
+        d.text((W / 2, y + (i - (len(rows) - 1) / 2) * 72), r, font=f, fill=(120, 70, 80), anchor="mm")
+    im.save(out)
+    return out
+
+
 # ------------------------------------------------------------ 컷 → 영상
 def render_cut(cut: dict, set_path: str, tmp: str, seed: int) -> list[str]:
     cam = cut.get("camera", {})
@@ -240,12 +270,16 @@ def render_cut(cut: dict, set_path: str, tmp: str, seed: int) -> list[str]:
     actors = cut.get("actors", [])
     files, prev = [], {}
     fl = 0.0
+    talking = {}
+    card = card_png(cut["card"], cut["_card_png"]) if cut.get("card") and cut.get("_card_png") else None
     for f in range(n):
         t = f / FPS
         beat = f / STEP
         cur = {a.get("name", str(i)): pose_at(a, beat)[0] for i, a in enumerate(actors)}
         props = cut.get("props", [])
-        img = compose(set_img, actors, t, beat, rng, R, props=props)
+        if f % STEP == 0:                                          # 입은 박자(12fps)마다 판단해서 유지
+            talking = mouth_state(cut, t, f)
+        img = compose(set_img, actors, t, beat, rng, R, props=props, talking=talking)
         changed = {k: prev[k] for k in cur if k in prev and prev[k] != cur[k]}
         if changed and cut.get("blend", False):            # 포즈 전환 반반 섞기 — 빠른 동작에서 잔상이 보여(11/13 시험3) 기본 끔
             img = Image.blend(img, compose(set_img, actors, t, beat, rng, R, override=changed, props=props), 0.45)
@@ -254,6 +288,9 @@ def render_cut(cut: dict, set_path: str, tmp: str, seed: int) -> list[str]:
             fl = rng.uniform(-1, 1)
         out = camera(img, f / max(n - 1, 1), cam, t)
         out = ImageEnhance.Brightness(out).enhance(1.0 + fl * cut.get("flicker", 0.004))
+        if card:
+            out = out.convert("RGBA")
+            out.alpha_composite(Image.open(card))
         for a0, b0, png in cut.get("_subs", []):                  # 대사 나오는 동안만 자막
             if a0 - 0.05 <= t < b0 + 0.25:
                 out = out.convert("RGBA")
@@ -304,8 +341,34 @@ def synth(kind: str, out: str) -> str:
                  "+0.25*sin(2*PI*2637*(t-0.09))*exp(-6*(t-0.09))*gt(t,0.09)':s=44100:d=0.9", "volume=0.9"),
         "tick": ("aevalsrc='0.9*sin(2*PI*2400*t)*exp(-180*t)':s=44100:d=0.06", "volume=0.8"),
         "clap": ("anoisesrc=d=0.12:c=pink:a=0.9", "afade=t=out:st=0.01:d=0.11,highpass=f=700"),
+        "ding": ("aevalsrc='0.45*sin(2*PI*1568*t)*exp(-4*t)+0.25*sin(2*PI*2349*t)*exp(-6*t)':s=44100:d=0.8", "volume=0.8"),
     }[kind]
     subprocess.run(["ffmpeg", "-y", "-f", "lavfi", "-i", spec[0], "-af", spec[1], out], check=True, capture_output=True)
+    return out
+
+
+def rms_track(path: str, fps: int = FPS) -> list[float]:
+    """오디오 → 프레임(1/24초)별 소리 크기(0~1 정규화). 입모양 판단용."""
+    import numpy as np
+    raw = subprocess.run(["ffmpeg", "-v", "error", "-i", path, "-f", "s16le", "-ac", "1", "-ar", "24000", "-"],
+                         capture_output=True, check=True).stdout
+    a = np.frombuffer(raw, dtype=np.int16).astype(np.float32)
+    hop = 24000 // fps
+    n = max(1, len(a) // hop)
+    r = np.sqrt(np.mean(a[: n * hop].reshape(n, hop) ** 2, axis=1))
+    top = np.percentile(r, 95) or 1.0
+    return [float(x) for x in np.clip(r / top, 0, 1)]
+
+
+def mouth_state(cut: dict, t: float, f: int) -> dict:
+    """이 순간 누가 말하고 있고 소리가 충분히 큰가 → {배역: 입 열림}. 말이 이어지는 동안엔 박자마다 열고닫기가 섞이게
+    (소리 크기 + 박자 홀짝)."""
+    out = {}
+    rms = cut.get("_rms")
+    lvl = rms[min(f, len(rms) - 1)] if rms else 0.6
+    for who, a0, b0 in cut.get("_talk", []):
+        if a0 <= t < b0:
+            out[who] = lvl > 0.28 and not (lvl < 0.55 and (f // STEP) % 2)
     return out
 
 
@@ -328,6 +391,11 @@ def plan_dialogue(shot: dict, base: str) -> None:
     sub_dir = os.path.join(base, "subs")
     os.makedirs(sub_dir, exist_ok=True)
     for ci, c in enumerate(shot["cuts"]):
+        if c.get("card"):
+            c["_card_png"] = os.path.join(sub_dir, f"card{ci:02d}.png")
+    if shot.get("voice_mode") == "natural" and voiced and voiced[0].get("full") and "start" in voiced[0]:
+        return plan_natural(shot, voiced, sub_dir, events)
+    for ci, c in enumerate(shot["cuts"]):
         t = c.get("lead", None)
         subs = []
         prev = None
@@ -340,6 +408,7 @@ def plan_dialogue(shot: dict, base: str) -> None:
             end = start + v["dur"]
             png = subtitle_png(l["text"], l["who"], os.path.join(sub_dir, f"c{ci:02d}_{li}.png"))
             subs.append((start, end, png))
+            c.setdefault("_talk", []).append((l["who"], start, end))
             if v.get("file"):
                 events.append({"file": v["file"], "at": round(t0 + start, 3), "vol": 1.0})
             prev = end
@@ -351,6 +420,48 @@ def plan_dialogue(shot: dict, base: str) -> None:
         t0 += c["seconds"]
     shot["sfx"] = events
     print(f"[stop] 대사 {k}줄 배치 — 총 {t0:.1f}초")
+
+
+def plan_natural(shot: dict, voiced: list[dict], sub_dir: str, events: list) -> None:
+    """진짜 대화 모드(11/17 사용자: "정말로 대화하고 있듯이"): v4가 한 번에 만든 대화 원본의 호흡(말 끊기·겹침·뜸)을
+    그대로 살린다. 대사 있는 컷은 원본에서 [첫 대사 시작 ~ 다음 컷 첫 대사 시작] 구간을 잘라 쓰고 컷 길이를 거기에 맞춘다.
+    대사 없는 컷(동작 컷)은 정해 둔 길이만큼 대화를 잠시 쉬어 간다."""
+    full = voiced[0]["full"]
+    idx, k = [], 0
+    for c in shot["cuts"]:
+        n = len(c.get("lines", []))
+        idx.append(list(range(k, k + n)))
+        k += n
+    starts = [voiced[ix[0]]["start"] if ix else None for ix in idx]
+    t0 = 0.0
+    for ci, c in enumerate(shot["cuts"]):
+        ix = idx[ci]
+        if ix:
+            s0 = max(0.0, starts[ci] - 0.08)
+            nxt = next((st for st in starts[ci + 1:] if st is not None), None)
+            e0 = (nxt - 0.03) if nxt is not None else voiced[ix[-1]]["end"] + 0.15
+            lead = c.get("lead", 0.12)
+            clip = os.path.join(sub_dir, f"cut{ci:02d}.wav")
+            subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", f"{s0:.3f}", "-to", f"{e0:.3f}", "-i", full,
+                            "-ar", "44100", "-ac", "1", clip], check=True)
+            span = e0 - s0
+            c["seconds"] = round(lead + span + c.get("hold", 0.0) + (c.get("tail", TAIL) if nxt is None else 0.0), 2)
+            subs, talk = [], []
+            for li, i in enumerate(ix):
+                v = voiced[i]
+                a0, b0 = lead + v["start"] - s0, lead + v["end"] - s0
+                subs.append((a0, b0, subtitle_png(v["text"], v["who"], os.path.join(sub_dir, f"c{ci:02d}_{li}.png"))))
+                talk.append((v["who"], a0, b0))
+            c["_subs"], c["_talk"] = subs, talk
+            rms = rms_track(clip)
+            pad = int(lead * FPS)
+            c["_rms"] = [0.0] * pad + rms
+            events.append({"file": clip, "at": round(t0 + lead, 3), "vol": 1.0})
+        for e in c.get("sfx", []):
+            events.append(dict(e, at=round(t0 + e["at"], 3)))
+        t0 += c["seconds"]
+    shot["sfx"] = events
+    print(f"[stop] 진짜 대화 모드 — 대사 {k}줄, 총 {t0:.1f}초")
 
 
 def render(shot_path: str, out: str) -> str:

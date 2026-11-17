@@ -26,12 +26,17 @@ VOICES = {"wife": os.getenv("ELEVEN_VOICE_WIFE", "Lb7qkOn5hF8p7qfCDH8q"),
 
 
 def speakable(text: str, who: str) -> str:
-    """자막용 연출 기호를 음성에서 뺀다: 앞 줄임표는 지우고(뜸은 타이밍으로), 가운데 줄임표는 쉼표."""
+    """음성용 글: [laughs]·[interrupting] 같은 v4 감정·대화 태그와 끊김 '—'는 그대로 둔다(모델이 연기에 씀).
+    앞 줄임표만 지운다(뜸은 태그 [pause]나 타이밍으로)."""
     t = (text or "").strip()
     t = re.sub(r"^[…\.\s]+", "", t)
-    if who == "husband":
-        t = re.sub(r"\s*…+\s*", ", ", t).strip(", ")
     return t
+
+
+def caption(text: str) -> str:
+    """자막용 글: 대괄호 태그 제거, 앞뒤 공백 정리."""
+    t = re.sub(r"\[[^\]]*\]\s*", "", text or "")
+    return re.sub(r"\s+", " ", t).strip()
 
 
 def _dur(path: str) -> float:
@@ -51,7 +56,8 @@ def build(lines: list[dict], out_dir: str) -> list[dict]:
     if os.path.exists(meta_p):
         meta = json.load(open(meta_p, encoding="utf-8"))
         if meta.get("sig") == sig and all(os.path.exists(os.path.join(out_dir, x["file"])) for x in meta["lines"]):
-            return [dict(x, file=os.path.join(out_dir, x["file"])) for x in meta["lines"]]
+            return [dict(x, file=os.path.join(out_dir, x["file"]), full=os.path.join(out_dir, "dialogue_full.mp3"))
+                    for x in meta["lines"]]
     key = os.getenv("ELEVEN_API_KEY", "").strip()
     if not key:
         print("[dialogue] 키도 캐시도 없음 — 음성 없이 자막 타이밍만 추정")
@@ -81,7 +87,8 @@ def build(lines: list[dict], out_dir: str) -> list[dict]:
         subprocess.run(["ffmpeg", "-y", "-ss", f"{max(a - 0.03, 0):.3f}", "-to", f"{b + 0.08:.3f}", "-i", full,
                         "-af", "afade=t=in:d=0.02,areverse,afade=t=in:d=0.04,areverse", "-ar", "44100", "-ac", "1", p],
                        check=True, capture_output=True)
-        out.append({"who": l["who"], "text": l["text"], "file": fn, "dur": round(_dur(p), 3)})
+        out.append({"who": l["who"], "text": l["text"], "file": fn, "dur": round(_dur(p), 3),
+                    "start": round(a, 3), "end": round(b, 3)})
     json.dump({"sig": sig, "model": MODEL, "lines": out}, open(meta_p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(f"[dialogue] ✅ {len(out)}줄, 전체 {_dur(full):.1f}초 ({MODEL})")
-    return [dict(x, file=os.path.join(out_dir, x["file"])) for x in out]
+    return [dict(x, file=os.path.join(out_dir, x["file"]), full=full) for x in out]
