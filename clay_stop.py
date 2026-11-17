@@ -193,6 +193,37 @@ def camera(img: Image.Image, t: float, cam: dict, sec: float = 0.0) -> Image.Ima
     return img.crop((round(x0), round(y0), round(x0 + vw), round(y0 + vh))).resize((W, H), Image.LANCZOS)
 
 
+# ------------------------------------------------------------ 자막
+NAME = {"wife": ("토끼", (242, 140, 168)), "husband": ("늘보", (154, 107, 79))}
+
+
+def subtitle_png(text: str, who: str, out: str) -> str:
+    """파스텔 자막: 크림색 둥근 상자 + 배역 이름표(토끼 분홍·늘보 갈색). 쇼츠 하단 UI를 피해 화면 78% 높이."""
+    if os.path.exists(out):
+        return out
+    from render_clay import font, wrap_line
+    im = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    f = font(64)
+    rows = wrap_line(text, lambda t: d.textlength(t, font=f), W - 220)
+    tw = max(d.textlength(r, font=f) for r in rows)
+    y = int(H * 0.78)
+    hh = 54 + 38 * (len(rows) - 1)
+    d.rounded_rectangle((W / 2 - tw / 2 - 44, y - hh, W / 2 + tw / 2 + 44, y + hh), radius=34,
+                        fill=(255, 248, 236, 236), outline=(120, 86, 64, 255), width=4)
+    for i, r in enumerate(rows):
+        d.text((W / 2, y + (i - (len(rows) - 1) / 2) * 76), r, font=f, fill=(92, 62, 46), anchor="mm")
+    name, col = NAME.get(who, ("", (120, 120, 120)))
+    if name:
+        ft = font(36)
+        nw = d.textlength(name, font=ft) + 44
+        tx = W / 2 - tw / 2 - 44
+        d.rounded_rectangle((tx, y - hh - 30, tx + nw, y - hh + 22), radius=20, fill=col + (255,))
+        d.text((tx + nw / 2, y - hh - 4), name, font=ft, fill=(255, 255, 255), anchor="mm")
+    im.save(out)
+    return out
+
+
 # ------------------------------------------------------------ 컷 → 영상
 def render_cut(cut: dict, set_path: str, tmp: str, seed: int) -> list[str]:
     cam = cut.get("camera", {})
@@ -223,6 +254,10 @@ def render_cut(cut: dict, set_path: str, tmp: str, seed: int) -> list[str]:
             fl = rng.uniform(-1, 1)
         out = camera(img, f / max(n - 1, 1), cam, t)
         out = ImageEnhance.Brightness(out).enhance(1.0 + fl * cut.get("flicker", 0.004))
+        for a0, b0, png in cut.get("_subs", []):                  # 대사 나오는 동안만 자막
+            if a0 - 0.05 <= t < b0 + 0.25:
+                out = out.convert("RGBA")
+                out.alpha_composite(Image.open(png))
         p = os.path.join(tmp, f"f{len(os.listdir(tmp)):05d}.png")
         out.convert("RGB").save(p, compress_level=1)
         files.append(p)
@@ -274,6 +309,50 @@ def synth(kind: str, out: str) -> str:
     return out
 
 
+LEAD = {"wife": 0.2, "husband": 0.6}      # 컷 첫 대사 전 뜸 — 늘보는 한 박자 늦게
+GAP = {"wife": 0.12, "husband": 0.45}     # 앞 대사가 끝나고 이 사람이 말을 시작하기까지
+TAIL = 0.45                               # 컷 마지막 대사 뒤 여운
+
+
+def plan_dialogue(shot: dict, base: str) -> None:
+    """cuts[].lines=[{who,text}] → v4 대화 음성(dialogue.py) → 대사 길이에 맞춰 컷 길이를 늘리고(줄이지는 않음)
+    자막 구간(_subs)·음성 이벤트(sfx 목록에 file로)·컷 기준 효과음(cut.sfx의 at=컷 시작 기준)을 절대 시각으로 만든다."""
+    lines = [l for c in shot["cuts"] for l in c.get("lines", [])]
+    voiced = []
+    if lines:
+        import dialogue
+        voiced = dialogue.build(lines, os.path.join(base, "voice"))
+    k = 0
+    t0 = 0.0
+    events = list(shot.get("sfx", []))
+    sub_dir = os.path.join(base, "subs")
+    os.makedirs(sub_dir, exist_ok=True)
+    for ci, c in enumerate(shot["cuts"]):
+        t = c.get("lead", None)
+        subs = []
+        prev = None
+        for li, l in enumerate(c.get("lines", [])):
+            v = voiced[k]
+            k += 1
+            start = (t if (li == 0 and t is not None) else
+                     LEAD[l["who"]] if li == 0 else prev + GAP[l["who"]])
+            start += l.get("pause", 0.0)
+            end = start + v["dur"]
+            png = subtitle_png(l["text"], l["who"], os.path.join(sub_dir, f"c{ci:02d}_{li}.png"))
+            subs.append((start, end, png))
+            if v.get("file"):
+                events.append({"file": v["file"], "at": round(t0 + start, 3), "vol": 1.0})
+            prev = end
+        if prev is not None:
+            c["seconds"] = round(max(c["seconds"], prev + c.get("tail", TAIL)), 2)
+        c["_subs"] = subs
+        for e in c.get("sfx", []):
+            events.append(dict(e, at=round(t0 + e["at"], 3)))
+        t0 += c["seconds"]
+    shot["sfx"] = events
+    print(f"[stop] 대사 {k}줄 배치 — 총 {t0:.1f}초")
+
+
 def render(shot_path: str, out: str) -> str:
     shot = json.load(open(shot_path, encoding="utf-8"))
     base = os.path.dirname(os.path.abspath(shot_path))
@@ -292,6 +371,7 @@ def render(shot_path: str, out: str) -> str:
             pr["prop"] = True
             src = j(pr["img"])
             pr["img"] = src if src.endswith("_cut.png") else cutout(src, src.rsplit(".", 1)[0] + "_cut.png")
+    plan_dialogue(shot, base)
     total = 0.0
     for i, c in enumerate(shot["cuts"]):
         render_cut(c, j(c.get("set", shot["set"])), tmp, seed=shot.get("seed", 13) + i)

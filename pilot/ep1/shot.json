@@ -1,0 +1,937 @@
+{
+ "title": "원템포 1화 — 첫눈 오는 저녁 (초안 v1, 11/17)",
+ "set": "../stop/test1/set.png",
+ "seed": 101,
+ "bgm": {
+  "name": "first_snow",
+  "volume": 0.22
+ },
+ "cuts": [
+  {
+   "seconds": 3.0,
+   "set": "../stop/test2/set_window.png",
+   "camera": {
+    "zoom0": 1.3,
+    "zoom1": 1.38,
+    "c0": [
+     0.5,
+     0.33
+    ],
+    "c1": [
+     0.5,
+     0.32
+    ]
+   },
+   "actors": [
+    {
+     "name": "wife",
+     "poses": [
+      "r_win.png"
+     ],
+     "height": 520,
+     "feet": [
+      540,
+      900
+     ],
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "timeline": [
+      [
+       0,
+       40
+      ]
+     ],
+     "breath": 0.0,
+     "sway": 0.8,
+     "sway_sec": 0.8
+    }
+   ],
+   "lines": [
+    {
+     "who": "wife",
+     "text": "어? 어어? 눈이다!"
+    }
+   ],
+   "sfx": [
+    {
+     "kind": "bell",
+     "at": 0.0,
+     "vol": 0.8
+    }
+   ]
+  },
+  {
+   "seconds": 3.5,
+   "set": "../stop/test1/set.png",
+   "camera": {
+    "zoom0": 1.0,
+    "zoom1": 1.04,
+    "c0": [
+     0.55,
+     0.5
+    ],
+    "c1": [
+     0.56,
+     0.5
+    ]
+   },
+   "actors": [
+    {
+     "name": "husband",
+     "poses": [
+      "s_lie.png"
+     ],
+     "height": 250,
+     "feet": [
+      800,
+      890
+     ],
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "timeline": [
+      [
+       0,
+       48
+      ]
+     ],
+     "breath": 0.02,
+     "shadow": false,
+     "breath_sec": 3.2
+    },
+    {
+     "name": "wife",
+     "poses": [
+      "../stop/test1/r2.png"
+     ],
+     "height": 560,
+     "feet": [
+      320,
+      1560
+     ],
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "timeline": [
+      [
+       0,
+       48
+      ]
+     ],
+     "breath": 0.0,
+     "flip": true,
+     "sway": 1.2,
+     "sway_sec": 0.7
+    }
+   ],
+   "lines": [
+    {
+     "who": "wife",
+     "text": "첫눈이다! 지금 나가자, 빨리!"
+    }
+   ],
+   "sfx": [
+    {
+     "kind": "bell",
+     "at": 0.1,
+     "vol": 0.6
+    },
+    {
+     "kind": "bell",
+     "at": 0.6,
+     "vol": 0.4
+    }
+   ]
+  },
+  {
+   "seconds": 4.0,
+   "set": "../stop/test1/set.png",
+   "camera": {
+    "zoom0": 2.2,
+    "zoom1": 2.35,
+    "c0": [
+     0.74,
+     0.44
+    ],
+    "c1": [
+     0.74,
+     0.44
+    ]
+   },
+   "actors": [
+    {
+     "name": "husband",
+     "poses": [
+      "s_lie.png",
+      "s_lie_half.png",
+      "s_lie_closed.png",
+      "s_lie_finger.png"
+     ],
+     "height": 250,
+     "feet": [
+      800,
+      890
+     ],
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "timeline": [
+      [
+       0,
+       6
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       2,
+       7
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       3,
+       40
+      ]
+     ],
+     "breath": 0.02,
+     "shadow": false,
+     "breath_sec": 3.2
+    }
+   ],
+   "lines": [
+    {
+     "who": "husband",
+     "text": "…응. 가자.",
+     "pause": 1.3
+    }
+   ],
+   "sfx": [
+    {
+     "kind": "tick",
+     "at": 0.5
+    },
+    {
+     "kind": "tick",
+     "at": 1.0
+    }
+   ]
+  },
+  {
+   "seconds": 3.5,
+   "set": "set_entry.png",
+   "camera": {
+    "zoom0": 1.12,
+    "zoom1": 1.18,
+    "c0": [
+     0.56,
+     0.48
+    ],
+    "c1": [
+     0.57,
+     0.47
+    ]
+   },
+   "actors": [
+    {
+     "name": "wife",
+     "poses": [
+      "r_door.png"
+     ],
+     "height": 700,
+     "feet": [
+      560,
+      1180
+     ],
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "timeline": [
+      [
+       0,
+       48
+      ]
+     ],
+     "breath": 0.0,
+     "sway": 1.5,
+     "sway_sec": 0.6
+    }
+   ],
+   "lines": [
+    {
+     "who": "wife",
+     "text": "나 다 됐어! 3초 줄게!"
+    }
+   ],
+   "sfx": [
+    {
+     "kind": "bell",
+     "at": 0.1,
+     "vol": 0.6
+    },
+    {
+     "kind": "bell",
+     "at": 0.5,
+     "vol": 0.4
+    }
+   ]
+  },
+  {
+   "seconds": 2.4,
+   "set": "../stop/test1/set.png",
+   "camera": {
+    "zoom0": 1.35,
+    "zoom1": 1.4,
+    "c0": [
+     0.72,
+     0.45
+    ],
+    "c1": [
+     0.72,
+     0.45
+    ]
+   },
+   "actors": [
+    {
+     "name": "husband",
+     "poses": [
+      "s_halfup.png"
+     ],
+     "height": 380,
+     "feet": [
+      800,
+      910
+     ],
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "timeline": [
+      [
+       0,
+       40
+      ]
+     ],
+     "breath": 0.015,
+     "shadow": false
+    }
+   ],
+   "lines": [
+    {
+     "who": "wife",
+     "text": "셋, 둘, 하나…"
+    }
+   ]
+  },
+  {
+   "seconds": 1.8,
+   "set": "set_entry.png",
+   "camera": {
+    "zoom0": 1.45,
+    "zoom1": 1.5,
+    "c0": [
+     0.52,
+     0.42
+    ],
+    "c1": [
+     0.52,
+     0.42
+    ]
+   },
+   "actors": [
+    {
+     "name": "wife",
+     "poses": [
+      "r_squint.png"
+     ],
+     "height": 700,
+     "feet": [
+      560,
+      1180
+     ],
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "timeline": [
+      [
+       0,
+       30
+      ]
+     ],
+     "breath": 0.0
+    }
+   ],
+   "lines": [
+    {
+     "who": "wife",
+     "text": "하나 반…?"
+    }
+   ],
+   "sfx": [
+    {
+     "kind": "bell",
+     "at": 0.1,
+     "vol": 0.4
+    }
+   ]
+  },
+  {
+   "seconds": 4.0,
+   "set": "../stop/test3/set_kitchen_empty.png",
+   "camera": {
+    "zoom0": 1.05,
+    "zoom1": 1.1,
+    "c0": [
+     0.5,
+     0.55
+    ],
+    "c1": [
+     0.52,
+     0.55
+    ]
+   },
+   "actors": [
+    {
+     "name": "husband",
+     "poses": [
+      "s_pour.png"
+     ],
+     "height": 880,
+     "feet": [
+      650,
+      1580
+     ],
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "timeline": [
+      [
+       0,
+       60
+      ]
+     ],
+     "breath": 0.012,
+     "sway": 0.4,
+     "sway_sec": 3.0
+    },
+    {
+     "name": "wife",
+     "poses": [
+      "r_peek.png"
+     ],
+     "height": 620,
+     "feet": [
+      150,
+      1640
+     ],
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "timeline": [
+      [
+       0,
+       60
+      ]
+     ],
+     "breath": 0.0,
+     "sway": 1.5,
+     "sway_sec": 0.7
+    }
+   ],
+   "lines": [
+    {
+     "who": "wife",
+     "text": "주전자? 지금? 눈 그친단 말야!"
+    }
+   ],
+   "sfx": [
+    {
+     "kind": "bell",
+     "at": 0.15,
+     "vol": 0.5
+    }
+   ]
+  },
+  {
+   "seconds": 3.5,
+   "set": "set_entry_open.png",
+   "camera": {
+    "zoom0": 1.2,
+    "zoom1": 1.28,
+    "c0": [
+     0.5,
+     0.45
+    ],
+    "c1": [
+     0.5,
+     0.44
+    ]
+   },
+   "actors": [
+    {
+     "name": "wife",
+     "poses": [
+      "r_handout.png",
+      "r_shake.png"
+     ],
+     "height": 660,
+     "feet": [
+      470,
+      1200
+     ],
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "timeline": [
+      [
+       0,
+       18
+      ],
+      [
+       1,
+       40
+      ]
+     ],
+     "breath": 0.0,
+     "sway": 1.0,
+     "sway_sec": 0.5
+    }
+   ],
+   "lines": [
+    {
+     "who": "wife",
+     "text": "먼저 간다!"
+    },
+    {
+     "who": "wife",
+     "text": "…앗, 차가워!",
+     "pause": 0.4
+    }
+   ],
+   "sfx": [
+    {
+     "kind": "bell",
+     "at": 0.0,
+     "vol": 0.5
+    }
+   ]
+  },
+  {
+   "seconds": 5.0,
+   "set": "set_entry_open.png",
+   "camera": {
+    "zoom0": 1.05,
+    "zoom1": 1.1,
+    "c0": [
+     0.55,
+     0.5
+    ],
+    "c1": [
+     0.56,
+     0.5
+    ]
+   },
+   "actors": [
+    {
+     "name": "wife",
+     "poses": [
+      "r_turn.png"
+     ],
+     "height": 620,
+     "feet": [
+      400,
+      1260
+     ],
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "timeline": [
+      [
+       0,
+       80
+      ]
+     ],
+     "breath": 0.0,
+     "flip": true
+    },
+    {
+     "name": "husband",
+     "poses": [
+      "s_thermos.png",
+      "s_mitten.png"
+     ],
+     "height": 900,
+     "feet": [
+      780,
+      1320
+     ],
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "timeline": [
+      [
+       0,
+       12
+      ],
+      [
+       1,
+       80
+      ]
+     ],
+     "breath": 0.012,
+     "sway": 0.4,
+     "sway_sec": 3.0
+    }
+   ],
+   "lines": [
+    {
+     "who": "wife",
+     "text": "언제 왔어?!"
+    },
+    {
+     "who": "husband",
+     "text": "…품에 넣어놨어.",
+     "pause": 1.2
+    }
+   ],
+   "sfx": [
+    {
+     "kind": "tick",
+     "at": 1.6
+    },
+    {
+     "kind": "tick",
+     "at": 2.1
+    }
+   ]
+  },
+  {
+   "seconds": 4.5,
+   "set": "set_entry_open.png",
+   "camera": {
+    "zoom0": 1.2,
+    "zoom1": 1.28,
+    "c0": [
+     0.53,
+     0.55
+    ],
+    "c1": [
+     0.53,
+     0.56
+    ]
+   },
+   "actors": [
+    {
+     "name": "wife",
+     "poses": [
+      "r_blush.png"
+     ],
+     "height": 620,
+     "feet": [
+      340,
+      1300
+     ],
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "timeline": [
+      [
+       0,
+       80
+      ]
+     ],
+     "breath": 0.0,
+     "flip": true,
+     "sway": 0.6,
+     "sway_sec": 1.2
+    },
+    {
+     "name": "husband",
+     "poses": [
+      "s_bend.png"
+     ],
+     "height": 900,
+     "feet": [
+      800,
+      1320
+     ],
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "timeline": [
+      [
+       0,
+       80
+      ]
+     ],
+     "breath": 0.012,
+     "sway": 0.3,
+     "sway_sec": 3.0
+    }
+   ],
+   "lines": [
+    {
+     "who": "wife",
+     "text": "따뜻해… 그래서 늦었구나.",
+     "pause": 0.5
+    }
+   ]
+  },
+  {
+   "seconds": 4.0,
+   "set": "set_entry_open.png",
+   "camera": {
+    "zoom0": 1.0,
+    "zoom1": 1.05,
+    "c0": [
+     0.5,
+     0.5
+    ],
+    "c1": [
+     0.5,
+     0.5
+    ]
+   },
+   "actors": [
+    {
+     "name": "wife",
+     "poses": [
+      "r_lookback.png"
+     ],
+     "height": 600,
+     "feet": [
+      320,
+      1240
+     ],
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "timeline": [
+      [
+       0,
+       80
+      ]
+     ],
+     "breath": 0.0,
+     "flip": true
+    },
+    {
+     "name": "husband",
+     "poses": [
+      "s_thermos.png",
+      "s_nod.png"
+     ],
+     "height": 880,
+     "feet": [
+      820,
+      1300
+     ],
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "timeline": [
+      [
+       0,
+       14
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       0,
+       80
+      ]
+     ],
+     "breath": 0.012
+    }
+   ],
+   "lines": [
+    {
+     "who": "wife",
+     "text": "천천히 가자. 눈 안 그쳐."
+    },
+    {
+     "who": "husband",
+     "text": "응. 같이."
+    }
+   ],
+   "sfx": [
+    {
+     "kind": "bell",
+     "at": 0.1,
+     "vol": 0.4
+    }
+   ]
+  },
+  {
+   "seconds": 3.5,
+   "set": "set_entry_open.png",
+   "camera": {
+    "zoom0": 1.15,
+    "zoom1": 1.22,
+    "c0": [
+     0.53,
+     0.5
+    ],
+    "c1": [
+     0.53,
+     0.49
+    ]
+   },
+   "actors": [
+    {
+     "name": "wife",
+     "poses": [
+      "r_handup.png"
+     ],
+     "height": 700,
+     "feet": [
+      310,
+      1180
+     ],
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "timeline": [
+      [
+       0,
+       80
+      ]
+     ],
+     "breath": 0.0,
+     "sway": 1.0,
+     "sway_sec": 0.6
+    },
+    {
+     "name": "husband",
+     "poses": [
+      "s_thermos.png",
+      "s_hf.png"
+     ],
+     "height": 900,
+     "feet": [
+      790,
+      1330
+     ],
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "timeline": [
+      [
+       0,
+       14
+      ],
+      [
+       1,
+       80
+      ]
+     ],
+     "breath": 0.012
+    }
+   ],
+   "sfx": [
+    {
+     "kind": "clap",
+     "at": 1.22,
+     "vol": 1.0
+    }
+   ]
+  },
+  {
+   "seconds": 2.2,
+   "set": "set_entry_open.png",
+   "camera": {
+    "zoom0": 1.5,
+    "zoom1": 1.65,
+    "c0": [
+     0.5,
+     0.47
+    ],
+    "c1": [
+     0.5,
+     0.45
+    ]
+   },
+   "actors": [
+    {
+     "name": "wife",
+     "poses": [
+      "r_crosseye.png"
+     ],
+     "height": 680,
+     "feet": [
+      540,
+      1230
+     ],
+     "tint": [
+      1.02,
+      0.97,
+      0.9
+     ],
+     "timeline": [
+      [
+       0,
+       40
+      ]
+     ],
+     "breath": 0.0
+    }
+   ],
+   "lines": [
+    {
+     "who": "wife",
+     "text": "어?",
+     "pause": 0.4
+    }
+   ],
+   "sfx": [
+    {
+     "kind": "bell",
+     "at": 1.7,
+     "vol": 0.7
+    }
+   ]
+  }
+ ],
+ "sfx": []
+}

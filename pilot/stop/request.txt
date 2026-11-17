@@ -1,1 +1,1 @@
-pilot/stop/test3/shot.json pilot/stop/test3/test3.mp4 시험3 수정: 토끼 빠른 걸음(깡충 대신). 좋다/아니다 한마디
+pilot/ep1/shot.json pilot/ep1/ep1_draft.mp4 원템포 1화 초안 v1(첫눈 오는 저녁, v4 대화 음성·자막·배경음). 보고 한마디 부탁드려요
