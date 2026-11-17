@@ -1,0 +1,96 @@
+{
+ "sig": "2f1f72d58d44",
+ "model": "eleven_v4",
+ "lines": [
+  {
+   "who": "wife",
+   "text": "어? 어어? 눈이다!",
+   "file": "line00.wav",
+   "dur": 1.76
+  },
+  {
+   "who": "wife",
+   "text": "첫눈이다! 지금 나가자, 빨리!",
+   "file": "line01.wav",
+   "dur": 2.91
+  },
+  {
+   "who": "husband",
+   "text": "…응. 가자.",
+   "file": "line02.wav",
+   "dur": 1.47
+  },
+  {
+   "who": "wife",
+   "text": "나 다 됐어! 3초 줄게!",
+   "file": "line03.wav",
+   "dur": 2.03
+  },
+  {
+   "who": "wife",
+   "text": "셋, 둘, 하나…",
+   "file": "line04.wav",
+   "dur": 2.75
+  },
+  {
+   "who": "wife",
+   "text": "하나 반…?",
+   "file": "line05.wav",
+   "dur": 1.23
+  },
+  {
+   "who": "wife",
+   "text": "주전자? 지금? 눈 그친단 말야!",
+   "file": "line06.wav",
+   "dur": 3.39
+  },
+  {
+   "who": "wife",
+   "text": "먼저 간다!",
+   "file": "line07.wav",
+   "dur": 1.31
+  },
+  {
+   "who": "wife",
+   "text": "…앗, 차가워!",
+   "file": "line08.wav",
+   "dur": 1.23
+  },
+  {
+   "who": "wife",
+   "text": "언제 왔어?!",
+   "file": "line09.wav",
+   "dur": 1.15
+  },
+  {
+   "who": "husband",
+   "text": "…품에 넣어놨어.",
+   "file": "line10.wav",
+   "dur": 1.47
+  },
+  {
+   "who": "wife",
+   "text": "따뜻해… 그래서 늦었구나.",
+   "file": "line11.wav",
+   "dur": 3.15
+  },
+  {
+   "who": "wife",
+   "text": "천천히 가자. 눈 안 그쳐.",
+   "file": "line12.wav",
+   "dur": 2.27
+  },
+  {
+   "who": "husband",
+   "text": "응. 같이.",
+   "file": "line13.wav",
+   "dur": 1.55
+  },
+  {
+   "who": "wife",
+   "text": "어?",
+   "file": "line14.wav",
+   "dur": 0.43
+  }
+ ]
+}
