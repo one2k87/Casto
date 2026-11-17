@@ -6,10 +6,70 @@
   "price_band": "저가",
   "brand": "",
   "product_id": "",
-  "evidence": "계량스푼 키워드 영상 3개, 채널 3개 확인",
+  "evidence": "주방꿀템 및 계량스푼 키워드 영상 19개, 채널 15개 등장",
   "category": "50000008",
-  "last_found": "2026-11-17",
+  "last_found": "2026-11-18",
   "first_seen": "2026-11-16"
+ },
+ "mini_dryer": {
+  "name": "미니건조기",
+  "search_keyword": "한경희 미니건조기",
+  "en_keyword": "mini clothes dryer",
+  "price_band": "고가",
+  "brand": "한경희",
+  "product_id": "",
+  "evidence": "원룸 및 의류건조기 키워드와 함께 다수 채널에서 언급",
+  "category": "50000003",
+  "last_found": "2026-11-18",
+  "first_seen": "2026-11-13"
+ },
+ "multi_blade_scissors": {
+  "name": "다중날가위",
+  "search_keyword": "다중날 주방가위",
+  "en_keyword": "multi blade kitchen shears",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "쿠팡추천템 및 생활꿀템 키워드 영상 다수 채널에 반복 등장",
+  "category": "50000008",
+  "last_found": "2026-11-18",
+  "first_seen": "2026-11-14"
+ },
+ "acrylic_mirror": {
+  "name": "붙이는전신거울",
+  "search_keyword": "아크릴 붙이는 전신거울",
+  "en_keyword": "adhesive acrylic mirror",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "집꾸미기 및 생활꿀템 키워드 영상 10개, 채널 3개 등장",
+  "category": "50000004",
+  "last_found": "2026-11-18",
+  "first_seen": "2026-11-17"
+ },
+ "electric_chopper": {
+  "name": "전동다지기",
+  "search_keyword": "전동 야채다지기",
+  "en_keyword": "electric food chopper",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "살림템추천 및 요리꿀팁 키워드 영상에서 다수 노출",
+  "category": "50000008",
+  "last_found": "2026-11-18",
+  "first_seen": "2026-11-09"
+ },
+ "soybean_paste_mudler": {
+  "name": "된장머들러",
+  "search_keyword": "된장 거품기 머들러",
+  "en_keyword": "",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "주방꿀템 및 살림템추천 키워드 영상에 채널 다수 등장",
+  "category": "50000008",
+  "last_found": "2026-11-18",
+  "first_seen": "2026-11-18"
  },
  "auto_dispenser": {
   "name": "자동디스펜서",
@@ -22,42 +82,6 @@
   "category": "50000008",
   "last_found": "2026-11-17",
   "first_seen": "2026-11-15"
- },
- "mini_dryer": {
-  "name": "미니건조기",
-  "search_keyword": "한경희 미니건조기 의류건조기",
-  "en_keyword": "mini clothes dryer",
-  "price_band": "고가",
-  "brand": "한경희",
-  "product_id": "",
-  "evidence": "원룸 빨래 미니건조기 추천 채널 언급",
-  "category": "50000003",
-  "last_found": "2026-11-17",
-  "first_seen": "2026-11-13"
- },
- "multi_blade_scissors": {
-  "name": "다중날가위",
-  "search_keyword": "다중날 주방가위 5중날",
-  "en_keyword": "multi blade kitchen shears",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "주방용품 및 주방꿀템 채널 다수 언급",
-  "category": "50000008",
-  "last_found": "2026-11-17",
-  "first_seen": "2026-11-14"
- },
- "acrylic_mirror": {
-  "name": "아크릴거울",
-  "search_keyword": "붙이는 아크릴 전신거울",
-  "en_keyword": "adhesive acrylic mirror",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "생활용품 및 집꾸미기 채널 다수 언급",
-  "category": "50000004",
-  "last_found": "2026-11-17",
-  "first_seen": "2026-11-17"
  },
  "mini_electric_cooker": {
   "name": "미니전기쿠커",
@@ -106,18 +130,6 @@
   "category": "50000008",
   "last_found": "2026-11-16",
   "first_seen": "2026-11-16"
- },
- "electric_chopper": {
-  "name": "전동다지기",
-  "search_keyword": "무선 전동 야채 다지기",
-  "en_keyword": "electric food chopper",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "주방꿀템 살림꿀템 영상 5개 / 채널 3개 및 대파다지기 키워드 등장",
-  "category": "50000008",
-  "last_found": "2026-11-15",
-  "first_seen": "2026-11-09"
  },
  "electric_spray": {
   "name": "전동스프레이",
@@ -223,18 +235,6 @@
   "brand": "",
   "product_id": "",
   "evidence": "주방꿀템 영상 23개, 채널 17개, 살림꿀템 영상 33개 등 다수 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-11-13",
-  "first_seen": "2026-11-13"
- },
- "kitchen_scissor_knife": {
-  "name": "도마 가위",
-  "search_keyword": "칼 도마 일체형 주방가위",
-  "en_keyword": "kitchen scissor knife",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "주방꿀템 및 주방용품 키워드 관련 영상 다수 등장",
   "category": "50000008",
   "last_found": "2026-11-13",
   "first_seen": "2026-11-13"
