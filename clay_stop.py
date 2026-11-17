@@ -17,6 +17,7 @@ import json
 import math
 import os
 import random
+import re
 import subprocess
 import sys
 
@@ -205,6 +206,54 @@ def camera(img: Image.Image, t: float, cam: dict, sec: float = 0.0) -> Image.Ima
 NAME = {"wife": ("토끼", (242, 140, 168)), "husband": ("늘보", (154, 107, 79))}
 
 
+def split_caption(text: str, limit: int = 22) -> list[str]:
+    """긴 대사 자막을 문장 단위로 나눈다(11/17 1화 v2: 41자 대사가 화면 밖으로 잘림). 한 덩어리 22자 이내 목표."""
+    import dialogue
+    t = dialogue.caption(text)
+    if len(t) <= limit:
+        return [t]
+    parts = re.split(r"(?<=[?!.…])\s+", t)
+    out, cur = [], ""
+    for p in parts:
+        if cur and len(cur) + 1 + len(p) > limit:
+            out.append(cur)
+            cur = p
+        else:
+            cur = (cur + " " + p).strip()
+    if cur:
+        out.append(cur)
+    fixed = []
+    for c in out:                                   # 한 문장이 여전히 길면 쉼표·공백에서 반으로
+        if len(c) > limit + 8:
+            mid = len(c) / 2
+            commas = [i for i, ch in enumerate(c) if ch == ","]
+            spaces = [i for i, ch in enumerate(c) if ch == " "]
+            pool = [i for i in commas if abs(i - mid) < len(c) * 0.3] or spaces or [len(c) // 2]
+            cut = min(pool, key=lambda i: abs(i - mid))
+            fixed += [c[: cut + 1].strip(), c[cut + 1:].strip()]
+        else:
+            fixed.append(c)
+    return [f for f in fixed if f]
+
+
+def timed_subs(text: str, who: str, a0: float, b0: float, out_base: str) -> list[tuple]:
+    """한 대사를 덩어리로 나눠 글자 수 비율로 시간 배분 → [(시작, 끝, png)]."""
+    chunks = split_caption(text)
+    total = sum(len(c) for c in chunks) or 1
+    res, t = [], a0
+    for i, c in enumerate(chunks):
+        d = (b0 - a0) * len(c) / total
+        res.append((t, t + d, subtitle_png(c, who, f"{out_base}_{i}.png")))
+        t += d
+    return res
+
+
+def clamp_subs(subs: list[tuple]) -> list[tuple]:
+    """자막이 겹치지 않게: 다음 자막이 시작하면 앞 자막은 내린다."""
+    subs = sorted(subs)
+    return [(a, min(b + 0.25, subs[i + 1][0]) if i + 1 < len(subs) else b + 0.25, p) for i, (a, b, p) in enumerate(subs)]
+
+
 def subtitle_png(text: str, who: str, out: str) -> str:
     """파스텔 자막: 크림색 둥근 상자 + 배역 이름표(토끼 분홍·늘보 갈색). 쇼츠 하단 UI를 피해 화면 78% 높이."""
     if os.path.exists(out):
@@ -292,7 +341,7 @@ def render_cut(cut: dict, set_path: str, tmp: str, seed: int) -> list[str]:
             out = out.convert("RGBA")
             out.alpha_composite(Image.open(card))
         for a0, b0, png in cut.get("_subs", []):                  # 대사 나오는 동안만 자막
-            if a0 - 0.05 <= t < b0 + 0.25:
+            if a0 - 0.05 <= t < b0:
                 out = out.convert("RGBA")
                 out.alpha_composite(Image.open(png))
         p = os.path.join(tmp, f"f{len(os.listdir(tmp)):05d}.png")
@@ -406,15 +455,14 @@ def plan_dialogue(shot: dict, base: str) -> None:
                      LEAD[l["who"]] if li == 0 else prev + GAP[l["who"]])
             start += l.get("pause", 0.0)
             end = start + v["dur"]
-            png = subtitle_png(l["text"], l["who"], os.path.join(sub_dir, f"c{ci:02d}_{li}.png"))
-            subs.append((start, end, png))
+            subs += timed_subs(l["text"], l["who"], start, end, os.path.join(sub_dir, f"c{ci:02d}_{li}"))
             c.setdefault("_talk", []).append((l["who"], start, end))
             if v.get("file"):
                 events.append({"file": v["file"], "at": round(t0 + start, 3), "vol": 1.0})
             prev = end
         if prev is not None:
             c["seconds"] = round(max(c["seconds"], prev + c.get("tail", TAIL)), 2)
-        c["_subs"] = subs
+        c["_subs"] = clamp_subs(subs)
         for e in c.get("sfx", []):
             events.append(dict(e, at=round(t0 + e["at"], 3)))
         t0 += c["seconds"]
@@ -450,9 +498,9 @@ def plan_natural(shot: dict, voiced: list[dict], sub_dir: str, events: list) -> 
             for li, i in enumerate(ix):
                 v = voiced[i]
                 a0, b0 = lead + v["start"] - s0, lead + v["end"] - s0
-                subs.append((a0, b0, subtitle_png(v["text"], v["who"], os.path.join(sub_dir, f"c{ci:02d}_{li}.png"))))
+                subs += timed_subs(v["text"], v["who"], a0, b0, os.path.join(sub_dir, f"c{ci:02d}_{li}"))
                 talk.append((v["who"], a0, b0))
-            c["_subs"], c["_talk"] = subs, talk
+            c["_subs"], c["_talk"] = clamp_subs(subs), talk
             rms = rms_track(clip)
             pad = int(lead * FPS)
             c["_rms"] = [0.0] * pad + rms
