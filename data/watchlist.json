@@ -1,4 +1,52 @@
 {
+ "multi_blade_scissors": {
+  "name": "다중날가위",
+  "search_keyword": "다중날 주방가위 5중 가위",
+  "en_keyword": "multi blade kitchen shears",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "쿠팡추천템 및 주방꿀템 키워드 관련 영상 다수 및 채널 반복 등장",
+  "category": "50000008",
+  "last_found": "2026-11-19",
+  "first_seen": "2026-11-14"
+ },
+ "vegetable_chopper": {
+  "name": "전동야채다지기",
+  "search_keyword": "전동 야채 다지기 자동 채소 다지기",
+  "en_keyword": "electric vegetable chopper",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "살림템추천 및 요리꿀팁 관련 채널 다수 등장",
+  "category": "50000008",
+  "last_found": "2026-11-19",
+  "first_seen": "2026-11-19"
+ },
+ "multi_cooker": {
+  "name": "만능 멀티쿠커",
+  "search_keyword": "멀티쿠커 전기 냄비",
+  "en_keyword": "multi cooker",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "쿠팡 냄비 관련 3개 채널, 5개 영상 언급",
+  "category": "50000003",
+  "last_found": "2026-11-19",
+  "first_seen": "2026-11-19"
+ },
+ "separation_trash_can": {
+  "name": "분리수거함",
+  "search_keyword": "원룸 분리수거함 추천",
+  "en_keyword": "recycling sorting bin",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "원룸 및 집꾸미기 키워드 채널 다수 등장",
+  "category": "50000004",
+  "last_found": "2026-11-19",
+  "first_seen": "2026-11-19"
+ },
  "folding_measuring_spoon": {
   "name": "접이식계량스푼",
   "search_keyword": "접이식 계량스푼",
@@ -22,18 +70,6 @@
   "category": "50000003",
   "last_found": "2026-11-18",
   "first_seen": "2026-11-13"
- },
- "multi_blade_scissors": {
-  "name": "다중날가위",
-  "search_keyword": "다중날 주방가위",
-  "en_keyword": "multi blade kitchen shears",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "쿠팡추천템 및 생활꿀템 키워드 영상 다수 채널에 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-11-18",
-  "first_seen": "2026-11-14"
  },
  "acrylic_mirror": {
   "name": "붙이는전신거울",
@@ -202,41 +238,5 @@
   "category": "50000008",
   "last_found": "2026-11-14",
   "first_seen": "2026-11-14"
- },
- "kitchen_scissors_knife": {
-  "name": "도마 가위",
-  "search_keyword": "칼 도마 합친 주방 가위",
-  "en_keyword": "cleaver scissors",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "주방꿀템(영상 23개/채널 17개), 주방용품(영상 15개/채널 10개) 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-11-14",
-  "first_seen": "2026-11-14"
- },
- "electric_food_chopper": {
-  "name": "전동 다지기",
-  "search_keyword": "대파 자동 전동 야채다지기",
-  "en_keyword": "electric food chopper",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "주방꿀템 살림꿀템(영상 5개/채널 3개), 살림템추천(영상 7개/채널 3개) 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-11-14",
-  "first_seen": "2026-11-14"
- },
- "multi_functional_slicer": {
-  "name": "다기능 채칼",
-  "search_keyword": "다기능 채칼 야채 감자칼",
-  "en_keyword": "multi-functional vegetable slicer",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "주방꿀템 영상 23개, 채널 17개, 살림꿀템 영상 33개 등 다수 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-11-13",
-  "first_seen": "2026-11-13"
  }
 }
