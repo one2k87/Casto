@@ -1,1 +1,1 @@
-tailored/episodes/s1e01 tailored/episodes/s1e01/s1e01.mp4 Tailored 1화 초안(효과음·편별 로파이 포함)
+tailored/episodes/s1e01 tailored/episodes/s1e01/s1e01.mp4 Tailored 1화 60초 버전(컷 16개·효과음·로파이). 자막 4개 언어는 captions 폴더

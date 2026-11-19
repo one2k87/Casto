@@ -2,7 +2,18 @@
  "name": "Tailored · Tiny Tail World",
  "tagline": "Life, tailored for tails.",
  "premise": "사람이 쓰는 모든 것이 동물 세계 버전으로 다시 만들어진 작은 세상. 시청자가 '동물 세계라면 이렇게 하겠구나' 하고 웃는 것이 핵심 재미.",
- "format": {"length_sec": [45, 50], "cuts": 14, "dialogue": "없음(웅얼거림·효과음·그림 기호만, 화면에 글자 금지)", "last_cut": "주요 캐릭터가 실제로 움직이는 영상 3~5초(클리프행어)", "per_week": 2},
+ "format": {
+  "length_sec": [
+   55,
+   62
+  ],
+  "cuts": "14~16",
+  "dialogue": "없음(웅얼거림·효과음·그림 기호만, 화면에 글자 금지)",
+  "last_cut": "주요 캐릭터가 실제로 움직이는 영상 3~5초(클리프행어)",
+  "per_week": 2,
+  "narration": "화면에는 글자를 넣지 않는다. 그림책·다큐 해설 말투의 짧은 내레이션을 컷마다 한 줄씩 써서 유튜브 자막 트랙(언어별 SRT)으로 제공한다. 기본 언어 ko·en·ja·es, 반응 보고 확대. 감정을 직접 설명하지 않고 건조하게 한 박자 비튼다.",
+  "title": "업로드 제목 = '한글 제목 이모지 | English Title · Tailored EP번호'. 언어별 번역 제목·설명도 함께 등록."
+ },
  "tone": "퇴근길 어른이 보는 귀여움. 직장인 공감 장면을 동물 세계로 비튼다. 아동용 아님.",
  "style_lock": "flat modern webtoon illustration, bold rounded dark-brown outlines, simple cel shading, soft pastel colors, sticker-cute proportions, big glossy expressive eyes, pink blush, clean readable composition, vertical 9:16, no text, no letters, no speech bubbles with words",
  "bug_lock": "cute chibi, round body, big sparkly eyes, blush, only a few short stubby legs, no realistic insect details",
@@ -14,7 +25,12 @@
   "한 주인공의 이야기는 약 8화로 끝낸다. 다음 주인공은 앞 시즌에 조연으로 먼저 나온다.",
   "모든 생물은 최대한 귀엽게 캐릭터화(사실적 묘사 금지)."
  ],
- "banned": ["지네처럼 다리가 많아 징그러운 벌레", "유명 작품의 상징(고양이 모양 버스, 고글·헬멧 펭귄 등)", "화면 속 글자·간판 문구", "특정 캐릭터를 채널 로고에 사용"],
+ "banned": [
+  "지네처럼 다리가 많아 징그러운 벌레",
+  "유명 작품의 상징(고양이 모양 버스, 고글·헬멧 펭귄 등)",
+  "화면 속 글자·간판 문구",
+  "특정 캐릭터를 채널 로고에 사용"
+ ],
  "axis": "눈송이 철도 — 도시 → 시골 → 바닷가 → 남쪽 끝을 잇는 철도. 시즌마다 다른 정거장이 무대.",
  "places": {
   "antarctica": "남극 펭귄 마을. 눈 언덕, 얼음집, 오로라",
@@ -24,5 +40,13 @@
   "snow_rail": "눈송이 철도 객차와 역",
   "seaside": "바닷가 마을. 반딧불이 등대"
  },
- "palette": {"lavender": "#C9B5EC", "mint": "#9ED9C3", "rose": "#F49AA6", "butter": "#FFD98F", "cream": "#FFF7EC", "wordmark": "#B8A0E6", "cocoa": "#8C7368"}
+ "palette": {
+  "lavender": "#C9B5EC",
+  "mint": "#9ED9C3",
+  "rose": "#F49AA6",
+  "butter": "#FFD98F",
+  "cream": "#FFF7EC",
+  "wordmark": "#B8A0E6",
+  "cocoa": "#8C7368"
+ }
 }

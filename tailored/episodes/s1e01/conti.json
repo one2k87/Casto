@@ -1,8 +1,12 @@
 {
  "episode": "s1e01",
  "season": "s1",
- "title": "상자 밖은",
- "title_note": "제목은 업로드 때만 사용, 화면에는 글자 없음",
+ "title": {
+  "ko": "상자 밖은 눈이 아니었다",
+  "en": "Not Snow Outside the Box",
+  "ja": "箱の外は雪じゃなかった",
+  "es": "Fuera de la caja no había nieve"
+ },
  "logline": "생선 냄새를 따라간 아기 펭귄 모찌가 화물 상자에서 잠든 사이, 고래 유람선이 그를 네온 도시로 데려간다.",
  "inventions": [
   "whale_ferry",
@@ -12,14 +16,14 @@
  "vote": null,
  "bgm": {
   "name": "s1e01_harbor",
-  "sec": 60,
+  "sec": 70,
   "vol": 0.45,
   "prompt": "Cozy lofi hip hop instrumental for a cute wordless animal cartoon: warm Rhodes piano, soft vinyl crackle, gentle boom-bap drums at 76 BPM, music box melody, a hint of ocean breeze pad, curious and tender mood that turns slightly wondrous at the end, no vocals, no sudden changes"
  },
  "cuts": [
   {
    "id": "c01",
-   "sec": 2.6,
+   "sec": 3.0,
    "place": "antarctica",
    "who": [
     "mochi",
@@ -46,7 +50,7 @@
    ],
    "emotes": [
     {
-     "t": 1.3,
+     "t": 1.49,
      "kind": "?",
      "at": [
       0.5,
@@ -56,17 +60,23 @@
    ],
    "sfx": [
     {
-     "t": 0.1,
+     "t": 0.11,
      "name": "waddle",
      "prompt": "cute cartoon tiny footsteps waddling on snow, playful",
      "sec": 2
     }
    ],
-   "img": "c01.jpg"
+   "img": "c01.jpg",
+   "narr": {
+    "ko": "남극 펭귄 유치원의 아침 산책. 한 명만 방향이 다릅니다.",
+    "en": "Morning walk at the penguin kindergarten. One of them has a different plan.",
+    "ja": "南極ペンギン幼稚園の朝のお散歩。ひとりだけ方向が違います。",
+    "es": "Paseo matutino en la guardería de pingüinos. Uno va en otra dirección."
+   }
   },
   {
    "id": "c02",
-   "sec": 3.0,
+   "sec": 3.4,
    "place": "antarctica",
    "who": [
     "mochi",
@@ -90,7 +100,7 @@
    },
    "emotes": [
     {
-     "t": 1.4,
+     "t": 1.61,
      "kind": "heart",
      "at": [
       0.5,
@@ -100,17 +110,23 @@
    ],
    "sfx": [
     {
-     "t": 0.8,
+     "t": 0.92,
      "name": "twinkle",
      "prompt": "soft magical twinkle chime, short",
      "sec": 1.2
     }
    ],
-   "img": "c02.jpg"
+   "img": "c02.jpg",
+   "narr": {
+    "ko": "이 아이는 모찌. 엄마가 준 조약돌은 '집'이라는 뜻입니다.",
+    "en": "This is Mochi. The pebble from Mom means \"home.\"",
+    "ja": "この子はモチ。ママがくれた小石は「おうち」という意味です。",
+    "es": "Este es Mochi. La piedrita de mamá significa «hogar»."
+   }
   },
   {
    "id": "c03",
-   "sec": 3.4,
+   "sec": 3.9,
    "place": "antarctica",
    "who": [
     "mochi"
@@ -138,17 +154,23 @@
    "emotes": [],
    "sfx": [
     {
-     "t": 0.3,
+     "t": 0.34,
      "name": "whale_horn",
      "prompt": "deep friendly whale call that sounds like a ship horn, cartoon",
      "sec": 2.5
     }
    ],
-   "img": "c03.jpg"
+   "img": "c03.jpg",
+   "narr": {
+    "ko": "그날, 고래 유람선이 들어왔습니다. 네, 고래입니다.",
+    "en": "That day, the whale ferry came in. Yes. A whale.",
+    "ja": "その日、クジラの遊覧船がやって来ました。はい、クジラです。",
+    "es": "Ese día llegó el ferri ballena. Sí, una ballena."
+   }
   },
   {
    "id": "c04",
-   "sec": 3.0,
+   "sec": 3.4,
    "place": "antarctica",
    "who": [
     "mochi"
@@ -174,17 +196,23 @@
    ],
    "sfx": [
     {
-     "t": 0.2,
+     "t": 0.23,
      "name": "sniff",
      "prompt": "cute cartoon sniffing, two quick sniffs",
      "sec": 1.2
     }
    ],
-   "img": "c04.jpg"
+   "img": "c04.jpg",
+   "narr": {
+    "ko": "모찌의 코가 뭔가를 찾아냈습니다.",
+    "en": "Mochi's nose picked up a lead.",
+    "ja": "モチの鼻が、何かを見つけました。",
+    "es": "La nariz de Mochi encontró una pista."
+   }
   },
   {
    "id": "c05",
-   "sec": 2.8,
+   "sec": 3.2,
    "place": "antarctica",
    "who": [
     "mochi"
@@ -210,7 +238,7 @@
    ],
    "emotes": [
     {
-     "t": 0.5,
+     "t": 0.57,
      "kind": "star",
      "at": [
       0.25,
@@ -218,7 +246,7 @@
      ]
     },
     {
-     "t": 0.8,
+     "t": 0.92,
      "kind": "star",
      "at": [
       0.78,
@@ -229,17 +257,68 @@
    ],
    "sfx": [
     {
-     "t": 0.3,
+     "t": 0.34,
      "name": "sparkle",
      "prompt": "bright cartoon sparkle shine sound",
      "sec": 1.2
     }
    ],
-   "img": "c05.jpg"
+   "img": "c05.jpg",
+   "narr": {
+    "ko": "생선. 그것도 한 상자.",
+    "en": "Fish. An entire crate of it.",
+    "ja": "魚。それも、ひと箱まるごと。",
+    "es": "Pescado. Una caja entera."
+   }
+  },
+  {
+   "id": "c05b",
+   "sec": 3.5,
+   "place": "antarctica",
+   "who": [
+    "mochi"
+   ],
+   "beat": "웃음",
+   "action": "생선 폭풍 흡입",
+   "gag": "볼 빵빵·생선 뼈가 날아감",
+   "scene": "Mochi sits inside the crate happily gobbling fish: cheeks stuffed round, one fish tail sticking out of its beak, a fish in each flipper, fish flying in the air.",
+   "alt_scene": "Mochi mid-gulp with head tilted back swallowing a whole fish, belly visibly bigger, fish bones flying out behind.",
+   "img": "c05b.jpg",
+   "alt": "c05c.jpg",
+   "hold": 0.3,
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.05
+    ],
+    "to": [
+     0.5,
+     0.5,
+     1.2
+    ]
+   },
+   "fx": [
+    "bob"
+   ],
+   "sfx": [
+    {
+     "t": 0.1,
+     "name": "munch",
+     "prompt": "fast cute cartoon munching and gobbling, nom nom nom",
+     "sec": 3
+    }
+   ],
+   "narr": {
+    "ko": "참는 건 처음부터 계획에 없었습니다.",
+    "en": "Self-control was never part of the plan.",
+    "ja": "がまんは、最初から予定にありませんでした。",
+    "es": "El autocontrol nunca estuvo en el plan."
+   }
   },
   {
    "id": "c06",
-   "sec": 3.4,
+   "sec": 3.9,
    "place": "antarctica",
    "who": [
     "mochi"
@@ -265,7 +344,7 @@
    },
    "emotes": [
     {
-     "t": 1.6,
+     "t": 1.84,
      "kind": "zzz",
      "at": [
       0.7,
@@ -276,17 +355,23 @@
    ],
    "sfx": [
     {
-     "t": 0.2,
+     "t": 0.23,
      "name": "burp",
      "prompt": "tiny cute cartoon burp then a sleepy sigh",
      "sec": 1.5
     }
    ],
-   "img": "c06.jpg"
+   "img": "c06.jpg",
+   "narr": {
+    "ko": "식사 끝. 그리고 식곤증.",
+    "en": "Dinner's over. Food coma begins.",
+    "ja": "食事終了。そして、おひるね。",
+    "es": "Fin de la cena. Empieza la siesta."
+   }
   },
   {
    "id": "c07",
-   "sec": 3.2,
+   "sec": 3.7,
    "place": "antarctica",
    "who": [
     "mochi"
@@ -312,23 +397,81 @@
     "shake"
    ],
    "shake": {
-    "t": 0.7,
-    "dur": 0.5,
+    "t": 0.8,
+    "dur": 0.57,
     "amp": 22
    },
    "sfx": [
     {
-     "t": 0.65,
+     "t": 0.75,
      "name": "stamp",
      "prompt": "heavy wooden lid slam and a rubber stamp thud, cartoon",
      "sec": 1.2
     }
    ],
-   "img": "c07.jpg"
+   "img": "c07.jpg",
+   "narr": {
+    "ko": "펠리컨은 일을 참 꼼꼼하게 합니다. 도장: 도시행.",
+    "en": "Pelicans are thorough workers. Stamp: to the city.",
+    "ja": "ペリカンは仕事がていねいです。スタンプ：都会行き。",
+    "es": "Los pelícanos trabajan con esmero. Sello: a la ciudad."
+   }
+  },
+  {
+   "id": "c07b",
+   "sec": 3.5,
+   "place": "antarctica",
+   "who": [],
+   "beat": "웃음",
+   "action": "펠리컨이 부리 주머니에 상자를 넣고 고래 유람선으로",
+   "gag": "코 고는 상자를 흘끗 보는 펠리컨",
+   "invention": "pelican_crane",
+   "scene": "The pelican dock worker carries the stamped crate inside its huge stretched beak pouch, waddling up a ramp onto the whale cruise ship, glancing sideways at the crate because small sleeping bubbles float out of it.",
+   "img": "c07b.jpg",
+   "cam": {
+    "from": [
+     0.45,
+     0.55,
+     1.1
+    ],
+    "to": [
+     0.55,
+     0.45,
+     1.3
+    ]
+   },
+   "fx": [
+    "bob"
+   ],
+   "emotes": [
+    {
+     "t": 1.2,
+     "kind": "zzz",
+     "at": [
+      0.6,
+      0.3
+     ],
+     "dur": 2.0
+    }
+   ],
+   "sfx": [
+    {
+     "t": 0.3,
+     "name": "snore",
+     "prompt": "tiny cute cartoon snoring, two snores",
+     "sec": 2.5
+    }
+   ],
+   "narr": {
+    "ko": "상자가 왜 코를 고는지는 아무도 묻지 않았습니다.",
+    "en": "Nobody asked why the crate was snoring.",
+    "ja": "箱がなぜいびきをかくのか、誰も聞きませんでした。",
+    "es": "Nadie preguntó por qué la caja roncaba."
+   }
   },
   {
    "id": "c08",
-   "sec": 3.4,
+   "sec": 3.9,
    "place": "antarctica",
    "who": [
     "mom"
@@ -351,7 +494,7 @@
    },
    "emotes": [
     {
-     "t": 2.0,
+     "t": 2.3,
      "kind": "!",
      "at": [
       0.3,
@@ -361,17 +504,23 @@
    ],
    "sfx": [
     {
-     "t": 0.2,
+     "t": 0.23,
      "name": "count",
      "prompt": "four quick cute marimba notes going up, then a comedic record-scratch stop",
      "sec": 2.2
     }
    ],
-   "img": "c08.jpg"
+   "img": "c08.jpg",
+   "narr": {
+    "ko": "하나, 둘, 셋, 넷… 다섯?",
+    "en": "One, two, three, four… five?",
+    "ja": "いち、に、さん、し… ご？",
+    "es": "Uno, dos, tres, cuatro… ¿cinco?"
+   }
   },
   {
    "id": "c09",
-   "sec": 3.4,
+   "sec": 3.9,
    "place": "바다",
    "who": [
     "mochi"
@@ -404,11 +553,17 @@
      "vol": 0.5
     }
    ],
-   "img": "c09.jpg"
+   "img": "c09.jpg",
+   "narr": {
+    "ko": "그렇게 모찌는 바다를 건넜습니다. 자면서.",
+    "en": "And so Mochi crossed the ocean. Asleep.",
+    "ja": "こうしてモチは海を渡りました。寝たまま。",
+    "es": "Y así Mochi cruzó el océano. Dormido."
+   }
   },
   {
    "id": "c10",
-   "sec": 2.8,
+   "sec": 3.2,
    "place": "바다",
    "who": [
     "mochi"
@@ -435,7 +590,7 @@
    ],
    "shake": {
     "t": 0.0,
-    "dur": 2.8,
+    "dur": 3.22,
     "amp": 20
    },
    "sfx": [
@@ -446,11 +601,17 @@
      "sec": 2.8
     }
    ],
-   "img": "c10.jpg"
+   "img": "c10.jpg",
+   "narr": {
+    "ko": "폭풍도 있었습니다.",
+    "en": "There was a storm, too.",
+    "ja": "嵐もありました。",
+    "es": "También hubo una tormenta."
+   }
   },
   {
    "id": "c11",
-   "sec": 3.0,
+   "sec": 3.4,
    "place": "harbor_city",
    "who": [
     "mochi"
@@ -473,7 +634,7 @@
    },
    "emotes": [
     {
-     "t": 1.5,
+     "t": 1.72,
      "kind": "?",
      "at": [
       0.7,
@@ -483,18 +644,24 @@
    ],
    "sfx": [
     {
-     "t": 0.6,
+     "t": 0.69,
      "name": "city_hum",
      "prompt": "distant muffled city ambience heard from inside a box, soft",
      "sec": 2.4,
      "vol": 0.5
     }
    ],
-   "img": "c11.jpg"
+   "img": "c11.jpg",
+   "narr": {
+    "ko": "눈을 떠 보니, 빛의 색이 이상합니다.",
+    "en": "When Mochi woke up, the light looked… wrong.",
+    "ja": "目を覚ますと、光の色がなんだか変です。",
+    "es": "Al despertar, la luz se veía… rara."
+   }
   },
   {
    "id": "c12",
-   "sec": 3.2,
+   "sec": 3.7,
    "place": "harbor_city",
    "who": [
     "mochi"
@@ -517,17 +684,23 @@
    },
    "sfx": [
     {
-     "t": 0.2,
+     "t": 0.23,
      "name": "creak",
      "prompt": "small wooden lid creaking open slowly",
      "sec": 1.5
     }
    ],
-   "img": "c12.jpg"
+   "img": "c12.jpg",
+   "narr": {
+    "ko": "남극의 빛은 분홍색으로 깜빡이지 않거든요.",
+    "en": "Antarctic light doesn't blink pink.",
+    "ja": "南極の光は、ピンクに点滅しませんから。",
+    "es": "La luz de la Antártida no parpadea en rosa."
+   }
   },
   {
    "id": "c13",
-   "sec": 4.0,
+   "sec": 4.6,
    "place": "harbor_city",
    "who": [
     "mochi"
@@ -552,7 +725,7 @@
    },
    "emotes": [
     {
-     "t": 2.6,
+     "t": 2.99,
      "kind": "!",
      "at": [
       0.62,
@@ -568,7 +741,13 @@
      "sec": 3
     }
    ],
-   "img": "c13.jpg"
+   "img": "c13.jpg",
+   "narr": {
+    "ko": "상자 밖은, 눈이 아니었습니다.",
+    "en": "Outside the box, there was no snow.",
+    "ja": "箱の外は、雪ではありませんでした。",
+    "es": "Fuera de la caja no había nieve."
+   }
   },
   {
    "id": "c14",
@@ -614,7 +793,13 @@
      "sec": 1.5
     }
    ],
-   "img": "c14.jpg"
+   "img": "c14.jpg",
+   "narr": {
+    "ko": "모찌는 집에 갈 수 있을까요? (다음 화에 계속)",
+    "en": "Can Mochi find the way home? (To be continued)",
+    "ja": "モチはおうちに帰れるのでしょうか。（つづく）",
+    "es": "¿Podrá Mochi volver a casa? (Continuará)"
+   }
   }
  ],
  "refs": {
@@ -622,5 +807,6 @@
   "c14_start": "e8f64a71-1c2f-4ec4-ad72-08d3057e4120",
   "c14_video": "921d8344-44cd-4bfd-8b8f-b697aaf1ec02",
   "c06": "37e223a5-86f2-4844-a79e-d39599d36806"
- }
+ },
+ "upload_title": "상자 밖은 눈이 아니었다 🐧 | Not Snow Outside the Box · Tailored EP1"
 }
