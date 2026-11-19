@@ -1,0 +1,53 @@
+{
+ "_rule": "고유색(color)과 애착템(item)은 모든 컷에 반드시 보인다. look 문장은 이미지 프롬프트에 그대로 넣는다. ref는 힉스필드 기준 이미지 job ID.",
+ "mochi": {
+  "name": "모찌", "species": "아기 펭귄", "role": "시즌 1 주인공", "status": "확정",
+  "color": {"name": "체리 레드", "hex": "#D9453F"}, "item": "빨간 배낭(안에 엄마가 준 반짝이는 조약돌)",
+  "personality": "겁 많지만 일단 가 보는 길치. 먹을 것에 약함.", "habit": "당황하면 지도를 거꾸로 든다 / 무서우면 배낭을 꼭 끌어안는다",
+  "look": "tiny round baby penguin chick with fluffy grey down, white face mask, big glossy dark eyes, pink blush, tiny orange beak, dark grey flippers and feet, wearing a little cherry-red backpack",
+  "ref": {"style_anchor": "59b74ee0-32d1-44d5-bd0a-ef9ae615c1f6", "turnaround": "c0722b1a-92dc-4279-8766-d3ed879599a6", "expressions": "6c2fab4c-5148-4c53-9d85-67ee935e54be"},
+  "never": ["고글·헬멧", "배낭 없는 컷", "어른 펭귄 체형"]
+ },
+ "mom": {
+  "name": "엄마 펭귄", "species": "어른 펭귄", "role": "시즌 1 조연", "status": "초안",
+  "color": {"name": "로즈", "hex": "#F49AA6"}, "item": "로즈색 목도리",
+  "personality": "다정하고 머릿수 세기에 진심", "habit": "아이들을 날개로 하나씩 짚으며 센다",
+  "look": "gentle adult penguin, black back and white belly, soft round shape, wearing a rose-pink knitted scarf", "ref": {}
+ },
+ "kong": {
+  "name": "콩", "species": "햄스터", "role": "택배기사 · 시즌 2 주인공", "status": "초안",
+  "color": {"name": "버터 옐로", "hex": "#FFD98F"}, "item": "버터색 택배 모자 + 수상한 상자",
+  "personality": "성실한데 늘 한 박자 늦음", "habit": "볼주머니에 택배를 넣었다 꺼낸다",
+  "look": "small round golden hamster with puffy cheeks, wearing a butter-yellow delivery cap and a tiny shoulder bag", "ref": {}
+ },
+ "mu": {
+  "name": "무", "species": "고양이", "role": "셰프 · 시즌 3 주인공", "status": "초안",
+  "color": {"name": "민트", "hex": "#9ED9C3"}, "item": "나무 국자 + 민트색 앞치마",
+  "personality": "무뚝뚝, 요리엔 진심", "habit": "국자로 박자를 맞춘다",
+  "look": "chubby cream-colored cat with half-closed stoic eyes, wearing a mint-green apron, holding a wooden ladle", "ref": {}
+ },
+ "raccoon": {
+  "name": "검표원 너구리", "species": "너구리", "role": "눈송이 철도 검표원", "status": "초안",
+  "color": {"name": "스카이 블루", "hex": "#A9D3F5"}, "item": "검표 펀치",
+  "personality": "규칙쟁이, 간식에 약함", "habit": "펀치를 딸깍거린다",
+  "look": "round raccoon with a sky-blue conductor cap and vest, holding a small ticket punch", "ref": {}
+ },
+ "crab": {
+  "name": "아기 게", "species": "게", "role": "바닷가 친구", "status": "초안",
+  "color": {"name": "코랄", "hex": "#FF9E8A"}, "item": "조개껍데기 모자",
+  "personality": "옆으로만 가는 낙천가", "habit": "집게로 박수",
+  "look": "tiny round coral-colored baby crab, big sparkly eyes, wearing a seashell as a hat", "ref": {}
+ },
+ "spider": {
+  "name": "아기 거미", "species": "거미", "role": "와이파이 기사", "status": "초안",
+  "color": {"name": "라벤더", "hex": "#C9B5EC"}, "item": "털모자 + 뜨개바늘",
+  "personality": "수줍음 많음", "habit": "긴장하면 뜨개질이 빨라진다",
+  "look": "tiny mochi-like lavender baby spider, cute chibi, big sparkly eyes, blush, only a few short stubby legs, knit beanie, knitting needles", "ref": {"design": "9dda7979-5faa-45a7-9539-1642f3aaca64"}
+ },
+ "firefly": {
+  "name": "반딧불이", "species": "반딧불이", "role": "가로등·등대 근무", "status": "초안",
+  "color": {"name": "레몬", "hex": "#FFE98A"}, "item": "경비 모자 + 회중시계",
+  "personality": "칼퇴근주의자", "habit": "퇴근 시간이면 하품",
+  "look": "tiny round fluffy cream firefly, cute chibi, big eyes, blush, tiny round wings, glowing lemon-yellow bottom, little guard cap and pocket watch", "ref": {"design": "1ac17ff1-ee7e-410e-b24d-172cca4f3e9d"}
+ }
+}

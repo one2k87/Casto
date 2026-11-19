@@ -1,0 +1,14 @@
+{
+ "id": "s1", "title": "모찌, 집에 가자", "lead": "mochi", "episodes": 8,
+ "question": "길 잃은 아기 펭귄은 남극 집에 돌아갈 수 있을까?",
+ "arc": [
+  {"ep": 1, "place": "antarctica → harbor_city", "story": "고래 유람선 화물 상자에서 낮잠 자다 도시 항구에 도착", "cliff": "상자 밖은 눈 대신 네온 도시", "inventions": ["whale_ferry", "pelican_crane"]},
+  {"ep": 2, "place": "commute_city", "story": "코끼리 버스·두더지 지하철·카멜레온 신호등에 휩쓸림", "cliff": "냉동 트럭에 실려 감", "inventions": ["elephant_bus", "mole_subway"]},
+  {"ep": 3, "place": "냉동 트럭", "story": "햄스터 택배기사 콩을 만남", "cliff": "남극행 소포 송장 발견", "inventions": ["hamster_parcel"], "cameo": ["kong"]},
+  {"ep": 4, "place": "alley", "story": "손님 0명 고양이 식당, 생선 고르는 재능", "cliff": "'남쪽 끝 마지막 배 3일 뒤' 포스터(그림)", "inventions": ["polar_fridge"], "cameo": ["mu"]},
+  {"ep": 5, "place": "snow_rail", "story": "무임승차 소동, 검표원 너구리 피하기", "cliff": "기차가 반대 방향", "inventions": ["bird_navi"], "cameo": ["raccoon"]},
+  {"ep": 6, "place": "seaside", "story": "반딧불이 등대와 폭풍, 아기 게를 도와줌", "cliff": "반딧불이 퇴근으로 등대가 꺼져 배를 놓침", "inventions": ["firefly_lamp"], "cameo": ["crab", "firefly"]},
+  {"ep": 7, "place": "바다", "story": "친구들 총출동 작전", "cliff": "바다 한가운데 폭풍", "inventions": ["whale_fireboat"]},
+  {"ep": 8, "place": "antarctica", "story": "엄마 품으로. 친구들에게 생선 엽서", "cliff": "콩의 수상한 상자 → 시즌 2 예고", "inventions": ["pelican_mailbox"]}
+ ]
+}

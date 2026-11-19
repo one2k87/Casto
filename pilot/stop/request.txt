@@ -1,1 +1,1 @@
-pilot/ep1v2/shot.json pilot/ep1v2/ep1v2_draft.mp4 원템포 1화 v2(자막 수정본) — 인터뷰: 우리가 처음 만난 날. 보고 한마디 부탁드려요
+tailored/episodes/s1e01 tailored/episodes/s1e01/s1e01.mp4 Tailored 1화 초안(효과음·편별 로파이 포함)

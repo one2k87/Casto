@@ -1,0 +1,626 @@
+{
+ "episode": "s1e01",
+ "season": "s1",
+ "title": "상자 밖은",
+ "title_note": "제목은 업로드 때만 사용, 화면에는 글자 없음",
+ "logline": "생선 냄새를 따라간 아기 펭귄 모찌가 화물 상자에서 잠든 사이, 고래 유람선이 그를 네온 도시로 데려간다.",
+ "inventions": [
+  "whale_ferry",
+  "pelican_crane",
+  "giraffe_crane"
+ ],
+ "vote": null,
+ "bgm": {
+  "name": "s1e01_harbor",
+  "sec": 60,
+  "vol": 0.45,
+  "prompt": "Cozy lofi hip hop instrumental for a cute wordless animal cartoon: warm Rhodes piano, soft vinyl crackle, gentle boom-bap drums at 76 BPM, music box melody, a hint of ocean breeze pad, curious and tender mood that turns slightly wondrous at the end, no vocals, no sudden changes"
+ },
+ "cuts": [
+  {
+   "id": "c01",
+   "sec": 2.6,
+   "place": "antarctica",
+   "who": [
+    "mochi",
+    "mom"
+   ],
+   "beat": "훅",
+   "action": "유치원 줄은 전부 왼쪽, 모찌만 지도를 거꾸로 들고 오른쪽",
+   "gag": "혼자 반대로 가는 길치",
+   "scene": "Antarctic snowfield at pastel dawn, wide shot. A line of four fluffy grey baby penguin chicks waddles to the LEFT following a gentle adult penguin with a rose-pink scarf at the front. At the very end of the line Mochi confidently waddles to the RIGHT, the opposite way, holding a paper map upside down. Funny contrast.",
+   "cam": {
+    "from": [
+     0.3,
+     0.56,
+     1.6
+    ],
+    "to": [
+     0.82,
+     0.56,
+     2.4
+    ]
+   },
+   "fx": [
+    "pop"
+   ],
+   "emotes": [
+    {
+     "t": 1.3,
+     "kind": "?",
+     "at": [
+      0.5,
+      0.3
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "t": 0.1,
+     "name": "waddle",
+     "prompt": "cute cartoon tiny footsteps waddling on snow, playful",
+     "sec": 2
+    }
+   ],
+   "img": "c01.jpg"
+  },
+  {
+   "id": "c02",
+   "sec": 3.0,
+   "place": "antarctica",
+   "who": [
+    "mochi",
+    "mom"
+   ],
+   "beat": "설정",
+   "action": "엄마가 배낭에 빛나는 조약돌을 넣어 줌",
+   "gag": null,
+   "scene": "Close two-shot. The mom penguin with a rose-pink scarf gently tucks a small glowing warm-yellow pebble into Mochi's open cherry-red backpack. Mochi looks up at her happily. Cozy round ice houses behind, soft sparkles.",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.05
+    ],
+    "to": [
+     0.5,
+     0.56,
+     1.25
+    ]
+   },
+   "emotes": [
+    {
+     "t": 1.4,
+     "kind": "heart",
+     "at": [
+      0.5,
+      0.22
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "t": 0.8,
+     "name": "twinkle",
+     "prompt": "soft magical twinkle chime, short",
+     "sec": 1.2
+    }
+   ],
+   "img": "c02.jpg"
+  },
+  {
+   "id": "c03",
+   "sec": 3.4,
+   "place": "antarctica",
+   "who": [
+    "mochi"
+   ],
+   "beat": "발명품",
+   "action": "고래 유람선 도착",
+   "gag": "배가 아니라 고래",
+   "invention": "whale_ferry",
+   "scene": "Wide shot of an icy harbor. A giant friendly smiling blue whale works as a cruise ship: a wooden deck with railings on its back, tiny tourist animals (rabbits, foxes, bears in scarves) taking pictures, and its blowhole spouting a tall water column like a ship horn. In the foreground Mochi seen from behind, looking up in awe.",
+   "cam": {
+    "from": [
+     0.55,
+     0.75,
+     1.5
+    ],
+    "to": [
+     0.5,
+     0.3,
+     1.1
+    ]
+   },
+   "fx": [
+    "sway"
+   ],
+   "emotes": [],
+   "sfx": [
+    {
+     "t": 0.3,
+     "name": "whale_horn",
+     "prompt": "deep friendly whale call that sounds like a ship horn, cartoon",
+     "sec": 2.5
+    }
+   ],
+   "img": "c03.jpg"
+  },
+  {
+   "id": "c04",
+   "sec": 3.0,
+   "place": "antarctica",
+   "who": [
+    "mochi"
+   ],
+   "beat": "목표",
+   "action": "생선 냄새를 따라 화물 더미로",
+   "gag": "킁킁 발끝 걸음",
+   "scene": "Mochi sniffing the air with closed eyes and tiny beak pointed up, tiptoeing. A wavy pastel scent trail with little fish icons floats from a pile of wooden cargo crates on the icy dock toward Mochi's beak.",
+   "cam": {
+    "from": [
+     0.35,
+     0.55,
+     1.15
+    ],
+    "to": [
+     0.6,
+     0.5,
+     1.15
+    ]
+   },
+   "fx": [
+    "bob"
+   ],
+   "sfx": [
+    {
+     "t": 0.2,
+     "name": "sniff",
+     "prompt": "cute cartoon sniffing, two quick sniffs",
+     "sec": 1.2
+    }
+   ],
+   "img": "c04.jpg"
+  },
+  {
+   "id": "c05",
+   "sec": 2.8,
+   "place": "antarctica",
+   "who": [
+    "mochi"
+   ],
+   "beat": "유혹",
+   "action": "생선 상자 발견, 눈이 별",
+   "gag": "눈에서 별·침",
+   "scene": "Mochi peeking over the edge of an open wooden crate full of shiny silver fish packed in ice. Mochi's eyes have turned into sparkling stars, a little drool, both flippers gripping the crate edge.",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.0
+    ],
+    "to": [
+     0.5,
+     0.42,
+     1.3
+    ]
+   },
+   "fx": [
+    "pop"
+   ],
+   "emotes": [
+    {
+     "t": 0.5,
+     "kind": "star",
+     "at": [
+      0.25,
+      0.2
+     ]
+    },
+    {
+     "t": 0.8,
+     "kind": "star",
+     "at": [
+      0.78,
+      0.26
+     ],
+     "size": 110
+    }
+   ],
+   "sfx": [
+    {
+     "t": 0.3,
+     "name": "sparkle",
+     "prompt": "bright cartoon sparkle shine sound",
+     "sec": 1.2
+    }
+   ],
+   "img": "c05.jpg"
+  },
+  {
+   "id": "c06",
+   "sec": 3.4,
+   "place": "antarctica",
+   "who": [
+    "mochi"
+   ],
+   "beat": "웃음",
+   "action": "다 먹고 배 빵빵, 상자 안에서 꾸벅",
+   "gag": "공처럼 부푼 배",
+   "alt": "c06b.jpg",
+   "hold": 0.55,
+   "scene": "Top-down view inside the wooden crate. Mochi lies on its back among neat fish bones, belly hugely round like a ball, sleepy happy half-closed eyes, a tiny burp cloud, the cherry-red backpack used as a pillow.",
+   "alt_scene": "Top-down view inside the wooden crate. Mochi lies on its back among neat fish bones, belly hugely round like a ball, now fast asleep with eyes closed and a snot bubble from the beak, the cherry-red backpack used as a pillow.",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.1
+    ],
+    "to": [
+     0.5,
+     0.5,
+     1.2
+    ]
+   },
+   "emotes": [
+    {
+     "t": 1.6,
+     "kind": "zzz",
+     "at": [
+      0.7,
+      0.25
+     ],
+     "dur": 1.8
+    }
+   ],
+   "sfx": [
+    {
+     "t": 0.2,
+     "name": "burp",
+     "prompt": "tiny cute cartoon burp then a sleepy sigh",
+     "sec": 1.5
+    }
+   ],
+   "img": "c06.jpg"
+  },
+  {
+   "id": "c07",
+   "sec": 3.2,
+   "place": "antarctica",
+   "who": [
+    "mochi"
+   ],
+   "beat": "방해 1",
+   "action": "펠리컨 하역부가 뚜껑을 닫고 도시 도장 쾅",
+   "gag": "도장 쾅",
+   "invention": "pelican_crane",
+   "scene": "A burly pelican dock worker in a small cap slams the lid shut on a wooden crate and presses a big rubber stamp on it; the stamp mark is a simple pictogram of skyscrapers (no letters). A tiny grey penguin foot barely sticks out of the lid gap. Behind, other pelicans carry crates in their huge beak pouches toward the whale ferry.",
+   "cam": {
+    "from": [
+     0.5,
+     0.45,
+     1.05
+    ],
+    "to": [
+     0.5,
+     0.55,
+     1.2
+    ]
+   },
+   "fx": [
+    "shake"
+   ],
+   "shake": {
+    "t": 0.7,
+    "dur": 0.5,
+    "amp": 22
+   },
+   "sfx": [
+    {
+     "t": 0.65,
+     "name": "stamp",
+     "prompt": "heavy wooden lid slam and a rubber stamp thud, cartoon",
+     "sec": 1.2
+    }
+   ],
+   "img": "c07.jpg"
+  },
+  {
+   "id": "c08",
+   "sec": 3.4,
+   "place": "antarctica",
+   "who": [
+    "mom"
+   ],
+   "beat": "웃음",
+   "action": "엄마가 머릿수를 세다가 한 자리 빈 걸 발견",
+   "gag": "점선 실루엣",
+   "scene": "The mom penguin with a rose-pink scarf counts a row of four baby penguin chicks with her flipper. At the end of the row is an empty spot marked by a dotted-outline silhouette of a missing chick. Mom's eyes are wide in shock. Far behind, the whale ferry sails away into a pastel sunset.",
+   "cam": {
+    "from": [
+     0.3,
+     0.62,
+     1.3
+    ],
+    "to": [
+     0.75,
+     0.72,
+     1.6
+    ]
+   },
+   "emotes": [
+    {
+     "t": 2.0,
+     "kind": "!",
+     "at": [
+      0.3,
+      0.3
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "t": 0.2,
+     "name": "count",
+     "prompt": "four quick cute marimba notes going up, then a comedic record-scratch stop",
+     "sec": 2.2
+    }
+   ],
+   "img": "c08.jpg"
+  },
+  {
+   "id": "c09",
+   "sec": 3.4,
+   "place": "바다",
+   "who": [
+    "mochi"
+   ],
+   "beat": "이동",
+   "action": "밤바다, 상자 안에서 쿨쿨, 조약돌이 빛남",
+   "gag": null,
+   "scene": "Night sea under a starry sky with pastel aurora. The whale ferry swims calmly. On its deck a wooden crate is shown in cutaway view: Mochi sleeps curled up inside, and the pebble in the cherry-red backpack glows softly warm.",
+   "cam": {
+    "from": [
+     0.5,
+     0.3,
+     1.0
+    ],
+    "to": [
+     0.5,
+     0.62,
+     1.5
+    ]
+   },
+   "fx": [
+    "sway"
+   ],
+   "sfx": [
+    {
+     "t": 0.0,
+     "name": "night_sea",
+     "prompt": "calm ocean waves at night, gentle, soft",
+     "sec": 3.4,
+     "vol": 0.5
+    }
+   ],
+   "img": "c09.jpg"
+  },
+  {
+   "id": "c10",
+   "sec": 2.8,
+   "place": "바다",
+   "who": [
+    "mochi"
+   ],
+   "beat": "방해 2",
+   "action": "폭풍, 상자가 갑판을 구름",
+   "gag": "틈으로 보이는 놀란 눈",
+   "flash": true,
+   "scene": "Stormy sea with big waves, rain and a lightning bolt. The wooden crate tumbles and slides across the whale's wet deck. Mochi's two surprised round eyes are visible through a gap in the crate.",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.15
+    ],
+    "to": [
+     0.55,
+     0.52,
+     1.25
+    ]
+   },
+   "fx": [
+    "shake"
+   ],
+   "shake": {
+    "t": 0.0,
+    "dur": 2.8,
+    "amp": 20
+   },
+   "sfx": [
+    {
+     "t": 0.0,
+     "name": "storm",
+     "prompt": "thunder crack with heavy rain and a wooden box tumbling, cartoon",
+     "sec": 2.8
+    }
+   ],
+   "img": "c10.jpg"
+  },
+  {
+   "id": "c11",
+   "sec": 3.0,
+   "place": "harbor_city",
+   "who": [
+    "mochi"
+   ],
+   "beat": "고요",
+   "action": "조용해짐. 틈새로 알록달록한 빛",
+   "gag": "부스스한 털",
+   "scene": "Dark inside of the wooden crate. A thin beam of colorful neon light comes through a crack in the lid and lands on Mochi's face. Mochi is just waking up with one eye open and messy feathers, hugging the cherry-red backpack.",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.25
+    ],
+    "to": [
+     0.5,
+     0.45,
+     1.1
+    ]
+   },
+   "emotes": [
+    {
+     "t": 1.5,
+     "kind": "?",
+     "at": [
+      0.7,
+      0.25
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "t": 0.6,
+     "name": "city_hum",
+     "prompt": "distant muffled city ambience heard from inside a box, soft",
+     "sec": 2.4,
+     "vol": 0.5
+    }
+   ],
+   "img": "c11.jpg"
+  },
+  {
+   "id": "c12",
+   "sec": 3.2,
+   "place": "harbor_city",
+   "who": [
+    "mochi"
+   ],
+   "beat": "반전 직전",
+   "action": "뚜껑을 빼꼼, 눈만 보임",
+   "gag": "눈에 비친 네온",
+   "scene": "Close-up. The crate lid is lifted just a little; only Mochi's two big glossy eyes and the top of its fluffy grey head peek out from the dark gap. Colorful neon reflections sparkle in the eyes.",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.0
+    ],
+    "to": [
+     0.5,
+     0.48,
+     1.45
+    ]
+   },
+   "sfx": [
+    {
+     "t": 0.2,
+     "name": "creak",
+     "prompt": "small wooden lid creaking open slowly",
+     "sec": 1.5
+    }
+   ],
+   "img": "c12.jpg"
+  },
+  {
+   "id": "c13",
+   "sec": 4.0,
+   "place": "harbor_city",
+   "who": [
+    "mochi"
+   ],
+   "beat": "반전",
+   "action": "눈 대신 네온 도시 항구",
+   "gag": "기린 크레인·코끼리 버스",
+   "invention": "giraffe_crane",
+   "flash": true,
+   "scene": "Wide establishing shot from behind tiny Mochi standing in an open crate on a dock. A huge glowing pastel-neon harbor city at night built for animals: giraffes working as cranes lifting containers with their long necks, an elephant bus with seats on its back, pelican dock workers, owl streetlamps, glowing signs showing only pictograms. No snow anywhere. Overwhelming and magical.",
+   "cam": {
+    "from": [
+     0.5,
+     0.85,
+     1.7
+    ],
+    "to": [
+     0.5,
+     0.45,
+     1.0
+    ]
+   },
+   "emotes": [
+    {
+     "t": 2.6,
+     "kind": "!",
+     "at": [
+      0.62,
+      0.72
+     ]
+    }
+   ],
+   "sfx": [
+    {
+     "t": 0.0,
+     "name": "reveal",
+     "prompt": "big magical reveal whoosh with shimmering city ambience",
+     "sec": 3
+    }
+   ],
+   "img": "c13.jpg"
+  },
+  {
+   "id": "c14",
+   "sec": 5.0,
+   "place": "harbor_city",
+   "who": [
+    "mochi"
+   ],
+   "beat": "클리프",
+   "action": "놀라서 두리번, 배낭을 꼭 끌어안음",
+   "gag": null,
+   "video": "c14.mp4",
+   "scene": "Front medium close-up of Mochi standing in the open crate, neon city lights glowing softly behind, shocked expression with tiny open beak and wide eyes, both flippers raised.",
+   "video_prompt": "The baby penguin blinks in shock, looks left then right, then hugs its red backpack tightly and shivers a little. Neon lights flicker softly in the background. Gentle camera push-in. Keep the flat cartoon style.",
+   "cam": {
+    "from": [
+     0.5,
+     0.45,
+     1.0
+    ],
+    "to": [
+     0.5,
+     0.42,
+     1.15
+    ]
+   },
+   "emotes": [
+    {
+     "t": 3.6,
+     "kind": "sweat",
+     "at": [
+      0.72,
+      0.3
+     ],
+     "size": 130
+    }
+   ],
+   "sfx": [
+    {
+     "t": 0.4,
+     "name": "gulp",
+     "prompt": "cute cartoon gulp and a tiny nervous squeak",
+     "sec": 1.5
+    }
+   ],
+   "img": "c14.jpg"
+  }
+ ],
+ "refs": {
+  "c05": "a63487ae-f040-4485-8663-ef10fbfd6af5",
+  "c14_start": "e8f64a71-1c2f-4ec4-ad72-08d3057e4120",
+  "c14_video": "921d8344-44cd-4bfd-8b8f-b697aaf1ec02",
+  "c06": "37e223a5-86f2-4844-a79e-d39599d36806"
+ }
+}

@@ -548,4 +548,10 @@ def render(shot_path: str, out: str) -> str:
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         raise SystemExit("사용: python clay_stop.py <shot.json> <out.mp4>")
+    if os.path.isdir(sys.argv[1]) and os.path.exists(os.path.join(sys.argv[1], "conti.json")):
+        # Tailored 에피소드 폴더면 만화 렌더러로 넘긴다(전용 워크플로를 붙이기 전까지 이 워크플로를 같이 쓴다).
+        os.environ.setdefault("TAILORED_SFX_DIR", os.path.join(sys.argv[1], "voice"))   # 이 워크플로가 커밋하는 폴더에 효과음 캐시
+        import tailored_render
+        tailored_render.render(sys.argv[1], sys.argv[2])
+        raise SystemExit(0)
     render(sys.argv[1], sys.argv[2])

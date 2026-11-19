@@ -1,0 +1,172 @@
+{
+ "_rule": "매 화 1~2개 사용. 쓰면 used에 화 번호를 적는다. 최근 3화에 쓴 것은 다시 쓰지 않는다. 지네류 금지, 벌레는 bug_lock으로 귀엽게.",
+ "items": [
+  {
+   "id": "whale_ferry",
+   "human": "유람선",
+   "animal": "고래 유람선",
+   "gag": "등에 갑판, 출항 신호 = 숨구멍 물기둥",
+   "used": [
+    "s1e01"
+   ]
+  },
+  {
+   "id": "pelican_crane",
+   "human": "항구 하역",
+   "animal": "펠리컨 하역부",
+   "gag": "부리 주머니로 상자를 나르고 도장 쾅",
+   "used": [
+    "s1e01"
+   ]
+  },
+  {
+   "id": "giraffe_crane",
+   "human": "크레인",
+   "animal": "기린 크레인",
+   "gag": "목으로 컨테이너를 들어 올림",
+   "used": [
+    "s1e01"
+   ]
+  },
+  {
+   "id": "elephant_bus",
+   "human": "출근 버스",
+   "animal": "코끼리 버스",
+   "gag": "등에 좌석, 만원이면 코로 밀어 넣기",
+   "used": []
+  },
+  {
+   "id": "mole_subway",
+   "human": "지하철",
+   "animal": "두더지 굴 지하철",
+   "gag": "기관사가 파면서 달림",
+   "used": []
+  },
+  {
+   "id": "kangaroo_taxi",
+   "human": "택시",
+   "animal": "캥거루 주머니 택시",
+   "gag": "승차감 = 롤러코스터",
+   "used": []
+  },
+  {
+   "id": "hamster_parcel",
+   "human": "택배",
+   "animal": "햄스터 볼주머니 택배",
+   "gag": "볼에서 꺼내니 다 젖은 택배",
+   "used": []
+  },
+  {
+   "id": "giraffe_elevator",
+   "human": "엘리베이터",
+   "animal": "기린 목 엘리베이터",
+   "gag": "층 버튼 = 목 쓰다듬기",
+   "used": []
+  },
+  {
+   "id": "chameleon_light",
+   "human": "신호등",
+   "animal": "카멜레온 신호등",
+   "gag": "기분 따라 색이 바뀜",
+   "used": []
+  },
+  {
+   "id": "firefly_lamp",
+   "human": "가로등·등대",
+   "animal": "반딧불이 가로등",
+   "gag": "퇴근하면 깜깜",
+   "used": []
+  },
+  {
+   "id": "owl_lamp",
+   "human": "가로등",
+   "animal": "부엉이 가로등",
+   "gag": "졸면 깜빡깜빡",
+   "used": []
+  },
+  {
+   "id": "spider_wifi",
+   "human": "와이파이",
+   "animal": "거미줄 인터넷",
+   "gag": "신호 약하면 한 땀 더 뜸",
+   "used": []
+  },
+  {
+   "id": "dolphin_wifi",
+   "human": "와이파이",
+   "animal": "돌고래 초음파 와이파이",
+   "gag": "신호 세기 = 돌고래 수",
+   "used": []
+  },
+  {
+   "id": "hamster_gym",
+   "human": "헬스장",
+   "animal": "쳇바퀴 헬스장",
+   "gag": "등록만 하고 안 감",
+   "used": []
+  },
+  {
+   "id": "squirrel_bank",
+   "human": "은행",
+   "animal": "도토리 은행",
+   "gag": "어디 묻었는지 까먹음",
+   "used": []
+  },
+  {
+   "id": "parrot_copier",
+   "human": "복사기",
+   "animal": "앵무새 복사기",
+   "gag": "엉뚱한 말까지 복사",
+   "used": []
+  },
+  {
+   "id": "goat_shredder",
+   "human": "문서 파쇄기",
+   "animal": "염소 파쇄기",
+   "gag": "중요한 서류까지 먹음",
+   "used": []
+  },
+  {
+   "id": "pelican_mailbox",
+   "human": "우체통",
+   "animal": "펠리컨 우체통",
+   "gag": "편지에 생선이 섞여 옴",
+   "used": []
+  },
+  {
+   "id": "elephant_carwash",
+   "human": "세차장",
+   "animal": "코끼리 코 세차장",
+   "gag": "마지막에 물 뿌리기 서비스",
+   "used": []
+  },
+  {
+   "id": "whale_fireboat",
+   "human": "소방차",
+   "animal": "고래 소방선",
+   "gag": "숨구멍 물기둥으로 진화",
+   "used": []
+  },
+  {
+   "id": "polar_fridge",
+   "human": "냉장고",
+   "animal": "북극곰 이글루 냉장고",
+   "gag": "안고 있어서 꺼내기 힘듦",
+   "used": []
+  },
+  {
+   "id": "rooster_alarm",
+   "human": "알람",
+   "animal": "수탉 알람",
+   "gag": "스누즈 = 입 막기",
+   "used": []
+  },
+  {
+   "id": "bird_navi",
+   "human": "내비게이션",
+   "animal": "철새 내비",
+   "gag": "자꾸 남쪽으로만 안내",
+   "used": []
+  }
+ ]
+}
