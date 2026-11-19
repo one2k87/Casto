@@ -959,6 +959,23 @@
    "en",
    "ja",
    "es"
-  ]
+  ],
+  "video_id": "QpG3rS_M8p8",
+  "url": "https://youtube.com/shorts/QpG3rS_M8p8",
+  "published": "2026-11-19",
+  "visibility": "public",
+  "captions": [
+   "ko",
+   "en",
+   "ja",
+   "es"
+  ],
+  "localized_titles": [
+   "en",
+   "ja",
+   "es"
+  ],
+  "ai_disclosure": true,
+  "note": "Studio 수동 업로드(크롬). 자동 생성 영어 자막(asr)은 잡음이라 추후 게시 취소 필요"
  }
 }
