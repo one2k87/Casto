@@ -1,4 +1,76 @@
 {
+ "auto_stirring_cup": {
+  "name": "자동 섞이는 컵",
+  "search_keyword": "자동 교반 컵",
+  "en_keyword": "self stirring mug",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "집꾸미기 및 신기한 아이템 관련 3개 채널에서 언급됨",
+  "category": "50000008",
+  "last_found": "2026-11-20",
+  "first_seen": "2026-11-16"
+ },
+ "5_blade_scissors": {
+  "name": "5중칼날가위",
+  "search_keyword": "5중 칼날 주방가위",
+  "en_keyword": "herb scissors",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "주방꿀템, 살림꿀템 채널 다수에서 반복 등장하며 14개 이상 채널에서 언급됨",
+  "category": "50000008",
+  "last_found": "2026-11-20",
+  "first_seen": "2026-11-20"
+ },
+ "folding_cutting_board": {
+  "name": "접히는 도마",
+  "search_keyword": "접히는 실리콘 도마",
+  "en_keyword": "folding cutting board",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "도마 관련 키워드가 4개 채널에서 냄비 연계 꿀템으로 언급됨",
+  "category": "50000008",
+  "last_found": "2026-11-20",
+  "first_seen": "2026-11-20"
+ },
+ "multi_multicooker": {
+  "name": "만능 멀티쿠커",
+  "search_keyword": "만능 멀티쿠커 냄비",
+  "en_keyword": "multi cooker",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "쿠팡 추천 냄비 카테고리에서 4개 채널이 냄비 대체용으로 소개",
+  "category": "50000003",
+  "last_found": "2026-11-20",
+  "first_seen": "2026-11-20"
+ },
+ "acrylic_full_body_mirror": {
+  "name": "아크릴 전신거울",
+  "search_keyword": "붙이는 아크릴 전신거울",
+  "en_keyword": "acrylic full length mirror",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "생활꿀템 및 집꾸미기 카테고리 3개 채널에서 언급됨",
+  "category": "50000004",
+  "last_found": "2026-11-20",
+  "first_seen": "2026-11-20"
+ },
+ "smart_measuring_spoon": {
+  "name": "똑똑한 계량스푼",
+  "search_keyword": "디지털 저울 계량스푼",
+  "en_keyword": "digital measuring spoon",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "주방 신박템 관련 5개 채널에서 반복 언급됨",
+  "category": "50000008",
+  "last_found": "2026-11-20",
+  "first_seen": "2026-11-20"
+ },
  "multi_blade_scissors": {
   "name": "다중날가위",
   "search_keyword": "다중날 주방가위 5중 가위",
@@ -155,18 +227,6 @@
   "last_found": "2026-11-16",
   "first_seen": "2026-11-15"
  },
- "auto_stirring_cup": {
-  "name": "자동섞이는컵",
-  "search_keyword": "자동 섞이는 컵",
-  "en_keyword": "self stirring mug",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "집꾸미기 키워드 영상 9개 / 채널 3개 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-11-16",
-  "first_seen": "2026-11-16"
- },
  "electric_spray": {
   "name": "전동스프레이",
   "search_keyword": "주방용 전동 오일 스프레이",
@@ -178,65 +238,5 @@
   "category": "50000008",
   "last_found": "2026-11-15",
   "first_seen": "2026-11-12"
- },
- "doma_scissor": {
-  "name": "도마가위",
-  "search_keyword": "칼 도마 일체형 주방가위",
-  "en_keyword": "kitchen board scissors",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "주방용품 영상 16개 / 채널 10개, 주방꿀템 영상 21개 / 채널 15개 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-11-15",
-  "first_seen": "2026-11-15"
- },
- "reverse_umbrella": {
-  "name": "거꾸로접히는우산",
-  "search_keyword": "거꾸로 3단 자동우산",
-  "en_keyword": "reverse folding umbrella",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "자동 영상 3개 / 채널 3개 및 생활용품 카테고리 인용",
-  "category": "50000008",
-  "last_found": "2026-11-15",
-  "first_seen": "2026-11-15"
- },
- "socks_storage": {
-  "name": "양말보관함",
-  "search_keyword": "서랍형 양말 정리함",
-  "en_keyword": "sock organizer",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "자취 8년차 양말보관함 추천 및 집꾸미기 영상 9개 / 채널 3개 등장",
-  "category": "50000008",
-  "last_found": "2026-11-15",
-  "first_seen": "2026-11-15"
- },
- "electric_oil_spray": {
-  "name": "전동 스프레이",
-  "search_keyword": "신기한 전동 식용유 스프레이",
-  "en_keyword": "electric oil sprayer",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "마세요(영상 5개/채널 5개), 이제(영상 4개/채널 4개) 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-11-14",
-  "first_seen": "2026-11-08"
- },
- "multi_function_slicer": {
-  "name": "다기능 채칼",
-  "search_keyword": "다기능 채칼 야채 감자칼 보관형",
-  "en_keyword": "multi-function vegetable slicer",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "주방꿀템(영상 23개/채널 17개), 살림꿀템(영상 32개/채널 9개) 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-11-14",
-  "first_seen": "2026-11-14"
  }
 }
