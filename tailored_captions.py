@@ -1,7 +1,7 @@
 """Tailored 자막실 — 콘티의 컷별 내레이션(narr)을 언어별 자막 파일(SRT)로 만든다 (2026-11-19).
 
 영상 화면에는 글자를 넣지 않는다. 내레이션은 유튜브 자막 트랙(언어별)으로만 제공해 시청자가 자기 언어로 본다.
-conti.json 의 cut.narr = {"ko": "...", "en": "...", ...}. 컷 시작 시각은 렌더러와 같은 방식(프레임 반올림)으로 계산한다.
+conti.json 의 cut.narr = {"ko": "...", "en": "...", ...}. 내레이션이 없는 컷에서는 앞 줄이 이어진다. 컷 시작 시각은 렌더러와 같은 방식(프레임 반올림)으로 계산한다.
 출력: <에피소드 폴더>/captions/<화>.<언어>.srt
 사용: python tailored_captions.py tailored/episodes/s1e01
 """
@@ -24,8 +24,13 @@ def build(ep_dir: str) -> list[str]:
     spans, t = [], 0.0
     for cut in conti["cuts"]:
         d = max(1, round(cut["sec"] * FPS)) / FPS
-        spans.append((t + 0.15, t + d - 0.1, cut.get("narr") or {}))
+        if cut.get("narr"):
+            if spans:                                           # 앞 내레이션은 새 내레이션이 나오기 직전까지 유지(최대 6.5초)
+                spans[-1][1] = min(t - 0.1, spans[-1][0] + 6.5)
+            spans.append([t + 0.1, t + d - 0.1, cut["narr"]])
         t += d
+    if spans:
+        spans[-1][1] = min(t - 0.1, spans[-1][0] + 6.5)
     langs = sorted({k for _, _, n in spans for k in n})
     os.makedirs(os.path.join(ep_dir, "captions"), exist_ok=True)
     out = []

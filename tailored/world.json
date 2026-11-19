@@ -4,15 +4,16 @@
  "premise": "사람이 쓰는 모든 것이 동물 세계 버전으로 다시 만들어진 작은 세상. 시청자가 '동물 세계라면 이렇게 하겠구나' 하고 웃는 것이 핵심 재미.",
  "format": {
   "length_sec": [
-   55,
-   62
+   58,
+   66
   ],
-  "cuts": "14~16",
+  "cuts": "24~28 (컷당 약 2~2.5초, 그림만 보고 이야기가 이어지게: 원인→행동→결과를 빠짐없이)",
   "dialogue": "없음(웅얼거림·효과음·그림 기호만, 화면에 글자 금지)",
   "last_cut": "주요 캐릭터가 실제로 움직이는 영상 3~5초(클리프행어)",
   "per_week": 2,
-  "narration": "화면에는 글자를 넣지 않는다. 그림책·다큐 해설 말투의 짧은 내레이션을 컷마다 한 줄씩 써서 유튜브 자막 트랙(언어별 SRT)으로 제공한다. 기본 언어 ko·en·ja·es, 반응 보고 확대. 감정을 직접 설명하지 않고 건조하게 한 박자 비튼다.",
-  "title": "업로드 제목 = '한글 제목 이모지 | English Title · Tailored EP번호'. 언어별 번역 제목·설명도 함께 등록."
+  "narration": "화면에는 글자를 넣지 않는다. 내레이션은 유튜브 자막 트랙(언어별 SRT)으로만. 한 줄이 컷 1~2개에 걸쳐 약 4초. 기본 언어 ko·en·ja·es.",
+  "title": "업로드 제목 = '한글 제목 이모지 | English Title · Tailored EP번호'. 언어별 번역 제목·설명도 함께 등록.",
+  "audio": "로파이 배경음만. 효과음·음성 없음."
  },
  "tone": "퇴근길 어른이 보는 귀여움. 직장인 공감 장면을 동물 세계로 비튼다. 아동용 아님.",
  "style_lock": "flat modern webtoon illustration, bold rounded dark-brown outlines, simple cel shading, soft pastel colors, sticker-cute proportions, big glossy expressive eyes, pink blush, clean readable composition, vertical 9:16, no text, no letters, no speech bubbles with words",
@@ -23,7 +24,8 @@
   "매 화 장소가 바뀐다. 매 화 '동물 세계 발명품' 1~2개가 볼거리.",
   "캐릭터는 고유색 1개 + 애착템 1개를 모든 컷에서 유지한다.",
   "한 주인공의 이야기는 약 8화로 끝낸다. 다음 주인공은 앞 시즌에 조연으로 먼저 나온다.",
-  "모든 생물은 최대한 귀엽게 캐릭터화(사실적 묘사 금지)."
+  "모든 생물은 최대한 귀엽게 캐릭터화(사실적 묘사 금지).",
+  "그림만 봐도 이해되어야 한다: 장면이 바뀔 때는 앞 컷의 물건·인물이 다음 컷에 이어져야 하고(도장 찍힌 상자, 지도, 배낭), 이동·시간 경과·원인을 보여 주는 연결 컷을 반드시 넣는다."
  ],
  "banned": [
   "지네처럼 다리가 많아 징그러운 벌레",

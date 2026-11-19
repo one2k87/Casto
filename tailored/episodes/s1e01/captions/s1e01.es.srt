@@ -1,64 +1,72 @@
 1
-00:00:00,150 --> 00:00:02,900
-Paseo matutino en la guardería de pingüinos. Uno va en otra dirección.
+00:00:00,100 --> 00:00:02,300
+Antártida. Cada mañana, mamá guarda una piedrita en la mochila de Mochi. Significa «hogar».
 
 2
-00:00:03,150 --> 00:00:06,300
-Este es Mochi. La piedrita de mamá significa «hogar».
+00:00:02,500 --> 00:00:06,500
+El problema: Mochi no tiene sentido de la orientación.
 
 3
-00:00:06,550 --> 00:00:10,200
+00:00:06,700 --> 00:00:11,100
 Ese día llegó el ferri ballena. Sí, una ballena.
 
 4
-00:00:10,450 --> 00:00:13,600
-La nariz de Mochi encontró una pista.
+00:00:11,300 --> 00:00:15,500
+Olor a pescado. La nariz de Mochi se movió antes que sus pies.
 
 5
-00:00:13,850 --> 00:00:16,800
-Pescado. Una caja entera.
+00:00:15,700 --> 00:00:19,100
+Una caja entera.
 
 6
-00:00:17,050 --> 00:00:20,300
+00:00:19,300 --> 00:00:21,700
 El autocontrol nunca estuvo en el plan.
 
 7
-00:00:20,550 --> 00:00:24,200
+00:00:21,900 --> 00:00:24,500
 Fin de la cena. Empieza la siesta.
 
 8
-00:00:24,450 --> 00:00:27,900
-Los pelícanos trabajan con esmero. Sello: a la ciudad.
+00:00:24,700 --> 00:00:26,500
+Justo entonces, era hora de zarpar.
 
 9
-00:00:28,150 --> 00:00:31,400
-Nadie preguntó por qué la caja roncaba.
+00:00:26,700 --> 00:00:31,100
+Los pelícanos trabajan con esmero. Sello: a la ciudad.
 
 10
-00:00:31,650 --> 00:00:35,300
-Uno, dos, tres, cuatro… ¿cinco?
+00:00:31,300 --> 00:00:33,500
+Nadie preguntó por qué la caja roncaba.
 
 11
-00:00:35,550 --> 00:00:39,200
-Y así Mochi cruzó el océano. Dormido.
+00:00:33,700 --> 00:00:36,100
+Uno, dos, tres, cuatro… ¿cinco?
 
 12
-00:00:39,450 --> 00:00:42,400
-También hubo una tormenta.
+00:00:36,300 --> 00:00:38,700
+Solo quedó un mapa.
 
 13
-00:00:42,650 --> 00:00:45,800
-Al despertar, la luz se veía… rara.
+00:00:38,900 --> 00:00:42,900
+Mochi cruzó el océano. Dormido.
 
 14
-00:00:46,050 --> 00:00:49,500
-La luz de la Antártida no parpadea en rosa.
+00:00:43,100 --> 00:00:47,500
+Y entonces, luces que nunca había visto.
 
 15
-00:00:49,750 --> 00:00:54,100
-Fuera de la caja no había nieve.
+00:00:47,700 --> 00:00:51,500
+Pum. Al despertar, la luz se veía… rara.
 
 16
-00:00:54,350 --> 00:00:59,100
-¿Podrá Mochi volver a casa? (Continuará)
+00:00:51,700 --> 00:00:58,100
+Fuera de la caja no había nieve.
+
+17
+00:00:58,300 --> 00:01:00,100
+Tampoco bajo sus pies.
+
+18
+00:01:00,300 --> 00:01:04,100
+El único barco de vuelta acaba de irse. ¿Podrá Mochi volver a casa? (Continuará)
 
