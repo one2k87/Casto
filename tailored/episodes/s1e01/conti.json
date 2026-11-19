@@ -23,7 +23,7 @@
  "cuts": [
   {
    "id": "c02",
-   "sec": 2.4,
+   "sec": 2.62,
    "place": "antarctica",
    "who": [
     "mochi",
@@ -47,7 +47,7 @@
    },
    "emotes": [
     {
-     "t": 1.14,
+     "t": 1.24,
      "kind": "heart",
      "at": [
       0.5,
@@ -65,7 +65,7 @@
   },
   {
    "id": "c01",
-   "sec": 2.2,
+   "sec": 2.4,
    "place": "antarctica",
    "who": [
     "mochi",
@@ -92,7 +92,7 @@
    ],
    "emotes": [
     {
-     "t": 1.09,
+     "t": 1.19,
      "kind": "?",
      "at": [
       0.5,
@@ -136,11 +136,11 @@
     "pop"
    ],
    "emotes": [],
-   "sec": 2.0
+   "sec": 2.18
   },
   {
    "id": "c03",
-   "sec": 2.4,
+   "sec": 2.62,
    "place": "antarctica",
    "who": [
     "mochi"
@@ -197,11 +197,11 @@
    },
    "invention": "pelican_crane",
    "emotes": [],
-   "sec": 2.2
+   "sec": 2.4
   },
   {
    "id": "c04",
-   "sec": 2.0,
+   "sec": 2.18,
    "place": "antarctica",
    "who": [
     "mochi"
@@ -259,11 +259,11 @@
     ]
    },
    "emotes": [],
-   "sec": 2.4
+   "sec": 2.62
   },
   {
    "id": "c05",
-   "sec": 1.8,
+   "sec": 1.97,
    "place": "antarctica",
    "who": [
     "mochi"
@@ -323,11 +323,11 @@
     "bob"
    ],
    "emotes": [],
-   "sec": 1.8
+   "sec": 1.97
   },
   {
    "id": "c05b",
-   "sec": 2.6,
+   "sec": 2.84,
    "place": "antarctica",
    "who": [
     "mochi"
@@ -365,7 +365,7 @@
   },
   {
    "id": "c06",
-   "sec": 2.8,
+   "sec": 3.06,
    "place": "antarctica",
    "who": [
     "mochi"
@@ -391,7 +391,7 @@
    },
    "emotes": [
     {
-     "t": 1.32,
+     "t": 1.44,
      "kind": "zzz",
      "at": [
       0.7,
@@ -431,7 +431,7 @@
    },
    "invention": "whale_ferry",
    "emotes": [],
-   "sec": 2.0,
+   "sec": 2.18,
    "narr": {
     "ko": "하필 그때가 출항 시간이었습니다.",
     "en": "Unfortunately, it was departure time.",
@@ -441,7 +441,7 @@
   },
   {
    "id": "c07",
-   "sec": 2.2,
+   "sec": 2.4,
    "place": "antarctica",
    "who": [
     "mochi"
@@ -467,8 +467,8 @@
     "shake"
    ],
    "shake": {
-    "t": 0.5,
-    "dur": 0.4,
+    "t": 0.55,
+    "dur": 0.44,
     "amp": 22
    },
    "img": "c07.jpg",
@@ -482,7 +482,7 @@
   },
   {
    "id": "c07b",
-   "sec": 2.4,
+   "sec": 2.62,
    "place": "antarctica",
    "who": [],
    "beat": "웃음",
@@ -530,7 +530,7 @@
     ]
    },
    "emotes": [],
-   "sec": 2.4,
+   "sec": 2.62,
    "narr": {
     "ko": "상자가 왜 코를 고는지는 아무도 묻지 않았습니다.",
     "en": "Nobody asked why the crate was snoring.",
@@ -540,7 +540,7 @@
   },
   {
    "id": "c08",
-   "sec": 2.6,
+   "sec": 2.84,
    "place": "antarctica",
    "who": [
     "mom"
@@ -563,7 +563,7 @@
    },
    "emotes": [
     {
-     "t": 1.53,
+     "t": 1.67,
      "kind": "!",
      "at": [
       0.3,
@@ -603,7 +603,7 @@
     ]
    },
    "emotes": [],
-   "sec": 2.6,
+   "sec": 2.84,
    "narr": {
     "ko": "남은 건 지도 한 장뿐이었습니다.",
     "en": "All that was left was a map.",
@@ -613,7 +613,7 @@
   },
   {
    "id": "c09",
-   "sec": 2.4,
+   "sec": 2.62,
    "place": "바다",
    "who": [
     "mochi"
@@ -648,7 +648,7 @@
   },
   {
    "id": "c10",
-   "sec": 1.8,
+   "sec": 1.97,
    "place": "바다",
    "who": [
     "mochi"
@@ -674,7 +674,7 @@
    ],
    "shake": {
     "t": 0.0,
-    "dur": 1.8,
+    "dur": 1.97,
     "amp": 18
    },
    "img": "c10.jpg",
@@ -702,7 +702,7 @@
     ]
    },
    "emotes": [],
-   "sec": 2.2,
+   "sec": 2.4,
    "narr": {
     "ko": "그리고 처음 보는 불빛.",
     "en": "And then, lights Mochi had never seen.",
@@ -733,11 +733,11 @@
    },
    "invention": "giraffe_crane",
    "emotes": [],
-   "sec": 2.4
+   "sec": 2.62
   },
   {
    "id": "c11",
-   "sec": 2.0,
+   "sec": 2.18,
    "place": "harbor_city",
    "who": [
     "mochi"
@@ -769,7 +769,7 @@
   },
   {
    "id": "c12",
-   "sec": 2.0,
+   "sec": 2.18,
    "place": "harbor_city",
    "who": [
     "mochi"
@@ -795,7 +795,7 @@
   },
   {
    "id": "c13",
-   "sec": 3.0,
+   "sec": 3.28,
    "place": "harbor_city",
    "who": [
     "mochi"
@@ -820,7 +820,7 @@
    },
    "emotes": [
     {
-     "t": 1.95,
+     "t": 2.13,
      "kind": "!",
      "at": [
       0.62,
@@ -838,7 +838,7 @@
   },
   {
    "id": "c14",
-   "sec": 3.6,
+   "sec": 4.2,
    "place": "harbor_city",
    "who": [
     "mochi"
@@ -898,7 +898,7 @@
     ]
    },
    "emotes": [],
-   "sec": 2.0,
+   "sec": 2.18,
    "narr": {
     "ko": "발밑에도 없었습니다.",
     "en": "None under its feet, either.",
@@ -950,5 +950,15 @@
   "a11_start": "70ca4870-f92c-4c51-a15d-ad7a62fbdf9a"
  },
  "upload_title": "상자 밖은 눈이 아니었다 🐧 | Not Snow Outside the Box · Tailored EP1",
- "audio": "로파이 배경음만(효과음 없음) — 사용자 2026-11-19"
+ "audio": "로파이 배경음만(효과음 없음) — 사용자 2026-11-19",
+ "upload": {
+  "title": "상자 밖은 눈이 아니었다 🐧 | Not Snow Outside the Box · Tailored EP1",
+  "made_for_kids": false,
+  "languages": [
+   "ko",
+   "en",
+   "ja",
+   "es"
+  ]
+ }
 }

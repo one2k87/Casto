@@ -1,72 +1,72 @@
 1
-00:00:00,100 --> 00:00:02,300
+00:00:00,100 --> 00:00:02,533
 Antártida. Cada mañana, mamá guarda una piedrita en la mochila de Mochi. Significa «hogar».
 
 2
-00:00:02,500 --> 00:00:06,500
+00:00:02,733 --> 00:00:07,100
 El problema: Mochi no tiene sentido de la orientación.
 
 3
-00:00:06,700 --> 00:00:11,100
+00:00:07,300 --> 00:00:12,133
 Ese día llegó el ferri ballena. Sí, una ballena.
 
 4
-00:00:11,300 --> 00:00:15,500
+00:00:12,333 --> 00:00:16,933
 Olor a pescado. La nariz de Mochi se movió antes que sus pies.
 
 5
-00:00:15,700 --> 00:00:19,100
+00:00:17,133 --> 00:00:20,867
 Una caja entera.
 
 6
-00:00:19,300 --> 00:00:21,700
+00:00:21,067 --> 00:00:23,700
 El autocontrol nunca estuvo en el plan.
 
 7
-00:00:21,900 --> 00:00:24,500
+00:00:23,900 --> 00:00:26,767
 Fin de la cena. Empieza la siesta.
 
 8
-00:00:24,700 --> 00:00:26,500
+00:00:26,967 --> 00:00:28,933
 Justo entonces, era hora de zarpar.
 
 9
-00:00:26,700 --> 00:00:31,100
+00:00:29,133 --> 00:00:33,967
 Los pelícanos trabajan con esmero. Sello: a la ciudad.
 
 10
-00:00:31,300 --> 00:00:33,500
+00:00:34,167 --> 00:00:36,600
 Nadie preguntó por qué la caja roncaba.
 
 11
-00:00:33,700 --> 00:00:36,100
+00:00:36,800 --> 00:00:39,433
 Uno, dos, tres, cuatro… ¿cinco?
 
 12
-00:00:36,300 --> 00:00:38,700
+00:00:39,633 --> 00:00:42,267
 Solo quedó un mapa.
 
 13
-00:00:38,900 --> 00:00:42,900
+00:00:42,467 --> 00:00:46,867
 Mochi cruzó el océano. Dormido.
 
 14
-00:00:43,100 --> 00:00:47,500
+00:00:47,067 --> 00:00:51,900
 Y entonces, luces que nunca había visto.
 
 15
-00:00:47,700 --> 00:00:51,500
+00:00:52,100 --> 00:00:56,233
 Pum. Al despertar, la luz se veía… rara.
 
 16
-00:00:51,700 --> 00:00:58,100
+00:00:56,433 --> 00:01:02,933
 Fuera de la caja no había nieve.
 
 17
-00:00:58,300 --> 00:01:00,100
+00:01:03,900 --> 00:01:05,867
 Tampoco bajo sus pies.
 
 18
-00:01:00,300 --> 00:01:04,100
+00:01:06,067 --> 00:01:09,867
 El único barco de vuelta acaba de irse. ¿Podrá Mochi volver a casa? (Continuará)
 
