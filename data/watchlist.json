@@ -1,4 +1,52 @@
 {
+ "folding_cutting_board": {
+  "name": "접히는 도마",
+  "search_keyword": "접히는 실리콘 도마",
+  "en_keyword": "folding cutting board",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "도마 관련 영상 4개 및 채널 4개에서 냄비와의 연계 활용으로 언급",
+  "category": "50000008",
+  "last_found": "2026-11-21",
+  "first_seen": "2026-11-20"
+ },
+ "multi_multicooker": {
+  "name": "만능 멀티쿠커",
+  "search_keyword": "멀티쿠커 냄비",
+  "en_keyword": "multi cooker",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "냄비 및 쿠팡추천템 관련 영상에서 냄비 대용 아이템으로 언급",
+  "category": "50000003",
+  "last_found": "2026-11-21",
+  "first_seen": "2026-11-20"
+ },
+ "multi_blade_scissors": {
+  "name": "5중칼날가위",
+  "search_keyword": "5중 칼날 주방가위",
+  "en_keyword": "herb scissors",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "주방꿀템 및 살림꿀템 관련 영상 18개 이상, 채널 다수 반복 등장",
+  "category": "50000008",
+  "last_found": "2026-11-21",
+  "first_seen": "2026-11-14"
+ },
+ "acrylic_mirror": {
+  "name": "아크릴거울",
+  "search_keyword": "붙이는 아크릴 전신거울",
+  "en_keyword": "acrylic mirror sheet",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "집꾸미기 및 생활꿀템 키워드 영상 7개, 채널 3개에서 등장",
+  "category": "50000004",
+  "last_found": "2026-11-21",
+  "first_seen": "2026-11-17"
+ },
  "auto_stirring_cup": {
   "name": "자동 섞이는 컵",
   "search_keyword": "자동 교반 컵",
@@ -20,30 +68,6 @@
   "product_id": "",
   "evidence": "주방꿀템, 살림꿀템 채널 다수에서 반복 등장하며 14개 이상 채널에서 언급됨",
   "category": "50000008",
-  "last_found": "2026-11-20",
-  "first_seen": "2026-11-20"
- },
- "folding_cutting_board": {
-  "name": "접히는 도마",
-  "search_keyword": "접히는 실리콘 도마",
-  "en_keyword": "folding cutting board",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "도마 관련 키워드가 4개 채널에서 냄비 연계 꿀템으로 언급됨",
-  "category": "50000008",
-  "last_found": "2026-11-20",
-  "first_seen": "2026-11-20"
- },
- "multi_multicooker": {
-  "name": "만능 멀티쿠커",
-  "search_keyword": "만능 멀티쿠커 냄비",
-  "en_keyword": "multi cooker",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "쿠팡 추천 냄비 카테고리에서 4개 채널이 냄비 대체용으로 소개",
-  "category": "50000003",
   "last_found": "2026-11-20",
   "first_seen": "2026-11-20"
  },
@@ -70,18 +94,6 @@
   "category": "50000008",
   "last_found": "2026-11-20",
   "first_seen": "2026-11-20"
- },
- "multi_blade_scissors": {
-  "name": "다중날가위",
-  "search_keyword": "다중날 주방가위 5중 가위",
-  "en_keyword": "multi blade kitchen shears",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "쿠팡추천템 및 주방꿀템 키워드 관련 영상 다수 및 채널 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-11-19",
-  "first_seen": "2026-11-14"
  },
  "vegetable_chopper": {
   "name": "전동야채다지기",
@@ -142,18 +154,6 @@
   "category": "50000003",
   "last_found": "2026-11-18",
   "first_seen": "2026-11-13"
- },
- "acrylic_mirror": {
-  "name": "붙이는전신거울",
-  "search_keyword": "아크릴 붙이는 전신거울",
-  "en_keyword": "adhesive acrylic mirror",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "집꾸미기 및 생활꿀템 키워드 영상 10개, 채널 3개 등장",
-  "category": "50000004",
-  "last_found": "2026-11-18",
-  "first_seen": "2026-11-17"
  },
  "electric_chopper": {
   "name": "전동다지기",
