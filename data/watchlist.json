@@ -1,51 +1,63 @@
 {
  "folding_cutting_board": {
   "name": "접히는 도마",
-  "search_keyword": "접히는 실리콘 도마",
+  "search_keyword": "접히는 도마",
   "en_keyword": "folding cutting board",
   "price_band": "저가",
   "brand": "",
   "product_id": "",
-  "evidence": "도마 관련 영상 4개 및 채널 4개에서 냄비와의 연계 활용으로 언급",
+  "evidence": "도마 관련 영상 4개 채널에서 반복 등장",
   "category": "50000008",
-  "last_found": "2026-11-21",
+  "last_found": "2026-11-22",
   "first_seen": "2026-11-20"
  },
  "multi_multicooker": {
   "name": "만능 멀티쿠커",
-  "search_keyword": "멀티쿠커 냄비",
+  "search_keyword": "만능 멀티쿠커",
   "en_keyword": "multi cooker",
   "price_band": "중가",
   "brand": "",
   "product_id": "",
-  "evidence": "냄비 및 쿠팡추천템 관련 영상에서 냄비 대용 아이템으로 언급",
+  "evidence": "쿠팡 추천 관련 냄비 및 멀티쿠커 언급 5개 이상 채널에서 등장",
   "category": "50000003",
-  "last_found": "2026-11-21",
+  "last_found": "2026-11-22",
   "first_seen": "2026-11-20"
  },
  "multi_blade_scissors": {
   "name": "5중칼날가위",
-  "search_keyword": "5중 칼날 주방가위",
-  "en_keyword": "herb scissors",
+  "search_keyword": "5중 칼날 가위 만능가위",
+  "en_keyword": "multi blade kitchen shears",
   "price_band": "저가",
   "brand": "",
   "product_id": "",
-  "evidence": "주방꿀템 및 살림꿀템 관련 영상 18개 이상, 채널 다수 반복 등장",
+  "evidence": "주방꿀템 및 살림꿀템 키워드 관련 영상 15개 이상, 다수 채널에서 반복 등장",
   "category": "50000008",
-  "last_found": "2026-11-21",
+  "last_found": "2026-11-22",
   "first_seen": "2026-11-14"
  },
  "acrylic_mirror": {
   "name": "아크릴거울",
   "search_keyword": "붙이는 아크릴 전신거울",
-  "en_keyword": "acrylic mirror sheet",
+  "en_keyword": "acrylic mirror",
   "price_band": "저가",
   "brand": "",
   "product_id": "",
-  "evidence": "집꾸미기 및 생활꿀템 키워드 영상 7개, 채널 3개에서 등장",
+  "evidence": "집꾸미기 및 생활꿀템 키워드 내 6개 영상 3개 채널에서 등장",
   "category": "50000004",
-  "last_found": "2026-11-21",
+  "last_found": "2026-11-22",
   "first_seen": "2026-11-17"
+ },
+ "measuring_spoon": {
+  "name": "계량스푼",
+  "search_keyword": "스마트 계량스푼",
+  "en_keyword": "digital measuring spoon",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "계량스푼 관련 영상 4개 채널에서 등장",
+  "category": "50000008",
+  "last_found": "2026-11-22",
+  "first_seen": "2026-11-22"
  },
  "auto_stirring_cup": {
   "name": "자동 섞이는 컵",
@@ -226,17 +238,5 @@
   "category": "50000003",
   "last_found": "2026-11-16",
   "first_seen": "2026-11-15"
- },
- "electric_spray": {
-  "name": "전동스프레이",
-  "search_keyword": "주방용 전동 오일 스프레이",
-  "en_keyword": "electric oil spray",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "이제 영상 4개 / 채널 4개 및 식용유 뿌리는 전동 스프레이 사례 인용",
-  "category": "50000008",
-  "last_found": "2026-11-15",
-  "first_seen": "2026-11-12"
  }
 }
