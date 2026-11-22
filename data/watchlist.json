@@ -6,10 +6,82 @@
   "price_band": "저가",
   "brand": "",
   "product_id": "",
-  "evidence": "도마 관련 영상 4개 채널에서 반복 등장",
+  "evidence": "도마 관련 키워드 및 여러 채널의 영상 내용에서 확인됨",
   "category": "50000008",
-  "last_found": "2026-11-22",
+  "last_found": "2026-11-23",
   "first_seen": "2026-11-20"
+ },
+ "multi_blade_scissors": {
+  "name": "다중날가위",
+  "search_keyword": "다중날 주방가위",
+  "en_keyword": "multi blade kitchen shears",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "쿠팡추천템 및 주방꿀템 해시태그에서 채널 다수 등장",
+  "category": "50000008",
+  "last_found": "2026-11-23",
+  "first_seen": "2026-11-14"
+ },
+ "acrylic_mirror": {
+  "name": "붙이는 전신거울",
+  "search_keyword": "아크릴 전신거울",
+  "en_keyword": "adhesive acrylic mirror",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "집꾸미기 및 생활꿀템 관련 채널에서 다수 등장",
+  "category": "50000004",
+  "last_found": "2026-11-23",
+  "first_seen": "2026-11-17"
+ },
+ "auto_stirring_cup": {
+  "name": "자동 섞이는 컵",
+  "search_keyword": "자동 젓는 컵",
+  "en_keyword": "self stirring mug",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "집꾸미기 및 추천템 쇼츠 영상에서 확인됨",
+  "category": "50000008",
+  "last_found": "2026-11-23",
+  "first_seen": "2026-11-16"
+ },
+ "multi_cooker": {
+  "name": "만능 멀티쿠커",
+  "search_keyword": "멀티쿠커",
+  "en_keyword": "multi cooker",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "쿠팡추천템 관련 영상에서 냄비 대용 아이템으로 등장",
+  "category": "50000003",
+  "last_found": "2026-11-23",
+  "first_seen": "2026-11-19"
+ },
+ "oil_mist_bottle": {
+  "name": "오일스프레이병",
+  "search_keyword": "오일스프레이병",
+  "en_keyword": "oil sprayer",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "주방꿀템 및 살림꿀템 관련 여러 채널의 해시태그 및 영상에서 반복 등장",
+  "category": "50000008",
+  "last_found": "2026-11-23",
+  "first_seen": "2026-11-23"
+ },
+ "mini_kimchi_refrigerator": {
+  "name": "미니 김치냉장고",
+  "search_keyword": "미니 김치냉장고",
+  "en_keyword": "mini kimchi refrigerator",
+  "price_band": "고가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "주방템 관련 쇼츠 영상에서 역대급 주방템으로 등장",
+  "category": "50000003",
+  "last_found": "2026-11-23",
+  "first_seen": "2026-11-23"
  },
  "multi_multicooker": {
   "name": "만능 멀티쿠커",
@@ -23,30 +95,6 @@
   "last_found": "2026-11-22",
   "first_seen": "2026-11-20"
  },
- "multi_blade_scissors": {
-  "name": "5중칼날가위",
-  "search_keyword": "5중 칼날 가위 만능가위",
-  "en_keyword": "multi blade kitchen shears",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "주방꿀템 및 살림꿀템 키워드 관련 영상 15개 이상, 다수 채널에서 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-11-22",
-  "first_seen": "2026-11-14"
- },
- "acrylic_mirror": {
-  "name": "아크릴거울",
-  "search_keyword": "붙이는 아크릴 전신거울",
-  "en_keyword": "acrylic mirror",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "집꾸미기 및 생활꿀템 키워드 내 6개 영상 3개 채널에서 등장",
-  "category": "50000004",
-  "last_found": "2026-11-22",
-  "first_seen": "2026-11-17"
- },
  "measuring_spoon": {
   "name": "계량스푼",
   "search_keyword": "스마트 계량스푼",
@@ -58,18 +106,6 @@
   "category": "50000008",
   "last_found": "2026-11-22",
   "first_seen": "2026-11-22"
- },
- "auto_stirring_cup": {
-  "name": "자동 섞이는 컵",
-  "search_keyword": "자동 교반 컵",
-  "en_keyword": "self stirring mug",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "집꾸미기 및 신기한 아이템 관련 3개 채널에서 언급됨",
-  "category": "50000008",
-  "last_found": "2026-11-20",
-  "first_seen": "2026-11-16"
  },
  "5_blade_scissors": {
   "name": "5중칼날가위",
@@ -116,18 +152,6 @@
   "product_id": "",
   "evidence": "살림템추천 및 요리꿀팁 관련 채널 다수 등장",
   "category": "50000008",
-  "last_found": "2026-11-19",
-  "first_seen": "2026-11-19"
- },
- "multi_cooker": {
-  "name": "만능 멀티쿠커",
-  "search_keyword": "멀티쿠커 전기 냄비",
-  "en_keyword": "multi cooker",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "쿠팡 냄비 관련 3개 채널, 5개 영상 언급",
-  "category": "50000003",
   "last_found": "2026-11-19",
   "first_seen": "2026-11-19"
  },
@@ -214,29 +238,5 @@
   "category": "50000003",
   "last_found": "2026-11-16",
   "first_seen": "2026-11-08"
- },
- "mini_lp_magnet": {
-  "name": "미니LP자석",
-  "search_keyword": "미니 LP 자석 냉장고",
-  "en_keyword": "mini lp magnet",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "집꾸미기 키워드 영상 9개 / 채널 3개 반복 등장",
-  "category": "50000004",
-  "last_found": "2026-11-16",
-  "first_seen": "2026-11-13"
- },
- "electric_mug": {
-  "name": "전기머그컵",
-  "search_keyword": "전기 머그컵",
-  "en_keyword": "electric mug",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "쿠팡추천템 키워드 영상 32개 / 채널 13개 반복 등장",
-  "category": "50000003",
-  "last_found": "2026-11-16",
-  "first_seen": "2026-11-15"
  }
 }

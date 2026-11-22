@@ -1,5 +1,5 @@
 {
- "next": 162,
+ "next": 164,
  "items": {
   "1": {
    "name": "늘어나는 밀폐용기",
@@ -1505,6 +1505,26 @@
    "url": "https://www.coupang.com/np/search?q=%EB%98%91%EB%98%91%ED%95%9C+%EA%B3%84%EB%9F%89%EC%8A%A4%ED%91%BC",
    "hold": true,
    "note": "123번과 같은 물건으로 보임 — 123번으로 캡처"
+  },
+  "162": {
+   "name": "오일스프레이병",
+   "slug": "",
+   "key": "오일스프레이병",
+   "done": false,
+   "search": "오일스프레이병",
+   "url": "https://www.coupang.com/np/search?q=%EC%98%A4%EC%9D%BC%EC%8A%A4%ED%94%84%EB%A0%88%EC%9D%B4%EB%B3%91",
+   "hold": true,
+   "note": "24번과 같은 물건으로 보임 — 24번으로 캡처"
+  },
+  "163": {
+   "name": "미니 김치냉장고",
+   "slug": "",
+   "key": "미니김치냉장고",
+   "done": false,
+   "search": "미니 김치냉장고",
+   "url": "https://www.coupang.com/np/search?q=%EB%AF%B8%EB%8B%88+%EA%B9%80%EC%B9%98%EB%83%89%EC%9E%A5%EA%B3%A0",
+   "hold": true,
+   "note": "14번과 같은 물건으로 보임 — 14번으로 캡처"
   }
  }
 }
