@@ -145,30 +145,38 @@
  "raccoon": {
   "name": "검표원 너구리",
   "species": "너구리",
-  "role": "눈송이 철도 검표원",
-  "status": "초안",
+  "role": "눈송이 철도 검표원 · 5~6화 조력자",
+  "status": "확정",
   "color": {
    "name": "스카이 블루",
    "hex": "#A9D3F5"
   },
   "item": "검표 펀치",
-  "personality": "규칙쟁이, 간식에 약함",
+  "personality": "규칙쟁이, 간식에 약함. 웃는 얼굴은 드물다",
   "habit": "펀치를 딸깍거린다",
-  "look": "round raccoon with a sky-blue conductor cap and vest, holding a small ticket punch",
-  "ref": {},
+  "look": "chubby round grey raccoon with a black eye mask, cream muzzle, small round ears and a thick ringed striped tail, serious strict little frown, wearing a sky-blue conductor cap with a small silver snowflake badge and a sky-blue vest, holding a small silver ticket punch",
+  "ref": {
+   "turnaround": "d3608eba-aaa3-4706-8112-4b6117232078",
+   "first_try": "2c06ece7-efc6-46f4-9423-cc7c4bbed4a2"
+  },
   "height": 1.7,
   "size_class": "어른 시민",
   "size_prompt": "the conductor raccoon is an adult citizen, about 1.7 times Mochi's height",
   "build": "둥근 몸, 줄무늬 꼬리",
-  "item_rule": "sky-blue conductor cap and vest; small silver ticket punch in his paw",
+  "item_rule": "sky-blue conductor cap with a small silver snowflake badge and a sky-blue vest always on; small silver ticket punch in his right paw",
   "first_ep": "s1e05",
   "home": "눈송이 철도",
   "job": "검표원",
-  "relations": {},
+  "relations": {
+   "mochi": "5화에서 생선 꼬치를 받고 소포에 구멍을 뚫어 줌",
+   "kong": "소포를 표로 인정"
+  },
   "never": [
    "넥타이·서류가방(2화 출근 너구리 엑스트라의 것)",
-   "모자 없는 컷"
-  ]
+   "모자 없는 컷",
+   "활짝 웃는 얼굴 남발(5화 23컷 한 번)"
+  ],
+  "note": "기준 그림은 앞·옆·뒤 + 모찌와 키 비교 한 장(2026-11-23). 첫 장은 넥타이가 그려져 다시 그림(넥타이는 2화 출근 너구리의 것)."
  },
  "crab": {
   "name": "아기 게",

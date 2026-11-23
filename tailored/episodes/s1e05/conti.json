@@ -1,0 +1,923 @@
+{
+ "episode": "s1e05",
+ "season": "s1",
+ "title": {
+  "ko": "표 없는 손님",
+  "en": "The Passengers Without Tickets",
+  "ja": "切符のないお客",
+  "es": "Pasajeros sin billete"
+ },
+ "upload_title": "표 없는 손님 🎫 | No Ticket, No Problem · Tailored EP5",
+ "logline": "기차를 타야 하는데 표 살 도토리가 없다. 콩의 꾀로 택배 상자에 들어가 화물로 실린 모찌와 콩은 객차에서 검표원 너구리와 숨바꼭질을 벌인다. 간식 냄새에 들켜 막다른 곳에 몰리지만, 식당에서 받은 생선 꼬치가 검표원의 마음을 열고 소포는 표가 된다. 그런데 첫 해가 뜨는 창밖에 눈 산이 다가온다. 기차는 반대 방향이다.",
+ "inventions": [
+  "squirrel_ticket",
+  "bird_navi",
+  "hedgehog_cart"
+ ],
+ "audio": "로파이 배경음만",
+ "experiment": {
+  "variable": "게시 직전 확정 — 앞 편 수치를 본 뒤(미리 만든 편이라 제목·올리는 시각·첫 3초 순서만 바꿀 수 있음)",
+  "same": "길이 약 70초·콜드 오픈·로파이·자막 4개 언어·마지막 컷 영상"
+ },
+ "model": "gpt_image_2_5 low 1k (장당 0.25) — 너구리 기준 그림 2장(넥타이가 그려져 1장 다시) + 새 그림 26장 + 다시 그리기 1장(13컷, 첫 장 채택) + 롱폼 가로 사이 컷 8장. 엔딩 영상 grok_video_v15_lite 720p 4초.",
+ "bgm": {
+  "name": "s1e05_train",
+  "sec": 72,
+  "vol": 0.75,
+  "prompt": "Cozy lofi hip hop instrumental for a cute wordless animal cartoon on a night train: soft brushed drums with a gentle train-like shuffle rhythm at 84 BPM, warm Rhodes chords, mellow upright bass, a small music-box and clarinet melody, soft vinyl crackle, sneaky tiptoe pizzicato feel in the middle, a short playful lift for a chase, then calm and warm again, ending on a slightly uneasy unresolved chord in the last 8 seconds, no vocals, no sudden loud changes"
+ },
+ "refs": {
+  "raccoon_sheet": "d3608eba-aaa3-4706-8112-4b6117232078",
+  "c01": "bf386611-302e-40c7-8001-1820b6fc8456",
+  "c02": "77016dbc-3cb6-4bb0-9885-a2266e769260",
+  "c04": "4d9db1ea-0dfd-4d36-8427-6dd3d322fc0f",
+  "c05": "20679177-a8de-478d-a0f2-d6783669a78c",
+  "c09": "7ceaac2f-c8c2-4187-8c1b-c2a0e5072c2f",
+  "c10": "6c9383eb-781b-45ae-8f8c-8087a079f448",
+  "c11": "13d666c9-4238-4ce3-93e5-169d2fe43ccd",
+  "c12": "b8e20aa8-4bf2-472f-a521-676779e84c8e",
+  "c15": "a749c41e-a2a1-44f7-b016-7f9fd2aa4b53",
+  "c17": "0615c524-8736-4144-9324-68c45e3cd63b",
+  "c21": "e4fb4746-f073-46a9-80e3-0d4d9e1d1b06",
+  "c25": "b44f1dca-ca33-4a51-bc11-cfda39850918",
+  "c26": "73d43fb3-ca3b-4f6f-83bf-d110a26f7e9f",
+  "c26_video": "e857b212-069b-422f-9429-09bfbbec00b6"
+ },
+ "module_versions": {
+  "story": "1.0",
+  "conti": "1.1",
+  "art": "1.1",
+  "music": "1.0",
+  "render": "1.0",
+  "publish": "1.0"
+ },
+ "cuts": [
+  {
+   "id": "c00",
+   "sec": 2.6,
+   "img": "c16.jpg",
+   "cam": {
+    "from": [
+     0.6,
+     0.62,
+     1.5
+    ],
+    "to": [
+     0.55,
+     0.42,
+     1.15
+    ]
+   },
+   "action": "(콜드 오픈) 큰 털실 뭉치에서 얼굴과 노란 모자만 삐져나와 있고, 검표원이 펀치를 들고 들여다본다",
+   "cast": [
+    "mochi",
+    "kong",
+    "raccoon"
+   ],
+   "fx": [
+    "pop",
+    "bob"
+   ],
+   "beat": "훅",
+   "residents": [
+    "sheep_granny"
+   ],
+   "narr": {
+    "ko": "이 기차에는 표 없는 손님이 둘 있습니다. 지금은 털실인 척하는 중입니다.",
+    "en": "This train has two passengers without tickets. Right now they are pretending to be yarn.",
+    "ja": "この汽車には切符のないお客が二人います。いまは毛糸のふりをしています。",
+    "es": "En este tren viajan dos pasajeros sin billete. Ahora mismo fingen ser lana."
+   }
+  },
+  {
+   "id": "c01",
+   "sec": 2.6,
+   "img": "c01.jpg",
+   "cam": {
+    "from": [
+     0.75,
+     0.3,
+     1.4
+    ],
+    "to": [
+     0.45,
+     0.62,
+     1.2
+    ]
+   },
+   "action": "밤의 언덕 위 역. 눈송이 기차가 눈송이 섞인 김을 뿜고, 모찌와 콩이 헐떡이며 승강장에 도착",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "flash": true,
+   "narr": {
+    "ko": "밤 기차는 아직 떠나지 않았습니다. 숨이 먼저 떠날 뻔했습니다.",
+    "en": "The night train hasn't left yet. Their breath almost left first.",
+    "ja": "夜汽車はまだ出ていません。先に息が切れるところでした。",
+    "es": "El tren nocturno aún no ha salido. Casi se les va antes el aliento."
+   }
+  },
+  {
+   "id": "c02",
+   "sec": 2.6,
+   "img": "c02.jpg",
+   "cam": {
+    "from": [
+     0.35,
+     0.35,
+     1.5
+    ],
+    "to": [
+     0.8,
+     0.72,
+     1.4
+    ]
+   },
+   "action": "매표소. 다람쥐 매표원이 도토리를 받아 볼에 넣고 나뭇잎 표를 내준다. 줄 끝의 둘은 빈손",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "invention": "squirrel_ticket",
+   "residents": [
+    "squirrel_clerk",
+    "commuters"
+   ],
+   "narr": {
+    "ko": "이 역은 도토리로 표를 삽니다. 매표원은 볼로 잔돈을 셉니다.",
+    "en": "Here, tickets cost acorns. The clerk counts the change in her cheeks.",
+    "ja": "この駅ではどんぐりで切符を買います。係はほっぺでおつりを数えます。",
+    "es": "Aquí los billetes se pagan con bellotas. La taquillera cuenta el cambio en sus mejillas."
+   }
+  },
+  {
+   "id": "c03",
+   "sec": 2.6,
+   "img": "c03.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.0
+    ],
+    "to": [
+     0.5,
+     0.78,
+     1.5
+    ]
+   },
+   "action": "모찌가 배낭을 뒤집어 턴다. 조약돌, 지도, 생선 꼬치. 콩의 가방에서는 소포. 도토리는 없다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "narr": {
+    "ko": "가진 것은 조약돌, 지도, 생선 꼬치, 소포. 도토리는 없습니다.",
+    "en": "They have a pebble, a map, fish skewers and a parcel. No acorns.",
+    "ja": "持ち物は小石、地図、魚の串、小包。どんぐりはありません。",
+    "es": "Tienen una piedrecita, un mapa, brochetas de pescado y un paquete. Bellotas, ninguna."
+   }
+  },
+  {
+   "id": "c04",
+   "sec": 2.6,
+   "img": "c04.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.3,
+     1.4
+    ],
+    "to": [
+     0.45,
+     0.68,
+     1.4
+    ]
+   },
+   "action": "승강장 양쪽에 기차가 한 대씩. 모찌가 지도를 펴 들고 자신 있게 오른쪽(눈 산 그림) 기차를 가리킨다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "beat": "복선",
+   "narr": {
+    "ko": "기차는 두 대. 모찌가 지도를 보고 자신 있게 골랐습니다. 이럴 때가 제일 불안합니다.",
+    "en": "Two trains. Mochi checked his map and chose with confidence. That is the worrying part.",
+    "ja": "汽車は二本。モチは地図を見て自信満々に選びました。こういう時がいちばん心配です。",
+    "es": "Hay dos trenes. Mochi miró el mapa y eligió muy seguro. Eso es lo preocupante."
+   }
+  },
+  {
+   "id": "c05",
+   "sec": 2.4,
+   "img": "c05.jpg",
+   "cam": {
+    "from": [
+     0.65,
+     0.4,
+     1.3
+    ],
+    "to": [
+     0.7,
+     0.75,
+     1.5
+    ]
+   },
+   "action": "짐꾼 오소리가 택배 상자를 수레로 화물칸에 싣는다. 그걸 본 콩의 눈이 반짝",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "fx": [
+    "pop"
+   ],
+   "residents": [
+    "badger_porter"
+   ],
+   "narr": {
+    "ko": "그때 콩이 뭔가를 봤습니다. 택배는 표가 필요 없습니다.",
+    "en": "Then Kong noticed something. Parcels don't need tickets.",
+    "ja": "その時、コンが気づきました。荷物に切符はいりません。",
+    "es": "Entonces Kong se fijó en algo. Los paquetes no necesitan billete."
+   }
+  },
+  {
+   "id": "c06",
+   "sec": 2.6,
+   "img": "c06.jpg",
+   "cam": {
+    "from": [
+     0.6,
+     0.7,
+     1.4
+    ],
+    "to": [
+     0.3,
+     0.78,
+     1.4
+    ]
+   },
+   "action": "콩이 빈 큰 상자를 가리키며 택배 모자를 톡톡 친다. 모찌는 한 발 물러선다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "narr": {
+    "ko": "택배기사의 꾀입니다. 모찌는 상자에 좋은 기억이 없습니다.",
+    "en": "A delivery worker's trick. Mochi has no good memories of boxes.",
+    "ja": "配達員の知恵です。モチは箱にいい思い出がありません。",
+    "es": "Un truco de repartidor. Mochi no guarda buenos recuerdos de las cajas."
+   }
+  },
+  {
+   "id": "c07",
+   "sec": 2.4,
+   "img": "c07.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.0
+    ],
+    "to": [
+     0.45,
+     0.72,
+     1.5
+    ]
+   },
+   "action": "상자 속. 둘이 꼭 끼어 앉아 있고 조약돌 빛이 얼굴을 비춘다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "narr": {
+    "ko": "또 상자 속입니다. 이번에는 혼자가 아닙니다.",
+    "en": "Inside a box again. This time he is not alone.",
+    "ja": "また箱の中です。今度はひとりではありません。",
+    "es": "Otra vez dentro de una caja. Esta vez no está solo."
+   }
+  },
+  {
+   "id": "c08",
+   "sec": 2.2,
+   "img": "c08.jpg",
+   "cam": {
+    "from": [
+     0.45,
+     0.4,
+     1.2
+    ],
+    "to": [
+     0.75,
+     0.68,
+     1.7
+    ]
+   },
+   "action": "짐꾼이 상자에 눈송이 도장을 쾅 찍는다. 손잡이 구멍으로 두 쌍의 눈",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "fx": [
+    "pop"
+   ],
+   "shake": {
+    "t": 0.2,
+    "dur": 0.5,
+    "amp": 12
+   },
+   "residents": [
+    "badger_porter"
+   ],
+   "narr": {
+    "ko": "눈송이 도장, 쾅. 손님이 아니라 화물이 됐습니다.",
+    "en": "Snowflake stamp, bang. Not passengers now, but cargo.",
+    "ja": "雪のはんこ、ドン。お客ではなく荷物になりました。",
+    "es": "Sello de copo de nieve, pum. Ya no son pasajeros, son carga."
+   }
+  },
+  {
+   "id": "c09",
+   "sec": 2.6,
+   "img": "c09.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.1
+    ],
+    "to": [
+     0.86,
+     0.32,
+     1.7
+    ]
+   },
+   "action": "화물칸. 상자 뚜껑이 열리고 두 머리가 올라온다. 구석의 상자 하나가 혼자 꿈틀거린다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "beat": "복선",
+   "narr": {
+    "ko": "화물칸 도착. 그런데 저 구석 상자는 왜 혼자 움직일까요.",
+    "en": "Cargo car reached. But why is that box in the corner moving on its own?",
+    "ja": "貨物室に到着。でも、あの隅の箱はなぜ勝手に動くのでしょう。",
+    "es": "Ya están en el vagón de carga. Pero ¿por qué se mueve sola esa caja del rincón?"
+   }
+  },
+  {
+   "id": "c10",
+   "sec": 2.4,
+   "img": "c10.jpg",
+   "cam": {
+    "from": [
+     0.3,
+     0.5,
+     1.3
+    ],
+    "to": [
+     0.7,
+     0.72,
+     1.3
+    ]
+   },
+   "action": "밤 들판을 달리는 눈송이 기차. 굴뚝에서 눈송이가 흩날린다",
+   "cast": [],
+   "narr": {
+    "ko": "눈송이 기차가 밤을 달립니다. 지나간 자리에만 눈이 옵니다.",
+    "en": "The Snowflake Train runs through the night. It only snows where it has passed.",
+    "ja": "雪の汽車が夜を走ります。通ったところにだけ雪が降ります。",
+    "es": "El Tren Copo de Nieve corre en la noche. Solo nieva por donde pasa."
+   }
+  },
+  {
+   "id": "c11",
+   "sec": 2.6,
+   "img": "c11.jpg",
+   "cam": {
+    "from": [
+     0.6,
+     0.2,
+     1.5
+    ],
+    "to": [
+     0.5,
+     0.75,
+     1.3
+    ]
+   },
+   "action": "객차 문틈으로 살금살금 들어오는 둘. 뜨개질하는 양 할머니, 천장 고리의 철새 내비",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "invention": "bird_navi",
+   "residents": [
+    "goose_navi",
+    "sheep_granny",
+    "bear_napper"
+   ],
+   "narr": {
+    "ko": "객차는 따뜻했습니다. 천장의 철새는 이 기차의 내비게이션입니다.",
+    "en": "The passenger car was warm. The bird on the ceiling is the train's navigation.",
+    "ja": "客車は暖かでした。天井の渡り鳥はこの汽車のナビです。",
+    "es": "El vagón era cálido. El pájaro del techo es el navegador del tren."
+   }
+  },
+  {
+   "id": "c12",
+   "sec": 2.4,
+   "img": "c12.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.78,
+     1.3
+    ],
+    "to": [
+     0.55,
+     0.38,
+     1.7
+    ]
+   },
+   "action": "객차 저편 문이 열리고 검표원 너구리 등장. 펀치를 딸깍, 승객들이 표를 내민다",
+   "cast": [
+    "mochi",
+    "kong",
+    "raccoon"
+   ],
+   "beat": "방해",
+   "residents": [
+    "goose_navi",
+    "sheep_granny",
+    "bear_napper"
+   ],
+   "narr": {
+    "ko": "그리고 검표원이 왔습니다. 딸깍, 딸깍.",
+    "en": "And then the conductor came. Click, click.",
+    "ja": "そして車掌が来ました。カチ、カチ。",
+    "es": "Y entonces llegó el revisor. Clic, clic."
+   }
+  },
+  {
+   "id": "c13",
+   "sec": 2.6,
+   "img": "c13.jpg",
+   "cam": {
+    "from": [
+     0.7,
+     0.4,
+     1.2
+    ],
+    "to": [
+     0.3,
+     0.55,
+     1.6
+    ]
+   },
+   "action": "숨기 1: 좌석 밑. 체리색 배낭이 삐져나와 있고 검표원의 발이 그 앞에서 멈춘다",
+   "cast": [
+    "mochi",
+    "kong",
+    "raccoon"
+   ],
+   "narr": {
+    "ko": "숨기 첫 번째, 좌석 밑. 배낭이 협조를 안 합니다.",
+    "en": "Hiding spot one: under the seat. The backpack refuses to cooperate.",
+    "ja": "かくれ場所その一、座席の下。リュックが協力してくれません。",
+    "es": "Escondite uno: bajo el asiento. La mochila no colabora."
+   }
+  },
+  {
+   "id": "c14",
+   "sec": 2.6,
+   "img": "c14.jpg",
+   "cam": {
+    "from": [
+     0.6,
+     0.3,
+     1.5
+    ],
+    "to": [
+     0.5,
+     0.8,
+     1.3
+    ]
+   },
+   "action": "검표원이 허리를 숙이려는 순간 양 할머니가 표를 쑥 내민다. 둘은 살금살금 달아난다",
+   "cast": [
+    "mochi",
+    "kong",
+    "raccoon"
+   ],
+   "residents": [
+    "sheep_granny"
+   ],
+   "narr": {
+    "ko": "양 할머니가 표를 내밀었습니다. 꼭 지금, 꼭 얼굴 앞에.",
+    "en": "Granny Sheep holds out her ticket. Right now, right in front of his face.",
+    "ja": "ヒツジのおばあさんが切符を出しました。ちょうど今、ちょうど顔の前に。",
+    "es": "La abuela oveja enseña su billete. Justo ahora, justo delante de su cara."
+   }
+  },
+  {
+   "id": "c15",
+   "sec": 2.6,
+   "img": "c15.jpg",
+   "cam": {
+    "from": [
+     0.3,
+     0.5,
+     1.2
+    ],
+    "to": [
+     0.72,
+     0.62,
+     1.7
+    ]
+   },
+   "action": "숨기 2: 양 할머니의 큰 털실 뭉치 속. 얼굴과 모자만 보인다. 할머니는 모른 척 뜨개질",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "residents": [
+    "sheep_granny"
+   ],
+   "narr": {
+    "ko": "숨기 두 번째, 털실 속. 할머니는 아무것도 못 봤습니다.",
+    "en": "Hiding spot two: inside the yarn. Granny saw nothing at all.",
+    "ja": "かくれ場所その二、毛糸の中。おばあさんは何も見ていません。",
+    "es": "Escondite dos: dentro de la lana. La abuela no ha visto nada."
+   }
+  },
+  {
+   "id": "c16",
+   "sec": 2.4,
+   "img": "c16.jpg",
+   "cam": {
+    "from": [
+     0.7,
+     0.35,
+     1.5
+    ],
+    "to": [
+     0.6,
+     0.58,
+     1.5
+    ]
+   },
+   "action": "검표원이 털실 뭉치를 의심스럽게 들여다본다. 펀치 딸깍",
+   "cast": [
+    "mochi",
+    "kong",
+    "raccoon"
+   ],
+   "residents": [
+    "sheep_granny"
+   ],
+   "narr": {
+    "ko": "검표원은 털실이 수상합니다. 털실은 숨을 참습니다.",
+    "en": "The conductor finds the yarn suspicious. The yarn holds its breath.",
+    "ja": "車掌は毛糸があやしいと思います。毛糸は息を止めています。",
+    "es": "Al revisor la lana le parece sospechosa. La lana aguanta la respiración."
+   }
+  },
+  {
+   "id": "c17",
+   "sec": 2.6,
+   "img": "c17.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.4,
+     1.1
+    ],
+    "to": [
+     0.45,
+     0.6,
+     1.5
+    ]
+   },
+   "action": "고슴도치 간식 수레가 지나간다. 가시에 꼬치, 사과, 도넛. 냄새 줄기",
+   "cast": [],
+   "invention": "hedgehog_cart",
+   "residents": [
+    "hedgehog_cart",
+    "bear_napper"
+   ],
+   "narr": {
+    "ko": "하필 그때 간식 수레가 지나갑니다. 가시마다 간식입니다.",
+    "en": "Of all times, the snack cart rolls by. A snack on every spine.",
+    "ja": "よりによって、おやつのワゴンが通ります。トゲごとにおやつです。",
+    "es": "Justo entonces pasa el carrito de la merienda. Un bocado en cada púa."
+   }
+  },
+  {
+   "id": "c18",
+   "sec": 2.4,
+   "img": "c18.jpg",
+   "cam": {
+    "from": [
+     0.3,
+     0.6,
+     1.3
+    ],
+    "to": [
+     0.7,
+     0.35,
+     1.5
+    ]
+   },
+   "action": "털실 뭉치에서 모찌가 쭉 나와 냄새 줄기를 따라간다. 콩이 배낭을 붙잡는다. 털실이 풀린다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "fx": [
+    "bob"
+   ],
+   "residents": [
+    "hedgehog_cart"
+   ],
+   "narr": {
+    "ko": "모찌의 코는 주인 말을 듣지 않습니다.",
+    "en": "Mochi's nose does not listen to its owner.",
+    "ja": "モチの鼻は持ち主の言うことを聞きません。",
+    "es": "La nariz de Mochi no obedece a su dueño."
+   }
+  },
+  {
+   "id": "c19",
+   "sec": 2.0,
+   "img": "c19.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.6,
+     1.0
+    ],
+    "to": [
+     0.5,
+     0.62,
+     1.5
+    ]
+   },
+   "action": "털실을 뒤집어쓴 모찌와 검표원의 눈이 딱 마주친다",
+   "cast": [
+    "mochi",
+    "raccoon"
+   ],
+   "shake": {
+    "t": 0,
+    "dur": 0.5,
+    "amp": 12
+   },
+   "beat": "들킴",
+   "narr": {
+    "ko": "눈이 마주쳤습니다.",
+    "en": "Their eyes met.",
+    "ja": "目が合いました。",
+    "es": "Sus miradas se cruzaron."
+   }
+  },
+  {
+   "id": "c20",
+   "sec": 2.4,
+   "img": "c20.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.4,
+     1.3
+    ],
+    "to": [
+     0.5,
+     0.78,
+     1.3
+    ]
+   },
+   "action": "통로 추격. 달리는 둘, 뒤쫓는 검표원, 길게 풀린 털실",
+   "cast": [
+    "mochi",
+    "kong",
+    "raccoon"
+   ],
+   "shake": {
+    "t": 0.2,
+    "dur": 1.6,
+    "amp": 6
+   },
+   "residents": [
+    "goose_navi",
+    "sheep_granny",
+    "bear_napper"
+   ],
+   "narr": {
+    "ko": "표 없는 손님이 통로를 달립니다. 털실도 같이 달립니다.",
+    "en": "The ticketless passengers run down the aisle. So does the yarn.",
+    "ja": "切符のないお客が通路を走ります。毛糸もいっしょに走ります。",
+    "es": "Los pasajeros sin billete corren por el pasillo. La lana también."
+   }
+  },
+  {
+   "id": "c21",
+   "sec": 2.2,
+   "img": "c21.jpg",
+   "cam": {
+    "from": [
+     0.55,
+     0.8,
+     1.3
+    ],
+    "to": [
+     0.45,
+     0.45,
+     1.5
+    ]
+   },
+   "action": "객차 끝 문. 더 갈 곳이 없다. 검표원이 다가온다",
+   "cast": [
+    "mochi",
+    "kong",
+    "raccoon"
+   ],
+   "narr": {
+    "ko": "객차는 여기까지입니다.",
+    "en": "The car ends here.",
+    "ja": "客車はここまでです。",
+    "es": "El vagón termina aquí."
+   }
+  },
+  {
+   "id": "c22",
+   "sec": 2.8,
+   "img": "c22.jpg",
+   "cam": {
+    "from": [
+     0.25,
+     0.5,
+     1.5
+    ],
+    "to": [
+     0.6,
+     0.45,
+     1.4
+    ]
+   },
+   "action": "콩이 소포의 발자국 도장을 보여 주고, 모찌는 떨리는 두 날개로 생선 꼬치를 내민다",
+   "cast": [
+    "mochi",
+    "kong",
+    "raccoon"
+   ],
+   "narr": {
+    "ko": "콩은 소포의 도장을, 모찌는 식당에서 받은 생선 꼬치를 내밀었습니다.",
+    "en": "Kong shows the stamp on the parcel. Mochi offers the fish skewer from the diner.",
+    "ja": "コンは小包のはんこを、モチは食堂でもらった魚の串を差し出しました。",
+    "es": "Kong enseña el sello del paquete. Mochi ofrece la brocheta de pescado del restaurante."
+   }
+  },
+  {
+   "id": "c23",
+   "sec": 2.6,
+   "img": "c23.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.75,
+     1.3
+    ],
+    "to": [
+     0.5,
+     0.4,
+     1.4
+    ]
+   },
+   "action": "검표원이 꼬치를 한입. 눈이 반달이 된다",
+   "cast": [
+    "mochi",
+    "kong",
+    "raccoon"
+   ],
+   "fx": [
+    "pop"
+   ],
+   "beat": "반전",
+   "narr": {
+    "ko": "규칙은 규칙입니다. 다만 생선이 아직 따뜻했습니다.",
+    "en": "Rules are rules. But the fish was still warm.",
+    "ja": "規則は規則です。ただ、魚がまだ温かかったのです。",
+    "es": "Las normas son las normas. Pero el pescado aún estaba caliente."
+   }
+  },
+  {
+   "id": "c24",
+   "sec": 2.8,
+   "img": "c24.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.6,
+     1.0
+    ],
+    "to": [
+     0.7,
+     0.4,
+     1.7
+    ]
+   },
+   "action": "검표원이 소포 귀퉁이에 펀치로 눈송이 모양 구멍을 딸깍 뚫는다",
+   "cast": [
+    "mochi",
+    "kong",
+    "raccoon"
+   ],
+   "fx": [
+    "pop"
+   ],
+   "narr": {
+    "ko": "딸깍. 소포에 눈송이 구멍이 났습니다. 이제 이게 표입니다.",
+    "en": "Click. A snowflake hole in the parcel. Now this is their ticket.",
+    "ja": "カチ。小包に雪の形の穴があきました。これが切符です。",
+    "es": "Clic. Un agujero con forma de copo en el paquete. Ahora ese es su billete."
+   }
+  },
+  {
+   "id": "c25",
+   "sec": 2.8,
+   "img": "c25.jpg",
+   "cam": {
+    "from": [
+     0.6,
+     0.75,
+     1.4
+    ],
+    "to": [
+     0.75,
+     0.2,
+     1.5
+    ]
+   },
+   "action": "창가에 나란히 앉은 둘. 천장의 철새 내비는 기차 꼬리 쪽을 가리키고 콩이 올려다본다. 창밖이 밝아 온다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "residents": [
+    "goose_navi"
+   ],
+   "narr": {
+    "ko": "드디어 손님입니다. 그런데 철새는 왜 자꾸 뒤쪽을 가리킬까요.",
+    "en": "Proper passengers at last. But why does the bird keep pointing backward?",
+    "ja": "やっとお客になりました。でも、鳥はなぜ後ろばかり指すのでしょう。",
+    "es": "Por fin son pasajeros. Pero ¿por qué el pájaro sigue señalando hacia atrás?"
+   }
+  },
+  {
+   "id": "c26",
+   "sec": 4.0,
+   "img": "c26.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.0
+    ],
+    "to": [
+     0.5,
+     0.4,
+     1.2
+    ]
+   },
+   "action": "(영상) 해가 뜬다. 창밖에 눈 산이 가까워진다. 콩이 바로 돌려 준 지도를 사이에 두고 둘이 얼어붙는다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "emotes": [
+    {
+     "t": 2.6,
+     "kind": "!",
+     "at": [
+      0.55,
+      0.62
+     ],
+     "size": 120
+    }
+   ],
+   "video": "c26.mp4",
+   "beat": "클리프",
+   "residents": [
+    "goose_navi"
+   ],
+   "narr": {
+    "ko": "첫 해가 떴습니다. 지도는 거꾸로였고, 기차는 반대로 갑니다. (다음 화에 계속)",
+    "en": "The first sun is up. The map was upside down, and the train is going the other way. (To be continued)",
+    "ja": "一つめの朝日です。地図は逆さまで、汽車は反対へ走っています。（つづく）",
+    "es": "Sale el primer sol. El mapa estaba al revés y el tren va en sentido contrario. (Continuará)"
+   }
+  }
+ ]
+}

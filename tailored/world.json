@@ -291,6 +291,66 @@
     "s1e04"
    ],
    "label": "북극곰 냉장고"
+  },
+  {
+   "id": "squirrel_clerk",
+   "species": "다람쥐",
+   "job": "눈송이 철도 매표원",
+   "height": 1.2,
+   "class": "작은 종 어른",
+   "mark": "초록 챙 모자, 볼에 도토리를 넣어 센다",
+   "seen": [
+    "s1e05"
+   ],
+   "label": "다람쥐 매표원"
+  },
+  {
+   "id": "badger_porter",
+   "species": "오소리",
+   "job": "눈송이 철도 짐꾼",
+   "height": 1.9,
+   "class": "어른 시민",
+   "mark": "갈색 납작 모자, 눈송이 도장",
+   "seen": [
+    "s1e05"
+   ],
+   "label": "오소리 짐꾼"
+  },
+  {
+   "id": "sheep_granny",
+   "species": "양",
+   "job": "승객(뜨개질하는 할머니)",
+   "height": 1.8,
+   "class": "어른 시민",
+   "mark": "동그란 안경, 분홍 숄, 큰 크림색 털실 뭉치",
+   "seen": [
+    "s1e05"
+   ],
+   "label": "양 할머니"
+  },
+  {
+   "id": "hedgehog_cart",
+   "species": "고슴도치",
+   "job": "간식 수레",
+   "height": 1.3,
+   "class": "작은 종 어른",
+   "mark": "가시에 꼬치·사과·도넛을 꽂고 작은 수레를 민다, 흰 머릿수건",
+   "seen": [
+    "s1e05"
+   ],
+   "label": "고슴도치 간식 수레"
+  },
+  {
+   "id": "goose_navi",
+   "species": "기러기",
+   "job": "철새 내비(객차 천장)",
+   "height": 1.0,
+   "class": "작은 종 어른",
+   "mark": "천장 고리에 앉아 날개로 늘 남쪽을 가리킨다, 작은 빨간 스카프",
+   "seen": [
+    "s1e05"
+   ],
+   "label": "철새 내비"
   }
  ]
 }
