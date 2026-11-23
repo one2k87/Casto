@@ -20,6 +20,14 @@
   "vol": 0.75,
   "prompt": "Cozy lofi hip hop instrumental for a cute wordless animal cartoon: warm Rhodes piano, soft vinyl crackle, gentle boom-bap drums at 76 BPM, music box melody, a hint of ocean breeze pad, curious and tender mood that turns slightly wondrous at the end, no vocals, no sudden changes"
  },
+ "module_versions": {
+  "story": "1.0",
+  "conti": "1.0",
+  "art": "1.0",
+  "music": "1.0",
+  "render": "1.0",
+  "publish": "1.0"
+ },
  "cuts": [
   {
    "id": "c02",

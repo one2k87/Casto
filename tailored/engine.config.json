@@ -1,0 +1,75 @@
+{
+ "_note": "Tailored 엔진 설정을 한곳에 모은 기준표. 지금은 사람과 세션이 읽는 파일이고, 코드는 아직 이 파일을 읽지 않는다(코드 고정 — 코드가 읽게 바꾸는 일은 별도 승인).",
+ "channel": {
+  "name": "Tailored",
+  "youtube_channel_id": "UC-wB3FjDH6zjBEuwYdVrsrQ",
+  "series": "대사 없는 동물 연재 만화 쇼츠"
+ },
+ "season": {
+  "id": "s1",
+  "title": "모찌, 집에 가자",
+  "episodes": 8,
+  "plan": "tailored/seasons/s1.json"
+ },
+ "modules": {
+  "bible": {
+   "version": "1.0",
+   "rules": "tailored/modules/bible/rules.json"
+  },
+  "story": {
+   "version": "1.0",
+   "rules": "tailored/modules/story/rules.json"
+  },
+  "conti": {
+   "version": "1.1",
+   "rules": "tailored/modules/conti/rules.json"
+  },
+  "art": {
+   "version": "1.1",
+   "rules": "tailored/modules/art/rules.json"
+  },
+  "music": {
+   "version": "1.0",
+   "rules": "tailored/modules/music/rules.json"
+  },
+  "render": {
+   "version": "1.0",
+   "rules": "tailored/modules/render/rules.json"
+  },
+  "publish": {
+   "version": "1.0",
+   "rules": "tailored/modules/publish/rules.json"
+  },
+  "measure": {
+   "version": "1.0",
+   "rules": "tailored/modules/measure/rules.json"
+  },
+  "improve": {
+   "version": "1.0",
+   "rules": "tailored/modules/improve/rules.json"
+  }
+ },
+ "current_module_versions": {
+  "story": "1.0",
+  "conti": "1.1",
+  "art": "1.1",
+  "music": "1.0",
+  "render": "1.0",
+  "publish": "1.0"
+ },
+ "resources": {
+  "image": "힉스필드 GPT Image 2.5 low·1k(장당 0.25)",
+  "video": "힉스필드 Grok Video 1.5 Lite 720p(초당 1)",
+  "music": "ElevenLabs Music",
+  "text": "common.py llm() — 무료 키 우선",
+  "ledger": "보드 budget/<자원>/apps/C — 생성 전 견적·planned 예약, 끝나면 정산",
+  "stop_rule": "단가·모델이 바뀌면 생성 전에 멈추고 보고"
+ },
+ "safety": [
+  "게시 버튼 직전 사용자 확인",
+  "tailored_cast.py check 통과 뒤 그림 생성",
+  "텔레그램 초안 확인",
+  "git 기록",
+  "키·토큰은 세션이 읽지 않는다"
+ ]
+}

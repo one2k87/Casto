@@ -1,0 +1,41 @@
+{
+ "module": "bible",
+ "name": "세계관·캐릭터",
+ "version": "1.0",
+ "files": [
+  "tailored/characters.json",
+  "tailored/world.json",
+  "tailored/inventions.json",
+  "tailored/continuity.json",
+  "tailored_cast.py"
+ ],
+ "required_before_first_appearance": [
+  "name",
+  "species",
+  "role",
+  "color",
+  "item",
+  "item_rule",
+  "personality",
+  "habit",
+  "look",
+  "height",
+  "size_prompt",
+  "build",
+  "never",
+  "first_ep",
+  "home",
+  "ref.turnaround"
+ ],
+ "height_unit": "모찌 키 = 1.0",
+ "gate": "그림 생성 전 `python tailored_cast.py check <화>` 통과",
+ "after_publish": [
+  "continuity.json 갱신",
+  "tailored_cast.py page",
+  "도감 재게시"
+ ],
+ "metric": [
+  "그림 생성 전 충돌 0건",
+  "규칙 위반으로 다시 그린 컷 수"
+ ]
+}

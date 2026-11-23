@@ -1,0 +1,20 @@
+{
+ "module": "music",
+ "name": "음악",
+ "version": "1.0",
+ "files": [
+  "bgm.py",
+  "assets/bgm/"
+ ],
+ "service": "ElevenLabs Music(키는 Actions Secrets, 세션은 읽지 않음)",
+ "prompt_frame": "cozy lofi hip hop instrumental, 80~84 BPM, 마지막 10~15초 분위기 전환, no vocals, no sudden loud changes",
+ "seconds": 72,
+ "volume": 0.75,
+ "one_track_per_episode": true,
+ "sfx": false,
+ "voice": false,
+ "metric": [
+  "생성 실패율",
+  "월 사용 분"
+ ]
+}

@@ -1,0 +1,31 @@
+{
+ "module": "improve",
+ "name": "개선",
+ "version": "1.0",
+ "files": [
+  "(수동) 스킬 video-variable-test의 읽는 법"
+ ],
+ "one_variable_per_episode": true,
+ "blame": [
+  {
+   "if": "노출수가 거의 없다",
+   "module": "publish·story",
+   "do": "주제·노출 경로를 바꾼다"
+  },
+  {
+   "if": "노출은 있는데 넘기지 않고 본 비율이 낮다",
+   "module": "conti",
+   "do": "첫 3초를 바꾼다"
+  },
+  {
+   "if": "시청 지속률이 낮다",
+   "module": "conti·render",
+   "do": "길이·컷 속도를 바꾼다"
+  }
+ ],
+ "thresholds": "미정 — 2화 24시간 수치가 나온 뒤 채운다",
+ "promote": "새 규칙을 2편에 적용해 직전 2편과 같은 지표로 비교. 이기면 승격, 지면 되돌리고 둘 다 CHANGELOG에 적는다",
+ "metric": [
+  "수정 전후 성과 차이"
+ ]
+}

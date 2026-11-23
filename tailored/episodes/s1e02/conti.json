@@ -38,6 +38,14 @@
   "c27": "b3e07d85-d0a5-45ef-bec4-e0bb17efd755",
   "c27_video": "67edc1ee-db2d-40dd-8c75-09bf6ae5b544"
  },
+ "module_versions": {
+  "story": "1.0",
+  "conti": "1.1",
+  "art": "1.0",
+  "music": "1.0",
+  "render": "1.0",
+  "publish": "1.0"
+ },
  "cuts": [
   {
    "id": "c00",

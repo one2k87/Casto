@@ -1,0 +1,41 @@
+{
+ "module": "conti",
+ "name": "콘티",
+ "version": "1.1",
+ "files": [
+  "tailored/episodes/<화>/conti.json"
+ ],
+ "cuts": [
+  24,
+  28
+ ],
+ "length_sec": [
+  60,
+  70
+ ],
+ "cold_open": true,
+ "cut_fields": [
+  "id",
+  "sec",
+  "img",
+  "cam",
+  "action",
+  "cast",
+  "narr"
+ ],
+ "narration": {
+  "where": "자막 트랙만(화면 글자 없음)",
+  "langs": [
+   "ko",
+   "en",
+   "ja",
+   "es"
+  ],
+  "line_sec": "한 줄이 컷 1~2개에 걸쳐 약 4초"
+ },
+ "continuity_rule": "장면이 바뀌면 앞 컷의 물건·인물이 다음 컷에 이어진다(원인→행동→결과)",
+ "last_cut": "실제 영상 3~5초",
+ "metric": [
+  "첫 3초 유지율(넘기지 않고 본 비율)"
+ ]
+}

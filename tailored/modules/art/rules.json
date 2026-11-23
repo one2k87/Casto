@@ -1,0 +1,49 @@
+{
+ "module": "art",
+ "name": "그림",
+ "version": "1.1",
+ "files": [
+  "tailored_cast.py prompt",
+  "힉스필드(세션 도구)"
+ ],
+ "style_lock": "flat modern webtoon illustration, bold rounded dark-brown outlines, simple cel shading, soft pastel colors, sticker-cute proportions, big glossy expressive eyes, pink blush, clean readable composition, vertical 9:16, no text, no letters, no speech bubbles with words",
+ "model": {
+  "id": "gpt_image_2_5",
+  "quality": "low",
+  "resolution": "1k",
+  "aspect_ratio": "9:16",
+  "price": 0.25
+ },
+ "ending_video": {
+  "id": "grok_video_v15_lite",
+  "resolution": "720p",
+  "sec": 4,
+  "price_per_sec": 1,
+  "role": "start_image"
+ },
+ "references": {
+  "max": 3,
+  "role": "image_references",
+  "rule": "캐릭터 기준 그림 + 같은 장소의 앞 컷. 다른 장소 컷을 넣으면 배경이 따라온다"
+ },
+ "batch_max": 6,
+ "redo_limit_cuts": 5,
+ "phrases": {
+  "back_view": "two shoulder straps backpack centered on his back",
+  "kong_height": "same height as Mochi (smaller 금지)",
+  "prop_in_hand": "nothing on his back, only ONE backpack",
+  "season": "late spring (야외 컷마다 명시)",
+  "pebble": "warm golden"
+ },
+ "gates": [
+  "tailored_cast.py check <화> 통과",
+  "생성 직전 재견적",
+  "장부 planned 예약",
+  "단가·모델이 바뀌면 멈추고 보고"
+ ],
+ "cheap_fix": "색만 틀린 컷은 다시 그리지 않고 후보정",
+ "metric": [
+  "다시 그리기 비율",
+  "편당 크레딧"
+ ]
+}

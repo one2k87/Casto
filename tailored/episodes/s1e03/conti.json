@@ -36,6 +36,14 @@
   "c26": "e1db29e3-b201-4a4a-904d-af4c1e8d228a",
   "c26_video": "03bba12f-966c-47bb-857f-45a8fb7277fc"
  },
+ "module_versions": {
+  "story": "1.0",
+  "conti": "1.1",
+  "art": "1.1",
+  "music": "1.0",
+  "render": "1.0",
+  "publish": "1.0"
+ },
  "cuts": [
   {
    "id": "c00",

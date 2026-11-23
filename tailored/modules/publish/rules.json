@@ -1,0 +1,28 @@
+{
+ "module": "publish",
+ "name": "게시",
+ "version": "1.0",
+ "files": [
+  "(수동) 유튜브 스튜디오 — 채널 계정 크롬"
+ ],
+ "title_format": "한글 제목 이모지 | English Title · Tailored EP번호",
+ "slot": "금요일 12:10 KST(사용자 승인은 금요일 점심)",
+ "cadence": "주 1편",
+ "languages": [
+  "ko",
+  "en",
+  "ja",
+  "es"
+ ],
+ "subtitles": "언어별 SRT 올리기, 자동 생성 영어 자막은 내린다",
+ "gate": "게시 버튼 직전 사용자 확인",
+ "after": [
+  "주소·크레딧 보고",
+  "experiments.md 게시일",
+  "continuity.json·도감 갱신"
+ ],
+ "metric": [
+  "게시에 든 사람 시간(편당 약 15분)",
+  "누락 0"
+ ]
+}

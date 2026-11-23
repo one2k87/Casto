@@ -1,0 +1,29 @@
+{
+ "module": "story",
+ "name": "줄거리",
+ "version": "1.0",
+ "files": [
+  "tailored/seasons/s1.json",
+  "tailored/story_so_far.md",
+  "tailored/episodes/<화>/beats.md"
+ ],
+ "structure": [
+  "훅(0~3초)",
+  "목표 하나",
+  "방해 두 번(웃음 3회 이상)",
+  "반전",
+  "클리프(마지막 5초)"
+ ],
+ "inventions_per_episode": [
+  1,
+  2
+ ],
+ "place_changes_every_episode": true,
+ "recurring_device": "모찌의 코가 먼저 움직인다(냄새 1화 · 찬 김 2화 · 연기 3화)",
+ "no_dialogue": true,
+ "season_length": 8,
+ "metric": [
+  "사용자 수정 요청 횟수",
+  "평균 시청 지속률"
+ ]
+}

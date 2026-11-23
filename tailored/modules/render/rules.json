@@ -1,0 +1,31 @@
+{
+ "module": "render",
+ "name": "편집",
+ "version": "1.0",
+ "files": [
+  "tailored_render.py",
+  "tailored_captions.py",
+  "clay_stop.py",
+  ".github/workflows/clay-stop.yml",
+  "pilot/stop/request.txt"
+ ],
+ "output": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30,
+  "format": "mp4"
+ },
+ "camera": "컷마다 from→to(가운데 x·y·배율) 천천히 이동",
+ "last_cut_video_sec": 4,
+ "request": "pilot/stop/request.txt에 `<에피소드 폴더> <out.mp4> 설명` 한 줄을 푸시",
+ "captions": [
+  "ko",
+  "en",
+  "ja",
+  "es"
+ ],
+ "metric": [
+  "렌더 성공률",
+  "렌더 시간(약 6분)"
+ ]
+}
