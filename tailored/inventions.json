@@ -33,14 +33,18 @@
    "human": "출근 버스",
    "animal": "코끼리 버스",
    "gag": "등에 좌석, 만원이면 코로 밀어 넣기",
-   "used": []
+   "used": [
+    "s1e02"
+   ]
   },
   {
    "id": "mole_subway",
    "human": "지하철",
    "animal": "두더지 굴 지하철",
    "gag": "기관사가 파면서 달림",
-   "used": []
+   "used": [
+    "s1e02"
+   ]
   },
   {
    "id": "kangaroo_taxi",
@@ -68,7 +72,9 @@
    "human": "신호등",
    "animal": "카멜레온 신호등",
    "gag": "기분 따라 색이 바뀜",
-   "used": []
+   "used": [
+    "s1e02"
+   ]
   },
   {
    "id": "firefly_lamp",

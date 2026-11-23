@@ -1,0 +1,739 @@
+{
+ "episode": "s1e02",
+ "season": "s1",
+ "title": {
+  "ko": "출근길은 처음이라",
+  "en": "First Rush Hour",
+  "ja": "はじめての通勤ラッシュ",
+  "es": "Mi primera hora punta"
+ },
+ "upload_title": "출근길은 처음이라 🐘 | First Rush Hour · Tailored EP2",
+ "logline": "고래 타는 곳을 찾아 도시로 들어간 모찌가 출근 인파에 휩쓸려 코끼리 버스·카멜레온 신호등·두더지 지하철을 거치고, 더위를 피해 들어간 냉동 트럭에 갇힌다.",
+ "inventions": [
+  "elephant_bus",
+  "chameleon_light",
+  "mole_subway"
+ ],
+ "audio": "로파이 배경음만",
+ "experiment": {
+  "variable": "첫 3초",
+  "change": "1화는 잔잔한 장면으로 시작 → 2화는 가장 웃긴 장면(코끼리 코에 매달린 모찌)을 맨 앞에 둔 콜드 오픈",
+  "prediction": "첫 장면을 가장 웃긴 순간으로 바꾸면 쇼츠 피드에서 넘기지 않고 본 비율이 오른다",
+  "same": "길이 약 70초(1화 70초)·제목 형식·로파이·자막 4개 언어·컷 수 27~28"
+ },
+ "notes": "영상 컷(c27.mp4, 콜드 오픈) 미생성 — 힉스필드 잔액 0.75(이미지 단가가 0.25→0.75로 오름). c27.mp4가 폴더에 있으면 자동으로 영상 사용, 없으면 정지 컷+카메라.",
+ "bgm": {
+  "name": "s1e02_commute",
+  "sec": 72,
+  "vol": 0.75,
+  "prompt": "Cozy upbeat lofi hip hop instrumental for a cute wordless animal cartoon about a busy city morning commute: bouncy warm Rhodes chords, soft plucked upright bass, light swing boom-bap drums at 84 BPM, playful marimba melody, gentle vinyl crackle, cheerful and slightly hectic but cozy, calmer and a little mysterious in the last 10 seconds, no vocals, no sudden loud changes"
+ },
+ "refs": {
+  "c06": "c4eef922-1b31-4411-a3fc-735696703120",
+  "c07": "0a8ab5a9-fc74-4b31-aec2-361a34a9ffa9",
+  "c13": "49cadc92-1d0d-42de-b2b1-f7230cefd9b4",
+  "c17": "7273be17-ca69-4414-88ab-a49d53706456",
+  "c22": "e63822b1-0c1c-4ba5-846a-cbd82d0f8b09",
+  "c26": "46f55fe4-f839-474f-8197-b8cf68e5b7f0",
+  "c27": "b3e07d85-d0a5-45ef-bec4-e0bb17efd755"
+ },
+ "cuts": [
+  {
+   "id": "c00",
+   "sec": 2.6,
+   "img": "c07.jpg",
+   "cam": {
+    "from": [
+     0.42,
+     0.3,
+     1.5
+    ],
+    "to": [
+     0.42,
+     0.33,
+     1.25
+    ]
+   },
+   "action": "(콜드 오픈) 코끼리 코에 대롱대롱 매달린 모찌",
+   "fx": [
+    "pop",
+    "bob"
+   ],
+   "beat": "훅(실험 변수: 첫 3초)",
+   "narr": {
+    "ko": "출근길. 코끼리 버스가 승객이 아닌 것을 태웠습니다.",
+    "en": "Rush hour. The elephant bus just picked up something that isn't a passenger.",
+    "ja": "朝のラッシュ。ゾウのバスが、乗客じゃないものを乗せました。",
+    "es": "Hora punta. El autobús elefante acaba de recoger algo que no es un pasajero."
+   }
+  },
+  {
+   "id": "c01",
+   "sec": 2.6,
+   "img": "c01.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.45,
+     1.0
+    ],
+    "to": [
+     0.45,
+     0.6,
+     1.3
+    ]
+   },
+   "action": "새벽 부두, 상자 안에서 배낭을 안고 웅크린 모찌",
+   "flash": true,
+   "narr": {
+    "ko": "몇 시간 전. 모찌는 집에 가는 배를 놓쳤습니다.",
+    "en": "A few hours earlier. Mochi had missed the boat home.",
+    "ja": "数時間前。モチは帰りの船に乗り遅れました。",
+    "es": "Unas horas antes. Mochi había perdido el barco a casa."
+   }
+  },
+  {
+   "id": "c02",
+   "sec": 2.4,
+   "img": "c02.jpg",
+   "cam": {
+    "from": [
+     0.4,
+     0.6,
+     1.3
+    ],
+    "to": [
+     0.6,
+     0.25,
+     1.4
+    ]
+   },
+   "action": "고래 그림 표지판 발견",
+   "narr": {
+    "ko": "그런데 표지판이 있습니다. 고래는 저쪽.",
+    "en": "But there's a sign. Whales, that way.",
+    "ja": "でも看板があります。クジラは、あっち。",
+    "es": "Pero hay un cartel. Ballenas, por allí."
+   }
+  },
+  {
+   "id": "c03",
+   "sec": 2.2,
+   "img": "c03.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.6,
+     1.15
+    ],
+    "to": [
+     0.55,
+     0.6,
+     1.3
+    ]
+   },
+   "action": "지도를 들고 화살표 쪽으로 출발",
+   "fx": [
+    "bob"
+   ]
+  },
+  {
+   "id": "c04",
+   "sec": 2.4,
+   "img": "c04.jpg",
+   "cam": {
+    "from": [
+     0.25,
+     0.6,
+     1.5
+    ],
+    "to": [
+     0.6,
+     0.55,
+     1.2
+    ]
+   },
+   "action": "출근 인파를 만남",
+   "narr": {
+    "ko": "문제는, 지금이 출근 시간이라는 것.",
+    "en": "The problem: it's rush hour.",
+    "ja": "問題は、今が通勤時間だということ。",
+    "es": "El problema: es hora punta."
+   }
+  },
+  {
+   "id": "c05",
+   "sec": 2.2,
+   "img": "c05.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.1
+    ],
+    "to": [
+     0.5,
+     0.52,
+     1.3
+    ]
+   },
+   "action": "인파 다리 사이에 휩쓸림",
+   "fx": [
+    "shake"
+   ],
+   "shake": {
+    "t": 0,
+    "dur": 2.2,
+    "amp": 10
+   }
+  },
+  {
+   "id": "c06",
+   "sec": 2.6,
+   "img": "c06.jpg",
+   "cam": {
+    "from": [
+     0.4,
+     0.3,
+     1.3
+    ],
+    "to": [
+     0.6,
+     0.55,
+     1.15
+    ]
+   },
+   "action": "코끼리 버스 도착, 코로 승객을 태움",
+   "invention": "elephant_bus",
+   "narr": {
+    "ko": "이 도시의 버스는 코끼리입니다.",
+    "en": "In this city, the bus is an elephant.",
+    "ja": "この街のバスは、ゾウです。",
+    "es": "En esta ciudad, el autobús es un elefante."
+   }
+  },
+  {
+   "id": "c07",
+   "sec": 2.2,
+   "img": "c07.jpg",
+   "cam": {
+    "from": [
+     0.42,
+     0.33,
+     1.25
+    ],
+    "to": [
+     0.42,
+     0.3,
+     1.6
+    ]
+   },
+   "action": "코가 모찌를 집어 올림(훅 장면으로 돌아옴)",
+   "fx": [
+    "bob"
+   ]
+  },
+  {
+   "id": "c08",
+   "sec": 2.6,
+   "img": "c08.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.3,
+     1.2
+    ],
+    "to": [
+     0.55,
+     0.33,
+     1.6
+    ]
+   },
+   "action": "만원 버스, 하마와 곰 사이에 끼임",
+   "narr": {
+    "ko": "만원 버스는 어느 세계나 똑같습니다.",
+    "en": "A packed bus feels the same in every world.",
+    "ja": "満員バスは、どの世界でも同じです。",
+    "es": "Un autobús lleno es igual en todos los mundos."
+   }
+  },
+  {
+   "id": "c09",
+   "sec": 2.6,
+   "img": "c09.jpg",
+   "cam": {
+    "from": [
+     0.6,
+     0.3,
+     1.4
+    ],
+    "to": [
+     0.85,
+     0.18,
+     1.9
+    ]
+   },
+   "action": "뒤로 멀어지는 고래 표지판",
+   "narr": {
+    "ko": "고래 표지판이 멀어집니다. 반대 방향이네요.",
+    "en": "The whale sign is getting smaller. Wrong direction.",
+    "ja": "クジラの看板が遠ざかります。逆方向ですね。",
+    "es": "El cartel de la ballena se aleja. Dirección equivocada."
+   }
+  },
+  {
+   "id": "c10",
+   "sec": 2.6,
+   "img": "c10.jpg",
+   "cam": {
+    "from": [
+     0.4,
+     0.4,
+     1.2
+    ],
+    "to": [
+     0.35,
+     0.3,
+     1.45
+    ]
+   },
+   "action": "하차 줄에 손이 안 닿아 폴짝폴짝",
+   "fx": [
+    "bob"
+   ],
+   "narr": {
+    "ko": "하차 줄은 코끼리 귀에 달려 있습니다. 조금 높습니다.",
+    "en": "The stop cord hangs from the elephant's ear. A bit high.",
+    "ja": "降車ひもはゾウの耳についています。少し高いです。",
+    "es": "El cordón de parada cuelga de la oreja del elefante. Un poco alto."
+   }
+  },
+  {
+   "id": "c11",
+   "sec": 2.4,
+   "img": "c11.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.35,
+     1.2
+    ],
+    "to": [
+     0.5,
+     0.4,
+     1.35
+    ]
+   },
+   "action": "기린이 대신 당겨 줌",
+   "narr": {
+    "ko": "고마워요, 기린 씨.",
+    "en": "Thank you, Mr. Giraffe.",
+    "ja": "ありがとう、キリンさん。",
+    "es": "Gracias, señor Jirafa."
+   }
+  },
+  {
+   "id": "c12",
+   "sec": 2.2,
+   "img": "c12.jpg",
+   "cam": {
+    "from": [
+     0.4,
+     0.65,
+     1.4
+    ],
+    "to": [
+     0.5,
+     0.5,
+     1.1
+    ]
+   },
+   "action": "사거리에 내려 줌"
+  },
+  {
+   "id": "c13",
+   "sec": 2.4,
+   "img": "c13.jpg",
+   "cam": {
+    "from": [
+     0.55,
+     0.25,
+     1.6
+    ],
+    "to": [
+     0.5,
+     0.55,
+     1.15
+    ]
+   },
+   "action": "카멜레온 신호등 초록",
+   "invention": "chameleon_light",
+   "narr": {
+    "ko": "신호등은 카멜레온. 초록이면 건넙니다.",
+    "en": "The traffic light is a chameleon. Green means go.",
+    "ja": "信号はカメレオン。緑なら渡れます。",
+    "es": "El semáforo es un camaleón. Verde: se cruza."
+   }
+  },
+  {
+   "id": "c14",
+   "sec": 2.6,
+   "img": "c14.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.55,
+     1.15
+    ],
+    "to": [
+     0.6,
+     0.28,
+     1.7
+    ]
+   },
+   "action": "딸기 트럭에 빨개진 카멜레온",
+   "flash": true,
+   "narr": {
+    "ko": "단, 딸기 트럭이 지나가지 않는다면.",
+    "en": "Unless a strawberry truck drives by.",
+    "ja": "ただし、イチゴのトラックが通らなければ。",
+    "es": "A menos que pase un camión de fresas."
+   }
+  },
+  {
+   "id": "c15",
+   "sec": 2.4,
+   "img": "c15.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.45,
+     1.0
+    ],
+    "to": [
+     0.5,
+     0.6,
+     1.35
+    ]
+   },
+   "action": "사거리 대혼란, 지도를 머리에 쓴 모찌",
+   "fx": [
+    "shake"
+   ],
+   "shake": {
+    "t": 0,
+    "dur": 1.2,
+    "amp": 12
+   }
+  },
+  {
+   "id": "c16",
+   "sec": 2.6,
+   "img": "c16.jpg",
+   "cam": {
+    "from": [
+     0.6,
+     0.35,
+     1.3
+    ],
+    "to": [
+     0.45,
+     0.62,
+     1.4
+    ]
+   },
+   "action": "두더지 지하철 입구로 휩쓸려 내려감",
+   "invention": "mole_subway",
+   "narr": {
+    "ko": "지하철은 두더지가 직접 팝니다.",
+    "en": "The subway is dug by a mole. In real time.",
+    "ja": "地下鉄は、モグラがその場で掘ります。",
+    "es": "El metro lo cava un topo. En tiempo real."
+   }
+  },
+  {
+   "id": "c17",
+   "sec": 2.4,
+   "img": "c17.jpg",
+   "cam": {
+    "from": [
+     0.4,
+     0.4,
+     1.1
+    ],
+    "to": [
+     0.6,
+     0.65,
+     1.45
+    ]
+   },
+   "action": "굴을 파며 수레를 끄는 두더지 기관사",
+   "fx": [
+    "shake"
+   ],
+   "shake": {
+    "t": 0.3,
+    "dur": 1.8,
+    "amp": 8
+   }
+  },
+  {
+   "id": "c18",
+   "sec": 2.6,
+   "img": "c18.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.4,
+     1.1
+    ],
+    "to": [
+     0.55,
+     0.45,
+     1.5
+    ]
+   },
+   "action": "만원 지하철, 손잡이에 손이 안 닿고 땀 뻘뻘",
+   "narr": {
+    "ko": "펭귄에게 만원 지하철은 조금 덥습니다.",
+    "en": "For a penguin, a packed subway is a little warm.",
+    "ja": "ペンギンに満員電車は、少し暑いです。",
+    "es": "Para un pingüino, el metro lleno es un poco caluroso."
+   }
+  },
+  {
+   "id": "c19",
+   "sec": 2.6,
+   "img": "c19.jpg",
+   "cam": {
+    "from": [
+     0.45,
+     0.7,
+     1.4
+    ],
+    "to": [
+     0.5,
+     0.3,
+     1.25
+    ]
+   },
+   "action": "생각 풍선에 눈송이와 얼음",
+   "narr": {
+    "ko": "고래는 잠깐 잊기로 했습니다. 일단 시원한 곳.",
+    "en": "Forget the whale for now. Somewhere cold first.",
+    "ja": "クジラはいったん忘れます。まずは涼しい場所。",
+    "es": "La ballena puede esperar. Primero, un lugar frío."
+   }
+  },
+  {
+   "id": "c20",
+   "sec": 2.2,
+   "img": "c20.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.4,
+     1.0
+    ],
+    "to": [
+     0.5,
+     0.75,
+     1.5
+    ]
+   },
+   "action": "지상으로 나와 뜨거운 길 위에서 녹아내림"
+  },
+  {
+   "id": "c21",
+   "sec": 2.6,
+   "img": "c21.jpg",
+   "cam": {
+    "from": [
+     0.4,
+     0.7,
+     1.4
+    ],
+    "to": [
+     0.6,
+     0.62,
+     1.3
+    ]
+   },
+   "action": "찬 김을 따라 발끝 걸음",
+   "fx": [
+    "bob"
+   ],
+   "narr": {
+    "ko": "찬 바람 냄새. 코가 먼저 움직입니다. 또.",
+    "en": "The smell of cold air. The nose moves first. Again.",
+    "ja": "冷たい空気のにおい。また、鼻が先に動きます。",
+    "es": "Olor a aire frío. La nariz se mueve primero. Otra vez."
+   }
+  },
+  {
+   "id": "c22",
+   "sec": 2.4,
+   "img": "c22.jpg",
+   "cam": {
+    "from": [
+     0.4,
+     0.75,
+     1.5
+    ],
+    "to": [
+     0.55,
+     0.4,
+     1.15
+    ]
+   },
+   "action": "냉동 트럭 발견, 눈에 별",
+   "emotes": [
+    {
+     "t": 1.2,
+     "kind": "star",
+     "at": [
+      0.25,
+      0.5
+     ],
+     "size": 120
+    }
+   ]
+  },
+  {
+   "id": "c23",
+   "sec": 2.6,
+   "img": "c23.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.45,
+     1.2
+    ],
+    "to": [
+     0.5,
+     0.37,
+     1.8
+    ]
+   },
+   "action": "얼음 상자 위에 대자로 눕기",
+   "narr": {
+    "ko": "찾았습니다. 작은 남극.",
+    "en": "Found it. A tiny Antarctica.",
+    "ja": "見つけました。小さな南極。",
+    "es": "Lo encontró. Una pequeña Antártida."
+   }
+  },
+  {
+   "id": "c24",
+   "sec": 2.4,
+   "img": "c24.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.4,
+     1.2
+    ],
+    "to": [
+     0.45,
+     0.38,
+     1.5
+    ]
+   },
+   "action": "택배 모자 그림자가 문을 쾅",
+   "fx": [
+    "shake"
+   ],
+   "shake": {
+    "t": 0.3,
+    "dur": 0.5,
+    "amp": 20
+   },
+   "narr": {
+    "ko": "배달 시간이었습니다.",
+    "en": "It was delivery time.",
+    "ja": "配達の時間でした。",
+    "es": "Era hora del reparto."
+   }
+  },
+  {
+   "id": "c25",
+   "sec": 2.6,
+   "img": "c25.jpg",
+   "cam": {
+    "from": [
+     0.6,
+     0.75,
+     1.5
+    ],
+    "to": [
+     0.7,
+     0.3,
+     1.3
+    ]
+   },
+   "action": "트럭이 고래 반대쪽, 산 쪽으로",
+   "narr": {
+    "ko": "트럭은 고래 반대쪽으로 갑니다.",
+    "en": "The truck heads away from the whales.",
+    "ja": "トラックは、クジラと反対の方へ。",
+    "es": "El camión se aleja de las ballenas."
+   }
+  },
+  {
+   "id": "c26",
+   "sec": 2.6,
+   "img": "c26.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.6,
+     1.5
+    ],
+    "to": [
+     0.5,
+     0.5,
+     1.1
+    ]
+   },
+   "action": "깜깜한 짐칸에서 눈을 뜸, 조약돌 빛"
+  },
+  {
+   "id": "c27",
+   "sec": 4.4,
+   "img": "c27.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.6,
+     1.1
+    ],
+    "to": [
+     0.5,
+     0.2,
+     2.0
+    ]
+   },
+   "action": "어둠 속 눈 두 개 (클리프)",
+   "emotes": [
+    {
+     "t": 2.6,
+     "kind": "!",
+     "at": [
+      0.72,
+      0.62
+     ],
+     "size": 150
+    }
+   ],
+   "video": "c27.mp4",
+   "beat": "클리프",
+   "video_prompt": "The two eyes in the dark blink and come slightly closer; Mochi gasps, hugs the glowing backpack and shuffles back.",
+   "narr": {
+    "ko": "그리고 모찌는 혼자가 아니었습니다. (다음 화에 계속)",
+    "en": "And Mochi was not alone. (To be continued)",
+    "ja": "そして、モチはひとりではありませんでした。（つづく）",
+    "es": "Y Mochi no estaba solo. (Continuará)"
+   }
+  }
+ ]
+}
