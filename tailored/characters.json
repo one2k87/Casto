@@ -18,7 +18,8 @@
   "name": "콩", "species": "햄스터", "role": "택배기사 · 시즌 2 주인공", "status": "초안",
   "color": {"name": "버터 옐로", "hex": "#FFD98F"}, "item": "버터색 택배 모자 + 수상한 상자",
   "personality": "성실한데 늘 한 박자 늦음", "habit": "볼주머니에 택배를 넣었다 꺼낸다",
-  "look": "small round golden hamster with puffy cheeks, wearing a butter-yellow delivery cap and a tiny shoulder bag", "ref": {"first_look": "218257eb-152e-41bf-b653-6096b7fe0f47"}
+  "look": "small round golden hamster with puffy cheeks, wearing a butter-yellow delivery cap and a tiny shoulder bag", "ref": {"turnaround": "101f380f-1500-4f1c-adf2-d4f74bb0961f", "first_look": "218257eb-152e-41bf-b653-6096b7fe0f47"},
+  "size": "모찌와 같은 키(프롬프트: same height as Mochi). '더 작다'고 쓰면 모찌 몸이 길어짐 — 11/23 시험"
  },
  "mu": {
   "name": "무", "species": "고양이", "role": "셰프 · 시즌 3 주인공", "status": "초안",
