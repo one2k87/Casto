@@ -1,0 +1,812 @@
+{
+ "episode": "s1e03",
+ "season": "s1",
+ "title": {
+  "ko": "택배 왔습니다",
+  "en": "Special Delivery",
+  "ja": "お届け物です",
+  "es": "¡Paquete!"
+ },
+ "upload_title": "택배 왔습니다 📦 | Special Delivery · Tailored EP3",
+ "logline": "냉동 트럭 어둠 속 눈의 주인은 햄스터 택배원 콩. 모찌가 서툰 배달을 돕다가 친구가 되고, 콩이 깜빡한 오래된 소포에서 펭귄 발자국 도장을 발견한다. 둘이 배달하기로 한 순간, 골목의 생선 굽는 연기가 모찌를 끌고 간다.",
+ "inventions": [
+  "hamster_parcel",
+  "turtle_truck"
+ ],
+ "audio": "로파이 배경음만",
+ "experiment": {
+  "variable": "게시 직전 확정(후보: 올리는 시각 / 제목 형식) — 2화 24시간 수치를 본 뒤",
+  "same": "길이 약 70초·콜드 오픈·로파이·자막 4개 언어·마지막 컷 영상"
+ },
+ "model": "gpt_image_2_5 low 1k (장당 0.25) — 새 그림 17장 + 다시 그리기 2장, 일관성 시험 통과분 9장 재사용. c06은 조약돌 빛 색만 후보정(파랑→금색).",
+ "bgm": {
+  "name": "s1e03_delivery",
+  "sec": 72,
+  "vol": 0.75,
+  "prompt": "Cozy playful lofi hip hop instrumental for a cute wordless animal cartoon about two new friends delivering parcels on a sunny spring day: warm Rhodes chords, soft walking upright bass, light brushed boom-bap drums at 82 BPM, plucky kalimba melody, gentle vinyl crackle, friendly and bouncy, turning tender and hopeful in the last 15 seconds, no vocals, no sudden loud changes"
+ },
+ "refs": {
+  "kong_sheet": "101f380f-1500-4f1c-adf2-d4f74bb0961f",
+  "c03": "9b5772d1-d83b-4346-8d56-ec5127e6f86a",
+  "c08": "41615589-f29f-4173-a7d7-cdbd604f034a",
+  "c14": "120a8fc8-6bc6-4289-a28f-ebbc9fab0509",
+  "c21": "e13f6596-cbec-453f-bf12-12e2d27cda0f",
+  "c22": "178555ae-c6cf-4fdf-91ae-8cec248dd318",
+  "c25": "4ff86e1d-f880-4dad-8ce4-540bf9e497fb",
+  "c26": "e1db29e3-b201-4a4a-904d-af4c1e8d228a",
+  "c26_video": "03bba12f-966c-47bb-857f-45a8fb7277fc"
+ },
+ "cuts": [
+  {
+   "id": "c00",
+   "sec": 2.6,
+   "img": "c09.jpg",
+   "cam": {
+    "from": [
+     0.62,
+     0.5,
+     1.5
+    ],
+    "to": [
+     0.55,
+     0.5,
+     1.2
+    ]
+   },
+   "action": "(콜드 오픈) 콩이 볼에서 꺼낸 젖은 택배를 토끼가 두 손가락으로 받음",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "fx": [
+    "pop",
+    "bob"
+   ],
+   "beat": "훅",
+   "narr": {
+    "ko": "택배 왔습니다. 조금 젖었지만요.",
+    "en": "Delivery! It's a little damp.",
+    "ja": "お届け物です。少し湿っていますが。",
+    "es": "¡Paquete! Está un poco húmedo."
+   }
+  },
+  {
+   "id": "c01",
+   "sec": 2.6,
+   "img": "c01.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.62,
+     1.3
+    ],
+    "to": [
+     0.5,
+     0.2,
+     1.5
+    ]
+   },
+   "action": "어두운 짐칸, 배낭을 안은 모찌와 어둠 속 눈 두 개",
+   "cast": [
+    "mochi"
+   ],
+   "flash": true,
+   "narr": {
+    "ko": "조금 전, 냉동 트럭. 어둠 속에 눈이 두 개 있었습니다.",
+    "en": "A little earlier, in the freezer truck. Two eyes in the dark.",
+    "ja": "少し前、冷凍トラック。暗闇に目がふたつ。",
+    "es": "Un poco antes, en el camión frigorífico. Dos ojos en la oscuridad."
+   }
+  },
+  {
+   "id": "c02",
+   "sec": 2.6,
+   "img": "c02.jpg",
+   "cam": {
+    "from": [
+     0.6,
+     0.7,
+     1.3
+    ],
+    "to": [
+     0.45,
+     0.35,
+     1.4
+    ]
+   },
+   "action": "조약돌 빛에 드러난 햄스터 택배원 콩",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "narr": {
+    "ko": "눈의 주인은 햄스터였습니다. 문을 닫고 올라탄 택배원, 콩.",
+    "en": "The eyes belonged to a hamster. Kong, the courier who shut the door.",
+    "ja": "目の主はハムスターでした。ドアを閉めて乗りこんだ配達員、コン。",
+    "es": "Los ojos eran de un hámster. Kong, el repartidor que cerró la puerta."
+   }
+  },
+  {
+   "id": "c03",
+   "sec": 2.4,
+   "img": "c03.jpg",
+   "cam": {
+    "from": [
+     0.62,
+     0.25,
+     1.4
+    ],
+    "to": [
+     0.5,
+     0.5,
+     1.1
+    ]
+   },
+   "action": "콩이 전등 줄을 당겨 불이 켜지고 둘 다 깜짝",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "shake": {
+    "t": 0.2,
+    "dur": 0.6,
+    "amp": 14
+   }
+  },
+  {
+   "id": "c04",
+   "sec": 2.4,
+   "img": "c04.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.4,
+     1.1
+    ],
+    "to": [
+     0.5,
+     0.38,
+     1.4
+    ]
+   },
+   "action": "얼음 상자 뒤에 숨어 눈만 빼꼼",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "narr": {
+    "ko": "서로 무서웠습니다. 공평하게.",
+    "en": "They were scared of each other. Fair enough.",
+    "ja": "お互いにこわかったのです。公平に。",
+    "es": "Se dieron miedo mutuamente. Justo."
+   }
+  },
+  {
+   "id": "c05",
+   "sec": 2.2,
+   "img": "c05.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.45,
+     1.0
+    ],
+    "to": [
+     0.5,
+     0.7,
+     1.35
+    ]
+   },
+   "action": "트럭이 덜컹, 굴러 나와 이마를 맞댐",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "fx": [
+    "shake"
+   ],
+   "shake": {
+    "t": 0,
+    "dur": 1.0,
+    "amp": 14
+   }
+  },
+  {
+   "id": "c06",
+   "sec": 2.6,
+   "img": "c06.jpg",
+   "cam": {
+    "from": [
+     0.55,
+     0.6,
+     1.15
+    ],
+    "to": [
+     0.3,
+     0.66,
+     1.5
+    ]
+   },
+   "action": "콩은 택배 배지를, 모찌는 배낭 속 조약돌을 보여 줌",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "narr": {
+    "ko": "콩은 택배 배지를, 모찌는 조약돌을 보여 줬습니다. 인사 끝.",
+    "en": "Kong showed his badge. Mochi showed his pebble. Introductions done.",
+    "ja": "コンはバッジを、モチは小石を見せました。あいさつ終わり。",
+    "es": "Kong mostró su insignia. Mochi, su piedrita. Presentaciones hechas."
+   }
+  },
+  {
+   "id": "c07",
+   "sec": 2.4,
+   "img": "c07.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.62,
+     1.3
+    ],
+    "to": [
+     0.55,
+     0.45,
+     1.1
+    ]
+   },
+   "action": "트럭이 서고 문이 열림, 콩이 따라오라고 손짓",
+   "cast": [
+    "mochi",
+    "kong"
+   ]
+  },
+  {
+   "id": "c08",
+   "sec": 2.6,
+   "img": "c08.jpg",
+   "cam": {
+    "from": [
+     0.2,
+     0.5,
+     1.6
+    ],
+    "to": [
+     0.5,
+     0.55,
+     1.1
+    ]
+   },
+   "action": "운전석의 거북이 기사가 아주 천천히 깜빡이를 켬",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "invention": "turtle_truck",
+   "residents": [
+    "turtle_driver"
+   ],
+   "narr": {
+    "ko": "이 트럭의 기사는 거북이입니다. 그래서 늘 늦습니다.",
+    "en": "The driver is a tortoise. That's why they're always late.",
+    "ja": "このトラックの運転手はカメです。だからいつも遅れます。",
+    "es": "El conductor es una tortuga. Por eso siempre llegan tarde."
+   }
+  },
+  {
+   "id": "c09",
+   "sec": 2.6,
+   "img": "c09.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.1
+    ],
+    "to": [
+     0.6,
+     0.52,
+     1.5
+    ]
+   },
+   "action": "첫 배달 토끼네: 볼에서 꺼낸 젖은 택배",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "invention": "hamster_parcel",
+   "residents": [
+    "rabbit_customer"
+   ],
+   "narr": {
+    "ko": "택배는 볼주머니에 넣어 옵니다. 안전하지만 축축합니다.",
+    "en": "Parcels travel in his cheek. Safe, but soggy.",
+    "ja": "荷物はほお袋で運びます。安全ですが、しっとり。",
+    "es": "Los paquetes viajan en su mejilla. Seguros, pero húmedos."
+   }
+  },
+  {
+   "id": "c10",
+   "sec": 2.2,
+   "img": "c10.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.55,
+     1.1
+    ],
+    "to": [
+     0.55,
+     0.5,
+     1.25
+    ]
+   },
+   "action": "모찌도 상자를 머리에 이고 뒤뚱뒤뚱",
+   "cast": [
+    "mochi"
+   ],
+   "fx": [
+    "bob"
+   ]
+  },
+  {
+   "id": "c11",
+   "sec": 2.6,
+   "img": "c11.jpg",
+   "cam": {
+    "from": [
+     0.6,
+     0.85,
+     1.7
+    ],
+    "to": [
+     0.62,
+     0.2,
+     1.3
+    ]
+   },
+   "action": "기린네 우편함이 까마득히 높음, 무등을 태워도 안 닿음",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "narr": {
+    "ko": "기린 씨네 우편함은 조금 높습니다.",
+    "en": "Mr. Giraffe's mailbox is a bit high.",
+    "ja": "キリンさんの郵便受けは、少し高いです。",
+    "es": "El buzón del señor Jirafa está un poco alto."
+   }
+  },
+  {
+   "id": "c12",
+   "sec": 2.4,
+   "img": "c12.jpg",
+   "cam": {
+    "from": [
+     0.4,
+     0.85,
+     1.6
+    ],
+    "to": [
+     0.72,
+     0.12,
+     1.5
+    ]
+   },
+   "action": "배낭 끈을 새총 삼아 택배를 쏘아 올림, 우편함에 쏙",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "narr": {
+    "ko": "배낭은 가방이기도 하고, 새총이기도 합니다.",
+    "en": "A backpack is a bag. And also a slingshot.",
+    "ja": "リュックはかばんであり、パチンコでもあります。",
+    "es": "Una mochila es una bolsa. Y también una resortera."
+   }
+  },
+  {
+   "id": "c13",
+   "sec": 2.2,
+   "img": "c13.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.0
+    ],
+    "to": [
+     0.5,
+     0.42,
+     1.2
+    ]
+   },
+   "action": "날개와 앞발로 하이파이브",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "fx": [
+    "pop"
+   ]
+  },
+  {
+   "id": "c14",
+   "sec": 2.6,
+   "img": "c14.jpg",
+   "cam": {
+    "from": [
+     0.75,
+     0.3,
+     1.6
+    ],
+    "to": [
+     0.5,
+     0.6,
+     1.15
+    ]
+   },
+   "action": "곰네 문에 달·감은 눈 그림 팻말, 살금살금",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "residents": [
+    "bear_napper"
+   ],
+   "narr": {
+    "ko": "곰 씨는 낮잠 중. 조용히만 하면 됩니다.",
+    "en": "Mr. Bear is napping. Just be quiet.",
+    "ja": "クマさんはお昼寝中。静かにすれば大丈夫。",
+    "es": "El señor Oso duerme la siesta. Solo hay que no hacer ruido."
+   }
+  },
+  {
+   "id": "c15",
+   "sec": 2.4,
+   "img": "c15.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.68,
+     1.2
+    ],
+    "to": [
+     0.8,
+     0.3,
+     1.7
+    ]
+   },
+   "action": "모찌가 미끄러져 쿵, 문틈으로 곰의 눈이 번쩍",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "shake": {
+    "t": 0,
+    "dur": 0.5,
+    "amp": 18
+   },
+   "residents": [
+    "bear_napper"
+   ],
+   "narr": {
+    "ko": "조용히는 실패했습니다.",
+    "en": "Quiet did not happen.",
+    "ja": "静かには、できませんでした。",
+    "es": "No hubo silencio."
+   }
+  },
+  {
+   "id": "c16",
+   "sec": 2.4,
+   "img": "c16.jpg",
+   "cam": {
+    "from": [
+     0.28,
+     0.3,
+     1.5
+    ],
+    "to": [
+     0.45,
+     0.62,
+     1.2
+    ]
+   },
+   "action": "둘이 트럭으로 줄행랑, 거북이 기사는 이제야 깜빡이",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "fx": [
+    "bob"
+   ],
+   "residents": [
+    "turtle_driver",
+    "bear_napper"
+   ]
+  },
+  {
+   "id": "c17",
+   "sec": 2.6,
+   "img": "c17.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.55,
+     1.1
+    ],
+    "to": [
+     0.5,
+     0.58,
+     1.45
+    ]
+   },
+   "action": "짐칸에서 숨을 고르며 웃음, 볼에서 꺼낸 젖은 해바라기씨",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "narr": {
+    "ko": "간식도 볼주머니에서 나옵니다.",
+    "en": "Snacks come from the cheek, too.",
+    "ja": "おやつも、ほお袋から出てきます。",
+    "es": "La merienda también sale de la mejilla."
+   }
+  },
+  {
+   "id": "c18",
+   "sec": 2.6,
+   "img": "c18.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.6,
+     1.1
+    ],
+    "to": [
+     0.6,
+     0.4,
+     1.5
+    ]
+   },
+   "action": "모찌가 지도(거꾸로)의 눈·빙산 그림을 가리킴, 콩은 갸웃",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "narr": {
+    "ko": "모찌는 집을 가리켰습니다. 콩은 거기가 어딘지 모릅니다.",
+    "en": "Mochi pointed at home. Kong has no idea where that is.",
+    "ja": "モチは家を指さしました。コンはそこがどこか知りません。",
+    "es": "Mochi señaló su casa. Kong no sabe dónde queda."
+   }
+  },
+  {
+   "id": "c19",
+   "sec": 2.4,
+   "img": "c19.jpg",
+   "cam": {
+    "from": [
+     0.45,
+     0.6,
+     1.25
+    ],
+    "to": [
+     0.35,
+     0.62,
+     1.5
+    ]
+   },
+   "action": "모찌 시무룩, 조약돌 빛이 약해짐",
+   "cast": [
+    "mochi",
+    "kong"
+   ]
+  },
+  {
+   "id": "c20",
+   "sec": 2.4,
+   "img": "c20.jpg",
+   "cam": {
+    "from": [
+     0.7,
+     0.3,
+     1.2
+    ],
+    "to": [
+     0.72,
+     0.72,
+     1.4
+    ]
+   },
+   "action": "트럭이 또 덜컹, 상자 더미가 무너지고 먼지 쌓인 소포가 굴러 나옴",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "shake": {
+    "t": 0,
+    "dur": 0.8,
+    "amp": 14
+   },
+   "narr": {
+    "ko": "그때, 아주 오래된 택배가 굴러 나왔습니다.",
+    "en": "Just then, a very old parcel rolled out.",
+    "ja": "そのとき、とても古い荷物が転がり出ました。",
+    "es": "En ese momento, rodó un paquete muy viejo."
+   }
+  },
+  {
+   "id": "c21",
+   "sec": 2.6,
+   "img": "c21.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.55,
+     1.1
+    ],
+    "to": [
+     0.62,
+     0.55,
+     1.4
+    ]
+   },
+   "action": "콩이 깜빡한 소포를 들고 뜨끔, 땀 뻘뻘",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "narr": {
+    "ko": "콩이 깜빡한 택배입니다. 꽤 오래.",
+    "en": "A parcel Kong forgot. For quite a while.",
+    "ja": "コンが忘れていた荷物です。かなり長いあいだ。",
+    "es": "Un paquete que Kong olvidó. Hace bastante."
+   }
+  },
+  {
+   "id": "c22",
+   "sec": 2.6,
+   "img": "c22.jpg",
+   "cam": {
+    "from": [
+     0.45,
+     0.5,
+     1.0
+    ],
+    "to": [
+     0.72,
+     0.5,
+     1.6
+    ]
+   },
+   "action": "송장 확대: 눈송이, 빙산, 펭귄 발자국 도장",
+   "cast": [],
+   "narr": {
+    "ko": "받는 곳: 눈, 빙산, 그리고 펭귄 발자국.",
+    "en": "Deliver to: snow, an iceberg, and a penguin footprint.",
+    "ja": "お届け先：雪、氷山、そしてペンギンの足あと。",
+    "es": "Destino: nieve, un iceberg y una huella de pingüino."
+   }
+  },
+  {
+   "id": "c23",
+   "sec": 2.6,
+   "img": "c23.jpg",
+   "cam": {
+    "from": [
+     0.6,
+     0.78,
+     1.5
+    ],
+    "to": [
+     0.5,
+     0.35,
+     1.3
+    ]
+   },
+   "action": "모찌가 발자국 도장에 발을 대 봄, 조약돌이 환하게 빛남",
+   "cast": [
+    "mochi"
+   ],
+   "narr": {
+    "ko": "발이 딱 맞았습니다.",
+    "en": "It was a perfect fit.",
+    "ja": "足がぴったり合いました。",
+    "es": "La huella encajaba perfecto."
+   }
+  },
+  {
+   "id": "c24",
+   "sec": 2.6,
+   "img": "c24.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.55,
+     1.1
+    ],
+    "to": [
+     0.4,
+     0.55,
+     1.35
+    ]
+   },
+   "action": "모찌가 소포를 꼭 안고, 콩이 모자를 고쳐 씀",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "narr": {
+    "ko": "이 택배는 둘이 배달하기로 했습니다.",
+    "en": "They decided to deliver this one together.",
+    "ja": "この荷物は、ふたりで届けることにしました。",
+    "es": "Decidieron entregar este paquete juntos."
+   }
+  },
+  {
+   "id": "c25",
+   "sec": 2.6,
+   "img": "c25.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.72,
+     1.35
+    ],
+    "to": [
+     0.55,
+     0.32,
+     1.3
+    ]
+   },
+   "action": "문이 열리고 골목의 생선 굽는 연기가 흘러듦",
+   "cast": [
+    "mochi",
+    "kong"
+   ]
+  },
+  {
+   "id": "c26",
+   "sec": 4.0,
+   "img": "c26.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.0
+    ],
+    "to": [
+     0.4,
+     0.55,
+     1.3
+    ]
+   },
+   "action": "(영상) 모찌가 연기를 따라 걸어 나가고 콩이 소포를 안고 따라감",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "emotes": [
+    {
+     "t": 2.2,
+     "kind": "!",
+     "at": [
+      0.72,
+      0.42
+     ],
+     "size": 140
+    }
+   ],
+   "video": "c26.mp4",
+   "beat": "클리프",
+   "narr": {
+    "ko": "다만 모찌의 코가 또 먼저 움직였습니다. (다음 화에 계속)",
+    "en": "But Mochi's nose moved first. Again. (To be continued)",
+    "ja": "ただ、モチの鼻がまた先に動きました。（つづく）",
+    "es": "Pero la nariz de Mochi se movió primero. Otra vez. (Continuará)"
+   }
+  }
+ ]
+}
