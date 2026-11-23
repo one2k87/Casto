@@ -136,7 +136,13 @@
    "action": "지도를 들고 화살표 쪽으로 출발",
    "fx": [
     "bob"
-   ]
+   ],
+   "narr": {
+    "ko": "지도는 한 장 더. 엄마는 늘 두 장 넣습니다.",
+    "en": "One map left. Mom always packs two.",
+    "ja": "地図はもう一枚。ママはいつも二枚入れます。",
+    "es": "Queda un mapa. Mamá siempre pone dos."
+   }
   },
   {
    "id": "c04",

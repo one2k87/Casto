@@ -1,54 +1,274 @@
 {
- "_rule": "고유색(color)과 애착템(item)은 모든 컷에 반드시 보인다. look 문장은 이미지 프롬프트에 그대로 넣는다. ref는 힉스필드 기준 이미지 job ID.",
+ "_rule": "고유색(color)과 애착템(item)은 모든 컷에 반드시 보인다. look 문장은 이미지 프롬프트에 그대로 넣는다. ref는 힉스필드 기준 이미지 job ID. 키(height)는 모찌 = 1.0 기준. 처음 등장하기 전에 _required 항목을 모두 채우고 status를 '확정'으로 바꾼다(tailored_cast.py가 검사).",
  "mochi": {
-  "name": "모찌", "species": "아기 펭귄", "role": "시즌 1 주인공", "status": "확정",
-  "color": {"name": "체리 레드", "hex": "#D9453F"}, "item": "빨간 배낭(안에 엄마가 준 반짝이는 조약돌)",
-  "personality": "겁 많지만 일단 가 보는 길치. 먹을 것에 약함.", "habit": "당황하면 지도를 거꾸로 든다 / 무서우면 배낭을 꼭 끌어안는다",
+  "name": "모찌",
+  "species": "아기 펭귄",
+  "role": "시즌 1 주인공",
+  "status": "확정",
+  "color": {
+   "name": "체리 레드",
+   "hex": "#D9453F"
+  },
+  "item": "빨간 배낭(안에 엄마가 준 반짝이는 조약돌)",
+  "personality": "겁 많지만 일단 가 보는 길치. 먹을 것에 약함.",
+  "habit": "당황하면 지도를 거꾸로 든다 / 무서우면 배낭을 꼭 끌어안는다",
   "look": "tiny round baby penguin chick with fluffy grey down, white face mask, big glossy dark eyes, pink blush, tiny orange beak, dark grey flippers and feet, wearing a little cherry-red backpack",
-  "ref": {"style_anchor": "59b74ee0-32d1-44d5-bd0a-ef9ae615c1f6", "turnaround": "c0722b1a-92dc-4279-8766-d3ed879599a6", "expressions": "6c2fab4c-5148-4c53-9d85-67ee935e54be"},
-  "never": ["고글·헬멧", "배낭 없는 컷", "어른 펭귄 체형"]
+  "ref": {
+   "style_anchor": "59b74ee0-32d1-44d5-bd0a-ef9ae615c1f6",
+   "turnaround": "c0722b1a-92dc-4279-8766-d3ed879599a6",
+   "expressions": "6c2fab4c-5148-4c53-9d85-67ee935e54be"
+  },
+  "never": [
+   "고글·헬멧",
+   "배낭 없는 컷",
+   "어른 펭귄 체형(길쭉한 몸)",
+   "배낭이 두 개",
+   "옆으로 메는 가방"
+  ],
+  "height": 1.0,
+  "size_class": "아기",
+  "size_prompt": "Mochi is a small chick, about 60 percent of an adult citizen's height and exactly the same height as Kong the hamster",
+  "build": "공처럼 둥근 몸, 머리와 몸 구분 없이 한 덩어리, 다리 짧음. 서 있어도 키가 늘어나지 않는다",
+  "item_rule": "cherry-red backpack with a front flap and small cream clasp, worn on his back with TWO shoulder straps; from behind it sits centered on his back; exactly one backpack",
+  "first_ep": "s1e01",
+  "home": "남극 펭귄 마을",
+  "job": "유치원생",
+  "relations": {
+   "mom": "엄마",
+   "kong": "3화에서 친구가 됨"
+  }
  },
  "mom": {
-  "name": "엄마 펭귄", "species": "어른 펭귄", "role": "시즌 1 조연", "status": "초안",
-  "color": {"name": "로즈", "hex": "#F49AA6"}, "item": "로즈색 목도리",
-  "personality": "다정하고 머릿수 세기에 진심", "habit": "아이들을 날개로 하나씩 짚으며 센다",
-  "look": "gentle adult penguin, black back and white belly, soft round shape, wearing a rose-pink knitted scarf", "ref": {}
+  "name": "엄마 펭귄",
+  "species": "어른 펭귄",
+  "role": "시즌 1 조연",
+  "status": "확정",
+  "color": {
+   "name": "로즈",
+   "hex": "#F49AA6"
+  },
+  "item": "로즈색 목도리",
+  "personality": "다정하고 머릿수 세기에 진심",
+  "habit": "아이들을 날개로 하나씩 짚으며 센다",
+  "look": "gentle round mother penguin with fluffy grey down like Mochi, white face, soft round shape, wearing a rose-pink chunky knitted scarf",
+  "ref": {},
+  "height": 1.3,
+  "size_class": "어른(펭귄)",
+  "size_prompt": "Mom is about 1.3 times Mochi's height, same round shape, a little taller",
+  "build": "모찌와 같은 둥근 체형에 조금 큰 몸. 길쭉한 어른 펭귄 체형으로 그리지 않는다(1화 기준)",
+  "item_rule": "rose-pink chunky knitted scarf wrapped around her neck, always visible",
+  "first_ep": "s1e01",
+  "home": "남극 펭귄 마을",
+  "job": "유치원 인솔",
+  "relations": {
+   "mochi": "아들"
+  },
+  "never": [
+   "검은 등·흰 배의 사실적 펭귄(1화에서 회색 솜털로 확정)",
+   "목도리 없는 컷"
+  ],
+  "note": "1화에 이미 등장. 기준 그림이 없어 8화 재등장 전에 1화 컷(c02)으로 기준 그림을 만들어야 한다. look 문장을 1화 실제 모습(회색 솜털)에 맞게 고침."
  },
  "kong": {
-  "name": "콩", "species": "햄스터", "role": "택배기사 · 시즌 2 주인공", "status": "초안",
-  "color": {"name": "버터 옐로", "hex": "#FFD98F"}, "item": "버터색 택배 모자 + 수상한 상자",
-  "personality": "성실한데 늘 한 박자 늦음", "habit": "볼주머니에 택배를 넣었다 꺼낸다",
-  "look": "small round golden hamster with puffy cheeks, wearing a butter-yellow delivery cap and a tiny shoulder bag", "ref": {"turnaround": "101f380f-1500-4f1c-adf2-d4f74bb0961f", "first_look": "218257eb-152e-41bf-b653-6096b7fe0f47"},
-  "size": "모찌와 같은 키(프롬프트: same height as Mochi). '더 작다'고 쓰면 모찌 몸이 길어짐 — 11/23 시험"
+  "name": "콩",
+  "species": "햄스터",
+  "role": "택배기사 · 시즌 2 주인공",
+  "status": "확정",
+  "color": {
+   "name": "버터 옐로",
+   "hex": "#FCD368"
+  },
+  "item": "버터색 택배 모자 + 수상한 상자",
+  "personality": "성실한데 늘 한 박자 늦음",
+  "habit": "볼주머니에 택배를 넣었다 꺼낸다",
+  "look": "small round golden hamster with puffy cheeks, wearing a butter-yellow delivery cap and a tiny shoulder bag",
+  "ref": {
+   "turnaround": "101f380f-1500-4f1c-adf2-d4f74bb0961f",
+   "first_look": "218257eb-152e-41bf-b653-6096b7fe0f47"
+  },
+  "size": "모찌와 같은 키(프롬프트: same height as Mochi). '더 작다'고 쓰면 모찌 몸이 길어짐 — 11/23 시험",
+  "height": 1.0,
+  "size_class": "작은 종 어른",
+  "size_prompt": "Kong is exactly the same height as Mochi",
+  "build": "찹쌀떡처럼 둥근 몸, 빵빵한 볼, 짧은 팔다리, 꼬리는 작은 크림색 솜뭉치",
+  "item_rule": "butter-yellow delivery cap with a small white patch on the front, and a tiny butter-yellow shoulder bag worn across the body",
+  "first_ep": "s1e03",
+  "home": "도시 택배 영업소(미정)",
+  "job": "택배기사(거북이 택배 트럭 조수석·짐칸 담당)",
+  "relations": {
+   "mochi": "3화에서 친구가 됨",
+   "turtle_driver": "같은 트럭의 기사"
+  },
+  "never": [
+   "모자 없는 컷",
+   "모찌보다 큰 몸",
+   "볼이 홀쭉한 얼굴"
+  ],
+  "note": "2화 24컷의 택배 모자 그림자와 27컷의 눈이 콩. 고유색 hex를 기준 그림 실측값으로 고침(#FFD98F → #FCD368). 키 지시는 'same height'로만 쓴다('smaller'라고 쓰면 모찌 몸이 길어짐 — 11/23 시험)."
  },
  "mu": {
-  "name": "무", "species": "고양이", "role": "셰프 · 시즌 3 주인공", "status": "초안",
-  "color": {"name": "민트", "hex": "#9ED9C3"}, "item": "나무 국자 + 민트색 앞치마",
-  "personality": "무뚝뚝, 요리엔 진심", "habit": "국자로 박자를 맞춘다",
-  "look": "chubby cream-colored cat with half-closed stoic eyes, wearing a mint-green apron, holding a wooden ladle", "ref": {}
+  "name": "무",
+  "species": "고양이",
+  "role": "셰프 · 시즌 3 주인공",
+  "status": "초안",
+  "color": {
+   "name": "민트",
+   "hex": "#9ED9C3"
+  },
+  "item": "나무 국자 + 민트색 앞치마",
+  "personality": "무뚝뚝, 요리엔 진심",
+  "habit": "국자로 박자를 맞춘다",
+  "look": "chubby cream-colored cat with half-closed stoic eyes, wearing a mint-green apron, holding a wooden ladle",
+  "ref": {},
+  "height": 1.7,
+  "size_class": "어른 시민",
+  "size_prompt": "Mu the cat is an adult citizen, about 1.7 times Mochi's height",
+  "build": "통통한 항아리 체형, 꼬리 짧고 굵음",
+  "item_rule": "mint-green apron always on; wooden ladle in his right paw or tucked in the apron pocket",
+  "first_ep": "s1e04",
+  "home": "골목 식당가의 손님 0명 식당",
+  "job": "셰프",
+  "relations": {},
+  "never": [
+   "웃는 얼굴 남발(무뚝뚝이 기본)",
+   "앞치마 없는 컷",
+   "출근길 고양이 엑스트라와 같은 삼색 무늬"
+  ]
  },
  "raccoon": {
-  "name": "검표원 너구리", "species": "너구리", "role": "눈송이 철도 검표원", "status": "초안",
-  "color": {"name": "스카이 블루", "hex": "#A9D3F5"}, "item": "검표 펀치",
-  "personality": "규칙쟁이, 간식에 약함", "habit": "펀치를 딸깍거린다",
-  "look": "round raccoon with a sky-blue conductor cap and vest, holding a small ticket punch", "ref": {}
+  "name": "검표원 너구리",
+  "species": "너구리",
+  "role": "눈송이 철도 검표원",
+  "status": "초안",
+  "color": {
+   "name": "스카이 블루",
+   "hex": "#A9D3F5"
+  },
+  "item": "검표 펀치",
+  "personality": "규칙쟁이, 간식에 약함",
+  "habit": "펀치를 딸깍거린다",
+  "look": "round raccoon with a sky-blue conductor cap and vest, holding a small ticket punch",
+  "ref": {},
+  "height": 1.7,
+  "size_class": "어른 시민",
+  "size_prompt": "the conductor raccoon is an adult citizen, about 1.7 times Mochi's height",
+  "build": "둥근 몸, 줄무늬 꼬리",
+  "item_rule": "sky-blue conductor cap and vest; small silver ticket punch in his paw",
+  "first_ep": "s1e05",
+  "home": "눈송이 철도",
+  "job": "검표원",
+  "relations": {},
+  "never": [
+   "넥타이·서류가방(2화 출근 너구리 엑스트라의 것)",
+   "모자 없는 컷"
+  ]
  },
  "crab": {
-  "name": "아기 게", "species": "게", "role": "바닷가 친구", "status": "초안",
-  "color": {"name": "코랄", "hex": "#FF9E8A"}, "item": "조개껍데기 모자",
-  "personality": "옆으로만 가는 낙천가", "habit": "집게로 박수",
-  "look": "tiny round coral-colored baby crab, big sparkly eyes, wearing a seashell as a hat", "ref": {}
+  "name": "아기 게",
+  "species": "게",
+  "role": "바닷가 친구",
+  "status": "초안",
+  "color": {
+   "name": "코랄",
+   "hex": "#FF9E8A"
+  },
+  "item": "조개껍데기 모자",
+  "personality": "옆으로만 가는 낙천가",
+  "habit": "집게로 박수",
+  "look": "tiny round coral-colored baby crab, big sparkly eyes, wearing a seashell as a hat",
+  "ref": {},
+  "height": 0.4,
+  "size_class": "꼬마",
+  "size_prompt": "the baby crab is tiny, less than half of Mochi's height",
+  "build": "동그란 등딱지, 짧은 집게 둘",
+  "item_rule": "a seashell worn as a hat, always on",
+  "first_ep": "s1e06",
+  "home": "바닷가 마을",
+  "job": "없음(아기)",
+  "relations": {},
+  "never": [
+   "사실적인 다리 마디",
+   "조개 모자 없는 컷"
+  ],
+  "note": "고유색이 엄마의 로즈와 가깝다 — 둘이 한 컷에 나올 일이 생기면 조정."
  },
  "spider": {
-  "name": "아기 거미", "species": "거미", "role": "와이파이 기사", "status": "초안",
-  "color": {"name": "라벤더", "hex": "#C9B5EC"}, "item": "털모자 + 뜨개바늘",
-  "personality": "수줍음 많음", "habit": "긴장하면 뜨개질이 빨라진다",
-  "look": "tiny mochi-like lavender baby spider, cute chibi, big sparkly eyes, blush, only a few short stubby legs, knit beanie, knitting needles", "ref": {"design": "9dda7979-5faa-45a7-9539-1642f3aaca64"}
+  "name": "아기 거미",
+  "species": "거미",
+  "role": "와이파이 기사",
+  "status": "초안",
+  "color": {
+   "name": "라벤더",
+   "hex": "#C9B5EC"
+  },
+  "item": "털모자 + 뜨개바늘",
+  "personality": "수줍음 많음",
+  "habit": "긴장하면 뜨개질이 빨라진다",
+  "look": "tiny mochi-like lavender baby spider, cute chibi, big sparkly eyes, blush, only a few short stubby legs, knit beanie, knitting needles",
+  "ref": {
+   "design": "9dda7979-5faa-45a7-9539-1642f3aaca64"
+  },
+  "height": 0.3,
+  "size_class": "꼬마 벌레",
+  "size_prompt": "the baby spider is tiny, about one third of Mochi's height",
+  "build": "찹쌀떡 몸, 짧은 다리 몇 개만",
+  "item_rule": "lavender knit beanie and tiny knitting needles",
+  "first_ep": "미정(거미줄 인터넷 편)",
+  "home": "미정",
+  "job": "뜨개질로 거미줄 인터넷을 짬",
+  "relations": {},
+  "never": [
+   "다리 8개를 사실적으로",
+   "털·이빨 묘사"
+  ]
  },
  "firefly": {
-  "name": "반딧불이", "species": "반딧불이", "role": "가로등·등대 근무", "status": "초안",
-  "color": {"name": "레몬", "hex": "#FFE98A"}, "item": "경비 모자 + 회중시계",
-  "personality": "칼퇴근주의자", "habit": "퇴근 시간이면 하품",
-  "look": "tiny round fluffy cream firefly, cute chibi, big eyes, blush, tiny round wings, glowing lemon-yellow bottom, little guard cap and pocket watch", "ref": {"design": "1ac17ff1-ee7e-410e-b24d-172cca4f3e9d"}
- }
+  "name": "반딧불이",
+  "species": "반딧불이",
+  "role": "가로등·등대 근무",
+  "status": "초안",
+  "color": {
+   "name": "레몬",
+   "hex": "#FFE98A"
+  },
+  "item": "경비 모자 + 회중시계",
+  "personality": "칼퇴근주의자",
+  "habit": "퇴근 시간이면 하품",
+  "look": "tiny round fluffy cream firefly, cute chibi, big eyes, blush, tiny round wings, glowing lemon-yellow bottom, little guard cap and pocket watch",
+  "ref": {
+   "design": "1ac17ff1-ee7e-410e-b24d-172cca4f3e9d"
+  },
+  "height": 0.25,
+  "size_class": "꼬마 벌레",
+  "size_prompt": "the firefly is tiny, about a quarter of Mochi's height",
+  "build": "동그란 크림색 몸, 꽁무니가 레몬색으로 빛남",
+  "item_rule": "little guard cap and a pocket watch",
+  "first_ep": "s1e06",
+  "home": "바닷가 등대",
+  "job": "등대지기(퇴근하면 깜깜)",
+  "relations": {},
+  "never": [
+   "사실적인 곤충 다리·더듬이",
+   "모자 없는 컷"
+  ],
+  "note": "고유색이 콩의 버터 옐로와 가깝다 — 6화 전에 연두빛 레몬(#E3F27A 안)으로 옮길지 정한다."
+ },
+ "_required": [
+  "name",
+  "species",
+  "role",
+  "color",
+  "item",
+  "item_rule",
+  "personality",
+  "habit",
+  "look",
+  "height",
+  "size_prompt",
+  "build",
+  "never",
+  "first_ep",
+  "home",
+  "ref.turnaround"
+ ]
 }

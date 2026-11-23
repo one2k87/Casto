@@ -7,70 +7,74 @@ Hora punta. El autobús elefante acaba de recoger algo que no es un pasajero.
 Unas horas antes. Mochi había perdido el barco a casa.
 
 3
-00:00:05,300 --> 00:00:09,700
+00:00:05,300 --> 00:00:07,500
 Pero hay un cartel. Ballenas, por allí.
 
 4
+00:00:07,700 --> 00:00:09,700
+Queda un mapa. Mamá siempre pone dos.
+
+5
 00:00:09,900 --> 00:00:14,300
 El problema: es hora punta.
 
-5
+6
 00:00:14,500 --> 00:00:19,100
 En esta ciudad, el autobús es un elefante.
 
-6
+7
 00:00:19,300 --> 00:00:21,700
 Un autobús lleno es igual en todos los mundos.
 
-7
+8
 00:00:21,900 --> 00:00:24,300
 El cartel de la ballena se aleja. Dirección equivocada.
 
-8
+9
 00:00:24,500 --> 00:00:26,900
 El cordón de parada cuelga de la oreja del elefante. Un poco alto.
 
-9
+10
 00:00:27,100 --> 00:00:31,500
 Gracias, señor Jirafa.
 
-10
+11
 00:00:31,700 --> 00:00:33,900
 El semáforo es un camaleón. Verde: se cruza.
 
-11
+12
 00:00:34,100 --> 00:00:38,900
 A menos que pase un camión de fresas.
 
-12
+13
 00:00:39,100 --> 00:00:43,900
 El metro lo cava un topo. En tiempo real.
 
-13
+14
 00:00:44,100 --> 00:00:46,500
 Para un pingüino, el metro lleno es un poco caluroso.
 
-14
+15
 00:00:46,700 --> 00:00:51,300
 La ballena puede esperar. Primero, un lugar frío.
 
-15
+16
 00:00:51,500 --> 00:00:56,300
 Olor a aire frío. La nariz se mueve primero. Otra vez.
 
-16
+17
 00:00:56,500 --> 00:00:58,900
 Lo encontró. Una pequeña Antártida.
 
-17
+18
 00:00:59,100 --> 00:01:01,300
 Era hora del reparto.
 
-18
+19
 00:01:01,500 --> 00:01:06,500
 El camión se aleja de las ballenas.
 
-19
+20
 00:01:06,700 --> 00:01:10,500
 Y Mochi no estaba solo. (Continuará)
 

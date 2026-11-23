@@ -21,3 +21,20 @@
 - 화면에 글자 없음. 대사 없음. 매 화 마지막 컷은 실제 영상(3~5초).
 - 캐릭터 고유색·애착템은 모든 컷에 유지. 지네류 금지, 벌레는 귀엽게 캐릭터화.
 - 매 화 발명품 1~2개, 쓴 것은 `inventions.json`의 used에 기록.
+
+## 캐릭터 도구 (2026-11-23)
+
+세계관 안에서 어긋나는 곳을 그림 생성 전에 잡는다. 도감 페이지: https://claude.ai/artifact/5BxL9bSAtYsRhPq4QqNfF1
+
+| 명령 | 하는 일 |
+|---|---|
+| `python tailored_cast.py lint` | 설정 빠짐·고유색 충돌·키 범위·소지품 장부 점검(충돌이 있으면 종료 코드 1) |
+| `python tailored_cast.py check s1e03` | 그 화에 나오는 캐릭터가 확정이고 기준 그림이 있는지 |
+| `python tailored_cast.py prompt mochi kong [--back]` | 그림 지시문에 넣을 표준 문장(생김새·애착템·키·계절) |
+| `python tailored_cast.py page` | 도감 페이지 `tailored/cast_page.html` 생성(생성 뒤 다시 게시) |
+
+- `characters.json`: 키(모찌 = 1.0)·체형·애착템 그리는 법·금지 사항·첫 등장 화. 처음 등장하기 전에 `_required` 항목을 채우고 status를 확정으로.
+- `world.json`: `scale`(크기 분류), `laws`(세계 법칙), `residents`(주민·일터 거인).
+- `continuity.json`: 누가 무엇을 갖고 있나, 화가 끝났을 때 어디에 있나, 풀리지 않은 것. 콘티 전에 읽고 게시 뒤 갱신.
+
+제작 순서: 줄거리 승인 → `check <화>` 통과 → `prompt`로 지시문 작성 → 견적·장부 예약 → 그림 생성 → 게시 뒤 `continuity.json` 갱신 → `page` 다시 게시.
