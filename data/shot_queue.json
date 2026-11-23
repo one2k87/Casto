@@ -1,5 +1,5 @@
 {
- "next": 164,
+ "next": 169,
  "items": {
   "1": {
    "name": "늘어나는 밀폐용기",
@@ -1525,6 +1525,48 @@
    "url": "https://www.coupang.com/np/search?q=%EB%AF%B8%EB%8B%88+%EA%B9%80%EC%B9%98%EB%83%89%EC%9E%A5%EA%B3%A0",
    "hold": true,
    "note": "14번과 같은 물건으로 보임 — 14번으로 캡처"
+  },
+  "164": {
+   "name": "멀티쿠커",
+   "slug": "",
+   "key": "멀티쿠커",
+   "done": false,
+   "search": "멀티쿠커",
+   "url": "https://www.coupang.com/np/search?q=%EB%A9%80%ED%8B%B0%EC%BF%A0%EC%BB%A4",
+   "hold": true,
+   "note": "156번과 같은 물건으로 보임 — 156번으로 캡처"
+  },
+  "165": {
+   "name": "푸드워머",
+   "slug": "",
+   "key": "푸드워머",
+   "done": false,
+   "search": "푸드워머",
+   "url": "https://www.coupang.com/np/search?q=%ED%91%B8%EB%93%9C%EC%9B%8C%EB%A8%B8"
+  },
+  "166": {
+   "name": "오일미스트",
+   "slug": "",
+   "key": "오일미스트",
+   "done": false,
+   "search": "오일미스트",
+   "url": "https://www.coupang.com/np/search?q=%EC%98%A4%EC%9D%BC%EB%AF%B8%EC%8A%A4%ED%8A%B8"
+  },
+  "167": {
+   "name": "애플코어러",
+   "slug": "",
+   "key": "애플코어러",
+   "done": false,
+   "search": "애플코어러",
+   "url": "https://www.coupang.com/np/search?q=%EC%95%A0%ED%94%8C%EC%BD%94%EC%96%B4%EB%9F%AC"
+  },
+  "168": {
+   "name": "길이조절 수납정리함",
+   "slug": "",
+   "key": "길이조절수납정리함",
+   "done": false,
+   "search": "길이조절 수납정리함",
+   "url": "https://www.coupang.com/np/search?q=%EA%B8%B8%EC%9D%B4%EC%A1%B0%EC%A0%88+%EC%88%98%EB%82%A9%EC%A0%95%EB%A6%AC%ED%95%A8"
   }
  }
 }
