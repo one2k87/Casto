@@ -1,0 +1,840 @@
+{
+ "episode": "s1e04",
+ "season": "s1",
+ "title": {
+  "ko": "손님이 없는 식당",
+  "en": "The Empty Diner",
+  "ja": "お客のいない食堂",
+  "es": "El restaurante vacío"
+ },
+ "upload_title": "손님이 없는 식당 🐟 | The Empty Diner · Tailored EP4",
+ "logline": "생선 굽는 연기를 따라간 모찌와 콩은 손님이 한 명도 없는 고양이 식당에 닿는다. 셰프 무의 생선은 새까맣고, 냉장고인 북극곰은 생선을 안 내준다. 길은 몰라도 생선은 아는 모찌의 코가 식당을 살리고, 무는 벽의 포스터로 남쪽 끝 가는 길을 알려 준다. 마지막 배는 해가 세 번 뜬 뒤.",
+ "inventions": [
+  "polar_fridge"
+ ],
+ "audio": "로파이 배경음만",
+ "experiment": {
+  "variable": "게시 직전 확정 — 앞 편 수치를 본 뒤(미리 만든 편이라 제목·올리는 시각·첫 3초 순서만 바꿀 수 있음)",
+  "same": "길이 약 70초·콜드 오픈·로파이·자막 4개 언어·마지막 컷 영상"
+ },
+ "model": "gpt_image_2_5 low 1k (장당 0.25) — 무 기준 그림 1장 + 새 그림 26장, 다시 그리기 0장. 엔딩 영상 grok_video_v15_lite 720p 4초.",
+ "bgm": {
+  "name": "s1e04_diner",
+  "sec": 72,
+  "vol": 0.75,
+  "prompt": "Cozy mellow lofi hip hop instrumental for a cute wordless animal cartoon set in a tiny late-night diner: warm Rhodes chords, soft upright bass, light brushed boom-bap drums at 80 BPM, gentle muted jazz guitar and a small vibraphone melody, soft vinyl crackle, sleepy and a little lonely at first, growing warm and lively in the middle, turning hopeful with a gentle train-like shuffle rhythm in the last 15 seconds, no vocals, no sudden loud changes"
+ },
+ "refs": {
+  "mu_sheet": "add71c94-1a9c-4a6d-93b5-2150a3c10bde",
+  "c02": "245f4864-8cc9-4b64-959e-cd103f41a4d3",
+  "c03": "60e47446-ade0-4b0a-8d05-cd4930fddcbf",
+  "c06": "89430e02-02d2-448f-aea4-43d41bad9932",
+  "c09": "a5607c1d-60ae-4a44-8b41-35afcd0a4bfe",
+  "c12": "59cdcdf3-d153-4e6c-b401-dd7b080330bc",
+  "c14": "93582692-08b1-4f22-8400-e66e1cb81520",
+  "c24": "36aa00c6-a75c-4110-a7db-5974b3722179",
+  "c26": "5f414eae-6d1a-426a-9a32-3a2b0b04befe",
+  "c26_video": "4235079f-fd3f-4d57-a971-76607bebf123"
+ },
+ "module_versions": {
+  "story": "1.0",
+  "conti": "1.1",
+  "art": "1.1",
+  "music": "1.0",
+  "render": "1.0",
+  "publish": "1.0"
+ },
+ "cuts": [
+  {
+   "id": "c00",
+   "sec": 2.6,
+   "img": "c09.jpg",
+   "cam": {
+    "from": [
+     0.6,
+     0.62,
+     1.5
+    ],
+    "to": [
+     0.5,
+     0.5,
+     1.15
+    ]
+   },
+   "action": "(콜드 오픈) 무가 북극곰이 껴안고 자는 이글루 냉장고에서 생선 꼬리를 잡고 줄다리기",
+   "cast": [
+    "mu"
+   ],
+   "fx": [
+    "pop",
+    "bob"
+   ],
+   "beat": "훅",
+   "residents": [
+    "polar_fridge"
+   ],
+   "narr": {
+    "ko": "이 식당의 냉장고는 북극곰입니다. 잘 안 열립니다.",
+    "en": "This diner's fridge is a polar bear. It doesn't open easily.",
+    "ja": "この食堂の冷蔵庫はシロクマです。なかなか開きません。",
+    "es": "La nevera de este restaurante es un oso polar. No se abre fácilmente."
+   }
+  },
+  {
+   "id": "c01",
+   "sec": 2.6,
+   "img": "c01.jpg",
+   "cam": {
+    "from": [
+     0.3,
+     0.3,
+     1.4
+    ],
+    "to": [
+     0.5,
+     0.6,
+     1.15
+    ]
+   },
+   "action": "골목. 연기 줄기를 코로 따라 걷는 모찌, 소포를 안고 따라오는 콩",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "flash": true,
+   "narr": {
+    "ko": "조금 전, 골목. 모찌의 코가 연기를 따라가고 있었습니다.",
+    "en": "A little earlier, in the alley. Mochi's nose was following the smoke.",
+    "ja": "少し前、路地。モチの鼻が煙を追っていました。",
+    "es": "Un poco antes, en el callejón. La nariz de Mochi seguía el humo."
+   }
+  },
+  {
+   "id": "c02",
+   "sec": 2.6,
+   "img": "c02.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.76,
+     1.4
+    ],
+    "to": [
+     0.5,
+     0.3,
+     1.3
+    ]
+   },
+   "action": "골목 식당가. 옆 가게는 줄이 길고 맨 끝 작은 식당만 텅 비었다. 연기는 그 집 굴뚝에서",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "narr": {
+    "ko": "옆집은 줄이 깁니다. 이 집만 손님이 없습니다.",
+    "en": "Next door, long lines. Here, no one.",
+    "ja": "隣は行列。この店だけ、お客がいません。",
+    "es": "Al lado, filas largas. Aquí, nadie."
+   }
+  },
+  {
+   "id": "c03",
+   "sec": 2.6,
+   "img": "c03.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.0
+    ],
+    "to": [
+     0.55,
+     0.4,
+     1.45
+    ]
+   },
+   "action": "창 안. 빈 식탁들 사이에서 혼자 생선을 굽는 고양이 셰프 무",
+   "cast": [
+    "mu"
+   ],
+   "narr": {
+    "ko": "주인은 고양이 셰프, 무. 오늘도 혼자 굽습니다.",
+    "en": "The owner is Mu, a cat chef. Grilling alone again today.",
+    "ja": "店主は猫のシェフ、ム。今日もひとりで焼いています。",
+    "es": "El dueño es Mu, un gato chef. Hoy también cocina solo."
+   }
+  },
+  {
+   "id": "c04",
+   "sec": 2.2,
+   "img": "c04.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.3,
+     1.2
+    ],
+    "to": [
+     0.4,
+     0.28,
+     1.5
+    ]
+   },
+   "action": "모찌가 창에 얼굴을 붙이고 침을 흘린다. 콩이 배낭을 잡아당겨 말린다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "fx": [
+    "bob"
+   ]
+  },
+  {
+   "id": "c05",
+   "sec": 2.6,
+   "img": "c05.jpg",
+   "cam": {
+    "from": [
+     0.3,
+     0.5,
+     1.4
+    ],
+    "to": [
+     0.65,
+     0.4,
+     1.4
+    ]
+   },
+   "action": "문이 열린다. 무의 귀만 쫑긋, 눈은 반쯤 감긴 채 국자로 빈 자리를 가리킨다",
+   "cast": [
+    "mochi",
+    "kong",
+    "mu"
+   ],
+   "narr": {
+    "ko": "첫 손님입니다. 무는 놀랐습니다. 귀만.",
+    "en": "First customers. Mu is surprised. Only his ear shows it.",
+    "ja": "最初のお客です。ムは驚きました。耳だけ。",
+    "es": "Primeros clientes. Mu se sorprende. Solo con la oreja."
+   }
+  },
+  {
+   "id": "c06",
+   "sec": 2.6,
+   "img": "c06.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.45,
+     1.1
+    ],
+    "to": [
+     0.45,
+     0.62,
+     1.6
+    ]
+   },
+   "action": "둘이 식탁에 앉고 무가 접시를 내려놓는다. 새까맣게 탄 생선",
+   "cast": [
+    "mochi",
+    "kong",
+    "mu"
+   ],
+   "narr": {
+    "ko": "오늘의 생선구이. 색이 조금 진합니다.",
+    "en": "Today's grilled fish. The color is a bit... deep.",
+    "ja": "本日の焼き魚。色が少し濃いめです。",
+    "es": "Pescado a la parrilla del día. De color algo... intenso."
+   }
+  },
+  {
+   "id": "c07",
+   "sec": 2.2,
+   "img": "c07.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.4,
+     1.0
+    ],
+    "to": [
+     0.3,
+     0.35,
+     1.4
+    ]
+   },
+   "action": "모찌가 한 입. 솜털이 곤두선다. 콩은 자기 몫을 볼에 슬쩍 숨긴다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "fx": [
+    "pop"
+   ],
+   "shake": {
+    "t": 0,
+    "dur": 0.5,
+    "amp": 12
+   }
+  },
+  {
+   "id": "c08",
+   "sec": 2.6,
+   "img": "c08.jpg",
+   "cam": {
+    "from": [
+     0.3,
+     0.7,
+     1.3
+    ],
+    "to": [
+     0.78,
+     0.42,
+     1.6
+    ]
+   },
+   "action": "무가 빈 식탁들을 둘러보고 귀가 처진다. 모찌가 주방 쪽을 기웃거린다",
+   "cast": [
+    "mochi",
+    "mu"
+   ],
+   "narr": {
+    "ko": "손님이 없는 데에는 이유가 있습니다.",
+    "en": "There is a reason this place is empty.",
+    "ja": "お客がいないのには、わけがあります。",
+    "es": "Hay una razón por la que está vacío."
+   }
+  },
+  {
+   "id": "c09",
+   "sec": 2.6,
+   "img": "c09.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.4,
+     1.1
+    ],
+    "to": [
+     0.65,
+     0.65,
+     1.5
+    ]
+   },
+   "action": "주방. 북극곰이 이글루 냉장고를 껴안고 잔다. 무가 생선 꼬리를 잡고 낑낑",
+   "cast": [
+    "mu"
+   ],
+   "invention": "polar_fridge",
+   "residents": [
+    "polar_fridge"
+   ],
+   "shake": {
+    "t": 0.3,
+    "dur": 1.2,
+    "amp": 8
+   },
+   "narr": {
+    "ko": "냉장고가 생선을 안 내줍니다. 자면서도요.",
+    "en": "The fridge won't hand over the fish. Even asleep.",
+    "ja": "冷蔵庫が魚を渡してくれません。寝ていても。",
+    "es": "La nevera no suelta el pescado. Ni dormida."
+   }
+  },
+  {
+   "id": "c10",
+   "sec": 2.6,
+   "img": "c10.jpg",
+   "cam": {
+    "from": [
+     0.6,
+     0.3,
+     1.3
+    ],
+    "to": [
+     0.4,
+     0.72,
+     1.5
+    ]
+   },
+   "action": "겨우 꺼낸 생선 바구니. 흐물흐물한 생선들 사이에 한 마리만 반짝. 무는 아무거나 집는다",
+   "cast": [
+    "mu"
+   ],
+   "residents": [
+    "polar_fridge"
+   ],
+   "narr": {
+    "ko": "그래서 무는 손에 잡히는 대로 굽습니다.",
+    "en": "So Mu grills whatever he can grab.",
+    "ja": "だからムは、取れた魚をそのまま焼きます。",
+    "es": "Así que Mu asa lo que logra sacar."
+   }
+  },
+  {
+   "id": "c11",
+   "sec": 2.6,
+   "img": "c11.jpg",
+   "cam": {
+    "from": [
+     0.25,
+     0.35,
+     1.5
+    ],
+    "to": [
+     0.3,
+     0.62,
+     1.5
+    ]
+   },
+   "action": "모찌의 코가 벌름. 반짝이는 한 마리를 날개로 딱 가리킨다",
+   "cast": [
+    "mochi",
+    "mu"
+   ],
+   "narr": {
+    "ko": "모찌의 코는 길은 몰라도 생선은 압니다.",
+    "en": "Mochi's nose can't find the way home. It can find the right fish.",
+    "ja": "モチの鼻は道は知りませんが、魚は知っています。",
+    "es": "La nariz de Mochi no conoce el camino, pero sí el pescado."
+   }
+  },
+  {
+   "id": "c12",
+   "sec": 2.2,
+   "img": "c12.jpg",
+   "cam": {
+    "from": [
+     0.75,
+     0.75,
+     1.5
+    ],
+    "to": [
+     0.5,
+     0.5,
+     1.1
+    ]
+   },
+   "action": "무가 의심스러운 눈으로 그 생선을 굽는다. 노릇노릇 황금빛",
+   "cast": [
+    "mochi",
+    "mu"
+   ]
+  },
+  {
+   "id": "c13",
+   "sec": 2.6,
+   "img": "c13.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.45,
+     1.0
+    ],
+    "to": [
+     0.42,
+     0.3,
+     1.6
+    ]
+   },
+   "action": "무가 한 입. 반쯤 감겼던 눈이 처음으로 번쩍 뜨이고 꼬리가 빳빳해진다",
+   "cast": [
+    "mochi",
+    "mu"
+   ],
+   "fx": [
+    "pop"
+   ],
+   "beat": "반전",
+   "narr": {
+    "ko": "무의 눈이 떠졌습니다. 개업 이래 처음입니다.",
+    "en": "Mu's eyes opened. A first since opening day.",
+    "ja": "ムの目が開きました。開店以来、初めてです。",
+    "es": "Mu abrió los ojos. Por primera vez desde que abrió."
+   }
+  },
+  {
+   "id": "c14",
+   "sec": 2.4,
+   "img": "c14.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.1
+    ],
+    "to": [
+     0.7,
+     0.48,
+     1.5
+    ]
+   },
+   "action": "무가 모찌의 배낭 손잡이를 들어 주방 의자 위에 올려놓는다. 생선 고르는 자리",
+   "cast": [
+    "mochi",
+    "mu"
+   ],
+   "fx": [
+    "bob"
+   ],
+   "residents": [
+    "polar_fridge"
+   ],
+   "narr": {
+    "ko": "모찌는 그 자리에서 채용됐습니다.",
+    "en": "Mochi was hired on the spot.",
+    "ja": "モチはその場で採用されました。",
+    "es": "Mochi fue contratado en el acto."
+   }
+  },
+  {
+   "id": "c15",
+   "sec": 2.6,
+   "img": "c15.jpg",
+   "cam": {
+    "from": [
+     0.2,
+     0.4,
+     1.4
+    ],
+    "to": [
+     0.7,
+     0.52,
+     1.5
+    ]
+   },
+   "action": "셋의 분업. 모찌가 고르고 무가 굽고, 콩이 접시를 볼에 넣으려다 국자에 딱 막힌다",
+   "cast": [
+    "mochi",
+    "kong",
+    "mu"
+   ],
+   "narr": {
+    "ko": "콩도 돕습니다. 볼주머니는 금지입니다.",
+    "en": "Kong helps too. Cheek pouches are not allowed.",
+    "ja": "コンも手伝います。ほお袋は禁止です。",
+    "es": "Kong también ayuda. Prohibido usar las mejillas."
+   }
+  },
+  {
+   "id": "c16",
+   "sec": 2.6,
+   "img": "c16.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.3,
+     1.3
+    ],
+    "to": [
+     0.5,
+     0.55,
+     1.15
+    ]
+   },
+   "action": "굴뚝 연기가 골목으로 퍼진다. 옆 가게 줄에 서 있던 손님들의 코가 한꺼번에 돌아간다",
+   "cast": [],
+   "residents": [
+    "commuters"
+   ],
+   "narr": {
+    "ko": "냄새는 줄을 서지 않습니다.",
+    "en": "A good smell doesn't wait in line.",
+    "ja": "匂いは行列に並びません。",
+    "es": "El buen olor no hace fila."
+   }
+  },
+  {
+   "id": "c17",
+   "sec": 2.6,
+   "img": "c17.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.6,
+     1.1
+    ],
+    "to": [
+     0.35,
+     0.18,
+     1.5
+    ]
+   },
+   "action": "손님들이 우르르. 텅 비었던 식탁이 꽉 차고 기린은 창으로 목만 넣는다",
+   "cast": [
+    "kong",
+    "mu"
+   ],
+   "residents": [
+    "commuters",
+    "giraffe_citizen"
+   ],
+   "narr": {
+    "ko": "그날 밤, 빈자리가 없었습니다. 기린 씨는 창문으로.",
+    "en": "That night, not a single empty seat. Mr. Giraffe used the window.",
+    "ja": "その夜、空席はありませんでした。キリンさんは窓から。",
+    "es": "Esa noche no quedó ni un asiento. El señor Jirafa usó la ventana."
+   }
+  },
+  {
+   "id": "c18",
+   "sec": 2.6,
+   "img": "c18.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.4,
+     1.1
+    ],
+    "to": [
+     0.35,
+     0.5,
+     1.4
+    ]
+   },
+   "action": "무가 국자로 박자를 맞추며 요리한다. 표정은 그대로인데 꼬리가 살랑",
+   "cast": [
+    "mochi",
+    "mu"
+   ],
+   "fx": [
+    "bob"
+   ],
+   "narr": {
+    "ko": "무는 웃지 않았습니다. 꼬리가 대신했습니다.",
+    "en": "Mu did not smile. His tail did it for him.",
+    "ja": "ムは笑いませんでした。しっぽが代わりに。",
+    "es": "Mu no sonrió. Su cola lo hizo por él."
+   }
+  },
+  {
+   "id": "c19",
+   "sec": 2.4,
+   "img": "c19.jpg",
+   "cam": {
+    "from": [
+     0.3,
+     0.4,
+     1.3
+    ],
+    "to": [
+     0.55,
+     0.62,
+     1.5
+    ]
+   },
+   "action": "냄새에 북극곰이 눈을 뜨고 이글루 문을 스스로 열어 생선을 내민다",
+   "cast": [
+    "mu"
+   ],
+   "residents": [
+    "polar_fridge"
+   ],
+   "narr": {
+    "ko": "냉장고도 스스로 열렸습니다.",
+    "en": "Even the fridge opened by itself.",
+    "ja": "冷蔵庫も、自分から開きました。",
+    "es": "Hasta la nevera se abrió sola."
+   }
+  },
+  {
+   "id": "c20",
+   "sec": 2.2,
+   "img": "c20.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.25,
+     1.3
+    ],
+    "to": [
+     0.4,
+     0.8,
+     1.4
+    ]
+   },
+   "action": "밤. 접시가 탑처럼 쌓였고 셋이 바닥에 대자로 뻗었다",
+   "cast": [
+    "mochi",
+    "kong",
+    "mu"
+   ]
+  },
+  {
+   "id": "c21",
+   "sec": 2.6,
+   "img": "c21.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.0
+    ],
+    "to": [
+     0.5,
+     0.6,
+     1.4
+    ]
+   },
+   "action": "무가 말없이 종이에 싼 생선 꼬치 두 개를 내민다",
+   "cast": [
+    "mochi",
+    "kong",
+    "mu"
+   ],
+   "narr": {
+    "ko": "무는 말이 없습니다. 대신 생선을 쌌습니다.",
+    "en": "Mu doesn't talk. He wrapped fish instead.",
+    "ja": "ムは何も言いません。代わりに魚を包みました。",
+    "es": "Mu no habla. En su lugar, envolvió pescado."
+   }
+  },
+  {
+   "id": "c22",
+   "sec": 2.4,
+   "img": "c22.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.55,
+     1.1
+    ],
+    "to": [
+     0.58,
+     0.68,
+     1.7
+    ]
+   },
+   "action": "콩이 소포의 발자국 도장을 보여 주고 어깨를 으쓱한다. 모찌는 자기 발을 대 본다",
+   "cast": [
+    "mochi",
+    "kong",
+    "mu"
+   ],
+   "narr": {
+    "ko": "콩이 물었습니다. 이 택배, 어디로 가나요.",
+    "en": "Kong asked: where does this parcel go?",
+    "ja": "コンが聞きました。この荷物、どこへ？",
+    "es": "Kong preguntó: ¿a dónde va este paquete?"
+   }
+  },
+  {
+   "id": "c23",
+   "sec": 2.2,
+   "img": "c23.jpg",
+   "cam": {
+    "from": [
+     0.4,
+     0.75,
+     1.4
+    ],
+    "to": [
+     0.72,
+     0.3,
+     1.4
+    ]
+   },
+   "action": "무가 국자로 벽을 가리킨다. 벽에 붙은 그림 포스터",
+   "cast": [
+    "mochi",
+    "kong",
+    "mu"
+   ]
+  },
+  {
+   "id": "c24",
+   "sec": 3.0,
+   "img": "c24.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.15,
+     1.6
+    ],
+    "to": [
+     0.5,
+     0.85,
+     1.6
+    ]
+   },
+   "action": "포스터 확대(그림만): 눈송이 기차 → 등대 바닷가 → 배 → 빙산과 펭귄. 아래에 해 세 개와 배 한 척",
+   "cast": [],
+   "narr": {
+    "ko": "기차, 등대, 배, 그리고 빙산. 마지막 배는 해가 세 번 뜬 뒤.",
+    "en": "Train, lighthouse, ship, iceberg. The last ship leaves after three sunrises.",
+    "ja": "汽車、灯台、船、そして氷山。最後の船は、日が三回のぼったあと。",
+    "es": "Tren, faro, barco, iceberg. El último barco sale tras tres amaneceres."
+   }
+  },
+  {
+   "id": "c25",
+   "sec": 2.6,
+   "img": "c25.jpg",
+   "cam": {
+    "from": [
+     0.6,
+     0.25,
+     1.4
+    ],
+    "to": [
+     0.4,
+     0.72,
+     1.4
+    ]
+   },
+   "action": "모찌와 콩이 해를 하나씩 세다가 눈이 커진다. 배낭 속 조약돌이 환해진다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "narr": {
+    "ko": "사흘. 길치 하나와 지각 택배원 하나.",
+    "en": "Three days. One lost penguin, one late courier.",
+    "ja": "三日。迷子がひとりと、遅刻の配達員がひとり。",
+    "es": "Tres días. Un pingüino perdido y un repartidor impuntual."
+   }
+  },
+  {
+   "id": "c26",
+   "sec": 4.0,
+   "img": "c26.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.0
+    ],
+    "to": [
+     0.5,
+     0.4,
+     1.2
+    ]
+   },
+   "action": "(영상) 언덕 위 역에서 눈송이 기차가 김을 뿜으며 움직인다. 모찌와 콩이 달려 올라가고 무는 문간에서 국자를 한 번 든다",
+   "cast": [
+    "mochi",
+    "kong",
+    "mu"
+   ],
+   "emotes": [
+    {
+     "t": 2.4,
+     "kind": "!",
+     "at": [
+      0.6,
+      0.47
+     ],
+     "size": 120
+    }
+   ],
+   "video": "c26.mp4",
+   "beat": "클리프",
+   "narr": {
+    "ko": "기차는 기다려 주지 않습니다. (다음 화에 계속)",
+    "en": "Trains don't wait. (To be continued)",
+    "ja": "汽車は待ってくれません。（つづく）",
+    "es": "Los trenes no esperan. (Continuará)"
+   }
+  }
+ ]
+}

@@ -160,7 +160,9 @@
    "human": "냉장고",
    "animal": "북극곰 이글루 냉장고",
    "gag": "안고 있어서 꺼내기 힘듦",
-   "used": []
+   "used": [
+    "s1e04"
+   ]
   },
   {
    "id": "rooster_alarm",

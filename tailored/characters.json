@@ -111,7 +111,7 @@
   "name": "무",
   "species": "고양이",
   "role": "셰프 · 시즌 3 주인공",
-  "status": "초안",
+  "status": "확정",
   "color": {
    "name": "민트",
    "hex": "#9ED9C3"
@@ -119,8 +119,10 @@
   "item": "나무 국자 + 민트색 앞치마",
   "personality": "무뚝뚝, 요리엔 진심",
   "habit": "국자로 박자를 맞춘다",
-  "look": "chubby cream-colored cat with half-closed stoic eyes, wearing a mint-green apron, holding a wooden ladle",
-  "ref": {},
+  "look": "chubby cream-colored cat chef with a jar-shaped round body, plain cream fur with no patches, half-closed stoic sleepy eyes, tiny flat mouth, wearing a mint-green bib apron tied in a bow at the back, holding a wooden ladle",
+  "ref": {
+   "turnaround": "add71c94-1a9c-4a6d-93b5-2150a3c10bde"
+  },
   "height": 1.7,
   "size_class": "어른 시민",
   "size_prompt": "Mu the cat is an adult citizen, about 1.7 times Mochi's height",
@@ -129,12 +131,16 @@
   "first_ep": "s1e04",
   "home": "골목 식당가의 손님 0명 식당",
   "job": "셰프",
-  "relations": {},
+  "relations": {
+   "mochi": "4화에서 생선 고르는 조수로 채용",
+   "kong": "볼주머니 금지"
+  },
   "never": [
    "웃는 얼굴 남발(무뚝뚝이 기본)",
    "앞치마 없는 컷",
    "출근길 고양이 엑스트라와 같은 삼색 무늬"
-  ]
+  ],
+  "note": "눈이 번쩍 뜨이는 것은 4화 13컷 한 번뿐. 기준 그림은 앞·옆·뒤 + 모찌와 키 비교 한 장(2026-11-23)."
  },
  "raccoon": {
   "name": "검표원 너구리",
