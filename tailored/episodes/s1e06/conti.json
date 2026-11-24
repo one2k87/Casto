@@ -1,0 +1,864 @@
+{
+ "episode": "s1e06",
+ "season": "s1",
+ "title": {
+  "ko": "등대지기는 칼퇴근",
+  "en": "The Lighthouse Keeper Clocks Out",
+  "ja": "灯台守は定時で帰る",
+  "es": "El farero sale a su hora"
+ },
+ "upload_title": "등대지기는 칼퇴근 💡 | The Lighthouse Clocks Out · Tailored EP6",
+ "logline": "검표원의 환승 구멍 덕에 맞는 기차로 갈아탄 모찌와 콩은 해 질 녘 바닷가 항구에 닿는다. 배는 밤에 등대 불빛을 따라 들어온다. 기다리던 둘은 바위틈에 집게가 낀 아기 게를 구해 가족에게 데려다주고 소라 껍데기를 선물로 받는다. 그런데 그 사이 등대지기 반딧불이가 정시에 퇴근해 등대가 꺼지고, 배는 항구를 찾지 못한 채 돌아선다.",
+ "inventions": [
+  "firefly_lamp",
+  "bird_navi"
+ ],
+ "audio": "로파이 배경음만",
+ "experiment": {
+  "variable": "게시 직전 확정 — 앞 편 수치를 본 뒤(미리 만든 편이라 제목·올리는 시각·첫 3초 순서만 바꿀 수 있음)",
+  "same": "길이 약 70초·콜드 오픈·로파이·자막 4개 언어·마지막 컷 영상"
+ },
+ "model": "gpt_image_2_5 low 1k (장당 0.25) — 기준 그림 2장(아기 게·반딧불이) + 새 그림 26장, 다시 그리기 0장 + 롱폼 가로 사이 컷 8장(1장은 생성 실패 뒤 다시 요청). 엔딩 영상 grok_video_v15_lite 720p 4초.",
+ "bgm": {
+  "name": "s1e06_lighthouse",
+  "sec": 72,
+  "vol": 0.75,
+  "prompt": "Cozy lofi hip hop instrumental for a cute wordless animal cartoon by the sea at sunset: warm Rhodes chords, soft nylon guitar, mellow upright bass, light brushed drums at 78 BPM, a small glockenspiel melody, soft vinyl crackle, calm and golden at first, a little tense and busy in the middle, tender and warm around two thirds, then growing quiet and lonely and ending on a single unresolved note in the last 10 seconds, no vocals, no sudden loud changes"
+ },
+ "refs": {
+  "crab_sheet": "9337e366-97ba-4706-ae97-59b2373fdeb1",
+  "firefly_sheet": "3c9c1896-168c-4bfd-bb96-373add0528c0",
+  "c01": "142017ae-e76e-4f15-a28e-359c9923e237",
+  "c02": "fcbe6218-6c37-4f8c-b31d-3b59e45815a7",
+  "c03": "aee17343-d356-4feb-bcaf-cd2e430df7ec",
+  "c04": "7666d9fc-7f0d-49a9-88f0-875c5d0bfb1d",
+  "c05": "e164fd11-bc94-4bbd-8251-906c2aea2150",
+  "c06": "afb652c4-462c-444a-a377-618692b3b8a7",
+  "c08": "499cd2c3-3b79-4fb6-9dd2-3fc430908c9f",
+  "c12": "834176d5-c27f-4195-93b5-d4fea9b7adb6",
+  "c15": "30ef8821-9ccc-4121-806c-ca72fe52bd8d",
+  "c16": "10351937-7854-4429-b186-70e134ef2e63",
+  "c18": "ff3de0f6-946a-4637-85b7-82b0a1a09c99",
+  "c22": "ecae96a5-92cf-49bd-bf6d-63cbb8f20213",
+  "c23": "41a069f4-e5b2-4ba2-b335-9c5e9a085fcd",
+  "c25": "a40f41b7-5f32-48ec-b7c4-cd12f0f3e692",
+  "c26": "d814e214-3005-44dd-867c-a94ba225b50d",
+  "c26_video": "cfb5c1ee-7202-430a-97e6-967256c4b623"
+ },
+ "module_versions": {
+  "story": "1.0",
+  "conti": "1.1",
+  "art": "1.1",
+  "music": "1.0",
+  "render": "1.0",
+  "publish": "1.0"
+ },
+ "cuts": [
+  {
+   "id": "c00",
+   "sec": 2.6,
+   "img": "c22.jpg",
+   "cam": {
+    "from": [
+     0.3,
+     0.35,
+     1.9
+    ],
+    "to": [
+     0.4,
+     0.4,
+     1.2
+    ]
+   },
+   "action": "(콜드 오픈) 등대 꼭대기. 반딧불이가 회중시계를 보더니 꽁무니 불을 딸깍 끈다",
+   "cast": [
+    "firefly"
+   ],
+   "fx": [
+    "pop"
+   ],
+   "beat": "훅",
+   "narr": {
+    "ko": "이 등대는 반딧불이가 켭니다. 그리고 정시에 끕니다.",
+    "en": "A firefly lights this lighthouse. And switches it off right on time.",
+    "ja": "この灯台はホタルがともします。そして定時に消します。",
+    "es": "Una luciérnaga enciende este faro. Y lo apaga a su hora en punto."
+   }
+  },
+  {
+   "id": "c01",
+   "sec": 2.8,
+   "img": "c01.jpg",
+   "cam": {
+    "from": [
+     0.45,
+     0.45,
+     1.5
+    ],
+    "to": [
+     0.72,
+     0.3,
+     1.4
+    ]
+   },
+   "action": "눈 산 간이역. 검표원이 소포에 구멍을 하나 더 뚫어 주고 건너편 기차를 가리킨다",
+   "cast": [
+    "mochi",
+    "kong",
+    "raccoon"
+   ],
+   "flash": true,
+   "narr": {
+    "ko": "기차는 반대로 왔습니다. 검표원이 구멍을 하나 더 뚫어 줬습니다. 환승입니다.",
+    "en": "They rode the wrong way. The conductor punched one more hole. That makes it a transfer.",
+    "ja": "汽車は反対に来ていました。車掌が穴をもう一つあけてくれました。乗りかえです。",
+    "es": "Iban en sentido contrario. El revisor hizo un agujero más. Eso es un transbordo."
+   }
+  },
+  {
+   "id": "c02",
+   "sec": 2.6,
+   "img": "c02.jpg",
+   "cam": {
+    "from": [
+     0.3,
+     0.4,
+     1.4
+    ],
+    "to": [
+     0.6,
+     0.15,
+     1.6
+    ]
+   },
+   "action": "반대 방향 기차의 창가. 바다가 보인다. 천장의 철새 내비가 앞을 가리키며 흡족해한다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "residents": [
+    "goose_navi"
+   ],
+   "narr": {
+    "ko": "이번에는 맞는 방향입니다. 철새도 드디어 앞을 가리킵니다.",
+    "en": "This time it's the right way. Even the bird finally points forward.",
+    "ja": "今度は正しい方向です。鳥もやっと前を指しました。",
+    "es": "Esta vez es la dirección correcta. Hasta el pájaro señala por fin hacia delante."
+   }
+  },
+  {
+   "id": "c03",
+   "sec": 2.6,
+   "img": "c03.jpg",
+   "cam": {
+    "from": [
+     0.7,
+     0.25,
+     1.4
+    ],
+    "to": [
+     0.5,
+     0.62,
+     1.3
+    ]
+   },
+   "action": "해 질 녘 바닷가 역. 둘이 내린다. 주황빛 하늘, 갈매기, 고깃배, 언덕 위 등대",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "residents": [
+    "seagulls"
+   ],
+   "narr": {
+    "ko": "해 질 녘 바닷가 역. 남쪽 끝으로 가는 배가 들어오는 항구입니다.",
+    "en": "A seaside station at sunset. The boat to the far south comes into this harbor.",
+    "ja": "夕暮れの海辺の駅。南の果てへ行く船が入る港です。",
+    "es": "Una estación junto al mar al atardecer. A este puerto llega el barco hacia el extremo sur."
+   }
+  },
+  {
+   "id": "c04",
+   "sec": 2.4,
+   "img": "c04.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.6,
+     1.2
+    ],
+    "to": [
+     0.25,
+     0.32,
+     1.7
+    ]
+   },
+   "action": "부두의 그림 표지판: 달과 별 아래 배가 등대 빛줄기를 따라 들어온다. 콩이 손가락으로 따라가며 읽는다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "residents": [
+    "seagulls"
+   ],
+   "narr": {
+    "ko": "배는 밤에 옵니다. 등대 불빛을 따라서.",
+    "en": "The boat comes at night. It follows the lighthouse beam.",
+    "ja": "船は夜に来ます。灯台の光をたよりに。",
+    "es": "El barco llega de noche. Sigue la luz del faro."
+   }
+  },
+  {
+   "id": "c05",
+   "sec": 2.8,
+   "img": "c05.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.7,
+     1.2
+    ],
+    "to": [
+     0.25,
+     0.38,
+     1.8
+    ]
+   },
+   "action": "언덕 위 등대. 꼭대기 방에서 반딧불이가 꽁무니 빛으로 바다를 비추며 근무 중",
+   "cast": [
+    "firefly"
+   ],
+   "invention": "firefly_lamp",
+   "narr": {
+    "ko": "등대지기는 반딧불이입니다. 작은 꽁무니 불빛을 렌즈가 키워 줍니다.",
+    "en": "The keeper is a firefly. The lens turns his tiny glow into a beam.",
+    "ja": "灯台守はホタルです。小さなおしりの光をレンズが大きくします。",
+    "es": "El farero es una luciérnaga. La lente convierte su lucecita en un gran haz."
+   }
+  },
+  {
+   "id": "c06",
+   "sec": 2.4,
+   "img": "c06.jpg",
+   "cam": {
+    "from": [
+     0.75,
+     0.3,
+     1.3
+    ],
+    "to": [
+     0.5,
+     0.6,
+     1.5
+    ]
+   },
+   "action": "부두 끝에 나란히 앉아 기다리는 둘. 마지막 생선 꼬치를 반씩 나눈다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "narr": {
+    "ko": "이제 기다리면 됩니다. 마지막 생선 꼬치는 반씩.",
+    "en": "Now they only have to wait. The last fish skewer, half each.",
+    "ja": "あとは待つだけです。最後の魚の串は半分こ。",
+    "es": "Ahora solo queda esperar. La última brocheta, a medias."
+   }
+  },
+  {
+   "id": "c07",
+   "sec": 2.6,
+   "img": "c07.jpg",
+   "cam": {
+    "from": [
+     0.4,
+     0.65,
+     1.4
+    ],
+    "to": [
+     0.55,
+     0.36,
+     1.9
+    ]
+   },
+   "action": "모찌가 고개를 돌린다. 저쪽 바위에서 작은 집게 하나가 흔들린다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "beat": "방해",
+   "narr": {
+    "ko": "그런데 저쪽 바위에서 누가 손을 흔듭니다. 인사가 아닙니다.",
+    "en": "But someone is waving from the rocks. It is not a hello.",
+    "ja": "でも、あちらの岩でだれかが手を振っています。あいさつではありません。",
+    "es": "Pero alguien agita la mano entre las rocas. No es un saludo."
+   }
+  },
+  {
+   "id": "c08",
+   "sec": 2.6,
+   "img": "c08.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.0
+    ],
+    "to": [
+     0.5,
+     0.78,
+     1.5
+    ]
+   },
+   "action": "바위틈에 집게가 낀 아기 게. 눈물이 그렁그렁. 밀물이 발목까지 찼다",
+   "cast": [
+    "crab"
+   ],
+   "narr": {
+    "ko": "아기 게의 집게가 바위틈에 끼었습니다. 물이 들어오고 있습니다.",
+    "en": "A baby crab's claw is stuck in the rocks. The tide is coming in.",
+    "ja": "子ガニのはさみが岩にはさまっています。潮が満ちてきます。",
+    "es": "La pinza de un cangrejito está atrapada entre las rocas. La marea está subiendo."
+   }
+  },
+  {
+   "id": "c09",
+   "sec": 2.2,
+   "img": "c09.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.4,
+     1.1
+    ],
+    "to": [
+     0.4,
+     0.75,
+     1.4
+    ]
+   },
+   "action": "달려가던 모찌가 젖은 바위에서 미끄러지고 콩이 배낭을 붙잡는다",
+   "cast": [
+    "mochi",
+    "kong",
+    "crab"
+   ],
+   "shake": {
+    "t": 0.1,
+    "dur": 0.5,
+    "amp": 10
+   },
+   "narr": {
+    "ko": "구조대가 출동합니다. 바위가 미끄럽습니다.",
+    "en": "The rescue team sets out. The rocks are slippery.",
+    "ja": "救助隊が出動します。岩はすべります。",
+    "es": "Sale el equipo de rescate. Las rocas resbalan."
+   }
+  },
+  {
+   "id": "c10",
+   "sec": 2.4,
+   "img": "c10.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.7,
+     1.1
+    ],
+    "to": [
+     0.45,
+     0.75,
+     1.6
+    ]
+   },
+   "action": "모찌가 집게를 잡아당긴다. 안 빠진다. 게는 옆으로만 버둥거린다",
+   "cast": [
+    "mochi",
+    "kong",
+    "crab"
+   ],
+   "fx": [
+    "bob"
+   ],
+   "narr": {
+    "ko": "당겨도 안 빠집니다. 게는 옆으로만 힘을 줍니다.",
+    "en": "Pulling doesn't work. The crab only pushes sideways.",
+    "ja": "引っぱっても抜けません。カニは横にしか力を入れません。",
+    "es": "Tirar no sirve. El cangrejo solo empuja de lado."
+   }
+  },
+  {
+   "id": "c11",
+   "sec": 2.6,
+   "img": "c11.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.2,
+     1.3
+    ],
+    "to": [
+     0.5,
+     0.75,
+     1.3
+    ]
+   },
+   "action": "물이 배까지 차오른다. 수평선에서 먹구름이 몰려온다",
+   "cast": [
+    "mochi",
+    "kong",
+    "crab"
+   ],
+   "narr": {
+    "ko": "물은 차오르고 먹구름이 몰려옵니다. 배가 올 시간도 다가옵니다.",
+    "en": "The water rises and storm clouds roll in. The boat's hour is getting close.",
+    "ja": "水は上がり、黒い雲が来ます。船の時間も近づいています。",
+    "es": "El agua sube y llegan nubes de tormenta. Se acerca la hora del barco."
+   }
+  },
+  {
+   "id": "c12",
+   "sec": 2.6,
+   "img": "c12.jpg",
+   "cam": {
+    "from": [
+     0.3,
+     0.2,
+     1.2
+    ],
+    "to": [
+     0.35,
+     0.55,
+     1.5
+    ]
+   },
+   "action": "둘이 바위를 미는 순간 큰 파도가 덮친다. 셋이 휩쓸리며 집게가 빠진다",
+   "cast": [
+    "mochi",
+    "kong",
+    "crab"
+   ],
+   "shake": {
+    "t": 0.1,
+    "dur": 1.0,
+    "amp": 12
+   },
+   "beat": "전환",
+   "narr": {
+    "ko": "하나, 둘, 셋에 밀었는데 파도가 먼저 밀었습니다. 빠졌습니다.",
+    "en": "They pushed on three, but the wave pushed first. The claw is free.",
+    "ja": "いち、に、さんで押したら、波が先に押しました。抜けました。",
+    "es": "Empujaron a la de tres, pero la ola empujó antes. La pinza quedó libre."
+   }
+  },
+  {
+   "id": "c13",
+   "sec": 2.8,
+   "img": "c13.jpg",
+   "cam": {
+    "from": [
+     0.35,
+     0.5,
+     1.4
+    ],
+    "to": [
+     0.75,
+     0.55,
+     1.4
+    ]
+   },
+   "action": "고맙다고 다가오려는 게와 모찌가 자꾸 엇갈린다",
+   "cast": [
+    "mochi",
+    "crab"
+   ],
+   "narr": {
+    "ko": "고맙다고 안아 주려는데 자꾸 엇갈립니다. 게는 옆으로만 갑니다.",
+    "en": "They go in for a thank-you hug and keep missing. Crabs only walk sideways.",
+    "ja": "お礼に抱きつこうとして、すれ違ってばかり。カニは横にしか歩けません。",
+    "es": "Quieren abrazarse y no dejan de cruzarse. Los cangrejos solo andan de lado."
+   }
+  },
+  {
+   "id": "c14",
+   "sec": 2.4,
+   "img": "c14.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.65,
+     1.2
+    ],
+    "to": [
+     0.4,
+     0.45,
+     1.7
+    ]
+   },
+   "action": "모찌가 게를 태운다. 게가 집게로 방향을 가리킨다",
+   "cast": [
+    "mochi",
+    "kong",
+    "crab"
+   ],
+   "fx": [
+    "pop"
+   ],
+   "narr": {
+    "ko": "그래서 태웠습니다. 길은 집게가 압니다.",
+    "en": "So Mochi gave him a ride. The claw knows the way.",
+    "ja": "だから乗せました。道ははさみが知っています。",
+    "es": "Así que lo subió a cuestas. La pinza conoce el camino."
+   }
+  },
+  {
+   "id": "c15",
+   "sec": 2.6,
+   "img": "c15.jpg",
+   "cam": {
+    "from": [
+     0.7,
+     0.4,
+     1.2
+    ],
+    "to": [
+     0.4,
+     0.72,
+     1.5
+    ]
+   },
+   "action": "먹구름과 파도 사이 바위길을 건너는 셋. 배낭 속 조약돌이 길을 밝힌다",
+   "cast": [
+    "mochi",
+    "kong",
+    "crab"
+   ],
+   "narr": {
+    "ko": "날은 어두워지고 파도는 높습니다. 조약돌이 발밑을 비춥니다.",
+    "en": "It is getting dark and the waves are high. The pebble lights their steps.",
+    "ja": "暗くなり、波は高いです。小石が足もとを照らします。",
+    "es": "Oscurece y las olas son altas. La piedrecita alumbra sus pasos."
+   }
+  },
+  {
+   "id": "c16",
+   "sec": 2.4,
+   "img": "c16.jpg",
+   "cam": {
+    "from": [
+     0.4,
+     0.45,
+     1.4
+    ],
+    "to": [
+     0.5,
+     0.68,
+     1.3
+    ]
+   },
+   "action": "바위 굴 앞의 게 가족. 어미 게와 형제들이 집게로 박수를 친다",
+   "cast": [
+    "mochi",
+    "kong",
+    "crab"
+   ],
+   "residents": [
+    "crab_family"
+   ],
+   "narr": {
+    "ko": "게 가족입니다. 박수는 집게로 칩니다.",
+    "en": "The crab family. They clap with their claws.",
+    "ja": "カニの家族です。拍手ははさみでします。",
+    "es": "La familia cangrejo. Aplauden con las pinzas."
+   }
+  },
+  {
+   "id": "c17",
+   "sec": 2.8,
+   "img": "c17.jpg",
+   "cam": {
+    "from": [
+     0.3,
+     0.45,
+     1.5
+    ],
+    "to": [
+     0.75,
+     0.72,
+     1.6
+    ]
+   },
+   "action": "어미 게가 아기 게를 꼭 안는다. 그 모습을 보는 모찌의 조약돌이 따뜻하게 빛난다",
+   "cast": [
+    "mochi",
+    "crab"
+   ],
+   "residents": [
+    "crab_family"
+   ],
+   "beat": "감정",
+   "narr": {
+    "ko": "모찌는 한참 바라봤습니다. 배낭 속 조약돌이 따뜻해졌습니다.",
+    "en": "Mochi watched for a long while. The pebble in his backpack grew warm.",
+    "ja": "モチはしばらく見ていました。リュックの小石が温かくなりました。",
+    "es": "Mochi se quedó mirando un buen rato. La piedrecita de su mochila se entibió."
+   }
+  },
+  {
+   "id": "c18",
+   "sec": 2.6,
+   "img": "c18.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.6,
+     1.1
+    ],
+    "to": [
+     0.4,
+     0.6,
+     1.6
+    ]
+   },
+   "action": "게 가족이 소라 껍데기 하나를 선물로 내민다. 콩이 두 손으로 받는다",
+   "cast": [
+    "mochi",
+    "kong",
+    "crab"
+   ],
+   "residents": [
+    "crab_family"
+   ],
+   "narr": {
+    "ko": "선물은 소라 껍데기입니다. 어디에 쓰는지는 아직 모릅니다.",
+    "en": "The gift is a conch shell. What it is for, nobody knows yet.",
+    "ja": "おみやげは巻き貝です。何に使うかは、まだわかりません。",
+    "es": "El regalo es una caracola. Para qué sirve, aún no se sabe."
+   }
+  },
+  {
+   "id": "c19",
+   "sec": 2.6,
+   "img": "c19.jpg",
+   "cam": {
+    "from": [
+     0.4,
+     0.65,
+     1.3
+    ],
+    "to": [
+     0.5,
+     0.2,
+     1.6
+    ]
+   },
+   "action": "돌아온 부두. 하늘은 깜깜하고 수평선에 배 불빛 하나가 나타난다. 둘이 폴짝 뛴다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "narr": {
+    "ko": "돌아와 보니 수평선에 불빛 하나. 배가 오고 있습니다.",
+    "en": "Back at the pier, one light on the horizon. The boat is coming.",
+    "ja": "もどってみると、水平線に明かりが一つ。船が来ます。",
+    "es": "De vuelta en el muelle, una luz en el horizonte. El barco viene."
+   }
+  },
+  {
+   "id": "c20",
+   "sec": 2.6,
+   "img": "c20.jpg",
+   "cam": {
+    "from": [
+     0.7,
+     0.65,
+     1.5
+    ],
+    "to": [
+     0.5,
+     0.4,
+     1.6
+    ]
+   },
+   "action": "등대 꼭대기. 회중시계 바늘이 달 그림에 닿는다. 반딧불이가 하품한다",
+   "cast": [
+    "firefly"
+   ],
+   "narr": {
+    "ko": "같은 시각, 등대 꼭대기. 시곗바늘이 달에 닿았습니다.",
+    "en": "Meanwhile, at the top of the lighthouse. The watch hand has reached the moon.",
+    "ja": "そのころ、灯台のてっぺん。時計の針が月に届きました。",
+    "es": "Mientras tanto, en lo alto del faro. La aguja del reloj ha llegado a la luna."
+   }
+  },
+  {
+   "id": "c21",
+   "sec": 2.6,
+   "img": "c21.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.0
+    ],
+    "to": [
+     0.4,
+     0.45,
+     1.6
+    ]
+   },
+   "action": "반딧불이가 근무 일지를 덮고 도시락을 가방에 넣는다",
+   "cast": [
+    "firefly"
+   ],
+   "narr": {
+    "ko": "등대지기는 일지를 덮고 가방을 쌉니다. 퇴근 시간입니다.",
+    "en": "The keeper closes his logbook and packs his bag. Time to go home.",
+    "ja": "灯台守は日誌を閉じてかばんをしまいます。退勤時間です。",
+    "es": "El farero cierra su cuaderno y recoge su bolsa. Hora de irse a casa."
+   }
+  },
+  {
+   "id": "c22",
+   "sec": 2.0,
+   "img": "c22.jpg",
+   "cam": {
+    "from": [
+     0.4,
+     0.4,
+     1.2
+    ],
+    "to": [
+     0.25,
+     0.35,
+     1.9
+    ]
+   },
+   "action": "꽁무니 불이 딸깍 꺼진다. 등대가 깜깜해진다",
+   "cast": [
+    "firefly"
+   ],
+   "beat": "사고",
+   "narr": {
+    "ko": "딸깍.",
+    "en": "Click.",
+    "ja": "カチ。",
+    "es": "Clic."
+   }
+  },
+  {
+   "id": "c23",
+   "sec": 2.6,
+   "img": "c23.jpg",
+   "cam": {
+    "from": [
+     0.75,
+     0.3,
+     1.5
+    ],
+    "to": [
+     0.5,
+     0.72,
+     1.4
+    ]
+   },
+   "action": "부두. 얼굴을 비추던 빛이 사라지고 둘이 등대를 올려다본다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "narr": {
+    "ko": "등대가 꺼졌습니다. 배는 아직 바다에 있는데.",
+    "en": "The lighthouse went dark. And the boat is still out at sea.",
+    "ja": "灯台が消えました。船はまだ海の上なのに。",
+    "es": "El faro se apagó. Y el barco sigue en el mar."
+   }
+  },
+  {
+   "id": "c24",
+   "sec": 2.8,
+   "img": "c24.jpg",
+   "cam": {
+    "from": [
+     0.4,
+     0.6,
+     1.3
+    ],
+    "to": [
+     0.85,
+     0.42,
+     1.7
+    ]
+   },
+   "action": "반딧불이가 콧노래를 부르며 둘 옆을 지나 퇴근한다. 둘이 팔을 뻗지만 닿지 않는다",
+   "cast": [
+    "mochi",
+    "kong",
+    "firefly"
+   ],
+   "narr": {
+    "ko": "나쁜 뜻은 없습니다. 정시 퇴근이 원칙일 뿐입니다.",
+    "en": "He means no harm. Leaving on time is simply his rule.",
+    "ja": "悪気はありません。定時で帰るのが決まりなだけです。",
+    "es": "No tiene mala intención. Salir a su hora es, sencillamente, su norma."
+   }
+  },
+  {
+   "id": "c25",
+   "sec": 2.6,
+   "img": "c25.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.7,
+     1.2
+    ],
+    "to": [
+     0.4,
+     0.45,
+     1.7
+    ]
+   },
+   "action": "모찌가 조약돌을 머리 위로 높이 든다. 콩은 모자를 흔든다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "narr": {
+    "ko": "모찌가 조약돌을 들었습니다. 가진 불빛은 이것뿐입니다.",
+    "en": "Mochi lifts his pebble. It is the only light they have.",
+    "ja": "モチが小石をかかげました。持っている明かりはこれだけです。",
+    "es": "Mochi levanta su piedrecita. Es la única luz que tienen."
+   }
+  },
+  {
+   "id": "c26",
+   "sec": 4.0,
+   "img": "c26.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.0
+    ],
+    "to": [
+     0.5,
+     0.4,
+     1.15
+    ]
+   },
+   "action": "(영상) 먼바다의 배 불빛이 두리번거리다 천천히 돌아선다. 조약돌 빛은 너무 작다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "video": "c26.mp4",
+   "beat": "클리프",
+   "narr": {
+    "ko": "배는 항구를 찾지 못하고 돌아섭니다. 조약돌은 너무 작습니다. (다음 화에 계속)",
+    "en": "The boat cannot find the harbor and turns away. The pebble is too small. (To be continued)",
+    "ja": "船は港を見つけられず、引き返します。小石は小さすぎます。（つづく）",
+    "es": "El barco no encuentra el puerto y da la vuelta. La piedrecita es demasiado pequeña. (Continuará)"
+   }
+  }
+ ]
+}

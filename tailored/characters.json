@@ -181,31 +181,36 @@
  "crab": {
   "name": "아기 게",
   "species": "게",
-  "role": "바닷가 친구",
-  "status": "초안",
+  "role": "바닷가 친구(6화에서 구해 줌)",
+  "status": "확정",
   "color": {
    "name": "코랄",
    "hex": "#FF9E8A"
   },
   "item": "조개껍데기 모자",
-  "personality": "옆으로만 가는 낙천가",
+  "personality": "옆으로만 가는 낙천가, 잘 운다",
   "habit": "집게로 박수",
-  "look": "tiny round coral-colored baby crab, big sparkly eyes, wearing a seashell as a hat",
-  "ref": {},
+  "look": "tiny round coral-pink baby crab with a smooth round shell body, big sparkly glossy eyes, pink blush, two short stubby claws and tiny simple nub legs, wearing a small cream spiral seashell as a hat",
+  "ref": {
+   "turnaround": "9337e366-97ba-4706-ae97-59b2373fdeb1"
+  },
   "height": 0.4,
   "size_class": "꼬마",
   "size_prompt": "the baby crab is tiny, less than half of Mochi's height",
   "build": "동그란 등딱지, 짧은 집게 둘",
-  "item_rule": "a seashell worn as a hat, always on",
+  "item_rule": "a small cream spiral seashell worn as a hat, always on",
   "first_ep": "s1e06",
   "home": "바닷가 마을",
   "job": "없음(아기)",
-  "relations": {},
+  "relations": {
+   "mochi": "6화에서 바위틈에서 구해 줌",
+   "kong": "6화에서 함께 구해 줌"
+  },
   "never": [
    "사실적인 다리 마디",
    "조개 모자 없는 컷"
   ],
-  "note": "고유색이 엄마의 로즈와 가깝다 — 둘이 한 컷에 나올 일이 생기면 조정."
+  "note": "고유색이 엄마의 로즈와 가깝다 — 둘이 한 컷에 나올 일이 생기면 조정. 가족(어미 게·형제)은 엑스트라라 조개 모자를 쓰지 않는다."
  },
  "spider": {
   "name": "아기 거미",
@@ -240,33 +245,37 @@
  "firefly": {
   "name": "반딧불이",
   "species": "반딧불이",
-  "role": "가로등·등대 근무",
-  "status": "초안",
+  "role": "바닷가 등대지기",
+  "status": "확정",
   "color": {
-   "name": "레몬",
-   "hex": "#FFE98A"
+   "name": "연두빛 레몬",
+   "hex": "#E3F27A"
   },
-  "item": "경비 모자 + 회중시계",
-  "personality": "칼퇴근주의자",
+  "item": "남색 등대지기 모자 + 회중시계(작은 갈색 가방)",
+  "personality": "정시 퇴근이 원칙. 악의는 없다",
   "habit": "퇴근 시간이면 하품",
-  "look": "tiny round fluffy cream firefly, cute chibi, big eyes, blush, tiny round wings, glowing lemon-yellow bottom, little guard cap and pocket watch",
+  "look": "tiny round fluffy cream-colored firefly, cute chibi, big glossy eyes, pink blush, two tiny round translucent wings, round bottom glowing soft lemon-lime yellow-green, wearing a little navy-blue lighthouse keeper cap, carrying a tiny brass pocket watch on a chain",
   "ref": {
+   "turnaround": "3c9c1896-168c-4bfd-bb96-373add0528c0",
    "design": "1ac17ff1-ee7e-410e-b24d-172cca4f3e9d"
   },
   "height": 0.25,
   "size_class": "꼬마 벌레",
   "size_prompt": "the firefly is tiny, about a quarter of Mochi's height",
-  "build": "동그란 크림색 몸, 꽁무니가 레몬색으로 빛남",
-  "item_rule": "little guard cap and a pocket watch",
+  "build": "동그란 크림색 몸, 꽁무니가 연두빛 레몬색으로 빛남. 불을 끄면 꽁무니는 크림색",
+  "item_rule": "little navy-blue keeper cap always on; tiny brass pocket watch on a chain; small brown satchel",
   "first_ep": "s1e06",
   "home": "바닷가 등대",
   "job": "등대지기(퇴근하면 깜깜)",
-  "relations": {},
+  "relations": {
+   "mochi": "6화에서 스쳐 지나감(붙잡지 못함)",
+   "kong": "6화에서 스쳐 지나감"
+  },
   "never": [
    "사실적인 곤충 다리·더듬이",
    "모자 없는 컷"
   ],
-  "note": "고유색이 콩의 버터 옐로와 가깝다 — 6화 전에 연두빛 레몬(#E3F27A 안)으로 옮길지 정한다."
+  "note": "고유색을 레몬(#FFE98A)에서 연두빛 레몬(#E3F27A)으로 옮김 — 콩의 버터 옐로와 겹쳐서(사용자 판단 11/24, c-ep06-firefly). 등대에서는 큰 렌즈가 작은 꽁무니 빛을 빛줄기로 키운다."
  },
  "_required": [
   "name",
