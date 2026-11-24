@@ -1,5 +1,5 @@
 {
- "next": 169,
+ "next": 175,
  "items": {
   "1": {
    "name": "늘어나는 밀폐용기",
@@ -1567,6 +1567,58 @@
    "done": false,
    "search": "길이조절 수납정리함",
    "url": "https://www.coupang.com/np/search?q=%EA%B8%B8%EC%9D%B4%EC%A1%B0%EC%A0%88+%EC%88%98%EB%82%A9%EC%A0%95%EB%A6%AC%ED%95%A8"
+  },
+  "169": {
+   "name": "젓지 않아도 섞이는 컵",
+   "slug": "",
+   "key": "젓지않아도섞이는컵",
+   "done": false,
+   "search": "젓지 않아도 섞이는 컵",
+   "url": "https://www.coupang.com/np/search?q=%EC%A0%93%EC%A7%80+%EC%95%8A%EC%95%84%EB%8F%84+%EC%84%9E%EC%9D%B4%EB%8A%94+%EC%BB%B5"
+  },
+  "170": {
+   "name": "사과 씨 제거기",
+   "slug": "",
+   "key": "사과씨제거기",
+   "done": false,
+   "search": "사과 씨 제거기",
+   "url": "https://www.coupang.com/np/search?q=%EC%82%AC%EA%B3%BC+%EC%94%A8+%EC%A0%9C%EA%B1%B0%EA%B8%B0"
+  },
+  "171": {
+   "name": "음식 식혀주는 동물 선풍기",
+   "slug": "",
+   "key": "음식식혀주는동물선풍기",
+   "done": false,
+   "search": "음식 식혀주는 동물 선풍기",
+   "url": "https://www.coupang.com/np/search?q=%EC%9D%8C%EC%8B%9D+%EC%8B%9D%ED%98%80%EC%A3%BC%EB%8A%94+%EB%8F%99%EB%AC%BC+%EC%84%A0%ED%92%8D%EA%B8%B0"
+  },
+  "172": {
+   "name": "접이식 살림템",
+   "slug": "",
+   "key": "접이식살림템",
+   "done": false,
+   "search": "접이식 살림템",
+   "url": "https://www.coupang.com/np/search?q=%EC%A0%91%EC%9D%B4%EC%8B%9D+%EC%82%B4%EB%A6%BC%ED%85%9C",
+   "hold": true,
+   "note": "11번과 같은 물건으로 보임 — 11번으로 캡처"
+  },
+  "173": {
+   "name": "창문 결로 방지템",
+   "slug": "",
+   "key": "창문결로방지템",
+   "done": false,
+   "search": "창문 결로 방지템",
+   "url": "https://www.coupang.com/np/search?q=%EC%B0%BD%EB%AC%B8+%EA%B2%B0%EB%A1%9C+%EB%B0%A9%EC%A7%80%ED%85%9C"
+  },
+  "174": {
+   "name": "원룸 분리수거함",
+   "slug": "",
+   "key": "원룸분리수거함",
+   "done": false,
+   "search": "원룸 분리수거함",
+   "url": "https://www.coupang.com/np/search?q=%EC%9B%90%EB%A3%B8+%EB%B6%84%EB%A6%AC%EC%88%98%EA%B1%B0%ED%95%A8",
+   "hold": true,
+   "note": "157번과 같은 물건으로 보임 — 157번으로 캡처"
   }
  }
 }
