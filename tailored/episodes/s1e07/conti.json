@@ -1,0 +1,915 @@
+{
+ "episode": "s1e07",
+ "season": "s1",
+ "title": {
+  "ko": "야근해 주세요",
+  "en": "Overtime, Please",
+  "ja": "残業おねがいします",
+  "es": "Horas extra, por favor"
+ },
+ "upload_title": "야근해 주세요 🐋 | Overtime, Please · Tailored EP7",
+ "logline": "등대가 꺼져 마지막 배를 놓친 밤, 콩이 볼에서 엽서 세 장을 꺼내 펠리컨 우체통에 맡긴다. 거북이 택배 트럭이 아주 천천히 무와 검표원을 싣고 오고, 게 가족도 옆걸음으로 모인다. 작전 하나, 자고 있는 등대지기 반딧불이를 생선 냄새로 깨우고 검표원이 야근 승인표에 구멍을 뚫어 준다. 반딧불이 동료들이 바다 위에 빛의 길을 만든다. 작전 둘, 게들의 집게 소리를 소라 껍데기로 키워 고래 소방선을 부른다. 둘은 고래 등에 올라 배를 쫓고 두 번째 해가 뜬다. 그런데 바다 한가운데 먹구름과 큰 파도가 빛의 길을 끊는다.",
+ "inventions": [
+  "pelican_mailbox",
+  "turtle_truck",
+  "firefly_lamp",
+  "whale_fireboat"
+ ],
+ "audio": "로파이 배경음만",
+ "experiment": {
+  "variable": "게시 직전 확정 — 앞 편 수치를 본 뒤(미리 만든 편이라 제목·올리는 시각·첫 3초 순서만 바꿀 수 있음)",
+  "same": "길이 약 70초·콜드 오픈·로파이·자막 4개 언어·마지막 컷 영상"
+ },
+ "model": "gpt_image_2_5 low 1k (장당 0.25) — 기준 그림 1장(고래 소방선) + 새 그림 26장, 다시 그리기 1장(21컷: 부두에 눈이 그려져서) + 롱폼 가로 사이 컷 8장. 엔딩 영상 grok_video_v15_lite 720p 4초. 합계 13.0크레딧.",
+ "bgm": {
+  "name": "s1e07_overtime",
+  "sec": 72,
+  "vol": 0.75,
+  "prompt": "Cozy lofi hip hop instrumental for a cute wordless animal cartoon at night by the sea: warm Rhodes chords, soft nylon guitar, mellow upright bass, light brushed drums at 80 BPM, a small glockenspiel melody, soft vinyl crackle, quiet and lonely for the first 8 seconds, then a hopeful melody enters as friends arrive, playful and busy in the middle like a tiny heist plan, sparkling and wide around two thirds as lights appear over the sea, proud and warm near the end, then darkening and ending on a single unresolved tense note in the last 8 seconds, no vocals, no sudden loud changes"
+ },
+ "refs": {
+  "whale_sheet": "acb371ae-ea10-42aa-b821-a50a51094de0",
+  "c01": "5216baab-4a80-49fe-a68c-6a0b788df314",
+  "c02": "457e6937-bcbb-45f1-91d0-3f51c5bf89ea",
+  "c03": "01c8fd09-5478-4416-b447-3a97d8f0078c",
+  "c04": "cbe7e50a-8647-4d94-9c97-e5fd1253171e",
+  "c05": "fb63d985-401c-4b6b-918a-7eb74ecf2872",
+  "c06": "fa263e6b-e770-4d02-8de6-49bcfbbdb6ed",
+  "c07": "849176af-1ecb-40e1-8da8-c6f01005c2c5",
+  "c08": "6edf947d-d96c-4436-ac38-5debd9c9c602",
+  "c09": "6cb209c1-516a-42b6-ba1e-665823127610",
+  "c10": "bb5c47c9-84c9-45fc-a85b-2dc63bd9449b",
+  "c11": "18969c8a-beb7-4506-b642-b7a2fe3db5c9",
+  "c12": "cf003b64-549e-49f5-8734-8a803f625804",
+  "c13": "89f02d12-9560-44f0-abea-4984c6c19a92",
+  "c14": "7c3ecb87-659e-48f3-8307-e96b348cd081",
+  "c15": "c9298e76-5dc0-444a-bd2f-fc83ce79a421",
+  "c16": "92b7456b-6a58-4ed4-9bbc-7d41fb2ee6a7",
+  "c17": "fa3ade78-1fc4-40f5-bfd8-9c0ef34a1979",
+  "c18": "2c396704-8896-4de2-857d-2413150ae28e",
+  "c19": "4a411fa6-f36d-47f2-894c-559bee199c8d",
+  "c20": "3d67a0f9-2362-4a06-add4-065b7ce05dae",
+  "c21": "ad727981-6684-4502-aff4-714577ee184d",
+  "c21_first_snowy": "a7f221e1-ed71-4d64-aa60-6d6e9ff1ed74",
+  "c22": "c3287252-6283-4b4a-881d-1ca895e67c9c",
+  "c23": "4bc6ba62-1223-4a24-89ef-c3830d8dd5be",
+  "c24": "f23eda52-429c-462f-9d25-4d86aa9146f5",
+  "c25": "629ff1f2-b4ac-49ca-a342-3cc5b5a21d1b",
+  "c26": "a4b1e13f-87ed-4f73-b6d5-caab860df49b",
+  "c26_video": "53b3a72d-3c7a-4935-a41e-8624ef29edb6"
+ },
+ "module_versions": {
+  "story": "1.0",
+  "conti": "1.1",
+  "art": "1.1",
+  "music": "1.0",
+  "render": "1.0",
+  "publish": "1.0"
+ },
+ "cuts": [
+  {
+   "id": "c00",
+   "sec": 2.6,
+   "img": "c20.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.78,
+     1.6
+    ],
+    "to": [
+     0.5,
+     0.4,
+     1.1
+    ]
+   },
+   "action": "(콜드 오픈) 밤 부두 끝. 빨간 소방 헬멧을 쓴 거대한 고래가 솟아오르고 물기둥이 하늘로 솟는다. 올려다보는 작은 둘",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "residents": [
+    "whale_fireboat"
+   ],
+   "fx": [
+    "pop"
+   ],
+   "shake": {
+    "t": 0.1,
+    "dur": 0.9,
+    "amp": 10
+   },
+   "beat": "훅",
+   "narr": {
+    "ko": "소방차를 불렀더니 고래가 왔습니다. 이 동네 소방차는 고래입니다.",
+    "en": "They called the fire engine. A whale came. Around here, the fire engine is a whale.",
+    "ja": "消防車を呼んだら、クジラが来ました。この町の消防車はクジラです。",
+    "es": "Llamaron a los bomberos. Vino una ballena. Aquí, el camión de bomberos es una ballena."
+   }
+  },
+  {
+   "id": "c01",
+   "sec": 2.8,
+   "img": "c01.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.3,
+     1.3
+    ],
+    "to": [
+     0.38,
+     0.62,
+     1.5
+    ]
+   },
+   "action": "밤의 부두. 꺼진 등대 아래 주저앉은 모찌. 손에 든 조약돌 빛이 약하다. 수평선은 텅 비었다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "narr": {
+    "ko": "등대는 꺼졌고 배는 돌아갔습니다. 조약돌 빛도 작아졌습니다.",
+    "en": "The lighthouse is dark and the boat is gone. Even the pebble has gone dim.",
+    "ja": "灯台は消え、船は帰ってしまいました。小石の光も小さくなりました。",
+    "es": "El faro está apagado y el barco se fue. Hasta la piedrecita brilla menos."
+   }
+  },
+  {
+   "id": "c02",
+   "sec": 2.6,
+   "img": "c02.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.6,
+     1.2
+    ],
+    "to": [
+     0.62,
+     0.58,
+     1.5
+    ]
+   },
+   "action": "콩이 모자를 고쳐 쓰고 볼에서 엽서 세 장을 꺼낸다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "fx": [
+    "pop"
+   ],
+   "narr": {
+    "ko": "콩이 모자를 고쳐 썼습니다. 볼에서 엽서 세 장이 나왔습니다.",
+    "en": "Kong fixes his cap. Three postcards come out of his cheek.",
+    "ja": "コンが帽子をかぶり直しました。ほっぺからはがきが三枚出てきました。",
+    "es": "Kong se ajusta la gorra. De su mejilla salen tres postales."
+   }
+  },
+  {
+   "id": "c03",
+   "sec": 2.6,
+   "img": "c03.jpg",
+   "cam": {
+    "from": [
+     0.62,
+     0.42,
+     1.5
+    ],
+    "to": [
+     0.6,
+     0.5,
+     1.4
+    ]
+   },
+   "action": "부두 기둥 위의 펠리컨 우체통. 콩이 엽서를 넣자 부리 주머니가 받는다. 주머니 안에 생선도 보인다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "residents": [
+    "pelican_post"
+   ],
+   "invention": "pelican_mailbox",
+   "narr": {
+    "ko": "펠리컨 우체통입니다. 편지는 생선 옆자리에 탑니다.",
+    "en": "This is the pelican mailbox. Letters ride next to the fish.",
+    "ja": "ペリカンのポストです。手紙は魚のとなりに乗ります。",
+    "es": "Este es el buzón pelícano. Las cartas viajan junto al pescado."
+   }
+  },
+  {
+   "id": "c04",
+   "sec": 2.0,
+   "img": "c04.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.75,
+     1.4
+    ],
+    "to": [
+     0.45,
+     0.3,
+     1.3
+    ]
+   },
+   "action": "펠리컨이 밤하늘로 날아오른다. 둘이 올려다본다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "residents": [
+    "pelican_post"
+   ],
+   "narr": {
+    "ko": "야간 배달이 출발했습니다.",
+    "en": "The night delivery takes off.",
+    "ja": "夜の配達が出発しました。",
+    "es": "Sale el reparto nocturno."
+   }
+  },
+  {
+   "id": "c05",
+   "sec": 2.6,
+   "img": "c05.jpg",
+   "cam": {
+    "from": [
+     0.62,
+     0.28,
+     1.4
+    ],
+    "to": [
+     0.58,
+     0.68,
+     1.4
+    ]
+   },
+   "action": "달이 하늘을 건너는 동안 둘이 등을 맞대고 앉아 기다린다. 모찌가 꾸벅 존다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "narr": {
+    "ko": "달이 하늘을 다 건너도록 기다렸습니다. 모찌는 조금 졸았습니다.",
+    "en": "They waited while the moon crossed the whole sky. Mochi dozed a little.",
+    "ja": "月が空を渡りきるまで待ちました。モチは少しうとうとしました。",
+    "es": "Esperaron mientras la luna cruzaba todo el cielo. Mochi se durmió un poquito."
+   }
+  },
+  {
+   "id": "c06",
+   "sec": 2.8,
+   "img": "c06.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.3,
+     1.2
+    ],
+    "to": [
+     0.55,
+     0.7,
+     1.5
+    ]
+   },
+   "action": "언덕길에 헤드라이트 두 개. 거북이 택배 트럭이 아주 천천히 온다. 갈매기가 걸어서 트럭을 앞지른다",
+   "cast": [],
+   "residents": [
+    "turtle_driver",
+    "seagulls"
+   ],
+   "invention": "turtle_truck",
+   "narr": {
+    "ko": "헤드라이트입니다. 거북이 택배 트럭은 걷는 갈매기보다 조금 느립니다.",
+    "en": "Headlights. The turtle truck is a little slower than a walking seagull.",
+    "ja": "ヘッドライトです。カメの宅配トラックは、歩くカモメより少し遅いです。",
+    "es": "Unos faros. El camión tortuga va un poco más lento que una gaviota a pie."
+   }
+  },
+  {
+   "id": "c07",
+   "sec": 2.6,
+   "img": "c07.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.4,
+     1.3
+    ],
+    "to": [
+     0.5,
+     0.6,
+     1.15
+    ]
+   },
+   "action": "짐칸 문이 열리고 셰프 무(생선 도시락)와 검표원 너구리(펀치)가 내린다. 모찌의 눈이 커진다",
+   "cast": [
+    "mochi",
+    "kong",
+    "mu",
+    "raccoon"
+   ],
+   "fx": [
+    "pop"
+   ],
+   "beat": "전환",
+   "narr": {
+    "ko": "짐칸에서 무와 검표원이 내렸습니다. 엽서를 받고 왔습니다.",
+    "en": "Mu and the conductor step out of the back. They got the postcards.",
+    "ja": "荷台からムと車掌が降りてきました。はがきを受け取って来たのです。",
+    "es": "De atrás bajan Mu y el revisor. Recibieron las postales."
+   }
+  },
+  {
+   "id": "c08",
+   "sec": 2.4,
+   "img": "c08.jpg",
+   "cam": {
+    "from": [
+     0.6,
+     0.75,
+     1.5
+    ],
+    "to": [
+     0.5,
+     0.72,
+     1.3
+    ]
+   },
+   "action": "바위 쪽에서 게 가족이 옆걸음으로 줄지어 온다. 아기 게가 맨 앞에서 집게를 흔든다",
+   "cast": [
+    "crab"
+   ],
+   "residents": [
+    "crab_family"
+   ],
+   "fx": [
+    "bob"
+   ],
+   "narr": {
+    "ko": "게 가족도 왔습니다. 옆으로 오느라 조금 돌아왔습니다.",
+    "en": "The crab family came too. Sideways, so it took a small detour.",
+    "ja": "カニの家族も来ました。横歩きなので、少し遠回りでした。",
+    "es": "También vino la familia cangrejo. De lado, así que dieron un pequeño rodeo."
+   }
+  },
+  {
+   "id": "c09",
+   "sec": 2.6,
+   "img": "c09.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.2
+    ],
+    "to": [
+     0.6,
+     0.55,
+     1.6
+    ]
+   },
+   "action": "모찌가 셰프 무에게 달려가 안긴다. 배낭 속 조약돌이 다시 밝아진다",
+   "cast": [
+    "mochi",
+    "mu"
+   ],
+   "narr": {
+    "ko": "모찌가 달려가 안겼습니다. 조약돌이 다시 밝아졌습니다.",
+    "en": "Mochi runs in for a hug. The pebble glows bright again.",
+    "ja": "モチが駆けよって抱きつきました。小石がまた明るくなりました。",
+    "es": "Mochi corre a abrazarlo. La piedrecita vuelve a brillar."
+   }
+  },
+  {
+   "id": "c10",
+   "sec": 2.6,
+   "img": "c10.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.0
+    ],
+    "to": [
+     0.42,
+     0.6,
+     1.4
+    ]
+   },
+   "action": "콩이 바닥에 조개껍데기와 돌멩이로 작전도를 놓는다(등대, 배, 고래). 모두가 둘러앉아 본다",
+   "cast": [
+    "mochi",
+    "kong",
+    "mu",
+    "raccoon",
+    "crab"
+   ],
+   "narr": {
+    "ko": "작전 회의입니다. 소라가 등대, 조개가 배, 돌멩이가 고래입니다.",
+    "en": "Battle plan. The spiral shell is the lighthouse, the clam is the boat, the stone is the whale.",
+    "ja": "作戦会議です。巻き貝が灯台、二枚貝が船、石がクジラです。",
+    "es": "Plan de batalla. La caracola es el faro, la almeja es el barco, la piedra es la ballena."
+   }
+  },
+  {
+   "id": "c11",
+   "sec": 2.6,
+   "img": "c11.jpg",
+   "cam": {
+    "from": [
+     0.3,
+     0.45,
+     1.2
+    ],
+    "to": [
+     0.68,
+     0.6,
+     1.7
+    ]
+   },
+   "action": "작전 1. 모래 언덕 갈대밭, 나뭇가지에 매달린 유리병 집들. 모두 깜깜하고 반딧불이가 수면 안대를 쓰고 잔다",
+   "cast": [
+    "firefly"
+   ],
+   "residents": [
+    "firefly_crew"
+   ],
+   "narr": {
+    "ko": "작전 하나. 등대지기는 유리병 마을에 삽니다. 퇴근하면 푹 잡니다.",
+    "en": "Step one. The lighthouse keeper lives in the glass jar village. Off duty, he sleeps deeply.",
+    "ja": "作戦その一。灯台守はガラスびんの村に住んでいます。仕事が終わるとぐっすり眠ります。",
+    "es": "Paso uno. El farero vive en la aldea de frascos. Fuera de turno, duerme profundamente."
+   }
+  },
+  {
+   "id": "c12",
+   "sec": 2.2,
+   "img": "c12.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.6,
+     1.2
+    ],
+    "to": [
+     0.6,
+     0.5,
+     1.4
+    ]
+   },
+   "action": "콩이 병을 톡톡 두드리고 검표원이 펀치를 딸깍거려도 깨지 않는다",
+   "cast": [
+    "kong",
+    "raccoon",
+    "firefly"
+   ],
+   "narr": {
+    "ko": "두드려도, 펀치를 딸깍거려도 깨지 않습니다.",
+    "en": "Knocking doesn't wake him. Neither does the ticket punch.",
+    "ja": "たたいても、パンチをカチカチ鳴らしても起きません。",
+    "es": "No lo despiertan los golpecitos. Tampoco la perforadora."
+   }
+  },
+  {
+   "id": "c13",
+   "sec": 2.6,
+   "img": "c13.jpg",
+   "cam": {
+    "from": [
+     0.3,
+     0.7,
+     1.4
+    ],
+    "to": [
+     0.7,
+     0.45,
+     1.6
+    ]
+   },
+   "action": "셰프 무가 도시락 뚜껑을 연다. 구운 생선 냄새가 병 속으로 흘러들고 반딧불이의 코가 움찔한다",
+   "cast": [
+    "mu",
+    "firefly"
+   ],
+   "narr": {
+    "ko": "무가 도시락을 열었습니다. 코가 먼저 일어났습니다.",
+    "en": "Mu opens the lunchbox. The nose wakes up first.",
+    "ja": "ムがお弁当を開けました。鼻が先に起きました。",
+    "es": "Mu abre la fiambrera. La nariz se despierta primero."
+   }
+  },
+  {
+   "id": "c14",
+   "sec": 2.6,
+   "img": "c14.jpg",
+   "cam": {
+    "from": [
+     0.45,
+     0.6,
+     1.3
+    ],
+    "to": [
+     0.35,
+     0.62,
+     1.6
+    ]
+   },
+   "action": "깨어난 반딧불이가 회중시계의 달 그림을 가리키며 고개를 젓는다. 지금은 퇴근 시간",
+   "cast": [
+    "firefly",
+    "mochi",
+    "kong"
+   ],
+   "narr": {
+    "ko": "하지만 시계는 달을 가리킵니다. 지금은 퇴근 시간입니다.",
+    "en": "But the watch points at the moon. It is off-duty time.",
+    "ja": "でも時計は月を指しています。今は退勤時間です。",
+    "es": "Pero el reloj señala la luna. Es hora de descanso."
+   }
+  },
+  {
+   "id": "c15",
+   "sec": 2.6,
+   "img": "c15.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.6,
+     1.2
+    ],
+    "to": [
+     0.5,
+     0.72,
+     1.6
+    ]
+   },
+   "action": "검표원 너구리가 달과 해가 그려진 야근 승인표에 펀치를 딸깍 뚫어 내민다",
+   "cast": [
+    "raccoon",
+    "firefly"
+   ],
+   "flash": true,
+   "narr": {
+    "ko": "검표원이 야근 승인표에 구멍을 뚫었습니다. 딸깍.",
+    "en": "The conductor punches an overtime permit. Click.",
+    "ja": "車掌が残業許可のきっぷに穴をあけました。カチッ。",
+    "es": "El revisor perfora un permiso de horas extra. Clic."
+   }
+  },
+  {
+   "id": "c16",
+   "sec": 2.4,
+   "img": "c16.jpg",
+   "cam": {
+    "from": [
+     0.4,
+     0.5,
+     1.5
+    ],
+    "to": [
+     0.4,
+     0.6,
+     1.15
+    ]
+   },
+   "action": "반딧불이가 표를 살펴보더니 모자를 눌러쓴다. 꽁무니 불이 켜진다",
+   "cast": [
+    "firefly"
+   ],
+   "fx": [
+    "pop"
+   ],
+   "beat": "전환",
+   "narr": {
+    "ko": "서류가 맞으면 일합니다. 등대지기가 모자를 썼습니다.",
+    "en": "With the right paperwork, he works. The keeper puts on his cap.",
+    "ja": "書類がそろえば働きます。灯台守が帽子をかぶりました。",
+    "es": "Con los papeles en regla, trabaja. El farero se pone la gorra."
+   }
+  },
+  {
+   "id": "c17",
+   "sec": 2.6,
+   "img": "c17.jpg",
+   "cam": {
+    "from": [
+     0.4,
+     0.62,
+     1.3
+    ],
+    "to": [
+     0.6,
+     0.25,
+     1.2
+    ]
+   },
+   "action": "유리병 집들이 차례로 켜지고 반딧불이 동료들이 밤하늘로 쏟아져 나온다",
+   "cast": [
+    "firefly"
+   ],
+   "residents": [
+    "firefly_crew"
+   ],
+   "narr": {
+    "ko": "유리병이 차례로 켜집니다. 동료들도 야근입니다.",
+    "en": "The jars light up one by one. The whole crew is on overtime.",
+    "ja": "ガラスびんが順番にともります。仲間たちも残業です。",
+    "es": "Los frascos se encienden uno a uno. Todo el equipo hace horas extra."
+   }
+  },
+  {
+   "id": "c18",
+   "sec": 2.8,
+   "img": "c18.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.75,
+     1.4
+    ],
+    "to": [
+     0.5,
+     0.35,
+     1.2
+    ]
+   },
+   "action": "바다 위에 한 줄로 늘어선 반딧불이들. 부두에서 수평선까지 빛의 길이 생긴다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "residents": [
+    "firefly_crew"
+   ],
+   "invention": "firefly_lamp",
+   "narr": {
+    "ko": "바다 위에 빛의 길이 생겼습니다. 부두에서 수평선까지.",
+    "en": "A road of light appears on the sea. From the pier to the horizon.",
+    "ja": "海の上に光の道ができました。桟橋から水平線まで。",
+    "es": "Aparece un camino de luz sobre el mar. Del muelle al horizonte."
+   }
+  },
+  {
+   "id": "c19",
+   "sec": 2.6,
+   "img": "c19.jpg",
+   "cam": {
+    "from": [
+     0.25,
+     0.6,
+     1.5
+    ],
+    "to": [
+     0.6,
+     0.55,
+     1.2
+    ]
+   },
+   "action": "작전 2. 부두 끝에서 게 가족이 집게를 딱딱 친다. 모찌가 소라 껍데기를 대 주자 소리의 물결이 바다로 퍼진다",
+   "cast": [
+    "mochi",
+    "crab"
+   ],
+   "residents": [
+    "crab_family"
+   ],
+   "narr": {
+    "ko": "작전 둘. 게들이 집게를 딱딱 칩니다. 소라가 소리를 키워 줍니다.",
+    "en": "Step two. The crabs click their claws. The seashell makes it loud.",
+    "ja": "作戦その二。カニたちがハサミをカチカチ鳴らします。巻き貝が音を大きくします。",
+    "es": "Paso dos. Los cangrejos chasquean las pinzas. La caracola lo hace sonar fuerte."
+   }
+  },
+  {
+   "id": "c20",
+   "sec": 2.6,
+   "img": "c20.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.8,
+     1.5
+    ],
+    "to": [
+     0.5,
+     0.35,
+     1.1
+    ]
+   },
+   "action": "빨간 소방 헬멧을 쓴 거대한 고래가 솟아오른다. 숨구멍 물기둥으로 대답한다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "residents": [
+    "whale_fireboat"
+   ],
+   "invention": "whale_fireboat",
+   "shake": {
+    "t": 0.1,
+    "dur": 1.0,
+    "amp": 12
+   },
+   "narr": {
+    "ko": "대답이 왔습니다. 고래 소방선입니다.",
+    "en": "An answer comes. It is the whale fireboat.",
+    "ja": "返事が来ました。クジラの消防船です。",
+    "es": "Llega una respuesta. Es la ballena bombera."
+   }
+  },
+  {
+   "id": "c21",
+   "sec": 2.6,
+   "img": "c21.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.3,
+     1.3
+    ],
+    "to": [
+     0.45,
+     0.72,
+     1.5
+    ]
+   },
+   "action": "고래가 부두에 꼬리를 대 준다. 검표원이 소포에 세 번째 구멍을 뚫는다. 승선권",
+   "cast": [
+    "mochi",
+    "kong",
+    "raccoon"
+   ],
+   "residents": [
+    "whale_fireboat"
+   ],
+   "flash": true,
+   "narr": {
+    "ko": "검표원이 소포에 세 번째 구멍을 뚫었습니다. 이제 승선권입니다.",
+    "en": "The conductor punches a third hole in the parcel. Now it is a boarding pass.",
+    "ja": "車掌が小包に三つ目の穴をあけました。これで乗船券です。",
+    "es": "El revisor hace un tercer agujero en el paquete. Ahora es un pase de abordar."
+   }
+  },
+  {
+   "id": "c22",
+   "sec": 2.6,
+   "img": "c22.jpg",
+   "cam": {
+    "from": [
+     0.42,
+     0.52,
+     1.3
+    ],
+    "to": [
+     0.38,
+     0.7,
+     1.5
+    ]
+   },
+   "action": "셰프 무가 생선 도시락을 모찌의 배낭에 넣어 준다. 아기 게가 운다",
+   "cast": [
+    "mochi",
+    "mu",
+    "crab"
+   ],
+   "narr": {
+    "ko": "무가 생선 도시락을 넣어 줬습니다. 아기 게는 벌써 웁니다.",
+    "en": "Mu packs him a fish lunch. The baby crab is already crying.",
+    "ja": "ムが魚のお弁当を入れてくれました。カニの赤ちゃんはもう泣いています。",
+    "es": "Mu le guarda un almuerzo de pescado. El cangrejito ya está llorando."
+   }
+  },
+  {
+   "id": "c23",
+   "sec": 2.4,
+   "img": "c23.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.68,
+     1.5
+    ],
+    "to": [
+     0.5,
+     0.35,
+     1.15
+    ]
+   },
+   "action": "고래 등 위의 둘. 빛의 길을 따라 출발한다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "residents": [
+    "whale_fireboat",
+    "firefly_crew"
+   ],
+   "narr": {
+    "ko": "고래 등에 올랐습니다. 빛의 길을 따라 출발합니다.",
+    "en": "They climb onto the whale's back and follow the road of light.",
+    "ja": "クジラの背中に乗りました。光の道をたどって出発です。",
+    "es": "Suben al lomo de la ballena y siguen el camino de luz."
+   }
+  },
+  {
+   "id": "c24",
+   "sec": 2.8,
+   "img": "c24.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.58,
+     1.4
+    ],
+    "to": [
+     0.5,
+     0.3,
+     1.15
+    ]
+   },
+   "action": "부두에서 국자와 펀치와 집게를 흔드는 친구들. 마을 언덕 뒤로 하늘이 밝아 온다. 두 번째 해",
+   "cast": [
+    "mu",
+    "raccoon",
+    "crab"
+   ],
+   "residents": [
+    "crab_family"
+   ],
+   "narr": {
+    "ko": "국자와 펀치와 집게가 손을 흔듭니다. 두 번째 해가 뜹니다.",
+    "en": "A ladle, a punch and many claws wave goodbye. The second sun rises.",
+    "ja": "おたまとパンチとハサミが手を振ります。二度目の朝日がのぼります。",
+    "es": "Un cucharón, una perforadora y muchas pinzas dicen adiós. Sale el segundo sol."
+   }
+  },
+  {
+   "id": "c25",
+   "sec": 2.6,
+   "img": "c25.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.7,
+     1.4
+    ],
+    "to": [
+     0.5,
+     0.25,
+     1.2
+    ]
+   },
+   "action": "빛의 길 끝, 멀리 마지막 배의 불빛이 보인다. 둘이 폴짝 뛴다. 그 앞에 먹구름의 벽",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "residents": [
+    "whale_fireboat",
+    "firefly_crew"
+   ],
+   "narr": {
+    "ko": "빛의 길 끝에 배 불빛이 보입니다. 그 뒤에는 먹구름도 보입니다.",
+    "en": "At the end of the road of light, the boat's lamp. Behind it, storm clouds.",
+    "ja": "光の道の先に船の明かりが見えます。その向こうに黒い雲も見えます。",
+    "es": "Al final del camino de luz, la luz del barco. Detrás, nubes de tormenta."
+   }
+  },
+  {
+   "id": "c26",
+   "sec": 4.0,
+   "img": "c26.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.0
+    ],
+    "to": [
+     0.5,
+     0.4,
+     1.15
+    ]
+   },
+   "action": "(영상) 바다 한가운데. 먹구름과 큰 파도. 바람에 반딧불이들이 뒤로 밀려나며 빛의 길이 끊긴다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "residents": [
+    "whale_fireboat",
+    "firefly_crew"
+   ],
+   "video": "c26.mp4",
+   "beat": "클리프",
+   "narr": {
+    "ko": "바람이 붑니다. 빛의 길이 끊깁니다. (다음 화에 계속)",
+    "en": "The wind rises. The road of light breaks. (To be continued)",
+    "ja": "風が吹きます。光の道がとぎれます。（つづく）",
+    "es": "Se levanta el viento. El camino de luz se rompe. (Continuará)"
+   }
+  }
+ ]
+}
