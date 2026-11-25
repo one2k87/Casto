@@ -1,0 +1,886 @@
+{
+ "episode": "s1e08",
+ "season": "s1",
+ "title": {
+  "ko": "집",
+  "en": "Home",
+  "ja": "おうち",
+  "es": "Hogar"
+ },
+ "upload_title": "집 🐧 | Home · Tailored EP8 (시즌 1 마지막 화)",
+ "logline": "폭풍 속에서 빛의 길이 끊기자, 집이 가까워진 모찌의 조약돌이 등대처럼 밝아지고 흩어진 반딧불이들이 다시 모인다. 고래 소방선은 파도를 가르고 남극에 닿는다. 부두에는 눈사람 셋을 만들며 기다린 엄마가 있다. 엄마가 아이들을 세다가 다섯 번째에서 멈춘다. 콩이 내민 늦은 소포 안에는 길 잃지 말라고 엄마가 주문했던 작은 방울. 모찌는 친구들에게 그림 엽서를 부치고, 엽서마다 생선이 한 마리씩 따라간다. 돌아가는 콩의 볼 속에서 상자 하나가 꿈틀거린다.",
+ "inventions": [
+  "whale_fireboat",
+  "firefly_lamp",
+  "pelican_mailbox"
+ ],
+ "audio": "로파이 배경음만",
+ "experiment": {
+  "variable": "게시 직전 확정 — 앞 편 수치를 본 뒤(미리 만든 편이라 제목·올리는 시각·첫 3초 순서만 바꿀 수 있음)",
+  "same": "길이 약 70초·콜드 오픈·로파이·자막 4개 언어·마지막 컷 영상"
+ },
+ "model": "gpt_image_2_5 low 1k (장당 0.25) — 엄마 기준 그림 1장(1화 c02·a7·c08을 올려 참조) + 새 그림 26장, 다시 그리기 2장(5컷: 모찌 대신 콩이 그려져서, 11컷: 고래 유람선이 배경에 그려져서) + 롱폼 가로 사이 컷 8장. 엔딩 영상 grok_video_v15_lite 720p 4초. 합계 13.25크레딧.",
+ "bgm": {
+  "name": "s1e08_home",
+  "sec": 72,
+  "vol": 0.75,
+  "prompt": "Cozy lofi hip hop instrumental for the season finale of a cute wordless animal cartoon: warm Rhodes chords, soft nylon guitar, mellow upright bass, light brushed drums at 76 BPM, a small glockenspiel melody and a tiny sleigh-bell jingle, soft vinyl crackle, tense and windy for the first 8 seconds, then a hopeful golden melody rises, opening wide and tender like a sunrise around 20 seconds, the warmest and most emotional part in the middle with a gentle reunion, playful and light in the last third, ending with a curious little question-like phrase on the glockenspiel in the final 5 seconds, no vocals, no sudden loud changes"
+ },
+ "refs": {
+  "mom_sheet": "55d61b49-c9a5-47d0-9b5d-b6f913c9d769",
+  "s1e01_c02_upload": "92f7281e-c8fe-49aa-8b1d-5a85a382df32",
+  "s1e01_a7_upload": "f12936df-09cd-4eb9-918a-cfff62756306",
+  "s1e01_c08_upload": "7740abf6-bdd5-462e-99b4-0ae3c9ad59b5",
+  "c01": "eb7d14fd-ab45-4d5d-8d4d-d32b8a0329b3",
+  "c02": "3c2fb372-4f82-4b76-bf9e-a0f79fb526bf",
+  "c03": "00386a43-e5bf-406b-b7ca-7af197c286bb",
+  "c04": "d0522356-725b-41c9-844f-028663b667c9",
+  "c05": "5531ee0e-65a9-4cb1-b091-d484b2ff793d",
+  "c05_first_kong": "be91367d-4488-4fcb-98d9-b42e2e1212b8",
+  "c06": "999aa078-58ea-4487-9b8a-c723453789ea",
+  "c07": "4ed19959-2172-4747-b78f-6ba5db3a1876",
+  "c08": "ad36da9c-a28c-4bf9-a6d7-3305f432e8dd",
+  "c09": "f7d5dbe0-2224-47ee-b74f-671d0d82ec56",
+  "c10": "2baaebfc-17be-470f-b511-7c30dbedaf07",
+  "c11": "b78d9f2e-1be7-41b4-a07f-a8d651bd1f8f",
+  "c11_first_ferry": "5866d6b6-94ed-4af9-a583-6d4849f20e9b",
+  "c12": "89183a4e-262d-449c-8aec-188dd8e0ad52",
+  "c13": "5bd7e22f-0a23-4012-baa5-6a692dd1e40c",
+  "c14": "fe075191-bd1b-495c-b4e3-6088954e5e2d",
+  "c15": "c8654705-c4ee-4758-aaa0-ad25436c6374",
+  "c16": "329e7a67-fc45-413b-8e26-ee5f8709f444",
+  "c17": "fb45fda8-546b-451b-94cf-ca3dde966fde",
+  "c18": "7b3cfe7f-8190-48a4-8a53-388b2cde25d2",
+  "c19": "c91d3c0c-f335-4e4c-8875-50a1241211bb",
+  "c20": "700a0a37-e7d3-4d45-a6ee-48b3042d5017",
+  "c21": "5fa948e1-821c-44b2-9d62-9d611f8c989e",
+  "c22": "ac7efa77-3b6a-4f0f-9991-85801f095a18",
+  "c23": "de58e7df-4b3a-46a5-95a0-41521a39996a",
+  "c24": "fc3f1ce6-2642-433c-bec5-8b0c817cb2aa",
+  "c25": "f1dbde36-51da-4925-999f-2e917cd58c72",
+  "c26": "24ba843e-8a3e-4db4-94d5-52e51449b8c9",
+  "c26_video": "16b3fb0a-2206-4930-a5b0-9e17ee9a9c23"
+ },
+ "module_versions": {
+  "story": "1.0",
+  "conti": "1.1",
+  "art": "1.1",
+  "music": "1.0",
+  "render": "1.0",
+  "publish": "1.0"
+ },
+ "cuts": [
+  {
+   "id": "c00",
+   "sec": 2.6,
+   "img": "c12.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.35,
+     1.7
+    ],
+    "to": [
+     0.5,
+     0.45,
+     1.15
+    ]
+   },
+   "action": "(콜드 오픈) 얼음 부두. 엄마가 아이들을 하나씩 세다가 다섯 번째 모찌에서 멈춘다",
+   "cast": [
+    "mom",
+    "mochi"
+   ],
+   "fx": [
+    "pop"
+   ],
+   "beat": "훅",
+   "narr": {
+    "ko": "엄마는 매일 아이들을 셉니다. 오늘은 다섯 번째에서 멈췄습니다.",
+    "en": "Mom counts the little ones every day. Today she stops at five.",
+    "ja": "ママは毎日子どもたちをかぞえます。今日は五番目で止まりました。",
+    "es": "Mamá cuenta a los pequeños cada día. Hoy se detiene en el quinto."
+   }
+  },
+  {
+   "id": "c01",
+   "sec": 2.8,
+   "img": "c01.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.3,
+     1.2
+    ],
+    "to": [
+     0.5,
+     0.6,
+     1.4
+    ]
+   },
+   "action": "폭풍 바다. 고래 소방선이 물기둥으로 큰 파도를 둘로 가른다. 등 위의 둘이 사다리를 꼭 잡는다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "residents": [
+    "whale_fireboat"
+   ],
+   "invention": "whale_fireboat",
+   "shake": {
+    "t": 0.1,
+    "dur": 1.0,
+    "amp": 12
+   },
+   "narr": {
+    "ko": "소방선은 불만 끄지 않습니다. 파도도 가릅니다.",
+    "en": "A fireboat doesn't just put out fires. It splits waves.",
+    "ja": "消防船は火を消すだけではありません。波も割ります。",
+    "es": "Un barco bombero no solo apaga fuegos. También parte olas."
+   }
+  },
+  {
+   "id": "c02",
+   "sec": 2.6,
+   "img": "c02.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.3,
+     1.2
+    ],
+    "to": [
+     0.5,
+     0.55,
+     1.5
+    ]
+   },
+   "action": "파도가 지나간 깜깜한 바다. 반딧불이들이 흩어져 있다. 등대지기가 모자를 붙잡고 두리번거린다",
+   "cast": [
+    "firefly"
+   ],
+   "residents": [
+    "firefly_crew"
+   ],
+   "narr": {
+    "ko": "파도는 지나갔지만 빛의 길은 흩어졌습니다. 어느 쪽이 남극일까요.",
+    "en": "The wave has passed, but the road of light is scattered. Which way is home?",
+    "ja": "波は過ぎましたが、光の道はばらばらです。南極はどっちでしょう。",
+    "es": "La ola pasó, pero el camino de luz se dispersó. ¿Hacia dónde queda casa?"
+   }
+  },
+  {
+   "id": "c03",
+   "sec": 2.6,
+   "img": "c03.jpg",
+   "cam": {
+    "from": [
+     0.4,
+     0.55,
+     1.4
+    ],
+    "to": [
+     0.4,
+     0.6,
+     1.7
+    ]
+   },
+   "action": "모찌가 배낭을 꼭 끌어안는다. 배낭 틈으로 새어 나오는 빛이 점점 밝아진다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "narr": {
+    "ko": "모찌가 배낭을 꼭 안았습니다. 배낭이 점점 밝아집니다.",
+    "en": "Mochi hugs his backpack tight. It grows brighter and brighter.",
+    "ja": "モチがリュックをぎゅっと抱きしめました。リュックがだんだん明るくなります。",
+    "es": "Mochi abraza fuerte su mochila. Brilla cada vez más."
+   }
+  },
+  {
+   "id": "c04",
+   "sec": 2.8,
+   "img": "c04.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.6,
+     1.3
+    ],
+    "to": [
+     0.5,
+     0.25,
+     1.4
+    ]
+   },
+   "action": "모찌가 조약돌을 머리 위로 높이 든다. 이번에는 등대처럼 밝은 금빛이 바다를 비춘다",
+   "cast": [
+    "mochi"
+   ],
+   "flash": true,
+   "beat": "전환",
+   "narr": {
+    "ko": "집이 가까워지면 조약돌이 밝아집니다. 오늘은 등대만큼 밝습니다.",
+    "en": "The closer to home, the brighter the pebble. Tonight it shines like a lighthouse.",
+    "ja": "家が近づくと、小石は明るくなります。今夜は灯台ほど明るいです。",
+    "es": "Cuanto más cerca de casa, más brilla la piedrecita. Esta noche brilla como un faro."
+   }
+  },
+  {
+   "id": "c05",
+   "sec": 2.6,
+   "img": "c05.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.3,
+     1.4
+    ],
+    "to": [
+     0.55,
+     0.55,
+     1.2
+    ]
+   },
+   "action": "흩어졌던 반딧불이들이 조약돌 빛을 향해 날아와 다시 한 줄로 선다. 빛의 길이 이어진다",
+   "cast": [
+    "mochi",
+    "firefly"
+   ],
+   "residents": [
+    "whale_fireboat",
+    "firefly_crew"
+   ],
+   "invention": "firefly_lamp",
+   "narr": {
+    "ko": "반딧불이들이 빛을 보고 돌아옵니다. 빛의 길이 다시 이어집니다.",
+    "en": "The fireflies see the light and come back. The road of light joins up again.",
+    "ja": "ホタルたちが光を見て戻ってきます。光の道がまたつながります。",
+    "es": "Las luciérnagas ven la luz y regresan. El camino de luz se une otra vez."
+   }
+  },
+  {
+   "id": "c06",
+   "sec": 2.4,
+   "img": "c06.jpg",
+   "cam": {
+    "from": [
+     0.35,
+     0.6,
+     1.4
+    ],
+    "to": [
+     0.6,
+     0.45,
+     1.2
+    ]
+   },
+   "action": "파도 사이의 작은 고깃배. 갈매기 선원들이 빛의 길을 보고 키를 돌려 따라온다",
+   "cast": [],
+   "residents": [
+    "seagulls"
+   ],
+   "narr": {
+    "ko": "길을 잃은 배가 하나 더 있었습니다. 그 배도 빛을 따라옵니다.",
+    "en": "There was one more lost boat. It follows the light too.",
+    "ja": "迷った船がもう一そうありました。その船も光についてきます。",
+    "es": "Había otro barco perdido. También sigue la luz."
+   }
+  },
+  {
+   "id": "c07",
+   "sec": 2.8,
+   "img": "c07.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.25,
+     1.2
+    ],
+    "to": [
+     0.5,
+     0.6,
+     1.3
+    ]
+   },
+   "action": "먹구름이 갈라지고 초록빛 오로라. 얼음 언덕과 이글루 마을이 보인다. 둘이 폴짝 뛴다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "residents": [
+    "whale_fireboat"
+   ],
+   "fx": [
+    "pop"
+   ],
+   "narr": {
+    "ko": "구름이 걷히고 오로라가 보입니다. 저기가 집입니다.",
+    "en": "The clouds part and the aurora appears. That's home.",
+    "ja": "雲が晴れて、オーロラが見えます。あそこが家です。",
+    "es": "Se abren las nubes y aparece la aurora. Allí está casa."
+   }
+  },
+  {
+   "id": "c08",
+   "sec": 2.6,
+   "img": "c08.jpg",
+   "cam": {
+    "from": [
+     0.4,
+     0.35,
+     1.3
+    ],
+    "to": [
+     0.7,
+     0.62,
+     1.6
+    ]
+   },
+   "action": "고래가 얼음 부두에 닿는다. 부두 끝에 로즈색 목도리의 엄마가 지도를 꼭 쥐고 서 있다",
+   "cast": [
+    "mom"
+   ],
+   "residents": [
+    "whale_fireboat"
+   ],
+   "narr": {
+    "ko": "부두 끝에 누군가 서 있습니다. 모찌가 떨어뜨린 지도를 들고.",
+    "en": "Someone is standing at the end of the pier, holding the map Mochi dropped.",
+    "ja": "桟橋の先にだれかが立っています。モチが落とした地図を持って。",
+    "es": "Alguien espera al final del muelle, con el mapa que Mochi perdió."
+   }
+  },
+  {
+   "id": "c09",
+   "sec": 2.6,
+   "img": "c09.jpg",
+   "cam": {
+    "from": [
+     0.6,
+     0.5,
+     1.3
+    ],
+    "to": [
+     0.3,
+     0.62,
+     1.5
+    ]
+   },
+   "action": "엄마 옆에 작은 눈사람 셋이 줄지어 서 있다. 하루에 하나씩 만들었다. 세 번째 해가 뜬다",
+   "cast": [
+    "mom"
+   ],
+   "narr": {
+    "ko": "눈사람이 셋. 하루에 하나씩 만들며 기다렸습니다. 세 번째 해가 뜹니다.",
+    "en": "Three snowmen. She made one each day while she waited. The third sun rises.",
+    "ja": "雪だるまが三つ。一日に一つずつ作って待っていました。三度目の朝日です。",
+    "es": "Tres muñecos de nieve. Hizo uno cada día mientras esperaba. Sale el tercer sol."
+   }
+  },
+  {
+   "id": "c10",
+   "sec": 2.4,
+   "img": "c10.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.3,
+     1.3
+    ],
+    "to": [
+     0.5,
+     0.62,
+     1.5
+    ]
+   },
+   "action": "모찌가 고래 꼬리를 미끄럼틀처럼 타고 내려와 달려간다",
+   "cast": [
+    "mochi"
+   ],
+   "residents": [
+    "whale_fireboat"
+   ],
+   "fx": [
+    "bob"
+   ],
+   "narr": {
+    "ko": "고래 꼬리 미끄럼틀. 제일 빠른 하선입니다.",
+    "en": "A whale-tail slide. The fastest way off a ship.",
+    "ja": "クジラのしっぽすべり台。いちばん速い下船です。",
+    "es": "Un tobogán de cola de ballena. La forma más rápida de bajar."
+   }
+  },
+  {
+   "id": "c11",
+   "sec": 2.6,
+   "img": "c11.jpg",
+   "cam": {
+    "from": [
+     0.25,
+     0.6,
+     1.3
+    ],
+    "to": [
+     0.75,
+     0.62,
+     1.5
+    ]
+   },
+   "action": "엄마가 형제 펭귄 넷을 날개로 하나씩 짚으며 센다. 다섯 번째 자리로 모찌가 쏙 들어간다",
+   "cast": [
+    "mom",
+    "mochi"
+   ],
+   "residents": [
+    "chicks"
+   ],
+   "narr": {
+    "ko": "하나, 둘, 셋, 넷. 비어 있던 자리로 모찌가 쏙 들어갑니다.",
+    "en": "One, two, three, four. Mochi hops into the empty spot.",
+    "ja": "いち、に、さん、し。空いていた場所にモチがぴょんと入ります。",
+    "es": "Uno, dos, tres, cuatro. Mochi salta al hueco vacío."
+   }
+  },
+  {
+   "id": "c12",
+   "sec": 2.6,
+   "img": "c12.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.45,
+     1.2
+    ],
+    "to": [
+     0.42,
+     0.4,
+     1.6
+    ]
+   },
+   "action": "엄마의 날개가 다섯 번째에서 멈춘다. 엄마 눈에 눈물이 맺힌다",
+   "cast": [
+    "mom",
+    "mochi"
+   ],
+   "beat": "전환",
+   "narr": {
+    "ko": "다섯. 이번에는 빈자리가 없습니다.",
+    "en": "Five. This time, no empty spot.",
+    "ja": "五。今度は空いた場所はありません。",
+    "es": "Cinco. Esta vez no falta nadie."
+   }
+  },
+  {
+   "id": "c13",
+   "sec": 2.8,
+   "img": "c13.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.2
+    ],
+    "to": [
+     0.5,
+     0.45,
+     1.55
+    ]
+   },
+   "action": "꼭 안는 엄마와 모찌. 로즈색 목도리가 둘을 감싼다",
+   "cast": [
+    "mom",
+    "mochi"
+   ],
+   "narr": {
+    "ko": "목도리가 둘을 한 번에 감쌉니다. 조약돌이 따뜻해집니다.",
+    "en": "The scarf wraps around them both. The pebble grows warm.",
+    "ja": "マフラーがふたりをいっしょに包みます。小石があたたかくなります。",
+    "es": "La bufanda los envuelve a los dos. La piedrecita se entibia."
+   }
+  },
+  {
+   "id": "c14",
+   "sec": 2.6,
+   "img": "c14.jpg",
+   "cam": {
+    "from": [
+     0.6,
+     0.5,
+     1.2
+    ],
+    "to": [
+     0.3,
+     0.62,
+     1.6
+    ]
+   },
+   "action": "콩이 볼에서 구멍 세 개 뚫린 소포를 꺼내 내민다. 소포에 로즈색 목도리 그림",
+   "cast": [
+    "kong",
+    "mom"
+   ],
+   "fx": [
+    "pop"
+   ],
+   "narr": {
+    "ko": "콩이 소포를 꺼냈습니다. 받는 사람 그림은 분홍 목도리입니다.",
+    "en": "Kong brings out the parcel. The address is a drawing of a pink scarf.",
+    "ja": "コンが小包を出しました。あて名の絵はピンクのマフラーです。",
+    "es": "Kong saca el paquete. La dirección es un dibujo de una bufanda rosa."
+   }
+  },
+  {
+   "id": "c15",
+   "sec": 2.6,
+   "img": "c15.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.3,
+     1.2
+    ],
+    "to": [
+     0.5,
+     0.62,
+     1.6
+    ]
+   },
+   "action": "엄마가 소포를 연다. 로즈 리본이 달린 작은 은방울이 반짝인다",
+   "cast": [
+    "mom"
+   ],
+   "flash": true,
+   "narr": {
+    "ko": "안에는 작은 방울. 길을 잃지 말라고 엄마가 주문한 것이었습니다.",
+    "en": "Inside, a little bell. Mom ordered it so Mochi would never get lost.",
+    "ja": "中には小さな鈴。迷子にならないようにママが注文したものでした。",
+    "es": "Dentro, una campanita. Mamá la pidió para que Mochi nunca se perdiera."
+   }
+  },
+  {
+   "id": "c16",
+   "sec": 2.8,
+   "img": "c16.jpg",
+   "cam": {
+    "from": [
+     0.6,
+     0.45,
+     1.3
+    ],
+    "to": [
+     0.3,
+     0.55,
+     1.6
+    ]
+   },
+   "action": "엄마가 방울과 콩을 번갈아 본다. 소포에서 먼지가 풀썩. 콩이 땀을 뻘뻘 흘린다",
+   "cast": [
+    "mom",
+    "kong"
+   ],
+   "shake": {
+    "t": 0.3,
+    "dur": 0.6,
+    "amp": 6
+   },
+   "narr": {
+    "ko": "출발하기 전에 왔어야 할 택배였습니다. 콩이 땀을 흘립니다.",
+    "en": "It should have arrived before the trip. Kong is sweating.",
+    "ja": "出発の前に届くはずの荷物でした。コンが汗をかいています。",
+    "es": "Debía llegar antes del viaje. Kong está sudando."
+   }
+  },
+  {
+   "id": "c17",
+   "sec": 2.6,
+   "img": "c17.jpg",
+   "cam": {
+    "from": [
+     0.55,
+     0.55,
+     1.2
+    ],
+    "to": [
+     0.62,
+     0.58,
+     1.6
+    ]
+   },
+   "action": "엄마가 방울을 모찌 배낭에 달아 준다. 딸랑",
+   "cast": [
+    "mom",
+    "mochi"
+   ],
+   "narr": {
+    "ko": "조약돌을 넣어 준 그 배낭에, 이번에는 방울을 달아 줍니다. 딸랑.",
+    "en": "On the same backpack where she put the pebble, she ties the bell. Jingle.",
+    "ja": "小石を入れてくれたあのリュックに、今度は鈴をつけます。チリン。",
+    "es": "En la misma mochila donde puso la piedrecita, ata la campanita. Tilín."
+   }
+  },
+  {
+   "id": "c18",
+   "sec": 2.6,
+   "img": "c18.jpg",
+   "cam": {
+    "from": [
+     0.4,
+     0.4,
+     1.2
+    ],
+    "to": [
+     0.4,
+     0.5,
+     1.5
+    ]
+   },
+   "action": "엄마가 콩도 날개로 안아 준다. 콩의 볼이 빨개진다",
+   "cast": [
+    "mom",
+    "kong",
+    "mochi"
+   ],
+   "narr": {
+    "ko": "늦었지만, 결국 배달했습니다. 엄마는 콩도 안아 줍니다.",
+    "en": "Late, but delivered after all. Mom hugs Kong too.",
+    "ja": "おそかったけれど、ちゃんと届けました。ママはコンも抱きしめます。",
+    "es": "Tarde, pero lo entregó. Mamá también abraza a Kong."
+   }
+  },
+  {
+   "id": "c19",
+   "sec": 2.6,
+   "img": "c19.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.4,
+     1.2
+    ],
+    "to": [
+     0.45,
+     0.7,
+     1.5
+    ]
+   },
+   "action": "그날 밤 이글루 안. 모찌가 크레용으로 그림 엽서를 그린다",
+   "cast": [
+    "mochi"
+   ],
+   "narr": {
+    "ko": "그날 밤, 모찌는 엽서를 그렸습니다. 글씨 대신 그림으로.",
+    "en": "That night, Mochi drew postcards. Pictures instead of words.",
+    "ja": "その夜、モチははがきをかきました。字のかわりに絵で。",
+    "es": "Esa noche, Mochi dibujó postales. Dibujos en vez de palabras."
+   }
+  },
+  {
+   "id": "c20",
+   "sec": 2.4,
+   "img": "c20.jpg",
+   "cam": {
+    "from": [
+     0.6,
+     0.4,
+     1.3
+    ],
+    "to": [
+     0.45,
+     0.55,
+     1.4
+    ]
+   },
+   "action": "얼음 부두의 펠리컨 우체통. 모찌가 엽서를 넣는다. 부리 주머니엔 생선이 가득",
+   "cast": [
+    "mochi"
+   ],
+   "residents": [
+    "pelican_post"
+   ],
+   "invention": "pelican_mailbox",
+   "narr": {
+    "ko": "남극에도 펠리컨 우체통이 있습니다. 생선도 같이 갑니다.",
+    "en": "There's a pelican mailbox here too. The fish go along as well.",
+    "ja": "南極にもペリカンのポストがあります。魚もいっしょに行きます。",
+    "es": "Aquí también hay buzón pelícano. Los peces viajan también."
+   }
+  },
+  {
+   "id": "c21",
+   "sec": 2.4,
+   "img": "c21.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.4,
+     1.2
+    ],
+    "to": [
+     0.55,
+     0.7,
+     1.4
+    ]
+   },
+   "action": "눈 산 간이역. 검표원 너구리가 엽서를 받는데 생선이 같이 툭 떨어진다",
+   "cast": [
+    "raccoon"
+   ],
+   "narr": {
+    "ko": "검표원에게 엽서가 왔습니다. 생선도 한 마리 왔습니다.",
+    "en": "A postcard for the conductor. And one fish.",
+    "ja": "車掌にはがきが届きました。魚も一匹届きました。",
+    "es": "Una postal para el revisor. Y un pez."
+   }
+  },
+  {
+   "id": "c22",
+   "sec": 2.4,
+   "img": "c22.jpg",
+   "cam": {
+    "from": [
+     0.45,
+     0.5,
+     1.4
+    ],
+    "to": [
+     0.6,
+     0.5,
+     1.2
+    ]
+   },
+   "action": "등대 꼭대기. 반딧불이가 엽서를 받는다. 따라온 생선이 반딧불이보다 크다",
+   "cast": [
+    "firefly"
+   ],
+   "narr": {
+    "ko": "등대지기에게도. 생선이 등대지기보다 큽니다.",
+    "en": "For the lighthouse keeper too. The fish is bigger than he is.",
+    "ja": "灯台守にも。魚のほうが灯台守より大きいです。",
+    "es": "También para el farero. El pez es más grande que él."
+   }
+  },
+  {
+   "id": "c23",
+   "sec": 2.4,
+   "img": "c23.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.6,
+     1.3
+    ],
+    "to": [
+     0.45,
+     0.45,
+     1.3
+    ]
+   },
+   "action": "바위 굴 앞. 게 가족이 엽서를 펼쳐 들고 집게 박수를 친다. 생선은 형제들이 끌고 간다",
+   "cast": [
+    "crab"
+   ],
+   "residents": [
+    "crab_family"
+   ],
+   "narr": {
+    "ko": "게 가족은 엽서는 벽에, 생선은 식탁에.",
+    "en": "The crab family: the postcard on the wall, the fish on the table.",
+    "ja": "カニの家族は、はがきは壁に、魚はテーブルに。",
+    "es": "La familia cangrejo: la postal a la pared, el pez a la mesa."
+   }
+  },
+  {
+   "id": "c24",
+   "sec": 2.6,
+   "img": "c24.jpg",
+   "cam": {
+    "from": [
+     0.3,
+     0.25,
+     1.4
+    ],
+    "to": [
+     0.4,
+     0.55,
+     1.3
+    ]
+   },
+   "action": "무의 식당 주방. 엽서를 벽에 붙이고, 같이 온 생선을 굽는다. 표정은 그대로인데 꼬리가 흔들린다",
+   "cast": [
+    "mu"
+   ],
+   "narr": {
+    "ko": "무는 생선을 굽습니다. 표정은 그대로인데, 꼬리가 말해 줍니다.",
+    "en": "Mu grills the fish. His face doesn't change, but his tail says it all.",
+    "ja": "ムは魚を焼きます。顔はいつも通りですが、しっぽが教えてくれます。",
+    "es": "Mu asa el pez. Su cara no cambia, pero su cola lo dice todo."
+   }
+  },
+  {
+   "id": "c25",
+   "sec": 2.6,
+   "img": "c25.jpg",
+   "cam": {
+    "from": [
+     0.4,
+     0.3,
+     1.3
+    ],
+    "to": [
+     0.5,
+     0.62,
+     1.3
+    ]
+   },
+   "action": "얼음 부두. 고래 등에 오른 콩이 손을 흔든다. 모찌와 엄마, 형제들이 손을 흔든다. 딸랑",
+   "cast": [
+    "kong",
+    "mochi",
+    "mom"
+   ],
+   "residents": [
+    "whale_fireboat",
+    "chicks"
+   ],
+   "narr": {
+    "ko": "콩은 다음 배달이 있습니다. 모찌의 방울이 딸랑, 인사합니다.",
+    "en": "Kong has more deliveries. Mochi's bell jingles goodbye.",
+    "ja": "コンには次の配達があります。モチの鈴がチリンとあいさつします。",
+    "es": "Kong tiene más entregas. La campanita de Mochi tintinea un adiós."
+   }
+  },
+  {
+   "id": "c26",
+   "sec": 4.0,
+   "img": "c26.jpg",
+   "cam": {
+    "from": [
+     0.5,
+     0.5,
+     1.0
+    ],
+    "to": [
+     0.45,
+     0.5,
+     1.2
+    ]
+   },
+   "action": "(영상) 돌아가는 고래 등 위의 콩. 볼에서 작은 상자를 꺼내는데 상자가 혼자 꿈틀거린다",
+   "cast": [
+    "kong"
+   ],
+   "residents": [
+    "whale_fireboat"
+   ],
+   "video": "c26.mp4",
+   "beat": "클리프",
+   "narr": {
+    "ko": "그런데 콩의 볼에 택배가 하나 더 있었습니다. 움직입니다. (시즌 2에 계속)",
+    "en": "But there was one more parcel in Kong's cheek. It's moving. (To be continued in Season 2)",
+    "ja": "ところが、コンのほっぺにもう一つ荷物がありました。動いています。（シーズン2につづく）",
+    "es": "Pero en la mejilla de Kong había otro paquete. Se mueve. (Continuará en la temporada 2)"
+   }
+  }
+ ]
+}

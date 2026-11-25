@@ -51,7 +51,14 @@
   "personality": "다정하고 머릿수 세기에 진심",
   "habit": "아이들을 날개로 하나씩 짚으며 센다",
   "look": "gentle round mother penguin with fluffy grey down like Mochi, white face, soft round shape, wearing a rose-pink chunky knitted scarf",
-  "ref": {},
+  "ref": {
+   "turnaround": "55d61b49-c9a5-47d0-9b5d-b6f913c9d769",
+   "s1e01_upload": {
+    "c02": "92f7281e-c8fe-49aa-8b1d-5a85a382df32",
+    "a7": "f12936df-09cd-4eb9-918a-cfff62756306",
+    "c08": "7740abf6-bdd5-462e-99b4-0ae3c9ad59b5"
+   }
+  },
   "height": 1.3,
   "size_class": "어른(펭귄)",
   "size_prompt": "Mom is about 1.3 times Mochi's height, same round shape, a little taller",
@@ -67,7 +74,7 @@
    "검은 등·흰 배의 사실적 펭귄(1화에서 회색 솜털로 확정)",
    "목도리 없는 컷"
   ],
-  "note": "1화에 이미 등장. 기준 그림이 없어 8화 재등장 전에 1화 컷(c02)으로 기준 그림을 만들어야 한다. look 문장을 1화 실제 모습(회색 솜털)에 맞게 고침."
+  "note": "1화에 이미 등장. 8화 재등장 전에 1화 c02·a7을 참조로 기준 그림을 만들었다(11/25, 앞·옆·뒤 + 모찌와 키 비교). 1화 컷 3장은 힉스필드에 올려 둔 media id로도 참조할 수 있다."
  },
  "kong": {
   "name": "콩",
