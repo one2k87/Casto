@@ -1,5 +1,5 @@
 {
- "next": 175,
+ "next": 178,
  "items": {
   "1": {
    "name": "늘어나는 밀폐용기",
@@ -1619,6 +1619,34 @@
    "url": "https://www.coupang.com/np/search?q=%EC%9B%90%EB%A3%B8+%EB%B6%84%EB%A6%AC%EC%88%98%EA%B1%B0%ED%95%A8",
    "hold": true,
    "note": "157번과 같은 물건으로 보임 — 157번으로 캡처"
+  },
+  "175": {
+   "name": "동물 선풍기",
+   "slug": "",
+   "key": "동물선풍기",
+   "done": false,
+   "search": "동물 선풍기",
+   "url": "https://www.coupang.com/np/search?q=%EB%8F%99%EB%AC%BC+%EC%84%A0%ED%92%8D%EA%B8%B0",
+   "hold": true,
+   "note": "19번과 같은 물건으로 보임 — 19번으로 캡처"
+  },
+  "176": {
+   "name": "과일 필러",
+   "slug": "",
+   "key": "과일필러",
+   "done": false,
+   "search": "과일 필러",
+   "url": "https://www.coupang.com/np/search?q=%EA%B3%BC%EC%9D%BC+%ED%95%84%EB%9F%AC",
+   "hold": true,
+   "note": "98번과 같은 물건으로 보임 — 98번으로 캡처"
+  },
+  "177": {
+   "name": "방수 카페트",
+   "slug": "",
+   "key": "방수카페트",
+   "done": false,
+   "search": "방수 카페트",
+   "url": "https://www.coupang.com/np/search?q=%EB%B0%A9%EC%88%98+%EC%B9%B4%ED%8E%98%ED%8A%B8"
   }
  }
 }

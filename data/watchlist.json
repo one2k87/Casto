@@ -6,10 +6,58 @@
   "price_band": "저가",
   "brand": "",
   "product_id": "",
-  "evidence": "냄비 영상 5개 / 채널 4개 및 깔끔하게 채널 출연",
+  "evidence": "냄비 및 깔끔하게 키워드 관련 채널에서 접히는 도마로 언급",
   "category": "50000008",
-  "last_found": "2026-11-25",
+  "last_found": "2026-11-26",
   "first_seen": "2026-11-20"
+ },
+ "animal_fan": {
+  "name": "동물 선풍기",
+  "search_keyword": "음식 식혀주는 동물 선풍기",
+  "en_keyword": "animal fan",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "생활꿀템 채널에서 음식 식혀주는 동물 선풍기 광고 상품으로 등장",
+  "category": "50000008",
+  "last_found": "2026-11-26",
+  "first_seen": "2026-11-25"
+ },
+ "apple_corer": {
+  "name": "사과 씨 제거기",
+  "search_keyword": "사과 씨 제거 애플 코어러",
+  "en_keyword": "apple corer",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "주방용품 채널 8개 반복 등장 및 사과 씨 제거 애플 코어러 언급",
+  "category": "50000008",
+  "last_found": "2026-11-26",
+  "first_seen": "2026-11-24"
+ },
+ "fruit_peeler": {
+  "name": "과일 필러",
+  "search_keyword": "과일 껍질 제거기 필러",
+  "en_keyword": "fruit peeler",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "주방꿀템 및 살림꿀템 채널 다수 반복 #과일필러 #과일껍질제거기",
+  "category": "50000008",
+  "last_found": "2026-11-26",
+  "first_seen": "2026-11-26"
+ },
+ "waterproof_carpet": {
+  "name": "방수 카페트",
+  "search_keyword": "물세탁 가능한 방오 방수 카페트",
+  "en_keyword": "waterproof carpet",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "생활꿀팁 채널에서 물세탁 가능한 방오, 방수 카페트로 등장",
+  "category": "50000004",
+  "last_found": "2026-11-26",
+  "first_seen": "2026-11-26"
  },
  "multi_cooker": {
   "name": "만능 멀티쿠커",
@@ -43,18 +91,6 @@
   "brand": "",
   "product_id": "",
   "evidence": "주방용품 영상 7개 / 채널 7개 출연",
-  "category": "50000008",
-  "last_found": "2026-11-25",
-  "first_seen": "2026-11-25"
- },
- "animal_fan": {
-  "name": "음식 식혀주는 동물 선풍기",
-  "search_keyword": "음식 식혀주는 동물 선풍기",
-  "en_keyword": "mini animal fan",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "생활꿀템 영상 4개 / 채널 4개 출연",
   "category": "50000008",
   "last_found": "2026-11-25",
   "first_seen": "2026-11-25"
@@ -115,18 +151,6 @@
   "brand": "",
   "product_id": "",
   "evidence": "살림꿀템 키워드 영상 18개, 채널 9개에서 언급",
-  "category": "50000008",
-  "last_found": "2026-11-24",
-  "first_seen": "2026-11-24"
- },
- "apple_corer": {
-  "name": "애플코어러",
-  "search_keyword": "사과 씨 제거 애플 코어러",
-  "en_keyword": "apple corer",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "주방용품 키워드 영상 6개, 채널 5개에서 언급",
   "category": "50000008",
   "last_found": "2026-11-24",
   "first_seen": "2026-11-24"
@@ -213,30 +237,6 @@
   "evidence": "쿠팡 추천 관련 냄비 및 멀티쿠커 언급 5개 이상 채널에서 등장",
   "category": "50000003",
   "last_found": "2026-11-22",
-  "first_seen": "2026-11-20"
- },
- "measuring_spoon": {
-  "name": "계량스푼",
-  "search_keyword": "스마트 계량스푼",
-  "en_keyword": "digital measuring spoon",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "계량스푼 관련 영상 4개 채널에서 등장",
-  "category": "50000008",
-  "last_found": "2026-11-22",
-  "first_seen": "2026-11-22"
- },
- "5_blade_scissors": {
-  "name": "5중칼날가위",
-  "search_keyword": "5중 칼날 주방가위",
-  "en_keyword": "herb scissors",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "주방꿀템, 살림꿀템 채널 다수에서 반복 등장하며 14개 이상 채널에서 언급됨",
-  "category": "50000008",
-  "last_found": "2026-11-20",
   "first_seen": "2026-11-20"
  }
 }
