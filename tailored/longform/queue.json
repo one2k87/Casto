@@ -1,0 +1,2052 @@
+{
+ "note": "시즌 1 롱폼(가로 16:9) 작업 순서. status: todo → img(16:9 그림 완료) → done(클립 받음)",
+ "items": [
+  {
+   "ep": "s1e01",
+   "cut": "c02",
+   "img": "c02.jpg",
+   "action": "엄마가 배낭에 빛나는 조약돌을 넣어 줌",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "c01",
+   "img": "c01.jpg",
+   "action": "유치원 줄은 전부 왼쪽, 모찌만 지도를 거꾸로 들고 오른쪽",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "a1",
+   "img": "a1.jpg",
+   "action": "엄마가 배낭끈을 잡아 줄로 데려옴",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "c03",
+   "img": "c03.jpg",
+   "action": "고래 유람선 도착",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "a2",
+   "img": "a2.jpg",
+   "action": "고래 유람선에서 펠리컨들이 생선 상자를 내림",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "c04",
+   "img": "c04.jpg",
+   "action": "생선 냄새를 따라 화물 더미로",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "a3",
+   "img": "a3.jpg",
+   "action": "줄은 왼쪽으로 떠나고 모찌만 냄새를 따라 오른쪽으로",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "c05",
+   "img": "c05.jpg",
+   "action": "생선 상자 발견, 눈이 별",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "a4",
+   "img": "a4.jpg",
+   "action": "상자에 머리부터 다이빙",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "c05b",
+   "img": "c05b.jpg",
+   "action": "생선 폭풍 흡입",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "c06",
+   "img": "c06.jpg",
+   "action": "다 먹고 배 빵빵, 상자 안에서 꾸벅",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "a5",
+   "img": "a5.jpg",
+   "action": "출항 신호. 펠리컨 반장이 호루라기를 불며 남은 상자를 가리킴",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "c07",
+   "img": "c07.jpg",
+   "action": "펠리컨 하역부가 뚜껑을 닫고 도시 도장 쾅",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "c07b",
+   "img": "c07b.jpg",
+   "action": "펠리컨이 부리 주머니에 상자를 넣고 고래 유람선으로",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "a6",
+   "img": "a6.jpg",
+   "action": "고래 유람선이 부두를 떠남. 갑판에 도장 찍힌 상자",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "c08",
+   "img": "c08.jpg",
+   "action": "엄마가 머릿수를 세다가 한 자리 빈 걸 발견",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "a7",
+   "img": "a7.jpg",
+   "action": "엄마가 부두 끝에서 모찌의 지도를 발견",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "c09",
+   "img": "c09.jpg",
+   "action": "밤바다, 상자 안에서 쿨쿨, 조약돌이 빛남",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "c10",
+   "img": "c10.jpg",
+   "action": "폭풍, 상자가 갑판을 구름",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "a8",
+   "img": "a8.jpg",
+   "action": "새벽, 고래 유람선이 큰 도시 항구로 다가감",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "a9",
+   "img": "a9.jpg",
+   "action": "기린 크레인이 상자를 부두에 내려놓음",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "c11",
+   "img": "c11.jpg",
+   "action": "조용해짐. 틈새로 알록달록한 빛",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "c12",
+   "img": "c12.jpg",
+   "action": "뚜껑을 빼꼼, 눈만 보임",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "c13",
+   "img": "c13.jpg",
+   "action": "눈 대신 네온 도시 항구",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "a10",
+   "img": "a10.jpg",
+   "action": "발끝으로 바닥을 콕. 눈이 아니다",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c01",
+   "img": "c01.jpg",
+   "action": "새벽 부두, 상자 안에서 배낭을 안고 웅크린 모찌",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c02",
+   "img": "c02.jpg",
+   "action": "고래 그림 표지판 발견",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c03",
+   "img": "c03.jpg",
+   "action": "지도를 들고 화살표 쪽으로 출발",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c04",
+   "img": "c04.jpg",
+   "action": "출근 인파를 만남",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c05",
+   "img": "c05.jpg",
+   "action": "인파 다리 사이에 휩쓸림",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c06",
+   "img": "c06.jpg",
+   "action": "코끼리 버스 도착, 코로 승객을 태움",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c07",
+   "img": "c07.jpg",
+   "action": "코가 모찌를 집어 올림(훅 장면으로 돌아옴)",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c08",
+   "img": "c08.jpg",
+   "action": "만원 버스, 하마와 곰 사이에 끼임",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c09",
+   "img": "c09.jpg",
+   "action": "뒤로 멀어지는 고래 표지판",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c10",
+   "img": "c10.jpg",
+   "action": "하차 줄에 손이 안 닿아 폴짝폴짝",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c11",
+   "img": "c11.jpg",
+   "action": "기린이 대신 당겨 줌",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c12",
+   "img": "c12.jpg",
+   "action": "사거리에 내려 줌",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c13",
+   "img": "c13.jpg",
+   "action": "카멜레온 신호등 초록",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c14",
+   "img": "c14.jpg",
+   "action": "딸기 트럭에 빨개진 카멜레온",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c15",
+   "img": "c15.jpg",
+   "action": "사거리 대혼란, 지도를 머리에 쓴 모찌",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c16",
+   "img": "c16.jpg",
+   "action": "두더지 지하철 입구로 휩쓸려 내려감",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c17",
+   "img": "c17.jpg",
+   "action": "굴을 파며 수레를 끄는 두더지 기관사",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c18",
+   "img": "c18.jpg",
+   "action": "만원 지하철, 손잡이에 손이 안 닿고 땀 뻘뻘",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c19",
+   "img": "c19.jpg",
+   "action": "생각 풍선에 눈송이와 얼음",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c20",
+   "img": "c20.jpg",
+   "action": "지상으로 나와 뜨거운 길 위에서 녹아내림",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c21",
+   "img": "c21.jpg",
+   "action": "찬 김을 따라 발끝 걸음",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c22",
+   "img": "c22.jpg",
+   "action": "냉동 트럭 발견, 눈에 별",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c23",
+   "img": "c23.jpg",
+   "action": "얼음 상자 위에 대자로 눕기",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c24",
+   "img": "c24.jpg",
+   "action": "택배 모자 그림자가 문을 쾅",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c25",
+   "img": "c25.jpg",
+   "action": "트럭이 고래 반대쪽, 산 쪽으로",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e02",
+   "cut": "c26",
+   "img": "c26.jpg",
+   "action": "깜깜한 짐칸에서 눈을 뜸, 조약돌 빛",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c01",
+   "img": "c01.jpg",
+   "action": "어두운 짐칸, 배낭을 안은 모찌와 어둠 속 눈 두 개",
+   "cast": [
+    "mochi"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c02",
+   "img": "c02.jpg",
+   "action": "조약돌 빛에 드러난 햄스터 택배원 콩",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c03",
+   "img": "c03.jpg",
+   "action": "콩이 전등 줄을 당겨 불이 켜지고 둘 다 깜짝",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c04",
+   "img": "c04.jpg",
+   "action": "얼음 상자 뒤에 숨어 눈만 빼꼼",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c05",
+   "img": "c05.jpg",
+   "action": "트럭이 덜컹, 굴러 나와 이마를 맞댐",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c06",
+   "img": "c06.jpg",
+   "action": "콩은 택배 배지를, 모찌는 배낭 속 조약돌을 보여 줌",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c07",
+   "img": "c07.jpg",
+   "action": "트럭이 서고 문이 열림, 콩이 따라오라고 손짓",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c08",
+   "img": "c08.jpg",
+   "action": "운전석의 거북이 기사가 아주 천천히 깜빡이를 켬",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c09",
+   "img": "c09.jpg",
+   "action": "첫 배달 토끼네: 볼에서 꺼낸 젖은 택배",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c10",
+   "img": "c10.jpg",
+   "action": "모찌도 상자를 머리에 이고 뒤뚱뒤뚱",
+   "cast": [
+    "mochi"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c11",
+   "img": "c11.jpg",
+   "action": "기린네 우편함이 까마득히 높음, 무등을 태워도 안 닿음",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c12",
+   "img": "c12.jpg",
+   "action": "배낭 끈을 새총 삼아 택배를 쏘아 올림, 우편함에 쏙",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c13",
+   "img": "c13.jpg",
+   "action": "날개와 앞발로 하이파이브",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c14",
+   "img": "c14.jpg",
+   "action": "곰네 문에 달·감은 눈 그림 팻말, 살금살금",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c15",
+   "img": "c15.jpg",
+   "action": "모찌가 미끄러져 쿵, 문틈으로 곰의 눈이 번쩍",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c16",
+   "img": "c16.jpg",
+   "action": "둘이 트럭으로 줄행랑, 거북이 기사는 이제야 깜빡이",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c17",
+   "img": "c17.jpg",
+   "action": "짐칸에서 숨을 고르며 웃음, 볼에서 꺼낸 젖은 해바라기씨",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c18",
+   "img": "c18.jpg",
+   "action": "모찌가 지도(거꾸로)의 눈·빙산 그림을 가리킴, 콩은 갸웃",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c19",
+   "img": "c19.jpg",
+   "action": "모찌 시무룩, 조약돌 빛이 약해짐",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c20",
+   "img": "c20.jpg",
+   "action": "트럭이 또 덜컹, 상자 더미가 무너지고 먼지 쌓인 소포가 굴러 나옴",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c21",
+   "img": "c21.jpg",
+   "action": "콩이 깜빡한 소포를 들고 뜨끔, 땀 뻘뻘",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c22",
+   "img": "c22.jpg",
+   "action": "송장 확대: 눈송이, 빙산, 펭귄 발자국 도장",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c23",
+   "img": "c23.jpg",
+   "action": "모찌가 발자국 도장에 발을 대 봄, 조약돌이 환하게 빛남",
+   "cast": [
+    "mochi"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c24",
+   "img": "c24.jpg",
+   "action": "모찌가 소포를 꼭 안고, 콩이 모자를 고쳐 씀",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e03",
+   "cut": "c25",
+   "img": "c25.jpg",
+   "action": "문이 열리고 골목의 생선 굽는 연기가 흘러듦",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c01",
+   "img": "c01.jpg",
+   "action": "골목. 연기 줄기를 코로 따라 걷는 모찌, 소포를 안고 따라오는 콩",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c02",
+   "img": "c02.jpg",
+   "action": "골목 식당가. 옆 가게는 줄이 길고 맨 끝 작은 식당만 텅 비었다. 연기는 그 집 굴뚝에서",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c03",
+   "img": "c03.jpg",
+   "action": "창 안. 빈 식탁들 사이에서 혼자 생선을 굽는 고양이 셰프 무",
+   "cast": [
+    "mu"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c04",
+   "img": "c04.jpg",
+   "action": "모찌가 창에 얼굴을 붙이고 침을 흘린다. 콩이 배낭을 잡아당겨 말린다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c05",
+   "img": "c05.jpg",
+   "action": "문이 열린다. 무의 귀만 쫑긋, 눈은 반쯤 감긴 채 국자로 빈 자리를 가리킨다",
+   "cast": [
+    "mochi",
+    "kong",
+    "mu"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c06",
+   "img": "c06.jpg",
+   "action": "둘이 식탁에 앉고 무가 접시를 내려놓는다. 새까맣게 탄 생선",
+   "cast": [
+    "mochi",
+    "kong",
+    "mu"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c07",
+   "img": "c07.jpg",
+   "action": "모찌가 한 입. 솜털이 곤두선다. 콩은 자기 몫을 볼에 슬쩍 숨긴다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c08",
+   "img": "c08.jpg",
+   "action": "무가 빈 식탁들을 둘러보고 귀가 처진다. 모찌가 주방 쪽을 기웃거린다",
+   "cast": [
+    "mochi",
+    "mu"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c09",
+   "img": "c09.jpg",
+   "action": "주방. 북극곰이 이글루 냉장고를 껴안고 잔다. 무가 생선 꼬리를 잡고 낑낑",
+   "cast": [
+    "mu"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c10",
+   "img": "c10.jpg",
+   "action": "겨우 꺼낸 생선 바구니. 흐물흐물한 생선들 사이에 한 마리만 반짝. 무는 아무거나 집는다",
+   "cast": [
+    "mu"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c11",
+   "img": "c11.jpg",
+   "action": "모찌의 코가 벌름. 반짝이는 한 마리를 날개로 딱 가리킨다",
+   "cast": [
+    "mochi",
+    "mu"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c12",
+   "img": "c12.jpg",
+   "action": "무가 의심스러운 눈으로 그 생선을 굽는다. 노릇노릇 황금빛",
+   "cast": [
+    "mochi",
+    "mu"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c13",
+   "img": "c13.jpg",
+   "action": "무가 한 입. 반쯤 감겼던 눈이 처음으로 번쩍 뜨이고 꼬리가 빳빳해진다",
+   "cast": [
+    "mochi",
+    "mu"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c14",
+   "img": "c14.jpg",
+   "action": "무가 모찌의 배낭 손잡이를 들어 주방 의자 위에 올려놓는다. 생선 고르는 자리",
+   "cast": [
+    "mochi",
+    "mu"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c15",
+   "img": "c15.jpg",
+   "action": "셋의 분업. 모찌가 고르고 무가 굽고, 콩이 접시를 볼에 넣으려다 국자에 딱 막힌다",
+   "cast": [
+    "mochi",
+    "kong",
+    "mu"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c16",
+   "img": "c16.jpg",
+   "action": "굴뚝 연기가 골목으로 퍼진다. 옆 가게 줄에 서 있던 손님들의 코가 한꺼번에 돌아간다",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c17",
+   "img": "c17.jpg",
+   "action": "손님들이 우르르. 텅 비었던 식탁이 꽉 차고 기린은 창으로 목만 넣는다",
+   "cast": [
+    "kong",
+    "mu"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c18",
+   "img": "c18.jpg",
+   "action": "무가 국자로 박자를 맞추며 요리한다. 표정은 그대로인데 꼬리가 살랑",
+   "cast": [
+    "mochi",
+    "mu"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c19",
+   "img": "c19.jpg",
+   "action": "냄새에 북극곰이 눈을 뜨고 이글루 문을 스스로 열어 생선을 내민다",
+   "cast": [
+    "mu"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c20",
+   "img": "c20.jpg",
+   "action": "밤. 접시가 탑처럼 쌓였고 셋이 바닥에 대자로 뻗었다",
+   "cast": [
+    "mochi",
+    "kong",
+    "mu"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c21",
+   "img": "c21.jpg",
+   "action": "무가 말없이 종이에 싼 생선 꼬치 두 개를 내민다",
+   "cast": [
+    "mochi",
+    "kong",
+    "mu"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c22",
+   "img": "c22.jpg",
+   "action": "콩이 소포의 발자국 도장을 보여 주고 어깨를 으쓱한다. 모찌는 자기 발을 대 본다",
+   "cast": [
+    "mochi",
+    "kong",
+    "mu"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c23",
+   "img": "c23.jpg",
+   "action": "무가 국자로 벽을 가리킨다. 벽에 붙은 그림 포스터",
+   "cast": [
+    "mochi",
+    "kong",
+    "mu"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c24",
+   "img": "c24.jpg",
+   "action": "포스터 확대(그림만): 눈송이 기차 → 등대 바닷가 → 배 → 빙산과 펭귄. 아래에 해 세 개와 배 한 척",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e04",
+   "cut": "c25",
+   "img": "c25.jpg",
+   "action": "모찌와 콩이 해를 하나씩 세다가 눈이 커진다. 배낭 속 조약돌이 환해진다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c01",
+   "img": "c01.jpg",
+   "action": "밤의 언덕 위 역. 눈송이 기차가 눈송이 섞인 김을 뿜고, 모찌와 콩이 헐떡이며 승강장에 도착",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c02",
+   "img": "c02.jpg",
+   "action": "매표소. 다람쥐 매표원이 도토리를 받아 볼에 넣고 나뭇잎 표를 내준다. 줄 끝의 둘은 빈손",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c03",
+   "img": "c03.jpg",
+   "action": "모찌가 배낭을 뒤집어 턴다. 조약돌, 지도, 생선 꼬치. 콩의 가방에서는 소포. 도토리는 없다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c04",
+   "img": "c04.jpg",
+   "action": "승강장 양쪽에 기차가 한 대씩. 모찌가 지도를 펴 들고 자신 있게 오른쪽(눈 산 그림) 기차를 가리킨다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c05",
+   "img": "c05.jpg",
+   "action": "짐꾼 오소리가 택배 상자를 수레로 화물칸에 싣는다. 그걸 본 콩의 눈이 반짝",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c06",
+   "img": "c06.jpg",
+   "action": "콩이 빈 큰 상자를 가리키며 택배 모자를 톡톡 친다. 모찌는 한 발 물러선다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c07",
+   "img": "c07.jpg",
+   "action": "상자 속. 둘이 꼭 끼어 앉아 있고 조약돌 빛이 얼굴을 비춘다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c08",
+   "img": "c08.jpg",
+   "action": "짐꾼이 상자에 눈송이 도장을 쾅 찍는다. 손잡이 구멍으로 두 쌍의 눈",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c09",
+   "img": "c09.jpg",
+   "action": "화물칸. 상자 뚜껑이 열리고 두 머리가 올라온다. 구석의 상자 하나가 혼자 꿈틀거린다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c10",
+   "img": "c10.jpg",
+   "action": "밤 들판을 달리는 눈송이 기차. 굴뚝에서 눈송이가 흩날린다",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c11",
+   "img": "c11.jpg",
+   "action": "객차 문틈으로 살금살금 들어오는 둘. 뜨개질하는 양 할머니, 천장 고리의 철새 내비",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c12",
+   "img": "c12.jpg",
+   "action": "객차 저편 문이 열리고 검표원 너구리 등장. 펀치를 딸깍, 승객들이 표를 내민다",
+   "cast": [
+    "mochi",
+    "kong",
+    "raccoon"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c13",
+   "img": "c13.jpg",
+   "action": "숨기 1: 좌석 밑. 체리색 배낭이 삐져나와 있고 검표원의 발이 그 앞에서 멈춘다",
+   "cast": [
+    "mochi",
+    "kong",
+    "raccoon"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c14",
+   "img": "c14.jpg",
+   "action": "검표원이 허리를 숙이려는 순간 양 할머니가 표를 쑥 내민다. 둘은 살금살금 달아난다",
+   "cast": [
+    "mochi",
+    "kong",
+    "raccoon"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c15",
+   "img": "c15.jpg",
+   "action": "숨기 2: 양 할머니의 큰 털실 뭉치 속. 얼굴과 모자만 보인다. 할머니는 모른 척 뜨개질",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c16",
+   "img": "c16.jpg",
+   "action": "검표원이 털실 뭉치를 의심스럽게 들여다본다. 펀치 딸깍",
+   "cast": [
+    "mochi",
+    "kong",
+    "raccoon"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c17",
+   "img": "c17.jpg",
+   "action": "고슴도치 간식 수레가 지나간다. 가시에 꼬치, 사과, 도넛. 냄새 줄기",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c18",
+   "img": "c18.jpg",
+   "action": "털실 뭉치에서 모찌가 쭉 나와 냄새 줄기를 따라간다. 콩이 배낭을 붙잡는다. 털실이 풀린다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c19",
+   "img": "c19.jpg",
+   "action": "털실을 뒤집어쓴 모찌와 검표원의 눈이 딱 마주친다",
+   "cast": [
+    "mochi",
+    "raccoon"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c20",
+   "img": "c20.jpg",
+   "action": "통로 추격. 달리는 둘, 뒤쫓는 검표원, 길게 풀린 털실",
+   "cast": [
+    "mochi",
+    "kong",
+    "raccoon"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c21",
+   "img": "c21.jpg",
+   "action": "객차 끝 문. 더 갈 곳이 없다. 검표원이 다가온다",
+   "cast": [
+    "mochi",
+    "kong",
+    "raccoon"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c22",
+   "img": "c22.jpg",
+   "action": "콩이 소포의 발자국 도장을 보여 주고, 모찌는 떨리는 두 날개로 생선 꼬치를 내민다",
+   "cast": [
+    "mochi",
+    "kong",
+    "raccoon"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c23",
+   "img": "c23.jpg",
+   "action": "검표원이 꼬치를 한입. 눈이 반달이 된다",
+   "cast": [
+    "mochi",
+    "kong",
+    "raccoon"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c24",
+   "img": "c24.jpg",
+   "action": "검표원이 소포 귀퉁이에 펀치로 눈송이 모양 구멍을 딸깍 뚫는다",
+   "cast": [
+    "mochi",
+    "kong",
+    "raccoon"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e05",
+   "cut": "c25",
+   "img": "c25.jpg",
+   "action": "창가에 나란히 앉은 둘. 천장의 철새 내비는 기차 꼬리 쪽을 가리키고 콩이 올려다본다. 창밖이 밝아 온다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c01",
+   "img": "c01.jpg",
+   "action": "눈 산 간이역. 검표원이 소포에 구멍을 하나 더 뚫어 주고 건너편 기차를 가리킨다",
+   "cast": [
+    "mochi",
+    "kong",
+    "raccoon"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c02",
+   "img": "c02.jpg",
+   "action": "반대 방향 기차의 창가. 바다가 보인다. 천장의 철새 내비가 앞을 가리키며 흡족해한다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c03",
+   "img": "c03.jpg",
+   "action": "해 질 녘 바닷가 역. 둘이 내린다. 주황빛 하늘, 갈매기, 고깃배, 언덕 위 등대",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c04",
+   "img": "c04.jpg",
+   "action": "부두의 그림 표지판: 달과 별 아래 배가 등대 빛줄기를 따라 들어온다. 콩이 손가락으로 따라가며 읽는다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c05",
+   "img": "c05.jpg",
+   "action": "언덕 위 등대. 꼭대기 방에서 반딧불이가 꽁무니 빛으로 바다를 비추며 근무 중",
+   "cast": [
+    "firefly"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c06",
+   "img": "c06.jpg",
+   "action": "부두 끝에 나란히 앉아 기다리는 둘. 마지막 생선 꼬치를 반씩 나눈다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c07",
+   "img": "c07.jpg",
+   "action": "모찌가 고개를 돌린다. 저쪽 바위에서 작은 집게 하나가 흔들린다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c08",
+   "img": "c08.jpg",
+   "action": "바위틈에 집게가 낀 아기 게. 눈물이 그렁그렁. 밀물이 발목까지 찼다",
+   "cast": [
+    "crab"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c09",
+   "img": "c09.jpg",
+   "action": "달려가던 모찌가 젖은 바위에서 미끄러지고 콩이 배낭을 붙잡는다",
+   "cast": [
+    "mochi",
+    "kong",
+    "crab"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c10",
+   "img": "c10.jpg",
+   "action": "모찌가 집게를 잡아당긴다. 안 빠진다. 게는 옆으로만 버둥거린다",
+   "cast": [
+    "mochi",
+    "kong",
+    "crab"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c11",
+   "img": "c11.jpg",
+   "action": "물이 배까지 차오른다. 수평선에서 먹구름이 몰려온다",
+   "cast": [
+    "mochi",
+    "kong",
+    "crab"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c12",
+   "img": "c12.jpg",
+   "action": "둘이 바위를 미는 순간 큰 파도가 덮친다. 셋이 휩쓸리며 집게가 빠진다",
+   "cast": [
+    "mochi",
+    "kong",
+    "crab"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c13",
+   "img": "c13.jpg",
+   "action": "고맙다고 다가오려는 게와 모찌가 자꾸 엇갈린다",
+   "cast": [
+    "mochi",
+    "crab"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c14",
+   "img": "c14.jpg",
+   "action": "모찌가 게를 태운다. 게가 집게로 방향을 가리킨다",
+   "cast": [
+    "mochi",
+    "kong",
+    "crab"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c15",
+   "img": "c15.jpg",
+   "action": "먹구름과 파도 사이 바위길을 건너는 셋. 배낭 속 조약돌이 길을 밝힌다",
+   "cast": [
+    "mochi",
+    "kong",
+    "crab"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c16",
+   "img": "c16.jpg",
+   "action": "바위 굴 앞의 게 가족. 어미 게와 형제들이 집게로 박수를 친다",
+   "cast": [
+    "mochi",
+    "kong",
+    "crab"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c17",
+   "img": "c17.jpg",
+   "action": "어미 게가 아기 게를 꼭 안는다. 그 모습을 보는 모찌의 조약돌이 따뜻하게 빛난다",
+   "cast": [
+    "mochi",
+    "crab"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c18",
+   "img": "c18.jpg",
+   "action": "게 가족이 소라 껍데기 하나를 선물로 내민다. 콩이 두 손으로 받는다",
+   "cast": [
+    "mochi",
+    "kong",
+    "crab"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c19",
+   "img": "c19.jpg",
+   "action": "돌아온 부두. 하늘은 깜깜하고 수평선에 배 불빛 하나가 나타난다. 둘이 폴짝 뛴다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c20",
+   "img": "c20.jpg",
+   "action": "등대 꼭대기. 회중시계 바늘이 달 그림에 닿는다. 반딧불이가 하품한다",
+   "cast": [
+    "firefly"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c21",
+   "img": "c21.jpg",
+   "action": "반딧불이가 근무 일지를 덮고 도시락을 가방에 넣는다",
+   "cast": [
+    "firefly"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c22",
+   "img": "c22.jpg",
+   "action": "꽁무니 불이 딸깍 꺼진다. 등대가 깜깜해진다",
+   "cast": [
+    "firefly"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c23",
+   "img": "c23.jpg",
+   "action": "부두. 얼굴을 비추던 빛이 사라지고 둘이 등대를 올려다본다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c24",
+   "img": "c24.jpg",
+   "action": "반딧불이가 콧노래를 부르며 둘 옆을 지나 퇴근한다. 둘이 팔을 뻗지만 닿지 않는다",
+   "cast": [
+    "mochi",
+    "kong",
+    "firefly"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e06",
+   "cut": "c25",
+   "img": "c25.jpg",
+   "action": "모찌가 조약돌을 머리 위로 높이 든다. 콩은 모자를 흔든다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c01",
+   "img": "c01.jpg",
+   "action": "밤의 부두. 꺼진 등대 아래 주저앉은 모찌. 손에 든 조약돌 빛이 약하다. 수평선은 텅 비었다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c02",
+   "img": "c02.jpg",
+   "action": "콩이 모자를 고쳐 쓰고 볼에서 엽서 세 장을 꺼낸다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c03",
+   "img": "c03.jpg",
+   "action": "부두 기둥 위의 펠리컨 우체통. 콩이 엽서를 넣자 부리 주머니가 받는다. 주머니 안에 생선도 보인다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c04",
+   "img": "c04.jpg",
+   "action": "펠리컨이 밤하늘로 날아오른다. 둘이 올려다본다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c05",
+   "img": "c05.jpg",
+   "action": "달이 하늘을 건너는 동안 둘이 등을 맞대고 앉아 기다린다. 모찌가 꾸벅 존다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c06",
+   "img": "c06.jpg",
+   "action": "언덕길에 헤드라이트 두 개. 거북이 택배 트럭이 아주 천천히 온다. 갈매기가 걸어서 트럭을 앞지른다",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c07",
+   "img": "c07.jpg",
+   "action": "짐칸 문이 열리고 셰프 무(생선 도시락)와 검표원 너구리(펀치)가 내린다. 모찌의 눈이 커진다",
+   "cast": [
+    "mochi",
+    "kong",
+    "mu",
+    "raccoon"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c08",
+   "img": "c08.jpg",
+   "action": "바위 쪽에서 게 가족이 옆걸음으로 줄지어 온다. 아기 게가 맨 앞에서 집게를 흔든다",
+   "cast": [
+    "crab"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c09",
+   "img": "c09.jpg",
+   "action": "모찌가 셰프 무에게 달려가 안긴다. 배낭 속 조약돌이 다시 밝아진다",
+   "cast": [
+    "mochi",
+    "mu"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c10",
+   "img": "c10.jpg",
+   "action": "콩이 바닥에 조개껍데기와 돌멩이로 작전도를 놓는다(등대, 배, 고래). 모두가 둘러앉아 본다",
+   "cast": [
+    "mochi",
+    "kong",
+    "mu",
+    "raccoon",
+    "crab"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c11",
+   "img": "c11.jpg",
+   "action": "작전 1. 모래 언덕 갈대밭, 나뭇가지에 매달린 유리병 집들. 모두 깜깜하고 반딧불이가 수면 안대를 쓰고 잔다",
+   "cast": [
+    "firefly"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c12",
+   "img": "c12.jpg",
+   "action": "콩이 병을 톡톡 두드리고 검표원이 펀치를 딸깍거려도 깨지 않는다",
+   "cast": [
+    "kong",
+    "raccoon",
+    "firefly"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c13",
+   "img": "c13.jpg",
+   "action": "셰프 무가 도시락 뚜껑을 연다. 구운 생선 냄새가 병 속으로 흘러들고 반딧불이의 코가 움찔한다",
+   "cast": [
+    "mu",
+    "firefly"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c14",
+   "img": "c14.jpg",
+   "action": "깨어난 반딧불이가 회중시계의 달 그림을 가리키며 고개를 젓는다. 지금은 퇴근 시간",
+   "cast": [
+    "firefly",
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c15",
+   "img": "c15.jpg",
+   "action": "검표원 너구리가 달과 해가 그려진 야근 승인표에 펀치를 딸깍 뚫어 내민다",
+   "cast": [
+    "raccoon",
+    "firefly"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c16",
+   "img": "c16.jpg",
+   "action": "반딧불이가 표를 살펴보더니 모자를 눌러쓴다. 꽁무니 불이 켜진다",
+   "cast": [
+    "firefly"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c17",
+   "img": "c17.jpg",
+   "action": "유리병 집들이 차례로 켜지고 반딧불이 동료들이 밤하늘로 쏟아져 나온다",
+   "cast": [
+    "firefly"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c18",
+   "img": "c18.jpg",
+   "action": "바다 위에 한 줄로 늘어선 반딧불이들. 부두에서 수평선까지 빛의 길이 생긴다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c19",
+   "img": "c19.jpg",
+   "action": "작전 2. 부두 끝에서 게 가족이 집게를 딱딱 친다. 모찌가 소라 껍데기를 대 주자 소리의 물결이 바다로 퍼진다",
+   "cast": [
+    "mochi",
+    "crab"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c20",
+   "img": "c20.jpg",
+   "action": "빨간 소방 헬멧을 쓴 거대한 고래가 솟아오른다. 숨구멍 물기둥으로 대답한다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c21",
+   "img": "c21.jpg",
+   "action": "고래가 부두에 꼬리를 대 준다. 검표원이 소포에 세 번째 구멍을 뚫는다. 승선권",
+   "cast": [
+    "mochi",
+    "kong",
+    "raccoon"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c22",
+   "img": "c22.jpg",
+   "action": "셰프 무가 생선 도시락을 모찌의 배낭에 넣어 준다. 아기 게가 운다",
+   "cast": [
+    "mochi",
+    "mu",
+    "crab"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c23",
+   "img": "c23.jpg",
+   "action": "고래 등 위의 둘. 빛의 길을 따라 출발한다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c24",
+   "img": "c24.jpg",
+   "action": "부두에서 국자와 펀치와 집게를 흔드는 친구들. 마을 언덕 뒤로 하늘이 밝아 온다. 두 번째 해",
+   "cast": [
+    "mu",
+    "raccoon",
+    "crab"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c25",
+   "img": "c25.jpg",
+   "action": "빛의 길 끝, 멀리 마지막 배의 불빛이 보인다. 둘이 폴짝 뛴다. 그 앞에 먹구름의 벽",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c01",
+   "img": "c01.jpg",
+   "action": "폭풍 바다. 고래 소방선이 물기둥으로 큰 파도를 둘로 가른다. 등 위의 둘이 사다리를 꼭 잡는다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c02",
+   "img": "c02.jpg",
+   "action": "파도가 지나간 깜깜한 바다. 반딧불이들이 흩어져 있다. 등대지기가 모자를 붙잡고 두리번거린다",
+   "cast": [
+    "firefly"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c03",
+   "img": "c03.jpg",
+   "action": "모찌가 배낭을 꼭 끌어안는다. 배낭 틈으로 새어 나오는 빛이 점점 밝아진다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c04",
+   "img": "c04.jpg",
+   "action": "모찌가 조약돌을 머리 위로 높이 든다. 이번에는 등대처럼 밝은 금빛이 바다를 비춘다",
+   "cast": [
+    "mochi"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c05",
+   "img": "c05.jpg",
+   "action": "흩어졌던 반딧불이들이 조약돌 빛을 향해 날아와 다시 한 줄로 선다. 빛의 길이 이어진다",
+   "cast": [
+    "mochi",
+    "firefly"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c06",
+   "img": "c06.jpg",
+   "action": "파도 사이의 작은 고깃배. 갈매기 선원들이 빛의 길을 보고 키를 돌려 따라온다",
+   "cast": [],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c07",
+   "img": "c07.jpg",
+   "action": "먹구름이 갈라지고 초록빛 오로라. 얼음 언덕과 이글루 마을이 보인다. 둘이 폴짝 뛴다",
+   "cast": [
+    "mochi",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c08",
+   "img": "c08.jpg",
+   "action": "고래가 얼음 부두에 닿는다. 부두 끝에 로즈색 목도리의 엄마가 지도를 꼭 쥐고 서 있다",
+   "cast": [
+    "mom"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c09",
+   "img": "c09.jpg",
+   "action": "엄마 옆에 작은 눈사람 셋이 줄지어 서 있다. 하루에 하나씩 만들었다. 세 번째 해가 뜬다",
+   "cast": [
+    "mom"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c10",
+   "img": "c10.jpg",
+   "action": "모찌가 고래 꼬리를 미끄럼틀처럼 타고 내려와 달려간다",
+   "cast": [
+    "mochi"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c11",
+   "img": "c11.jpg",
+   "action": "엄마가 형제 펭귄 넷을 날개로 하나씩 짚으며 센다. 다섯 번째 자리로 모찌가 쏙 들어간다",
+   "cast": [
+    "mom",
+    "mochi"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c12",
+   "img": "c12.jpg",
+   "action": "엄마의 날개가 다섯 번째에서 멈춘다. 엄마 눈에 눈물이 맺힌다",
+   "cast": [
+    "mom",
+    "mochi"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c13",
+   "img": "c13.jpg",
+   "action": "꼭 안는 엄마와 모찌. 로즈색 목도리가 둘을 감싼다",
+   "cast": [
+    "mom",
+    "mochi"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c14",
+   "img": "c14.jpg",
+   "action": "콩이 볼에서 구멍 세 개 뚫린 소포를 꺼내 내민다. 소포에 로즈색 목도리 그림",
+   "cast": [
+    "kong",
+    "mom"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c15",
+   "img": "c15.jpg",
+   "action": "엄마가 소포를 연다. 로즈 리본이 달린 작은 은방울이 반짝인다",
+   "cast": [
+    "mom"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c16",
+   "img": "c16.jpg",
+   "action": "엄마가 방울과 콩을 번갈아 본다. 소포에서 먼지가 풀썩. 콩이 땀을 뻘뻘 흘린다",
+   "cast": [
+    "mom",
+    "kong"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c17",
+   "img": "c17.jpg",
+   "action": "엄마가 방울을 모찌 배낭에 달아 준다. 딸랑",
+   "cast": [
+    "mom",
+    "mochi"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c18",
+   "img": "c18.jpg",
+   "action": "엄마가 콩도 날개로 안아 준다. 콩의 볼이 빨개진다",
+   "cast": [
+    "mom",
+    "kong",
+    "mochi"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c19",
+   "img": "c19.jpg",
+   "action": "그날 밤 이글루 안. 모찌가 크레용으로 그림 엽서를 그린다",
+   "cast": [
+    "mochi"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c20",
+   "img": "c20.jpg",
+   "action": "얼음 부두의 펠리컨 우체통. 모찌가 엽서를 넣는다. 부리 주머니엔 생선이 가득",
+   "cast": [
+    "mochi"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c21",
+   "img": "c21.jpg",
+   "action": "눈 산 간이역. 검표원 너구리가 엽서를 받는데 생선이 같이 툭 떨어진다",
+   "cast": [
+    "raccoon"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c22",
+   "img": "c22.jpg",
+   "action": "등대 꼭대기. 반딧불이가 엽서를 받는다. 따라온 생선이 반딧불이보다 크다",
+   "cast": [
+    "firefly"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c23",
+   "img": "c23.jpg",
+   "action": "바위 굴 앞. 게 가족이 엽서를 펼쳐 들고 집게 박수를 친다. 생선은 형제들이 끌고 간다",
+   "cast": [
+    "crab"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c24",
+   "img": "c24.jpg",
+   "action": "무의 식당 주방. 엽서를 벽에 붙이고, 같이 온 생선을 굽는다. 표정은 그대로인데 꼬리가 흔들린다",
+   "cast": [
+    "mu"
+   ],
+   "status": "todo"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c25",
+   "img": "c25.jpg",
+   "action": "얼음 부두. 고래 등에 오른 콩이 손을 흔든다. 모찌와 엄마, 형제들이 손을 흔든다. 딸랑",
+   "cast": [
+    "kong",
+    "mochi",
+    "mom"
+   ],
+   "status": "todo"
+  }
+ ]
+}

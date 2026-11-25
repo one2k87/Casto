@@ -11,3 +11,4 @@ out/demo_clay/
 # 3화 Flow 시험 영상(대용량, 깃 제외)
 tailored/episodes/*/flow/
 tailored/episodes/*/test/
+tailored/longform/s1e0*/
