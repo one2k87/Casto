@@ -3,7 +3,7 @@
 | 항목 | 값 |
 |---|---|
 | 게시일 | 12/18(금) 12:10 KST |
-| 영상 | `tailored/episodes/s1e05/s1e05.mp4` (69.4초, 세로 1080×1920) |
+| 영상 | `tailored/episodes/s1e05/s1e05_flow.mp4` (Flow 애니메이션판, 69.4초, 세로 1080×1920 — 11/25 사용자 결정으로 원본 대신 사용. 원본 s1e05.mp4는 보관) |
 | 제목 | 표 없는 손님 🎫 \| No Ticket, No Problem · Tailored EP5 |
 | 자막 | `captions/s1e05.ko.srt` · `en` · `ja` · `es` (자동 생성 영어 자막은 내린다) |
 | 시청자층 | 1화 설정을 스튜디오에서 확인해 같게 맞춘다(기록 없음) |
