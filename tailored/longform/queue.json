@@ -3,6 +3,55 @@
  "items": [
   {
    "ep": "s1e01",
+   "cut": "w1",
+   "img": null,
+   "action": "부두에 갑자기 눈보라(화이트아웃). 하얗게 아무것도 안 보임",
+   "cast": [
+    "mom",
+    "mochi",
+    "chicks"
+   ],
+   "status": "todo",
+   "note": "사용자 승인 11/26 — 엄마가 놓치는 이유. 새 그림(Flow Nano Banana, 참조: 1화 c02·c08)"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "w2",
+   "img": null,
+   "action": "눈보라 속 엄마가 날개로 아이들을 하나·둘·셋·넷·다섯 셈. 다섯째는 눈 덮인 둥근 회색 돌(모찌 크기)",
+   "cast": [
+    "mom",
+    "chicks"
+   ],
+   "status": "todo",
+   "note": "8화 「다섯째에서 멈춤」과 이어짐"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "w3",
+   "img": null,
+   "action": "엄마가 안심하고 줄을 데리고 떠남. 그 사이 화면 반대쪽에서 모찌는 생선 냄새를 따라감",
+   "cast": [
+    "mom",
+    "chicks",
+    "mochi"
+   ],
+   "status": "todo",
+   "note": "a3 대체"
+  },
+  {
+   "ep": "s1e01",
+   "cut": "w4",
+   "img": null,
+   "action": "(c08 앞) 눈보라가 그치자 다섯째 자리의 눈이 녹아 회색 돌이 드러남. 엄마 깜짝",
+   "cast": [
+    "mom"
+   ],
+   "status": "todo",
+   "note": "c08 직전"
+  },
+  {
+   "ep": "s1e01",
    "cut": "c02",
    "img": "c02.jpg",
    "action": "엄마가 배낭에 빛나는 조약돌을 넣어 줌",
@@ -47,7 +96,8 @@
    "img": "c04.jpg",
    "action": "생선 냄새를 따라 화물 더미로",
    "cast": [],
-   "status": "done"
+   "status": "redo",
+   "note": "review 11/26: 냄새 줄기가 코에서 나오는 것처럼 보임 → 그림 프롬프트 no smell lines + fx scent_trail(음식→코). a3는 1화 화이트아웃 수정안에 맞춰 다시"
   },
   {
    "ep": "s1e01",
@@ -55,7 +105,8 @@
    "img": "a3.jpg",
    "action": "줄은 왼쪽으로 떠나고 모찌만 냄새를 따라 오른쪽으로",
    "cast": [],
-   "status": "done"
+   "status": "redo",
+   "note": "review 11/26: 냄새 줄기가 코에서 나오는 것처럼 보임 → 그림 프롬프트 no smell lines + fx scent_trail(음식→코). a3는 1화 화이트아웃 수정안에 맞춰 다시"
   },
   {
    "ep": "s1e01",

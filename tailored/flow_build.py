@@ -10,6 +10,8 @@ import numpy as np
 from PIL import Image
 
 ep, c00src, skip = sys.argv[1], sys.argv[2], float(sys.argv[3])
+# 검수(review 모듈) 결과 반영: {"c12": "still", "c05": 3.0} — still=정지 그림(카메라 연출), 숫자=원본 클립 앞 N초만 컷 길이에 맞춰 사용
+OVR = json.loads(sys.argv[4]) if len(sys.argv) > 4 else {}
 SRC = f"/mnt/user-data/uploads/SolvUp_Workspace/Casto/tailored/episodes/{ep}/flow"
 ORIG = f"/home/claude/Casto/tailored/episodes/{ep}"
 WORK = f"/home/claude/e3/{ep}_flow"
@@ -33,11 +35,17 @@ shutil.rmtree(WORK, ignore_errors=True)
 shutil.copytree(ORIG, WORK)
 os.makedirs(f"{WORK}/flow", exist_ok=True)
 enc = ["-an", "-vf", "setpts=PTS/2", "-r", "30", "-c:v", "libx264", "-crf", "18", "-preset", "veryfast"]
+secs = {c["id"]: c["sec"] for c in conti["cuts"]}
 for i in ids:
-    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", f"{SRC}/{i}_flow.mp4", *enc, f"{WORK}/flow/{i}.mp4"], check=True)
+    if OVR.get(i) == "still":
+        continue
+    e = list(enc)
+    if isinstance(OVR.get(i), (int, float)):
+        e[e.index("setpts=PTS/2")] = f"setpts=PTS*{secs[i] / float(OVR[i]):.4f}"
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", f"{SRC}/{i}_flow.mp4", *e, f"{WORK}/flow/{i}.mp4"], check=True)
 subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", str(skip), "-i", f"{SRC}/{c00src}_flow.mp4", *enc, f"{WORK}/flow/c00.mp4"], check=True)
 for c in conti["cuts"]:
-    if not c.get("video"):
+    if not c.get("video") and OVR.get(c["id"]) != "still":
         c["video"] = f"flow/{c['id']}.mp4"
 json.dump(conti, open(f"{WORK}/conti.json", "w"), ensure_ascii=False, indent=1)
 sys.path.insert(0, "/home/claude/Casto")
