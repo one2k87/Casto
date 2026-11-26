@@ -1,15 +1,87 @@
 {
  "folding_cutting_board": {
   "name": "접히는 도마",
-  "search_keyword": "접히는 도마 냄비",
+  "search_keyword": "접히는 도마 냄비 깔끔하게",
   "en_keyword": "folding cutting board",
   "price_band": "저가",
   "brand": "",
   "product_id": "",
-  "evidence": "냄비 및 깔끔하게 키워드 관련 채널에서 접히는 도마로 언급",
+  "evidence": "냄비 및 주방템 관련 쇼츠 영상에서 썬 재료를 담는 도마로 등장",
   "category": "50000008",
-  "last_found": "2026-11-26",
+  "last_found": "2026-11-27",
   "first_seen": "2026-11-20"
+ },
+ "apple_corer": {
+  "name": "사과 씨 제거기",
+  "search_keyword": "사과 씨 제거 애플 코어러",
+  "en_keyword": "apple corer",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "주방용품 카테고리 제목에 반복 등장하며 사과 씨 빼는 아이템으로 소개됨",
+  "category": "50000008",
+  "last_found": "2026-11-27",
+  "first_seen": "2026-11-24"
+ },
+ "fruit_peeler": {
+  "name": "과일 필러",
+  "search_keyword": "자동 과일 필러 전동 껍질제거기",
+  "en_keyword": "electric fruit peeler",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "주방꿀템 및 살림꿀템 영상 다수에서 과일 껍질 제거기로 언급됨",
+  "category": "50000008",
+  "last_found": "2026-11-27",
+  "first_seen": "2026-11-26"
+ },
+ "waterproof_carpet": {
+  "name": "방수 카페트",
+  "search_keyword": "물세탁 가능한 방수 카페트",
+  "en_keyword": "waterproof washable rug",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "생활꿀팁 카테고리에서 물세탁 가능한 방오 방수 카페트로 등장",
+  "category": "50000004",
+  "last_found": "2026-11-27",
+  "first_seen": "2026-11-26"
+ },
+ "egg_cooker": {
+  "name": "신박한 계란용품",
+  "search_keyword": "전자레인지 계란 용품",
+  "en_keyword": "microwave egg cooker",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "계란 하나 관련 신박한 주방용품 랭킹 영상에 반복 등장",
+  "category": "50000008",
+  "last_found": "2026-11-27",
+  "first_seen": "2026-11-27"
+ },
+ "rice_dispenser": {
+  "name": "잡곡통 자판기",
+  "search_keyword": "잡곡통 쌀통 자판기",
+  "en_keyword": "rice dispenser",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "이런 주방템 처음 봄이라는 수식어와 함께 주방템 영상에 등장",
+  "category": "50000008",
+  "last_found": "2026-11-27",
+  "first_seen": "2026-11-27"
+ },
+ "oil_bottle": {
+  "name": "오일병",
+  "search_keyword": "주방 오일병 양념병",
+  "en_keyword": "oil dispenser bottle",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "쿠팡템 및 살림템 추천 쇼츠 영상에서 하나로 끝내는 아이템으로 언급됨",
+  "category": "50000008",
+  "last_found": "2026-11-27",
+  "first_seen": "2026-11-27"
  },
  "animal_fan": {
   "name": "동물 선풍기",
@@ -22,42 +94,6 @@
   "category": "50000008",
   "last_found": "2026-11-26",
   "first_seen": "2026-11-25"
- },
- "apple_corer": {
-  "name": "사과 씨 제거기",
-  "search_keyword": "사과 씨 제거 애플 코어러",
-  "en_keyword": "apple corer",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "주방용품 채널 8개 반복 등장 및 사과 씨 제거 애플 코어러 언급",
-  "category": "50000008",
-  "last_found": "2026-11-26",
-  "first_seen": "2026-11-24"
- },
- "fruit_peeler": {
-  "name": "과일 필러",
-  "search_keyword": "과일 껍질 제거기 필러",
-  "en_keyword": "fruit peeler",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "주방꿀템 및 살림꿀템 채널 다수 반복 #과일필러 #과일껍질제거기",
-  "category": "50000008",
-  "last_found": "2026-11-26",
-  "first_seen": "2026-11-26"
- },
- "waterproof_carpet": {
-  "name": "방수 카페트",
-  "search_keyword": "물세탁 가능한 방오 방수 카페트",
-  "en_keyword": "waterproof carpet",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "생활꿀팁 채널에서 물세탁 가능한 방오, 방수 카페트로 등장",
-  "category": "50000004",
-  "last_found": "2026-11-26",
-  "first_seen": "2026-11-26"
  },
  "multi_cooker": {
   "name": "만능 멀티쿠커",
@@ -202,41 +238,5 @@
   "category": "50000004",
   "last_found": "2026-11-23",
   "first_seen": "2026-11-17"
- },
- "oil_mist_bottle": {
-  "name": "오일스프레이병",
-  "search_keyword": "오일스프레이병",
-  "en_keyword": "oil sprayer",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "주방꿀템 및 살림꿀템 관련 여러 채널의 해시태그 및 영상에서 반복 등장",
-  "category": "50000008",
-  "last_found": "2026-11-23",
-  "first_seen": "2026-11-23"
- },
- "mini_kimchi_refrigerator": {
-  "name": "미니 김치냉장고",
-  "search_keyword": "미니 김치냉장고",
-  "en_keyword": "mini kimchi refrigerator",
-  "price_band": "고가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "주방템 관련 쇼츠 영상에서 역대급 주방템으로 등장",
-  "category": "50000003",
-  "last_found": "2026-11-23",
-  "first_seen": "2026-11-23"
- },
- "multi_multicooker": {
-  "name": "만능 멀티쿠커",
-  "search_keyword": "만능 멀티쿠커",
-  "en_keyword": "multi cooker",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "쿠팡 추천 관련 냄비 및 멀티쿠커 언급 5개 이상 채널에서 등장",
-  "category": "50000003",
-  "last_found": "2026-11-22",
-  "first_seen": "2026-11-20"
  }
 }
