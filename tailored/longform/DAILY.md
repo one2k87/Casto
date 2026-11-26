@@ -11,6 +11,7 @@
    `Outpaint this exact illustration into a wide 16:9 landscape frame. Keep the characters, their poses, the art style, colors and lighting exactly the same and centered. Extend the scene naturally to the left and right. No text.`
 4. 영상 만들기(10크레딧): 설정 = 동영상 · 프레임 · 16:9 · Veo 3.1 - Lite · x1. 시작 프레임 = 3의 가로 그림. 프롬프트 = 컷 action을 영어 한두 문장으로 + `Keep the exact art style, colors and character designs of the image. Gentle expressive cartoon animation, smooth natural motion, slow subtle camera movement. No text.`
 5. 완성되면 편집 화면 「미디어 다운로드 → 720p」로 받는다(파일 이름 `<ep>_<cut>_wide.mp4`). 받은 파일을 기기 `~/Downloads` → `Casto/tailored/longform/<ep>/<cut>.mp4` 로 복사하고 queue.json status를 `done`으로.
+5-1. **검수(QA_CHECKLIST.md 2단계)**: 받은 클립마다 시작·가운데·끝 3장을 뽑아 본다. ❌면 queue status를 `redo`로 두고 이유를 note에 적는다(그림부터 다시).
 6. 생성이 「실패」면 크레딧이 환불되므로 그 컷은 `todo`로 두고 다음 날 다시.
 7. 끝나면 famto 인박스에 한 줄: `캐스토 | 롱폼 매일 ○/201 (오늘 c..~c..)`.
 
