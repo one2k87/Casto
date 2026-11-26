@@ -10,7 +10,7 @@ import numpy as np
 from PIL import Image
 
 ep, c00src, skip = sys.argv[1], sys.argv[2], float(sys.argv[3])
-# 검수(review 모듈) 결과 반영: {"c12": "still", "c05": 3.0} — still=정지 그림(카메라 연출), 숫자=원본 클립 앞 N초만 컷 길이에 맞춰 사용
+# 검수(review 모듈) 결과 반영: {"c12": "still", "c21": "still:c21_fix.png", "c05": 3.0} — still=정지 그림(카메라 연출), 숫자=원본 클립 앞 N초만 컷 길이에 맞춰 사용
 OVR = json.loads(sys.argv[4]) if len(sys.argv) > 4 else {}
 SRC = f"/mnt/user-data/uploads/SolvUp_Workspace/Casto/tailored/episodes/{ep}/flow"
 ORIG = f"/home/claude/Casto/tailored/episodes/{ep}"
@@ -23,7 +23,11 @@ def thumb(path):
 
 refs = {i: thumb(f"{ORIG}/{next(c['img'] for c in conti['cuts'] if c['id']==i)}") for i in ids}
 bad = []
+def _still(v):
+    return isinstance(v, str) and v.startswith("still")
 for i in ids:
+    if _still(OVR.get(i)):
+        continue
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", f"{SRC}/{i}_flow.mp4", "-frames:v", "1", "-vf", "scale=90:160", "/tmp/claude-0/f.png"], check=True)
     a = thumb("/tmp/claude-0/f.png")
     best = min(refs, key=lambda k: np.abs(a - refs[k]).mean())
@@ -37,7 +41,7 @@ os.makedirs(f"{WORK}/flow", exist_ok=True)
 enc = ["-an", "-vf", "setpts=PTS/2", "-r", "30", "-c:v", "libx264", "-crf", "18", "-preset", "veryfast"]
 secs = {c["id"]: c["sec"] for c in conti["cuts"]}
 for i in ids:
-    if OVR.get(i) == "still":
+    if _still(OVR.get(i)):
         continue
     e = list(enc)
     if isinstance(OVR.get(i), (int, float)):
@@ -45,7 +49,10 @@ for i in ids:
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", f"{SRC}/{i}_flow.mp4", *e, f"{WORK}/flow/{i}.mp4"], check=True)
 subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", str(skip), "-i", f"{SRC}/{c00src}_flow.mp4", *enc, f"{WORK}/flow/c00.mp4"], check=True)
 for c in conti["cuts"]:
-    if not c.get("video") and OVR.get(c["id"]) != "still":
+    v = OVR.get(c["id"])
+    if _still(v) and ":" in v:          # "still:c21_fix.png" — 검수로 다시 만든 그림을 정지 컷으로
+        c["img"] = v.split(":", 1)[1]
+    if not c.get("video") and not _still(v):
         c["video"] = f"flow/{c['id']}.mp4"
 json.dump(conti, open(f"{WORK}/conti.json", "w"), ensure_ascii=False, indent=1)
 sys.path.insert(0, "/home/claude/Casto")
