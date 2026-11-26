@@ -26,7 +26,7 @@
 ## 지금 막힌 것
 - 1화 조회 2회의 원인 미확인(노출 자체가 안 됨으로 추정 — Studio 분석 필요, 개인 크롬 미연결).
 - 이 채널용 업로드·댓글 API 인증 없음 → 업로드·자막 등록이 크롬 수동(편당 약 15분).
-- 이름 부제·핸들(@tailoredworld) 변경은 11/26까지 잠김.
+- ✅ 11/26 채널 이름 「Tailored · Tiny Tail World」·핸들 @tailoredworld 변경 게시(사용자 확인).
 
 ## 자산(다른 앱이 쓸 수 있는 것)
 - 만화 렌더러 `tailored_render.py`·자막 도구 `tailored_captions.py`·콘티 형식(`tailored/README.md`) — 랩토 픽쳐쇼가 재사용 중/가능.
