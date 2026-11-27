@@ -5,7 +5,7 @@
   python3 longform_build.py --season s1e01,s1e02,... --out season1.mp4   (화별 결과를 이어 붙임)
 
 - 컷 순서는 episodes/<ep>/conti.json 그대로, c00(쇼츠용 콜드 오픈)은 뺀다.
-- 가로 클립(<clips>/<ep>/<cut>.mp4, Flow 720p)이 있으면 1배속으로 앞 --sec 초까지 쓴다. 화면은 자르지 않는다(워터마크 유지).
+- 가로 클립(<clips>/<ep>/<cut>.mp4, Flow 720p)이 있으면 1배속으로 앞 --sec 초까지 쓴다(queue.json use_sec가 있으면 그 초까지). 화면은 자르지 않는다(워터마크 유지).
 - 없으면 임시 화면: 세로 그림을 가운데 두고 양옆은 같은 그림을 흐리게 — 클립이 모일수록 진짜 화면으로 바뀐다.
 - 세로 영상 컷(엔딩 실제 영상)도 같은 임시 화면 방식으로 가운데에 둔다.
 - 소리: 그 화 쇼츠 완성본의 음악을 반복해 길이에 맞추고 0.45배, 끝 2초 페이드아웃.
@@ -44,6 +44,10 @@ def build_episode(ep, clips, out, sec):
     ed = os.path.join(ROOT, "episodes", ep)
     conti = json.load(open(os.path.join(ed, "conti.json"), encoding="utf-8"))
     tmp = tempfile.mkdtemp(prefix=f"lf_{ep}_")
+    # 검수(QA 2단계)에서 「앞 N초만」으로 정한 컷: longform/queue.json 의 use_sec
+    qp = os.path.join(ROOT, "longform", "queue.json")
+    use = {i["cut"]: i["use_sec"] for i in (json.load(open(qp, encoding="utf-8"))["items"] if os.path.exists(qp) else [])
+           if i.get("ep") == ep and i.get("use_sec")}
     segs, subs, t, real = [], [], 0.0, 0
     for c in conti["cuts"]:
         if c["id"] == "c00":
@@ -51,7 +55,7 @@ def build_episode(ep, clips, out, sec):
         seg = os.path.join(tmp, f"{c['id']}.mp4")
         wide = os.path.join(clips, ep, f"{c['id']}.mp4") if clips else ""
         if wide and os.path.exists(wide):
-            d = min(sec, dur(wide))
+            d = min(sec, use.get(c["id"], sec), dur(wide))
             sh("-i", wide, "-t", f"{d:.2f}", "-vf", f"scale={W}:{H},setsar=1", *ENC, seg)
             real += 1
         elif c.get("video") and os.path.exists(os.path.join(ed, c["video"])):

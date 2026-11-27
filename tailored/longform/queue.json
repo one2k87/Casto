@@ -11,8 +11,9 @@
     "mochi",
     "chicks"
    ],
-   "status": "todo",
-   "note": "사용자 승인 11/26 — 엄마가 놓치는 이유. 새 그림(Flow Nano Banana, 참조: 1화 c02·c08)"
+   "status": "done",
+   "note": "11/27 클립(Veo Lite). QA 2단계 ⚠: 3초부터 눈굴이 생기고 아기들에게 빨간 배낭이 생김(모찌가 여럿처럼 보임) → 앞 2.5초만 사용(use_sec, 0크레딧). 원래 note: 사용자 승인 11/26 — 엄마가 놓치는 이유. 새 그림(Flow Nano Banana, 참조: 1화 c02·c08)",
+   "use_sec": 2.5
   },
   {
    "ep": "s1e01",
@@ -23,8 +24,9 @@
     "mom",
     "chicks"
    ],
-   "status": "todo",
-   "note": "8화 「다섯째에서 멈춤」과 이어짐"
+   "status": "done",
+   "note": "11/27 클립(Veo Lite). QA 2단계 ⚠: 4초부터 왼쪽 아기에게 빨간 배낭끈이 생김(모찌가 줄에 있는 것처럼 보임) → 앞 3.5초만 사용(use_sec). 다섯째=눈 덮인 돌, 엄마 날개가 돌 위 ✅. 8화 「다섯째에서 멈춤」과 이어짐",
+   "use_sec": 3.5
   },
   {
    "ep": "s1e01",
@@ -36,8 +38,9 @@
     "chicks",
     "mochi"
    ],
-   "status": "todo",
-   "note": "a3 대체"
+   "status": "done",
+   "note": "11/27 클립(Veo Lite). QA 2단계 ⚠: 4초쯤 엄마가 사라지고 아기들이 반투명, 끝에 엄마가 모찌 쪽으로 돌아섬 → 앞 3초만 사용(use_sec). 앞 3초는 엄마·아기 넷 왼쪽, 눈벽 사이, 모찌 오른쪽 화물로 ✅. a3 대체",
+   "use_sec": 3.0
   },
   {
    "ep": "s1e01",
@@ -47,8 +50,8 @@
    "cast": [
     "mom"
    ],
-   "status": "todo",
-   "note": "c08 직전"
+   "status": "done",
+   "note": "11/27 클립(Veo Lite). QA 2단계 ✅: 눈보라 그침, 회색 돌, 엄마 깜짝 → 끝은 엄마 얼굴 가까이(걱정). c08 직전"
   },
   {
    "ep": "s1e01",
@@ -96,8 +99,8 @@
    "img": "c04.jpg",
    "action": "생선 냄새를 따라 화물 더미로",
    "cast": [],
-   "status": "redo",
-   "note": "review 11/26: 냄새 줄기가 코에서 나오는 것처럼 보임 → 그림 프롬프트 no smell lines + fx scent_trail(음식→코). a3는 1화 화이트아웃 수정안에 맞춰 다시"
+   "status": "done",
+   "note": "11/27 다시 만듦: 그림에서 냄새 점선·물고기 기호 지우고(Nano Banana outpaint) Veo Lite. QA 2단계 ✅: 냄새 줄기 없음, 모찌 모습·배낭 유지, 화물 상자 쪽으로 감. 냄새 방향은 fx scent_trail(음식→코)로 덧그림 예정. (이전 review 11/26: 냄새 줄기가 코에서 나오는 것처럼 보임)"
   },
   {
    "ep": "s1e01",
