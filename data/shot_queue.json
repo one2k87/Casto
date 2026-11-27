@@ -1,5 +1,5 @@
 {
- "next": 181,
+ "next": 184,
  "items": {
   "1": {
    "name": "늘어나는 밀폐용기",
@@ -1673,6 +1673,36 @@
    "done": false,
    "search": "오일병",
    "url": "https://www.coupang.com/np/search?q=%EC%98%A4%EC%9D%BC%EB%B3%91"
+  },
+  "181": {
+   "name": "3단 자동 계란보관함",
+   "slug": "",
+   "key": "3단자동계란보관함",
+   "done": false,
+   "search": "3단 자동 계란보관함",
+   "url": "https://www.coupang.com/np/search?q=3%EB%8B%A8+%EC%9E%90%EB%8F%99+%EA%B3%84%EB%9E%80%EB%B3%B4%EA%B4%80%ED%95%A8",
+   "hold": true,
+   "note": "29번과 같은 물건으로 보임 — 29번으로 캡처"
+  },
+  "182": {
+   "name": "무인양품 추천템",
+   "slug": "",
+   "key": "무인양품추천템",
+   "done": false,
+   "search": "무인양품 추천템",
+   "url": "https://www.coupang.com/np/search?q=%EB%AC%B4%EC%9D%B8%EC%96%91%ED%92%88+%EC%B6%94%EC%B2%9C%ED%85%9C",
+   "hold": true,
+   "note": "64번과 같은 물건으로 보임 — 64번으로 캡처"
+  },
+  "183": {
+   "name": "만능 냄비",
+   "slug": "",
+   "key": "만능냄비",
+   "done": false,
+   "search": "만능 냄비",
+   "url": "https://www.coupang.com/np/search?q=%EB%A7%8C%EB%8A%A5+%EB%83%84%EB%B9%84",
+   "hold": true,
+   "note": "77번과 같은 물건으로 보임 — 77번으로 캡처"
   }
  }
 }

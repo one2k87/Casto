@@ -1,15 +1,75 @@
 {
  "folding_cutting_board": {
   "name": "접히는 도마",
-  "search_keyword": "접히는 도마 냄비 깔끔하게",
+  "search_keyword": "접히는 도마 냄비",
   "en_keyword": "folding cutting board",
   "price_band": "저가",
   "brand": "",
   "product_id": "",
-  "evidence": "냄비 및 주방템 관련 쇼츠 영상에서 썬 재료를 담는 도마로 등장",
+  "evidence": "냄비 및 살림 관련 쇼츠 영상에서 반복 등장",
   "category": "50000008",
-  "last_found": "2026-11-27",
+  "last_found": "2026-11-28",
   "first_seen": "2026-11-20"
+ },
+ "3d_auto_egg_storage_box": {
+  "name": "3단 자동 계란보관함",
+  "search_keyword": "3단 자동 계란보관함",
+  "en_keyword": "automatic egg dispenser",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "쿠팡추천템 키워드 영상 27개, 채널 14개에 반복 등장",
+  "category": "50000008",
+  "last_found": "2026-11-28",
+  "first_seen": "2026-11-28"
+ },
+ "muji_recommendation_item": {
+  "name": "무인양품 추천템",
+  "search_keyword": "무인양품 주방용품",
+  "en_keyword": "muji haul",
+  "price_band": "중가",
+  "brand": "무인양품",
+  "product_id": "",
+  "evidence": "무인양품 키워드 영상 8개, 채널 8개에서 반복 노출",
+  "category": "50000008",
+  "last_found": "2026-11-28",
+  "first_seen": "2026-11-28"
+ },
+ "minjung_recommendation_pot": {
+  "name": "만능 냄비",
+  "search_keyword": "이민정 만능 냄비",
+  "en_keyword": "",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "냄비 키워드 영상 4개, 채널 4개에서 자취템으로 언급",
+  "category": "50000008",
+  "last_found": "2026-11-28",
+  "first_seen": "2026-11-28"
+ },
+ "animal_food_fan": {
+  "name": "동물 선풍기",
+  "search_keyword": "음식 식혀주는 동물 선풍기",
+  "en_keyword": "mini food cooler fan",
+  "price_band": "저가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "생활꿀템 광고 상품 키워드로 직접 노출됨",
+  "category": "50000008",
+  "last_found": "2026-11-28",
+  "first_seen": "2026-11-28"
+ },
+ "rice_dispenser_container": {
+  "name": "잡곡통 자판기",
+  "search_keyword": "잡곡통 자동 디스펜서",
+  "en_keyword": "rice dispenser",
+  "price_band": "중가",
+  "brand": "",
+  "product_id": "",
+  "evidence": "주방템 TOP3 키워드 영상에서 신박한 아이템으로 소개",
+  "category": "50000008",
+  "last_found": "2026-11-28",
+  "first_seen": "2026-11-28"
  },
  "apple_corer": {
   "name": "사과 씨 제거기",
@@ -178,65 +238,5 @@
   "category": "50000008",
   "last_found": "2026-11-24",
   "first_seen": "2026-11-24"
- },
- "oil_mist": {
-  "name": "오일미스트",
-  "search_keyword": "오일스프레이 병 오일미스트",
-  "en_keyword": "oil sprayer",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "살림꿀템 키워드 영상 18개, 채널 9개에서 언급",
-  "category": "50000008",
-  "last_found": "2026-11-24",
-  "first_seen": "2026-11-24"
- },
- "recycling_bin": {
-  "name": "분리수거함",
-  "search_keyword": "원룸 분리수거함 추천",
-  "en_keyword": "recycling bin",
-  "price_band": "중가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "원룸 키워드 영상 4개, 채널 3개에서 언급",
-  "category": "50000004",
-  "last_found": "2026-11-24",
-  "first_seen": "2026-11-24"
- },
- "storage_organizer": {
-  "name": "길이조절 수납정리함",
-  "search_keyword": "원룸 길이조절 수납정리함",
-  "en_keyword": "expandable storage organizer",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "원룸 키워드 영상 4개, 채널 3개에서 언급",
-  "category": "50000004",
-  "last_found": "2026-11-24",
-  "first_seen": "2026-11-24"
- },
- "multi_blade_scissors": {
-  "name": "다중날가위",
-  "search_keyword": "다중날 주방가위",
-  "en_keyword": "multi blade kitchen shears",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "쿠팡추천템 및 주방꿀템 해시태그에서 채널 다수 등장",
-  "category": "50000008",
-  "last_found": "2026-11-23",
-  "first_seen": "2026-11-14"
- },
- "acrylic_mirror": {
-  "name": "붙이는 전신거울",
-  "search_keyword": "아크릴 전신거울",
-  "en_keyword": "adhesive acrylic mirror",
-  "price_band": "저가",
-  "brand": "",
-  "product_id": "",
-  "evidence": "집꾸미기 및 생활꿀템 관련 채널에서 다수 등장",
-  "category": "50000004",
-  "last_found": "2026-11-23",
-  "first_seen": "2026-11-17"
  }
 }
