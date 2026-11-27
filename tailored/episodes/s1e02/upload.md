@@ -27,3 +27,7 @@ JA — 「はじめての通勤ラッシュ」 / ES — «Mi primera hora punta�
 
 #Tailored #shorts #animation
 ```
+
+## 게시 결과
+- 2026-11-27 08:55 업로드, **12:10 공개 예약**(사용자 선택) — https://youtube.com/shorts/3BkEvTetrjg
+- 아동용 아님 · 카테고리 영화/애니메이션 · AI 사용 '예' · 관련 동영상 EP1 · 자막 ko(기본)·en·ja·es 게시 · 저작권 검사 문제 없음
