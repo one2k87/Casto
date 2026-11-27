@@ -1,25 +1,70 @@
 {
  "module": "fx",
  "name": "효과(영상·소리) — 채널 공통",
- "version": "1.0",
+ "version": "1.1",
  "why": "사용자 11/26 제안: 효과를 일반 모듈로 두고 채널마다 켜고 끈다. 검수(review)가 찾은 방향 오류 일부는 효과로 바로잡는다",
- "engine": "tailored_render_fx.py(카메라·깊이·전환음) + cc_notice.py(안내 문구) — 효과를 추가할 때 이 목록에 등록",
+ "engine": "tailored_render_fx.py(카메라·깊이·전환음) + cc_notice.py(안내 문구) — 효과를 추가할 때 이 목록에 등록 + fx_overlay.py(냄새 줄기·입김·화이트아웃 — 방향 고정 덧그리기)",
  "video": {
-  "camera_ease": {"what": "가감속 확대·이동 + 손 흔들림", "status": "있음(tailored_render_fx.py)"},
-  "depth_parallax": {"what": "캐릭터/배경 분리 깊이감(rembg)", "status": "있음"},
-  "shake": {"what": "충격·놀람 흔들림(conti fx: shake)", "status": "있음"},
-  "pop_bob_sway": {"what": "튀어나옴·통통·흔들(conti fx)", "status": "있음"},
-  "emotes": {"what": "땀·반짝·물음표 기호(conti emotes)", "status": "있음"},
-  "speed_ramp": {"what": "클립 일부만 쓰기·느리게(검수 조치)", "status": "있음(flow_build 숫자 초)"},
-  "scent_trail": {"what": "냄새 줄기 — 음식 위치에서 코 위치로 물결선이 흘러 들어가며 끝이 가늘어짐(방향 고정)", "status": "만들 예정 v1.1", "params": ["from_xy", "to_xy(코)", "color", "icons(생선 등)"]},
-  "steam_breath": {"what": "입김·김(입·코에서 나옴)", "status": "만들 예정 v1.1"},
-  "flash_whiteout": {"what": "번쩍·눈보라 화이트아웃 전환", "status": "만들 예정 v1.1(1화 롱폼 수정에 사용)"},
-  "caption_notice": {"what": "맨 앞 「자막을 켜면 이야기가 보여요」", "status": "있음(cc_notice.py)"}
+  "camera_ease": {
+   "what": "가감속 확대·이동 + 손 흔들림",
+   "status": "있음(tailored_render_fx.py)"
+  },
+  "depth_parallax": {
+   "what": "캐릭터/배경 분리 깊이감(rembg)",
+   "status": "있음"
+  },
+  "shake": {
+   "what": "충격·놀람 흔들림(conti fx: shake)",
+   "status": "있음"
+  },
+  "pop_bob_sway": {
+   "what": "튀어나옴·통통·흔들(conti fx)",
+   "status": "있음"
+  },
+  "emotes": {
+   "what": "땀·반짝·물음표 기호(conti emotes)",
+   "status": "있음"
+  },
+  "speed_ramp": {
+   "what": "클립 일부만 쓰기·느리게(검수 조치)",
+   "status": "있음(flow_build 숫자 초)"
+  },
+  "scent_trail": {
+   "what": "냄새 줄기 — 음식 위치에서 코 위치로 물결선이 흘러 들어가며 끝이 가늘어짐(방향 고정)",
+   "status": "있음 v1.1(fx_overlay.py) — 음식(굵음)→코(가늘)로 물결 줄 + 코 쪽으로 이동하는 알갱이",
+   "params": [
+    "from_xy",
+    "to_xy(코)",
+    "color",
+    "icons(생선 등)"
+   ]
+  },
+  "steam_breath": {
+   "what": "입김·김(입·코에서 나옴)",
+   "status": "있음 v1.1(fx_overlay.py) — at(입·코)에서 dir 쪽으로 퐁퐁"
+  },
+  "flash_whiteout": {
+   "what": "번쩍·눈보라 화이트아웃 전환",
+   "status": "있음 v1.1(fx_overlay.py) — 하얗게 덮였다 걷힘 + 눈송이, 1화 롱폼 w1·w4 전환"
+  },
+  "caption_notice": {
+   "what": "맨 앞 「자막을 켜면 이야기가 보여요」",
+   "status": "있음(cc_notice.py)"
+  }
  },
  "sound": {
-  "whoosh": {"what": "컷 전환 휙", "status": "있음(숫자로 합성, 외부 API 없음)"},
-  "pop_boing_footsteps": {"what": "팝·통·발소리 등", "status": "만들 예정(합성 또는 무료 라이선스 확인된 것만)"},
-  "music_duck": {"what": "효과음 때 음악 살짝 낮춤", "status": "만들 예정"}
+  "whoosh": {
+   "what": "컷 전환 휙",
+   "status": "있음(숫자로 합성, 외부 API 없음)"
+  },
+  "pop_boing_footsteps": {
+   "what": "팝·통·발소리 등",
+   "status": "만들 예정(합성 또는 무료 라이선스 확인된 것만)"
+  },
+  "music_duck": {
+   "what": "효과음 때 음악 살짝 낮춤",
+   "status": "만들 예정"
+  }
  },
  "auto_rules": [
   "conti action에 「냄새」가 있으면 scent_trail 후보(그림에는 냄새 줄을 넣지 않게 프롬프트에 no smell lines)",
@@ -28,7 +73,23 @@
   "「반짝·발견」 → emotes sparkle"
  ],
  "channels": {
-  "tailored": {"video": ["camera_ease", "shake", "pop_bob_sway", "emotes", "speed_ramp", "caption_notice", "scent_trail", "steam_breath", "flash_whiteout"], "sound": [], "note": "효과음은 끔(형식: 소리는 편별 음악만). depth_parallax는 Flow판에선 안 씀"}
+  "tailored": {
+   "video": [
+    "camera_ease",
+    "shake",
+    "pop_bob_sway",
+    "emotes",
+    "speed_ramp",
+    "caption_notice",
+    "scent_trail",
+    "steam_breath",
+    "flash_whiteout"
+   ],
+   "sound": [],
+   "note": "효과음은 끔(형식: 소리는 편별 음악만). depth_parallax는 Flow판에선 안 씀"
+  }
  },
- "review_link": "fx를 넣은 뒤에도 review 모듈 2단계를 한 번 더"
+ "review_link": "fx를 넣은 뒤에도 review 모듈 2단계를 한 번 더",
+ "usage": "python3 tailored/fx_overlay.py <in.mp4|in.png> <out.mp4> '[{\"type\":\"scent_trail\",\"t\":[0.3,5],\"from\":[0.5,0.66],\"to\":[0.53,0.43]}]' [--sec 4]  (좌표는 화면 비율, 코·음식 위치는 검수 3장에서 읽는다)",
+ "watermark": "효과는 오른쪽 아래 워터마크 자리(가로 93.5%~·세로 92.5%~, 가장자리 흐림)를 항상 비운다 — 화이트아웃도 「Veo」 글자가 보이게"
 }

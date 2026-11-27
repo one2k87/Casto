@@ -53,7 +53,7 @@
    "rules": "tailored/modules/review/rules.json"
   },
   "fx": {
-   "version": "1.0",
+   "version": "1.1",
    "rules": "tailored/modules/fx/rules.json"
   }
  },
@@ -65,7 +65,7 @@
   "render": "1.0",
   "publish": "1.0",
   "review": "1.0",
-  "fx": "1.0"
+  "fx": "1.1"
  },
  "resources": {
   "image": "힉스필드 GPT Image 2.5 low·1k(장당 0.25)",

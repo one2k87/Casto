@@ -1,0 +1,41 @@
+{
+ "at": "2026-11-27",
+ "stage": "콘티·프롬프트 사전 검수(생성 전, 0크레딧)",
+ "checked": [
+  "s1e06",
+  "s1e07",
+  "s1e08"
+ ],
+ "rules": "modules/review/rules.json v1.0 + prompt_guards v1.1",
+ "fixed": [
+  {
+   "ep": "s1e06",
+   "cut": "c04",
+   "before": "On the pier, a picture sign shows a boat under the moon and stars following the lighthouse beam; the hamster traces it with his finger while reading.",
+   "after": "On the pier, a picture-only sign (simple drawings, no words or letters) shows a boat under the moon and stars following the lighthouse beam; the hamster traces the drawing with his finger.",
+   "why": "text: 'reading a sign' 문구가 글자를 부름 → 그림뿐인 표지로"
+  },
+  {
+   "ep": "s1e07",
+   "cut": "c13",
+   "before": "The cat chef opens the lunchbox; the smell of grilled fish drifts into the jar and the firefly's nose twitches.",
+   "after": "The cat chef opens the lunchbox of grilled fish right next to the jar; inside, the sleeping firefly's nose twitches and he sniffs toward the lunchbox.",
+   "why": "냄새 방향: 'smell drifts' 대신 냄새 줄 없이 코가 음식 쪽으로 킁킁(냄새 줄은 fx scent_trail로 음식→코)"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c11",
+   "before": "The mother penguin counts the four sibling penguins one by one with her wing; the baby penguin pops into the fifth spot.",
+   "after": "The mother penguin counts her five children one by one with her wing: four sibling chicks without backpacks, and in the fifth spot, where a gray rock once stood, the baby penguin with the small red backpack pops in.",
+   "why": "캐릭터 중복 방지: 형제는 배낭 없음, 모찌만 빨간 배낭 + 1화 w2(다섯째=돌)와 이어짐"
+  },
+  {
+   "ep": "s1e08",
+   "cut": "c12",
+   "before": "The mother's wing stops at the fifth one; tears well up in her eyes.",
+   "after": "The mother's wing stops on the fifth one, the baby penguin with the red backpack; tears well up in her eyes.",
+   "why": "8화 다섯째 = 모찌 확인이 보이게"
+  }
+ ],
+ "passed_note": "나머지 72컷: 글자·불·냄새 방향·보호자 개연성 문제 없음. 위험 장면(6화 c11·c12 파도)은 콘티 범위 안 — 생성 뒤 2단계에서 과한지 확인"
+}
