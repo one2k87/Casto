@@ -1,0 +1,14 @@
+{
+ "note": "롱폼에만 들어가는 컷(쇼츠 conti에 없음). replace: 그 컷 대신 넣음, before: 그 컷 바로 앞에 넣음. narr: 롱폼 자막(ko·en·ja·es). 클립(longform/<ep>/<cut>.mp4)이 없으면 건너뜀",
+ "s1e01": {
+  "why": "사용자 11/26 「엄마가 왜 못 챙기지?」 → 눈보라 화이트아웃 + 다섯째 자리 돌 착각(승인)",
+  "replace": {"a3": ["w1", "w2", "w3"]},
+  "before": {"c08": ["w4"]},
+  "narr": {
+   "w1": {"ko": "그때, 부두에 눈보라가 몰아쳤습니다.", "en": "Just then, a blizzard swept over the pier.", "ja": "そのとき、ふ頭に吹雪が吹き荒れました。", "es": "Justo entonces, una ventisca cubrió el muelle."},
+   "w2": {"ko": "엄마는 늘 하던 대로 셌습니다. 하나, 둘, 셋, 넷, 다섯.", "en": "Mom counted, like always. One, two, three, four, five.", "ja": "ママはいつものように数えました。ひとつ、ふたつ、みっつ、よっつ、いつつ。", "es": "Mamá contó, como siempre. Uno, dos, tres, cuatro, cinco."},
+   "w3": {"ko": "다섯째는… 눈 덮인 돌이었습니다.", "en": "The fifth one… was a snow-covered rock.", "ja": "いつつめは…雪をかぶった石でした。", "es": "El quinto… era una roca cubierta de nieve."},
+   "w4": {"ko": "눈보라가 그쳤습니다.", "en": "The blizzard stopped.", "ja": "吹雪がやみました。", "es": "La ventisca se detuvo."}
+  }
+ }
+}

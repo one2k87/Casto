@@ -46,18 +46,40 @@ def build_episode(ep, clips, out, sec):
     tmp = tempfile.mkdtemp(prefix=f"lf_{ep}_")
     # 검수(QA 2단계)에서 「앞 N초만」으로 정한 컷: longform/queue.json 의 use_sec
     qp = os.path.join(ROOT, "longform", "queue.json")
-    use = {i["cut"]: i["use_sec"] for i in (json.load(open(qp, encoding="utf-8"))["items"] if os.path.exists(qp) else [])
-           if i.get("ep") == ep and i.get("use_sec")}
-    segs, subs, t, real = [], [], 0.0, 0
+    qitems = {i["cut"]: i for i in (json.load(open(qp, encoding="utf-8"))["items"] if os.path.exists(qp) else []) if i.get("ep") == ep}
+    use = {k: v["use_sec"] for k, v in qitems.items() if v.get("use_sec")}
+    # 롱폼 전용 삽입 컷(longform/inserts.json): 쇼츠 콘티에 없는 컷을 끼우거나 바꿔 넣는다
+    ip = os.path.join(ROOT, "longform", "inserts.json")
+    ins = json.load(open(ip, encoding="utf-8")).get(ep, {}) if os.path.exists(ip) else {}
+    cuts = []
     for c in conti["cuts"]:
+        extra = [{"id": w, "narr": ins.get("narr", {}).get(w), "insert": True} for w in ins.get("before", {}).get(c["id"], [])]
+        repl = ins.get("replace", {}).get(c["id"])
+        cuts += extra
+        if repl:
+            ok = [w for w in repl if os.path.exists(os.path.join(clips, ep, f"{w}.mp4"))]
+            if ok:  # 대체 클립이 하나라도 있으면 원래 컷 대신
+                cuts += [{"id": w, "narr": ins.get("narr", {}).get(w), "insert": True} for w in repl]
+                continue
+        cuts.append(c)
+    segs, subs, t, real = [], [], 0.0, 0
+    for c in cuts:
         if c["id"] == "c00":
             continue
         seg = os.path.join(tmp, f"{c['id']}.mp4")
         wide = os.path.join(clips, ep, f"{c['id']}.mp4") if clips else ""
         if wide and os.path.exists(wide):
-            d = min(sec, use.get(c["id"], sec), dur(wide))
-            sh("-i", wide, "-t", f"{d:.2f}", "-vf", f"scale={W}:{H},setsar=1", *ENC, seg)
+            q = qitems.get(c["id"], {})
+            st = float(q.get("start_sec", 0))  # 검수: 앞부분 문제(예: 코에서 김)면 그만큼 건너뜀
+            d = min(sec, use.get(c["id"], sec), dur(wide) - st)
+            sh("-ss", f"{st:.2f}", "-i", wide, "-t", f"{d:.2f}", "-vf", f"scale={W}:{H},setsar=1", *ENC, seg)
+            if q.get("fx"):  # fx 모듈 v1.1: 방향 고정 효과(냄새 줄기 등)를 덧그림 — 워터마크 자리는 비움
+                fxo = seg[:-4] + "_fx.mp4"
+                subprocess.run(["python3", os.path.join(ROOT, "fx_overlay.py"), seg, fxo, json.dumps(q["fx"])], check=True)
+                seg = fxo
             real += 1
+        elif c.get("insert"):
+            continue  # 삽입 컷인데 아직 클립이 없으면 건너뜀
         elif c.get("video") and os.path.exists(os.path.join(ed, c["video"])):
             v = os.path.join(ed, c["video"])
             d = dur(v)
