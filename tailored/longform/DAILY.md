@@ -5,7 +5,8 @@
 
 ## 매일 순서 (하루 5클립, 50크레딧)
 
-1. `tailored/longform/queue.json`에서 status가 `todo`인 앞쪽 5개를 고른다.
+0. **하루치 지급 시각: 매일 13:35 전후**(11/27 확인 — 13:26 0 → 13:40 50, 이월 없음). 매일 예약 작업은 13:50에 돈다. 시작 전 https://one.google.com/ai/activity 에서 「Google Flow 크레딧」 숫자를 읽고, 0이면 건너뜀.
+1. `tailored/longform/queue.json`에서 status가 `todo` 또는 `redo`인 앞쪽 5개를 고른다(`replaced`는 건너뜀).
 2. 크롬 Flow 프로젝트 https://flow.google.com/project/1d459ece-b64b-4613-bc04-8fe6acfe093a 를 연다. **Flow 탭을 화면 앞에 둔다**(뒤에 있으면 크롬이 자동 작업을 1분에 1컷으로 늦춘다).
 3. 그림 만들기(0크레딧): 프롬프트 칸 설정 = 이미지 · 16:9 · Nano Banana 2.1 · x1. 「+」로 원본 세로 그림(`<ep>_<img>`, 없으면 raw.githubusercontent.com/one2k87/Casto/main/tailored/episodes/<ep>/<img> 를 받아 「미디어 업로드」)을 넣고 프롬프트:
    `Outpaint this exact illustration into a wide 16:9 landscape frame. Keep the characters, their poses, the art style, colors and lighting exactly the same and centered. Extend the scene naturally to the left and right. No text.` + modules/review/prompt_guards.json 의 flow_image_suffix

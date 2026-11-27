@@ -1,5 +1,5 @@
 {
- "note": "시즌 1 롱폼(가로 16:9) 작업 순서. status: todo → img(16:9 그림 완료) → done(클립 받음)",
+ "note": "시즌 1 롱폼(가로 16:9) 작업 순서. status: todo → img(16:9 그림 완료) → done(클립 받음) · redo(다시 만들기) · replaced(다른 컷으로 대체, 건너뜀)",
  "items": [
   {
    "ep": "s1e01",
@@ -105,8 +105,8 @@
    "img": "a3.jpg",
    "action": "줄은 왼쪽으로 떠나고 모찌만 냄새를 따라 오른쪽으로",
    "cast": [],
-   "status": "redo",
-   "note": "review 11/26: 냄새 줄기가 코에서 나오는 것처럼 보임 → 그림 프롬프트 no smell lines + fx scent_trail(음식→코). a3는 1화 화이트아웃 수정안에 맞춰 다시"
+   "status": "replaced",
+   "note": "11/27 w3(엄마 떠남·모찌 반대쪽 냄새)로 대체 — 만들지 않음. review 11/26: 냄새 줄기가 코에서 나오는 것처럼 보임 → 그림 프롬프트 no smell lines + fx scent_trail(음식→코). a3는 1화 화이트아웃 수정안에 맞춰 다시"
   },
   {
    "ep": "s1e01",
