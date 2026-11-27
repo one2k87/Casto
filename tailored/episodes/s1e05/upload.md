@@ -27,3 +27,7 @@ JA — 「切符のないお客」 / ES — «Pasajeros sin billete»
 
 #Tailored #shorts #animation
 ```
+
+## 게시 결과
+- 2026-11-27 업로드, **12/18(금) 12:10 공개 예약** — https://youtube.com/shorts/4Tinru6xrGQ
+- 아동용 아님 · 영화/애니메이션 · AI 사용 '예' · 자막 ko·en·ja·es · 관련 동영상 EP1(앞 화가 아직 비공개라 선택 불가 — 공개 뒤 앞 화로 교체) · 검수판 영상

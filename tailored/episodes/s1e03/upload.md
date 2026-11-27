@@ -27,3 +27,7 @@ JA — 「お届け物です」 / ES — «¡Paquete!»
 
 #Tailored #shorts #animation
 ```
+
+## 게시 결과
+- 2026-11-27 업로드, **12/4(금) 12:10 공개 예약** — https://youtube.com/shorts/2ESpk4nxSG0
+- 아동용 아님 · 영화/애니메이션 · AI 사용 '예' · 자막 ko·en·ja·es · 관련 동영상 EP2 · 검수판 영상
