@@ -151,7 +151,8 @@
    "img": "c05b.jpg",
    "action": "생선 폭풍 흡입",
    "cast": [],
-   "status": "todo"
+   "status": "done",
+   "note": "11/28 클립(Veo Lite). QA 2단계 ✅: 상자 안 생선 흡입·생선 튀어오름, 모찌 디자인·빨간 배낭 유지. 그림: 세로 c05b outpaint(Nano Banana 0)"
   },
   {
    "ep": "s1e01",
@@ -159,7 +160,8 @@
    "img": "c06.jpg",
    "action": "다 먹고 배 빵빵, 상자 안에서 꾸벅",
    "cast": [],
-   "status": "todo"
+   "status": "done",
+   "note": "11/28 클립(Veo Lite). QA 2단계 ✅: 위에서 본 상자 안, 배 빵빵·꾸벅 잠듦, 배낭 베개. 그림에서 트림 구름 지움(zzz는 emote로)"
   },
   {
    "ep": "s1e01",
@@ -167,7 +169,9 @@
    "img": "a5.jpg",
    "action": "출항 신호. 펠리컨 반장이 호루라기를 불며 남은 상자를 가리킴",
    "cast": [],
-   "status": "todo"
+   "status": "done",
+   "still": true,
+   "note": "11/28 클립(Veo Lite) ❌: 0.8초부터 검은 머리·빨간 배낭 펭귄이 부두에 새로 등장(모찌는 상자 안에서 자는 중이어야 함) → 연결 컷이라 규칙대로 가로 그림 still(a5_wide.png → a5.mp4 6초 느린 줌, 0크레딧). 원인 추정: 영상 꼬리말의 아기 펭귄 문장이 펭귄 없는 장면에 펭귄을 불러옴 → prompt_guards 1.2"
   },
   {
    "ep": "s1e01",
@@ -175,7 +179,9 @@
    "img": "c07.jpg",
    "action": "펠리컨 하역부가 뚜껑을 닫고 도시 도장 쾅",
    "cast": [],
-   "status": "todo"
+   "status": "done",
+   "use_sec": 3.2,
+   "note": "11/28 클립(Veo Lite). QA 2단계 ⚠: 4초부터 펠리컨이 뚜껑을 열고 검은 머리 펭귄이 보임 → 앞 3.2초만(도장 쾅까지, 도장=빌딩 그림·글자 없음 ✅)"
   },
   {
    "ep": "s1e01",
@@ -183,7 +189,9 @@
    "img": "c07b.jpg",
    "action": "펠리컨이 부리 주머니에 상자를 넣고 고래 유람선으로",
    "cast": [],
-   "status": "todo"
+   "status": "done",
+   "use_sec": 2.5,
+   "note": "11/28 클립(Veo Lite). QA 2단계 ⚠: 3초부터 배 문 안 작은 인물이 검은 머리 펭귄으로 바뀌고 끝엔 빨간 배낭 펭귄들 → 앞 2.5초만(경사로 오름·잠 방울·흘끗 ✅)"
   },
   {
    "ep": "s1e01",

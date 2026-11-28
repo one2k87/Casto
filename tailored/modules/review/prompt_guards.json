@@ -1,6 +1,6 @@
 {
  "_why": "검수에서 걸려 다시 만들면 크레딧이 나간다 → 걸리는 유형을 생성 단계에서 미리 막는다. 새 ❌ 유형이 나오면 여기에 한 줄 추가(학습).",
- "version": "1.1",
+ "version": "1.2",
  "flow_video_suffix": " Only the characters already in the image; do not add any new characters or animals. The baby penguin keeps exactly the same design for the whole clip: round fluffy gray chick, white belly, big glossy eyes, small red backpack — never a realistic penguin, never black-headed. Signs and screens stay blank, no text or letters anywhere. No fire, no flames. Keep the camera framing close to the image. The main action happens in the first 4 seconds, then the pose holds gently.",
  "flow_image_suffix": " Same characters and designs as the reference. Blank signs, no text or letters. Do not draw smell lines, steam lines or motion lines (effects are added later).",
  "by_case": [
@@ -38,10 +38,16 @@
    "case": "냄새·찬 김·연기 방향",
    "rule": "그림부터 '출처에서 넓게 → 코 쪽으로 가늘게, 부리·코에서 나오지 않게' 명시. 1차 검수에서 놓친 사례(2화 c21) — 방향 검사는 시작 프레임을 확대해서 본다",
    "cost": 0
+  },
+  {
+   "case": "모찌(펭귄)가 화면에 없는 컷(펠리컨·고래·부두 장면)",
+   "rule": "영상 꼬리말은 flow_video_suffix 대신 flow_video_suffix_no_mochi(아기 펭귄 문장 빼고 'no penguins anywhere'). 11/28 a5(0.8초~)·c07(4초~)·c07b(3초~)에서 검은 머리·빨간 배낭 펭귄이 새로 생김 — 꼬리말의 펭귄 묘사가 펭귄을 불러온 것으로 추정",
+   "cost": 0
   }
  ],
  "gate_order": [
   "① 콘티 검수(0) → ② 컷별 '클립 / still' 결정(위 by_case) → ③ 그림(0) 검수 → ④ 클립(10)은 ③ 통과 컷만 → ⑤ 받은 즉시 3장 검수 → ❌면 still/앞부분만(0) 먼저, 이야기 핵심 컷만 다시 생성(10)"
  ],
- "style_preference": "사용자 11/26: Flow가 만든 「3D 카툰풍」 움직임(2화 c05 인파에 치이는 장면)을 매우 좋아함. 그림체가 평면→3D 카툰으로 바뀌는 것은 ❌가 아니다. ❌는 ①실사 펭귄 ②검은 머리·흰 얼굴 등 다른 종처럼 보임 ③배낭 사라짐 ④같은 캐릭터가 둘 ⑤글자·불. 판단이 애매하면 클립을 살리는 쪽으로."
+ "style_preference": "사용자 11/26: Flow가 만든 「3D 카툰풍」 움직임(2화 c05 인파에 치이는 장면)을 매우 좋아함. 그림체가 평면→3D 카툰으로 바뀌는 것은 ❌가 아니다. ❌는 ①실사 펭귄 ②검은 머리·흰 얼굴 등 다른 종처럼 보임 ③배낭 사라짐 ④같은 캐릭터가 둘 ⑤글자·불. 판단이 애매하면 클립을 살리는 쪽으로.",
+ "flow_video_suffix_no_mochi": " Only the characters already in the image; do not add any new characters or animals. There are no penguins anywhere in this scene — never add a penguin. Signs and screens stay blank, no text or letters anywhere. No fire, no flames. Keep the camera framing close to the image. The main action happens in the first 4 seconds, then the pose holds gently."
 }
