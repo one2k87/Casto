@@ -1,0 +1,25 @@
+{
+ "date": "2026-11-28",
+ "subscribers": 2,
+ "total_views": 3,
+ "video_count": 2,
+ "hidden_subscriber_count": false,
+ "videos": [
+  {
+   "id": "3BkEvTetrjg",
+   "title": "출근길은 처음이라 🐘 | First Rush Hour · Tailored EP2",
+   "published": "2026-11-27",
+   "views": 0,
+   "likes": 0,
+   "comments": 0
+  },
+  {
+   "id": "QpG3rS_M8p8",
+   "title": "상자 밖은 눈이 아니었다 🐧 | Not Snow Outside the Box · Tailored EP1",
+   "published": "2026-11-19",
+   "views": 4,
+   "likes": 0,
+   "comments": 0
+  }
+ ]
+}
